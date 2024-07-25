@@ -45,6 +45,7 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/css/demo19.min.css">
 
+    <script src="~/Content/NewAssests/vendor/jquery/jquery.min.js"></script>
 
     <style>
         .menu-sign li > ul {
@@ -78,7 +79,7 @@
         }
 
         .main-nav .menu li a.active {
-            color: #58b132;
+            color: #239d57;
         }
 
         .pro-c:hover {
@@ -105,6 +106,9 @@
             border-color: #1f5707;
             background-color: #1f5707;
         }
+        .lireg li a:after{
+            display:none;
+        }
     </style>
 </head>
 <body>
@@ -129,7 +133,7 @@
                         <i class="d-icon-bars2"></i>
                     </a>
                     <a href="/Home/Index" class="logo">
-                        <img src="~/Content/NewAssests/images/lifeonelogo.jpg" alt="logo" width="200" />
+                        <img src="~/Content/NewAssests/images/lifeonelogo.png" alt="logo" width="100" />
                     </a>
                     <!-- End Logo -->
                     <nav class="main-nav">
@@ -137,8 +141,12 @@
                             <li>
                                 <a href="/Home/Index">Home</a>
                             </li>
-                            <li>
-                                <a href="/Home/About">About</a>
+                            <li class="submenu">
+                                <a href="#">Company</a>
+                                <ul>
+                                    <li><a href="/Home/About">About Us</a></li>
+                                    <li><a href="#">Management Team</a></li>
+                                </ul>
                             </li>
                             @{
                                 Html.RenderAction("RenderMenu", "Home");
@@ -168,6 +176,22 @@
                                     <li><a href="#">Article of Associaiton</a></li>
                                 </ul>
                             </li>
+                            <li class="submenu">
+                                <a href="#">Media</a>
+                                <ul>
+                                    <li><a href="#">News & Announcements</a></li>
+                                    <li><a href="#">FAQ's</a></li>
+                                    <li><a href="#">Testimonials</a></li>
+                                    <li><a href="#">Downloads</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="#">Gallery</a>
+                                <ul>
+                                    <li><a href="/Home/ImageGallery">Image Gallery</a></li>
+                                    <li><a href="/Home/Video">Video Gallery</a></li>
+                                </ul>
+                            </li>
                             <li>
                                 <a href="/Home/Contact">Contact</a>
                             </li>
@@ -195,14 +219,14 @@
                     @{ DateTime currentDate = DateTime.Now;
                     }
 
-                    <div class="d-flex justify-content-between">
+                    <div class="date-time-div">
                         <div class="display-date">
                             <span id="day">@DateTime.Now.DayOfWeek.ToString()</span>,
-                            <span id="Date">@currentDate.ToString("dd/MM/yyyy")</span>
+                            <span id="Date">@currentDate.ToString("dd/MM/yyyy")</span>&nbsp;&nbsp;
                             @*<span id="month">May</span>
                                 <span id="year">2024 </span>*@
-                        </div>&nbsp;&nbsp;
-                        <div class="display-time" id="time">@DateTime.Now.ToShortTimeString()</div>
+                            <span class="display-time" id="time">@DateTime.Now.ToShortTimeString()</span>
+                        </div>
                     </div>
                     @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
                     {
@@ -289,7 +313,7 @@
 
                     }
                     <div>
-                        <ul class="menu menu-sign">
+                        <ul class="menu menu-sign lireg">
                             <li>
                                 <a href="#"><i style="font-size: 28px;" class="bi bi-person"></i></a>
                                 @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
@@ -329,7 +353,7 @@
         <!-- End CloseButton -->
         <div class="mobile-menu-container scrollable">
             <a href="#" class="logo">
-                <img src="images/lifeonelogo.png" alt="logo" width="200" />
+                <img src="~/Content/NewAssests/images/lifeonelogo.png" alt="logo" width="100" />
             </a>
 
             <!-- End Search Form -->
@@ -338,7 +362,11 @@
                     <a href="/Home/Index" class="active">Home</a>
                 </li>
                 <li>
-                    <a href="/Home/About">About</a>
+                    <a href="#">Company</a>
+                    <ul>
+                        <li><a href="/Home/About">About Us</a></li>
+                        <li><a href="#">Management Team</a></li>
+                    </ul>
                 </li>
                 <li>
                     <a href="#">Products</a>
@@ -362,6 +390,23 @@
                         <li><a href="wishlist.html">Article of Associaiton</a></li>
                     </ul>
                 </li>
+                <li>
+                    <a href="#">Media</a>
+                    <ul>
+                        <li><a href="#">News & Announcements</a></li>
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Downloads</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Gallery</a>
+                    <ul>
+                        <li><a href="#">Image Gallery</a></li>
+                        <li><a href="#">Video Gallery</a></li>
+                    </ul>
+                </li>
+
                 <li><a href="/Home/Contact">Contact</a></li>
             </ul>
 
@@ -395,20 +440,25 @@
             </div>
         </div>*@
     <!-- Plugins JS File -->
-    <script src="~/Content/NewAssests/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Content/NewAssests/vendor/sticky/sticky.min.js"></script>
-    <script src="~/Content/NewAssests/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+   
+    <script src="~/Content/NewAssests/vendor/parallax/parallax.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/elevatezoom/jquery.elevatezoom.min.js"></script>
     <script src="~/Content/NewAssests/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
     <script src="~/Content/NewAssests/vendor/owl-carousel/owl.carousel.min.js"></script>
-    <script src="~/Content/NewAssests/vendor/elevatezoom/jquery.elevatezoom.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/sticky/sticky.min.js"></script>
+    <script src="~/Content/NewAssests/js/main.min.js"></script>
+<script src="~/Content/NewAssests/js/main.js"></script>
+
     <script src="~/Content/NewAssests/vendor/photoswipe/photoswipe.min.js"></script>
     <script src="~/Content/NewAssests/vendor/photoswipe/photoswipe-ui-default.min.js"></script>
     <!-- Main JS File -->
-    <script src="~/Content/NewAssests/js/main.min.js"></script>
-    <script src="~/Content/NewAssests/vendor/parallax/parallax.min.js"></script>
-    @*
-        <script src="~/Content/NewAssests/vendor/isotope/isotope.pkgd.min.js"></script>*@
 
+
+
+    <script src="~/Content/ShoppingCart/Cookies.js"></script>
+    <script src="~/Content/ShoppingCart/ShoppingCart.js"></script>
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>*@
     @*<script src="~/AutoFill/jquery-2.1.3.js"></script>*@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
@@ -427,7 +477,7 @@
             });
         })
     </script>
-    <script>        
+    <script>
         function updateTime() {
             const now = new Date();
             const dayOfWeek = now.toLocaleString('default', { weekday: 'long' });
@@ -519,14 +569,13 @@
         });
     </script>
 
-    <script src="~/Content/ShoppingCart/Cookies.js"></script>
-    <script src="~/Content/ShoppingCart/ShoppingCart.js"></script>
+
     @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>*@
     @*<script src="~/AutoFill/jquery-2.1.3.js"></script>*@
 
 
     <!-- Main JS File -->
-    @*<script src="js/main.min.js"></script>*@
+
     <script>
         function AddToCart23(ProductId) {
             debugger;

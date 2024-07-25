@@ -8,3 +8,7 @@
 /LifeOne/packages
 /LifeOne/Properties
 /packages
+*.vsidx
+.vs/LifeOne/v17/.suo
+.vs/LifeOne/v17/DocumentLayout.json
+.vs/LifeOne/v17/fileList.bin
