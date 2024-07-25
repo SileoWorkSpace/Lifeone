@@ -1,0 +1,10 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/LifeOne/.vs
+/LifeOne/bin
+/LifeOne/obj/Debug
+/LifeOne/packages
+/LifeOne/Properties
+/packages
