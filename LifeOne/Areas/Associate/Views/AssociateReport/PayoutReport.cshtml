@@ -1,0 +1,352 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MPayoutReport
+@{
+    ViewBag.Title = "PayoutReport";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+<style>
+    .alert-warning {
+        background-color: #fcf8e3 !important;
+        border-color: #faebcc !important;
+    }
+
+    .tableincome {
+    }
+
+        .tableincome td:first-child {
+            background: #fbfbfb;
+            max-width: 40%;
+        }
+
+        .tableincome td {
+            font-weight: bold;
+        }
+</style>
+<div class="content">
+    <div class="content-wrapper-before"></div>
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0 text-white">Payout Report</h4>
+                @*<nav aria-label="breadcrumb" class="float-left mt-1">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/Associate-Dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="#">Loyality Income</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Payout Report</li>
+                        </ol>
+                    </nav>*@
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                    @*<span>  <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a></span>*@
+                    @*<span>
+                            <a href="/Associate/AssociateReport/PayoutReportExportExcel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                        </span><span>
+                            <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                        </span>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body p-0">
+
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                @using (Html.BeginForm("PayoutReport", "AssociateReport", FormMethod.Post))
+                                {
+                                    <!--<div class="alert alert-warning" style="color:#727272 !important">
+                                        <div class="row">
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Payout No</label>-->
+                                    @*<input type="text" name="PayoutNo" id="PayoutNo" placeholder="" class="form-control">*@
+                                    <!--@Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.PayoutMaster, "Value", "Text"), new { @class = "form-control", @id = "PayoutNo" })
+                                        </div>
+                                    </div>-->
+                                    @*<div class="col-12 col-md-3">
+                                            <div class="form-group">
+                                                <label>From Date</label>
+                                                <input type="date" name="FromDate" id="FromDate" placeholder="" class="form-control">
+                                            </div>
+                                        </div>*@
+
+
+                                    <!--<div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label class="display">&nbsp;</label>
+                                                    <input type="submit" class="btn btn-success" value="Search" id="BtnSearch">
+                                                    <a href="/Associate/AssociateReport/PayoutReport" class="btn btn-secondary">Reset</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>-->
+                                }
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th nowrap>SNo.</th>
+                                        <th nowrap>Payout No</th>
+                                        <th class="text-right">ClosingDate</th>
+                                        @*<th class="text-right">Direct Income Bonus</th>*@
+                                        <th class="text-right">Matching Bonus</th>
+                                        @*<th class="text-right">Performance Bonus</th>*@
+                                        <th class="text-right">Gross Amount</th>
+                                        <th class="text-right"> TDS Amount</th>
+                                        <th class="text-right">Processing Fee</th>
+                                        <th class="text-right">Advance</th>
+                                        <th class="text-right">Adjusted Amount</th>
+                                        <th class="text-right">Net Amount</th>
+
+                                        <th class="text-right">View</th>
+                                        <!--<th nowrap>#Sn.</th>
+                                        <th nowrap>Payout No</th>
+
+                                        <th class="text-right">Referral Bonus</th>
+                                        <th class="text-right">Matching Bonus</th>
+                                        <th class="text-right">Leadership Bonus</th>-->
+                                        @*<th class="text-left">Advance-Amt</th>
+                                            <th class="text-left">Adjustment</th>*@
+                                        <!--<th class="text-right">Gross Amount</th>
+                                        <th class="text-right">TDS Amount</th>
+                                        <th class="text-right">Processing Fee</th>
+                                        <th class="text-right">Net Amount</th>
+                                        <th class="text-left">Payout Date</th>
+                                        <th class="text-left">Status</th>
+                                        <th class="text-left">Action</th>-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (Model != null && Model.Objlist.Count > 0)
+                                    {
+                                        int SNo = 0;
+                                        //decimal TotalDirectIncome = 0;
+                                        decimal TotalBinaryIncome = 0;
+                                        decimal TotalLeaderBonusIncome = 0;
+                                        decimal TotalAdvance = 0;
+                                        decimal TotalAdjustmentAmount = 0;
+                                        decimal TotalGrossAmount = 0;
+                                        decimal TotalTDSAmount = 0;
+                                        decimal TotalProcessingFee = 0;
+                                        decimal TotalNetAmount = 0;
+
+
+                                        foreach (var item in Model.Objlist)
+                                        {
+                                            //TotalDirectIncome += @item.DirectIncome;
+                                            //TotalBinaryIncome += @item.BinaryIncome;
+                                            //TotalLeaderBonusIncome += @item.LeadershipBonus;
+                                            TotalAdvance += @item.Advance;
+                                            TotalAdjustmentAmount += @item.AdjustedAmount;
+                                            TotalGrossAmount += @item.GrossAmount;
+                                            TotalTDSAmount += @item.TDSAmount;
+                                            TotalProcessingFee += @item.ProcessingFee;
+                                            TotalNetAmount += @item.NetAmount;
+
+
+                                            <tr>
+                                                <td data-title="#SN:">@(SNo = SNo + 1)</td>
+                                                <td data-title="PayoutNo:">@item.PayoutNo</td>
+                                                <td class="text-right" data-title="ClosingDate:">@item.ClosingDate</td>
+                                                @*<td class="text-right" data-title="MatchingBonus:">@item.DirectIncome</td>*@
+                                                <td class="text-right" data-title="MatchingBonus:">@item.MatchingBonus</td>
+                                                @*<td class="text-right" data-title="PerformanceBonus:">@item.PerformanceBonus</td>*@
+                                                @*<td class="text-right" data-title="Advance:">@item.AdvanceAmt</td>
+                                                    <td class="text-right" data-title="Adjustment:">@item.AdvAdjustedAmt</td>*@
+
+                                                <td class="text-right" data-title="Gross Amount:">@item.GrossAmount</td>
+                                                <td class="text-right" data-title="TDS Amount:">@item.TDSAmount</td>
+                                                <td class="text-right" data-title="Processing Fee:">@item.ProcessingFee</td>
+                                                <td class="text-right" data-title="Net Amount:">@item.Advance</td>
+                                                <td class="text-right" data-title="Closing Date:">@item.AdjustedAmount</td>
+                                                <td class="text-right" data-title="Closing Date:">@item.NetAmount</td>
+                                                <td>
+
+                                                    <input type="button" onclick="GetStatementDetails(@item.PayoutNo)" value="Statement" class="btn btn-success btn-sm" />
+                                                    @*<input type="button" onclick="GetIncomeDetails('@item.LoginId',@item.PayoutNo)" value="Income" class="btn btn-secondary btn-sm" />*@
+                                                </td>
+                                                @*<td>
+                                                        <a onclick="ShowDetails('@item.PrevLeft','@item.PrevRight','@item.CurrLeft','@item.CurrRight','@item.BalLeft','@item.BalRight');" class="text-info"><i class="fa fa-eye text-inverse m-r-10"></i></a>
+                                                    </td>*@
+                                            </tr>
+                                        }
+
+                                        @*< !--<tr>
+                                            <td></td>
+                                            <td><b>Total :</b></td>-->*@
+                                        @*<td class="text-right">@TotalDirectIncome</td>*@
+                                        @*<td class="text-right">@TotalDirectIncome</td>*@
+                                        @*<td class="text-right">@TotalBinaryIncome</td>
+                                        <td class="text-right">@TotalLeaderBonusIncome</td>
+                                        <td class="text-right">@TotalAdvance</td><td class="text-right">@TotalAdjustmentAmount</td>
+                                        <td class="text-right">@TotalGrossAmount</td>
+                                            <td class="text-right">@TotalTDSAmount</td>
+                                            <td class="text-right">@TotalProcessingFee</td>
+                                            <td class="text-right">@TotalNetAmount</td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>*@
+                                    }
+                                    else
+                                    {
+                                        @*<tr>
+                                                <td colspan="10">No Record Found..</td>
+                                            </tr>*@
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Statement Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+
+
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive" style="max-height:600px;">
+                    <table class="table" id="TblEmpList">
+                        <thead>
+                            <tr>
+                                <th>From Id</th>
+                                <th>Direct Seller </th>
+                                <th>Business Amount</th>
+                                <th>Commission Percentage</th>
+                                <th>Income Type</th>
+                                <th>Payment Date</th>
+                                <th>Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tblData"></tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><b>Total</b></td>
+                                <td><b><span id="spnTotal"></span></b></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>*@
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal fade" id="ModalBankDetails" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog " style="max-width: 50%!important;">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                @*<h5 class="modal-title" id="myModalLabel">Payout Details</h5>*@
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive">
+
+                    <table class="table  table-striped" id="datatables">
+                        <thead>
+                            <tr>
+                                <th>S. No.</th>
+                                <th>Previous Left</th>
+                                <th>Previous Right</th>
+                                <th>Current Left</th>
+                                <th>Current Right</th>
+                                <th>Balance Left</th>
+                                <th>Balance Right</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="tblPayoutDetails">
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+</div>
+<script>
+    function ShowDetails(PreviousLeft, PreviousRight, CurrentLeft, CurrentRight, BalanceLeft, BalanceRight) {
+        $('#ModalBankDetails').modal('show');
+
+        $("#tblPayoutDetails").html('');
+
+        $("#tblPayoutDetails").append(
+            '<tr>' +
+            '<td>' + 1 + '</td>' +
+            '<td align = "right">' + PreviousLeft + '</td>' +
+            '<td align = "right">' + PreviousRight + '</td>' +
+            '<td align = "right">' + CurrentLeft + '</td>' +
+            '<td align = "right">' + CurrentRight + '</td>' +
+            '<td align = "right">' + BalanceLeft + '</td>' +
+            '<td align = "right">' + BalanceRight + '</td>' +
+            '</tr>')
+    }
+    function CloseBankDetail() {
+        $('#ModalBankDetails').modal('hide');
+    }
+
+    function GetStatementDetails(PayoutNo) {
+
+        $.ajax({
+
+            url: '/Associate/AssociateReport/StatementDetails',
+            data: { PayoutNo: PayoutNo },
+            type: 'POST',
+            dataType: 'JSON',
+            containtType: 'application/json;charset=utf-8',
+            success: function (data) {
+                if (data != null) {
+                    var total = 0;
+                    $('#tblData').html('');
+                    $('#myModal').modal("show");
+                    for (var i = 0; i < data.lstStatement.length; i++) {
+                        tr = $('<tr/>');
+                        tr.append("<td>" + data.lstStatement[i].LoginId + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].DisplayName + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].BusinessAmount + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].CommissionPercentage + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].IncomeType + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].CurrentDate + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].Amount + "</td>");
+                        $('#tblData').append(tr);
+                        total = total + Math.round(parseFloat(data.lstStatement[i].Amount));
+                    }
+                    $("#spnTotal").html(total);
+                }
+            }
+        });
+    }
+</script>

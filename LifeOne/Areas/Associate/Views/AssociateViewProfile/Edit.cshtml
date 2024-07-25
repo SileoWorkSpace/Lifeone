@@ -1,0 +1,1445 @@
+﻿@model LifeOne.Models.AssociateManagement.AssociateEntity.AssociateProfile
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+<style>
+    label {
+        font-weight: 500;
+    }
+
+    .formtab {
+        display: none;
+        max-width: 1050px;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .form-horizontal .formtab .col-md-5.control-label {
+        max-width: 200px;
+        width: 100%;
+    }
+
+    .form-horizontal .formtab .col-md-7 {
+        width: calc(100% - 200px);
+    }
+
+    fieldset {
+        min-width: 0;
+        padding: 15px;
+        margin: 0 0 20px 0;
+        border: 1px solid silver;
+    }
+
+    legend {
+        display: block;
+        width: auto;
+        padding: 0 5px;
+        margin-bottom: 10px;
+        font-size: 18px;
+        line-height: inherit;
+        color: #333;
+        border: 0;
+        border-bottom: 0;
+    }
+    /* Make circles that indicate the steps of the form: */
+    .step {
+        height: 15px;
+        width: 15px;
+        margin: 0 2px;
+        background-color: #bbbbbb;
+        border: none;
+        border-radius: 50%;
+        display: inline-block;
+        opacity: 0.5;
+    }
+
+        .step.active {
+            opacity: 1;
+        }
+
+        /* Mark the steps that are finished and valid: */
+        .step.finish {
+            background-color: #4CAF50;
+        }
+</style>
+<link href="~/Content/dist/css/sweetalert.css" rel="stylesheet" />
+<div class="content">
+    <div class="content-wrapper-before"></div>
+    <!-- Start Content-->
+    <div class="container-fluid">
+
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="my-3 text-white">User Application Form</h4>
+            </div>
+        </div>
+        <div class="row">
+
+            <!-- end col -->
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <form id="regForm" action="#">
+                            <input type="hidden" id="MaritalStatusID" value="@TempData["GetMaritalStatus"]" />
+                            <div class="formtab">
+                                <div class="row">
+                                    <div class="col-md-12 mb-15">
+
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row form-group">
+                                                    <label class="col-md-3 control-label">Sponseror ID<span class="text-danger">*</span></label>
+                                                    <div class="col-md-4">
+                                                        @*<input type="text" class="form-control" placeholder="POLYRICH2">*@
+                                                        @Html.TextBoxFor(m => m.InviteCode, new { @class = "form-control", @readonly = "readonly", @onchange = "GetReferDetails()", @placeholder = "InviteCode" })
+                                                        @Html.HiddenFor(m => m.Fk_SponserId)
+                                                        @Html.HiddenFor(m => m.Fk_MemId)
+                                                    </div>
+                                                    <div class="col-md-5"></div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-md-3 control-label">Sponseror Name:<span class="text-danger">*</span></label>
+                                                    <div class="col-md-4 pt-10"> <strong class="text-green" id="sponsorName">@Html.DisplayFor(m => m.SponserName)</strong> </div>
+                                                </div>
+                                                <div class="row form-group hide">
+                                                    <label class="col-md-3 control-label">Account Purpose<span class="text-danger">*</span></label>
+                                                    <div class="col-md-4">
+                                                        <div class="custom_radio">
+                                                            <input type="radio" id="Farmer" name="AccountPurpose" value="Farmer">
+                                                            <label for="Farmer">Farmer</label>
+                                                            <input type="radio" id="Non-Farmer" name="AccountPurpose" value="Non-Farmer">
+                                                            <label for="Non-Farmer">Non-Farmer</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-md-3 control-label">Full Name<span class="text-danger">*</span></label>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", @readonly = "readonly" })
+                                                        <span class="font11"><em>(Full Name as on your PAN CARD)</em></span>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-md-3 control-label">Father Name</label>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(m => m.FathersName, new { @class = "form-control" })
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group hide">
+                                                    <label class="col-md-3 control-label">Registration Type<span class="text-danger">*</span></label>
+                                                    <div class="col-md-4">
+                                                        <div class="custom_radio">
+                                                            <input type="radio" id="Individual" name="RegType" value="Individual">
+                                                            <label for="Individual">Individual</label>
+                                                            <input type="radio" id="Organisation" name="RegType" value="Organisation">
+                                                            <label for="Organisation">Organisation</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-md-3 control-label">Gender<span class="text-danger">*</span></label>
+                                                    <div class="col-md-4">
+                                                        <div class="custom_radio">
+                                                            <input type="radio" id="Male" name="Gender" value="Male">
+                                                            <label for="Male">Male</label>
+                                                            <input type="radio" id="Female" name="Gender" value="Female">
+                                                            <label for="Female">Female</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group hide">
+                                                    <label class="col-md-3 control-label">Organisation Type<span class="text-danger">*</span></label>
+                                                    <div class="col-md-4">
+                                                        <div class="custom_radio">
+                                                            <input type="radio" id="soleproprietorship" name="OrgType" value="soleproprietorship" />
+                                                            <label for="soleproprietorship">Sole Proprietorship</label>
+                                                            <br>
+                                                            <input type="radio" id="Partnership" name="OrgType" value="Partnership">
+                                                            <label for="Partnership">Partnership</label>
+                                                            <br>
+                                                            <input type="radio" id="LLP" name="OrgType" value="LLP">
+                                                            <label for="LLP">LLP</label>
+                                                            <br>
+                                                            <input type="radio" id="privatelimited" name="OrgType" value="privatelimited">
+                                                            <label for="privatelimited">Private Limited</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-md-3 control-label">Date of Birth <span class="text-danger">*</span></label>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(m => m.DOB, new { @class = "form-control selectdate", @readonly = "readonly" })
+
+                                                    </div>
+                                                    <div class="col-md-5"><em>Date of Birth must be as per PAN CARD.</em> </div>
+                                                </div>
+                                                <div class="row form-group">
+                                                    <label class="col-md-3 control-label">Profile Picture@*<span class="text-danger">*</span>*@ </label>
+                                                    <div class="col-md-4">
+                                                        @Html.TextBoxFor(m => m.profilepic, new { @type = "file", @onchange = "UploadFile(this,'ProfileImages')" })
+                                                        @Html.HiddenFor(m => m.profilepic, new { @Id = "Hdnprofilepic" })
+                                                        <span id="spanprofilepic"><a href="#" onclick="ShowProfileImage('@Model.profilepic')"><span id="ProfileImagesstatusval"></span></a></span>
+                                                    </div>
+                                                    <div class="col-md-5"><em class="font11"></em></div>
+                                                </div>                                                  
+                                                    <div class="row form-group hide">
+                                                        <label class="col-md-3 control-label">Date of Commencement <span class="text-danger">*</span></label>
+                                                        <div class="col-md-4">
+                                                            @Html.TextBoxFor(m => m.CommencementDate, new { @class = "form-control selectdate", @readonly = "readonly" })
+                                                        </div>
+                                                        <div class="col-md-5"><em>Date of Commencement must be as per ROC.</em> </div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-md-3 control-label">Marital Status@*<span class="text-danger">*</span>*@</label>
+                                                        <div class="col-md-4">
+                                                            <div class="custom_radio">
+
+                                                                <input type="radio" id="Married" name="MaritalStatus" value="Married" onclick="return GetMarried();">
+
+                                                                <label for="Married">Married</label>
+                                                                <input type="radio" id="Single" name="MaritalStatus" value="Single" onclick="return GetMarried();">
+                                                                <label for="Single">Single</label>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group" id="Div1">
+                                                        <label class="col-md-3 control-label">Marriage Anniversary @*<span class="text-danger">*</span>*@</label>
+                                                        <div class="col-md-4">
+                                                            @Html.TextBoxFor(m => m.MarriageAnniversary, new { @class = "form-control selectdate", @readonly = "readonly", @id = "MarriageAnniversaryID" })
+
+                                                        </div>
+                                                    </div>
+                                                    <div class="row form-group hide">
+                                                        <label class="col-md-3 control-label">Password<span class="text-danger">*</span></label>
+                                                        <div class="col-md-4">
+                                                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @type = "password" })
+                                                        </div>
+                                                        <div class="col-md-5"><em class="font11">Password must be minimum 6characters long, you can use number orletters of your choice.</em></div>
+                                                    </div>
+                                                    <div class="row form-group hide">
+                                                        <label class="col-md-3 control-label">Confirm Password<span class="text-danger">*</span></label>
+                                                        <div class="col-md-4">
+                                                            @Html.TextBoxFor(m => m.ConPassword, new { @class = "form-control", @type = "password" })
+                                                        </div>
+                                                        <div class="col-md-5"><em class="font11">Confirm password should matchpassword entered above.</em></div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-md-3 control-label">Mobile No.@*<span class="text-danger">*</span>*@ </label>
+                                                        <div class="col-md-4">
+                                                            @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control only-numeric", @onchange = "checkMobile(this.id)", @readonly = "readonly", @maxlength = "10" })
+                                                        </div>
+                                                        <div class="col-md-5"><em class="font11">Mobile no registered here will be usedfor all official communications.</em></div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-md-3 control-label">Email Id @*<span class="text-danger">*</span>*@</label>
+                                                        @if (string.IsNullOrEmpty(Model.EmailId))
+                                                        {
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", @onchange = "validateEmail()" })
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.EmailId, new { @class = "form-control", @onchange = "validateEmail()", @readonly = "readonly" })
+                                                            </div>
+                                                        }
+
+                                                        <div class="col-md-5"><em class="font11">Email ID registered here will be used forall official mail communications.</em></div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-md-3 control-label">Aadhar No @*<span class="text-danger">*</span>*@</label>
+
+                                                        @if (string.IsNullOrEmpty(Model.AadharNo))
+                                                        {
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.AadharNo, new { @class = "form-control only-numeric", @maxlength = "12", @onchange = "ValidateAAdhar(this.id)" })
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.AadharNo, new { @class = "form-control only-numeric", @maxlength = "12", @onchange = "ValidateAAdhar(this.id)", @readonly = "readonly" })
+                                                            </div>
+                                                        }
+
+                                                        <div class="col-md-5"><em class="font11">Aadhar No should not be already registered for any other User ID of LifeOne.</em></div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-md-3 control-label">Upload Aadhar Photo@*<span class="text-danger">*</span>*@ </label>
+                                                        <div class="col-md-4">
+                                                            @Html.TextBoxFor(m => m.CustAadharImage, new { @type = "file", @onchange = "UploadFile(this,'AadharImages')" })
+                                                            @Html.HiddenFor(m => m.CustAadharImage, new { @Id = "HdnCustAadharImage" })
+                                                            <span id="spanCustAadharImage"><a href="#" onclick="ShowAllImage('@Model.CustAadharImage')"><span id="CustAadharImagestatusval"></span></a></span>
+                                                        </div>
+                                                        <div class="col-md-5"><em class="font11"></em></div>
+                                                    </div>
+                                                    <div class="row form-group">
+                                                        <label class="col-md-3 control-label">PAN No @*<span class="text-danger">*</span>*@</label>
+                                                        <div class="col-md-4">
+                                                            @Html.TextBoxFor(m => m.PanNo, new { @class = "form-control Pancard", @onchange = "ValidatePAN(this.id)" })
+                                                        </div>
+                                                        <div class="col-md-5"><em class="font11">PAN No should not be already registeredfor any other User ID of LifeOne.</em> </div>
+                                                    </div>
+                                                    <div class="row form-group hide">
+                                                        <label class="col-md-3 control-label">GST No<span class="text-danger">*</span></label>
+                                                        <div class="col-md-4">
+                                                            @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control" })
+                                                        </div>
+                                                        <div class="col-md-5"><em class="font11">GST No should not be alreadyregistered for any other User ID of LifeOne</em></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 mb-15">
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row form-group">
+                                                            <label class="col-md-3 control-label">Address Line 1 <span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.Address1, new { @class = "form-control" })
+                                                            </div>
+                                                            <div class="col-md-5"><em class="font11">Enter House No or name, Building Name and Sector No or Street Name</em></div>
+                                                        </div>
+                                                        <div class="row form-group hide">
+                                                            <label class="col-md-3 control-label">Address Line 2</label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.Address2, new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group hide">
+                                                            <label class="col-md-3 control-label">Landmark</label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.LandMark, new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-md-3 control-label">Pin Code <span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.Pincode, new { @class = "form-control only-numeric", @maxlength = "6", @minlength = "6" })
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <button type="button" class="btn btn-info" onclick="GetDistrictCityStateDetailsByPincode()">Search</button>
+                                                                @*<button type="button" class="btn btn-warning" onclick="GetDistrictCityStateDetailsByPincode()">Change</button>*@
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group hide">
+                                                            <label class="col-md-3 control-label">Village Name <span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.VillageName, new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group hide">
+                                                            <label class="col-md-3 control-label">Taluka / Tehsil / Block <span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.Tehsil, new { @class = "form-control", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-md-3 control-label">District <span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                @*<select id="DistrictName" class="form-control city-name" name="DistrictName" required onchange="BindDistrictDetail()"><option value="">--Select District--</option></select>*@
+                                                                @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly",@id= "CityID" })
+                                                                @Html.HiddenFor(m => m.DistrictId)
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-md-3 control-label">State <span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.StateName, new { @class = "form-control", @readonly = "readonly" })
+                                                                @Html.HiddenFor(m => m.StateId)
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group hide">
+                                                            <label class="col-md-3 control-label">Zone <span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.Zone, new { @class = "form-control", @readonly = "readonly" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group hide">
+                                                            <label class="col-md-3 control-label">Country <span class="text-danger">*</span></label>
+                                                            <div class="col-md-4">
+                                                                @Html.DropDownListFor(m => m.CountryId,
+                                         new List<SelectListItem> {
+                                              new SelectListItem { Value = "0" , Text = "--Select--" },
+                                              new SelectListItem { Value = "1" , Text = "India" }
+                                           },
+                                         new { @class = "form-control" })
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-md-12 mb-15">
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="row form-group">
+                                                            <label class="col-md-3 control-label">Bank Account No</label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.BankAccountNo, new { @class = "form-control only-numeric" })
+                                                            </div>
+
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-md-3 control-label">IFSC Code</label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.IFSCCode, new { @class = "form-control", @onchange = "GetBankDetailsByIFSC();" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-md-3 control-label">Bank Name</label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control" })
+                                                            </div>
+                                                        </div>
+                                                        <div class="row form-group">
+                                                            <label class="col-md-3 control-label">Branch Name</label>
+                                                            <div class="col-md-4">
+                                                                @Html.TextBoxFor(m => m.BranchName, new { @class = "form-control" })
+                                                                <div class="mt-3 text-left">
+
+                                                                    <button type="button" class="btn btn-success" onclick="Savedata(1)" id="SaveBtn">Save</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- end card -->
+            </div>
+            <!-- end col -->
+        </div>
+        <!-- end row -->
+
+    </div>
+    <!-- container-fluid -->
+
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel">Aadhar Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body"> <img class="img-fluid" id="allImage" src="" alt="Aadhar image" />  </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div id="myModal1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel1">Profile Image</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body"> <img class="img-fluid" id="allProfileImage" src="" alt="Profile Image" /></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- content -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        var load = $('#MaritalStatusID').val();
+        if (load == "Married") {
+            $('#Married').prop("checked", true);
+            $('#Div1').show();
+        }
+        else if (load == "Single") {
+            $('#Single').prop("checked", true);
+            $('#Div1').hide();
+            $('#MarriageAnniversaryID').val('');
+
+        }
+
+    });
+
+        $('.selectdate').datepicker({});
+     var ArrFamilyDetails = [];
+    $(document).ready(function () {
+        //hide Marrital
+        debugger
+        $("input[value='@Model.AccountPurpose']").attr('checked', true);
+        $("input[value='@Model.RegType']").attr('checked', true);
+        $("input[value='@Model.Gender']").attr('checked', true);
+        $("input[value='@Model.OrgType']").attr('checked', true);
+        $("input[value='@Model.MaritalStatus']").attr('checked', true);
+        $('#sponsorName').text('@Model.SponserName');
+        if (@Model.Fk_MemId!= null) {
+            $("#spanCustAadharImage").css("display", "block");
+            $("#spanCustAadharImage").css("color", "green");
+            $("#CustAadharImagestatusval").text('@Model.CustAadharImageStatus');
+            $("#spanSpouseAadharImages").css("display", "block");
+            $("#spanSpouseAadharImages").css("color", "green");
+            $("#SpouseAadharImagesstatusval").text('@Model.SpouseAadharImagesStatus');
+            $("#CountryId option:selected").text('@Model.CountryId');
+            $("#CityID option:selected").text('@Model.DistrictName');
+            $("#Zone").text('@Model.Zone');
+            $("#spanprofilepic").css("display", "block");
+            $("#spanprofilepic").css("color", "green");
+            $("#ProfileImagesstatusval").text('Uploaded');
+            if (@Model.lstChild.Count> 0) {
+
+                //table start
+                var table = '<table class="table table-bordered success-bordered-table" id="tbodyData">';
+                //preparing html table row and data here
+                  table += '<thead>' +
+                '<tr>' +
+                '</tr>' +
+                '<tr class="bg-inverse">' +
+                '<th>S.No.</th>' +
+                '<th>Child Name</th>' +
+                '<th>Relation</th>' +
+                '<th>Aadhar No</th>' +
+                '<th>PanNo</th>' +
+                '<th>Child Aadhar Image</th>' +
+                '<th>Child Profile Image</th>' +
+                '<th>Action</th>' +
+                '</tr>' +
+                '</thead>';
+                var Sno = 0;
+                var i;
+                var tags = @Html.Raw(Json.Encode(Model.lstChild));
+                for (i = 0; i < tags.length; i++) {
+
+                    Sno++;
+                    table += '<tr>' +
+                        '<td>' + Sno + '</td>' +
+                        '<td>' + tags[i].ChildName + '</td>' +
+                        '<td>' + tags[i].Relation + '</td>' +
+                        '<td>' +tags[i].ChildAadhar + '</td>' +
+                        '<td>' + tags[i].ChildPanNo + '</td>' +
+                        '<td><span title="Child Aadhar Image" class="fa fa-eye" onclick="ShowAllImage(`@Model.CustAadharImage`)"></span></td>' +
+                        '<td><span title="Child Profile Image" class="fa fa-eye" onclick="ShowProfileImage(`@Model.profilepic`)"></span></td>' +
+                        '<td><a href="javascript:void(0);" onclick = RemoveMultiFamilyTable(this)><i class="fa fa-trash text-danger"></i></a></td>' +
+                        '</tr>';
+                        ArrFamilyDetails.push({
+                    ChildName:tags[i].ChildName,
+                    Relation: tags[i].Relation ,
+                    ChildAadhar:  tags[i].ChildAadhar,
+                            ChildPanNo: tags[i].ChildPanNo,
+                            ChildAadharImage:tags[i].ChildAadharImage,
+                            ChildProfileImage: tags[i].ChildProfileImage
+                });
+                    $('#hidFamilyDetails').val(JSON.stringify(ArrFamilyDetails));
+                }
+                                          }
+                    table += '</table>';
+                $('#divMultipleFamilyTable').html(table);
+            }
+    });
+
+    function ShowAllImage(path) {
+        debugger
+            $("#allImage").attr('src',   path.replace("~", ""));
+            $("#myModal").modal('show');            
+     }
+    function ShowProfileImage(path) { 
+        debugger
+        $("#allProfileImage").attr('src', path.replace("~", ""));        
+        $("#myModal1").modal('show');
+    }
+</script>
+<script>
+    var savetab = 0;
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    var status = true;
+    showTab(currentTab); // Display the current tab
+    function showTab(n) {
+        //     // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("formtab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").style.display = "none";
+        } else {
+            document.getElementById("nextBtn").style.display = "inline";
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        fixStepIndicator(n)
+
+        //... and run a function that will display the correct step indicator:
+
+    }
+    function ShowImagePreview(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').prop('src', '');
+                $('#imagePreview').prop('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+        var path = input.value;
+        var ext = path.slice(path.lastIndexOf('.') + 1).toUpperCase()
+        if (ext == "JPG" || ext == "JPEG" || ext == "PNG") { }
+        else {
+            alert('Invalid Format')
+            $("#ProfilePic").val('');
+            $("#imagePreview").prop('src', '');
+            $("#ProfilePic").focus();
+            return false;
+        }
+    }
+    function Savedata(i) {
+        debugger;
+        var InviteCode = $('#InviteCode').val();
+        var SponserName = $('#sponsorName').text();
+        var Fk_SponserId = $('#Fk_SponserId').val();
+        var Name = $("#Name").val();
+        var DOB = $("#DOB").val();
+        var Gender = $('[name="Gender"]:checked').val();
+        var MaritalStatus = $('[name="MaritalStatus"]:checked').val();
+        var Password = $("#Password").val();
+        var ConPassword = $("#ConPassword").val();
+        var MobileNo = $("#MobileNo").val();
+        var EmailId = $("#EmailId").val();
+        var AadharNo = $("#AadharNo").val();
+        var Fk_MemId = $('#Fk_MemId').val();
+        var CustAadharImage = $("#HdnCustAadharImage").val();
+        var PanNo = $("#PanNo").val();
+       // var GSTNo = $("#GSTNo").val();
+        var Address1 = $("#Address1").val();
+        // var Address2 = $("#Address2").val();
+        // var LandMark = $("#LandMark").val();
+        var Pincode = $("#Pincode").val();
+        // var VillageName = $("#VillageName").val();
+        // var Tehsil = $("#Tehsil").val();
+        var DistrictName = $("#CityID").val();
+        var StateName = $("#StateName").val();
+        // var CountryId = $("#CountryId option:selected").text();
+        // var Zone = $("#Zone").val();
+        var NomineeName = $("#NomineeName").val();
+        var RelationWithNominee = $("#RelationWithNominee").val();
+        var BankAccountNo = $("#BankAccountNo").val();
+        var IFSCCode = $("#IFSCCode").val();
+        var BankName = $("#BankName").val();
+        var BranchName = $("#BranchName").val();
+        var LastName = $('#LastName').val();
+        var FathersName = $('#FathersName').val();
+        var MarriageAnniversary = $('#MarriageAnniversaryID').val();
+        var profilepic = $('#Hdnprofilepic').val();
+
+
+            if (InviteCode == '' || InviteCode == undefined || InviteCode == null) {
+                swal('', "Please Enter Referal Id", 'warning');
+                status = false;
+                showTab(savetab - 1);
+                savetab = 0;
+                currentTab = 0;
+                return false;
+
+            }
+            else {
+                status = true;
+            }
+           
+            if (Name == '' || Name == undefined || Name == null) {
+                swal('', "Please enter name", 'warning');
+                status = false;
+                showTab(savetab - 1);
+                savetab = 0;
+                currentTab = 0;
+                return false;
+            }
+           
+            if (Gender == '' || Gender == undefined || Gender == null) {
+                swal('', "PLease Select  Gender", 'warning');
+                status = false;
+                showTab(savetab - 1);
+                savetab = 0;
+                currentTab = 0;
+                return false;
+
+            }
+            else {
+                status = true;
+            }
+          
+            if (DOB == '' || DOB == undefined || DOB == null) {
+                swal('', "Please enter DOB", 'warning');
+                status = false; CompanyId
+                showTab(savetab - 1);
+                savetab = 0;
+                currentTab = 0;
+                return false;
+            }
+            else {
+                status = true;
+
+            }
+
+            
+            //if (MaritalStatus == '' || MaritalStatus == undefined || MaritalStatus == null) {
+            //    swal('', "Please Select Marital Status", 'warning');
+            //    status = false;
+            //    showTab(savetab - 1);
+            //    savetab = 0;
+            //    currentTab = 0;
+            //    return false;
+            //}
+            //else {
+            //    status = true;
+
+            //}
+        if ($("input[type=radio][name='MaritalStatus']:checked").val() == "Married") {
+            if (MarriageAnniversary == '' || MarriageAnniversary == undefined || MarriageAnniversary == null) {
+                swal('', "Please Select Marriage Anniversary Date", 'warning');
+                status = false;
+                showTab(savetab - 1);
+                savetab = 0;
+                currentTab = 0;
+                return false;
+            }
+            else {
+                status = true;
+
+            }
+            
+        }
+        
+            if (Password == '' || Password == undefined || Password == null) {
+                swal('', "Please enter Password", 'warning');
+                status = false;
+                showTab(savetab - 1);
+                savetab = 0;
+                currentTab = 0;
+                return false;
+            }
+            else {
+
+                status = true;
+            }
+            if (ConPassword == '' || ConPassword == undefined || ConPassword == null) {
+                swal('', "Please enter Confirm Password", 'warning');
+                status = false;
+                showTab(savetab - 1);
+                savetab = 0;
+                currentTab = 0;
+                return false;
+            }
+            else {
+
+                status = true;
+            }
+            if (Password != ConPassword) {
+                swal('', "password or Confirm Password does not match", 'warning');
+                status = false;
+                showTab(savetab - 1);
+                savetab = 0;
+                currentTab = 0;
+                return false;
+            }
+            else {
+
+                status = true;
+            }
+            //if (MobileNo == '' || MobileNo == undefined || MobileNo == null) {
+            //    swal('', "Please enter MobileNo.", 'warning');
+            //    status = false;
+            //    showTab(savetab - 1);
+            //    savetab = 0;
+            //    currentTab = 0;
+            //    return false;
+            //}
+            //else {
+            //    status = true;
+
+            //}
+            //if (EmailId == '' || EmailId == undefined || EmailId == null) {
+            //    swal('', "Please enter EmailId", 'warning');
+            //    status = false;
+            //    showTab(savetab - 1);
+            //    savetab = 0;
+            //    currentTab = 0;
+            //    return false;
+            //}
+            //else {
+            //    status = true;
+
+            //}
+            //if (AadharNo == '' || AadharNo == undefined || AadharNo == null) {
+            //    swal('', "Please enter AadharNo", 'warning');
+            //    status = false;
+            //    showTab(savetab - 1);
+            //    savetab = 0;
+            //    currentTab = 0;
+            //    return false;
+            //}
+            //else {
+            //    status = true;
+
+            //}
+            //if (CustAadharImage == '' || CustAadharImage == undefined || CustAadharImage == null) {
+            //    swal('', "Please Upload Aadhar Image", 'warning');
+            //    status = false;
+            //    showTab(savetab - 1);
+            //    savetab = 0;
+            //    currentTab = 0;
+            //    return false;
+            //}
+            //else {
+            //    status = true;
+
+            //}
+            //if (PanNo == '' || PanNo == undefined || PanNo == null) {
+            //    swal('', "Please enter PanNo", 'warning');
+            //    status = false;
+            //    showTab(savetab - 1);
+            //    savetab = 0;
+            //    currentTab = 0;
+            //    return false;
+            //}
+            //else {
+            //    status = true;
+
+            //}
+           
+            var CustomerDetails = {
+                InviteCode: InviteCode,
+            SponserName: SponserName,
+            Fk_SponserId: Fk_SponserId,
+            Name: Name,
+            DOB: DOB,
+            Gender: Gender,
+            MaritalStatus: MaritalStatus,
+            Password: Password,
+            MobileNo: MobileNo,
+            EmailId: EmailId,
+             AadharNo: AadharNo,
+            CustAadharImage: CustAadharImage,
+             PanNo: PanNo,
+            
+            Address1: Address1,
+            // Address2: Address2,
+            //LandMark: LandMark,
+            Pincode: Pincode,
+            //  Tehsil: Tehsil,
+            DistrictName: DistrictName,
+            StateName: StateName,
+            // CountryId: CountryId,
+            //  VillageName: VillageName,
+            //   Zone: Zone,
+            Fk_MemId: Fk_MemId,
+            NomineeName: NomineeName,
+            RelationWithNominee: RelationWithNominee,
+            BankAccountNo: BankAccountNo,
+            IFSCCode: IFSCCode,
+            BankName: BankName,
+            BranchName: BranchName,
+            LastName: LastName,
+            FathersName: FathersName,
+            MarriageAnniversary: MarriageAnniversary,
+            profilepic: profilepic
+            }
+            $.post("/Associate/AssociateViewProfile/CustomerPrimaryDetails", CustomerDetails, function (data, err) {
+                if (data.status == "success") {
+                    swal('', data.Remark, 'success');
+                    $('#Fk_MemId').val(data.Fk_MemId);
+                    showTab(savetab);
+                }
+                else {
+                    swal('', data.Remark, 'error');
+                    savetab = savetab - 1;
+                    currentTab = currentTab - 1;
+                    showTab(savetab);
+                }
+            });
+      //  }
+        //else if (savetab == 2) {
+        //    var Address1 = $("#Address1").val();
+        //    var Address2 = $("#Address2").val();
+        //    var LandMark = $("#LandMark").val();
+        //    var Pincode = $("#Pincode").val();
+        //    var VillageName = $("#VillageName").val();
+        //    var Tehsil = $("#Tehsil").val();
+        //    var DistrictName = $("#DistrictName option:selected").text();
+        //    var StateName = $("#StateName").val();
+        //    var CountryId = $("#CountryId option:selected").text();
+        //    var Zone = $("#Zone").val();
+
+        //    if (Address1 == "" || Address1 == undefined) {
+        //        swal("", "Please enter Address1", "warning");
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+
+        //    //if (VillageName == "" || VillageName == undefined) {
+        //    //    swal('', "Please enter Village Name", 'warning');
+        //    //    savetab = savetab - 1;
+        //    //    currentTab = currentTab - 1;
+        //    //    showTab(savetab);
+        //    //    return false;
+        //    //}
+
+        //    if (Pincode == "" || Pincode == undefined || Pincode == '0') {
+        //        swal('', "Please enter Pincode", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    if (DistrictName == "" || DistrictName == undefined) {
+        //        swal('', "Please enter District Name", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+
+        //    if (StateName == "" || StateName == undefined) {
+        //        swal('', "Please enter State ", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    if (Zone == "" || Zone == undefined) {
+        //        swal('', "Please enter Zone ", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+
+        //    if (CountryId == "" || CountryId == undefined) {
+        //        swal('', "Please enter Country ", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+
+
+        //    var CustomerAddress = {
+        //        FK_MemId: $('#Fk_MemId').val(),
+        //        Address1: Address1,
+        //        Address2: Address2,
+        //        LandMark: LandMark,
+        //        Pincode: Pincode,
+        //        Tehsil: Tehsil,
+        //        DistrictName: DistrictName,
+        //        StateName: StateName,
+        //        CountryId: CountryId,
+        //        VillageName: VillageName,
+        //        Zone: Zone,
+        //    };
+        //    $.post("/Associate/AssociateViewProfile/CustomerAddressDetails", CustomerAddress, function (data, err) {
+        //        if (data.status == "success") {
+        //            swal('', data.Remark, 'success');
+        //            showTab(savetab);
+        //        }
+        //        else {
+        //            swal('', data.Remark, 'error');
+        //            savetab = savetab - 1;
+        //            currentTab = currentTab - 1;
+        //            showTab(savetab);
+        //        }
+        //    })
+        //}
+        //else if (savetab == 3) {
+           
+        //    var SpouseName = $("#SpouseName").val();
+        //    var Relation = $('[name="Relation"]:checked').val();
+        //    var SpouseAadharNo = $("#SpouseAadharNo").val();
+        //    var SpousePanNo = $("#SpousePanNo").val();
+        //    var SpouseAadharImages = $("#HdnSpouseAadharImages").val();
+        //    var Fk_MemId = $('#Fk_MemId').val();
+        //    if (SpouseName == "" || SpouseName == undefined) {
+        //        swal('', "Please enter SpouseName", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    if (SpouseAadharNo == "" || SpouseAadharNo == undefined) {
+        //        swal('', "Please enter Spouse Aadhar", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    if (SpouseAadharImages == "" || SpouseAadharImages == undefined) {
+        //        swal('', "Please Upload Spouse Aadhar Images", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    const details = ArrFamilyDetails;
+        //    //if (details.length == 0) {
+        //    //    swal('', "Please enter Child Detail", 'warning');
+        //    //    savetab = savetab - 1;
+        //    //    currentTab = currentTab - 1;
+        //    //    showTab(savetab);
+        //    //    return false;
+        //    //}
+        //    $.post("/Associate/AssociateViewProfile/CustomerFamilyDetails", { SpouseName: SpouseName, SpouseAadharNo: SpouseAadharNo, SpousePanNo: SpousePanNo, SpouseAadharImages: SpouseAadharImages, Fk_MemId: Fk_MemId, data: details }, function (data, err) {
+        //        if (data.status == "success") {
+        //            swal('', data.Remark, 'success');
+        //          // showTab(savetab);
+
+        //            return false;
+        //        }
+        //        else {
+        //            swal('', data.Remark, 'error');
+        //            savetab = savetab - 1;
+        //            currentTab = currentTab - 1;
+        //            showTab(savetab);
+        //        }
+        //    })
+        //}
+        //else if (savetab == 4) {
+
+        //    var TotalLand = $('#TotalLand').val();
+        //    var FruitImages = $('#FruitImages').val();
+        //    var FruitVegetablesImages = $('#FruitVegetablesImages').val();
+        //    var LeafVegetablesImage = $('#LeafVegetablesImage').val();
+        //    var GrainImages = $('#GrainImages').val();
+        //    var PulseCropImages = $('#PulseCropImages').val();
+        //    var Fk_MemId = $('#Fk_MemId').val();
+        //    if (TotalLand == "" || TotalLand == undefined || TotalLand == '0') {
+        //        swal('', "Please enter Land", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    if (FruitImages == "" || FruitImages == undefined) {
+        //        swal('', "please Select Fruit Crops", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    if (FruitVegetablesImages == "" || FruitVegetablesImages == undefined) {
+        //        swal('', "please Select Fruit Vegetables Crops", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+
+        //    if (LeafVegetablesImage == "" || LeafVegetablesImage == undefined) {
+        //        swal('', "please Select Leaf Vegetables Crops", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    if (GrainImages == "" || GrainImages == undefined) {
+        //        swal('', "please Select Grain Crops", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    if (PulseCropImages == "" || PulseCropImages == undefined) {
+        //        swal('', "please Select Pulse Crops", 'warning');
+        //        savetab = savetab - 1;
+        //        currentTab = currentTab - 1;
+        //        showTab(savetab);
+        //        return false;
+        //    }
+        //    var FarmDetails = {
+        //        TotalLand: TotalLand,
+        //        FruitImages: FruitImages,
+        //        FruitVegetablesImages: FruitVegetablesImages,
+        //        LeafVegetablesImage: LeafVegetablesImage,
+        //        GrainImages: GrainImages,
+        //        PulseCropImages: PulseCropImages,
+        //        Fk_MemId: Fk_MemId
+        //    }
+
+
+        //    $.post("/Associate/AssociateViewProfile/CustomerFarmDetails", FarmDetails, function (data, err) {
+        //        if (data.status == "success") {
+        //            swal('', data.Remark, 'success');
+        //            window.setTimeout(function () {
+        //                window.location.href = "/Associate/AssociateViewProfile/ViewProfile";
+        //            }, 3000);
+        //            savetab = savetab - 1;
+        //            currentTab = currentTab - 1;
+        //            showTab(savetab);
+        //        }
+        //        else {
+        //            swal('', data.Remark, 'error');
+        //            savetab = savetab - 1;
+        //            currentTab = currentTab - 1;
+        //            showTab(savetab);
+        //        }
+        //    });
+        //}
+
+        //else {
+        //    showTab(0);
+        //}
+    }
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("formtab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        /*for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }
+        }*/
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class on the current step:
+        x[n].className += " active";
+    }
+</script>
+<script>
+
+    $("#addrow").on("click", function () {
+        debugger
+        var count = 0;
+        var ChildName = $("#ChildName").val();
+        var Relation = $('[name="Relation"]:checked').val();
+        var ChildAadhar = $("#ChildAadhar").val();
+        var ChildPanNo = $("#ChildPanNo").val();
+        var ChildAadharImage = $("#HdnChildAadharImage").val();
+        if (ChildName == "") {
+            swal('', "Please enter Child Name", 'warning');
+            return false;
+        }
+        if (Relation == "") {
+            swal('', "Please Choose Relation", 'warning');
+            return false;
+        }
+
+        $.each(ArrFamilyDetails, function (i) {
+            if (ArrFamilyDetails[i].ChildAadhar == $('#ChildAadhar').val()) {
+                count++;
+            }
+        });
+        if (count > 0) {
+            swal('', "Aadhar number already exists", 'warning');
+            return false;
+        }
+        AddFamilyDetails();
+    });
+    function AddFamilyDetails() {
+        ArrFamilyDetails.push({
+            ChildName: $('#ChildName').val(),
+            Relation: $('[name="Relation"]:checked').val(),
+            ChildAadhar: $('#ChildAadhar').val(),
+            ChildPanNo: $('#ChildPanNo').val(),
+            ChildAadharImage: $("#HdnChildAadharImage").val()
+        });
+
+        $('#hidFamilyDetails').val(JSON.stringify(ArrFamilyDetails));
+        BindMultipleFamilyDetails();
+    }
+    function BindMultipleFamilyDetails() {
+        //table start
+        var table = '<table class="table table-bordered success-bordered-table" id="tbodyData">';
+        //preparing html table row and data here
+        table += '<thead>' +
+            '<tr>' +
+            '</tr>' +
+            '<tr class="bg-inverse">' +
+            '<th>S.No.</th>' +
+            '<th>Child Name</th>' +
+            '<th>Relation</th>' +
+            '<th>Aadhar No</th>' +
+            '<th>PanNo</th>' +
+            '<th>Action</th>' +
+            '</tr>' +
+            '</thead>';
+        var Sno = 0;
+        $.each(ArrFamilyDetails, function (e) {
+            Sno++;
+            table += '<tr>' +
+                '<td>' + Sno + '</td>' +
+                '<td>' + ArrFamilyDetails[e].ChildName + '</td>' +
+                '<td>' + ArrFamilyDetails[e].Relation + '</td>' +
+                '<td>' + ArrFamilyDetails[e].ChildAadhar + '</td>' +
+                '<td>' + ArrFamilyDetails[e].ChildPanNo + '</td>' +
+                '<td><a href="javascript:void(0);" onclick = RemoveMultiFamilyTable(this)><i class="fa fa-trash text-danger"></i></a></td>' +
+                '</tr>';
+        });
+        //table end
+        table += '</table>';
+        //bind the table in to div
+        $('#divMultipleFamilyTable').html(table);
+        $('#ChildName').val('');
+        $('#ChildAadhar').val('');
+        $('#ChildPanNo').val('');
+    }
+    function RemoveMultiFamilyTable(idx) {
+        var RemoveMultiFamilyTableidx = $(idx).closest('tr').index();
+        ArrFamilyDetails.splice(RemoveMultiFamilyTableidx, 1);
+        $(idx).closest('tr').remove();
+
+    }
+    function GetReferDetails() {
+        debugger;
+        $.ajax({
+            url: '/Home/GetReferDetails',
+            type: 'post',
+            dataType: 'json',
+            data: { Fk_SponserId: $("#InviteCode").val() },
+            success: function (data) {
+                if (data != null) {
+                    debugger;
+                    $('#sponsorName').text(data.Name);
+                    $('#Fk_SponserId').val(data.Fk_SponserId);
+                }
+                else {
+                    swal('', "Error", 'error');
+                }
+            }
+        });
+    }
+    function GetDistrictCityStateDetailsByPincode() {
+        debugger;
+        if ($('#Pincode').val == "" || $('#Pincode').val() == 0) {
+            swal('', "Please Enter Pincode", 'warning');
+            $('#StateId').val('');
+            $('#CityId').val('');
+            return false;
+        }
+        debugger
+        $.ajax({
+            url: '/AssociateViewProfile/GetLocationByPinCode',
+            type: "POST",
+            data: JSON.stringify({ "pin": $('#Pincode').val() }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+
+                if (response != null || response != '') {
+                    $("#CityID").html('');
+                   /* $("#DistrictName").append($("<option></option>").val("").html('--Select City--'));*/
+                    $.each(response, function (i, item) {
+                        /*$("#DistrictName").append($("<option></option>").val(item.District).html(item.District));*/
+                        $("#CityID").val(item.District)
+                    });
+                    window.sessionStorage.setItem("regDistrictDetail", JSON.stringify(response));
+                }
+                else {
+                    swal('', "data does not exists", 'warning');
+                    return false;
+                }
+
+            },
+            error: function (er) {
+                swal('', "An Error Occured", 'error');
+                return false;
+            }
+        });
+    }
+
+    function BindDistrictDetail() {
+        var data = JSON.parse(window.sessionStorage.getItem("regDistrictDetail"));
+        var district = $("#DistrictName").val();
+        if (data != null) {
+            sessionStorage.clear();
+            $.each(data, function (i, item) {
+                if (item.District == district) {
+                    $("#StateName").val(item.State);
+                    $("#Tehsil").val(item.DistrictDetail[0].Taluka);
+                    $("#Zone").val(item.DistrictDetail[0].Zone);
+                    $('#CountryId').val(1);
+                }
+
+            });
+
+        }
+
+    }
+</script>
+
+<script>
+    function UploadFile(obj, subdir) {
+        debugger;
+        var Id = $(obj).attr("Id");
+        var data = new FormData();
+        var files = $("#" + Id).get(0).files;
+        if (files.length > 0) {
+            data.append("file", files[0]);
+            data.append("subdir", subdir);
+        }
+        else {
+            swal('', "Please select file to upload.", 'warning');
+            return false;
+        }
+        var extension = $("#" + Id).val().split('.').pop().toUpperCase();
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
+            swal('', "Invalid image file format.Only jpg,jpeg,png,bmp files are allow", 'warning');
+            return false;
+        }
+        $.ajax({
+            url: '/Associate/AssociateViewProfile/Uploadfile',
+            type: "POST",
+            processData: false,
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response != null || response != '') {
+                    if (response.result == "success") {
+
+                        $("#" + Id + "Path").val("");
+                        if (Id == "CustAadharImage") {
+                            $("#HdnCustAadharImage").val(response.Path);
+                        }
+                        else if (Id == "SpouseAadharImages") {
+                            $("#HdnSpouseAadharImages").val(response.Path);
+                        }
+                        else if (Id == "ChildAadharImage") {
+                            $("#HdnChildAadharImage").val(response.Path);
+                        }
+                        else if (Id == "profilepic") {
+                            $("#Hdnprofilepic").val(response.Path);
+                        }
+                    }
+
+                }
+            },
+            error: function (er) {
+                swal('', "An Error Occured.", 'error');
+            }
+        });
+    }
+    $(".only-numeric").bind("keypress", function (e) {
+        var keyCode = e.which ? e.which : e.keyCode
+        if (!(keyCode >= 48 && keyCode <= 57)) {
+            //swal("", "Please enter numeric digit only", "warning");
+            return false;
+        }
+        return true;
+    });
+    function ValidateAAdhar(id) {
+        var aadhar = document.getElementById(id).value;
+        var adharcardTwelveDigit = /^\d{12}$/;
+        var adharSixteenDigit = /^\d{16}$/;
+        if (aadhar != '') {
+            if (aadhar.match(adharcardTwelveDigit)) {
+                return true;
+            }
+            else if (aadhar.match(adharSixteenDigit)) {
+                return true;
+            }
+            else {
+                swal('', "Please enter valid aadhar number", 'warning');
+                document.getElementById(id).value = "";
+                return false;
+            }
+        }
+    }
+    function ValidatePAN(id) {
+
+        var PanNo = document.getElementById(id).value;
+        if (PanNo.value != "") {
+            var panPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+            if (PanNo.search(panPattern) == -1) {
+                swal('', "Please enter valid pan number", 'warning');
+                document.getElementById(id).value = "";
+                return false;
+            }
+
+        }
+    }
+
+    function checkMobile(id) {
+        var charCode = document.getElementById(id).value;
+        var matchpattern = /^[6-9][0-9]{9}$/;
+        var val = matchpattern.test(charCode);
+        if (!val) {
+            swal('', "Please enter 10 digit mobile number", 'warning');
+            document.getElementById(id).value = "";
+        }
+    }
+    function validateEmail() {
+        var reg = /^([A-Za-z0-9_\-\.])+\@@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+        var emailField = $("#EmailId").val();
+        if (reg.test(emailField) == false) {
+            $("#EmailId").focus();
+            emailField.value = "";
+            swal('', "Please enter a valid email", 'warning');
+            return false;
+        }
+    }
+    function GetMarried() {
+        debugger;
+        var status = $('input[name=MaritalStatus]:checked').val();
+        if (status == "Married") {
+            $('#Div1').show();
+        }
+        else if (status == "Single") {
+            $('#Div1').hide();
+            $('#MarriageAnniversaryID').val('');
+        }
+        else {
+            $('#Div1').hide();
+        }     
+    }
+
+</script>
+
+<script src="~/Content/dist/js/sweetalert.min.js"></script>
+

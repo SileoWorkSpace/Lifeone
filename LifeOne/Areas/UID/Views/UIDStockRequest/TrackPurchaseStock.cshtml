@@ -1,0 +1,706 @@
+﻿
+@using LifeOne.Models.Manager
+@model LifeOne.Models.FranchiseManagement.FEntity.MOrder
+@{
+    ViewBag.Title = "TrackPurchaseStock";
+    var Key = System.Configuration.ConfigurationManager.AppSettings["Aeskey"].ToString();
+
+}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+
+
+<style>
+    .custom-thead thead {
+        background: aliceblue;
+    }
+
+    .btn-default {
+        color: #333;
+    }
+
+    @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 1150px;
+        }
+    }
+
+    .modal-header {
+        display: block;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Order Status</h4>
+
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">UID</a></li>
+                    <li class="breadcrumb-item"><a href="#">Manage Stock</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Order Status</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton ">
+            <div class="right text-right">
+                <span>
+                    <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>
+                </span>
+                <span>
+                    <a href="@Url.Action("ExportToExcelTrackPurchaseStock","UIDStockRequest",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                </span>
+                <span>
+                    <button class="btn btn-danger btn-custom btn-rounded btn-sm" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>
+                </span>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body p-0">
+
+                    <div class="row" id="advance-search" style="display:none;">
+                        <div class="col-md-12">
+                            <div class="alert alert-warning" style="color:#727272 !important">
+                                @using (Html.BeginForm("TrackPurchaseStock", "UIDStockRequest", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                                {
+
+                                    <div class="row">
+
+                                        <div class="col-12 col-md-3">
+
+                                            <div class="form-group">
+                                                <label>Order No.</label>
+                                                <input type="text" name="OrderNo" id="OrderNo" placeholder="" class="form-control">
+                                            </div>
+                                        </div>
+                                        @*<div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Date</label><br />
+                                                <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                    @Html.TextBoxFor(m => m.ApproveDate, new { @class = "form-control selectdate", })
+                                                </div>
+
+                                            </div>
+                                        </div>*@
+                                        <div class="col-12 col-md-3">
+                                            <div class="form-group">
+                                                <label>From Date</label><br />
+                                                <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                    <input type="date" name="FromDate" id="FromDate"  placeholder="" class="form-control">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-3">
+                                            <div class="form-group">
+                                                <label>To Date</label><br />
+                                                <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                    <input type="date" name="ToDate" id="ToDate" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-12 col-md-3">
+                                            <div class="form-group">
+                                                <label style="display:block;"></label>
+                                                <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                <a href="/UID-Track-Purchase-Stock" class="btn btn-danger " style="margin-top:1.5em;" id="BtnSearchReset">Reset</a>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive" >
+                        <table class="table table-striped mb-0" id="tblTrackPurchaseOrder">
+                            <thead>
+                                <tr>
+                                    <th>SNo.</th>
+                                    <th>Order No</th>
+                                    <th>Qty.</th>
+                                    <th>Total&nbsp;PV</th>
+                                    <th>Payment&nbsp;Type</th>
+                                    <th>Order Info.</th>
+                                    @*
+                                        <th>Order&nbsp;Status</th>*@
+                                    <th>Payment&nbsp;Status</th>
+                                    @*
+                                        <th>Approved&nbsp;Dt</th>*@
+                                    @*
+                                        <th>Shipped&nbsp;Dt</th>*@
+                                    <th>Invoice / Shipping&nbsp;Details</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.LstOrder != null && Model.LstOrder.Count > 0)
+                                {
+                                    int i = 0;
+                                    foreach (var item in Model.LstOrder)
+                                    {
+                                        <tr>
+                                            <td align="left">@(i = i + 1)</td>
+                                            <td align="left"><span> <a href="#" style="text-decoration:underline" data-toggle="modal" data-target="#myModal" onclick="ShowItem(@item.PK_RId)">@item.OrderNo</a></span></td>
+                                            <td align="left"><span>@item.ItemQty</span></td>
+                                            <td align="left"><span>@item.TotalPV</span></td>
+                                            <td align="left"><span>@item.PaymentType</span></td>
+                                            <td align="left">
+                                                <span><b>Date</b>&nbsp;:&nbsp;@item.OrderDate</span><br />
+                                                <span><b>Amount</b>&nbsp;:&nbsp;@item.Amount</span>
+                                            </td>
+
+                                            @*@if (item.OrderStatus == "Pending")
+                                                {
+                                                    <td><span class="label label-danger">@item.OrderStatus</span></td>
+                                                }
+                                                else
+                                                {
+                                                    <td><span class="label label-success">@item.OrderStatus</span></td>
+                                                }*@
+                                            @if (item.PaymentStatus == "Pending")
+                                            {
+                                                <td><span class="label label-danger">@item.PaymentStatus</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="label label-success">@item.PaymentStatus</span></td>
+                                            }
+                                            @*<td align="left"><span>@item.ApproveDate</span></td>*@
+                                            @*<td align="left"><span>@item.ShippedDate</span></td>*@
+                                            <td>
+                                                @if (item.PaymentStatus == "Pending")
+                                                {
+
+                                                    <button type="button" class="btn btn-sm btn-default text-warning" disabled title="View Invoice"><i class="fa fa-file"></i></button>
+
+                                                }
+                                                else
+                                                {
+
+                                                    <a href="/UID/UIDStockRequest/MemberTaxInvoice?OrderId=@LifeOne.Models.API.AesEncryptDecrypt.EncryptString(Key, item.PK_RId.ToString())" target="_blank" class="btn btn-sm btn-default text-warning" title="View Invoice" data-toggle="tooltip"><i class="fa fa-file"></i></a>
+
+
+                                                }
+                                                @if (item.FK_RefTblOrderId == "0")
+                                                {
+
+                                                    <button type="button" class="btn btn-sm btn-default text-danger" disabled title="View Shipping Status">
+                                                        <i class="fa fa-truck"></i>
+                                                    </button>
+
+                                                }
+                                                else
+                                                {
+
+                                                    <button type="button" class="btn btn-sm btn-default text-danger" id="btnshowpopupdelivery" onclick="ShowShippedINformation(@item.PK_RId)" data-toggle="modal" data-target="#myModaldelivery" title="View Shipping Status"> <i class="fa fa-truck"></i></button>
+
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                else
+                                {
+                                    @*<tr colspan="7">
+                                            <td>No Record Found..</td>
+                                        </tr>*@
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <footer class="card-footer bg-white p-2">
+                    <div class="d-md-flex align-items-center justify-content-between">
+
+                        @if (Model != null)
+                        {
+                            if (Model.Pager != null)
+                            {
+                                if (Model.Pager.EndPage > 1)
+                                {
+                                    <div> <small class="text-muted inline">showing @Model.LstOrder.Count  of @Model.LstOrder[0].TotalRecords items</small> </div>
+                                    <div>
+                                        <ul class="pagination pagination-sm m-t-none m-b-none">
+                                            @if (Model.Pager.CurrentPage > 1)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/Associate/AssociateStockRequest/TrackPurchaseStock?OrderNo=@Model.OrderNo&ApproveDate=@Model.ApproveDate">First</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/Associate/AssociateStockRequest/TrackPurchaseStock?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                                </li>
+                                            }
+                                            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                            {
+                                                <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                    <a class="page-link" href="/Associate/AssociateStockRequest/TrackPurchaseStock?page=@page&OrderNo=@Model.OrderNo&ApproveDate=@Model.ApproveDate">@page</a>
+                                                </li>
+                                            }
+                                            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                            {
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/Associate/AssociateStockRequest/TrackPurchaseStock?page=@(Model.Pager.CurrentPage + 1)&OrderNo=@Model.OrderNo&ApproveDate=@Model.ApproveDate">Next</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link" href="/Associate/AssociateStockRequest/TrackPurchaseStock?page=@(Model.Pager.TotalPages)&OrderNo=@Model.OrderNo&ApproveDate=@Model.ApproveDate">Last</a>
+                                                </li>
+                                            }
+                                        </ul>
+                                    </div>
+                                }
+                            }
+
+                        }
+
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">  Order Details</h4>
+            </div>
+            <div class="modal-body">
+                <div id="CustomMessages1"></div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive" >
+                            <table id="Productdetails" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Product&nbsp;Type</th>
+                                        <th>Product&nbsp;Name</th>
+                                        <th>Product&nbsp;Amt</th>
+                                        <th>Requsted&nbsp;Qty</th>
+                                        <th>Final&nbsp;Amt</th>
+                                        <th>Point&nbsp;Value</th>
+                                        <th>Total&nbsp;PV</th>
+                                        @*<th>Approved&nbsp;Qty</th>
+                                            <th>Remark</th>
+                                            <th>Status</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myModaldelivery" class="modal fade">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"> Shipping Information</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive" >
+                    <table id="ShippingInformation" class="table table-hover">
+                        <thead class="">
+                            <tr>
+                                <th>Franchise </th>
+                                <th>Franchise Adr</th>
+                                @*<th>Product </th>
+                                    <th>Requsted Qty.</th>*@
+                                <th>Courier Info.</th>
+                                <th>Vehical Info</th>
+                                <th>Shipped Adr/Date</th>
+                                <th>Shipping Status</th>
+                                <th>ContactPerson Person</th>
+                                <th>View Product(s)</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer pull-right">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+
+<script>
+    $(function () {
+        $('input[name="ApproveDate"]').daterangepicker({
+            //opens: 'left'
+            timePicker: true,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour').add(32, 'hour'),
+            locale: {
+                format: 'DD/M/YYYY'
+            }
+        }, function (start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+    });
+</script>
+
+
+<script>
+
+    function ShowItem(RequestId) {
+        var ReqId = RequestId;
+        $.ajax({
+            url: "/UID/UIDStockRequest/ViewRequestItemDetail",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ RequestId: ReqId }),
+            contentType: "application/json",
+            success: function (result) {
+
+                if (result != undefined && result != '') {
+
+                    $("#Productdetails tbody").html('');
+
+                    var str = "";
+                    var str1 = "";
+                    var TotalProdAmt = 0;
+                    var TotalReqQty = 0;
+                    var FinalAmt = 0;
+                    for (var i = 0; i < result.length; i++) {
+                        var status = ""
+                        var css = ""
+                        if (result[i].PrdWiseStsId == 5) {
+                            status = "Approved"
+                            css = "label label-success"
+                        }
+                        else if (result[i].PrdWiseStsId == 6) {
+                            status = "Decline"
+                            css = "label label-danger"
+                        }
+                        else {
+                            status = "Pending"
+                            css = "label label-danger"
+                        }
+
+                        TotalProdAmt = parseInt(TotalProdAmt) + parseFloat(result[i].Amount);
+                        TotalReqQty = parseInt(TotalReqQty) + parseFloat(result[i].ReqQnty);
+                        FinalAmt = parseInt(FinalAmt) + parseFloat(((result[i].Amount) * (result[i].ReqQnty)));
+
+                        //str += "<tr ><td nowrap>" + result[i].ProductType + "</td><td>" + result[i].ProductName + "</td><td>" + result[i].Amount + "</td><td>" + result[i].ReqQnty + "</td><td>" + ((result[i].Amount) * (result[i].ReqQnty)) + "</td><td>" + result[i].PointValue + "</td><td>" + result[i].TotalPV + "</td><td>" + result[i].ApprovalQty + "</td><td>" + result[i].PrdWiseRmrk + "</td><td><span class='" + css + "'>" + status + "</span></td></tr>";
+                        str += "<tr ><td nowrap>" + result[i].ProductType + "</td><td>" + result[i].ProductName + "</td><td>" + result[i].Amount + "</td><td>" + result[i].ReqQnty + "</td><td>" + ((result[i].Amount) * (result[i].ReqQnty)) + "</td><td>" + result[i].PointValue + "</td><td>" + result[i].TotalPV + "</td></tr>";
+                    }
+
+                    str += "<tr><th colspan='2'>Total</th><th>" + TotalProdAmt + "</th><th>" + TotalReqQty + "</th><th>" + FinalAmt + "</th><th></th><th></th></tr>";
+
+                    $("#Productdetails tbody").html(str);
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+
+    function ShowShippedINformation(RequestId) {
+        $("#ShippingInformation tbody").html('');
+        var ReqId = RequestId;
+        $.ajax({
+            url: "/UID/UIDStockRequest/GetShippingInformationForAssociate",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ RequestId: ReqId }),
+            contentType: "application/json",
+            success: function (result) {
+                if (result != undefined && result != '') {
+                    $("#ShippingInformation tbody").html('');
+                    var str = "";
+                    for (var i = 0; i < result.length; i++) {
+                        str += "<tr ><td nowrap  style='color: #2196F3;'>" + result[i].FranchiseName + "</br>" + result[i].EmailAddress + "</br>" + result[i].Contact + "</td>" +
+                            "<td> " + result[i].Address + "</td > <td> " + result[i].CourierName + " </br>" + result[i].RefNo + "</td >" +
+                            "<td> " + result[i].VehicalInfo + "</td ><td>" + result[i].DeliveryAddress + "</br> <span style='color:red'>" + result[i].DocDate + "<span></td> <td>" + MangeShippingStatus(result[i].DeliveredStatus) + "</td><td>" + result[i].ContactPerson + "</td><td><a style='cursor:pointer'  data-toggle='collapse' data-target='#demo" + i + "'  onclick=ShowItemOnViewPorductButton(" + result[i].FranchiseId + "," + result[i].FK_FbSID + "," + i + ") >View Product</a></td>" +
+                            "</tr ><tr><td colspan='8'><div id='demo" + i + "' class='collapse'></div></td></tr>";
+                    }
+                    //str += "<tr><th colspan='2'>Total</th><th>" + TotalProdAmt + "</th><th>" + TotalReqQty + "</th><th>" + FinalAmt + "</th><th></th><th></th><th></th><th></th><th></th></tr>";
+                    $("#ShippingInformation tbody").html(str);
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+
+    function ShowItemOnViewPorductButton(FranchiseId, RequestId, iValue) {
+
+        var ReqId = RequestId;
+        $.ajax({
+            url: "/UID/UIDStockRequest/ViewRequestItemDetailFranchiseWise",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ RequestId: ReqId, FranchiseId: FranchiseId }),
+            contentType: "application/json",
+            success: function (result) {
+
+
+                $("#demo" + iValue + "").html('');
+                $("#demo" + iValue + "").append('<table id="" class="table table-hover custom-thead">' +
+                    '      <thead>                                    ' +
+                    '          <tr>                                   ' +
+                    '              <th>Product&nbsp;Type</th>         ' +
+                    '              <th>Product&nbsp;Name</th>         ' +
+                    '              <th>Product&nbsp;Amt</th>          ' +
+                    '              <th>Requsted&nbsp;Qty</th>         ' +
+                    '              <th>Final&nbsp;Amt</th>            ' +
+                    //'              <th>Point&nbsp;Value</th>          '+
+                    //'              <th>Total&nbsp;PV</th>             '+
+                    '                      </tr>                      ' +
+                    '      </thead>                                   ' +
+                    '      <tbody id="tableBody' + iValue + '"></tbody>                            ' +
+                    '  </table>');
+                if (result != undefined && result != '') {
+
+                    var str = "";
+                    var str1 = "";
+                    var TotalProdAmt = 0;
+                    var TotalReqQty = 0;
+                    var FinalAmt = 0;
+                    for (var i = 0; i < result.length; i++) {
+                        var status = ""
+                        var css = ""
+                        if (result[i].PrdWiseStsId == 5) {
+                            status = "Approved"
+                            css = "label label-success"
+                        }
+                        else if (result[i].PrdWiseStsId == 6) {
+                            status = "Decline"
+                            css = "label label-danger"
+                        }
+                        else {
+                            status = "Pending"
+                            css = "label label-danger"
+                        }
+
+                        TotalProdAmt = parseInt(TotalProdAmt) + parseFloat(result[i].Amount);
+                        TotalReqQty = parseInt(TotalReqQty) + parseFloat(result[i].ReqQnty);
+                        FinalAmt = parseInt(FinalAmt) + parseFloat(((result[i].Amount) * (result[i].ReqQnty)));
+
+                        //str += "<tr ><td nowrap>" + result[i].ProductType + "</td><td>" + result[i].ProductName + "</td><td>" + result[i].Amount + "</td><td>" + result[i].ReqQnty + "</td><td>" + ((result[i].Amount) * (result[i].ReqQnty)) + "</td><td>" + result[i].PointValue + "</td><td>" + result[i].TotalPV + "</td><td>" + result[i].ApprovalQty + "</td><td>" + result[i].PrdWiseRmrk + "</td><td><span class='" + css + "'>" + status + "</span></td></tr>";
+                        str += "<tr ><td nowrap>" + result[i].ProductType + "</td><td>" + result[i].ProductName + "</td><td>" + result[i].Amount + "</td><td>" + result[i].ReqQnty + "</td><td>" + ((result[i].Amount) * (result[i].ReqQnty)) + "</td></tr>";
+                        //<td>" + result[i].PointValue + "</td><td>" + result[i].TotalPV + "</td>
+                    }
+
+                    str += "<tr><td></td><td>Total</td><td>" + TotalProdAmt + "</td><td>" + TotalReqQty + "</td><td>" + FinalAmt + "</td></tr>";
+
+                    $("#tableBody" + iValue).html(str);
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+
+    function MangeShippingStatus(status) {
+
+        var html = "";
+        if (status == 1) {
+            html = "<label class='label label-success'>Shipped</label>";
+        } else {
+            html = "<label class='label label-danger'>Pending</label>";
+        }
+        return html;
+
+    }
+
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [7, 0]; // coloms to remove
+
+        var tbl = $('#tblTrackPurchaseOrder').clone();
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 35,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Track Purchase Order',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "TrackPurchaseOrder");
+        doc.page++;
+        doc.save('TrackPurchaseOrder.pdf');
+
+    });
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('DepartmentTable').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Track Purchase Order</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+</script>

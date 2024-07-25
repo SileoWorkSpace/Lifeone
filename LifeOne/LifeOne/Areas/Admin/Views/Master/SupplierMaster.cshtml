@@ -1,0 +1,231 @@
+﻿@model LifeOne.Models.ProductsDetail
+
+@{
+    ViewBag.Title = "SupplierMaster";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .card-body.em .row .col-md-6 {
+        margin-bottom: 10px;
+    }
+    /* The container */
+    .container2 {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default radio button */
+        .container2 input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container2:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container2 input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container2 input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container2 .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .dv_Orbit {
+        display: none;
+    }
+</style>
+
+
+
+@using (Html.BeginForm("SupplierMaster", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Vendor Master</h4>
+
+        </div>
+
+    </div>
+    <div class="row">
+       
+        <div class="col-md-6 offset-3">
+            <div class="card">
+                <div class="card-body" style="padding:25px;">
+
+                    <div class="row">
+                        <div class="col-md-12 form-group">
+                            <label>Vendor Name<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.SupplierName, new { @class = "form-control" })
+                        </div>
+
+                        <div class="col-md-6 form-group">
+                            <label>Mobile No.<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.Mobile, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+
+
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>GST No.<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.GSTNo, new { @class = "form-control" })
+
+                        </div>
+
+
+                        <div class="col-md-12 form-group" id="dv_PV">
+                            <label>Address<span style="color:red;">*</span></label>
+                            
+                            @Html.TextAreaFor(m => m.Address, new { @class = "form-control" })
+
+                        </div>
+
+
+                        <div class="col-md-6 form-group">
+                            <label>Pin Code<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12" style="margin-top:10px">
+                            <div class="text-center" style="margin-left:50px">
+                                @{
+                                    var Button = "";
+                                    if (Model == null)
+                                    {
+                                        Button = "Save";
+                                    }
+
+                                    else if (Model != null)
+                                    {
+
+                                        if (string.IsNullOrEmpty(Model.Pk_SupplierId) || Model.Pk_SupplierId == "0")
+                                        {
+                                            Button = "Save";
+                                        }
+                                        else
+                                        {
+                                            Button = "Update";
+                                        }
+                                    }
+                                    <button type="submit" value="@Button" class="btn btn-success" onclick="return validate();" name="@Button">@Button</button>
+
+                                }
+
+
+                                <a href="/SupplierMasterList" class="btn btn-danger"> Cancel</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            @Html.HiddenFor(m => m.Pk_SupplierId)
+
+        </div>
+    </div>
+</div>     }
+            <script type="text/javascript">
+
+
+
+
+                function validate() {
+                    var SupplierName = $('#SupplierName').val();
+                    var Mobile = $('#Mobile').val();
+                    var PinCode = $('#PinCode').val();
+                    var Address = $('#Address').val();
+                    var GSTNo = $('#GSTNo').val();
+
+
+                    if (SupplierName == null || SupplierName == "") {
+                        alert("Please Add Supplier Name");
+                        return false;
+                    }
+                    else if (Mobile == null || Mobile == "") {
+                        alert("Please Add Mobile Number");
+                        return false;
+
+                    }
+                    else if (Mobile.length != 10) {
+                        alert("Please Add  Valid Mobile Number");
+                        return false;
+
+                    }
+                    else if (GSTNo == null || GSTNo == "") {
+                        alert("Please Add GSTNo ");
+                        return false;
+                    }
+                    else if (Address == null || Address == "") {
+                        alert("Please Add Supplier Address");
+                        return false;
+                    }
+
+
+                    else if (PinCode == null || PinCode == "") {
+                        alert("Please Add PinCode");
+                        return false;
+                    }
+                    else if (PinCode.length != 6) {
+                        alert("Please Add Valid Pincode");
+                        return false;
+                    }
+                    else {
+                        $('#idfinalsubmit').click();
+                    }
+                }
+                function isNumberKey(evt) {
+                    var charCode = (evt.which) ? evt.which : event.keyCode;
+                    if (charCode != 46 && charCode > 31
+                        && (charCode < 48 || charCode > 57))
+                        return false;
+                }
+            </script>

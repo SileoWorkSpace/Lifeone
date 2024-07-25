@@ -1,0 +1,459 @@
+﻿
+@model LifeOne.Models.Reports
+
+
+@{
+    ViewBag.Title = "Open Order List";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .modal-footer {
+        background: white;
+        width: 100%;
+    }
+
+    .modal-body {
+        position: relative;
+        padding: 31px;
+    }
+</style>
+@using (Html.BeginForm("OpenOrderList", "Admin", FormMethod.Post))
+{
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Open Order List</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <!--<li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#">Open Orders</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Open Order List</li>-->
+                    </ol>
+                </nav>
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                    <span>
+                        <a href="#" onclick="fCallPaging(1,1)" data-toggle="tooltip" data-placement="top" title="Download Excel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                    </span>
+                    <span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+              
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <h4 class="header-title mt-0 mb-1"></h4>
+                                    <p class="sub-header">  </p>
+                                </div>
+                                <div class="col-md-3 navbar-custom pull-right" style="position:relative">
+                                    <div class="app-search">
+                                        @Html.HiddenFor(m => m.Page)
+                                        @Html.HiddenFor(m => m.IsExport)
+                                        <button type="submit" style="display:none;" id="BtnSearch" ></button>
+                                        @*<form>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search...">
+                                        <span data-feather="search"></span>
+                                    </div>
+                                </form>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped mb-0" id="tblBillingOrdered">
+                                    <thead>
+                                        <tr>
+                                            <th>#Sn.</th>
+                                            <th>Order No</th>
+                                            <th>Customer Name</th>
+                                            <th>Payment Type</th>
+                                            <th>Transaction No</th>
+                                            <th>Item Qty.</th>
+                                            <th>BV</th>
+                                            <th>Order Amt.(₹)</th>
+                                            <th>Final Amt.(₹)</th>
+                                            <th>Ordered Dt.</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @if (Model != null && Model.dtDetails.Rows.Count > 0)
+                                        {
+                                            int j = 0;
+                                            int page = Model.Page ?? 0;
+                                            page = (page - 1);
+
+
+                                            j = ((page) * (Model.Size));
+
+                                            for (var i = 0; i < Model.dtDetails.Rows.Count; i++)
+                                            {
+
+                                                <tr>
+                                                    <td>@(j = j + 1)</td>
+                                                    <td align="left">
+
+                                                        <a href="#" style="text-decoration:underline" data-toggle="modal" data-target="#myModal" onclick="return ShowItems('@Model.dtDetails.Rows[i]["Pk_OrderId"].ToString()')">
+                                                            @Model.dtDetails.Rows[i]["OrderNo"].ToString()
+                                                        </a>
+
+                                                    </td>
+                                                    <td>@Model.dtDetails.Rows[i]["Name"].ToString()</td>
+                                                    <td>@Model.dtDetails.Rows[i]["PaymentMode"].ToString()</td>
+                                                    <td>@Model.dtDetails.Rows[i]["TransactionNo"].ToString()</td>
+                                                    <td>@Model.dtDetails.Rows[i]["TotalQty"].ToString()</td>
+                                                    <td>@Model.dtDetails.Rows[i]["TotalBV"].ToString()</td>
+                                                    <td>@Model.dtDetails.Rows[i]["OrderAmount"].ToString()</td>
+                                                    <td>@Model.dtDetails.Rows[i]["OrderAmount"].ToString()</td>
+                                                    <td>@Model.dtDetails.Rows[i]["OrderDate"].ToString()</td>
+                                                    <td>
+
+                                                        <a href="/Admin/Admin/OpenOrderTaxInvoice?OrderId=@Model.dtDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        <a href="/Admin/Admin/DeleteOpenOrder?id=@Model.dtDetails.Rows[i]["Pk_OrderId"].ToString()" class="btn btn-default btn-sm text-danger" onclick="return confirm('Are you sure to Delete this Order?')" title="click here to Delete" style="display:@ViewBag.delete;">
+                                                            Delete
+                                                        </a>
+                                                    </td>
+
+
+                                                </tr>
+                                                
+
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <footer class="card-footer bg-white p-2">
+                                <div class="d-md-flex align-items-center justify-content-between">
+
+                                    @if (Model != null)
+                                    {
+                                        if (Model.Pager != null)
+                                        {
+                                            if (Model.Pager.EndPage > 1)
+                                            {
+                                                <div> <small class="text-muted inline">showing @Model.dtDetails.Rows.Count  of @Model.dtDetails.Rows[0]["TotalRecords"].ToString() items</small> </div>
+                                                <div>
+                                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                        @if (Model.Pager.CurrentPage > 1)
+                                                        {
+                                                            <li class="page-item">
+                                                                <a class="page-link" onclick="fCallPaging(1,0)" href="#">First</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1),0)" href="#">Previous</a>
+                                                            </li>
+                                                        }
+                                                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                        {
+                                                            <li class="page-item @(page == Model.Pager.CurrentPage ? " active" : "" )">
+
+
+                                                                <span><a class="page-link" onclick="fCallPaging(@page,0)" href="#">@page</a></span>
+                                                            </li>
+                                                        }
+                                                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                        {
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1),0)" href="#">Next</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages),0)" href="#">Last</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+              
+                </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ordered Details</h4>
+                </div>
+                <div class="modal-body">
+                    @*<div id="CustomMessages1"></div>*@
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive" >
+                                <table id="Productdetails" class="table table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Product&nbsp;Type</th>
+                                            <th>Product&nbsp;Name</th>
+                                            <th>Total&nbsp;Qty</th>
+                                            <th>BV</th>
+                                            <th>Total BV</th>
+                                            <th>Product&nbsp;Amt</th>
+
+
+                                            <th>Final&nbsp;Amt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}
+
+<script>
+    function fCallPaging(val, IsExport) {
+
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#IsExport").val(IsExport);
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+
+
+   
+
+    function ShowItems(OrderId) {
+        
+        var ReqId = OrderId;
+        $.ajax({
+            url: "/Admin/Admin/ViewSupplyItemDetail",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ OrderId: ReqId }),
+            contentType: "application/json",
+            success: function (result) {
+
+                if (result != undefined && result != '') {
+
+                    $("#Productdetails tbody").html('');
+
+                    var str = "";
+                    var TotalProdAmt = 0;
+                    var TotalReqQty = 0;
+                    var FinalAmt = 0;
+                    var PointValue = 0;
+                    var TotalPV = 0;
+                    for (var i = 0; i < result.length; i++) {
+                        PointValue = PointValue + parseInt(result[i].PointValue);
+                        TotalPV = TotalPV + parseInt(result[i].TotalPV);
+                        TotalReqQty = parseInt(TotalReqQty) + parseFloat(result[i].ItemQty);
+                        FinalAmt = parseInt(FinalAmt) + parseInt(result[i].TotalAmt);
+                        TotalProdAmt = parseInt(TotalProdAmt) + parseInt(result[i].Amount);
+
+                        str += "<tr><td  nowrap>" + result[i].ProductType + "</td><td >" + result[i].ProductName + "</td><td >" + result[i].ItemQty + "</td><td >" + result[i].PointValue + "</td><td >" + result[i].TotalPV + "</td><td >" + result[i].Amount + "</td><td >" + result[i].TotalAmt + "</td></tr>";
+                    }
+
+                    str += "<tr><th colspan='2'>Total</th><th>" + TotalReqQty + "</th><th>" + PointValue + "</th><th>" + TotalPV + "</th><th>" + TotalProdAmt + "</th><th>" + FinalAmt + "</th></tr>";
+
+                    $("#Productdetails tbody").html(str);
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [0,10]; // coloms to remove
+
+        var tbl = $('#tblBillingOrdered').clone();
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 27,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Open Order List',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "Open Order List");
+        doc.page++;
+        doc.save('Open Order List.pdf');
+
+    });
+
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('tblBillingOrdered').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Open Order List</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+</script>
+
+

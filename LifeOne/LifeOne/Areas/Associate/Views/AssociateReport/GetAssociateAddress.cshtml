@@ -1,0 +1,173 @@
+﻿@model LifeOne.Models.Reports
+
+@{
+    ViewBag.Title = "AssociateAddress";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="~/Content/dist/js/CommonJS.js?1.0"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<div class="container-fluid">
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Address</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Shpping </a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Associate Address </li>  
+                </ol>
+
+            </nav>
+
+        </div>
+        <div class="ptitle" style="text-align:right;">
+            <a href="/Associate/AssociateReport/AssociateAddress" id="btnAdd" class="btn btn-success btn-sm" style="text-align:right">
+                <i class="fa fa-plus" aria-hidden="true" style="text-align:right"></i> Add New Address
+            </a>
+        </div>
+    </div>
+
+
+    @using (Html.BeginForm("PaymentGatewayIntegration", "AssociateReport", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+
+        @Html.HiddenFor(m => m.Pk_AddressId)
+
+        <div id="no-more-tables">
+            <form id="form1" method="post">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+
+
+                                <div class="table-responsive" id="customers">
+                                    <table class="table mb-0" id="tblCustomers">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th> Name</th>
+                                                <th>MobileNo</th>
+                                                <th>Landmark</th>
+                                                <th>Address</th>
+                                                <th>State</th>
+                                                <th> City</th>
+                                                <th>Pin Code</th>
+                                                <th>Address Type</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @if (Model != null && Model.dtaddressdetails.Rows.Count > 0)
+                                            {
+
+                                                for (var i = 0; i < Model.dtaddressdetails.Rows.Count; i++)
+                                                {
+
+                                            <tr>
+                                                <td>
+                                                    <input type="radio" id="rdDefaultAddress" name="rdDefaultAddress" groupname="rdAddress" onclick="return getAddress('@Model.dtaddressdetails.Rows[i]["Pk_AddressId"].ToString()')" />
+                                                </td>
+                                                <td>@Model.dtaddressdetails.Rows[i]["Name"].ToString()</td>
+                                                <td>@Model.dtaddressdetails.Rows[i]["MobileNo"].ToString()</td>
+                                                <td>@Model.dtaddressdetails.Rows[i]["Landmark"].ToString()</td>
+                                                <td>@Model.dtaddressdetails.Rows[i]["Address"].ToString()</td>
+                                                <td>@Model.dtaddressdetails.Rows[i]["State"].ToString()</td>
+                                                <td>@Model.dtaddressdetails.Rows[i]["City"].ToString()</td>
+                                                <td>@Model.dtaddressdetails.Rows[i]["PinCode"].ToString()</td>
+                                                <td>@Model.dtaddressdetails.Rows[i]["AddressType"].ToString()</td>
+                                                <td>
+
+
+                                                    <a href="/Associate/AssociateReport/AssociateAddress?id=@Model.dtaddressdetails.Rows[i]["Pk_AddressId"]" class="btn btn-primary btn-sm" style="display:@ViewBag.edit;">
+                                                        <i class="fa fa-edit"></i>
+                                                    </a>
+                                                    <a href="/Associate/AssociateReport/AssociateAddressDelete?id=@Model.dtaddressdetails.Rows[i]["Pk_AddressId"]" id="btnDelete" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to delete this address?')" ToolTip="Delete" style="display:@ViewBag.delete;">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+
+                                                </td>
+
+                                            </tr>
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                               
+                            </div>
+
+                            <!-- /.box-body -->
+                        </div>
+                        <div class="card">
+                            <div class="card-body">
+
+                                <div class=" col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <label>TotalAmount<span style="color:red;"></span></label>
+                                            @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control" , @readonly = "readonly"})
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>WalletAmount<span style="color:red;"></span></label>
+
+                                            @Html.TextBoxFor(m => m.WalletAmount, new { @class = "form-control", @readonly = "readonly"})
+                                        </div>
+                                        <div class="col-md-3">
+                                            <label>GatewayAmount<span style="color:red;"></span></label>
+                                            @Html.TextBoxFor(m => m.GatewayAmount, new { @class = "form-control" , @readonly = "readonly"})
+                                        </div>
+                                        <div class="col-md-3" style="text-align:right;">
+                                            <label style="display:block;"></label>
+                                            <input type="submit" class="btn btn-primary"onclick="return fcheckaddres()" value="Place Order" />
+                                        </div>
+                                      
+                                    </div>
+                                 </div>
+                                <br />
+                                <div class="row">
+
+                                    
+                                </div>
+                            </div>
+
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+                        
+                    </div>
+                    <!-- /.col -->
+                </div>
+
+            </form>
+        </div>
+    }
+
+    </div>
+
+<script>
+    function fCallPaging(val) {
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+    function getAddress(addressId) {
+        $('#Pk_AddressId').val(addressId);
+    }
+    function fcheckaddres() {
+        if (!document.getElementById('rdDefaultAddress').checked) {
+            alert("Please Select Address");
+            return false;
+        }
+    }
+
+</script>
+

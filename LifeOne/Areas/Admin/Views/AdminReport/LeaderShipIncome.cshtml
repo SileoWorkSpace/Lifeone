@@ -1,0 +1,451 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MPayoutReport
+@{
+    ViewBag.Title = "LeaderShipIncome";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+    @using (Html.BeginForm("LeadershipIncome", "AdminReport", FormMethod.Post))
+    {
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Leadership Income </h4>
+                @*<nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Reports</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Leadership Income Report</li>
+                    </ol>
+                </nav>*@
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                    @*<span>
+                        <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>
+                    </span>*@
+                    <span>
+                        <a href="#" onclick="fCallPaging(1,1)" data-toggle="tooltip" data-placement="top" title="Download Excel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                        @*<button class="btn btn-success btn-rounded btnprint" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>*@
+                        <button class="btn btn-success btn-rounded btngreen" id="btnpdf"  data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
+
+                    </span>
+
+                </div>
+            </div>
+        </div>
+        <div id="no-more-tables">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-body">
+
+                            <div class="row" id="advance-search" style="display:none;">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" style="color:#727272 !important">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Login Id</label>
+                                                    @Html.HiddenFor(m => m.Page)
+                                                    @Html.HiddenFor(m => m.IsExport)
+                                                    <input type="text" name="LoginID" id="LoginID" placeholder="Enter Login Id" class="form-control" value="@ViewBag.LoginId">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Payout No</label>
+                                                    @*<input type="text" name="PayoutNo" id="PayoutNo" placeholder="" class="form-control">*@
+                                                    @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.PayoutMaster, "Value", "Text"), new { @class = "form-control", @id = "PayoutNo" })
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;display:none;" value="Search" id="BtnSearch">
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" onclick="fCallPaging(1,0)">
+                                                    <input type="button" class="btn btn-secondary" onClick="fclaer()" style="margin-top:1.5em;" value="Reset">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="table-responsive" id="customers">
+                                <table class="table table-striped mb-0" id="tblCustomers">
+                                    <thead>
+
+                                        <tr>
+                                            <th nowrap>#Sn.</th>
+                                            <th nowrap>Login Id</th>
+                                            <th nowrap>Direct Seller</th>
+                                            <th nowrap>Payout No</th>
+                                            <th nowrap>Leadership Income</th>
+                                            <th class="text-right">Gross Amount</th>
+                                            <th class="text-right">Processing Fee</th>
+                                            <th class="text-right">TDS Amount</th>
+                                            <th class="text-right">Net Amount</th>
+                                            <th class="text-right">Payable Amount</th>
+                                            <th>Date</th>
+                                            <th class="text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.Objlist != null && Model.Objlist.Count > 0)
+                                        {
+                                            int i = 1;
+                                            var page = Model.Pager.CurrentPage;
+                                            page = (page - 1);
+                                            i = ((page) * (Model.Pager.PageSize));
+
+                                            foreach (var item in Model.Objlist)
+                                            {
+
+                                                <tr>
+                                                    <td data-title="#SN:">@(i + 1)</td>
+                                                    <td data-title="LoginId:">@item.LoginId</td>
+                                                    <td data-title="DisplayName:">@item.DisplayName</td>
+                                                    <td data-title="PayoutNo:">@item.PayoutNo</td>
+                                                    <td data-title="LeadershipBonus:">@item.LeadershipBonus</td>
+                                                    <td data-title="GrossAmount:">@item.GrossAmount</td>
+                                                    <td data-title="ProcessingFee:">@item.ProcessingFee</td>
+                                                    <td data-title="TDSAmount:">@item.TDSAmount</td>
+                                                    <td data-title="NetAmount:">@item.NetAmount</td>
+                                                    <td data-title="Payable:">@item.PaidAmount</td>
+                                                    <td data-title="NetAmount:">@item.ClosingDate</td>
+                                                    <td><a class="label label-info btn-sm" style="cursor:pointer;" onclick="GetStatementDetails(@item.FK_MemId)">Statement</a></td>
+                                                </tr>
+                                                i++;
+                                            }
+                                        }
+                                        else
+                                        {
+                                            @*<tr>
+                            <td colspan="10">No Record Found..</td>
+                        </tr>*@
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+                            <footer class="card-footer bg-white p-2">
+                                <div class="d-md-flex align-items-center justify-content-between">
+
+                                    @if (Model != null)
+                                    {
+                                        if (Model.Pager != null)
+                                        {
+                                            if (Model.Pager.EndPage > 1)
+                                            {
+                                                <div> <small class="text-muted inline">showing @Model.Objlist.Count  of @Model.Pager.TotalItems items</small> </div>
+                                                <div>
+                                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                        @if (Model.Pager.CurrentPage > 1)
+                                                        {
+                                                            <li class="page-item">
+                                                                <a class="page-link" onclick="fCallPaging(1,0)" href="#">First</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1),0)" href="#">Previous</a>
+                                                            </li>
+                                                        }
+                                                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                        {
+                                                            <li class="page-item @(page == Model.Pager.CurrentPage ? " active" : "" )">
+
+
+                                                                <span><a class="page-link" onclick="fCallPaging(@page,0)" href="#">@page</a></span>
+                                                            </li>
+                                                        }
+                                                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                        {
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1),0)" href="#">Next</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages),0)" href="#">Last</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </footer>
+                            <!-- /.box-body -->
+                        </div>
+                        <!-- /.box -->
+
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </div>
+        </div>
+
+    }
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Statement Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive" >
+                        <table class="table" id="TblEmpList">
+                            <thead>
+                                <tr>
+                                    <th>Login Id</th>
+                                    <th>Direct Seller</th>
+                                    <th>Business Amount</th>
+                                    <th>Amount</th>
+                                    <th>Commission%</th>
+                                    <th>Income Type</th>
+                                    <th>Payment Date</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblData"></tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+<div id="tblpdff" style="font-size:50px;">
+
+</div>
+<script>
+    function fCallPaging(val, IsExport) {
+        debugger
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#IsExport").val(IsExport);
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+    function fclaer() {
+        $(".fclear").val('');
+        $("#Page").val(1);
+        $("#IsExport").val(0);
+        window.location.reload();
+    }
+
+
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [0]; // coloms to remove
+
+        var tbl = $('#tblCustomers').clone();
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 27,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Leadership Income',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "Leadership Income");
+        doc.page++;
+        doc.save('Leadership Income.pdf');
+
+    });
+
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('tblCustomers').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Leadership Income</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+    // PRINT THE CONTENTS-----------------------------
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+
+    function GetStatementDetails(FK_MemId) {
+        $.ajax({
+            method: 'POST',
+            url: '/Admin/AdminReport/StatementDetailsByIncomeType',
+            data: { FK_MemId: FK_MemId,IncomeType:'Leader'},
+            success: function (data) {
+                if (data != null) {
+                    $('#tblData').html('');
+                    $('#myModal').modal("show");
+                    for (var i = 0; i < data.lstStatement.length; i++) {
+                        tr = $('<tr/>');
+                        tr.append("<td>" + data.lstStatement[i].LoginId + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].DisplayName + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].BusinessAmount + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].Amount + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].CommissionPercentage + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].IncomeType + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].CurrentDate + "</td>");
+                        $('#tblData').append(tr);
+                    }
+                }
+            }
+        });
+    }
+</script>
+

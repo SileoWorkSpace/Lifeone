@@ -1,0 +1,262 @@
+﻿@using LifeOne.Models.Manager
+<!DOCTYPE html>
+
+
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>LifeOne | Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="Coderthemes" name="author" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/Content/admin-assets/images/favicon.png">
+    <!-- plugins -->
+    <link href="~/Content/admin-assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- App css -->
+    <link href="~/Content/admin-assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/admin-assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/admin-assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/style.css" rel="stylesheet" />
+    <style>
+        #preloader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 50px;
+            height: 50px;
+            margin: -30px 0 0 -30px;
+        }
+
+        #loader-area {
+            position: fixed;
+            z-index: 999999;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: block;
+            background: #fff;
+            background-image: url('../../Content/assests/images/prettyPhoto/dark_rounded/loader.gif');
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+    <style>
+
+        .modal-header {
+            display: block;
+        }
+    </style>
+</head>
+<body data-layout="topnav">
+    <div class="wrapper">
+        <!-- preloader start -->
+        <div id="preloader">
+            <div id="loader-area">&nbsp;</div>
+        </div>
+        <!-- preloader end -->
+        <div class="navbar navbar-expand flex-column flex-md-row navbar-custom">
+            <div class="container-fluid">
+                <!-- LOGO -->
+                <a href="/Franchise/Franchise/FranchiseDashboard" class="navbar-brand mr-0 mr-md-2 logo"> <span class="logo-lg"> <img src="~/Content/admin-assets/images/logo.svg" alt="LifeOne" height="40" /> </span> <span class="logo-sm"> <img src="~/Content/admin-assets/images/icon.svg" alt="" height="44"> </span> </a>
+                <ul class="navbar-nav bd-navbar-nav flex-row list-unstyled menu-left mb-0">
+                    <li class="">
+                        <button class="button-menu-mobile open-left disable-btn"> <i data-feather="menu" class="menu-icon"></i> <i data-feather="x" class="close-icon"></i> </button>
+                    </li>
+                </ul>
+                <ul class="navbar-nav flex-row ml-auto d-flex list-unstyled topnav-menu float-right mb-0">
+
+                    <li class="dropdown notification-list align-self-center profile-dropdown">
+                        <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="javascript: void(0);" role="button"
+                           aria-haspopup="false" aria-expanded="false">
+                            <div class="media user-profile ">
+                                <img src="~/Content/admin-assets/images/users/avatar-7.jpg" alt="user-image" class="rounded-circle align-self-center" />
+                                <div class="media-body text-left">
+                                    <h6 class="pro-user-name ml-2 my-0"> <span>@SessionManager.Name</span> <span class="pro-user-desc text-muted d-block mt-1">Administrator </span> </h6>
+                                </div>
+                                <span data-feather="chevron-down" class="ml-2 align-self-center"></span>
+                            </div>
+                        </a>
+                        <div class="dropdown-menu profile-dropdown-items dropdown-menu-right">
+                            <a href="/Franchise/FranchiseProfile/FranchiseProfile" class="dropdown-item notify-item"> <i data-feather="help-circle" class="icon-dual icon-xs mr-2"></i> <span>Profile</span> </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="/Home/Logout" class="dropdown-item notify-item"> <i data-feather="log-out" class="icon-dual icon-xs mr-2"></i> <span>Logout</span> </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- Left side column. contains the logo and sidebar -->
+        <div class="topnav shadow-sm">
+            <div class="container-fluid">
+                <nav class="navbar navbar-light navbar-expand-lg topbar-nav">
+                    <div class="collapse navbar-collapse" id="topnav-menu-content">
+                        <ul class="metismenu" id="menu-bar">
+                            <li> <a href="/Franchise/Franchise/FranchiseDashboard"> <i class="fa fa-dashboard"></i> <span>Dashboard</span> </a> </li>
+                            <li><a href="/Franchise/FranchiseProfile/FranchiseProfile"> <i class="fa fa-user"></i> <span>View Profile</span></a></li>
+                            <li>
+                                <a href="#"> <i class="fa fa-comment"></i> <span>Product</span>  <span class="menu-arrow"></span> </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="/Franchise/FranchiseOrderStatus/MyStockDetails">Product Stock List</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-shopping-cart"></i> <span>Order</span> <span class="menu-arrow"></span> </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="/Order-Request">Order Request</a></li>
+                                    <li><a href="/Franchise/FranchiseOrderStatus/ViewRequestdOrderStatus">View Order Status</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-credit-card"></i> <span>Customer Order</span>  <span class="menu-arrow"></span> </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="/Franchise/FranchiseCustomerOrder/CustomerDetail">Create Order</a></li>
+                                    <li><a href="/Franchise/FranchiseCustomerOrder/ViewFranchiseSupplyOrderStatus">Ordered List</a></li>
+
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="#"> <i class="fa fa-print"></i> <span>Reports</span>  <span class="menu-arrow"></span> </a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li><a href="#">View Order Status</a></li>
+                                </ul>
+                            </li>
+                            @*<li><a href="#-"> <i class="fa fa-shopping-cart"></i> <span>Purchase Order</span></a></li>*@
+                            <li><a href="#-"> <i class="fa fa-money"></i> <span>Commission</span></a></li>
+                            @*<li><a href="/Franchise/FranchiseProfile/FranchiseChangePassword"> <i class="fa fa-lock"></i><span>Change Password</span></a></li>*@
+                            @*<li><a href="/Home/Logout"> <i class="fa fa-power-off"></i><span>Logout</span></a></li>*@
+
+                        </ul>
+
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+
+
+        <div class="content-page">
+            <div class="content">
+                <div id="CustomMessages"></div>
+                @RenderBody()
+
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">2020 &copy; LifeOne. All Rights Reserved. </div>
+                </div>
+            </div>
+        </footer>
+
+
+    </div>
+
+    <!-- jQuery 2.1.4 -->
+    <script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script src="~/Content/dist/js/CommonJS.js?1.0"></script>
+    <!-- Bootstrap 3.3.5 -->
+    <script src="~/Content/bootstrap/js/bootstrap.min.js"></script>
+    <!-- FastClick -->
+    <!-- ChartJS 1.0.1 -->
+
+    <script src="~/Content/plugins/chartjs/Chart.min.js"></script>
+    <script src="~/Content/plugins/fastclick/fastclick.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/Content/dist/js/app.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/Content/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <!-- jvectormap -->
+    <script src="~/Content/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="~/Content/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <!-- SlimScroll 1.3.0 -->
+    <script src="~/Content/plugins/slimScroll/jquery.slimscroll.min.js"></script>
+    @*<script src="~/Content/dist/js/bootstrap-datepicker.min.js"></script>*@
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+
+
+        //$(function () {
+        //    $("#example1").DataTable();
+        //    $('#example2').DataTable({
+        //        "paging": true,
+        //        "lengthChange": false,
+        //        "searching": false,
+        //        "ordering": true,
+        //        "info": true,
+        //        "autoWidth": false
+        //    });
+        //});
+
+        google.charts.load("current", { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+                ["Element", "Density", { role: "style" }],
+                ["Copper", 8.94, "#b87333"],
+                ["Silver", 10.49, "silver"],
+                ["Gold", 19.30, "gold"],
+                ["Platinum", 21.45, "color: #e5e4e2"]
+            ]);
+
+            var view = new google.visualization.DataView(data);
+            view.setColumns([0, 1,
+                {
+                    calc: "stringify",
+                    sourceColumn: 1,
+                    type: "string",
+                    role: "annotation"
+                },
+                2]);
+
+            var options = {
+                title: "Density of Precious Metals, in g/cm^3",
+                width: 100,
+                height: 400,
+                bar: { groupWidth: "95%" },
+                legend: { position: "none" },
+            };
+            var chart = new google.visualization.ColumnChart(document.getElementById("barChart"));
+            chart.draw(view, options);
+        }
+    </script>
+
+    <!-- Vendor js -->
+    <script src="~/Content/admin-assets/js/vendor.min.js"></script>
+
+    <!-- optional plugins -->
+    <script src="~/Content/admin-assets/libs/moment/moment.min.js"></script>
+    <script src="~/Content/admin-assets/libs/apexcharts/apexcharts.min.js"></script>
+    <script src="~/Content/admin-assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- page js -->
+    <script src="~/Content/admin-assets/js/pages/dashboard.init.js"></script>
+
+    <!-- App js -->
+    <script src="~/Content/admin-assets/js/app.min.js"></script>
+    <script src="~/Content/dist/js/Table_No_Data.js?1.0"></script>
+    <script>
+        $(document).ready(function () {
+            $(".advance-search").click(function () {
+                $("#advance-search").slideToggle("slow");
+            });
+        });
+        /*------- Preloader JS Start ------*/
+        $(window).on("load", function () {
+            $("#preloader").fadeOut();
+            $("#loader-area").fadeOut(9000);
+        })
+                /*------- Preloader JS End ------*/
+    </script>
+</body>
+</html>

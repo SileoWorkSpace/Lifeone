@@ -1,0 +1,219 @@
+﻿@using LifeOne.Models.Manager
+@model LifeOne.Models.AssociateManagement.AssociateEntity.TreeModel
+@{
+    ViewBag.Title = "LevelTree";
+    
+}
+<link href="~/Content/Associate/assets/css/leveltree.css" rel="stylesheet" />
+<div class="content">
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Tree</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#">My Team</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Tree</li>
+                    </ol>
+                </nav>
+            </div>
+           
+        </div>
+
+        @using (Html.BeginForm("LevelTree", "/AssociateViewProfile", FormMethod.Post, new { @id = "form1-new", @class = "top-reg  accordion accordion-secondary" }))
+        {
+        <div class="row page-titles">
+            <div class="search-box col-md-12" style="max-width:500px; width:100%;margin: 0 auto;">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <a href="#" id="Up" class="waves-effect waves-light btn btn-warning pull-right btn-sm"><i class="mdi mdi-chevron-double-up"></i> UP</a>
+                        <a href="@Url.Action("LevelTree", "/AssociateViewProfile")" class="waves-effect waves-light btn  btn-success pull-right btn-sm"><i class="mdi mdi-account-star"></i> ROOT</a>
+                    </div>
+                    <input type="text" name="LoginID" placeholder="Please Enter LoginID" class="form-control form-control-sm" onkeypress="return isAlphabets(event)" maxlength="60" value="@Model.LoginID">
+                    <div class="input-group-append">
+                        <button type="submit" class="btn btn-success btn-sm" id="BtnSearch" onclick="return validation();"><i class="fa fa-search fa-xs"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+
+        @if (Model != null && Model.LoginID != null)
+        {
+            <div class="card-body">
+                <div class="tf-tree example">
+                    <ul>
+                        <li>
+                            <span class="tf-nc">
+                                <div class="two-div">
+                                    <div class="left-div"> <span class="id-icon"><img src="~/Content/Associate/assets/images/no-img.jpg" style="width:40px;" alt=""></span> </div>
+                                    <div class="right-div"> <span class="id-name">@Model.Name</span> <span class="id"><a href="#" class="hover-link"><em>@Model.LoginID</em></a></span> <span class="date">Joining Date :@Model.DateOfJoining</span> </div>
+                                </div>
+                                <span class="content-block">
+                                    <table class="table-of-content">
+                                        <tbody>
+                                            <tr>
+                                        <td>Current Level</td>
+                                        <td>:</td>
+                                        <td>@Model.Designation</td>
+                                           </tr>
+                                            <tr>
+                                                <td>Direct Team</td>
+                                                <td>:</td>
+                                                <td>@Model.DirectMember</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Team</td>
+                                                <td>:</td>
+                                                <td>@Model.TotalTeam</td>
+                                            </tr>
+
+                                            <tr>
+                                                <td>Self Business</td>
+                                                <td>:</td>
+                                                <td>@Model.SelfBusiness</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Team Business</td>
+                                                <td>:</td>
+                                                <td>@Model.TeamBusiness</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Total Business</td>
+                                                <td>:</td>
+                                                <td>@Model.TotalBusiness</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </span>
+                            </span>
+                            <ul>
+                                @if (Model.TreeList != null)
+                                {
+                                    foreach (var item in Model.TreeList)
+                                    {
+                                        <li>
+                                            <span class="tf-nc">
+                                                <div class="two-div">
+                                                    <div class="left-div"> <span class="id-icon"><img src="~/Content/Associate/assets/images/no-img.jpg" style="width:40px;" alt=""></span> </div>
+                                                    <div class="right-div">
+                                                        <span class="id-name">@item.Name1</span> <a href="/Associate/AssociateViewProfile/LevelTree?LoginID=@item.LoginID1">@item.LoginID1</a><br>
+                                                        <span class="date">Joining Date : @item.DateOfJoining1</span>
+                                                    </div>
+                                                </div>
+                                                <span class="content-block">
+                                                    <table class="table-of-content">
+                                                        <tbody>
+                                                            <tr>
+                                                      <td>Level</td>
+                                                      <td>:</td>
+                                                        <td>@item.Designation1</td>
+                                                             </tr>
+                                                            <tr>
+                                                                <td>Direct Team </td>
+                                                                <td>:</td>
+                                                                <td>@item.DirectMember1</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Total Team</td>
+                                                                <td>:</td>
+                                                                <td>@item.TotalTeam1</td>
+                                                            </tr>
+
+                                                            <tr>
+                                                                <td>Self Business</td>
+                                                                <td>:</td>
+                                                                <td>@item.SelfBusiness1</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Team Business</td>
+                                                                <td>:</td>
+                                                                <td>@item.TeamBusiness1</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Total Business</td>
+                                                                <td>:</td>
+                                                                <td>@item.TeamBusiness1</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </span>
+                                            </span>
+                                        </li>
+                                    }
+                                }
+
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        }
+    </div>
+    </div>
+    <script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+    <script>
+    function validation() {
+        debugger;
+        if ($('#LoginID').val() == "") {
+            swal("", "Please Enter Login ID!!", "warning");
+
+            return false;
+        }
+    }
+    $('#Root').on('click', function () {;
+        $.ajax({
+            url: '@Url.Action("GetRootId", "/AssociateViewProfile")',
+            dataType: 'json',
+            containtType: 'application/json;charset=utf-8',
+            type: 'POST',
+            success: function (gradelist) {
+                if (gradelist == "") {
+                    $('#PanErrorMsg').html('Can not use this PanNumber this is Already use 3 times!! ');
+                    $('#IdProfPan').val('');
+                }
+                else {
+                    SearchRootId(gradelist);
+                }
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    });
+    $('#Up').on('click', function () {
+        var RootId = $('#ParentId').val();
+        if (RootId == '@SessionManager.LoginId.ToString()') {
+            $('#Up').css('disabled');
+            return false;
+        }
+        else {
+            $.ajax({
+                url: '@Url.Action("GetUpId", "/AssociateViewProfile")',
+                data: { LoginId: RootId },
+                dataType: 'json',
+                containtType: 'application/json;charset=utf-8',
+                type: 'POST',
+                success: function (gradelist) {
+                    debugger;
+                    if (gradelist == "") {
+                        $('#PanErrorMsg').html('Can not use this PanNumber this is Already use 3 times!! ');
+                        $('#IdProfPan').val('');
+                    }
+                    else {
+                        SearchRootId(gradelist);
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                }
+            });
+        }
+    });
+    function SearchRootId(RootId) {
+        $('#LoginID').val(RootId);
+        $('#BtnSearch').trigger('click');
+    }
+
+    </script>

@@ -1,0 +1,398 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.PrintInvoice
+@{
+    Layout = null;
+}
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>SG CARE INDIA</title>
+</head>
+<style type="text/css">
+    p {
+        padding: 0px;
+        margin: 0px;
+        margin-bottom: 10px !important;
+    }
+</style>
+
+<body style=" margin: 10px 0; font-size: 12px;font-family:Arial, Verdana, Tahoma; line-height: 16px;">
+    <div id="DivIdToPrint">
+        <table cellspacing="0" cellpadding="0" style="width: 800px; margin: 0px auto;border:1px solid #000">
+            <tbody>
+                <tr>
+                    <td>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td style=" width:50%; vertical-align:top;  text-align:left;">&nbsp;&nbsp;<strong>GSTIN :</strong>@Model.GSTIN</td>
+                                                    <td style=" width:50%; vertical-align:top;  text-align:right;"><strong>Original Copy&nbsp;&nbsp;</strong></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td style=" width:100%; vertical-align:top;text-align:center;"><strong>TAX INVOICE</strong></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="border-bottom:1px solid #000; text-align:center; width:250px;"><img src="@Model.CompanyLogo" alt="Logo" style=" width:200px;"></td>
+                                                    <td style="text-align:center;border-bottom:1px solid #000">
+                                                        <h2 style="margin:0px; padding:10px 0px; font-size:26px;">@Model.CompanyName</h2>
+                                                        <h3 style="margin:0px; padding:2px 0px; font-size:14px;">@Model.OfficeAddress</h3>
+                                                        <p>
+                                                            Contact:<strong>@Model.OfficeContactNo </strong> | E-mail: <strong>@Model.OfficeEmailId</strong><br>
+                                                            Website: <strong>@Model.Website</strong>
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="4">
+                                            <tbody>
+                                                <tr>
+
+                                                    <td style="vertical-align:top">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td><strong>Invoice No.</strong></td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.OrderNo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Date of Invoice</strong></td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.InvoiceDate</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Order No.</strong></td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.OrderNo</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Transport Mode</strong></td>
+                                                                    <td>:</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td><strong>Courier Ref. No</strong></td>
+                                                                    <td>:</td>
+                                                                    <td>NA</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-top:1px solid #000; border-right:1px solid #000; background:#f1f1f1;font-size:14px; font-weight:bold;">Billing Address</td>
+                                                    <td style="border-top:1px solid #000; background:#f1f1f1;font-size:14px; font-weight:bold;">Shipping Address</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-right:1px solid #000; border-top:1px solid #000; width:50%;">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">Buyer Name</td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.Name</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">Address</td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.Address</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">Contact No.</td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.Mobile</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">State</td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.State</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">State Code</td>
+                                                                    <td>:</td>
+                                                                    <td></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">GSTN</td>
+                                                                    <td>:</td>
+                                                                    <td>NA</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td style="border-top:1px solid #000;">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">Consignee Name</td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.Name</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">Address</td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.Address</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">Contact No.</td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.Mobile</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">State</td>
+                                                                    <td>:</td>
+                                                                    <td>@Model.OrderDetails.State</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">State Code</td>
+                                                                    <td>:</td>
+                                                                    <td>09</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="font-weight:bold;">GSTN</td>
+                                                                    <td>:</td>
+                                                                    <td>NA</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="border-top:1px solid #000; vertical-align:top">
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                                            <tbody>
+                                                <tr>
+                                                    <td rowspan="2" style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>#.</strong></td>
+                                                    @*<td rowspan="2" style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>Product Code</strong></td>*@
+                                                    <td rowspan="2" style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>Description of  Goods</strong></td>
+                                                    @*<td rowspan="2" style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>HSN/SAC Code</strong></td>*@
+                                                    <td rowspan="2" style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>Unite Price (₹)</strong></td>
+
+                                                    <td rowspan="2" style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>Amount</strong></td>
+                                                    <td rowspan="2" style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>Qty</strong></td>
+                                                    <td rowspan="2" style="text-align:right;background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center">
+                                                        <strong>
+                                                            Taxable <br>
+                                                            Amount(₹)
+                                                        </strong>
+                                                    </td>
+                                                    <td colspan="2" style="text-align:center;background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>CGST</strong></td>
+                                                    <td colspan="2" style="text-align:center;background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>SGST</strong></td>
+                                                    <td colspan="2" style="text-align:center;background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>IGST</strong></td>
+
+                                                    <td rowspan="2" style="background:#f1f1f1;border-bottom:1px solid #000; text-align:center"><strong>SubTotal(₹)</strong></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center; font-size:10px;"><strong>R(%)</strong></td>
+                                                    <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center; font-size:10px;"><strong>Amt(₹)</strong></td>
+                                                    <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center; font-size:10px;"><strong>R(%)</strong></td>
+                                                    <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center; font-size:10px;"><strong>Amt(₹)</strong></td>
+                                                    <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center; font-size:10px;"><strong>R(%)</strong></td>
+                                                    <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center; font-size:10px;"><strong>Amt(₹)</strong></td>
+                                                </tr>
+
+                                                @{
+                                                    decimal DP = 0;
+                                                    decimal TaxableAmount = 0;
+                                                    decimal GSTAmount = 0;
+                                                }
+
+                                                @if (Model.ItemList != null)
+                                                {
+                                                    int Sno = 0;
+                                                    foreach (var item in Model.ItemList)
+                                                    {
+                                                        DP += Convert.ToDecimal(@item.DP);
+                                                        GSTAmount += Convert.ToDecimal(@item.GSTAmount);
+                                                        TaxableAmount += Convert.ToDecimal(@item.TaxableAmount);
+                                            <tr>
+                                                <td style="line-height:25px;border-right:1px solid #000;border-bottom:1px solid #000;">@(Sno = Sno + 1)</td>
+                                                <td style="border-right:1px solid #000;border-bottom:1px solid #000;">@item.ProductName</td>
+                                                <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@item.MRP</td>
+                                                <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@item.SingleDP</td>
+                                                <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:center;">@item.Qty</td>
+                                                <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@item.TaxableAmount</td>
+                                                @if (Model.OrderDetails.State == "UTTAR PRADESH")
+                                                {
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@(@item.GSTPer/2)</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@(@item.GSTAmount/2)</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@(item.GSTPer/2)</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@(item.GSTAmount/2)</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">0</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">0</td>
+                                                }
+                                                else
+                                                {
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">0</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">0</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">0</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">0</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@item.GSTPer</td>
+                                                    <td style="border-right:1px solid #000;border-bottom:1px solid #000;text-align:right;">@item.GSTAmount</td>
+                                                }
+                                                <td style="text-align:right;border-bottom:1px solid #000;">@item.DP</td>
+                                            </tr>
+
+                                                    }
+
+
+                                                }
+
+
+
+                                                <tr>
+                                                    <td style="height:50px;">&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="7" rowspan="3" style="line-height:25px;border-right:1px solid #000;border-top:1px solid #000;border-bottom:1px solid #000;">
+                                                        <em>Amount in words-</em> <strong><em>@Model.OrderDetails.InWordDP</em></strong><br>
+
+                                                        <em>Payment Mode-</em> <strong><em>@Model.OrderDetails.PayMode</em></strong><br>
+
+                                                        <strong><em>BV- </em></strong><em> @Model.OrderDetails.InWordBV.</em>
+                                                    </td>
+                                                    <td style="border-right:1px solid #000;text-align:right;border-top:1px solid #000;" colspan="3"><strong>Taxable Total:</strong></td>
+                                                    <td style="border-right:0px solid #000;text-align:right;border-top:1px solid #000;" colspan="5">@TaxableAmount</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-right:1px solid #000;text-align:right;border-top:1px solid #000;" colspan="3"><strong>Tax Total:</strong></td>
+                                                    <td style="border-right:0px solid #000;text-align:right;border-top:1px solid #000;" colspan="5">@GSTAmount</td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="border-right:1px solid #000;text-align:right;border-top:1px solid #000;border-bottom:1px solid #000;" colspan="3"><strong>Grand Total:</strong></td>
+                                                    <td style="border-right:0px solid #000;text-align:right;border-top:1px solid #000;border-bottom:1px solid #000;" colspan="5">@DP</td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="border-bottom:1px solid #000;width:61%; vertical-align:top;border-right:1px solid #000;">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td>
+                                                                        <strong>TERM & CONDITION</strong><br>
+                                                                        Subject to Lucknow Jurisdiction only.
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td style="border-bottom:1px solid #000; vertical-align:bottom; ">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style=" font-size:14px;font-weight:bold; text-align:center;" colspan="2">&nbsp;<br><br><br>For LifeoneWellness Industries Private Limited<br><br> <br><br></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style=" font-size:14px;"><strong>Employee ID:</strong> @Model.OrderDetails.EmployeeId</td>
+                                                                    <td style="text-align:right;font-size:12px;">Authorised Signatory</td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                            <tbody>
+                                                <tr>
+                                                    <td style=" vertical-align:top;padding:5px 0;  text-align:center;">This is a Computer Generated Invoice</td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td style=" vertical-align:top;padding:5px 0;  text-align:center;"><input type="button" value="Print" onclick="printDiv();" /></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+<script type="text/javascript">
+
+
+
+    function printDiv() {
+
+        var divToPrint = document.getElementById('DivIdToPrint');
+
+        var newWin = window.open('', 'Print-Window');
+
+        newWin.document.open();
+
+        newWin.document.write('<html><body onload="window.print()">' + divToPrint.innerHTML + '</body></html>');
+
+        newWin.document.close();
+
+        setTimeout(function () { newWin.close(); }, 10);
+
+    }
+</script>

@@ -1,0 +1,282 @@
+﻿@model LifeOne.Models.Reports
+
+@{
+    ViewBag.Title = "HomeAddress";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<div class="bg-body-secondary py-5">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center">
+            <li class="breadcrumb-item">
+                <a class="text-decoration-none text-body" href="#">Home</a>
+            </li>
+            <li class="breadcrumb-item active pl-0 d-flex align-items-center" aria-current="page">Home Address</li>
+        </ol>
+    </nav>
+</div>
+@using (Html.BeginForm("HomeAddress", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="registration-form  ml-auto my-5 mr-auto no-float">
+        <div class="container">
+            <div class="row">
+                <div class="card mb-5">
+                    <div class="card-body em">
+                        <div class="col-md-12">
+                            <div class="mb-30">
+                                <h5 class="nonecase-font txt-grey">Address</h5>
+                            </div>
+                            <hr />
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <div class="row">
+
+
+                                <div class="col-md-3">
+                                    <label>Name<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label>Mobile<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+
+
+                                </div>
+                                <div class="col-md-3">
+                                    <label>LandMark<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Landmark, new { @class = "form-control" })
+
+                                </div>
+
+
+                                <div class="col-md-3 form-group" id="dv_PV">
+                                    <label>Address<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>PinCode<span style="color:red;">*</span></label>
+                                    @*<input type="text" id="Pincode" onchange="GetDistrictCityStateDetailsByPincode()" name="PinCode" class="form-control" onkeypress="return isNumberKey(event)" />*@
+                                    @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @id = "Pincode", @onkeypress = "return isNumberKey(event)", @onchange = "GetDistrictCityStateDetailsByPincode()" })
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label>City<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
+                                    @*<select id="DistrictName" class="form-control city-name" name="City" onchange="BindDistrictDetail()"><option value="">--Select City--</option></select>*@
+                                    @Html.HiddenFor(m => m.DistrictId)
+                                </div>
+                                <div class="col-md-3">
+                                    <label>State<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
+                                    @Html.HiddenFor(m => m.StateId)
+
+                                </div>
+
+
+
+                                <div class="col-md-3">
+                                    <label>Address Type<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.AddressType, new { @class = "form-control" })
+
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label>Default Address<span style="color:red;">*</span></label>
+                                    @if (Model.IsDefault == true)
+                                    {
+                                        @Html.CheckBoxFor(m => m.IsDefault, new { @type = "checkbox", @id = "IsDefault", @checked = "checked" })
+                                        @*<input type="checkbox" id="IsDefault" name="IsDefault" checked />*@
+                                    }
+                                    else
+                                    {
+                                        @*<input type="checkbox" id="IsDefault" name="IsDefault" />*@
+                                        @Html.CheckBoxFor(m => m.IsDefault, new { @type = "checkbox", @id = "IsDefault" })
+                                    }
+
+
+                                </div>
+
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-12" style="margin-top:10px">
+                                    <div class="text-center" style="margin-left:50px">
+                                        @{
+                                            var Button = "";
+                                            if (Model == null)
+                                            {
+                                                Button = "Save";
+                                            }
+
+                                            else if (Model != null)
+                                            {
+
+                                                if (string.IsNullOrEmpty(Model.Pk_AddressId) || Model.Pk_AddressId == "0")
+                                                {
+                                                    Button = "Save";
+                                                }
+                                                else
+                                                {
+                                                    Button = "Update";
+                                                }
+                                            }
+                                            <button type="submit" value="@Button" class="btn btn-primary btn-sm px-11" onclick="return validate();" name="@Button">@Button</button>
+
+                                        }
+
+
+                                        <a href="/Home/GetAddress" class=" btn btn-danger btn-hover-bg-primary btn-sm btn-hover-border-primary px-11"> Cancel</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br />
+
+                    </div>
+                    @Html.HiddenFor(m => m.Pk_AddressId)
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script type="text/javascript">
+    function validate() {
+        var Name = $('#Name').val();
+        var MobileNo = $('#MobileNo').val();
+        var Landmark = $('#Landmark').val();
+        var Address = $('#Address').val();
+        var State = $('#State').val();
+        var City = $('#City').val();
+        var PinCode = $('#Pincode').val();
+        var AddressType = $('#AddressType').val();
+
+
+
+        if (Name == null || Name == "") {
+            alert("Please Add Name");
+            return false;
+        }
+        else if (MobileNo == null || MobileNo == "") {
+            alert("Please Add Mobile Number");
+            return false;
+
+        }
+        else if (MobileNo.length != 10) {
+            alert("Please Add  Valid Mobile Number");
+            return false;
+
+        }
+        else if (Landmark == null || Landmark == "") {
+            alert("Please Add Landmark ");
+            return false;
+        }
+        else if (Address == null || Address == "") {
+            alert("Please Add Address");
+            return false;
+        }
+        else if (PinCode == null || PinCode == "") {
+            alert("Please Add PinCode");
+            return false;
+        }
+        else if (State == null || State == "") {
+            alert("Please Add State");
+            return false;
+        }
+        else if (City == null || City == "") {
+            alert("Please Add City");
+            return false;
+        }
+
+        else if (PinCode.length != 6) {
+            alert("Please Add Valid Pincode");
+            return false;
+        }
+        else if (AddressType == null || AddressType == "") {
+            alert("Please Add AddressType");
+            return false;
+        }
+        else {
+            $('#idfinalsubmit').click();
+        }
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+    function fcheckbox() {
+        if ($('#IsDefault').val() == "1") {
+            $('#IsDefault').attr('checked', true);
+
+        }
+
+    }
+
+
+    function GetDistrictCityStateDetailsByPincode() {
+        if ($('#Pincode').val() == "" || $('#Pincode').val() == 0) {
+            swal('', "Please Enter Pincode", 'warning');
+            $('#StateId').val('');
+            $('#DistrictId').val('');
+            return false;
+        }
+
+        $.ajax({
+            url: '/Admin/FranchiseMaster/GetLocationByPin',
+            type: "POST",
+            data: JSON.stringify({ "pin": $('#Pincode').val() }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+
+                if (response != null || response != '') {
+                    $("#City").val(response[0].District);
+                    $("#State").val(response[0].State);
+
+                }
+                else {
+                    swal('', "data does not exists", 'warning');
+                    return false;
+                }
+
+
+            },
+            error: function (er) {
+                swal('', "An Error Occured", 'error');
+                return false;
+            }
+        });
+    }
+
+    function BindDistrictDetail() {
+        var data = JSON.parse(window.sessionStorage.getItem("regDistrictDetail"));
+        var district = $("#Pincode").val();
+        if (data != null) {
+            sessionStorage.clear();
+            $.each(data, function (i, item) {
+                if (item.District == district) {
+                    $("#City").val(item.State);
+                    $("#State").val(item.State);
+                    $("#Tehsil").val(item.DistrictDetail[0].Taluka);
+                    $("#Zone").val(item.DistrictDetail[0].Zone);
+                    $('#CountryId').val(1);
+                }
+
+            });
+
+        }
+
+    }
+</script>

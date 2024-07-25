@@ -1,0 +1,247 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.EmployeesViewModel
+@{
+    ViewBag.Title = "EmployeeRegistration";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<style>
+    .card-body.em .row .col-md-6 {
+        margin-bottom: 10px;
+    }
+    /* The container */
+    .container2 {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default radio button */
+        .container2 input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container2:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container2 input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container2 input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container2 .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .dv_Orbit {
+        display: none;
+    }
+
+    .invalid {
+        color: red !important;
+    }
+</style>
+
+
+
+
+<div class="registration-form  ml-auto mr-auto no-float" ng-app="my-App" ng-controller="my-Ctrl">
+    <div class="container" style="background-color:#fff; padding:20px;border-radius:10px;">
+        <div class="row">
+            <div class="card">
+                <div class="card-body em">
+                    <div class="col-md-12">
+                        <div class="mb-30">
+                            <h2 class="nonecase-font txt-grey" id="hededit">Employee Registration</h2>
+                        </div>
+                        <hr />
+                    </div>
+
+                    <div class="col-md-12">
+
+                        <form name="EntryForm" id="EntryForm" novalidate>
+                            <div class="row">
+                                <input type="hidden" ng-model="FK_MemId" />
+                                <div class="col-md-6 form-group">
+                                    <label>First Name<span style="color:red;">*</span></label>
+                                    <input type="text" name="FirstName" id="FirstName" class="form-control" required ng-model="FirstNameModel" ng-pattern="/^[a-zA-Z ]+$/" />
+                                    <span class="invalid" ng-if="EntryFormSubmitted && EntryForm.FirstName.$invalid">Enter first name.</span>
+                                </div>
+                                <div class="col-md-6 form-group">
+                                    <label>Last Name<span style="color:red;"></span></label>
+                                    <input type="text" name="LaststName" id="LaststName" class="form-control" ng-model="LastNameModel" ng-pattern="/^[a-zA-Z ]+$/" />
+                                    <span class="invalid" ng-if="EntryFormSubmitted && EntryForm.LaststName.$invalid">Enter last name.</span>
+                                </div>
+                                <div class="col-md-6">
+                                    <label>Mobile<span style="color:red;">*</span></label>
+                                    <input type="text" name="Mobile" id="Mobile" class="form-control" maxlength="10" minlength="10" onkeypress="return isNumberKey(event)" required ng-model="MobileModel" ng-pattern="/(6|7|8|9)\d{9}/" />
+                                    <span class="invalid" ng-if="EntryFormSubmitted && EntryForm.Mobile.$invalid">Enter 10 valid mobile no.</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Email<span style="color:red;">*</span></label>
+                                    <input type="email" name="Email" id="Email" class="form-control" required ng-model="EmailModel" />
+                                    <span class="invalid" ng-if="EntryFormSubmitted && EntryForm.Email.$invalid"> Enter valid mail address.</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Join On<span style="color:red;">*</span></label>
+                                    <input type="date" name="Dob" id="Dob" class="form-control" required ng-model="DobModel" />
+                                    <span class="invalid" ng-if="EntryFormSubmitted && EntryForm.Dob.$invalid"> Select date of Joining.</span>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Gender<span style="color:red;">*</span></label>
+                                    <br />
+                                    <input type="radio" name="Gender" id="Gender" value="Male" required ng-model="GenderModel" /> Male  &nbsp;
+                                    <input type="radio" name="Gender" id="Gender" value="Female" required ng-model="GenderModel" /> Female<br />
+                                    <span class="invalid" ng-if="EntryFormSubmitted && EntryForm.Gender.$invalid"> Choose gender.</span>
+                                </div>
+
+
+                                <div class="col-md-6">
+                                    <label>Aadhar No.<span style="color:red;">*</span></label>
+                                    <input type="text" name="Aadhar" id="Aadhar" class="form-control" required maxlength="12" minlength="12" onkeypress="return isNumberKey(event)" ng-model="AadharModel" />
+                                    <span class="invalid" ng-if="EntryFormSubmitted && EntryForm.Aadhar.$invalid"> Enter 12 digit valid aadhar no.</span>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-12" style="margin-top:10px">
+                                    <div class="text-center" style="margin-left:50px">
+                                        <input type="submit" class="btn btn-success" id="idfinalsubmit" name="Save" ng-click="Submit(EntryForm);EntryFormSubmitted=true"  />
+                                        <a href="/Admin-Employees" class="btn btn-danger"> Cancel</a>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+
+
+
+                    </div>
+                    <br />
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+<script>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    var app = angular.module('my-App', []);
+    app.controller('my-Ctrl', function ($scope, $http) {
+        debugger
+        var Fk_MemID = sessionStorage.getItem("Fk_MemID");
+
+
+        $scope.Submit = function (entryform) {
+            if (entryform.$valid) {
+                $http({
+                    url: '/Admin/Admin/EmpReg',
+                    method: 'post',
+                    data: {
+                        FK_MemId: $scope.FK_MemId,
+                        FirstName: $scope.FirstNameModel,
+                        LastName: $scope.LastNameModel,
+                        Mobile: $scope.MobileModel,
+                        Email: $scope.EmailModel,
+                        DOB: $('#Dob').val(),
+                        Gender: $scope.GenderModel,
+                        CustAadharNo: $scope.AadharModel
+                    }
+                }).then(function (response) {
+                    if (response.data.Status) {
+                        window.location.href = "/Admin-Employees";
+                    } else {
+                        //                        
+                    }
+                    alert(response.data.Message);
+                    window.location.href = "/Admin-Employees";
+                })
+            } else {
+                $scope.invalid = true;
+            }
+        }
+
+        $scope.GetDetail = function () {
+
+            $http({
+                url: '/Admin/Admin/GetEmployeeDetailBYID?FK_MemId=' + Fk_MemID,
+                method: 'get'
+            }).then(function (response) {
+                debugger
+                if (response.data != null) {
+                    $scope.FK_MemId = response.data.FK_MemId;
+                    $scope.FirstNameModel = response.data.FirstName;
+                    $scope.LastNameModel = response.data.LastName;
+                    $scope.MobileModel = response.data.Mobile;
+                    $scope.EmailModel = response.data.Email;
+                    $('#Dob').val(response.data.DOB);
+                    $scope.GenderModel = response.data.Gender;
+                    $scope.AadharModel = parseInt(response.data.CustAadharNo);
+
+                    $('#Mobile').attr("readonly","readonly");
+                    $('#Email').attr("readonly","readonly"); 
+                    $('#idfinalsubmit').val("Update");                    
+                }
+            })
+        }
+
+        if (Fk_MemID != null && Fk_MemID > 0) {
+            $scope.GetDetail();
+        }
+    });
+</script>

@@ -1,0 +1,92 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.Contact
+<footer class="pt-10 pt-lg-15 footer">
+    <div class="container container-xxl pt-4">
+        <div class="row">
+            <div class="col-lg col-md-3 col-12 mb-11 mb-lg-0 fs-14px text-center">
+                    <a class="d-inline-block" href="/Home/Index">
+                        <img class="lazy-image light-mode-img" src="#" data-src="/Content/WebsiteCss/assets/images/others/logo.png" width="284" alt="">
+                        <img class="lazy-image dark-mode-img" src="#" data-src="/Content/WebsiteCss/assets/images/others/logo-white.png" width="179" alt="">
+                    </a>
+            </div>
+            <div class="col-lg col-md-3 col-12 mb-11 mb-lg-0">
+                <h3 class="fs-5 mb-6 ">Useful links</h3>
+                <ul class="list-unstyled mb-0 fw-medium ">
+                    <li class="pt-3 mb-4">
+                        <a href="/Home/About" title="New Products" class="text-body">About</a>
+                    </li>
+                    <li class="pt-3 mb-4">
+                        <a href="/Home/Products" title="Best Sellers" class="text-body">Product</a>
+                    </li>
+                    <li class="pt-3 mb-4">
+                        <a href="/Home/Contact" title="Bundle &amp; Save" class="text-body">Contact</a>
+                    </li>
+                    <li class="pt-3 mb-4">
+                        <a href="/Home/VisionMission" title="Vision & Mission" class="text-body">Vision & Mission</a>
+                    </li>
+                    <li class="pt-3 mb-4">
+                        <a href="/Home/CmdDesk" title="Cmd Desk" class="text-body">Cmd Desk</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg col-md-3 col-12 mb-11 mb-lg-0">
+                <h3 class="fs-5 mb-6 ">Information</h3>
+                <ul class="list-unstyled mb-0 fw-medium ">
+                    <li class="pt-3 mb-4">
+                        <a href="#" title="Start a Return" class="text-body">Start a Return</a>
+                    </li>
+                    <li class="pt-3 mb-4">
+                        <a href="/Home/Contact" title="Contact Us" class="text-body">Contact Us</a>
+                    </li>
+                    <li class="pt-3 mb-4">
+                        <a href="#" title="Shipping FAQ" class="text-body">Shipping FAQ</a>
+                    </li>
+                    <li class="pt-3 mb-4">
+                        <a href="#" title="Terms &amp; Conditions" class="text-body">Terms &amp; Conditions</a>
+                    </li>
+                    <li class="pt-3 mb-4">
+                        <a href="#" title="Privacy Policy" class="text-body">Privacy Policy</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-3 col-md-3 col-12 mb-11 mb-lg-0 text-center">
+                <h3 class="mb-4 ">Contact Us</h3>
+                <p class="mb-2 lh-2">
+                    @if (Model != null)
+                    {
+                        @Model.Email
+                    }
+
+                </p>
+                <p>
+                    @if (Model != null)
+                    {
+                        @Model.Address1
+                    }
+
+
+                </p>
+                <div class="col-sm-12 order-2 order-lg-1 fs-6 mt-8 mt-lg-0">
+                    <ul class="list-inline fs-18px mb-0">
+                        <li class="list-inline-item me-8">
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                        </li>
+                        <li class="list-inline-item me-8">
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        </li>
+                        <li class="list-inline-item me-8">
+                            <a href="#"><i class="fab fa-instagram"></i></a>
+                        </li>
+                        <li class="list-inline-item">
+                            <a href="#"><i class="fab fa-youtube"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row align-items-center mt-0 mt-lg-10 pt-lg-4 footer-bottom-1">
+            <div class="col-md-12 col-sm-12">
+                <p class="mb-0 text-center">© All Right Reserved Life One 2024</p>
+            </div>
+        </div>
+    </div>
+</footer>

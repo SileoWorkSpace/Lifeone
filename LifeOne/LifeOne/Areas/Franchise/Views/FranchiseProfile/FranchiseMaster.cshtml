@@ -1,0 +1,841 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminFranchise
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "FranchiseMaster";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+}
+
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<style>
+    .card-body.em .row .col-md-6 {
+        margin-bottom: 10px;
+    }
+    /* The container */
+    .container2 {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        /* Hide the browser's default radio button */
+        .container2 input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    /* Create a custom radio button */
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container2:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container2 input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container2 input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container2 .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+</style>
+@{
+    string msg = (string)TempData["msg"];
+    string code = (string)TempData["code"];
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30 msgdiv" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-success m-t-30 msgdiv" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+
+
+
+        }
+    }
+}
+<br />
+
+@using (Html.BeginForm("FranchiseMaster", "FranchiseProfile", FormMethod.Post, new { enctype = "multy-part/form" }))
+{
+
+
+
+    <div class="registration-form  ml-auto mr-auto no-float">
+        <div class="container" style="background-color:#fff; padding:20px;border-radius:10px;">
+            <div class="row">
+
+                <div class="col-md-12">
+                    <div class="mb-30">
+                        <h3 class="nonecase-font txt-grey">Edit Franchise</h3>
+                    </div>
+                    <hr />
+                </div>
+
+                <div class="col-md-12">
+
+                    <div class="row">
+
+                        <div class="col-md-6 form-group">
+                            <label>Person Name:</label>
+                            @Html.TextBoxFor(m => m.PersonName, new { @class = "form-control only-alpha",@readonly = true })
+
+                        </div>
+
+                        <div class="col-md-6 ">
+                            <label>Email Address<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control only-alpha", @onblur = "validateCaseSensitiveEmail();", autocomplete = "new-password" })
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-6  form-group">
+                            <label>Mobile<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.Contact, new
+                       {
+                           @class = "allownumericwithoutdecimal form-control mobile",
+                           @placeholder = "Contact No",
+                           @minlength = "10",
+                           @maxlength = "10",
+                           @onkeypress = "return isNumberKey(event)",
+                           @required = "required"
+                       })
+
+                        </div>
+                        <div class="col-md-6">
+                            <label>DOB<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.Dateofbirth, new { @class = "email form-control ", @type = "date" })
+
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>FatherName<span style="color:red;">*</span></label>
+                            @*@Html.TextBoxFor(m => m.Dob, new { @class = "form-control datepicker-all", @placeholder = "Date Of Birth", @min = "today", @required = "required" })*@
+                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @autocomplete = "off" })
+
+                        </div>
+
+
+                        <div class="col-md-6">
+
+                            <label class="col-md-5 control-label  ">Profile<em style="color:red"></em></label>
+                            <div class="col-md-7">
+                                @Html.TextBoxFor(m => m.ProfilePic, new { @type = "file", @class = "form-control", @onchange = "UploadFile(this,'FranchiseProfilePic')" })
+
+                                <br />
+                                @Html.HiddenFor(m => m.ProfilePic, new { @Id = "HdnProfilePicPath" })
+
+                                @if (Model.ProfilePic != null && Model.ProfilePic != "")
+                                {
+                                    <div class="col-lg-4 p-t-20 m-t-10" id="divpreview">
+                                        <img class="m-t-20" src='@Model.ProfilePic' height="80px" width="70px" />
+                                    </div>
+
+                                }
+                                else
+                                {<div class="col-lg-4 p-t-20 m-t-10" id="divpreview">
+                                    <img class="m-t-20" src='/Content/images/default-user.png' height="80px" width="70px" />
+    
+                                </div>
+
+                                }
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <br />
+                    <div class="mb-30">
+                        <h5 class="nonecase-font txt-grey"><b>Current Address</b></h5>
+                    </div>
+
+                    <div class="row">
+
+
+                        <hr />
+                        <div class="col-md-6  form-group">
+                            <label>Pincode<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.Cr_PinCode, new
+                       {
+                           @minlength = "6",
+                           @maxlength = "6",
+                           @class = "form-control",
+                           @autocomplete = "off",
+                           @onkeypress = "return isNumberKey(event)",
+
+                           @placeholder = "Pin Code",
+                           @required = "required"
+                       })
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <label>Address1<span style="color:red;">*</span></label>
+                            @Html.TextAreaFor(m => m.Cr_Address, new
+                       {
+                           @class = "form-control",
+                           @placeholder = "Current Address1",
+                           @style = "width:100%;",
+                           @autofocus = "autofocus",
+                           @required = "required",
+                           @cols = "10",
+                           @rows = "2"
+                       })
+
+
+                        </div>
+
+
+
+
+
+                        <br />
+
+
+                    </div>
+
+
+                    <div class="row">
+                        <br />
+                        <div class="col-md-6  form-group">
+                            <label>District</label>
+                            @*@Html.TextBoxFor(m => m.Cr_City, new { @class = "city-name form-control", @readonly = "readonly", @required = "required", @placeholder = "City Name" })*@
+                            <select id="Cr_City" class="form-control city-name" name="Cr_City" required onchange="BindDistrictDetail()"><option value="">--Select City--</option></select>
+                        </div>
+                        <div class="col-md-6">
+                            <label>State</label>
+                            @Html.TextBoxFor(m => m.Cr_State, new { @class = "state-name form-control", @readonly = "readonly", @required = "required", @placeholder = "State Name" })
+
+
+                        </div>
+
+
+                        <br />
+
+
+                    </div>
+
+                    <div class="row">
+                        <br />
+                        <div class="col-md-6">
+                            <label>Taluka</label>
+                            @Html.TextBoxFor(m => m.Co_Tehsil, new { @class = "city-name form-control", @readonly = "readonly", @required = "required", @placeholder = "Taluka" })
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <label>Zone</label>
+                            @Html.TextBoxFor(m => m.Zone, new { @class = "state-name form-control", @readonly = "readonly", @required = "required", @placeholder = "Zone" })
+
+
+                        </div>
+
+
+                        <br />
+
+
+                    </div>
+                    <br />
+                    <div class="mb-30">
+                        <h5 class="nonecase-font txt-grey"><b>Permanent Address</b></h5>
+                    </div>
+
+                    <hr />
+                    <input type="checkbox" id="sameAs" name="Issame"> <span>Same Address</span>
+                    <div class="row">
+
+
+
+                        <br />
+                        <br />
+
+                        <div class="col-md-6">
+                            <label>Pincode<span style="color:red;">*</span></label>
+                            @Html.TextBoxFor(m => m.P_PinCode, new
+                       {
+                           @minlength = "6",
+                           @maxlength = "6",
+                           @class = "form-control",
+                           @autocomplete = "off",
+                           @onkeypress = "return isNumberKey(event)",
+
+                           @placeholder = "Pin Code",
+                           @required = "required"
+                       })
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <label>Address1<span style="color:red;">*</span></label>
+                            @Html.TextAreaFor(m => m.P_Address, new
+                       {
+                           @class = "form-control",
+                           @placeholder = "Permanent Address1",
+                           @style = "width:100%;",
+                           @autofocus = "autofocus",
+                           @required = "required",
+                           @cols = "10",
+                           @rows = "2"
+                       })
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>District</label>
+                            @*@Html.TextBoxFor(m => m.P_City, new { @class = "city-name form-control", @readonly = "readonly", @required = "required", @placeholder = "District" })*@
+                            <select id="P_City" class="form-control city-name" name="P_City" required onchange="BindP_DistrictDetail()"><option value="">--Select City--</option></select>
+
+                        </div>
+                        <div class="col-md-6">
+                            <label>State</label>
+                            @Html.TextBoxFor(m => m.P_State, new { @class = "city-name form-control", @readonly = "readonly", @required = "required", @placeholder = "State Name" })
+
+                            <br />
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <br />
+                        <div class="col-md-6">
+                            <label>Taluka</label>
+                            @Html.TextBoxFor(m => m.P_Tehsil, new { @class = "city-name form-control", @readonly = "readonly", @required = "required", @placeholder = "Taluka" })
+
+
+                        </div>
+                        <div class="col-md-6">
+                            <label>Zone</label>
+                            @Html.TextBoxFor(m => m.P_Zone, new { @class = "state-name form-control", @readonly = "readonly", @required = "required", @placeholder = "Zone" })
+
+
+                        </div>
+
+
+                        <br />
+
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-1">
+                            @{
+                                var Button = "";
+                                if (Model == null)
+                                {
+                                    Button = "Save";
+                                }
+
+                                else if (Model != null)
+                                {
+
+                                    if (string.IsNullOrEmpty(Model.PKFranchiseRegistrationId) || Model.PKFranchiseRegistrationId == "0")
+                                    {
+                                        Button = "Save";
+                                    }
+                                    else
+                                    {
+                                        Button = "Update";
+                                        <input type="hidden" name="PKFranchiseRegistrationId" value="@(Model != null && Model.PKFranchiseRegistrationId != null ? Model.PKFranchiseRegistrationId : null)" />
+                                    }
+                                }
+                                <button type="button" value="@Button" class="btn btn-success" onclick="return Validate();" name="@Button">@Button</button>
+
+
+                                @* < input type="submit" value="@Button" class="btn btn-success"   name="@Button" />*@
+
+                            }
+                            @*<input type="submit" class="btn btn-success" id="btnSubmit" onclick="return Validate();" name="Save" />*@
+
+                            <input type="submit" class="btn btn-success" id="idfinalsubmit" name="Save" style="display:none" />
+
+                        </div>
+
+                        
+                    </div>
+
+                </div>
+
+                <br />
+
+
+            </div>
+        </div>
+    </div>
+}
+
+@{
+
+    var piccode = Model != null ? Model.Cr_PinCode : "";
+    var Dist = Model != null ? Model.Cr_City : "";
+}
+
+<script>
+    $(document).ready(function () {
+        if ('@piccode' != '') {
+            BindCityByPinCode(@piccode);
+        }
+    })
+
+    function validateCaseSensitiveEmail() {
+
+        var email = document.getElementById('EmailAddress').value;
+        var reg = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+        if (reg.test(email)) {
+            return true;
+        }
+        else {
+            alert('Please enter valid Email');
+            document.getElementById('EmailAddress').value = '';
+            return false;
+        }
+    }
+
+
+    //$(document).ready(function () {
+    //    $('input[id$=Dateofbirth]').datepicker({
+    //        dateFormat: 'dd/mm/yy'
+    //    });
+    //});
+
+
+    $("#Cr_PinCode").keyup(function () {
+        
+        var length = $("#Cr_PinCode").val().length;
+        if (length == 6) {
+            var Id = $(this).val();
+            if ($(this).val() != "") {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Franchise/FranchiseProfile/GetLocationByPin',
+                    datatype: 'json',
+                    data: { pin: Id },
+                    success: OnSuccess,
+                    error: function (ex) {
+                        alert('Failed to retrive !!' + ex);
+                    }
+                });
+                function OnSuccess(response) {
+                
+
+                    $("#Cr_City").html('');
+                    $("#Cr_City").append($("<option></option>").val("").html('--Select City--'));
+                    $.each(response, function (i, item) {
+                        $("#Cr_City").append($("<option></option>").val(item.District).html(item.District));
+                    });
+                    $("#Cr_State").val(response[0].State);
+                    window.sessionStorage.setItem("districtDetail", JSON.stringify(response));
+                }
+
+            }
+            else {
+                $("#Cr_PinCode").empty();
+            }
+        }
+    });
+
+
+    $("#P_PinCode").keyup(function () {
+        var length = $("#P_PinCode").val().length;
+        if (length == 6) {
+            var Id = $(this).val();
+            if ($(this).val != "") {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Franchise/FranchiseProfile/GetLocationByPin',
+                    datatype: 'json',
+                    data: { pin: Id },
+                    success: OnSuccess,
+                    error: function (ex) {
+                        alert('Failed to retrive !!' + ex);
+                    }
+
+                });
+                function OnSuccess(response) {
+
+                    $("#P_City").html('');
+                    $("#P_City").append($("<option></option>").val("").html('--Select City--'));
+                    $.each(response, function (i, item) {
+                        $("#P_City").append($("<option></option>").val(item.District).html(item.District));
+                    });
+                    $("#P_State").val(response[0].State);
+                    window.sessionStorage.setItem("P_districtDetail", JSON.stringify(response));
+                }
+            }
+            else {
+                $("#P_PinCode").empty();
+            }
+        }
+    });
+
+    function BindCityByPinCode(pincode) {
+   
+        var length = pincode;
+            var Id = pincode;
+            if ($(this).val() != "") {
+                $.ajax({
+                    type: 'POST',
+                    url: '/Franchise/FranchiseProfile/GetLocationByPin',
+                    datatype: 'json',
+                    data: { pin: Id },
+                    success: OnSuccess,
+                    error: function (ex) {
+                        alert('Failed to retrive !!' + ex);
+                    }
+
+                });
+                function OnSuccess(response) {
+
+                    $("#Cr_City").html('');
+                    $("#Cr_City").append($("<option></option>").val("").html('--Select City--'));
+                    $.each(response, function (i, item) {
+                        $("#Cr_City").append($("<option></option>").val(item.District).html(item.District));
+                    });
+                    $("#P_State").val(response[0].State);
+                    window.sessionStorage.setItem("P_districtDetail", JSON.stringify(response));
+
+                    var status = "";
+                    status ='@Dist';
+                    if (status != '' || status != null) {
+                        $("#Cr_City").val('@Dist')
+                        }
+                }
+            }
+            else {
+                $("#P_PinCode").empty();
+            }
+
+    }
+
+    $("#sameAs").on("change", function () {
+        debugger
+        if ($("#Cr_PinCode").val() == "" || $("#Cr_Address").val() == "") {
+
+            if ($("#Cr_Address").val() == "") {
+                alert("Please Fill Address line");
+                $("#Cr_Address").focus();
+                $("#sameAs").attr('checked', false);
+                return;
+            }
+            else {
+                alert("Please Fill Pin code");
+                $("#Cr_PinCode").focus();
+                $("#sameAs").attr('checked', false);
+                return;
+            }
+        }
+        else {
+            if ($("#sameAs").prop('checked') == true) {
+                $("#P_Address").val($("#Cr_Address").val());
+
+                $("#P_PinCode").val($("#Cr_PinCode").val());
+                $( "#P_City option:selected" ).text($("#Cr_City").val());
+                //$("#P_City").val($("#Cr_City").val());
+                $("#P_State").val($("#Cr_State").val());
+                $("#P_City").attr('disabled', 'disabled');
+                $("#P_State").addClass('aspNetDisabled');
+
+                $("#P_Tehsil").val($("#Co_Tehsil").val());
+                $("#P_Zone").val($("#Zone").val());
+            }
+            else {
+                $("#P_Address").val('');
+                $("#P_PinCode").val('');
+                $("#P_City").val('');
+                $("#P_State").val('');
+                $("#P_PinCode").prop("disabled", false);
+                $("#P_Address").prop("disabled", false);
+                $("#P_State").prop("disabled", false);
+                $("#P_City").prop("disabled", false);
+
+                $("#P_Tehsil").val('');
+                $("#P_Zone").val('');
+            }
+        }
+
+    });
+    function Validate() {
+        debugger;
+        if ($('#PersonName').val() == "" || $('#PersonName').val() == "0") {
+            alert("Please Enter Person Name");
+            $('#PersonName').focus();
+            return false;
+        }
+        else if ($('#EmailAddress').val() == "" || $('#EmailAddress').val() == "0") {
+            alert("Please Enter Email Address");
+            $('#EmailAddress').focus();
+            return false;
+        }
+        else if ($('#Contact').val() == "" || $('#Contact').val() == "0") {
+            alert("Please Enter Contact");
+            $('#Contact').focus();
+            return false;
+        }
+        else if ($('#Fk_UserTypeId').val() == "0") {
+            alert("Please Select UserType");
+            $('#Fk_UserTypeId').focus();
+            return false;
+        }
+        else if ($('#Dateofbirth').val() == "") {
+            alert("Please Enter Date of birth");
+            $('#Dateofbirth').focus();
+            return false;
+        }
+        else if ($('#Mobile').val() == "") {
+            alert("Please Enter Mobile");
+            $('#Mobile').focus();
+            return false;
+        }
+        else if ($('#FatherName').val() == "") {
+            alert("Please Enter Father Name");
+            $('#FatherName').focus();
+            return false;
+        }
+        else if ($('#FathersName').val() == "") {
+            alert("Please Enter FathersName");
+            $('#FathersName').focus();
+            return false;
+        }
+        else if ($('#Cr_PinCode').val() == "") {
+            alert("Please Enter PinCode");
+            $('#Cr_PinCode').focus();
+            return false;
+        }
+        else if ($('#Cr_Address').val() == "") {
+            alert("Please Enter Current Address");
+            $('#Cr_Address').focus();
+            return false;
+        }
+        else if ($('#P_PinCode').val() == "") {
+            alert("Please Enter  Permanent PinCode");
+            $('#P_PinCode').focus();
+            return false;
+        }
+        else if ($('#P_Address').val() == "") {
+            alert("Please Enter Permanent Address");
+            $('#P_Address').focus();
+            return false;
+        }
+        else {
+            $('#idfinalsubmit').click();
+        }
+
+
+    }
+    function bindUserType(elementId) {
+
+        $.ajax({
+            url: 'GetFranchiseCDOUserType',
+            data: {},
+            async: false,
+            success: function (data) {
+                $("#" + elementId).empty();
+
+
+                if (data != null) {
+                    $.each(data, function (i, result) {
+                        $("#" + elementId).append('<option value="' + result.Value + '">' + result.Text + '</option>');
+                    });
+                }
+            },
+            error: function (err) {
+                swal("", "An error occured", "error");
+            }
+        });
+    }
+
+    function binddropdown(elementId, _procId) {
+
+        $.ajax({
+            type: 'POST',
+            url: 'BindCountryStateByUserType',
+            datatype: 'json',
+            data: { ProcId: _procId },
+            success: function (data) {
+
+                $("#" + elementId).empty();
+
+                $.each(data, function (i, item) {
+
+                    $("#" + elementId).append('<option value=' + item.Value + '>' + item.Text + '</option>');
+
+
+
+                });
+            },
+            error: function (ex) {
+                alert('Failed to retrive !!' + ex);
+            }
+        });
+
+    }
+
+    function SetPincode() {
+        var DistrictId = $('#ddldistrict option:selected').val();
+
+        if (DistrictId != "") {
+            $.ajax({
+                type: 'POST',
+                url: 'GetPincodeList',
+                datatype: 'json',
+                data: { Id: DistrictId },
+                success: function (response) {
+                    $("#ddlPincode").html('<option value="">Select Pincode</option>')
+                    for (var i in response) {
+                        $("#ddlPincode").append('<option value="' + response[i].Text + '">' + response[i].Value + '</option>')
+                    }
+                }
+
+
+            });
+
+        }
+
+    }
+
+    function UploadFile(obj, subdir) {
+        debugger;
+
+        var Id = $(obj).attr("Id");
+
+        var data = new FormData();
+        var files = $("#" + Id).get(0).files;
+
+        if (files.length > 0) {
+            data.append("file", files[0]);
+            data.append("subdir", subdir);
+        }
+        else {
+
+            swal('', 'Please select file to upload.', 'warning');
+            return false;
+        }
+        var extension = $("#" + Id).val().split('.').pop().toUpperCase();
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
+            swal("", 'Invalid image file format.Only jpg,jpeg,png,bmp files are allow', 'warning');
+            return false;
+        }
+        $.ajax({
+            url: '/Franchise/FranchiseProfile/Uploadfile',
+            type: "POST",
+            processData: false,
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response != null || response != '') {
+                    if (response.result == "success") {
+                        $("#" + Id + "Path").val("");
+                        $("#HdnProfilePicPath").val(response.Path);
+
+                        $("#divpreview").show();
+                        $("#divpreview").empty();
+                        $('img').attr('src', '');
+                        $("#divpreview").append('<img class="m-t-20" src="' + response.Path.replace('~', '') + '" height="80px" width="70px"/>');
+                    }
+                    alert("Image uploaded sucessfully");
+                }
+
+            },
+            error: function (er) {
+                alert("An error occured");
+            }
+        });
+
+
+    }
+
+    function BindDistrictDetail() {
+        debugger
+        var data = JSON.parse(window.sessionStorage.getItem("districtDetail"));
+        var district = $("#Cr_City").val();
+        if (data != null) {
+            $.each(data, function (i, item) {
+                if (item.District == district) {
+                    $("#Co_Tehsil").val(item.DistrictDetail[0].Taluka);
+                    $("#Zone").val(item.DistrictDetail[0].Zone);
+                }
+
+            });
+
+        }
+
+    }
+
+     function BindP_DistrictDetail() {
+        debugger
+        var data = JSON.parse(window.sessionStorage.getItem("P_districtDetail"));
+        var district = $("#P_City").val();
+        if (data != null) {
+            $.each(data, function (i, item) {
+                if (item.District == district) {
+                    $("#P_Tehsil").val(item.DistrictDetail[0].Taluka);
+                    $("#P_Zone").val(item.DistrictDetail[0].Zone);
+                }
+
+            });
+
+        }
+
+    }
+</script>
+
+

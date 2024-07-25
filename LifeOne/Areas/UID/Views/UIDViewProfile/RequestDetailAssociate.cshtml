@@ -1,0 +1,252 @@
+﻿@model LifeOne.Models.AssociateManagement.AssociateEntity.RequestForAssociateFranchise
+@{
+    ViewBag.Title = "RequestDetailAssociate";
+
+}
+
+
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Request Details</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">UID</a></li>
+                        <li class="breadcrumb-item"><a href="#">My Account</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Request Details</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="pbutton hide">
+                <div class="right text-right">
+                    <span>
+                        <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                    </span>
+
+                    <span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="table-responsive" >
+                            @if (Model != null)
+                            {
+                                <table class="table table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#SNo:</th>
+                                            <th>LoginId</th>
+                                            <th>Display Name</th>
+                                            <th>Mobile</th>
+                                            <th>Email</th>
+                                            <th>Joining Date</th>
+                                            <th>Request Date</th>
+                                            <th>Associate Remark</th>
+                                            <th>Franchise Remark</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.lstRequest.Count > 0)
+                                        {
+                                            int i = 0;
+                                            foreach (var item in Model.lstRequest)
+                                            {
+                                                i = i + 1;
+
+                                                <tr data-toggle="tooltip" data-placement="top" class="from">
+                                                    <td data-title="#SN:">@i</td>
+                                                    <td data-title="Member ID:">@item.LoginId</td>
+                                                    <td>@item.DisplayName</td>
+                                                    <td>@item.Mobile</td>
+                                                    <td>@item.Email</td>
+                                                    <td>@item.JoiningDate</td>
+                                                    <td>@item.RequestDate</td>
+                                                    <td>@item.AssociateRemark</td>
+                                                    <td>@item.FranchiseRemark</td>
+                                                    <td>
+                                                        @if (item.IsAssociate == false && item.IsFranchise == false)
+                                                        {
+                                                            if (item.IsBusiness == false)
+                                                            {
+                                                                <button class="btn btn-info btn-sm" onclick="AssociateRequest('Associate');" value="AssociateRequest">AssociateRequest</button>
+                                                            }
+                                                            <button class="btn btn-primary btn-sm" value="FranchiseRequest" onclick="FranchiseRequest('Franchise');">FranchiseRequest</button>
+
+                                                        }
+
+                                                        @if (item.IsAssociate == true && item.IsFranchise == true)
+                                                        {
+                                                            if (item.IsAssociateApprove == 1)
+                                                            {
+                                                                <label class="badge badge-success badge-sm">Approved</label>
+                                                            }
+                                                            else if (item.IsAssociateApprove == 2)
+                                                            {
+                                                                <label class="badge badge-danger badge-sm">Decline</label>
+                                                            }
+                                                            if (item.IsFranchiseApprove == 1)
+                                                            {
+                                                                <label class="badge badge-success badge-sm">Approved</label>
+                                                            }
+                                                            else if (item.IsFranchiseApprove == 2)
+                                                            {
+                                                                <label class="badge badge-danger badge-sm">Decline</label>
+                                                            }
+                                                        }
+
+                                                        else if (item.IsAssociate == true && item.IsFranchise == false)
+                                                        {
+                                                            if (item.IsAssociateApprove == 1)
+                                                            {
+                                                                <label class="badge badge-success badge-sm">Approved</label>
+                                                            }
+                                                            else if (item.IsAssociateApprove == 2)
+                                                            {
+                                                                <label class="badge badge-danger badge-sm">Decline</label>
+                                                            }
+
+                                                            if (item.IsFranchise == false)
+                                                            {
+                                                                <button class="btn btn-primary btn-sm" value="FranchiseRequest" onclick="FranchiseRequest('Franchise');">FranchiseRequest</button>
+                                                            }
+                                                            if (item.IsAssociateApprove <= 0)
+                                                            {
+                                                                <label class="btn btn-info btn-sm">Associate Purpose</label>
+                                                            }
+                                                        }
+                                                        else if (item.IsFranchise == true && item.IsAssociate == false)
+                                                        {
+
+                                                            if (item.IsFranchiseApprove == 1)
+                                                            {
+                                                                <label class="badge badge-success badge-sm">Approved</label>
+                                                            }
+                                                            else if (item.IsFranchiseApprove == 2)
+                                                            {
+                                                                <label class="badge badge-danger badge-sm">Decline</label>
+                                                            }
+                                                            if (item.IsAssociate == false)
+                                                            {
+                                                                <button class="btn btn-info btn-sm" onclick="AssociateRequest('Associate');" value="AssociateRequest">AssociateRequest</button>
+                                                            }
+                                                            if (item.IsFranchiseApprove <= 0)
+                                                            {
+                                                                <label class="btn btn-primary btn-sm">Franchise PurPose</label>
+                                                            }
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container-fluid -->
+</div>
+
+
+<div class="modal" id="myModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="titleText"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <form enctype="multipart/form-data" method="post">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label for="Transaction">Remark</label>
+                                <textarea class="form-control" id="Remark"></textarea>
+                                <input type="hidden" id="type" />
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                </div>
+            </form>
+            <!-- Modal footer -->
+            <div class="modal-footer">
+                <input type="button" value="Send" class="btn btn-primary" onclick="submit()" />
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    function AssociateRequest(type) {
+        var result = confirm("Are you sure to make a Associate Request?");
+        if (result == true) {
+            $("#myModal").modal('show');
+            $('#type').text(type);
+            $('#titleText').text(type + ' Request Remark');
+        }
+        else {
+            return false;
+        }
+    }
+
+    function FranchiseRequest(type) {
+        var result = confirm("Are you sure to make a Franchise Request?");
+        if (result == true) {
+            $("#myModal").modal('show');
+            $('#type').text(type);
+            $('#titleText').text(type + ' Request Remark');
+        } else {
+            return false;
+        }
+    }
+
+    function submit() {
+        debugger;
+        var Type = $('#type').text();
+        var remark = $('#Remark').val();
+        if (remark == '') {
+            swal('', 'Please enter Remark', 'warning');
+            return false;
+        }
+        $.ajax({
+            method: 'POST',
+            url: '/AssociateViewProfile/RequestForFranchise',
+            data: { type: Type, remark: remark },
+            success: function (data) {
+                debugger
+                if (data.Code == "1") {
+                    location.reload();
+                    swal('', data.Msg, 'success');
+                }
+                else {
+                    location.reload();
+                    swal('', "Error Occured While processing the data", 'error');
+                }
+            }
+
+        });
+    }
+</script>

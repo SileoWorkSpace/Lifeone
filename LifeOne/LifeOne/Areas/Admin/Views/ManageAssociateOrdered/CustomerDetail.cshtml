@@ -1,0 +1,185 @@
+﻿@using LifeOne.Models.Manager;
+@model LifeOne.Models.FranchiseManagement.FEntity.MFranchiseorderRequest
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "CustomerDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    .box {
+        padding: 14px;
+    }
+
+    .hide {
+        display: none;
+    }
+</style>
+
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+@*<section class="content-header">
+        <div class="col-md-12">
+            <h3> Create Order For Customer/Member <small></small> </h3>
+            <ol class="breadcrumb" style="clear:both;background:none; padding:0px;">
+                <li><a href="#-">Home</a></li>
+                <li><a href="#-">Manage Customer Order</a></li>
+                <li class="active">Create Order For Customer/Member </li>
+            </ol>
+        </div>
+    </section>*@
+
+<div class="container-fluid">
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Create Order For Customer/Member</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#">Order</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Create Order For Customer/Member </li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <div id="no-more-tables">
+
+        <div id="no-more-tables">
+            <div class="row">
+                <div class="col-md-4 col-sm-12 offset-lg-4">
+                    <div class="box">
+                        <div class="box-body">
+
+                            <div>
+                                <div class="box-body" id="dvInitialInfo">
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <label for="CustomerMobileNo">Member Login/Mobile No.<span class="text-danger"></span></label>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    @Html.TextBoxFor(m => m.CustomerMobile, new { @class = "form-control"})
+                                                    @Html.HiddenFor(m => m.CustomerId)
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                @if (PermissionManager.IsActionPermit("Create Order", ViewOptions.FormSave))
+                                                {
+                                                    <div class="form-group"><input type="button" value="Submit" class="btn btn-success btn-block" onclick="GetCustomerDetails()" /></div>
+                                                }
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="box-body hide" id="PersonDetail">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Name</label>
+                                                <input type="text" id="txtName" class="form-control" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Mobile No.</label>
+                                                <input type="text" id="txtMobile" class="form-control" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label for="">Email</label>
+                                                <input type="text" id="txtMail" class="form-control" disabled />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <a href="/AddOrderForCustomer" class="btn btn-success btn-block">Confirm & Next</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <input type="hidden" id="TotalProductAmount" />
+
+
+        <script>
+            $(document).ready(function () {
+
+                if (sessionStorage.getItem("customerId") == null) {
+                    sessionStorage.setItem("customerId", "0")
+                }
+                if (sessionStorage.getItem("customerName") == null) {
+                    sessionStorage.setItem("customerName", "")
+                }
+            })
+
+            function GetCustomerDetails() {
+                var _mobile = $('#CustomerMobile').val();
+                if (_mobile != "") {
+                    $.ajax({
+                        url: "/Admin/ManageAssociateOrdered/BindCustomerDetails",
+                        type: "POST",
+                        dataType: 'json',
+                        data: JSON.stringify({ CustomerMobile: _mobile }),
+                        contentType: "application/json",
+                        success: function (result) {
+                            if (result != null) {
+                                if (result.Code == 1) {
+                                    $('#dvInitialInfo').addClass('hide');
+                                    $('#PersonDetail').removeClass('hide');
+                                    sessionStorage.setItem("customerId", result.CustomerId);
+                                    sessionStorage.setItem("customerName", result.CustomerName);
+                                    sessionStorage.setItem("CustomerMobile", result.CustomerMobile)
+                                    sessionStorage.setItem("CustomerEmail", result.CustomerMail)
+                                    $('#txtName').val(result.CustomerName);
+                                    $('#txtMobile').val(result.CustomerMobile);
+                                    $('#txtMail').val(result.CustomerMail);
+                                }
+                                else {
+                                    showSnazzyErrorMessage("Invalid Mobile Number");
+                                }
+                            }
+                        },
+                        error: function (err) {
+                            showSnazzyErrorMessage(err.statusText);
+                            return false;
+                        }
+                    });
+                }
+            }
+
+            function CustomerAddOrder() {
+                window.location.href = "/AddOrderForCustomer";
+            }
+
+            function isNumberKey(evt) {
+                var charCode = (evt.which) ? evt.which : event.keyCode;
+                if (charCode != 46 && charCode > 31
+                    && (charCode < 48 || charCode > 57))
+                    return false;
+            }
+
+            function isAlphabets(evt) {
+                evt = (evt) ? evt : window.event;
+                var charCode = (evt.which) ? evt.which : evt.keyCode;
+                if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32) {
+                    return true;
+                }
+                return false;
+            }
+        </script>
+
+
+    </div>
+</div>
+

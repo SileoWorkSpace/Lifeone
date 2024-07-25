@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "ManageProductStock";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<section class="content-header">
+    <div class="col-md-12">
+        <h1> Manage Product Stock <small></small> </h1>
+        <ol class="breadcrumb" style="clear:both;background:none; padding:0px;">
+            <li><a href="#-">Home</a></li>
+            <li><a href="#-">Admin</a></li>
+            <li class="active">Manage Product Stock</li>
+        </ol>
+    </div>
+</section>
+
+
+<section class="content">
+    <div id="no-more-tables">
+
+        <div class="row">
+            <div class="col-xs-4">
+                <div class="box">
+                    <div class="box-body">
+                        <table id="example1" class="table table-bordered table-striped datatables">
+                            <thead>
+                                <tr>
+                                    <th>S No.</th>
+                                    <th>Category</th>
+                                    <th>Product Name</th>
+                                    <th>PV</th>
+                                    <th>Available Qty</th>
+                                    <th>Add/Deduct Qty</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+
+                                    <td colspan="6">No Data Found...</td>
+                                </tr>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td colspan="6" style="text-align:right;">
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

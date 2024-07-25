@@ -1,0 +1,307 @@
+﻿@model LifeOne.Models.FranchiseManagement.FEntity.MChildFranchise
+
+
+@{
+    ViewBag.Title = "ChildFranchiseList";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+    int count = 1;
+}
+
+@{
+    string msg = (string)TempData["msg"];
+    string code = (string)TempData["code"];
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30 msgdiv" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-success m-t-30 msgdiv" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+        }
+    }
+}
+
+@using (Html.BeginForm("ChildFranchiseList", "ChildFranchise", FormMethod.Post, new { enctype = "multypart/form-data" }))
+{
+
+<div class="container-fluid">
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Add Franchise</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#">Franchise List</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">View & Add Franchise</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                <a href="/Franchise/ChildFranchise/ChildFranchiseRegistration" title="Add New" id="btnAdd" class="btn btn-rounded btngreen">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+                    </span>
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                </span> 
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btnprint"><i class="fa fa-print"></i></button>
+                </span> 
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4 class="header-title mt-0 mb-1"></h4>
+                        </div>
+                        <div class="col-md-3 pull-right text-right" style="position:relative">
+
+                            <a class="btn btn-outline-warning small advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom">Search&nbsp;<i class="fa fa-search"></i></a>
+
+                        </div>
+                    </div>
+                    <div class="row" id="advance-search" style="display:none;">
+                        <div class="col-md-12">
+                            <div class="alert alert-warning" style="color:#727272 !important">
+                                <div class="row">
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label>Franchise Name</label>
+                                            <input type="text"  placeholder="" class="form-control">
+
+
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-12 col-md-4">
+                                        <div class="form-group">
+                                            <label style="display:block;"></label>
+                                            <input type="button" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                            <a href="#" class="btn btn-danger" style="margin-top:1.5em;">Reset</a>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="table-responsive" >
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th><b>#Sn.</b></th>
+                                    <th><b>Franchise Name</b></th>
+                                    <th><b>Mobile</b></th>
+                                    <th><b>Email</b></th>
+                                    <th><b>DOB</b></th>
+                                    <th><b>Address</b></th>
+                                    <th><b>Status</b></th>
+                                    <th><b>Action</b></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null)
+                                {
+
+                                    foreach (var item in Model.FranchiseMasterList)
+                                    {
+                                        <tr>
+                                            <td align="left">@count</td>
+                                            <td align="left"><span>@item.PersonName</span></td>
+                                            <td align="left"><span>@item.Contact</span></td>
+                                            <td align="left"><span>@item.EmailAddress</span></td>
+                                            <td align="left"><span>@item.DisplayDOB</span></td>
+                                            <td align="left"><span>@item.Cr_Address</span></td>
+                                            <td align="left">
+                                                @if (item.IsBlocked == "False")
+                                                {
+                                                    <div>
+                                                        <div class="label label-success" style="background-color:green">Unblock</div>
+                                                    </div>
+                                                }
+                                                else
+                                                {
+                                                    <div>
+                                                        <div class="label label-danger" style="background-color:red">Block</div>
+                                                    </div>
+                                                }
+                                            </td>
+                                            <td align="left">
+                                                <a href="/Franchise/ChildFranchise/ChildFranchiseRegistration?id=@item.PKFranchiseRegistrationId" class="btn btn-primary btn-sm" style="display:@ViewBag.edit;" title="Edit">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="#" data-toggle="modal" Target="_blank" data-rel="tooltips" ToolTip="View Stock" data-target="#myModal4" class="btn btn-warning btn-tbl-edit btn-sm" onclick="StockDetails('@item.PKFranchiseRegistrationId')" title="View Franchise Stock">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="/Franchise/ChildFranchise/ChildFranchiseMasterDelete?id=@item.PKFranchiseRegistrationId" id="btnDelete" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to delete this record')" ToolTip="Delete" style="display:@ViewBag.delete;" title="Delete">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+
+                                                @if (item.IsBlocked == "False")
+                                                {
+                                                    <a href="/Franchise/ChildFranchise/ChildFranchiseMasterBlockUnblock?id=@item.PKFranchiseRegistrationId" class="btn btn-success btn-sm" onclick="return confirm('are you sure to Block this franchise')" title="Click here to Block Franchise" style="display:@ViewBag.delete;">
+                                                        <i class="fa fa-unlock"></i>
+                                                    </a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="/Franchise/ChildFranchise/ChildFranchiseMasterBlockUnblock?id=@item.PKFranchiseRegistrationId" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to Unblock this franchise')" title="Click here to Unblock Franchise" style="display:@ViewBag.delete;">
+                                                        <i class="fa fa-lock"></i>
+                                                    </a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                    count++;
+                                }
+                                else
+                                {
+                                    <tr colspan="7">
+                                        <td>No Record Found..</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+}
+
+
+<div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Stock Details</h4>
+            </div>
+            <div class="modal-body">
+                <div class="table-responsive" id="divMultipleDocTable">
+
+                    <table class="table table-striped b-t b-light">
+                        <tr>
+                            <th>#Sn.</th>
+                            <th>Product Name</th>
+                            <th>Available Quantity</th>
+                            <th>Product Description</th>
+                            <th>MRP</th>
+                            <th>Sales Price</th>
+                            <th>PV</th>
+                            <th>Product Type</th>
+                        </tr>
+                        <tr>
+                            <td colspan="8" align="center">No record available!,please add item to table</td>
+                        </tr>
+                    </table>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    function StockDetails(_Fk_memid) {
+
+        if (_Fk_memid == "0" || _Fk_memid == "")
+            return false;
+        $.ajax({
+
+            url: "/AdminReport/FranchiseStockGet",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ Fk_Memid: _Fk_memid }),
+            contentType: "application/json",
+            success: function (result) {
+
+                if (result != undefined && result != '') {
+
+                    //table start
+                    var table = '<table class="table table-striped b-t b-light" id="tbodyData">';
+                    //preparing html table row and data here
+                    table += '<thead>' +
+                        '<tr>' +
+                        '<th>S.No.</th>' +
+                        '<th>Product Name</th>' +
+                        '<th>Available Quantity</th>' +
+                        '<th>Product Description</th>' +
+                        '<th>MRP</th>' +
+                        '<th>Sales Price</th>' +
+                        '<th>PV</th>' +
+                        '<th>Product Type</th>' +
+                        '</tr>' +
+                        '</thead>';
+
+                    var Sno = 0;
+
+                    $.each(result, function (e) {
+                        debugger;
+                        Sno++;
+                        table += '<tr>' +
+                            '<td>' + Sno + '</td>' +
+                            '<td>' + result[e].ProductName + '</td>' +
+                            '<td>' + result[e].AvailableQuantity + '</td>' +
+                            '<td>' + result[e].ProductDescription + '</td>' +
+                            '<td>' + result[e].MRP + '</td>' +
+                            '<td>' + result[e].SalesPrice + '</td>' +
+                            '<td>' + result[e].PV + '</td>' +
+                            '<td>' + result[e].ProductType + '</td>' +
+                            '</tr>';
+                    });
+
+                    //table end
+                    table += '</table>';
+                    //bind the table in to div
+                    $('#divMultipleDocTable').html(table);
+
+                }
+            },
+            error: function (err) {
+                alert(err.statusText);
+                return false;
+            }
+        });
+    }
+
+</script>
+
+
+
+
+
+

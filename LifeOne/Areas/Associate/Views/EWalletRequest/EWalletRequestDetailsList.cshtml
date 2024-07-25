@@ -1,0 +1,137 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model LifeOne.Models.AssociateManagement.AssociateEntity.CashbackWallet
+
+
+@{
+    ViewBag.Title = "EWallet Ledger Details";
+    ViewBag.Controller = "EWalletRequest";
+    ViewBag.HeaderTitle = "Cashback Wallet";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+
+<style>
+
+    form {
+        padding: 15px;
+    }
+
+    .label {
+        font-size: 12px !important;
+    }
+</style>
+<div class="content-wrapper-before"></div>
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0 text-white">E-Wallet Ledger Details</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">My Income</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">E-Wallet Ledger Details</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                </span>
+
+                @*<span>
+                        <button type="button" class="btn btn-success btn-rounded btnprint"><i class="fa fa-print"></i></button>
+                    </span>*@
+
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive" >
+                        <table id="myTable" class="table  table-hover">
+                            <thead>
+
+                                <tr class="text-right">
+                                    <th>S. No.</th>
+                                    <th>Transaction Date</th>
+                                    <th>Narration </th>
+                                    <th>Credit Amount</th>
+                                    <th>Debit Amount</th>
+                                    <th>Balance</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                @if (Model != null)
+                                {
+                                    if (Model.CashbackWallets != null && Model.CashbackWallets.Count > 0)
+                                    {
+                                        int i = 1;
+                                        foreach (var item in Model.CashbackWallets)
+                                        {
+
+                                            <tr>
+                                                <td>@i</td>
+                                                <td>@Html.DisplayFor(m => item.TransactionDate)</td>
+                                                <td>@Html.DisplayFor(m => item.Narration)</td>
+                                                <td>@Html.DisplayFor(m => item.CrAmount)</td>
+                                                <td>@Html.DisplayFor(m => item.DrAmount)</td>
+                                                <td>@Html.DisplayFor(m => item.Balance)</td>
+                                            </tr>
+
+                                            i++;
+                                        }
+                                    }
+                                }
+
+                            </tbody>
+                        </table>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        md.initSliders()
+        demo.initFormExtendedDatetimepickers();
+    });
+
+    var target = $('.filter-bar')
+    target.after('<div class="affix" id="affix"></div>')
+
+    var affix = $('.affix')
+    affix.append(target.clone(true))
+
+    // Show affix on scroll.
+    var element = document.getElementById('affix')
+    if (element !== null) {
+        var position = target.position()
+        window.addEventListener('scroll', function () {
+            var height = $(window).scrollTop()
+            if (height > position.top) {
+                target.css('visibility', 'hidden')
+                affix.css('display', 'block')
+            } else {
+                affix.css('display', 'none')
+                target.css('visibility', 'visible')
+            }
+        })
+    }
+</script>
+

@@ -1,0 +1,292 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MPayoutReport
+@{
+    ViewBag.Title = "PayoutReport";
+    
+}
+<style>
+    .alert-warning {
+        background-color: #fcf8e3 !important;
+        border-color: #faebcc !important;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Payout Report</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">UID</a></li>
+                        <li class="breadcrumb-item"><a href="#">My Income</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Payout Report</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                    <span>  <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a></span>
+                    <span>
+                        <a href="/Associate/AssociateReport/PayoutReportExportExcel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                    </span><span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body p-0">
+
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                @using (Html.BeginForm("PayoutReport", "AssociateReport", FormMethod.Post))
+                                {
+                                    <div class="alert alert-warning" style="color:#727272 !important">
+                                        <div class="row">
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Payout No</label>
+                                                    @*<input type="text" name="PayoutNo" id="PayoutNo" placeholder="" class="form-control">*@
+                                                    @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.PayoutMaster, "Value", "Text"), new { @class = "form-control", @id = "PayoutNo" })
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>From Date</label>
+                                                    <input type="date" name="FromDate" id="FromDate" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>To Date</label>
+                                                    <input type="date" name="ToDate" id="ToDate" placeholder="" class="form-control ">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label class="display">&nbsp;</label>
+                                                    <input type="submit" class="btn btn-success" value="Search" id="BtnSearch">
+                                                    <a href="/Associate/AssociateReport/PayoutReport" class="btn btn-secondary">Reset</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th nowrap>#Sn.</th>
+
+                                        <th nowrap>Payout No</th>
+                                        <th>Date</th>
+                                        <th class="text-right">Gross Amount</th>
+                                        <th class="text-right">Processing Fee</th>
+                                        <th class="text-right">Net Amount</th>
+                                        <th class="text-right">Adjustment</th>
+                                        <th class="text-right">Advance</th>
+                                        <th class="text-right">Payable Amount</th>
+                                        <th class="text-right">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @if (Model != null && Model.Objlist.Count > 0)
+                                    {
+                                        int SNo = 0;
+                                        foreach (var item in Model.Objlist)
+                                        {
+
+                                            <tr>
+                                                <td data-title="#SN:">@(SNo = SNo + 1)</td>
+                                                <td data-title="PayoutNo:">@item.PayoutNo</td>
+                                                <td data-title="Date:">@item.ClosingDate</td>
+                                                <td data-title="Gross Amount:">@item.GrossAmount</td>
+                                                <td data-title="Processing Fee:">@item.ProcessingFee</td>
+                                                <td data-title="Net Amount:">@item.NetAmount</td>
+                                                <td data-title="Adjustment:">@item.AdjustedAmount</td>
+                                                <td data-title="Advance:">@item.Advance</td>
+                                                <td data-title="Payable Amount:">@(item.NetAmount - item.AdjustedAmount - item.Advance)</td>
+                                                <td><a href="" onclick="GetStatementDetails(@item.FK_MemId)">View</a>
+                                                    <a href="" onclick="GetIncomeDetails(@item.LoginId,@item.PayoutNo)">View Income</a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @*<tr>
+                                                <td colspan="10">No Record Found..</td>
+                                            </tr>*@
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container-fluid -->
+    <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Statement Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive" style="height:600px;">
+                        <table class="table" id="TblEmpList">
+                            <thead>
+                                <tr>
+                                    <th>From Id</th>
+                                    <th>Display Name</th>
+                                    <th>Business Amount</th>
+                                    <th>Commission Percentage</th>
+                                    <th>Income Type</th>
+                                    <th>Closing Date</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblData"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td><b>Total</b></td>
+                                    <td><b><span id="spnTotal"></span></b></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+                @*<div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>*@
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+    <!-- container-fluid -->
+    <div id="myModalIncm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="myModalLabel">Income Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive" style="height:600px;">
+                        <table class="table" id="TblList">
+                            <thead>
+                                <tr>
+                                    <th>Self Income</th>
+                                    <th>Team Income</th>
+                                    <th>Air Orbit Income</th>
+                                    <th>Water Orbit Income</th>
+                                    <th>Space Orbit Income</th>
+                                    <th>Royalty Income</th>
+                                    <th>Orbit Royalty Income</th>
+                                    <th>Leadership Income</th>
+                                    <th>Club Bonus</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tblDataIncome"></tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+</div>
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script>
+    function GetStatementDetails(FK_MemId) {
+        $.ajax({
+            method: 'POST',
+            url: '/AssociateReport/StatementDetails',
+            data: { FK_MemId: FK_MemId },
+            dataType: 'json',
+            success: function (data) {
+                debugger;
+                if (data != null) {
+                    var total = 0;
+                    $('#tblData').html('');
+                    $('#myModal').modal("show");
+                    for (var i = 0; i < data.lstStatement.length; i++) {
+                        tr = $('<tr/>');
+                        tr.append("<td>" + data.lstStatement[i].LoginId + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].DisplayName + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].BusinessAmount + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].CommissionPercentage + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].IncomeType + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].CurrentDate + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].Amount + "</td>");
+                        $('#tblData').append(tr);
+                        total = total + Math.round(parseFloat(data.lstStatement[i].Amount));
+                    }
+                    $("#spnTotal").html(total);
+                }
+            }
+        });
+    }
+
+    function GetIncomeDetails(ID,Payout) {
+
+        $.ajax({
+            method: 'POST',
+            url: '/AssociateReport/IncomeReport',
+            data: JSON.stringify({ LoginId: ID, PayoutNo: Payout }),
+            dataType: 'json',
+            success: function (data) {
+                debugger;
+                if (data != null) {
+                    $('#tblDataIncome').html('');
+                    $('#myModalIncm').modal("show");
+                    for (var i = 0; i < data.lstStatement.length; i++) {
+                        tr = $('<tr/>');
+                        tr.append("<td>" + data.lstStatement[i].SelfIncome + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].TeamIncome + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].AirOrbitIncome + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].WaterOrbitIncome + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].SpaceOrbitIncome + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].RoyaltyIncome + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].OrbitRoyaltyIncome + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].LeadershipIncome + "</td>");
+                        tr.append("<td>" + data.lstStatement[i].ClubBonus + "</td>");
+                        $('#tblDataIncome').append(tr);
+                    }
+                }
+            }
+        });
+    }
+</script>

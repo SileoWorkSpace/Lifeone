@@ -1,0 +1,131 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.Contact
+@{
+    ViewBag.Title = "Contact";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}   <!-- Section: page title -->
+<main class="main">
+    <div class="page-header" style="background-image: url(/Content/NewAssests/images/page-header/contact-us.jpg) ">
+        <h1 class="page-title font-weight-bold text-capitalize ls-l">Contact Us</h1>
+        <nav class="breadcrumb-nav">
+            <ul class="breadcrumb">
+                <li><a href="/Home/Index"><i class="d-icon-home"></i> <i class="bi bi-chevron-right"></i></a></li>
+                <li>Contact Us</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page-content mt-10">
+        <section class="contact-section my-5">
+            <div class="container">
+                @{ 
+                    if(Model != null)
+                    { 
+                                <div class="row">
+                                    <div class="col-lg-3 col-md-4 col-sm-6 ls-m mb-4">
+                                        <div class="grey-section d-flex align-items-center h-100">
+                                            <div class="p-3">
+                                                <h4 class="mb-2 text-capitalize">Address</h4>
+                                                <p>
+                                                    @Model.Address1<br>
+                                                    @Model.Address2
+                                                </p>
+
+                                                <h4 class="mb-2 text-capitalize">Contact</h4>
+                                                <p>
+                                                    <a href="tel:#"><i class="bi bi-telephone"></i>@Model.Mobile</a><br>
+                                                    <a href="tel:#"><i class="bi bi-telephone"></i>@Model.Mobile2</a>
+                                                </p>
+                                                <p class="mb-4">
+                                                    <a href="#"><i class="bi bi-envelope-at"></i>@Model.Email</a><br>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-9 col-md-8 col-sm-6 d-flex align-items-center mb-4">
+                                        <div class="w-100">
+                                            <form class="pl-lg-2" method="post" action="/Home/Contact">
+                                                <h4 class="ls-m font-weight-bold">Let’s Connect</h4>
+                                                <p>
+                                                    Your email address will not be published. Required fields are
+                                                    marked *
+                                                </p>
+                                                <span class="text-success">@TempData["Msg"]</span>
+                                                <div class="row mb-2">
+                                                    <div class="col-12 mb-4">
+                                                        <textarea class="form-control" required
+                                                                  placeholder="Comment*" id="comment"></textarea>
+                                                    </div>
+                                                    <div class="col-md-6 mb-4">
+                                                        <input class="form-control" type="text" placeholder="Name *" id="name" required>
+                                                    </div>
+                                                    <div class="col-md-6 mb-4">
+                                                        <input class="form-control" type="email" placeholder="Email *" id="email" required>
+                                                    </div>
+                                                </div>
+
+                                                <button type="submit" class="btn btn-primary btn-rounded">
+                                                    Post Comment<i class="d-icon-arrow-right"></i>
+                                                </button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                    }
+                }
+                
+            </div>
+        </section>
+        <!-- End About Section-->
+        <!-- Google Maps - Go to the bottom of the page to change settings and map location. -->
+        <div class="grey-section google-map" style="height: 386px">
+            @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d14001.008247813721!2d77.4270943944596!3d28.68210560509175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cf1a287cc654f%3A0x97c8c4524fe600ca!2sRaj%20Nagar%2C%20Ghaziabad%2C%20Uttar%20Pradesh%20201002!5e0!3m2!1sen!2sin!4v1712737226709!5m2!1sen!2sin" height="350" style="border:0;width:100%" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" id="map"> </iframe>*@
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.794157245757!2d81.00118957367008!3d26.8782802615727!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399be3fe9d6285d7%3A0x84896a82d0dc70a!2sSPARSH%20HEIGHT%20APARTMENT!5e0!3m2!1sen!2sin!4v1721629025929!5m2!1sen!2sin" width="100%" height="350" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        <!-- End Map Section -->
+    </div>
+
+</main>
+<script>
+    function contactValidation() {
+
+        if ($('#comment').val() == '0' || $('#comment').val() == undefined || $('#comment').val() == null) {
+            $('#comment').focus();
+            return false;
+        }
+        if ($('#name').val() == "" || $('#name').val() == undefined || $('#name').val() == null) {
+            $('#name').focus();
+            return false;
+        }
+        if ($('#email').val() == "" || $('#email').val() == undefined || $('#email').val() == null) {
+            $('#email').focus();
+
+            return false;
+        }
+        
+        //var message = $('#comment').val();
+        //var name = $('#name').val();
+        //var email = $('#email').val();
+       
+        //var data = new formData();
+        //data.append("Name", name);
+        //data.append("Email", mobile);
+        //data.append("Message", message);
+        //$.ajax({
+        //    type: 'POST',
+        //    url: "/Home/Contact",
+        //    data: data,
+        //    processData: false,
+        //    contentType: false,
+        //    success: function (responce) {
+               
+        //        if (responce.status == "1") {
+        //            alert(responce.message);
+        //        }
+        //        else {
+        //            alert(responce.message);
+        //        }
+        //    }
+        //});
+
+    }
+</script>

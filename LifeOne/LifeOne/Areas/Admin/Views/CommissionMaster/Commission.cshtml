@@ -1,0 +1,283 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MCommission
+
+@{
+    ViewBag.Title = "Commission";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+
+@{
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-danger m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+
+
+
+        }
+    }
+
+}
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Commission Master</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Master</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Commission Master</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                @*<span>
+                    <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                </span> <span>
+                    <button type="button" class="btn btn-success btn-rounded btnprint"><i class="fa fa-print"></i></button>
+                </span> <span>
+                    <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                </span>*@
+
+
+                <a href="" id="btnAdd" class="btn btn-success btn-sm " onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4" style="display:none">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="no-more-tables">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                               @* <h4 class="header-title mt-0 mb-1">Commission List</h4>*@
+                            </div>
+                            @*<div class="col-md-3 pull-right text-right" style="position:relative">
+
+                                <a class="btn btn-outline-warning small advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom">Search&nbsp;<i class="fa fa-search"></i></a>
+
+                            </div>*@
+                        </div>
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <div class="row">
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Login ID</label>
+                                                <input type="text" name="LoginID" id="LoginID" placeholder="" class="form-control">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label style="display:block;"></label>
+                                                <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                <a href="/PlotBooking/BookingDetails" class="btn btn-danger" style="margin-top:1.5em;">Reset</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Vendor Name</th>
+                                        <th>Gateway Number</th>
+                                        <th>Service Provider Name</th>
+                                        <th>Margin</th>
+                                        <th>Surcharge</th>
+                                        <th>Min-Surcharge</th>
+                                        <th>Remuneration/Transaction</th>
+                                        <th>Returned Part Of Surcharge</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.objList)
+                                    {
+                                        <tr>
+                                            <td>@(count = count + 1)</td>
+                                            <td>@item.VendorName</td>
+                                            <td>@item.GatewayNumber</td>
+                                            <td>@item.Serviceprovidername</td>
+                                            <td>@item.Margin</td>
+                                            <td>@item.Surcharge</td>
+                                            <td>@item.MinSurcharge</td>
+                                            <td>@item.RemunerationPerTransaction</td>
+                                            <td>@item.Returnedpartofsurcharge</td>
+                                            <td class="text-right">
+                                                @* <a href="/Admin/?Id=@item.Pk_BankId" class="btn btn-primary" onclick="return confirm('Are yor sure to UnAssigne Kit')"><i class="fa fa-pencil"></i></a>*@
+                                                <a href="/Admin/CommissionMaster/CommissionDelete?Id=@item.Pk_CommonId" onclick="return confirm('are you sure to delete this record')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="return OpenPopUp('@item.Pk_CommonId','@item.VendorName','@item.GatewayNumber','@item.Serviceprovidername','@item.Margin','@item.Surcharge','@item.MinSurcharge','@item.RemunerationPerTransaction','@item.Returnedpartofsurcharge')" data-toggle="modal" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>
+                                                @*<button type="button" class="btn btn-danger" ng-click="Delete(Utiliy.Pk_BankId)"><i class="fa fa-trash"></i></button>*@
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+
+    @using (Html.BeginForm("CommissionSave", "CommissionMaster", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+        <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Add/Update Commission Master</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="row">
+
+                                @Html.HiddenFor(m => m.Pk_CommonId, new { @id = "Pk_CommonId" })
+
+                                <div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Vendor Name</label>
+                                    <input type="text" class="form-control" name="VendorName" id="VendorName">
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Gateway Number</label>
+                                    <input type="text" class="form-control" name="GatewayNumber" id="GatewayNumber">
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Service Provider Name</label>
+                                    <input type="text" class="form-control" name="Serviceprovidername" id="Serviceprovidername">
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Margin</label>
+                                    <input type="text" class="form-control" name="Margin" id="Margin">
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Surcharge</label>
+                                    <input type="text" class="form-control" name="Surcharge" id="Surcharge">
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Min-Surcharge</label>
+                                    <input type="text" class="form-control" name="MinSurcharge" id="MinSurcharge">
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Remuneration/Transaction</label>
+                                    <input type="text" class="form-control" name="RemunerationPerTransaction" id="RemunerationPerTransaction">
+
+
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Returned Part Of Surcharge</label>
+                                    <input type="text" class="form-control" name="Returnedpartofsurcharge" id="Returnedpartofsurcharge">
+
+
+                                </div>
+
+
+
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
+<script>
+    function ResetPopup() {
+        $('#Save').val('Save');
+        $('#Pk_CommonId').val();
+        $('#VendorName').val();
+        $('#GatewayNumber').val();
+        $('#Serviceprovidername').val();
+        $('#Margin').val();
+        $('#Surcharge').val();
+        $('#MinSurcharge').val();
+        $('#RemunerationPerTransaction').val();
+        $('#Returnedpartofsurcharge').val();
+    }
+
+    function OpenPopUp(pk_id, VendorName, GatewayNumber, Serviceprovidername, Margin, Surcharge, MinSurcharge, RemunerationPerTransaction, Returnedpartofsurcharge) {
+        //data - target="#myModal4"
+        // $("#myModal4").modal("show");
+        $('#Save').val('Update');
+        $('#Pk_CommonId').val(pk_id);
+        $('#VendorName').val(VendorName);
+        $('#GatewayNumber').val(GatewayNumber);
+        $('#Serviceprovidername').val(Serviceprovidername);
+        $('#Margin').val(Margin);
+        $('#Surcharge').val(Surcharge);
+        $('#MinSurcharge').val(MinSurcharge);
+        $('#RemunerationPerTransaction').val(RemunerationPerTransaction);
+        $('#Returnedpartofsurcharge').val(Returnedpartofsurcharge);
+    }
+
+    function validate() {
+        //if ($('#Bank').val() == '' || $('#Bank').val() == null || $('#Bank').val() == undefined) {
+        //    $('#Bank').focus();
+        //    return false;
+        //}
+    }
+</script>
+

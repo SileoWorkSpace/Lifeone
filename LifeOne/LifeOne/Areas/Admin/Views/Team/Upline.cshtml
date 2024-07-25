@@ -1,0 +1,246 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MUpline
+@{
+    ViewBag.Title = "Upline";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .alert-warning {
+        background-color: #fcf8e3 !important;
+        border-color: #faebcc !important;
+    }
+</style>
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Upline</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Team</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Upline</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+
+                    @*<button onclick="BackPage();" class="btn btn-success btn-sm float-right"><i class="mdi mdi-arrow-left"></i> Back  </button>*@
+
+                    @*<span>
+                        <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnprint" onclick="printDiv('customers')"><i class="fa fa-print"></i></button>
+                    </span>*@
+                    @*<span>
+                            <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                        </span>*@
+
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        @using (Html.BeginForm("Upline", "Team", FormMethod.Post))
+                        {
+                            <div class="row">
+
+                                <div class="col-lg-4 offset-lg-4">
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <div class="input-group" style="float:left">
+                                            @*<input type="text" name="LoginId" id="LoginId" placeholder="Enter Login Id" class="form-control" >*@
+                                            @Html.TextBoxFor(m => m.LoginId, new { @placeholder = "Enter Login Id", @class = "form-control" })
+                                            @Html.HiddenFor(m => m.LoginId, new { @name = "Hiddenlogin" })
+                                            <button type="submit" class="btn btn-success mr-2" value="Search" id="BtnSearch" onclick="return ValidateSearch();" style="border-radius: 0 5px 5px 0px;"><i class="fa fa-search"></i></button>
+                                            <span id="MemberName" style="color:red"></span>
+                                            <input type="hidden" name="FK_MemId" id="Fk_MemId" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>}
+
+
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th nowrap>S. No.</th>
+                                        <th nowrap>Login Id</th>
+                                        <th nowrap>Member Name</th>
+                                        <th nowrap>Type</th>
+                                        <th nowrap>Level</th>
+
+                                        <th nowrap colspan="2">Team Count <br /> (BID/UID)</th>
+                                        <th nowrap>Self Business</th>
+                                        <th nowrap>Team Business</th>
+                                        <th nowrap>Direct Count</th>
+
+                                        <th nowrap>Total Count</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.MUplineList != null && Model.MUplineList.Count > 0)
+                                    {
+                                        int SNo = 0;
+                                        foreach (var item in Model.MUplineList)
+                                        {
+                                            <tr>
+                                                <td data-title="#SN:">@(SNo = SNo + 1)</td>
+                                                <td data-title="LoginId:">@item.LoginId</td>
+                                                <td data-title="MemberName:">@item.FirstName </td>
+                                                <td data-title="Type:">
+                                                    @if (item.UID == "UID")
+                                                    {
+                                                        <label class="btn btn-sm btn-danger">UID</label>
+                                                    }
+                                                    else
+                                                    {
+                                                        <label class="btn btn-sm btn-success">BID</label>
+                                                    }
+                                                </td>
+                                                <td>@item.PerformanceLevel (@item.SelfBusiness)</td>
+
+                                                <td data-title="TeamCount:" colspan="2"><span>@item.BIDCount</span>/<span>@item.UIDCount</span></td>
+                                                <td>@item.SelfBusiness</td>
+                                                <td>@item.TeamBusiness</td>
+                                                <td>@item.DirectCount</td>
+                                                <td>@item.TotalCount</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @*<tr>
+                                <td colspan="10">No Record Found..</td>
+                            </tr>*@
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                    <footer class="card-footer bg-white p-2">
+                        <div class="d-md-flex align-items-center justify-content-between">
+
+                            @if (Model != null)
+                            {
+                                if (Model.Pager != null)
+                                {
+                                    if (Model.Pager.EndPage > 1)
+                                    {
+                                        <div> <small class="text-muted inline">showing @Model.MUplineList.Count  of @Model.MUplineList[0].TotalRecords items</small> </div>
+                                        <div>
+                                            <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                @if (Model.Pager.CurrentPage > 1)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin/Team/Upline">First</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin/Team/Upline?Page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                                    </li>
+                                                }
+                                                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                {
+                                                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                        <a class="page-link" href="/Admin/Team/Upline?Page=@page">@page</a>
+                                                    </li>
+                                                }
+                                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin/Team/Upline?Page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin/Team/Upline?Page=@(Model.Pager.TotalPages)">Last</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+
+                            }
+
+                        </div>
+                    </footer>
+                  
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container-fluid -->
+
+</div>
+
+<script>
+    function ValidateSearch() {
+       
+        if ($("#LoginId").val().trim() == "" || $("#LoginId").val().trim() == "0") {
+            alert("Please Enter Login ID");
+            $("#LoginId").focus();
+            return false;
+        }
+        //else if ($("#Fk_MemId").val().trim() == "" || $("#Fk_MemId").val().trim() == "0") {
+        //    alert("Please Enter Valid Login ID");
+        //    $("#LoginId").focus();
+        //    return false;
+        //}
+        else {
+            $.ajax({
+                type: 'get',
+                datatype: 'json',
+                contentType: 'application/json;charset=utf-8',
+                url: '/Admin/Team/GetMemberById',
+                data: { LoginId: $("#LoginId").val() },
+                success: function (res) {
+                
+                    if (res.length > 0) {
+                        $("#Fk_MemId").val(res[0].FK_MemId);
+                        $("#LoginId").val(res[0].LoginId);
+                        $("#MemberName").html(res[0].MemberName);
+                    }
+                    else {
+                        $("#LoginId").val("");
+                        $("#Fk_MemId").val("");
+                        $("#MemberName").html("");
+                        alert("No Data Found");
+                    }
+                }
+            });
+        }
+        return true;
+    }
+
+    function GetMemberById() {
+        if ($("#LoginId").val() != "") {
+            $.ajax({
+                type: 'get',
+                datatype: 'json',
+                contentType: 'application/json;charset=utf-8',
+                url: '/Admin/Team/GetMemberById',
+                data: { LoginId: $("#LoginId").val() },
+                success: function (res) {
+                
+                    if (res.length > 0) {
+                        $("#Fk_MemId").val(res[0].FK_MemId);
+                        $("#LoginId").val(res[0].LoginId);
+                        $("#MemberName").html(res[0].MemberName);
+                    }
+                    else {
+                        $("#LoginId").val("");
+                        $("#Fk_MemId").val("");
+                        $("#MemberName").html("");
+                        alert("No Data Found");
+                    }
+                }
+            });
+        }
+
+    }
+</script>

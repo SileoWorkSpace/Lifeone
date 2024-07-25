@@ -1,0 +1,89 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.MLogin
+@{
+    ViewBag.Title = "Login";
+
+}
+<main id="content" class="wrapper layout-page">
+    <div class="page-header" style="background-image: url(/Content/NewAssests/images/page-header/contact-us.jpg) ">
+        <h1 class="page-title font-weight-bold text-capitalize ls-l">Login</h1>
+        <nav class="breadcrumb-nav">
+            <ul class="breadcrumb">
+                <li><a href="/Home/Index"><i class="d-icon-home"></i> <i class="bi bi-chevron-right"></i></a></li>
+                <li>Login</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page-content mt-10">
+        <section class="contact-section my-5">
+            <div class="container">
+                <div class="row no-gutters">
+                    <div class="col-lg-10 mx-auto">
+                        <div class="row no-gutters">
+                            <div class="col-lg-6 mb-15 mb-lg-0 pe-xl-2">
+                                <h3 class="fs-4 mb-5">Log In</h3>
+                                <span class="text-danger">@TempData["Msg"]</span>
+                                @*<form class>*@
+                                @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                                {
+                                    <div class="form-group mb-6">
+                                        <label for="user_login_email" class="visually-hidden">Email address</label>
+                                        <input type="text" class="form-control" id="Loginid" name="Login" placeholder="Login Id">
+                                    </div>
+                                    <div class="form-group mb-6">
+                                        <label for="user_login_password" class="visually-hidden">Password</label>
+                                        <input type="password" class="form-control" id="Password" placeholder="Password" name="Password">
+                                    </div>
+
+                                    @*<a href="/Home/ForgotPassword?_=@Request.QueryString["_"]" class="d-inline-block fs-15 lh-12 mb-7">Forgot your password?</a>*@
+                                    <button class="btn btn-primary btn-sm w-100 mb-7" type="submit">SIGN IN</button>
+                                    @*<button type="submit" class="btn btn-primary w-100 mb-7">Submit</button>*@
+                                    @*<div class="form-check mb-7 d-flex">
+                                            <input type="checkbox" class="form-check-input rounded-0" id="customCheck1" name="remember">
+                                            <label class="form-check-label fs-15 ps-4 text-body-emphasis" for="customCheck1">Keep me signed in.</label>
+                                        </div>*@
+
+                                }
+                                @*</form>*@
+                            </div>
+                            <div class="col-lg-6 ps-lg-6 ps-xl-12">
+                                <h3 class="fs-4 mb-5">New Customer</h3>
+                                <p class="mb-8">
+                                    By creating an account with our store, you will be able to move through the
+                                    checkout process
+                                    faster, store multiple shipping addresses, view and track your orders in your account and
+                                    more.
+                                </p>
+                                <a href="/Home/CustomerRegistration" class="btn btn-sm btn-primary">Register</a>
+                                @*<a href="user-registration.html" class="btn btn-primary">Register</a>*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        </div>
+</main>
+
+@*<script>
+        $(document).ready(function () {
+
+                if ('@ViewBag.UserType' != null && '@ViewBag.UserType' != '') {
+                    if ('@ViewBag.UserType' == "5") {
+
+                        $('#SMSList').show();
+                    }
+                }
+                if ('@TempData["Msg"]' != null && '@TempData["Msg"]' != '') {
+                    swal('', '@TempData["Msg"]', 'warning');
+                }
+        });
+</script>*@
+
+
+
+
+
+
+
+
+

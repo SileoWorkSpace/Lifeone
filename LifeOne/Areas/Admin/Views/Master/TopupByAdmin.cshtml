@@ -1,0 +1,382 @@
+﻿@model LifeOne.Models.AssociateManagement.AssociateEntity.MemberTopup
+@{
+    ViewBag.Title = "TopupByAdmin";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    #alertBoxx {
+        position: relative;
+        z-index: 1;
+    }
+</style>
+<section class="content">
+    @using (Html.BeginForm("TopUpByAdmin", "Master", FormMethod.Post, new { @id = "form1" }))
+    {
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h3 class="text-themecolor">TopUp</h3>
+                @*<ol class="breadcrumb">
+                <li class="breadcrumb-item"> <a href="/Admin-Dashboard">Dashboard</a></li>
+                <li class="breadcrumb-item"> <a href="">Transactions</a></li>
+                <li class="active breadcrumb-item" aria-current="page">TopUp</li></ol>*@
+            </div>
+
+            <div class="psearch">
+                <div class="input-group">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (ViewBag.Alert != null)
+            {
+                <div class="col-md-12" id="alertBoxx">
+
+                    <div class="alert  alert-dismissible fade show" style="background-color:lightgreen;border-color:#faebcc;" role="alert">
+                        <strong> @Html.Raw(ViewBag.Alert)</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
+        <div class="box box-info">
+            <div class="box-body">
+
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-outline-info">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Login Id</label>
+                                            <input type="text" class="form-control clearIniFields" name="LoginId" placeholder="Enter Login Id" id="txtLoginId" required />
+                                            <span id="SpnLogInId" style="color:green"></span>
+                                            <input type="hidden" class="clearIniFields" id="hdnMemId" name="FK_MemId" />
+                                            <input type="hidden" class="clearIniFields" id="hdnTemppermanent" name="TempPermanent" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Package</label>
+                                            @Html.DropDownListFor(m => m.FK_PackageId, new SelectList(ViewBag.ddlPackageList, "Value", "Text"), new { @class = "form-control clearIniFields", @onchange = "getPackageAmount()", @required = "required" })
+                                            <input type="hidden" id="hdnPackageName" name="ProductName" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Package Amount</label>
+                                            <input type="text" class="form-control clearIniFields" placeholder="Enter Package Amount" name="PaidAmount" id="txtPaidAmount" onkeypress="return onlyNos(event,this);" autocomplete="off" required readonly="readonly" />
+                                        </div>
+                                    </div>
+
+                                    @*<div class="col-md-6">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="form-control-placeholder" for="name">Topup Date</label>
+                                                <input type="text" class="form-control" name="TopupDate" id="mdate" required autocomplete="off" />
+                                            </div>
+                                        </div>*@
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Payment Mode</label>
+                                            <select id="ddlPaymentMode" name="PaymentMode" class="form-control " required>
+                                                <option value="0">Select</option>
+                                                <option value="Cash">Cash</option>
+                                                <option value="Cheque">Cheque</option>
+                                                <option value="UPI">UPI</option>
+                                                <option value="DD">DD</option>
+                                                <option value="NEFT">NEFT</option>
+                                                <option value="RTGS">RTGS</option>
+                                                <option value="Free">Free</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" id="dv" style="display:none;">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name" id="changeLabelName">NEFT/RTGS/Check/DD No</label>
+                                            <input type="text" class="form-control clearIniFields" name="ChequeDDNo" id="txtChequeDDNo" onkeypress="return onlyNos(event,this);" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="dv1" style="display:none;">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Bank Name</label>
+                                            <input type="text" class="form-control clearIniFields" name="BankName" id="txtBankName" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Date</label>
+                                            <input type="text" class="datepicker-all form-control clearIniFields" name="ChequeDDDate" id="mdate1" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="display:none;">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Remark</label>
+                                            @Html.TextAreaFor(m => m.TopupRemark, new { @class = "form-control clearIniFields", @maxlength = "500" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="button" name="Save" class="btn btn-fill btn-success" onclick="onValidation()" style="display:@ViewBag.add;" value="Submit" />
+                                        <input type="submit" id="Save" name="Save" class="btn btn-fill btn-success" style="display:none;" value="Submit" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <span id="dbResponse" style="color:red"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    }
+</section>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        Resetfields();
+        $('#txtTopupDate').datepicker({
+            dateFormat: 'dd/mm/yy',
+            changeMonth: true,
+            changeYear: true,
+        });
+
+
+
+        //$('#mdate1').datepicker({
+        //    dateFormat: 'dd/mm/yy',
+        //    changeMonth: true,
+        //    changeYear: true,
+        //});
+
+        $(".datepicker-all").datepicker({
+            maxDate: '0',
+            yearRange: "-100:",
+            showAnim: "slide",
+            dateFormat: "mm-dd-yy",
+            changeMonth: true,
+            changeYear: true,
+        });
+        
+    });
+    function Resetfields() {
+        debugger
+        $('.clearIniFields').val('');
+        $("#ddlPaymentMode").val(0);
+        //$("#FK_PackageId").val(0);
+        $("#txtLoginId").focus();
+        debugger
+    }
+    $("#txtPaidAmount").change(function () {
+        var amount = $("#txtPaidAmount").val();
+        var PMode = $("#ddlPaymentMode").val();
+        if (PMode == "Cash" || PMode == "NEFT" || PMode == "RTGS" || PMode == "Cheque" || PMode == "DD" || PMode == "") {
+            if (parseInt(amount) < 3000) {
+                alert('Amount should not be less than 3000')
+                //$('#alertBox').html(ReturnAlert('warning', 'Amount should not be less than 10000'));
+                $("#txtPaidAmount").val("");
+                $("#txtPaidAmount").focus();
+            }
+            //if (parseInt(amount) > 150000) {
+            //    alert('Amount should not be greater than 150000')
+            //    //$('#alertBox').html(ReturnAlert('warning', 'Amount should not be greater than 150000'));
+            //    $("#txtPaidAmount").val("");
+            //    $("#txtPaidAmount").focus();
+            //}
+        }
+        else {
+            $("#txtPaidAmount").val("0");
+        }
+
+    });
+
+    $("#ddlPaymentMode").change(function () {
+        debugger;
+        var PMode = $("#ddlPaymentMode").val();
+        if (PMode == "Cash" || PMode == "0" || PMode == "Free") {
+            $("#dv").css("display", "none");
+            $("#dv1").css("display", "none");
+            // $("#txtPaidAmount").val("");
+            $("#txtPaidAmount").prop('readonly', false);
+        }
+        else if (PMode == "UPI")
+        {
+            $('#changeLabelName').text('UPI Number');
+            $("#dv").css("display", "block");
+            $("#dv1").css("display", "none");
+            $("#txtPaidAmount").prop('readonly', false);
+        }
+        //else if(PMode == "Free")
+        //{
+        //    $("#dv").css("display", "none");
+        //    $("#dv1").css("display", "none");
+        //    $("#txtPaidAmount").val("0");
+        //    $("#txtPaidAmount").prop('readonly', true);
+        //}
+        else {
+            $('#changeLabelName').text('NEFT/RTGS/Check/DD No');
+            $("#dv").css("display", "block");
+            $("#dv1").css("display", "block");
+            $("#txtPaidAmount").prop('readonly', false);
+        }
+    });
+
+    $("#txtLoginId").change(function () {
+        var loginid = $(this).val();
+        if ($(this).val != "") {
+            $.ajax({
+                type: 'POST',
+                url: '/BuyPackage/GetMemberName',
+                datatype: 'json',
+                data: { LoginId: loginid },
+                success: OnSuccess,
+                error: function (ex) {
+                    alert('Failed to retrive !!' + ex);
+                }
+
+            });
+            function OnSuccess(response) {
+                debugger
+                if (response.Result == "0") {
+
+                    if (response.TempPermanent == "P") {
+                        alert("Member has been already Top-Up");
+                        $("#hdnMemId").val("");
+                        $("#SpnLogInId").html("");
+                        $("#txtLoginId").val("");
+                        return false;
+                    }
+                    else {
+                        $("#hdnMemId").val(response.Fk_MemId);
+                        $("#SpnLogInId").html(response.DisplayName);
+                    }
+
+                }
+                else {
+                    alert('InValid Login Id!!!');
+                    //$('#alertBox').html(ReturnAlert('warning', 'InValid Login Id!!!'));
+                    $("#hdnMemId").val("");
+                    $("#SpnLogInId").html("");
+                    $("#txtLoginId").val("");
+                }
+
+            }
+
+
+
+        }
+    });
+
+    function getPackageAmount() {
+
+        var Pk_PackageID = $('#FK_PackageId').val();
+        var PackageAmt = 0
+        if ($(this).val != "") {
+            $.ajax({
+                type: 'POST',
+                url: '/BuyPackage/GetAmountPackageId',
+                datatype: 'json',
+                data: { Pk_PackageID: Pk_PackageID },
+                success: OnSuccess,
+                error: function (ex) {
+                    alert('Failed to retrive !!' + ex);
+                }
+
+            });
+            function OnSuccess(response) {
+
+                if (response[0].Msg == "1") {
+                    $("#txtPaidAmount").val(response[0].MRP);
+                    $("#txtBV").val(response[0].BV);
+                    $('#hdnPackageName').html(response[0].ProductName);
+
+                }
+                else {
+                    alert('Something went wrong!!!');
+                    $("#txtPaidAmount").val(0);
+                    $('#hdnPackageName').html("");
+                }
+            }
+
+        }
+
+    }
+
+    function onValidation() {
+        if ($('#txtLoginId').val().trim() == "") {
+            alert('Please enter loginid');
+            $('#txtLoginId').focus();
+            return false;
+        }
+        if ($('#FK_PackageId').val() == 0) {
+            alert('Please select package');
+            $('#FK_PackageId').focus();
+            return false;
+        }
+
+        if ($('#txtPaidAmount').val() == 0 || $('#txtPaidAmount').val().trim() == "") {
+            alert('Please enter package amount');
+            $('#txtPaidAmount').focus();
+            return false;
+        }
+
+        if ($('#ddlPaymentMode').val() == 0) {
+            alert('Please select payment mode');
+            $('#ddlPaymentMode').focus();
+            return false;
+        }
+
+        if ($('#ddlPaymentMode').val() != "Cash" && $('#ddlPaymentMode').val() != "Free") {
+            if ($('#txtChequeDDNo').val().trim() == "") {
+                alert('Please enter Cheque/DD/RTGS/NEFT No.');
+                $('#txtChequeDDNo').focus();
+                return false;
+            }
+            if ($('#txtBankName').val().trim() == "") {
+                alert('Please enter BankName');
+                $('#txtBankName').focus();
+                return false;
+            }
+            if ($('#mdate1').val().trim() == "") {
+                alert('Please enter Date');
+                $('#mdate1').focus();
+                return false;
+            }
+            $('#Save').trigger('click');
+            return false;
+        }
+        $('#Save').trigger('click');
+    }
+</script>

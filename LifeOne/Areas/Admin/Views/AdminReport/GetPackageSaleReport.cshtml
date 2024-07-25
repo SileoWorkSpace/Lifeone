@@ -1,0 +1,212 @@
+﻿@model LifeOne.Models.Reports
+
+@{
+    ViewBag.Title = "PackageSaleReport";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="~/Content/dist/js/CommonJS.js?1.0"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<div class="container-fluid">
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Package Sales Report</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Reports</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Package Sales Report</li>
+                </ol>
+            </nav>*@
+        </div>
+      
+    </div>
+
+
+
+
+    <div id="no-more-tables">
+        <form id="form1" method="post">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+
+
+                            <div class="table-responsive" id="customers">
+                                <table class="table mb-0" id="tblCustomers">
+                                    
+                                    <thead>
+                                        <tr>
+
+                                            <th>Package Name</th>
+                                            <th style="text-align:right">Business Amount</th>
+                                            <th style="text-align:right">Business BV</th>
+                                            <th style="text-align:right">Dis Amount</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            decimal TotalBusinessAmount = 0;
+                                            decimal TotalBusinessBV = 0;
+                                            decimal TotalDisAmount = 0;
+                                        }
+                                        @if (Model.dtPaidActivation != null && Model.dtPaidActivation.Rows.Count > 0)
+                                        {
+
+                                            for (var i = 0; i < Model.dtPaidActivation.Rows.Count; i++)
+                                            {
+                                                TotalBusinessAmount += Convert.ToDecimal(@Model.dtPaidActivation.Rows[i]["BusinessAmount"]);
+                                                TotalBusinessBV += Convert.ToDecimal(@Model.dtPaidActivation.Rows[i]["BusinessBV"]);
+                                                TotalDisAmount += Convert.ToDecimal(@Model.dtPaidActivation.Rows[i]["DisAmount"]);
+
+                                        <tr>
+
+                                            <td style="width:312px;">@Model.dtPaidActivation.Rows[i]["PackageName"].ToString()</td>
+                                            <td style="text-align:right">@Model.dtPaidActivation.Rows[i]["BusinessAmount"].ToString()</td>
+                                            <td style="text-align:right">@Model.dtPaidActivation.Rows[i]["BusinessBV"].ToString()</td>
+                                            <td style="text-align:right">@Model.dtPaidActivation.Rows[i]["DisAmount"].ToString()</td>
+
+                                        </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td><b>Total </b></td>
+                                            <td style="text-align:right;"><b>@TotalBusinessAmount</b></td>
+                                            <td style="text-align:right;"><b>@TotalBusinessBV</b></td>
+                                            <td><b>@TotalDisAmount</b></td>
+
+
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                            <div class="table-responsive" id="customers">
+                                <table class="table mb-0" id="tblCustomers">
+                                    <thead>
+                                        <tr>
+                                            <th>Package Name</th>
+                                            <th style="text-align:right">Business Amount</th>
+                                            <th style="text-align:right">Business BV</th>
+                                            <th style="text-align:right">Dis Amount</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{
+                                            decimal TotalBusinessAmountFree = 0;
+                                            decimal TotalBusinessBVFree = 0;
+                                            decimal TotalDisAmountFree = 0;
+                                        }
+                                        @if (Model.dtFreeActivation != null && Model.dtFreeActivation.Rows.Count > 0)
+                                        {
+
+                                            for (var i = 0; i < Model.dtFreeActivation.Rows.Count; i++)
+                                            {
+                                                TotalBusinessAmountFree += Convert.ToDecimal(@Model.dtFreeActivation.Rows[i]["BusinessAmount"]);
+                                                TotalBusinessBVFree += Convert.ToDecimal(@Model.dtFreeActivation.Rows[i]["BusinessBV"]);
+                                                TotalDisAmountFree += Convert.ToDecimal(@Model.dtFreeActivation.Rows[i]["DisAmount"]);
+
+
+                                        <tr>
+
+                                            <td style="width:312px;">@Model.dtFreeActivation.Rows[i]["PackageName"].ToString()</td>
+                                            <td style="text-align:right">@Model.dtFreeActivation.Rows[i]["BusinessAmount"].ToString()</td>
+                                            <td style="text-align:right">@Model.dtFreeActivation.Rows[i]["BusinessBV"].ToString()</td>
+                                            <td style="text-align:right">@Model.dtFreeActivation.Rows[i]["DisAmount"].ToString()</td>
+
+                                        </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td><b>Total </b></td>
+                                            <td style="text-align:right;"><b>@TotalBusinessAmountFree</b></td>
+                                            <td style="text-align:right;"><b>@TotalBusinessBVFree</b></td>
+                                            <td><b>@TotalDisAmountFree</b></td>
+
+
+
+                                        </tr>
+                                    </tfoot>
+                                </table>
+
+                            </div>
+                        </div>
+                        <footer class="card-footer bg-white p-2">
+                          
+                        </footer>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+
+        </form>
+    </div>
+
+</div>
+<div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Order Details</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped mb-0" id="tableOrderDetail">
+                    <thead>
+                        <tr>
+                            
+                            <th>Package Name</th>
+                            <th>Business Amount</th>
+                            <th>Business BV</th>
+                            <th>Dis Amount</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                    <tfoot id="tablefoot">
+
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div id="tblpdff" style="font-size:50px;">
+
+</div>
+<script>
+    function fCallPaging(val) {
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+
+</script>

@@ -1,0 +1,123 @@
+﻿@model SGCareWeb.Models.AdminManagement.AEntity.MAdminProfile
+@using SGCareWeb.Models.Manager;
+@{
+    ViewBag.Title = "Associate Change Profile Picture";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+<div class="content">
+    <div class="content-wrapper-before"></div>
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0 text-white">Change Profile Picture</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">My Account</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Change Profile Picture</li>
+                </ol>
+            </nav>
+        </div>
+
+    </div>
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-3"></div> 
+            <div class="card">
+                <div class="card-body">
+                    <div class="col-md-12 mt-10">
+                        @using (Html.BeginForm("AssociateChangeProfilePicture", "AssociateViewProfile", FormMethod.Post))
+                        {
+
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        @*<img src="@Model.OldPicture" id="imagePreview" class="rounded-circle mt-3 ml-4 img-thumbnail avatar-xl" style="height:120px;width:120px;">*@
+                                        <img id="imagePreview" src="@SessionManager.ProfilePic" width="120" height="120" />
+                                    </div>
+                                </div>
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <br />
+                                        <label>Upload New Image<span style="color:red;">*</span></label>
+                                        @Html.TextBoxFor(m => m.file, new { @type = "file", @class = "input-text form-control", @onchange = "ShowImagePreview(this)" })
+
+                                    </div>
+
+                                </div>
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <br />
+                                        <br />
+                                        <input type="Submit" value="Update" name="Update" class="btn btn-success" onclick="return UploadFile()" id="BtnChangePassword">
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        }
+                    </div>
+                        <div class="col-md-3"></div>
+                    </div>
+                </div>
+                <!-- container-fluid -->
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        function UploadFile() {
+            debugger;
+            var data = new FormData();
+            var files = $("#file").get(0).files;
+            if (files.length > 0) {
+                data.append("file", files[0]);
+            }
+            else {
+                alert("Please select file to upload.");
+                $("#file").focus();
+                return false;
+            }
+            var extension = $("#file").val().split('.').pop().toUpperCase();
+            if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
+                alert("Invalid image file format.Only jpg,jpeg,png,bmp files are allow");
+                return false;
+            }
+            $.ajax({
+                url: '/Associate/AssociateViewProfile/AssociateUploadfile',
+                type: "POST",
+                processData: false,
+                data: data,
+                dataType: 'json',
+                contentType: false,
+                success: function (response) {
+
+                    if (response.Flag == 1) {
+                        alert(response.Msg);
+                    }
+                    else {
+                        alert(response.Msg);
+                    }
+                    setTimeout(
+                        window.location.reload()
+                        , 50);
+                }
+            });
+        }
+        function ShowImagePreview(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('#imagePreview').prop('src', e.target.result);
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+
+    </script>
+
