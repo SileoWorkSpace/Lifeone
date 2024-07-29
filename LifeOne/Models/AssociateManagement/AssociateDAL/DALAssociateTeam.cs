@@ -102,9 +102,9 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                     new SqlParameter("@Fk_memId",Fk_MemId),
                     new SqlParameter("@Search",string.IsNullOrEmpty(SearchLoginId)?null:SearchLoginId),
                     new SqlParameter("@Leg",string.IsNullOrEmpty(Leg)?null:Leg),
-                 
-                    new SqlParameter("@Pk_PackageID",string.IsNullOrEmpty(Pk_PackageID)?null:Pk_PackageID),
-
+                    //new SqlParameter("@JoiningDate",string.IsNullOrEmpty(JoiningDate)?null:JoiningDate),                 
+                    new SqlParameter("@Pk_PackageID",Pk_PackageID=="0"?null:Pk_PackageID),
+                    new SqlParameter("@Status",string.IsNullOrEmpty(Status)?null:Status),                   
                 };
                 DataSet ds = DBHelper.ExecuteQuery("AssociateDownlineTeam", param);
 

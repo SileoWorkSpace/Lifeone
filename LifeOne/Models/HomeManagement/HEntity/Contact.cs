@@ -40,9 +40,7 @@ namespace LifeOne.Models.HomeManagement.HEntity
                 throw ex;
             }
             return ds;
-
-
-        }
+        }      
     }
     public class ContactResponse
     {

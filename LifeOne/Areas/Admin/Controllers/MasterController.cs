@@ -1741,6 +1741,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 }
             }
             return Json(list);
-        }
+        }      
     }
 }

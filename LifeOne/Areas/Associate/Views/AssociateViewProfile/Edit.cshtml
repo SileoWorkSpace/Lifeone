@@ -168,7 +168,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="row form-group">
-                                                    <label class="col-md-3 control-label">Date of Birth <span class="text-danger">*</span></label>
+                                                    <label class="col-md-3 control-label">Date of Birth @*<span class="text-danger">*</span>*@</label>
                                                     <div class="col-md-4">
                                                         @Html.TextBoxFor(m => m.DOB, new { @class = "form-control selectdate", @readonly = "readonly" })
 
@@ -267,15 +267,15 @@
 
                                                         <div class="col-md-5"><em class="font11">Aadhar No should not be already registered for any other User ID of LifeOne.</em></div>
                                                     </div>
-                                                    <div class="row form-group">
-                                                        <label class="col-md-3 control-label">Upload Aadhar Photo@*<span class="text-danger">*</span>*@ </label>
+                                                    <!--<div class="row form-group">
+                                                        <label class="col-md-3 control-label">Upload Aadhar Photo-->@*<span class="text-danger">*</span>*@ <!--</label>
                                                         <div class="col-md-4">
                                                             @Html.TextBoxFor(m => m.CustAadharImage, new { @type = "file", @onchange = "UploadFile(this,'AadharImages')" })
                                                             @Html.HiddenFor(m => m.CustAadharImage, new { @Id = "HdnCustAadharImage" })
                                                             <span id="spanCustAadharImage"><a href="#" onclick="ShowAllImage('@Model.CustAadharImage')"><span id="CustAadharImagestatusval"></span></a></span>
                                                         </div>
                                                         <div class="col-md-5"><em class="font11"></em></div>
-                                                    </div>
+                                                    </div>-->
                                                     <div class="row form-group">
                                                         <label class="col-md-3 control-label">PAN No @*<span class="text-danger">*</span>*@</label>
                                                         <div class="col-md-4">
@@ -300,7 +300,7 @@
                                                 <div class="row">
                                                     <div class="col-md-12">
                                                         <div class="row form-group">
-                                                            <label class="col-md-3 control-label">Address Line 1 <span class="text-danger">*</span></label>
+                                                            <label class="col-md-3 control-label">Address Line 1 @*<span class="text-danger">*</span>*@</label>
                                                             <div class="col-md-4">
                                                                 @Html.TextBoxFor(m => m.Address1, new { @class = "form-control" })
                                                             </div>
@@ -487,13 +487,14 @@
 
         }
 
+
     });
 
         $('.selectdate').datepicker({});
      var ArrFamilyDetails = [];
     $(document).ready(function () {
         //hide Marrital
-        debugger
+        debugger;
         $("input[value='@Model.AccountPurpose']").attr('checked', true);
         $("input[value='@Model.RegType']").attr('checked', true);
         $("input[value='@Model.Gender']").attr('checked', true);
@@ -512,7 +513,8 @@
             $("#Zone").text('@Model.Zone');
             $("#spanprofilepic").css("display", "block");
             $("#spanprofilepic").css("color", "green");
-            $("#ProfileImagesstatusval").text('Uploaded');
+           // $("#ProfileImagesstatusval").text('Upload');
+                                                    
             if (@Model.lstChild.Count> 0) {
 
                 //table start
@@ -697,18 +699,18 @@
                 status = true;
             }
           
-            if (DOB == '' || DOB == undefined || DOB == null) {
-                swal('', "Please enter DOB", 'warning');
-                status = false; CompanyId
-                showTab(savetab - 1);
-                savetab = 0;
-                currentTab = 0;
-                return false;
-            }
-            else {
-                status = true;
+            //if (DOB == '' || DOB == undefined || DOB == null) {
+            //    swal('', "Please enter DOB", 'warning');
+            //    status = false; CompanyId
+            //    showTab(savetab - 1);
+            //    savetab = 0;
+            //    currentTab = 0;
+            //    return false;
+            //}
+            //else {
+            //    status = true;
 
-            }
+            //}
 
             
             //if (MaritalStatus == '' || MaritalStatus == undefined || MaritalStatus == null) {
@@ -1355,6 +1357,7 @@
                         }
                         else if (Id == "profilepic") {
                             $("#Hdnprofilepic").val(response.Path);
+                            $("#ProfileImagesstatusval").text('Uploaded');
                         }
                     }
 

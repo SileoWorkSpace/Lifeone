@@ -2062,8 +2062,32 @@ namespace LifeOne.Controllers
 
         public ActionResult TermsandConditions()
         {
-            return View();
+            TermsCondition obj = new TermsCondition();
+            try
+            {
+                List<TermsCondition> lstTermsCondition1 = new List<TermsCondition>();
+                DataSet ds = obj.getTermsandCondition();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        TermsCondition lstTermsCondition = new TermsCondition();
+                        lstTermsCondition.TermsandCondition = ds.Tables[0].Rows[i]["TermsandCondition"].ToString();
+                        lstTermsCondition1.Add(lstTermsCondition);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(lstTermsCondition1);
+                    obj.dtDetails = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+            return View(obj);
         }
+
         public ActionResult MDMessage()
         {
             return View();
@@ -2188,6 +2212,14 @@ namespace LifeOne.Controllers
 
         }
         public ActionResult CmdDesk()
+        {
+            return View();
+        }
+        public ActionResult ImageGallery()
+        {
+            return View();
+        }
+        public ActionResult Video()
         {
             return View();
         }

@@ -20,8 +20,9 @@
     <link href="~/Content/admin-assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     @*<link href="~/Content/admin-assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />*@
     <link href="~/Content/admin-assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    
 
-
+    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
     <style>
         .topbar-nav .metismenu li:hover ul.nav-second-level.mm-collapse {
             display: block;
@@ -108,7 +109,7 @@
     <script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
     <script src="~/Content/dist/js/CommonJS.js?1.0"></script>
 
-
+   
 
     @if (Request.RawUrl != "/Agriculture-Master" && Request.RawUrl != "/OrderReport")
     {
@@ -230,7 +231,10 @@
                                         {
                                             <li><a href="/Admin-ChangePopup">Change Website Pop-up</a></li>
                                         }
-
+                                        @if (PermissionManager.IsViewPermit("Upload Terms and Condition"))
+                                        {
+                                            <li><a href="/UploadTermsandConditionList">Upload Terms & Condition</a></li>
+                                        }
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
         {
             <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
@@ -257,6 +261,7 @@
                                         {
                                             <li><a href="/Role-Master-List">Role Master</a></li>
                                         }
+
                                         <li>
                                             <a href="javascript: void(0);" aria-expanded="false">
                                                 User Master
@@ -522,8 +527,8 @@
                                         {
                                             <li><a href="/CancelInvoicRequest">Cancel Invoice Report</a></li>
                                         }
-                                        
-                                       
+
+
 
 
 
@@ -698,9 +703,9 @@
                                                     <li><a href="/LifeTimeReward">Lifetime Reward</a></li>
                                                 }
                                                 @*@if (PermissionManager.IsViewPermit("Premium Club Direct Seller"))
-                {
-                    <li><a href="/PremiumClubMember">Premium Club Direct Seller</a></li>
-                }*@
+                                                    {
+                                                        <li><a href="/PremiumClubMember">Premium Club Direct Seller</a></li>
+                                                    }*@
                                                 @if (PermissionManager.IsViewPermit("Premium Club Qualifier"))
                                                 {
                                                     <li><a href="/PremiumClubQualifier">Premium Club Qualifier</a></li>
@@ -1011,6 +1016,7 @@
     <!-- App js -->
     <script src="~/Content/admin-assets/js/app.min.js"></script>
     @*<script src="~/Content/dist/js/Table_No_Data.js?1.0"></script>*@
+   
     <script>
         $(document).ready(function () {
 
