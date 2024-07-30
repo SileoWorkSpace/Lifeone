@@ -24,73 +24,14 @@
                     {
                         if (Model.dtDetails != null)
                         {
-                            <h2 class="mb-8">About Glowing</h2>
+                            @*<h2 class="mb-8">About Glowing</h2>*@
                             for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
                             {
                                 <div class="row">
                                     <div class="col-lg-12 px-xxl-18 mt-12 mt-lg-0" style="text-align:justify;">
                                         <p>
-                                            @Model.dtDetails.Rows[i]["TermsandCondition"].ToString()
-                                            @*Lifeone Wellness Pvt Ltd Established In 2024 With An Impact Full
-                                    Provison Of Health, Wealth Happiness. Today With Immense
-                                    Inescapable Response Of Our Team, We Have Been Exploding As One Of
-                                    The Successfully Direct Selling Companies In India.*@
-                                        </p>
-                                        @*<p>
-                                    Lifeone Wellness Working With Robust Network Of Corporate
-                                    Magnificent Service Product With Spectacular Packaging In Budget
-                                    Friendly Pricing Top Of The Line Health Benefits For Its Allegiance
-                                    Customer With A Remarkable Rewarding Business Plan Band Together
-                                    With World Class Training Programme.
-                                </p>
-                                <p>
-                                    LIFEONE WELLNESS Onset In 2024 From Lucknow (The Constantinople Of
-                                    India), With A Determination To Own Progressive Quest To Expand Its
-                                    Operational Base Across India.
-                                </p>
-                                <p>
-                                    Lifeone Wellness Lifeone Deliver Premium Wellness Products With
-                                    Authenticate Ingredients At An Affordable Price That Would Give
-                                    Desired Health Results For Its Valued Customers.
-                                </p>
-                                <p>
-                                    Swiftly, Lifeone Wellness Is Coming Out As Successful In Gaining People s
-                                    Trust As Its Products Were Highly Appreciated Direct Selling Is A
-                                    Strikingly Fair, Democratic, Socially Responsible System Of Generating
-                                    Wealth. It s About Fulfilling People s Needs, Dreams Aspirations.
-                                </p>
-                                <p>
-                                    Lifeone Wellness Emphasizes Strongly In Building The Well Being Of It s
-                                    Distributors, Customers, Partners Staff. Products, Platform, People’s,
-                                    Plan The Culture Of Lifeone Wellness Spirals From The Core Values
-                                    Solidarity Of Our Founders In Connecting People On A Heart To Heart
-                                    Level. As A Result Family Of Distributors, Customers, Partners Staff
-                                    Experience Rewarding Relationships Based On Mutual Respect, Care,
-                                    Trust Love.
-                                </p>
-                                <p>
-                                    Everyone Who Wants To Be An Entrepreneur Should Take A Look At
-                                    Direct Selling Business. “Some Of The Biggest Fortune 500 Companies,
-                                    Such As Citibank, Avon, Levis Smith Barney, Distribute Their Products
-                                    Through A Direct Sales System.”
-                                </p>
-                                <p>
-                                    Lifeone Believe That Building A Business Alone Is Not About You, Its
-                                    About Other People, Its About Your Team, Your Customers, Your
-                                    Mentor How Well You Can Learn Apply From Them. Lifeone With An
-                                    Excellent Business Opportunity That Has Multiple Wow – Factors
-                                    Profoundly Committed To Continue Launching Innovative value For
-                                    Money On An Ongoing Basis Reach Out To Every Household Across
-                                    India.
-                                </p>
-                                <p>
-                                    Come Join Hands To Take Forward Our Corporate Mission
-                                    Experience The Bliss Of Limitless Personal Fulfilment Professional
-                                    Accomplishments With Time Financial Freedom.
-                                </p>
-                                <p>
-                                    Let Us Create A Unceasing Consumer Revolution In India.
-                                </p>*@
+                                            @Html.Raw(Model.dtDetails.Rows[i]["TermsandCondition"].ToString())
+                                        </p>                                       
                                     </div>
                                 </div>
                             }

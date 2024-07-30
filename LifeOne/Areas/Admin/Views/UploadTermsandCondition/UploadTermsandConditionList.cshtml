@@ -37,13 +37,10 @@
             <h4 class="mb-1 mt-0">Upload Terms & Condition</h4>
         </div>
         <div class="pbutton">
-            <div class="right text-right">
-                @if (PermissionManager.IsActionPermit("Upload Terms and Condition", ViewOptions.FormSave))
-                {
+            <div class="right text-right">              
                     <a href="/UploadTermsandCondition" id="btnAdd" class="btn btn-success btn-sm">
                         <i class="fa fa-plus" aria-hidden="true"></i> Add New
-                    </a>
-                }
+                    </a>                
             </div>
         </div>
     </div>
@@ -77,21 +74,14 @@
                                     {
                                         <tr>
                                             <td data-title="#Sn">@count</td>
-                                            <td data-title="News Heading">@item.TermsandCondition</td>                                         
-                                            <td data-title="Action">
-
-                                                @if (PermissionManager.IsActionPermit("Product Master", ViewOptions.FormUpdate))
-                                                {
+                                            <td data-title="News Heading">@Html.Raw(item.TermsandCondition)</td>                                         
+                                            <td data-title="Action">                                               
                                                     <a href="/UploadTermsandCondition?id=@item.Pk_Id"class="btn btn-primary btn-sm" style="display:@ViewBag.edit;">
                                                         <i class="fa fa-edit"></i>
                                                     </a>
-                                                }
-                                                @if (PermissionManager.IsActionPermit("Product Master", ViewOptions.FormDelete))
-                                                {
-                                                    <a href="/Admin/UploadTermsandCondition/TermsandConditionDelete?id=@item.Pk_Id" id="btnDelete" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to delete this record?')" ToolTip="Delete" style="display:@ViewBag.delete;">
+                                                <a href="/Admin/UploadTermsandCondition/TermsandConditionDelete?id=@item.Pk_Id" id="btnDelete" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to delete this record?')" ToolTip="Delete" style="display:@ViewBag.delete;">
                                                         <i class="fa fa-trash"></i>
-                                                    </a>
-                                                }
+                                                    </a>                                                
                                             </td>
                                         </tr>
                                         count++;

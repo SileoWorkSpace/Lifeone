@@ -37,10 +37,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 obj.Pk_Id = id;
                 try
                 {
-                    obj = _objService.TermsConditionEditService(obj);
-
-                    //obj.TermsandCondition = obj.Rows[0]["TermsandCondition"].ToString();                    
-
+                    obj = _objService.TermsConditionEditService(obj);                                  
                 }
                 catch (Exception)
                 {
@@ -63,17 +60,14 @@ namespace LifeOne.Areas.Admin.Controllers
                 _result = _objService.SaveTermsConditionService(model);
                 if (_result != null)
                 {
-
                     TempData["code"] = _result.Flag;
                     TempData["msg"] = _result.Msg;
                 }
-
                 else
                 {
                     TempData["code"] = "0";
                     TempData["msg"] = "Can not process the request";
                 }
-
             }
             catch (Exception)
             {
@@ -88,13 +82,11 @@ namespace LifeOne.Areas.Admin.Controllers
             List<AdminTermsCondition> objlst = new List<AdminTermsCondition>();
             try
             {
-
                 objlst = _objService.GetTermsandCondition(obj);
                 if (objlst != null)
                 {
                     obj.TermsConditionList = objlst;
                 }
-
             }
             catch (Exception)
             {
@@ -125,7 +117,6 @@ namespace LifeOne.Areas.Admin.Controllers
                     TempData["code"] = "0";
                     TempData["msg"] = "Can not process the request";
                 }
-
             }
             catch (Exception)
             {
@@ -133,10 +124,6 @@ namespace LifeOne.Areas.Admin.Controllers
             }
 
             return Redirect("/UploadTermsandConditionList");
-
         }
-
-
-
     }
 }

@@ -267,15 +267,15 @@
 
                                                         <div class="col-md-5"><em class="font11">Aadhar No should not be already registered for any other User ID of LifeOne.</em></div>
                                                     </div>
-                                                    <!--<div class="row form-group">
-                                                        <label class="col-md-3 control-label">Upload Aadhar Photo-->@*<span class="text-danger">*</span>*@ <!--</label>
+                                                    @*<div class="row form-group">
+                                                        <label class="col-md-3 control-label">Upload Aadhar Photo<span class="text-danger">*</span> </label>
                                                         <div class="col-md-4">
                                                             @Html.TextBoxFor(m => m.CustAadharImage, new { @type = "file", @onchange = "UploadFile(this,'AadharImages')" })
                                                             @Html.HiddenFor(m => m.CustAadharImage, new { @Id = "HdnCustAadharImage" })
                                                             <span id="spanCustAadharImage"><a href="#" onclick="ShowAllImage('@Model.CustAadharImage')"><span id="CustAadharImagestatusval"></span></a></span>
                                                         </div>
                                                         <div class="col-md-5"><em class="font11"></em></div>
-                                                    </div>-->
+                                                    </div>*@
                                                     <div class="row form-group">
                                                         <label class="col-md-3 control-label">PAN No @*<span class="text-danger">*</span>*@</label>
                                                         <div class="col-md-4">
@@ -512,9 +512,8 @@
             $("#CityID option:selected").text('@Model.DistrictName');
             $("#Zone").text('@Model.Zone');
             $("#spanprofilepic").css("display", "block");
-            $("#spanprofilepic").css("color", "green");
-           // $("#ProfileImagesstatusval").text('Upload');
-                                                    
+            $("#spanprofilepic").css("color", "green");            
+            $("#ProfileImagesstatusval").text('Upload');                                                                          
             if (@Model.lstChild.Count> 0) {
 
                 //table start
@@ -573,8 +572,8 @@
      }
     function ShowProfileImage(path) { 
         debugger
-        $("#allProfileImage").attr('src', path.replace("~", ""));        
-        $("#myModal1").modal('show');
+        $("#allProfileImage").attr('src', path.replace("~", ""));                 
+        $("#myModal1").modal('show');    
     }
 </script>
 <script>
@@ -1356,8 +1355,8 @@
                             $("#HdnChildAadharImage").val(response.Path);
                         }
                         else if (Id == "profilepic") {
-                            $("#Hdnprofilepic").val(response.Path);
-                            $("#ProfileImagesstatusval").text('Uploaded');
+                            $("#Hdnprofilepic").val(response.Path);                           
+                            //$("#ProfileImagesstatusval").val(Update);
                         }
                     }
 

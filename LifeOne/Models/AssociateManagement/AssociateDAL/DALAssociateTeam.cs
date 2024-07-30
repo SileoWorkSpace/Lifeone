@@ -39,7 +39,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                     new SqlParameter("@Fk_memId",Fk_MemId),
                     new SqlParameter("@SearchLoginId",string.IsNullOrEmpty(SearchLoginId)?null:SearchLoginId),
                     new SqlParameter("@Status",string.IsNullOrEmpty(Status)?null:Status),
-                    new SqlParameter("@JoiningDate",string.IsNullOrEmpty(JoiningDate)?null:JoiningDate)
+                    //new SqlParameter("@JoiningDate",string.IsNullOrEmpty(JoiningDate)?null:JoiningDate)
 
                 };
                 DataSet ds = DBHelper.ExecuteQuery("AssociateDirectTeam", param);
@@ -129,12 +129,9 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                             SponsorName = dr["SponsorName"].ToString(),
                             Status=dr["ActiveStatus"].ToString()
                             
-
                         });
 
-
                     }
-
                 }
                 return objlist;
             }
@@ -221,8 +218,6 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                     }
 
                 }
-
-
                 //string _qury = "AssociateDetails @Fk_MemId='" + obj.Fk_memId + "',@Status=" + obj.Status + "";
                 //List<DistributorDetails> _iresult = DBHelperDapper.DAGetDetailsInList<DistributorDetails>(_qury).ToList();
                 return _iresult;

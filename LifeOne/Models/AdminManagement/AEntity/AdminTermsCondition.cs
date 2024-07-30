@@ -4,6 +4,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace LifeOne.Models.AdminManagement.AEntity
 {
@@ -11,6 +12,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
     public class AdminTermsCondition
     {
         public string Pk_Id { get; set; }
+        [AllowHtml]
         public string TermsandCondition { get; set; }
         public long CreatedBy { get; set; }
         public List<AdminTermsCondition> TermsConditionList { get; set; }        

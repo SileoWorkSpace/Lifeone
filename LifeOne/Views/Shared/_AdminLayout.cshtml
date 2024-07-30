@@ -20,9 +20,10 @@
     <link href="~/Content/admin-assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     @*<link href="~/Content/admin-assets/css/app-dark.min.css" rel="stylesheet" type="text/css" />*@
     <link href="~/Content/admin-assets/css/app.min.css" rel="stylesheet" type="text/css" />
-    
 
-    <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+    <link href="~/Content/summernote/summernote/summernote-bs4.min.css" rel="stylesheet" />   
+
+    @*<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">*@
     <style>
         .topbar-nav .metismenu li:hover ul.nav-second-level.mm-collapse {
             display: block;
@@ -236,14 +237,14 @@
                                             <li><a href="/UploadTermsandConditionList">Upload Terms & Condition</a></li>
                                         }
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
-        {
-            <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
-        }
+                                            {
+                                                <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
+                                            }
 
-        @if (PermissionManager.IsViewPermit("Bonanza Detail"))
-        {
-            <li><a href="/Admin-BonanzaDetail">Bonanza Details Master</a></li>
-        }*@
+                                            @if (PermissionManager.IsViewPermit("Bonanza Detail"))
+                                            {
+                                                <li><a href="/Admin-BonanzaDetail">Bonanza Details Master</a></li>
+                                            }*@
 
 
 
@@ -254,9 +255,9 @@
 
 
                                         @*@if (PermissionManager.IsViewPermit("Offer Date Master"))
-        {
-            <li><a href="/GetOfferDateMaster">Offer Date Master</a></li>
-        }*@
+                                            {
+                                                <li><a href="/GetOfferDateMaster">Offer Date Master</a></li>
+                                            }*@
                                         @if (PermissionManager.IsViewPermit("Role Master"))
                                         {
                                             <li><a href="/Role-Master-List">Role Master</a></li>
@@ -284,8 +285,8 @@
                                             </ul>
                                         </li>
                                         @* <li>
-                                    <a href="javascript: void(0);" aria-expanded="false">Users<span class="menu-arrow"></span> </a>
-                                    <ul class="nav-second-level" aria-expanded="false">
+                                                                        <a href="javascript: void(0);" aria-expanded="false">Users<span class="menu-arrow"></span> </a>
+                                                                        <ul class="nav-second-level" aria-expanded="false">
 
 
 
@@ -296,24 +297,24 @@
 
 
 
-                                       @if (PermissionManager.IsViewPermit("Employee Registration"))
-        {
-            <li><a href="/Employee-Registration">Add Employees</a></li>
-        }*@
+                                                                           @if (PermissionManager.IsViewPermit("Employee Registration"))
+                                            {
+                                                <li><a href="/Employee-Registration">Add Employees</a></li>
+                                            }*@
                                         @*@if (PermissionManager.IsViewPermit("Role Master"))
-        {
-            <li><a href="/Role-Master-List">Role Master</a></li>
-        }*@
+                                            {
+                                                <li><a href="/Role-Master-List">Role Master</a></li>
+                                            }*@
                                         @*@if (PermissionManager.IsViewPermit("Form Type"))
-        {
-            <li><a href="/Form-Type-List">Form Type</a></li>
-        }
-        @if (PermissionManager.IsViewPermit("Form Master"))
-        {
-            <li><a href="/Form-Master-List">Form Master</a></li>
-        }
-                                    </ul>
-                                        </li>*@
+                                            {
+                                                <li><a href="/Form-Type-List">Form Type</a></li>
+                                            }
+                                            @if (PermissionManager.IsViewPermit("Form Master"))
+                                            {
+                                                <li><a href="/Form-Master-List">Form Master</a></li>
+                                            }
+                                                                        </ul>
+                                                                            </li>*@
 
                                     </ul>
                                 </li>
@@ -1016,6 +1017,9 @@
     <!-- App js -->
     <script src="~/Content/admin-assets/js/app.min.js"></script>
     @*<script src="~/Content/dist/js/Table_No_Data.js?1.0"></script>*@
+
+    @*<script src="~/Content/assests/js/jquery.min.js"></script>*@
+    <script src="~/Content/summernote/summernote/summernote-bs4.min.js"></script>
    
     <script>
         $(document).ready(function () {
@@ -1045,13 +1049,7 @@
             window.location.reload();
         }
 
-
-
-
     </script>
     @RenderSection("BODY", false)
-
-
-
 </body>
 </html>

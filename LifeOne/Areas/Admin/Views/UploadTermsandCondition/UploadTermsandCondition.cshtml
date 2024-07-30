@@ -4,7 +4,6 @@
     ViewBag.Title = "UploadTermsandCondition";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-<link href="~/Content/summernote/summernote/summernote-bs4.min.css" rel="stylesheet" />
 
 @{
     string msg = (string)TempData["msg"];
@@ -34,17 +33,16 @@
         </div>
         <div class="pbutton">
             <div class="right text-right">
-                @if (PermissionManager.IsActionPermit("Upload Termsand Condition", ViewOptions.FormSave))
-                {
+              
                     <a href="/UploadTermsandConditionList" id="btnAdd" class="btn btn-success btn-sm">
                         View List
                     </a>
-                }
+                
             </div>
         </div>
     </div>
 
-    @using (Html.BeginForm("UploadTermsandConditionSave", "UploadTermsandCondition", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("UploadTermsandConditionSave", "UploadTermsandCondition", FormMethod.Post))
     {
         <div id="no-more-tables">
             <div class="row">
@@ -56,7 +54,7 @@
                                     <div class="alert alert-warning" style="color:#727272 !important">
                                         <div class="row">
                                             <div class="card-body" id="TextBoxDis">
-                                                @Html.TextAreaFor(m => m.TermsandCondition, new { @class = "form-control", @id = "summernote" })
+                                                @Html.TextAreaFor(m => m.TermsandCondition, new { @class = "form-control", @id = "TermsandCondition" })
                                             </div>
                                         </div>
                                         <div class="row">
@@ -65,11 +63,12 @@
                                                     <label style="display:block;"></label>
                                                     @if (string.IsNullOrEmpty(Model.Pk_Id) || Model.Pk_Id == "0")
                                                     {
-                                                        <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Save" id="Btnsave">
+                                                        <input type="submit" class="btn btn-success" onclick="return validate()" style="margin-top:1.5em;" value="Save" id="Btnsave">
                                                     }
                                                     else
                                                     {
-                                                        <input type="submit" class="btn btn-danger " style="margin-top:1.5em;" value="Update" id="Btnsave">
+                                                        <input type="submit" class="btn btn-success" onclick="return validate()" style="margin-top:1.5em;" value="Update" id="Btnsave">
+                                                        <a href="/UploadTermsandConditionList" class="btn btn-danger" style="margin-top:1.5em;"> Cancel</a>
                                                     }
                                                 </div>
                                             </div>
@@ -89,15 +88,24 @@
     }
 </div>
 
-<script src="~/Content/assests/js/jquery.min.js"></script>
-<script src="~/Content/summernote/summernote/summernote-bs4.min.js"></script>
 <script>
     $(document).ready(function () {
-        $('#summernote').summernote({
+        debugger;
+        $('#TermsandCondition').summernote({
             height: 300, // Set editor height
             minHeight: null, // Set minimum height of editor
             maxHeight: null, // Set maximum height of editor
             focus: true // Set focus to editable area after initializing summernote
         });
     });
+
+    function validate() {
+        var TermsandCondition = $('#TermsandCondition').val();
+
+        if (TermsandCondition == null || TermsandCondition == 0) {
+            alert("Please Add Terms and Condition");
+            return false;
+        }
+    }
 </script>
+
