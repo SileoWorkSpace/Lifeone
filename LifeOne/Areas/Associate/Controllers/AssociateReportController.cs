@@ -1249,8 +1249,13 @@ namespace LifeOne.Areas.Associate.Controllers
 
             return View(obj);
         }
+        public ActionResult RewardsandRecogination()
+        {
+            return View();
+        }
 
-        
+
+
     }
 }
 
