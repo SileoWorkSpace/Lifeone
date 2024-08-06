@@ -17420,6 +17420,3 @@ input[type="radio"] ~ label:after {
         transform: translate(-50%, -50%) rotate(0deg) scale(1);
     }
 
-section.store-section.pt-50.appear-animate.fadeIn.appear-animation-visible {
-    padding-top: 60px;
-}
