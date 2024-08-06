@@ -1,0 +1,147 @@
+﻿@model LifeOne.Models.RewardsRecognition
+@{
+    ViewBag.Title = "Rewards and Recogination";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+<style>
+    .alert-warning {
+        background-color: #fcf8e3 !important;
+        border-color: #faebcc !important;
+    }
+
+    .tableincome {
+    }
+
+        .tableincome td:first-child {
+            background: #fbfbfb;
+            max-width: 40%;
+        }
+
+        .tableincome td {
+            font-weight: bold;
+            vertical-align: middle;
+            font-size: 11px;
+            line-height: 27px
+        }
+
+    .reimg {
+        max-width: 50px;
+        border: 1px solid #d8d8d8;
+        border-radius: 50%
+    }
+
+    .tdcenter {
+        text-align: center;
+    }
+
+    .tdleft {
+        text-align: left;
+    }
+
+    .tdright {
+        text-align: right;
+    }
+
+        .tdright span {
+            font-size: 8px
+        }
+
+    .table td:last-child, .table th:last-child {
+        text-align: center;
+    }
+</style>
+<div class="content">
+    <div class="content-wrapper-before"></div>
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0 text-white">Rewards and Recogination</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Associate-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#">Loyalty Income</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Rewards and Recogination</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+
+        @using (Html.BeginForm("RewardsandRecogination", "AssociateReport", FormMethod.Post, new { @id = "form1" }))
+        {
+
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table  table-striped " id="datatables">
+                                    <thead>
+                                        <tr>
+                                            <th>S. No.</th>
+                                            <th class="tdcenter">Sales Business Unit</th>
+                                            <th class="tdcenter">Car & Rewards</th>
+                                            <th class="tdcenter">Tours</th>
+                                            <th class="tdcenter">Recognitions</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.RewardsDetail != null)
+                                            {
+                                                int SNO = 0;
+                                                foreach (var item in Model.RewardsDetail)
+                                                {
+                                                    <tr>
+                                                        <td class="tdleft">@(SNO = SNO + 1)</td>
+                                                        <td class="tdcenter">@item.LeftBusiness:@item.RightBusiness</td>
+                                                        @if (@item.RewardDetailName =="NULL")
+                                                        {
+                                                            <td class="tdcenter">-</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="tdcenter"><img src="@item.RewardImage" alt="" class="reimg"><br>@item.RewardDetailName</td>
+                                                        }
+                                                        @if (@item.ToursName == "NULL")
+                                                        {
+                                                            <td class="tdcenter">-</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="tdcenter"><img src="@item.ToursImage" alt="" class="reimg"><br>@item.ToursName</td>
+                                                        }
+                                                        @if (@item.RecognitionName== "NULL")
+                                                        {
+                                                            <td class="tdcenter">-</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="tdcenter"><img src="@item.RecognitionImage" alt="" class="reimg"><br>@item.RecognitionName</td>
+                                                        }
+                                                    </tr>
+
+                                                }
+
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        }
+    </div>
+</div>
+
+

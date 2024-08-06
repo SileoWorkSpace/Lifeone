@@ -522,6 +522,18 @@ namespace LifeOne.Areas.Associate
                new[] { "LifeOne.Areas.Associate.Controllers" });
 
             context.MapRoute(
+              "Associate_RewardsandRecogination",
+              "Associate_RewardsandRecogination/{action}/{id}",
+              new
+              {
+                  area = "Associate",
+                  controller = "AssociateReport",
+                  action = "RewardsandRecogination",
+                  id = UrlParameter.Optional
+              },
+              new[] { "LifeOne.Areas.Associate.Controllers" });
+
+            context.MapRoute(
               "Associate_PinRecognition",
               "Associate_PinRecognition/{action}/{id}",
               new
@@ -556,6 +568,8 @@ namespace LifeOne.Areas.Associate
                  id = UrlParameter.Optional
              },
              new[] { "LifeOne.Areas.Associate.Controllers" });
+
+
 
             context.MapRoute(
              "AssociateReport/PlaceOrder",

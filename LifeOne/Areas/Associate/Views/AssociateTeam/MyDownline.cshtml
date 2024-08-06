@@ -164,21 +164,34 @@
 
                                 <div class="col-lg-3">
                                     <div class="form-group">
-                                       
+
                                         @Html.DropDownListFor(m => m.Pk_PackageID, new SelectList(ViewBag.PackageList, "Value", "Text"), new { @class = "form-control", @id = "Pk_PackageID" })
 
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+
+                                        <div class="input-group" style="float:left">
+                                            <select class="form-control" name="Status" id="ddlStatus">
+                                                <option value="">--Select--</option>
+                                                <option value="T">InActive</option>
+                                                <option value="P">Performence</option>
+                                                <option value="F">Bronze</option>
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-lg-3">
                                     <div class="input-group" style="float:left">
                                         @Html.TextBoxFor(m => m.SearchLoginId, new { @class = "form-control", @placeholder = "Enter Login ID" })
                                     </div>
-                                   
+
                                 </div>
                                 <div class="col-lg-3">
-                                   
-                                        <button type="submit" class="btn btn-success mr-2" style="border-radius: 0 5px 5px 0px;">Search</button>
-                                  
+
+                                    <button type="submit" class="btn btn-success mr-2" style="border-radius: 0 5px 5px 0px;">Search</button>
+
                                 </div>
                             </div>
                         }
@@ -235,7 +248,7 @@
                                                 <td>@item.SponsorLoginId </td>
                                                 <td>@item.SponsorName </td>
                                                 <td>
-                                                    @if (@item.Status == "Active")
+                                                    @if (@item.Status == "Performence")
                                                     {
                                                         <span class="badge badge-success">@item.Status</span>
                                                     }
@@ -243,7 +256,7 @@
                                                     {
                                                         <span class="badge badge-info">@item.Status</span>
                                                     }
-                                                    else
+                                                    else if (@item.Status == "InActive")
                                                     {
                                                         <span class="badge badge-danger">@item.Status</span>
                                                     }
