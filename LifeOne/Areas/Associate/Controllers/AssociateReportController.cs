@@ -1249,9 +1249,24 @@ namespace LifeOne.Areas.Associate.Controllers
 
             return View(obj);
         }
-        public ActionResult RewardsandRecogination()
+        public ActionResult RewardsandRecogination(RewardsRecognition obj)
         {
-            return View();
+            List<RewardsRecognition> listdata = new List<RewardsRecognition>();
+            try
+            {
+
+
+                obj.FkMemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+                listdata = obj.RewardsandRecognitionDetails();
+                obj.RewardsDetail = listdata;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return View(obj);
+
+            // return View();
         }
 
 

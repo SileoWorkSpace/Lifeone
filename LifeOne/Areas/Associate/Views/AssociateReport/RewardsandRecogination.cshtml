@@ -1,4 +1,4 @@
-﻿@model LifeOne.Models.Modelreward
+﻿@model LifeOne.Models.RewardsRecognition
 @{
     ViewBag.Title = "Rewards and Recogination";
     Layout = "~/Views/Shared/_AssociateLayout.cshtml";
@@ -20,8 +20,8 @@
         .tableincome td {
             font-weight: bold;
             vertical-align: middle;
-            font-size:11px;
-            line-height:27px
+            font-size: 11px;
+            line-height: 27px
         }
 
     .reimg {
@@ -45,6 +45,7 @@
         .tdright span {
             font-size: 8px
         }
+
     .table td:last-child, .table th:last-child {
         text-align: center;
     }
@@ -87,259 +88,49 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td class="tdleft">1</td>
-                                            <td class="tdcenter">2:04</td>
+                                    </tbody>
+                                    <tbody>
+                                        @if (Model != null)
+                                        {
+                                            if (Model.RewardsDetail != null)
+                                            {
+                                                int SNO = 0;
+                                                foreach (var item in Model.RewardsDetail)
+                                                {
+                                                    <tr>
+                                                        <td class="tdleft">@(SNO = SNO + 1)</td>
+                                                        <td class="tdcenter">@item.LeftBusiness:@item.RightBusiness</td>
+                                                        @if (@item.RewardDetailName =="NULL")
+                                                        {
+                                                            <td class="tdcenter">-</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="tdcenter"><img src="@item.RewardImage" alt="" class="reimg"><br>@item.RewardDetailName</td>
+                                                        }
+                                                        @if (@item.ToursName == "NULL")
+                                                        {
+                                                            <td class="tdcenter">-</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="tdcenter"><img src="@item.ToursImage" alt="" class="reimg"><br>@item.ToursName</td>
+                                                        }
+                                                        @if (@item.RecognitionName== "NULL")
+                                                        {
+                                                            <td class="tdcenter">-</td>
+                                                        }
+                                                        else
+                                                        {
+                                                            <td class="tdcenter"><img src="@item.RecognitionImage" alt="" class="reimg"><br>@item.RecognitionName</td>
+                                                        }
+                                                    </tr>
 
+                                                }
 
+                                            }
+                                        }
 
-                                            <td class="tdcenter"><img src="~/Content/Associate/assets/images/Rewards/Celing.jpg" alt="" class="reimg"><br>Celing Fan Or Iron</td>
-                                            <td class="tdcenter">-</td>
-                                            <td class="tdcenter"><img src="~/Content/Associate/assets/images/Rewards/rank/star-distributer.png" alt="" class="reimg"><br>STAR DISTRIBUTOR</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">2</td>
-                                            <td class="tdcenter">5:10</td>
-
-
-
-                                            <td class="tdcenter">-</td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/domestic.jpg" alt="" class="reimg"><br>2D/1N
-                                                DOMESTIC
-                                                TOUR
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/star-executive.png" alt="" class="reimg"><br>STAR
-                                                EXECUTIVE
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">3</td>
-                                            <td class="tdcenter"><span class="tdcenter1">15:30</span></td>
-
-
-
-                                            <td class="tdcenter">-</td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/leadership.jpg" alt="" class="reimg"><br>
-                                                3D/2N
-                                                LDP
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/divine-star.png" alt="" class="reimg"><br>DEVINE
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">4</td>
-                                            <td class="tdcenter">25:50</td>
-
-
-
-                                            <td class="tdcenter">-</td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/mobile.jpg" alt="" class="reimg"><br>
-                                                MOBILE/
-                                                FRIDGE
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/silver-star.png" alt="" class="reimg"><br>SILVER
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">5</td>
-                                            <td class="tdcenter">50:100</td>
-
-
-
-                                            <td class="tdcenter">-</td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/bangkok.jpg" alt="" class="reimg"><br>
-                                                BANGKOK
-                                                TOUR 4D/3N
-                                                LKO TO LKO
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/gold-star.png" alt="" class="reimg"><br>GOLD
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">6</td>
-                                            <td class="tdcenter">100:200</td>
-
-
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/kwid.jpg" alt="" class="reimg"><br>
-                                                KWID CAR DP
-                                            </td>
-                                            <td class="tdcenter">
-                                                <br>
-                                                -
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/eagle.png" alt="" class="reimg"><br><br>EAGLE
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">7</td>
-                                            <td class="tdcenter">250:500</td>
-
-
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/swift.jpg" alt="" class="reimg"><br>
-                                                1 Lac
-                                                (Swift Dezire DP)
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/dubai-tour.jpg" alt="" class="reimg"><br>
-                                                4D/3N
-                                                DUBAI
-                                                TOUR
-                                            </td>
-                                            <td class="tdcenter"><img src="~/Content/Associate/assets/images/Rewards/rank/platinium.png" alt="" class="reimg"><br>PLATINUM STAR</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">8</td>
-                                            <td class="tdcenter">500:1K</td>
-
-
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/thar.jpg" alt="" class="reimg"><br>
-                                                Mahindra Thar Dp/
-                                                Alkaline
-                                                Water Machine
-                                            </td>
-                                            <td class="tdcenter">-</td>
-                                            <td class="tdcenter"><img src="~/Content/Associate/assets/images/Rewards/rank/ruby.png" alt="" class="reimg"><br>RUBY STAR</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">9</td>
-                                            <td class="tdcenter">1100:2200</td>
-
-
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/scorpio.jpg" alt="" class="reimg"><br>6 Lac
-                                                (Mahindra Scorpio DP )
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/maldives.jpg" alt="" class="reimg"><br>MALDIVES
-                                                TOUR 4D/3N
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/pearl.png" alt="" class="reimg"><br>PEARL
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">10</td>
-                                            <td class="tdcenter">2500:5000</td>
-
-
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/Mercedes-Benz.jpg" alt="" class="reimg"><br>10 Lac
-                                                (Mercedez Benz DP)
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/star.jpg" alt="" class="reimg"><br>STAR CRUISE
-                                                WITH COUPLE
-                                                5D/4N
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/diamond-star.png" alt="" class="reimg"><br>DIAMOND
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">11</td>
-                                            <td class="tdcenter">5K:10K</td>
-
-
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/Jaguar.jpg" alt="" class="reimg"><br>22 Lac
-                                                (Jaguar DP)
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/australia.jpg" alt="" class="reimg"><br>AUSTRALIA
-                                                TOUR
-                                                WITH COUPLE
-                                                4D/3N
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/double-diamond.png" alt="" class="reimg"><br>DOUBLE
-                                                DIAMOND
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">12</td>
-                                            <td class="tdcenter">10K:20K</td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/flat.jpg" alt="" class="reimg"><br>3 BHK Flat/
-                                                1000 Sqft. Row House
-                                            </td>
-                                            <td class="tdcenter">-</td>
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/blue-diamond-star.png" alt="" class="reimg"><br>BLUE DIAMOND
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">13</td>
-                                            <td class="tdcenter">25K:50K</td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/bmw.jpg" alt="" class="reimg"><br>
-                                                BMW Car
-                                            </td>
-                                            <td class="tdcenter">-</td>
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/black-diamond-star.png" alt="" class="reimg"><br>BLACK DIAMOND
-                                                STAR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">14</td>
-                                            <td class="tdcenter">50K:1Lac</td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/defendar.jpg" alt="" class="reimg"><br>
-                                                Land Rover Defender
-                                            </td>
-                                            <td class="tdcenter">-</td>
-                                            <td class="tdcenter"><img src="~/Content/Associate/assets/images/Rewards/rank/ambassador.png" alt="" class="reimg"><br>AMBASSADOR</td>
-                                        </tr>
-                                        <tr>
-                                            <td class="tdleft">15</td>
-                                            <td class="tdcenter">1Lac:2Lac</td>
-
-
-
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/BentleyCar.jpg" alt="" class="reimg"><br>
-                                                Bentley Car<br>
-                                                or<br>
-                                                Bunglow 10,000 sqft
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/world-tour.jpg" class="reimg" alt="" /><br>
-                                                World Tour
-                                                With Family*
-                                            </td>
-                                            <td class="tdcenter">
-                                                <img src="~/Content/Associate/assets/images/Rewards/rank/brand-ambassador.png" alt="" class="reimg"><br>BRAND
-                                                AMBASSADOR
-                                            </td>
-                                        </tr>
                                     </tbody>
                                 </table>
                             </div>
@@ -350,8 +141,6 @@
 
 
         }
-
-
     </div>
 </div>
 

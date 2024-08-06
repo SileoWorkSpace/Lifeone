@@ -165,5 +165,9 @@ namespace LifeOne.Models.AdminManagement.AService
                 return _objResponseModel;
             }
         }
+        public static WebSitePopup SaveImage(WebSitePopup model)
+        {
+            return DALProductServices.UpdateWebSitePopup(model);
+        }
     }
 }

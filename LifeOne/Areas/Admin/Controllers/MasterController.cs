@@ -1741,6 +1741,48 @@ namespace LifeOne.Areas.Admin.Controllers
                 }
             }
             return Json(list);
-        }      
+        }
+        [HttpGet]
+        public ActionResult UploadImage()
+        {
+            //if (!PermissionManager.IsActionPermit("Change WebSite Popup", ViewOptions.FormView))
+            //{
+            //    return Redirect("/Home/adminlogin");
+            //}
+
+            //WebSitePopup model = new WebSitePopup();
+            //model.ActiveType = "Select";
+            //ViewBag.WebSitePopup = ProductService.ChangeWebSitePopup(model);
+
+            //return View(model);
+            return View();
+        }
+        [HttpPost]
+        public ActionResult UploadImage(WebSitePopup model, HttpPostedFileBase file)
+        {
+          
+            Random rnd = new Random();
+            string path = "";
+            if (file != null)
+            {
+                string pic = rnd.Next(1000000).ToString() + System.IO.Path.GetFileName(file.FileName);
+
+                path = System.IO.Path.Combine(
+                 Server.MapPath("~/Images/Users/Popup"), pic);
+
+                file.SaveAs(path);
+
+                model.ImageUrl = "~/Images/Users/Popup/" + pic;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    file.InputStream.CopyTo(ms);
+                    byte[] array = ms.GetBuffer();
+                }
+
+            }           
+            WebSitePopup status = ProductService.UpdateWebSitePopup(model);
+
+            return RedirectToAction("UploadImage");
+        }
     }
 }
