@@ -75,7 +75,7 @@
                                     </td>
                                     <td>@item.CreatedDate</td>
                                     <td>
-                                        <a href="/Master/VideoDelete?Id=@item.Id" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        <a href="/Master/VideoDelete?Id=@item.Id" onclick="return confirm ('Are you sure to delete?');" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>
                              }

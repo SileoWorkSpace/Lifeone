@@ -20,6 +20,7 @@ using static LifeOne.Models.ShoppingRequest;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.EMMA;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -1745,27 +1746,23 @@ namespace LifeOne.Areas.Admin.Controllers
             return Json(list);
         }       
         public ActionResult UploadImage(MAdminProductMaster obj)
-            {
-           
+        {
+
             List<MAdminProductMaster> objlst = new List<MAdminProductMaster>();
             try
             {
-               
-
+                ResponseMaster _result = new ResponseMaster();
                 objlst = _objService.ImageGetService(obj);
                 if (objlst != null)
                 {
                     obj.ProductMasterList = objlst;
                 }
-
-
-
             }
             catch (Exception)
             {
                 throw;
             }
-            return View(obj);                     
+            return View(obj);
         }
         [HttpPost]
         public ActionResult UploadImageSave(MAdminProductMaster obj)
@@ -1810,7 +1807,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 throw;
             }            
             return Redirect("UploadImage");                      
-        }
+        }        
         public ActionResult ImageDelete(int Id)
         {
             MAdminProductMaster obj = new MAdminProductMaster();
@@ -1818,25 +1815,20 @@ namespace LifeOne.Areas.Admin.Controllers
             obj.OpCode = 2;
             try
             {
-
                 ResponseMaster _result = new ResponseMaster();
-
-                _result = _objService.SaveImage(obj);
+                _result = _objService.DeleteImage(obj);
                 if (_result != null)
                 {
-
                     TempData["code"] = _result.Code.ToString();
                     TempData["msg"] = _result.Msg.ToString();
                     //return RedirectToAction("UploadImage", "Master");
                 }
-
                 else
                 {
                     TempData["code"] = "0";
                     TempData["msg"] = "Can not process the request";
 
                 }
-
             }
             catch (Exception)
             {

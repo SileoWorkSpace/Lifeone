@@ -50,6 +50,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string Videolink { get; set; }
         public int OpCode { get; set; }
         public List<MAdminProductMaster> ProductMasterList { get; set; }
+        public List<MAdminProductMaster> ObjList{ get; set; }
          
     }
     public class Image 

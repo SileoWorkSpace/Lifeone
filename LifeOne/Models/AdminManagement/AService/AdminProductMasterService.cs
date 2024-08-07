@@ -110,6 +110,21 @@ namespace LifeOne.Models.AdminManagement.AService
                 return _objResponseModel;
             }
         }
+        public ResponseMaster DeleteImage(MAdminProductMaster _obj)
+        {
+
+            try
+            {
+                ResponseMaster _objResponseModel = new ResponseMaster();                
+                _objResponseModel = DALAdminProductMaster.ImageUpload(_obj);
+
+                return _objResponseModel;
+            }
+            catch (Exception ex)
+            {
+                return _objResponseModel;
+            }
+        }
         public List<MAdminProductMaster> ImageGetService(MAdminProductMaster _obj)
         {
             List<MAdminProductMaster> _objResponseModel = new List<MAdminProductMaster>();

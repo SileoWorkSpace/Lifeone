@@ -76,7 +76,7 @@
                                             <td class="text-right">
                                                 @*<button type="button" class="btn btn-primary btn-sm" onclick="return OpenPopUp()" data-toggle="modal" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>*@
 
-                                                <a href="/Master/ImageDelete?Id=@item.Id" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                <a href="/Master/ImageDelete?Id=@item.Id" onclick="return confirm ('Are you sure to delete?');"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     }
@@ -150,8 +150,8 @@
 
         }
         var extension = $("#file").val().split('.').pop().toUpperCase();
-        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
-            alert("Invalid image file format.Only jpg,jpeg,png,bmp files are allow");
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG") {
+            alert("Invalid image file format.Only jpg,jpeg,png files are allow");
             return false;
         }
     }
@@ -176,6 +176,11 @@
         if ($('#file').val() == '' || $('#file').val() == null || $('#file').val() == undefined) {
             alert('Please upload Image');
             $('#file').focus();
+            return false;
+        }
+        var extension = $("#file").val().split('.').pop().toUpperCase();
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG") {
+            alert("Invalid image file format.Only jpg,jpeg,png files are allow");
             return false;
         }
     }
