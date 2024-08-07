@@ -209,84 +209,30 @@
                     }
                     else
                     {
-                        <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
-                            <a href="" class="cart-toggle link">
-                                <i class="bi bi-bag">
-                                    <span class="cart-count">@LifeOne.Models.Manager.SessionManager.ProductCount</span>
-                                    @*<span class="cart-count">@LifeOne.Models.Manager.SessionManager.TotalItems</span>*@
-                                </i>
-                            </a>
-                            @if (LifeOne.Models.Manager.SessionManager.ProductCount == 0)
-                            {
-
-                            }
-                            else
-                            {
+                        if (LifeOne.Models.Manager.SessionManager.ProductCount == 0)
+                        {
+                        }
+                        else
+                        {
+                            <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
+                                <a href="" class="cart-toggle link">
+                                    <i class="bi bi-bag">
+                                        <span class="cart-count">@LifeOne.Models.Manager.SessionManager.ProductCount</span>
+                                        @*<span class="cart-count">@LifeOne.Models.Manager.SessionManager.TotalItems</span>*@
+                                    </i>
+                                </a>
+                                @if (LifeOne.Models.Manager.SessionManager.ProductCount == 0)
                                 {
-                                    Html.RenderAction("CartPartialMenu", "Home");
+
                                 }
-                            }
-
-
-                            @*<div class="dropdown-box">
-                                    <div class="products scrollable">
-                                        <div class="product product-cart">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="~/Content/NewAssests/images/cart/product-1.jpg" alt="product" width="80"
-                                                         height="88" />
-                                                </a>
-                                                <button class="btn btn-link btn-close">
-                                                    <i class="fas fa-times"></i><span class="sr-only">Close</span>
-                                                </button>
-                                            </figure>
-                                            <div class="product-detail">
-                                                <a href="product.html" class="product-name">Riode White Trends</a>
-                                                <div class="price-box">
-                                                    <span class="product-quantity">1</span>
-                                                    <span class="product-price">$21.00</span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                         End of Cart Product
-                                        <div class="product product-cart">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="~/Content/NewAssests/images/cart/product-2.jpg" alt="product" width="80"
-                                                         height="88" />
-                                                </a>
-                                                <button class="btn btn-link btn-close">
-                                                    <i class="fas fa-times"></i><span class="sr-only">Close</span>
-                                                </button>
-                                            </figure>
-                                            <div class="product-detail">
-                                                <a href="product.html" class="product-name">
-                                                    Dark Blue Women’s
-                                                    Leomora Hat
-                                                </a>
-                                                <div class="price-box">
-                                                    <span class="product-quantity">1</span>
-                                                    <span class="product-price">$118.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                         End of Cart Product
-                                    </div>
-                                     End of Products
-                                    <div class="cart-total">
-                                        <label>Subtotal:</label>
-                                        <span class="price">$139.00</span>
-                                    </div>
-                                     End of Cart Total
-                                    <div class="cart-action">
-                                        <a href="cart.html" class="btn btn-dark btn-link">View Cart</a>
-                                        <a href="checkout.html" class="btn btn-dark"><span>Go To Checkout</span></a>
-                                    </div>
-                                     End of Cart Action
-                                </div>*@
-                        </div>
-
+                                else
+                                {
+                                    {
+                                        Html.RenderAction("CartPartialMenu", "Home");
+                                    }
+                                }
+                            </div>
+                        }
                     }
                     <div>
                         <ul class="menu menu-sign">
@@ -312,7 +258,6 @@
                 </div>
             </div>
         </div>
-
     </header>
     @RenderBody()
     @{
@@ -367,8 +312,7 @@
 
             <!-- End MobileMenu -->
         </div>
-    </div>
-
+    </div>    
     <!-- newsletter-popup type2 -->
     @*<div class="newsletter-popup newsletter-pop2 mfp-hide" id="newsletter-popup">
             <figure>
@@ -413,8 +357,8 @@
     @*<script src="~/AutoFill/jquery-2.1.3.js"></script>*@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
-
     <script>
+
         document.addEventListener("DOMContentLoaded", function () {
             debugger;
             var currentPath = window.location.pathname;
@@ -427,7 +371,7 @@
             });
         })
     </script>
-    <script>        
+    <script>
         function updateTime() {
             const now = new Date();
             const dayOfWeek = now.toLocaleString('default', { weekday: 'long' });
@@ -564,8 +508,7 @@
                 //return false;
             }
         }
-    </script>
-
+    </script>    
 </body>
 </html>
 

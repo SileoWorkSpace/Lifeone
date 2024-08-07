@@ -1556,6 +1556,7 @@
     <Content Include="Areas\Admin\Views\UploadTermsandCondition\UploadTermsandConditionList.cshtml" />
     <Content Include="Areas\Associate\Views\AssociateReport\RewardsandRecogination.cshtml" />
     <Content Include="Areas\Admin\Views\Master\UploadImage.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\UploadVideo.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />

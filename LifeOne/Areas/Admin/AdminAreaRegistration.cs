@@ -1859,6 +1859,18 @@ namespace LifeOne.Areas.Admin
               new[] { "LifeOne.Areas.Admin.Controllers" });
 
             context.MapRoute(
+             "Admin-UploadVideo",
+             "Admin-UploadVideo/{action}/{id}",
+             new
+             {
+                 area = "Admin",
+                 controller = "Master",
+                 action = "UploadVideo",
+                 id = UrlParameter.Optional
+             },
+             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
                 "Admin-RepurchaseIncomeType",
                 "Admin-RepurchaseIncomeType/{action}/{id}",
                 new

@@ -240,6 +240,11 @@
                                         {
                                             <li><a href="/Admin-UploadImage">Upload Image</a></li>
                                         }
+                                        @if (PermissionManager.IsViewPermit("Upload Video"))
+                                        {
+                                            <li><a href="/Admin-UploadVideo">Upload Video</a></li>
+                                        }
+                                        
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
         {
             <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>

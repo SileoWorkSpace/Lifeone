@@ -269,20 +269,9 @@
             });
             function OnSuccess(response) {
                 debugger
-                if (response.Result == "0") {
-
-                    if (response.TempPermanent == "P") {
-                        alert("Member has been already Top-Up");
-                        $("#hdnMemId").val("");
-                        $("#SpnLogInId").html("");
-                        $("#txtLoginId").val("");
-                        return false;
-                    }
-                    else {
+                if (response.Result == "0") {                   
                         $("#hdnMemId").val(response.Fk_MemId);
-                        $("#SpnLogInId").html(response.DisplayName);
-                    }
-
+                        $("#SpnLogInId").html(response.DisplayName);                   
                 }
                 else {
                     alert('InValid Login Id!!!');
@@ -358,7 +347,7 @@
             return false;
         }
 
-        if ($('#ddlPaymentMode').val() != "Cash" && $('#ddlPaymentMode').val() != "Free") {
+        if ($('#ddlPaymentMode').val() != "Cash" && $('#ddlPaymentMode').val() != "Free" && $('#ddlPaymentMode').val() != "UPI") {
             if ($('#txtChequeDDNo').val().trim() == "") {
                 alert('Please enter Cheque/DD/RTGS/NEFT No.');
                 $('#txtChequeDDNo').focus();

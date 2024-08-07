@@ -47,7 +47,6 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 throw ex;
             }
         }
-
         public static ResponseMaster UpdateProductMaster(MAdminProductMaster obj)
         {
             try
@@ -136,6 +135,67 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 queryParameters.Add("@Pk_ProductId", id);
 
                 ResponseMaster _iresult = DBHelperDapper.DAAddAndReturnModel<ResponseMaster>("ProductMasterDelete", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static ResponseMaster ImageUpload(MAdminProductMaster obj)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();
+                queryParameters.Add("@Id", obj.Id);                          
+                queryParameters.Add("@ImageUrl", obj.ImageUrl);                          
+                queryParameters.Add("@OpCode", obj.OpCode);                          
+                ResponseMaster _iresult = DBHelperDapper.DAAddAndReturnModel<ResponseMaster>("UploadeWebsiteImage", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static List<MAdminProductMaster> GetImageList(MAdminProductMaster obj)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();
+                queryParameters.Add("@Id", obj.Id);
+                List<MAdminProductMaster> _iresult = DBHelperDapper.DAAddAndReturnModelList<MAdminProductMaster>("WebsiteImageList", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static ResponseMaster VideoUpload(MAdminProductMaster obj)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();
+                queryParameters.Add("@Id", obj.Id);                              
+                queryParameters.Add("@Videofile", obj.Videolink);
+                queryParameters.Add("@OpCode", obj.OpCode);
+                ResponseMaster _iresult = DBHelperDapper.DAAddAndReturnModel<ResponseMaster>("UploadeWebsiteVideo", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static List<MAdminProductMaster> GetVideoDetails(MAdminProductMaster obj)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();
+                queryParameters.Add("@Id", obj.Id);
+                List<MAdminProductMaster> _iresult = DBHelperDapper.DAAddAndReturnModelList<MAdminProductMaster>("WebsiteVideoList", queryParameters);
                 return _iresult;
             }
             catch (Exception ex)

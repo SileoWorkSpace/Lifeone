@@ -19,6 +19,7 @@ using LifeOne.Models;
 using static LifeOne.Models.ShoppingRequest;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -26,6 +27,7 @@ namespace LifeOne.Areas.Admin.Controllers
     [SessionTimeoutAttributeAdmin]
     public class MasterController : Controller
     {
+        AdminProductMasterService _objService = new AdminProductMasterService();
         // GET: Admin/Master
         public ActionResult Index()
         {
@@ -1741,48 +1743,187 @@ namespace LifeOne.Areas.Admin.Controllers
                 }
             }
             return Json(list);
-        }
-        [HttpGet]
-        public ActionResult UploadImage()
-        {
-            //if (!PermissionManager.IsActionPermit("Change WebSite Popup", ViewOptions.FormView))
-            //{
-            //    return Redirect("/Home/adminlogin");
-            //}
-
-            //WebSitePopup model = new WebSitePopup();
-            //model.ActiveType = "Select";
-            //ViewBag.WebSitePopup = ProductService.ChangeWebSitePopup(model);
-
-            //return View(model);
-            return View();
-        }
-        [HttpPost]
-        public ActionResult UploadImage(WebSitePopup model, HttpPostedFileBase file)
-        {
-          
-            Random rnd = new Random();
-            string path = "";
-            if (file != null)
+        }       
+        public ActionResult UploadImage(MAdminProductMaster obj)
             {
-                string pic = rnd.Next(1000000).ToString() + System.IO.Path.GetFileName(file.FileName);
+           
+            List<MAdminProductMaster> objlst = new List<MAdminProductMaster>();
+            try
+            {
+               
 
-                path = System.IO.Path.Combine(
-                 Server.MapPath("~/Images/Users/Popup"), pic);
-
-                file.SaveAs(path);
-
-                model.ImageUrl = "~/Images/Users/Popup/" + pic;
-                using (MemoryStream ms = new MemoryStream())
+                objlst = _objService.ImageGetService(obj);
+                if (objlst != null)
                 {
-                    file.InputStream.CopyTo(ms);
-                    byte[] array = ms.GetBuffer();
+                    obj.ProductMasterList = objlst;
                 }
 
-            }           
-            WebSitePopup status = ProductService.UpdateWebSitePopup(model);
 
-            return RedirectToAction("UploadImage");
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return View(obj);                     
+        }
+        [HttpPost]
+        public ActionResult UploadImageSave(MAdminProductMaster obj)
+        {           
+            ResponseMaster _result = new ResponseMaster();
+            try
+            {
+
+                if (obj.file != null && obj.file.ContentLength > 0)
+                {
+                    string ImageUrl = obj.file.FileName;
+                    var ImagePath = "~/Images/ImageUrl/";
+                    var extension = Path.GetExtension(ImageUrl);
+                    var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + ImageUrl;
+                    obj.ImageUrl = ImagePath + fileName;
+
+                    var filename = Path.Combine(Server.MapPath(ImagePath), fileName);
+                    if (!Directory.Exists(Server.MapPath(ImagePath)))
+                    {
+                        Directory.CreateDirectory((Server.MapPath(ImagePath)));
+                    }
+                    obj.file.SaveAs(filename);
+
+                }
+                obj.OpCode = 1;
+                _result = _objService.SaveImage(obj);
+                if (_result != null)
+                {
+
+                    TempData["code"] = _result.Code.ToString();
+                    TempData["msg"] = _result.Msg.ToString();
+                    return Redirect("UploadImage");
+                }
+                else
+                {
+                    TempData["code"] = "0";
+                    TempData["msg"] = "Can not process the request";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }            
+            return Redirect("UploadImage");                      
+        }
+        public ActionResult ImageDelete(int Id)
+        {
+            MAdminProductMaster obj = new MAdminProductMaster();
+            obj.Id = Id.ToString();
+            obj.OpCode = 2;
+            try
+            {
+
+                ResponseMaster _result = new ResponseMaster();
+
+                _result = _objService.SaveImage(obj);
+                if (_result != null)
+                {
+
+                    TempData["code"] = _result.Code.ToString();
+                    TempData["msg"] = _result.Msg.ToString();
+                    //return RedirectToAction("UploadImage", "Master");
+                }
+
+                else
+                {
+                    TempData["code"] = "0";
+                    TempData["msg"] = "Can not process the request";
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            //return RedirectToAction("UploadImage", "Master");
+            return Redirect("UploadImage");
+        }
+        [HttpGet]
+        public ActionResult UploadVideo()
+        {
+            MAdminProductMaster obj = new MAdminProductMaster();
+            List<MAdminProductMaster> objlst = new List<MAdminProductMaster>();
+            try
+            {
+
+                objlst = _objService.GetVideoService(obj);
+                if (objlst != null)
+                {
+                    obj.ProductMasterList = objlst;
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        public ActionResult UploadVideo(MAdminProductMaster obj)
+        {
+            ResponseMaster _result = new ResponseMaster();
+            try
+            {
+                 obj.OpCode = 1;
+                _result = _objService.SaveVideo(obj);
+                if (_result != null)
+                {
+
+                    TempData["code"] = _result.Code.ToString();
+                    TempData["msg"] = _result.Msg.ToString();
+                    return Redirect("UploadVideo");
+                }
+                else
+                {
+                    TempData["code"] = "0";
+                    TempData["msg"] = "Can not process the request";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Redirect("UploadVideo");
+        }
+        public ActionResult VideoDelete(int Id)
+        {
+            MAdminProductMaster obj = new MAdminProductMaster();
+           // obj.Id = Id;
+            obj.OpCode = 2;
+            try
+            {
+
+                ResponseMaster _result = new ResponseMaster();
+
+                _result = _objService.SaveVideo(obj);
+                if (_result != null)
+                {
+
+                    TempData["code"] = _result.Code.ToString();
+                    TempData["msg"] = _result.Msg.ToString();
+                    return Redirect("UploadVideo");
+                }
+
+                else
+                {
+                    TempData["code"] = "0";
+                    TempData["msg"] = "Can not process the request";
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Redirect("UploadVideo");
         }
     }
 }

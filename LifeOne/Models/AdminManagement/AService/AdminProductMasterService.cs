@@ -90,5 +90,79 @@ namespace LifeOne.Models.AdminManagement.AService
                 return _objResponseModel;
             }
         }
+        public ResponseMaster SaveImage(MAdminProductMaster _obj)
+        {
+
+            try
+            {
+                ResponseMaster _objResponseModel = new ResponseMaster();
+                if (_obj.BoxType == "Box")
+                {
+                    _obj.IsBox = true;
+                }
+                                                                 
+                _objResponseModel = DALAdminProductMaster.ImageUpload(_obj);
+                
+                return _objResponseModel;
+            }
+            catch (Exception ex)
+            {
+                return _objResponseModel;
+            }
+        }
+        public List<MAdminProductMaster> ImageGetService(MAdminProductMaster _obj)
+        {
+            List<MAdminProductMaster> _objResponseModel = new List<MAdminProductMaster>();
+            try
+            {
+
+                //decrypt app team reponse
+                _objResponseModel = DALAdminProductMaster.GetImageList(_obj);
+
+
+                return _objResponseModel;
+            }
+            catch (Exception ex)
+            {
+                return _objResponseModel;
+            }
+        }
+        public ResponseMaster SaveVideo(MAdminProductMaster _obj)
+        {
+
+            try
+            {
+                ResponseMaster _objResponseModel = new ResponseMaster();
+                if (_obj.BoxType == "Box")
+                {
+                    _obj.IsBox = true;
+                }
+
+                _objResponseModel = DALAdminProductMaster.VideoUpload(_obj);
+
+                return _objResponseModel;
+            }
+            catch (Exception ex)
+            {
+                return _objResponseModel;
+            }
+        }
+        public List<MAdminProductMaster> GetVideoService(MAdminProductMaster _obj)
+        {
+            List<MAdminProductMaster> _objResponseModel = new List<MAdminProductMaster>();
+            try
+            {
+
+                //decrypt app team reponse
+                _objResponseModel = DALAdminProductMaster.GetVideoDetails(_obj);
+
+
+                return _objResponseModel;
+            }
+            catch (Exception ex)
+            {
+                return _objResponseModel;
+            }
+        }
     }
 }
