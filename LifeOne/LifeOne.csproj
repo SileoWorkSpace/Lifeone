@@ -1885,6 +1885,7 @@
     <Content Include="Content\NewAssests\images\agents\4.jpg" />
     <Content Include="Content\NewAssests\images\agents\5.jpg" />
     <Content Include="Content\NewAssests\images\banner.jpg" />
+    <Content Include="Content\NewAssests\images\Beauty_Care_Range.png" />
     <Content Include="Content\NewAssests\images\blog\1_lg.jpg" />
     <Content Include="Content\NewAssests\images\blog\1_xs.jpg" />
     <Content Include="Content\NewAssests\images\blog\2col\1.jpg" />
@@ -2098,6 +2099,8 @@
     <Content Include="Content\NewAssests\images\effects\s3.png" />
     <Content Include="Content\NewAssests\images\effects\sparkle1.png" />
     <Content Include="Content\NewAssests\images\effects\sparkle2.png" />
+    <Content Include="Content\NewAssests\images\Food-Product-Range.png" />
+    <Content Include="Content\NewAssests\images\HAir-care.jpg" />
     <Content Include="Content\NewAssests\images\hero-slider-01a.jpg" />
     <Content Include="Content\NewAssests\images\hero-slider-09a.jpg" />
     <Content Include="Content\NewAssests\images\icon-boxes\alret.svg" />
@@ -2129,6 +2132,7 @@
     <Content Include="Content\NewAssests\images\no-image%281%29.png" />
     <Content Include="Content\NewAssests\images\no-image.png" />
     <Content Include="Content\NewAssests\images\no-products-found.png" />
+    <Content Include="Content\NewAssests\images\Oral-Care-Range.png" />
     <Content Include="Content\NewAssests\images\page-header.jpg" />
     <Content Include="Content\NewAssests\images\page-header\about-us.jpg" />
     <Content Include="Content\NewAssests\images\page-header\contact-us.jpg" />
@@ -2153,6 +2157,9 @@
     <Content Include="Content\NewAssests\images\products\product7.jpg" />
     <Content Include="Content\NewAssests\images\products\product8.jpg" />
     <Content Include="Content\NewAssests\images\products\product9.jpg" />
+    <Content Include="Content\NewAssests\images\wel-cat1.jpg" />
+    <Content Include="Content\NewAssests\images\hair.jpg" />
+    <Content Include="Content\NewAssests\images\Wellness_Care_Range.png" />
     <Content Include="Content\NewAssests\js\docs.js" />
     <Content Include="Content\NewAssests\js\docs.min.js" />
     <Content Include="Content\NewAssests\js\main.js" />
