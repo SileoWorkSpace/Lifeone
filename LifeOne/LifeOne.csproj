@@ -2097,6 +2097,7 @@
     <Content Include="Content\NewAssests\images\effects\s3.png" />
     <Content Include="Content\NewAssests\images\effects\sparkle1.png" />
     <Content Include="Content\NewAssests\images\effects\sparkle2.png" />
+    <Content Include="Content\NewAssests\images\HAir-care.jpg" />
     <Content Include="Content\NewAssests\images\hero-slider-01a.jpg" />
     <Content Include="Content\NewAssests\images\hero-slider-09a.jpg" />
     <Content Include="Content\NewAssests\images\icon-boxes\alret.svg" />
@@ -2152,6 +2153,8 @@
     <Content Include="Content\NewAssests\images\products\product7.jpg" />
     <Content Include="Content\NewAssests\images\products\product8.jpg" />
     <Content Include="Content\NewAssests\images\products\product9.jpg" />
+    <Content Include="Content\NewAssests\images\wel-cat1.jpg" />
+    <Content Include="Content\NewAssests\images\hair.jpg" />
     <Content Include="Content\NewAssests\js\docs.js" />
     <Content Include="Content\NewAssests\js\docs.min.js" />
     <Content Include="Content\NewAssests\js\main.js" />
