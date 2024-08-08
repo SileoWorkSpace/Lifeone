@@ -137,9 +137,65 @@
                 </div>
             </div>
         </section>
+
+
+        <section class="customer-section pt-10 pb-10 appear-animate">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-7">
+                        <figure>
+                            <img src="~/Content/NewAssests/images/HAir-care.jpg" alt="Hair care" width="580"
+                                 height="507" class="banner-radius" style="background-color: #BDD0DE;" />
+                        </figure>
+                    </div>
+                    <div class="col-md-5 mb-4">
+                        <h3 class="section-title lh-1 font-weight-bold">
+                            Hair Care Range
+                        </h3>
+                        <p class="section-desc text-grey">
+                            Our Hair Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.
+                        </p>
+                        <a href="#" class="btn btn-primary ls-m">
+                            View Hair Care Product<i class="d-icon-arrow-right"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Customer Section -->
+
+        <section class="store-section pt-10 pb-10 appear-animate" style="background: #fafafa;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-6 order-md-first mb-4">
+                       
+                        <h3 class="section-title lh-1 font-weight-bold">Beauty Care Range</h3>
+                        <p class="section-desc text-grey">
+                            Our Beauty Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.
+                        </p>
+                        <a href="#" class="btn btn-primary ls-m">
+                            View Beauty Care Product<i class="d-icon-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-6">
+                        <figure>
+                            <img src="~/Content/NewAssests/images/wel-cat1.jpg" alt="Beauty care" width="580" height="507"
+                                 class="banner-radius" style="background-color: #DEE6E8;" />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- End Store-section -->
+
+
         @if (Model.dtCategory != null && Model.dtCategory.Rows.Count > 0)
         {
+<<<<<<< HEAD
             <section class="product-wrapper grey-section pt-10 pb-6 appear-animate">
+=======
+            <section class="product-wrapper pt-10 pb-6 appear-animate">
+>>>>>>> prakhar
                 <div class="container-fluid mb-10">
                     <h2 class="title title-simple text-center pt-8">Shop by categories</h2>
                     <div class="owl-carousel owl-theme row owl-dot-grey cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
@@ -222,6 +278,7 @@
                         {
                             for (int i = 0; i < Model.dtCategory.Rows.Count; i++)
                             {
+<<<<<<< HEAD
 
                                 <div class="category category-absolute category-classic overlay-zoom mr-1" data-animation-options="{
              'name': 'fadeIn',
@@ -296,6 +353,140 @@
                 </div>
             </div>
 
+=======
+
+                                <div class="category category-absolute category-classic overlay-zoom mr-1" data-animation-options="{
+             'name': 'fadeIn',
+             'delay': '.3s'
+         }">
+                                    <a href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtCategory.Rows[i]["PK_ProductTypeId"].ToString())">
+                                        <figure class="category-media">
+                                            <img src="@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString()" alt="category" width="348"
+                                                 height="348" />
+                                        </figure>
+                                    </a>
+                                    <div class="category-content">
+                                        <a class="pro-c" href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtCategory.Rows[i]["PK_ProductTypeId"].ToString())">
+                                            <h4 class="category-name">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h4>
+                                        </a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                </div>
+            </div>
+        </section>*@
+        <section class="brand-section grey-section pt-10 pb-10 appear-animate" style="background: #eff1d9;">
+            <div class="container mt-8 mb-10">
+                <div class="row">
+                    <div class="col-md-12 d-flex justify-content-center mb-4">
+                        <div class="col-md-8">
+                            <h3 class="section-title lh-1 font-weight-bold text-center mb-2">Product Reviews</h3>
+                            <p class="text-center">We are a Health Products Selling company founded by business professionals. At Asclepius Wellness we create dynamic entrepreneurs through the promotion of high quality wellness products.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="owl-carousel owl-theme row cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
+                     data-owl-options="{
+                      'nav': false,
+                      'dots': false,
+                      'autoplay': true,
+                      'margin': 20,
+                      'responsive': {
+                          '0': {
+                              'items': 2
+                          },
+                          '576': {
+                              'items': 3
+                          },
+                          '768': {
+                              'items': 4
+                          },
+                          '992': {
+                              'items': 5
+                          },
+                          '1200': {
+                              'items': 6
+                          }
+                      }
+                  }">
+                    <figure class="brand-wrap bg-white banner-radius">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/lZa-oNUtp8U?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </figure>
+                    <figure class="brand-wrap bg-white banner-radius">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/lZa-oNUtp8U?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </figure>
+                    <figure class="brand-wrap bg-white banner-radius">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/lZa-oNUtp8U?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </figure>
+                    <figure class="brand-wrap bg-white banner-radius">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/lZa-oNUtp8U?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </figure>
+                    <figure class="brand-wrap bg-white banner-radius">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/lZa-oNUtp8U?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </figure>
+                    <figure class="brand-wrap bg-white banner-radius">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/lZa-oNUtp8U?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </figure>
+                    <figure class="brand-wrap bg-white banner-radius">
+                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/lZa-oNUtp8U?rel=0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                    </figure>
+                </div>
+            </div>
+        </section>
+        <section class="banner-group container-fluid mt-10 pt-6 pb-8 mb-10 appear-animate">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="banner1 banner banner-fixed overlay-effect1">
+                        <figure style=" background-color:#27262b">
+                            <img src="~/Content/NewAssests/images/demos/demo19/banner/4.jpg" alt="banner" width="881" height="150" />
+                        </figure>
+                        <div class="banner-content y-50">
+                            <h4 class="banner-subtitle text-uppercase text-body mb-0" style="color:#fff !important;">
+                                New Arrivals
+                            </h4>
+                            @*<h3 style="color:#fff" class="banner-title font-weight-bolder ls-m mb-0" data-animation-options="{
+                                        'name': 'blurIn',
+                                        'delay': '.4s'
+                                    }">
+                                Season Training Shoes
+                            </h3>
+                            <hr class="bg-grey border-no">
+                            <h4 class="font-weight-normal mb-0 ls-normal" style="color:#fff;">
+                                Only from <span class="text-primary font-weight-semi-bold">₹78.99</span>
+                            </h4>*@
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="banner2 banner banner-fixed overlay-effect1">
+                        <figure style="background-color: #231f1c">
+                            <img src="~/Content/NewAssests/images/demos/demo19/banner/5.jpg" alt="banner" width="881" height="150" />
+                        </figure>
+                        <div class="banner-content y-50">
+                            <h4 class="banner-subtitle text-uppercase mb-0">
+                                Top Products
+                            </h4>
+                            @*<h3 class="banner-title font-weight-bolder ls-m mb-0 appear-animate text-white"
+                                data-animation-options="{
+                                        'name': 'blurIn',
+                                        'delay': '.4s'
+                                    }">
+                                Suitable Women Wear
+                            </h3>
+                            <hr class="bg-grey border-no">
+                            <h4 class="font-weight-normal mb-0 ls-normal">
+                                Only from <span class="text-primary font-weight-semi-bold">₹121.99</span>
+                            </h4>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+>>>>>>> prakhar
         </section>
         @if (Model.DtDetails != null && Model.DtDetails.Rows.Count > 0)
         {
@@ -536,6 +727,7 @@
                 </div>
             </section>
         }
+<<<<<<< HEAD
         @{
             if (ViewBag.PopupStatus == "Active")
             {
@@ -556,6 +748,8 @@
 
         }
 
+=======
+>>>>>>> prakhar
 </main>
 <script src="~/Content/NewAssests/vendor/jquery/jquery.min.js"></script>
 <script src="~/Content/NewAssests/vendor/owl-carousel/owl.carousel.min.js"></script>

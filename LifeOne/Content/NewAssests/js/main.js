@@ -3737,7 +3737,7 @@ window.Riode = {};
     // Initialize Method after document has been loaded
     Riode.init = function () {
         Riode.appearAnimate('.appear-animate');                               // Runs appear animations
-        Riode.Minipopup.init();                                                 // Initialize minipopup
+/*        Riode.Minipopup.init();                                                 */// Initialize minipopup
         Riode.Shop.init();                                                      // Initialize shop
         Riode.initProductSinglePage();                                          // Initialize single product page
         Riode.slider('.owl-carousel');                                        // Initialize slider
