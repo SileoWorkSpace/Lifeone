@@ -582,9 +582,7 @@ namespace LifeOne.Areas.Admin.Controllers
         public JsonResult ChangeCMDStartDateTime(DynamicUtilityModel req)
         {
             return Json(UtilityService.ChangeCMDStartDateTime(req));
-        }
-
-     
+        }    
         #region Crop Product SubCategory
 
         public ActionResult CropSubCategory()
