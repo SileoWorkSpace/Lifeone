@@ -35,6 +35,24 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
+    .food {
+        background-image: url(/Content/NewAssests/images/Food-Product-Range.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .wellness {
+        background-image: url(/Content/NewAssests/images/Wellness_Care_Range.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .Oral-care {
+        background-image: url(/Content/NewAssests/images/Oral-Care-Range.png);
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
     .panel-lifeone {
         padding: 40px 0px 25px 0px;
         text-align: center;
@@ -216,7 +234,7 @@
                     <div class="col-xs-12 col-md-6 col-xs-12 beauty-care vh-100 hidden-mb"></div>
                 </div>
                 <div class="row ps-wel-cat-bg3-side">
-                    <div class="col-xs-12 col-md-6 col-xs-12 ps-wel-cat-bg4 vh-100 hidden-mb"></div>
+                    <div class="col-xs-12 col-md-6 col-xs-12 wellness vh-100 hidden-mb"></div>
                     <div class="col-xs-12 col-md-6 col-xs-12">
                         <div class="text-center product-s">
                             <h2 class="product-system">Wellness Care Range</h2>
@@ -233,10 +251,10 @@
                             <a href="product/food-product/" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Food Products Range <i class="d-icon-arrow-right"></i></a>
                         </div>
                     </div>
-                    <div class="col-xs-12 col-md-6 col-xs-12 ps-wel-cat-bg4 vh-100 hidden-mb"></div>
+                    <div class="col-xs-12 col-md-6 col-xs-12 food vh-100 hidden-mb"></div>
                 </div>
                 <div class="row ps-wel-cat-bg4-side">
-                    <div class="col-xs-12 col-md-6 col-xs-12 ps-wel-cat-bg4 vh-100 hidden-mb"></div>
+                    <div class="col-xs-12 col-md-6 col-xs-12 Oral-care vh-100 hidden-mb"></div>
                     <div class="col-xs-12 col-md-6 col-xs-12">
                         <div class="text-center product-s">
                             <h2 class="product-system">Oral Care Range</h2>
@@ -249,114 +267,7 @@
             </div>
         </section>
 
-        @if (Model.dtCategory != null && Model.dtCategory.Rows.Count > 0)
-        {
-            <section class="product-wrapper pt-10 pb-6 appear-animate">
-                <div class="container-fluid mb-10">
-                    <h2 class="title title-simple text-center pt-8">Shop by categories</h2>
-                    <div class="owl-carousel owl-theme row owl-dot-grey cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
-                         data-owl-options="{
-                     'items':@Model.dtCategory.Rows[0]["TotalRecords"].ToString(),
-                     'margin': 20,
-                     'loop': false,
-                     'autoplay': true,
-                     'autoplayTimeout': 3000,
-                     'autoplayHoverPause': true,
-                     'responsive': {
-                         '0': { 'items': 2 },
-                         '576': { 'items': 3 },
-                         '768': { 'items': 4 },
-                         '992': { 'items': 5, 'dots': false },
-                         '1200': { 'items': 5, 'dots': false }
-                     }
-                   }">
-                        <!-- Dynamic Content -->
-                        @{
-                            if (Model.DtDetails != null)
-                            {
-                                for (int i = 0; i < Model.dtCategory.Rows.Count; i++)
-                                {
-                                    <div class="category category-absolute category-classic overlay-zoom mr-1" data-animation-options="{
-                                'name': 'fadeIn',
-                                'delay': '.3s'
-                            }">
-                                        <a href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.dtCategory.Rows[i]["PK_ProductTypeId"].ToString())">
-                                            <figure class="category-media">
-                                                <img src="@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString()" alt="category" width="348" height="348" />
-                                            </figure>
-                                        </a>
-                                        <div class="category-content">
-                                            <a class="pro-c" href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.dtCategory.Rows[i]["PK_ProductTypeId"].ToString())">
-                                                <h4 class="category-name">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h4>
-                                            </a>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        }
-                    </div>
-                </div>
-            </section>
-        }
-        @*<section class="product-wrapper grey-section pt-10 pb-6 appear-animate">
-            <div class="container-fluid mb-10">
-                <h2 class="title title-simple text-center pt-8">Shop by categories</h2>
-                <div class="owl-carousel owl-theme row owl-dot-grey cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
-                    data-owl-options="{
-                        'items': 6,
-                        'margin': 20,
-                        'loop': false,
-                        'autoplay': true,
-                        'autoplayTimeout': 3000,
-                        'autoplayHoverPause': true,
-                        'responsive': {
-                            '0': {
-                                'items': 2
-                            },
-                            '576': {
-                                'items': 3
-                            },
-                            '768': {
-                                'items': 4
-                            },
-                            '992': {
-                                'items': 5,
-                                'dots': false
-                            },
-                            '1200': {
-                                'items': 5,
-                                'dots': false
-                            }
-                        }
-                 }">
-                    @{
-                        if (Model.DtDetails != null)
-                        {
-                            for (int i = 0; i < Model.dtCategory.Rows.Count; i++)
-                            {
-
-                                <div class="category category-absolute category-classic overlay-zoom mr-1" data-animation-options="{
-             'name': 'fadeIn',
-             'delay': '.3s'
-         }">
-                                    <a href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtCategory.Rows[i]["PK_ProductTypeId"].ToString())">
-                                        <figure class="category-media">
-                                            <img src="@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString()" alt="category" width="348"
-                                                 height="348" />
-                                        </figure>
-                                    </a>
-                                    <div class="category-content">
-                                        <a class="pro-c" href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtCategory.Rows[i]["PK_ProductTypeId"].ToString())">
-                                            <h4 class="category-name">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h4>
-                                        </a>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    }
-                </div>
-            </div>
-        </section>*@
+       
         <section class="brand-section grey-section pt-10 pb-10 appear-animate" style="background: #eff1d9;">
             <div class="container mt-8 mb-10">
                 <div class="row">
@@ -385,10 +296,10 @@
                               'items': 4
                           },
                           '992': {
-                              'items': 5
+                              'items': 4
                           },
                           '1200': {
-                              'items': 6
+                              'items': 4
                           }
                       }
                   }">
@@ -467,245 +378,8 @@
             </div>
 
         </section>
-        @if (Model.DtDetails != null && Model.DtDetails.Rows.Count > 0)
-        {
-            <section class="product-wrapper grey-section pt-10 pb-6 appear-animate">
-                <div class="container-fluid mb-10">
-                    <h2 class="title title-simple text-center pt-8">Shop Products</h2>
-                    <div class="owl-carousel owl-theme row owl-dot-grey cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
-                         data-owl-options="{
-                            'items':@Model.DtDetails.Rows[0]["TotalRecords"].ToString(),
-                            'margin': 20,
-                            'autoplay': true,
-                 'autoplayTimeout': 3000,
-                            'loop': false,
-                            'responsive': {
-                                '0': {
-                                    'items': 2
-                                },
-                                '576': {
-                                    'items': 3
-                                },
-                                '768': {
-                                    'items': 4
-                                },
-                                '992': {
-                                    'items': 5
-                                },
-                                '1200': {
-                                    'items': 6,
-                                    'dots': false
-                                }
-                            }
-                        }">
-                        @{
-                            if (Model.DtDetails != null)
-                            {
-
-                                for (int i = 0; i < Model.DtDetails.Rows.Count; i++)
-                                {
-                                    <div class="product text-center">
-                                        <figure class="product-media">
-                                            <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">
-                                                <img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="280"
-                                                     height="315">
-                                                @*<img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()"  alt="product" width="300"
-                                                height="338">*@
-                                            </a>
-                                            @*<div class="product-label-group">
-                                                <label class="product-label label-sale">27% off</label>
-                                            </div>*@
-                                            <div class="product-action-vertical">
-                                                @*<a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                                                      data-target="#addCartModal" title="Add to cart">
-                                                    <i class="d-icon-bag"></i>
-                                                </a>*@
-                                                <a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart"
-                                                   title="Add to cart" value="Add" name="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">
-                                                    <i class="d-icon-bag"></i>
-                                                </a>
-                                                @*<input type="submit" class="btn-product-icon btn-cart" name="Add" value="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())" />*@
-                                                @*<a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                                    <i class="d-icon-heart"></i>
-                                                </a>*@
-                                            </div>
-                                            <div class="product-action">
-                                                <a class="btn-product btn-quickview" title="Quick View" href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">Quick View</a>
-                                            </div>
-                                        </figure>
-                                        <div class="product-details">
-                                            <h3 class="product-name">
-                                                <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
-                                            </h3>
-                                            <div class="product-price">
-                                                <ins class="new-price">₹@Model.DtDetails.Rows[i]["DP"].ToString()</ins><del class="old-price">₹@Model.DtDetails.Rows[i]["OfferedPrice"].ToString()</del>
-                                            </div>
-                                            <div class="ratings-container">
-                                                <div class="ratings-full">
-                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "1")
-                                                    {
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                    }
-                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "2")
-                                                    {
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                    }
-                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "3")
-                                                    {
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                    }
-                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "4")
-                                                    {
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                    }
-                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "5")
-                                                    {
-                                                        <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                    }
-                                                </div>
-                                                @if (@Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "0")
-                                                {
-
-                                                }
-                                                else
-                                                {
-                                                    <a href="#" class="rating-reviews">@Model.DtDetails.Rows[i]["ReviewCount"].ToString()</a>
-                                                }
-
-                                            </div>
-                                        </div>
-                                    </div>
-                                }
-                            }
-                        }
-                    </div>
-                </div>
-            </section>
-        }
-        @if (Model.DtDetails != null && Model.DtDetails.Rows.Count > 0)
-        {
-            <section class="product-wrapper container-fluid pt-10 appear-animate mb-5">
-                <h2 class="title title-simple text-center pt-7">Featured Products</h2>
-                <div class="owl-carousel owl-theme row owl-dot-grey cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
-                     data-owl-options="{
-                        'items':@Model.DtDetails.Rows[0]["TotalRecords"].ToString(),
-                        'margin': 20,
-                 'autoplay': true,
-                 'autoplayTimeout': 3000,
-                        'loop': false,
-                        'responsive': {
-                            '0': {
-                                'items': 2
-                            },
-                            '576': {
-                                'items': 3
-                            },
-                            '768': {
-                                'items': 4
-                            },
-                            '992': {
-                                'items': 5
-                            },
-                            '1200': {
-                                'items': 6,
-                                'dots': false
-                            }
-                        }
-                    }">
-                    @{
-                        if (Model.DtDetails != null)
-                        {
-                            for (int i = 0; i < Model.DtDetails.Rows.Count; i++)
-                            {
-                                <div class="product text-center">
-                                    <figure class="product-media">
-                                        <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">
-                                            <img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="300"
-                                                 height="338">
-                                            <img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="300"
-                                                 height="338">
-                                        </a>
-                                        <div class="product-action-vertical">
-                                            <a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart" data-toggle="modal" title="Add to cart" value="Add" name="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())"
-                                               data-target="#addCartModal">
-                                                <i class="d-icon-bag"></i>
-                                            </a>
-                                            @*<a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                                <i class="d-icon-heart"></i>
-                                            </a>*@
-                                        </div>
-                                        <div class="product-action">
-                                            <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())" class="btn-product btn-quickview" title="Quick View">Quick View</a>
-                                        </div>
-                                    </figure>
-                                    <div class="product-details">
-                                        <h3 class="product-name">
-                                            <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
-                                        </h3>
-                                        <div class="product-price">
-                                            <ins class="new-price">₹@Model.DtDetails.Rows[i]["DP"].ToString()</ins><del class="old-price">₹@Model.DtDetails.Rows[i]["OfferedPrice"].ToString()</del>
-                                        </div>
-                                        <div class="ratings-container">
-                                            <div class="ratings-full">
-                                                @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "1")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                }
-                                                @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "2")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                }
-                                                @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "3")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                }
-                                                @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "4")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                }
-                                                @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "5")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-
-                                                }
-                                            </div>
-                                            @if (@Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "0")
-                                            {
-
-                                            }
-                                            else
-                                            {
-                                                <a href="#" class="rating-reviews">@Model.DtDetails.Rows[i]["ReviewCount"].ToString()</a>
-                                            }
-
-                                        </div>
-                                    </div>
-                                </div>
-                            }
-                        }
-                    }
-                </div>
-            </section>
-        }
+     
+                                         
 </main>
 <script src="~/Content/NewAssests/vendor/jquery/jquery.min.js"></script>
 <script src="~/Content/NewAssests/vendor/owl-carousel/owl.carousel.min.js"></script>
