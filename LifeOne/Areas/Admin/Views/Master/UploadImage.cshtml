@@ -24,10 +24,6 @@
                 <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
             </div>
-
-
-
-
         }
     }
 
@@ -73,10 +69,8 @@
                                             <td>@(count = count + 1)</td>
                                             <td><img src="@item.ImageUrl" height="50px" width="50px" /></td>
                                             <td>@item.CreatedDate</td>
-                                            <td class="text-right">
-                                                @*<button type="button" class="btn btn-primary btn-sm" onclick="return OpenPopUp()" data-toggle="modal" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>*@
-
-                                                <a href="/Master/ImageDelete?Id=@item.Id" onclick="return confirm ('Are you sure to delete?');"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                            <td class="text-right">                                              
+                                                <a href="/Master/ImageDelete?Id=@item.Id" onclick="return confirm ('Are you sure want to delete?');"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     }
@@ -127,7 +121,7 @@
         </div>
 
     </div>
-}
+ }
 
 </div>
 
@@ -180,8 +174,8 @@
         }
         var extension = $("#file").val().split('.').pop().toUpperCase();
         if (extension != "PNG" && extension != "JPG" && extension != "JPEG") {
-            alert("Invalid image file format.Only jpg,jpeg,png files are allow");
-            return false;
+            alert("Invalid image file format.Only jpg,jpeg,png files are allow");           
+            return false;            
         }
     }
 </script>

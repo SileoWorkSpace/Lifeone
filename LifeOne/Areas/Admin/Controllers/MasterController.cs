@@ -1819,7 +1819,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 {
                     TempData["code"] = _result.Code.ToString();
                     TempData["msg"] = _result.Msg.ToString();
-                    //return RedirectToAction("UploadImage", "Master");
+                    return Redirect("UploadImage");
                 }
                 else
                 {
@@ -1831,8 +1831,7 @@ namespace LifeOne.Areas.Admin.Controllers
             catch (Exception)
             {
                 throw;
-            }
-            //return RedirectToAction("UploadImage", "Master");
+            }           
             return Redirect("UploadImage");
         }
         [HttpGet]
@@ -1886,7 +1885,7 @@ namespace LifeOne.Areas.Admin.Controllers
         public ActionResult VideoDelete(int Id)
         {
             MAdminProductMaster obj = new MAdminProductMaster();
-           // obj.Id = Id;
+            obj.Id = Id.ToString();
             obj.OpCode = 2;
             try
             {

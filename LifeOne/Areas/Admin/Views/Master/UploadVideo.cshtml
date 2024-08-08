@@ -59,28 +59,30 @@
                             <thead>
                                 <tr>
                                     <th>#Sn.</th>
-                                    <th>Video</th>
+                                    <th>Video Link</th>
                                     <th>Created Date</th>
                                     <th class="text-right">Actions</th>
                                 </tr>
-                            </thead>
-                            @foreach (var item in Model.ProductMasterList)
-                             {
-                                <tr>
-                                    <td>@(count = count + 1)</td>
-                                    <td>
-                                        <video width="100" height="100" controls>
-                                            <source src="@item.Videolink">
-                                        </video>
-                                    </td>
-                                    <td>@item.CreatedDate</td>
-                                    <td>
-                                        <a href="/Master/VideoDelete?Id=@item.Id" onclick="return confirm ('Are you sure to delete?');" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                             }
+                            </thead>                            
                             <tbody>
-                            </tbody>
+                                @if (Model != null && Model.ProductMasterList.Count > 0)
+                                {
+
+                                    foreach (var item in Model.ProductMasterList)
+                                    {
+                                        <tr>
+                                            <td>@(count = count + 1)</td>
+                                            <td>
+                                                <a href="#">@item.Videolink</a>
+                                            </td>
+                                            <td>@item.CreatedDate</td>
+                                            <td>
+                                                <a href="/Master/VideoDelete?Id=@item.Id" onclick="return confirm ('Are you sure want to delete?');" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                </tbody>
                         </table>
                     </div>
                 </div>
