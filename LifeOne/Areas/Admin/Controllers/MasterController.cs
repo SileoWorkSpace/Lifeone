@@ -28,7 +28,8 @@ namespace LifeOne.Areas.Admin.Controllers
     [SessionTimeoutAttributeAdmin]
     public class MasterController : Controller
     {
-        AdminProductMasterService _objService = new AdminProductMasterService();
+        //AdminProductMasterService _objService = new AdminProductMasterService();
+        AdminImageUploadService _objServices = new AdminImageUploadService();
         // GET: Admin/Master
         public ActionResult Index()
         {
@@ -1743,17 +1744,188 @@ namespace LifeOne.Areas.Admin.Controllers
             }
             return Json(list);
         }       
-        public ActionResult UploadImage(MAdminProductMaster obj)
-        {
+        //public ActionResult UploadImage(MAdminProductMaster obj)
+        //{
 
-            List<MAdminProductMaster> objlst = new List<MAdminProductMaster>();
+        //    List<MAdminProductMaster> objlst = new List<MAdminProductMaster>();
+        //    try
+        //    {
+        //        ResponseMaster _result = new ResponseMaster();
+        //        objlst = _objService.ImageGetService(obj);
+        //        if (objlst != null)
+        //        {
+        //            obj.ProductMasterList = objlst;
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return View(obj);
+        //}
+        //[HttpPost]
+        //public ActionResult UploadImageSave(MAdminProductMaster obj)
+        //{           
+        //    ResponseMaster _result = new ResponseMaster();
+        //    try
+        //    {
+
+        //        if (obj.file != null && obj.file.ContentLength > 0)
+        //        {
+        //            string ImageUrl = obj.file.FileName;
+        //            var ImagePath = "~/Images/ImageUrl/";
+        //            var extension = Path.GetExtension(ImageUrl);
+        //            var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + ImageUrl;
+        //            obj.ImageUrl = ImagePath + fileName;
+
+        //            var filename = Path.Combine(Server.MapPath(ImagePath), fileName);
+        //            if (!Directory.Exists(Server.MapPath(ImagePath)))
+        //            {
+        //                Directory.CreateDirectory((Server.MapPath(ImagePath)));
+        //            }
+        //            obj.file.SaveAs(filename);
+
+        //        }
+        //        obj.OpCode = 1;
+        //        _result = _objService.SaveImage(obj);
+        //        if (_result != null)
+        //        {
+
+        //            TempData["code"] = _result.Code.ToString();
+        //            TempData["msg"] = _result.Msg.ToString();
+        //            return Redirect("UploadImage");
+        //        }
+        //        else
+        //        {
+        //            TempData["code"] = "0";
+        //            TempData["msg"] = "Can not process the request";
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }            
+        //    return Redirect("UploadImage");                      
+        //}       
+        //public ActionResult ImageDelete(int Id)
+        //{
+        //    MAdminProductMaster obj = new MAdminProductMaster();
+        //    obj.Id = Id.ToString();
+        //    obj.OpCode = 2;
+        //    try
+        //    {
+        //        ResponseMaster _result = new ResponseMaster();
+        //        _result = _objService.DeleteImage(obj);
+        //        if (_result != null)
+        //        {
+        //            TempData["code"] = _result.Code.ToString();
+        //            TempData["msg"] = _result.Msg.ToString();
+        //            return Redirect("UploadImage");
+        //        }
+        //        else
+        //        {
+        //            TempData["code"] = "0";
+        //            TempData["msg"] = "Can not process the request";
+
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }           
+        //    return Redirect("UploadImage");
+        //}
+        //[HttpGet]
+        //public ActionResult UploadVideo()
+        //{
+        //    MAdminProductMaster obj = new MAdminProductMaster();
+        //    List<MAdminProductMaster> objlst = new List<MAdminProductMaster>();
+        //    try
+        //    {
+
+        //        objlst = _objService.GetVideoService(obj);
+        //        if (objlst != null)
+        //        {
+        //            obj.ProductMasterList = objlst;
+        //        }
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return View(obj);
+        //}
+        //[HttpPost]
+        //public ActionResult UploadVideo(MAdminProductMaster obj)
+        //{
+        //    ResponseMaster _result = new ResponseMaster();
+        //    try
+        //    {
+        //         obj.OpCode = 1;
+        //        _result = _objService.SaveVideo(obj);
+        //        if (_result != null)
+        //        {
+
+        //            TempData["code"] = _result.Code.ToString();
+        //            TempData["msg"] = _result.Msg.ToString();
+        //            return Redirect("UploadVideo");
+        //        }
+        //        else
+        //        {
+        //            TempData["code"] = "0";
+        //            TempData["msg"] = "Can not process the request";
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return Redirect("UploadVideo");
+        //}
+        //public ActionResult VideoDelete(int Id)
+        //{
+        //    MAdminProductMaster obj = new MAdminProductMaster();
+        //    obj.Id = Id.ToString();
+        //    obj.OpCode = 2;
+        //    try
+        //    {
+
+        //        ResponseMaster _result = new ResponseMaster();
+
+        //        _result = _objService.SaveVideo(obj);
+        //        if (_result != null)
+        //        {
+
+        //            TempData["code"] = _result.Code.ToString();
+        //            TempData["msg"] = _result.Msg.ToString();
+        //            return Redirect("UploadVideo");
+        //        }
+
+        //        else
+        //        {
+        //            TempData["code"] = "0";
+        //            TempData["msg"] = "Can not process the request";
+        //        }
+
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    }
+        //    return Redirect("UploadVideo");
+        //}
+
+        public ActionResult UploadImage(MAdminImageUpload obj)
+        {            
+            List<MAdminImageUpload> objlst = new List<MAdminImageUpload>();
             try
             {
-                ResponseMaster _result = new ResponseMaster();
-                objlst = _objService.ImageGetService(obj);
+                ResponseUploadImage _result = new ResponseUploadImage();
+                objlst = _objServices.ImageGetService(obj);
                 if (objlst != null)
                 {
-                    obj.ProductMasterList = objlst;
+                    obj.ImageList = objlst;
                 }
             }
             catch (Exception)
@@ -1763,12 +1935,11 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(obj);
         }
         [HttpPost]
-        public ActionResult UploadImageSave(MAdminProductMaster obj)
-        {           
-            ResponseMaster _result = new ResponseMaster();
+        public ActionResult UploadImageSave(MAdminImageUpload obj)
+        {
+            ResponseUploadImage _result = new ResponseUploadImage();
             try
             {
-
                 if (obj.file != null && obj.file.ContentLength > 0)
                 {
                     string ImageUrl = obj.file.FileName;
@@ -1786,7 +1957,8 @@ namespace LifeOne.Areas.Admin.Controllers
 
                 }
                 obj.OpCode = 1;
-                _result = _objService.SaveImage(obj);
+                obj.CreatedBy = int.Parse(SessionManager.Fk_MemId.ToString());
+                _result = _objServices.SaveImage(obj);
                 if (_result != null)
                 {
 
@@ -1803,18 +1975,18 @@ namespace LifeOne.Areas.Admin.Controllers
             catch (Exception)
             {
                 throw;
-            }            
-            return Redirect("UploadImage");                      
-        }        
+            }
+            return Redirect("UploadImage");
+        }
         public ActionResult ImageDelete(int Id)
         {
-            MAdminProductMaster obj = new MAdminProductMaster();
+            MAdminImageUpload obj = new MAdminImageUpload();
             obj.Id = Id.ToString();
             obj.OpCode = 2;
             try
             {
-                ResponseMaster _result = new ResponseMaster();
-                _result = _objService.DeleteImage(obj);
+                ResponseUploadImage _result = new ResponseUploadImage();
+                _result = _objServices.DeleteImage(obj);
                 if (_result != null)
                 {
                     TempData["code"] = _result.Code.ToString();
@@ -1825,29 +1997,26 @@ namespace LifeOne.Areas.Admin.Controllers
                 {
                     TempData["code"] = "0";
                     TempData["msg"] = "Can not process the request";
-
                 }
             }
             catch (Exception)
             {
                 throw;
-            }           
+            }
             return Redirect("UploadImage");
         }
         [HttpGet]
         public ActionResult UploadVideo()
         {
-            MAdminProductMaster obj = new MAdminProductMaster();
-            List<MAdminProductMaster> objlst = new List<MAdminProductMaster>();
+            MAdminImageUpload obj = new MAdminImageUpload();
+            List<MAdminImageUpload> objlst = new List<MAdminImageUpload>();
             try
             {
-
-                objlst = _objService.GetVideoService(obj);
+                objlst = _objServices.GetVideoService(obj);
                 if (objlst != null)
                 {
-                    obj.ProductMasterList = objlst;
+                    obj.ImageList = objlst;
                 }
-
             }
             catch (Exception)
             {
@@ -1856,13 +2025,14 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(obj);
         }
         [HttpPost]
-        public ActionResult UploadVideo(MAdminProductMaster obj)
+        public ActionResult UploadVideo(MAdminImageUpload obj)
         {
-            ResponseMaster _result = new ResponseMaster();
+            ResponseUploadImage _result = new ResponseUploadImage();
             try
             {
-                 obj.OpCode = 1;
-                _result = _objService.SaveVideo(obj);
+                obj.OpCode = 1;
+                obj.CreatedBy = int.Parse(SessionManager.Fk_MemId.ToString());
+                _result = _objServices.SaveVideo(obj);
                 if (_result != null)
                 {
 
@@ -1884,15 +2054,14 @@ namespace LifeOne.Areas.Admin.Controllers
         }
         public ActionResult VideoDelete(int Id)
         {
-            MAdminProductMaster obj = new MAdminProductMaster();
+            MAdminImageUpload obj = new MAdminImageUpload();
             obj.Id = Id.ToString();
             obj.OpCode = 2;
             try
             {
+                ResponseUploadImage _result = new ResponseUploadImage();
 
-                ResponseMaster _result = new ResponseMaster();
-
-                _result = _objService.SaveVideo(obj);
+                _result = _objServices.DeleteVideo(obj);
                 if (_result != null)
                 {
 
@@ -1900,13 +2069,11 @@ namespace LifeOne.Areas.Admin.Controllers
                     TempData["msg"] = _result.Msg.ToString();
                     return Redirect("UploadVideo");
                 }
-
                 else
                 {
                     TempData["code"] = "0";
                     TempData["msg"] = "Can not process the request";
                 }
-
             }
             catch (Exception)
             {

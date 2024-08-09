@@ -1,4 +1,4 @@
-﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminProductMaster
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminImageUpload
 @using LifeOne.Models.Manager;
 @{
     ViewBag.Title = "Upload Image";
@@ -60,17 +60,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if (Model != null && Model.ProductMasterList.Count > 0)
+                                @if (Model != null && Model.ImageList.Count > 0)
                                 {
 
-                                    foreach (var item in Model.ProductMasterList)
+                                    foreach (var item in Model.ImageList)
                                     {
                                         <tr>
                                             <td>@(count = count + 1)</td>
                                             <td><img src="@item.ImageUrl" height="50px" width="50px" /></td>
                                             <td>@item.CreatedDate</td>
                                             <td class="text-right">                                              
-                                                <a href="/Master/ImageDelete?Id=@item.Id" onclick="return confirm ('Are you sure want to delete?');"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                <a href="/Admin/Master/ImageDelete?Id=@item.Id" onclick="return confirm ('Are you sure want to delete?');"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                             </td>
                                         </tr>
                                     }
@@ -93,7 +93,6 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-
                     <h4 class="modal-title">Upload Image</h4>
                 </div>
                 <div class="modal-body">
@@ -113,21 +112,20 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
-
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
-
             </div>
         </div>
-
     </div>
  }
 
-</div>
-
-
 <script type="text/javascript">
-
+    function ResetPopup() {
+        $("#file").val("")
+        $('#Bank').val("");        
+        $('#Save').val('Save')
+        $("#Save").show();
+    }
     function UploadFile() {
         debugger;
         /*    var Id = $(obj).attr("Id");*/
@@ -141,7 +139,6 @@
             return false;
         }
         else {
-
         }
         var extension = $("#file").val().split('.').pop().toUpperCase();
         if (extension != "PNG" && extension != "JPG" && extension != "JPEG") {
@@ -149,7 +146,6 @@
             return false;
         }
     }
-
     function ShowImagePreview(input) {
 
         if (input.files && input.files[0]) {

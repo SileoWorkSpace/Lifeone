@@ -378,6 +378,7 @@
     <Compile Include="Models\AdminManagement\ADAL\DALAdminIncomeType.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminManageStock.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminPlanIncome.cs" />
+    <Compile Include="Models\AdminManagement\ADAL\DALAdminImageUpload.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProductMaster.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminTermsCondition.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProductType.cs" />
@@ -438,6 +439,7 @@
     <Compile Include="Models\AdminManagement\AEntity\MAdminIncomeType.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminManageStock.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminPlanIncome.cs" />
+    <Compile Include="Models\AdminManagement\AEntity\MAdminImageUpload.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminProductMaster.cs" />
     <Compile Include="Models\AdminManagement\AEntity\AdminTermsCondition.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminProductType.cs" />
@@ -489,6 +491,7 @@
     <Compile Include="Models\AdminManagement\AService\AdminDashboardService.cs" />
     <Compile Include="Models\AdminManagement\AService\AdminFranchiseOrderService.cs" />
     <Compile Include="Models\AdminManagement\AService\AdminKYCService.cs" />
+    <Compile Include="Models\AdminManagement\AService\AdminImageUploadService.cs" />
     <Compile Include="Models\AdminManagement\AService\AdminProductMasterService.cs" />
     <Compile Include="Models\AdminManagement\AService\AdminProfileService.cs" />
     <Compile Include="Models\AdminManagement\AService\AdminReportsService.cs" />
