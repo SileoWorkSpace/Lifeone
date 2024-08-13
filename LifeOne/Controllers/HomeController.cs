@@ -44,7 +44,7 @@ namespace LifeOne.Controllers
         //DataTable dt = _objservice.CreateCartProduct("0.80938891", "1", "hi", "2021/01/20");
         // LifeOne.Models.API.Common.SendEmailByAPICommonVerification("amar@qloginuaeretech.com", "Amar" + " " + "yadav", "7800444476", "123456");
         public ActionResult Index(Products products, string Add, string Fk_CategoryId, string ProductName)
-        {            
+        {
             string time = DateTime.Now.ToString("ddMMyyyyhhMMss") + "_" + 4050;
             WebSitePopup model = DALProductServices.WebSitePopup();
             ViewBag.PopupStatus = model.Status;
@@ -77,7 +77,7 @@ namespace LifeOne.Controllers
             DataSet dataSet = products.GetAllProducts();
             products.DtDetails = dataSet.Tables[0];
             if (products.DtDetails != null)
-            {                  
+            {
                 for (int i = 0; i < products.DtDetails.Rows.Count; i++)
                 {
                     Products listdata1 = new Products();
@@ -95,10 +95,10 @@ namespace LifeOne.Controllers
                     listdata1.OfferedPrice = dataSet.Tables[0].Rows[i]["OfferedPrice"].ToString();
                     listdata1.ReviewCount = dataSet.Tables[0].Rows[i]["ReviewCount"].ToString();
                     listdata1.TotalRecords = int.Parse(dataSet.Tables[0].Rows[i]["TotalRecord"].ToString());
-                    productsList1.Add(listdata1);                                   
+                    productsList1.Add(listdata1);
                 }
                 DataTable dataTable = DALCommon.ToDataTable(productsList1);
-                products.DtDetails = dataTable;               
+                products.DtDetails = dataTable;
             }
             //products.DtDetailsecond = dataSet.Tables[1];
             //products.ProductType = products.DtDetails.Rows[0]["CategoryName"].ToString();
@@ -388,7 +388,7 @@ namespace LifeOne.Controllers
             if (products.DtDetails != null && products.DtDetails.Rows.Count > 0)
             {
                 products.ProductType = products.DtDetails.Rows[0]["CategoryName"].ToString();
-                
+
                 for (int i = 0; i < products.DtDetails.Rows.Count; i++)
                 {
                     Products listdata1 = new Products();
@@ -440,12 +440,10 @@ namespace LifeOne.Controllers
             if (!string.IsNullOrEmpty(Add))
             {
                 Session["Pk_ProductId"] = products.Pk_ProductId;
-
                 if (string.IsNullOrEmpty(SessionManager.LoginId))
                 {
                     return RedirectToAction("Login", "Home");
                 }
-
                 return RedirectToAction("ShoppingCartList", "Home");
             }
             products.Fk_CategoryId = int.Parse(CategoryId.ToString());
@@ -474,8 +472,6 @@ namespace LifeOne.Controllers
             //{
             //    return RedirectToAction("Login", "Home");
             //}
-
-
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Products");
@@ -490,7 +486,6 @@ namespace LifeOne.Controllers
                 SessionManager.TotalItems = int.Parse(products.DtDetails.Rows[0]["Quantity"].ToString());
                 id = Crypto.Encryption(Aeskey, productDetails.Pk_ProductId.ToString());
             }
-
             DataTable dtImages = new DataTable();
             dtImages.Columns.Add("Images");
             id = id.Replace(" ", "+");
@@ -502,7 +497,7 @@ namespace LifeOne.Controllers
             productDetails.ReviewCount = dataSet.Tables[0].Rows[0]["ReviewCount"].ToString();
             productDetails.MRP = dataSet.Tables[0].Rows[0]["MRP"].ToString();
             productDetails.OfferedPrice = dataSet.Tables[0].Rows[0]["OfferedPrice"].ToString();
-            productDetails.ProductImage = baseurl+dataSet.Tables[0].Rows[0]["ProductImage"].ToString();
+            productDetails.ProductImage = baseurl + dataSet.Tables[0].Rows[0]["ProductImage"].ToString();
             productDetails.ProductDescription = dataSet.Tables[0].Rows[0]["ProductDescription"].ToString();
             productDetails.DirectionOfUse = dataSet.Tables[0].Rows[0]["DirectionOfUse"].ToString();
             productDetails.Doses = dataSet.Tables[0].Rows[0]["Doses"].ToString();
@@ -536,10 +531,10 @@ namespace LifeOne.Controllers
                         listdata1.ProductImage = baseurlNoImg;
                     }
                     listdata1.Pk_ProductId = int.Parse(dataSet3.Tables[0].Rows[i]["Pk_ProductId"].ToString());
-                    listdata1.ProductName = dataSet3.Tables[0].Rows[i]["ProductName"].ToString();                  
-                    listdata1.DP = decimal.Parse(dataSet3.Tables[0].Rows[i]["DP"].ToString());                  
+                    listdata1.ProductName = dataSet3.Tables[0].Rows[i]["ProductName"].ToString();
+                    listdata1.DP = decimal.Parse(dataSet3.Tables[0].Rows[i]["DP"].ToString());
                     listdata1.OfferedPrice = dataSet3.Tables[0].Rows[i]["OfferedPrice"].ToString();
-                    listdata1.ReviewCount = dataSet3.Tables[0].Rows[i]["ReviewCount"].ToString();                   
+                    listdata1.ReviewCount = dataSet3.Tables[0].Rows[i]["ReviewCount"].ToString();
                     productsList1.Add(listdata1);
                 }
                 DataTable dataTable = DALCommon.ToDataTable(productsList1);
@@ -2084,7 +2079,7 @@ namespace LifeOne.Controllers
             {
                 throw ex;
             }
-            
+
             return View(obj);
         }
 
@@ -2217,11 +2212,58 @@ namespace LifeOne.Controllers
         }
         public ActionResult ImageGallery()
         {
-            return View();
+            UploadImageVideo obj = new UploadImageVideo();
+            try
+            {
+                List<UploadImageVideo> ImageList1 = new List<UploadImageVideo>();
+                DataSet ds = obj.getImagegallery();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        UploadImageVideo ImageList = new UploadImageVideo();
+                        ImageList.ImageUrl = ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        ImageList1.Add(ImageList);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(ImageList1);
+                    obj.dtDetails = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(obj);
         }
         public ActionResult Video()
         {
-            return View();
+            UploadImageVideo obj = new UploadImageVideo();
+            try
+            {
+                List<UploadImageVideo> ImageList1 = new List<UploadImageVideo>();
+                DataSet ds = obj.getVideogallery();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        UploadImageVideo ImageList = new UploadImageVideo();
+                        ImageList.Videolink = ds.Tables[0].Rows[i]["Videolink"].ToString();
+                        ImageList1.Add(ImageList);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(ImageList1);
+                    obj.dtDetails = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(obj);
+            //  return View();
         }
     }
 }
