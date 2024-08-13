@@ -2223,8 +2223,16 @@ namespace LifeOne.Controllers
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
                         UploadImageVideo ImageList = new UploadImageVideo();
-                        ImageList.ImageUrl = ds.Tables[0].Rows[i]["ImageUrl"].ToString();
-                        ImageList1.Add(ImageList);
+                        if (!string.IsNullOrEmpty(ds.Tables[0].Rows[i]["ImageUrl"].ToString()))
+                        {
+                            ImageList.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        }
+                        else
+                        {
+                            ImageList.ImageUrl = baseurlNoImg;
+                        }
+                        //ImageList.ImageUrl = ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        ImageList1.Add(ImageList);                                               
                     }
                     DataTable dataTable = DALCommon.ToDataTable(ImageList1);
                     obj.dtDetails = dataTable;
@@ -2237,6 +2245,7 @@ namespace LifeOne.Controllers
 
             return View(obj);
         }
+
         public ActionResult Video()
         {
             UploadImageVideo obj = new UploadImageVideo();
