@@ -1,0 +1,122 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MPayoutReport
+@{
+    ViewBag.Title = "Print Payout Report For Bank";
+    Layout = null;
+}
+
+<div class="container-fluid">
+    <div class="card" id="PrintPayout">
+        <div class="card-body">
+            <div class="row page-titles d-flex justify-content-between">
+                <div class="ptitle">
+                    <h4 class="mb-1 mt-0">LIFEONE WELLNESS PRIVATE LIMITED</h4>
+                    <p>
+                        Lucknow uttar pradesh - 226016
+                    </p>
+                </div>
+                <div class="pbutton">
+                    <div class="right text-right">
+                        <span>
+                            <button class="btn btn-success btn-rounded btnprint" onclick="printDiv('PrintPayout')" title="Print"><i class="fa fa-print"></i></button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <p>To</p>
+                    <p>Branch Manager</p>
+                    <p>Kotak Mahindra Bank</p>
+                    <p>Munsipulia Branch</p>
+                </div>
+            </div>
+            <div class="row" style="padding-top:30px;">
+                <div class="col-md-12">
+                    <p>Sub-Bulk Payment Transfer- Aug-2024 from Chq No._________________ Ac No. 056734266276.</p>
+                </div>
+            </div>
+            <div id="no-more-tables">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box">
+                            <div class="box-body">
+                                <div class="table-responsive">
+                                    <table class="table table-striped border-1 mb-0">
+                                        <thead>
+                                            <tr>
+                                                <th align="left" scope="col">#Sn.</th>
+                                                <th align="left" scope="col">Name</th>
+                                                <th align="left" scope="col">Bank Name</th>
+                                                <th align="left" scope="col">Account No</th>
+                                                <th align="left" scope="col">IFSC Code</th>
+                                                <th align="left" scope="col">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.Objlist.Count > 0)
+                                            {
+
+                                                int i = 1;
+                                                int page = Model.Pager.CurrentPage;
+                                                page = (page - 1);
+                                                i = ((page) * (Model.Pager.PageSize));
+
+
+                                                foreach (var item in Model.Objlist)
+                                                {
+
+                                                    <tr>
+                                                        <td data-title="#SN:">@(i+1)</td>
+                                                        <td>@item.Name</td>
+                                                        <th>@item.BankName</th>
+                                                        <th>@item.IFSCCode</th>
+                                                        <th>@item.MemberAccNo</th>
+                                                        <td>@item.NetIncome</td>
+                                                    </tr>
+                                                    i++;
+                                                }
+                                                i++;
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td style="text-align:center" colspan="12">No Record Found..</td>
+                                                </tr>
+                                            }
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                            <!-- /.box -->
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/assets/libs/jquery/jquery.min.js"></script>
+<script>
+    function printDiv(PrintPayout) {
+        debugger
+        var printContents = document.getElementById(PrintPayout).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+    $(document).ready(function () {
+
+        printDiv('PrintPayout');
+    });
+
+</script>
+
+
+
+
+

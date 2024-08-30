@@ -5816,6 +5816,17 @@ namespace LifeOne.Areas.Admin.Controllers
             return Json(obj, JsonRequestBehavior.AllowGet);
 
         }
+        public ActionResult PrintPayoutReportForBank(int? Page)
+        {
+            MPayoutReport obj = new MPayoutReport();          
+            ViewBag.LoginId = obj.MemberLoginId;                      
+            obj = AdminReportsService.GetPayoutReportForBankService(Page, obj);
+            //ViewBag.PayoutMaster = DALBindCommonDropdown.BindPayoutMaster();
+            Session["PReportBank"] = obj.Objlist;
+            //return Redirect("/AdminReport/PayoutReportForBank");
+            return View(obj);
+
+        }
 
     }
 }
