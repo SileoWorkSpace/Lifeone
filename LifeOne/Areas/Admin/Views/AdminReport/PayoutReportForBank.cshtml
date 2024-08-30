@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
-
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="ptitle">
@@ -26,11 +24,9 @@
                 <span>
                     <a href="/Admin/AdminReport/PrintPayoutReportForBank" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" data-placement="top" title="Print"><i class="fa fa-print"></i></a>
 
-                    <a href="#" onclick="fCallPaging(1,1)" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" data-placement="top" title="Download Excel"><i class="fa fa-file-excel-o"></i></a>
-                    @*<button class="btn btn-default btn-custom btn-rounded btn-sm" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>*@
+                    <a href="#" onclick="fCallPaging(1,1)" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" data-placement="top" title="Download Excel"><i class="fa fa-file-excel-o"></i></a>                    
                     <button class="btn btn-success btn-rounded btnprint" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>
                     <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
-
                 </span>
 
             </div>
