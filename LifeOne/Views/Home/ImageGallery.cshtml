@@ -6,7 +6,7 @@
 }
 <style>
     .gallery {
-        display: grid;
+        display: flex;
         grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
         grid-gap: 2rem;
         padding: 40px 0px 40px 0px;
@@ -16,6 +16,8 @@
     .gallery__item {
         box-shadow: 0 .1875rem .625rem rgba(0, 0, 0, 0.4);
         overflow: hidden;
+        width: 350px;
+        height: 250px;
     }
 
     .gallery__item {
