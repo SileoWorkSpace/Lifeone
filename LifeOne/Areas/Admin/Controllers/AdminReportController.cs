@@ -5822,7 +5822,7 @@ namespace LifeOne.Areas.Admin.Controllers
             ViewBag.LoginId = obj.MemberLoginId;                      
             obj = AdminReportsService.GetPayoutReportForBankService(Page, obj);           
             Session["PReportBank"] = obj.Objlist;
-            //return Redirect("/Admin/AdminReport/PayoutReportForBank");
+            //return RedirectToAction("PayoutReportForBank", "AdminReport");
             return View(obj);
 
         }

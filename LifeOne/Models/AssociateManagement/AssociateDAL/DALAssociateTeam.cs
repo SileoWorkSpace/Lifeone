@@ -127,8 +127,9 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                             TotalRecords= Convert.ToInt32(dr["TotalCount"].ToString()),
                             ParentName = dr["ParentName"].ToString(),
                             SponsorName = dr["SponsorName"].ToString(),
-                            Status=dr["ActiveStatus"].ToString()
-                            
+                            Status=dr["ActiveStatus"].ToString(),
+                            PackageName = dr["PackageName"].ToString(),
+
                         });
 
                     }
