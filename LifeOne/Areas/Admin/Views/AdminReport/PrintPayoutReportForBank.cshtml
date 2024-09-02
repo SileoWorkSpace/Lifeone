@@ -3,102 +3,180 @@
     ViewBag.Title = "Print Payout Report For Bank";
     Layout = null;
 }
-
-<div class="container-fluid">
-    <div class="card" id="PrintPayout">
-        <div class="card-body">
-            <div class="row page-titles d-flex justify-content-between">
-                <div class="ptitle">
-                    <h4 class="mb-1 mt-0">LIFEONE WELLNESS PRIVATE LIMITED</h4>
-                    <p>
-                        Lucknow uttar pradesh - 226016
-                    </p>
-                </div>
-                @*<div class="pbutton">
-                    <div class="right text-right">
-                        <span>
-                            <button class="btn btn-success btn-rounded btnprint" onclick="printDiv('PrintPayout')" title="Print"><i class="fa fa-print"></i></button>
-                        </span>
-                    </div>
-                </div>*@
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <p>To</p>
-                    <p>Branch Manager</p>
-                    <p>Kotak Mahindra Bank</p>
-                    <p>Munsipulia Branch</p>
-                </div>
-            </div>
-            <div class="row" style="padding-top:30px;">
-                <div class="col-md-12">
-                    <p>Sub-Bulk Payment Transfer- Aug-2024 from Chq No._________________ Ac No. 056734266276.</p>
-                </div>
-            </div>
-            <div id="no-more-tables">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="box">
-                            <div class="box-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped border-1 mb-0">
-                                        <thead>
-                                            <tr>
-                                                <th align="left" scope="col">#Sn.</th>
-                                                <th align="left" scope="col">Name</th>
-                                                <th align="left" scope="col">Bank Name</th>
-                                                <th align="left" scope="col">Account No</th>
-                                                <th align="left" scope="col">IFSC Code</th>
-                                                <th align="left" scope="col">Amount</th>
-                                            </tr>
-                                        </thead>
+<head>
+    <meta charset="utf-8" />
+    <title>Print Payout Report For Bank</title>
+</head>
+<body style="
+      margin: 10px 0;
+      font-size: 12px;
+      font-family: Arial, Verdana, Tahoma;
+      line-height: 16px;
+    ">
+    <table cellspacing="0" cellpadding="0" style="
+        width: 800px;
+        margin: 0px auto;
+        border: 1px solid #000;
+        font-size: 12px;
+        font-family: Arial, Verdana, Tahoma;
+        line-height: 16px;
+      ">
+        <tbody id="PrintPayout">
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
+                                            <tr>
+                                                <td style="
+                              width: 100%;
+                              vertical-align: top;
+                              text-align: center;
+                            "></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="
+                              text-align: left;
+                              border-bottom: 0px solid #000;
+                            ">
+                                                    <h2 style="
+                                margin: 0px;
+                                padding: 40px 0px 0px 0px;
+                                font-size: 26px;
+                                text-transform: uppercase;
+                                text-align: center;
+                              ">
+                                                        lifeone wellness private limited
+                                                    </h2>
+                                                    <p style="
+                                text-align: center;
+                                border-bottom: 0px solid #000;
+                                font-weight: 600;
+                              ">
+                                                        9-8 Indira Nagar Near Arvindo Park Munshi Puliya
+                                                        Indira Nagar Lucknow Uttar Pradesh - 226016
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="
+                              border-top: 1px solid #000;
+                              width: 30%;
+                              vertical-align: top;
+                              padding: 10px 0px 0px 0px;
+                            ">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="padding: 5px 5px">
+                                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                        <tr>
+                                                                            <td><strong>To,</strong></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>The Branch Manager</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Kotak Mahindra Bank</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Munshipuliya Branch</td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                @*<td style="padding: 30px 0px 40px 5px;">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                                        <tbody>
+                                            <tr>
+                                                <td>Sub - Bulk Payment Transfer - Aug 2024 from Chq No.__________________ Ac No. 0512413558</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>*@
+                            </tr>
+                            <tr>
+                                <td style="border-top:1px solid #000; vertical-align:top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="1">
+                                        <tbody>
+                                            <tr>
+                                                <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>S.No.</strong></td>
+                                                <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>Name</strong></td>
+                                                <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>Bank Name</strong></td>
+                                                <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>Account No.</strong></td>
+                                                <td style="background:#f1f1f1;border-right:1px solid #000;border-bottom:1px solid #000; text-align:center"><strong>IFSC Code</strong></td>
+                                                <td style="border-right:1px solid #000;background:#f1f1f1;border-bottom:1px solid #000; text-align:center"><strong>Amount ₹</strong></td>
+
+                                            </tr>
                                             @if (Model != null && Model.Objlist.Count > 0)
                                             {
-
+                                                decimal TotalAmount = 0;
                                                 int i = 1;
                                                 int page = Model.Pager.CurrentPage;
                                                 page = (page - 1);
                                                 i = ((page) * (Model.Pager.PageSize));
 
-
                                                 foreach (var item in Model.Objlist)
                                                 {
-
+                                                    TotalAmount += Convert.ToDecimal(@item.NetIncome);
                                                     <tr>
-                                                        <td data-title="#SN:">@(i+1)</td>
-                                                        <td>@item.Name</td>
-                                                        <th>@item.BankName</th>
-                                                        <th>@item.IFSCCode</th>
-                                                        <th>@item.MemberAccNo</th>
-                                                        <td>@item.NetIncome</td>
+                                                        <td style="line-height:25px;border-right:1px solid #000;border-bottom:1px solid #000; text-align: center;">@(i+1)</td>
+                                                        <td style="line-height:25px;border-right:1px solid #000;border-bottom:1px solid #000;">@item.Name</td>
+                                                        <td style="border-right:1px solid #000;border-bottom:1px solid #000;">@item.BankName</td>
+                                                        <td style="border-right:1px solid #000;border-bottom:1px solid #000; text-align: center;">@item.MemberAccNo</td>
+                                                        <td style="border-right:1px solid #000;border-bottom:1px solid #000;">@item.IFSCCode</td>
+                                                        <td style="border-bottom:1px solid #000; text-align: center;">@item.NetIncome</td>
+
                                                     </tr>
-                                                    i++;
+                                                  i++;
                                                 }
                                                 i++;
-                                            }
-                                            else
-                                            {
                                                 <tr>
-                                                    <td style="text-align:center" colspan="12">No Record Found..</td>
-                                                </tr>
-                                            }
-
+                                                        <td colspan="4"></td>
+                                                        <td style="font-weight: 600;text-align: center;">TOTAL</td>
+                                                        <td style="font-weight: 600;text-align: center;">@TotalAmount</td>
+                                                    </tr>
+                                             }
                                         </tbody>
                                     </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
 
-                                </div>
-                            </div>
-                            <!-- /.box -->
-
-                        </div>
-                        <!-- /.col -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        </tbody>
+    </table>
+</body>
 <script src="~/assets/libs/jquery/jquery.min.js"></script>
 <script>
     function printDiv(PrintPayout) {

@@ -5820,10 +5820,9 @@ namespace LifeOne.Areas.Admin.Controllers
         {
             MPayoutReport obj = new MPayoutReport();          
             ViewBag.LoginId = obj.MemberLoginId;                      
-            obj = AdminReportsService.GetPayoutReportForBankService(Page, obj);
-            //ViewBag.PayoutMaster = DALBindCommonDropdown.BindPayoutMaster();
+            obj = AdminReportsService.GetPayoutReportForBankService(Page, obj);           
             Session["PReportBank"] = obj.Objlist;
-            //return Redirect("/AdminReport/PayoutReportForBank");
+            //return Redirect("/Admin/AdminReport/PayoutReportForBank");
             return View(obj);
 
         }
