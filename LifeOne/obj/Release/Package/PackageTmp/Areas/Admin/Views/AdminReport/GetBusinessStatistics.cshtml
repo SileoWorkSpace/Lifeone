@@ -1,0 +1,406 @@
+﻿@model LifeOne.Models.Reports
+
+@{
+    ViewBag.Title = "BusinessStatistics";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="~/Content/dist/js/CommonJS.js?1.0"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<div class="container-fluid">
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Business Statistics</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Reports</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Business Statistics</li>
+                    </ol>
+                </nav>*@
+        </div>
+        <div class="row">
+            <div class="col-md-5 col-xl-4">
+                <div class="card" style="background:#36cd9a">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Direct Income </span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; @Model.dtDirectBusinessValues0.Rows[0]["DirectIncome"].ToString()</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-4">
+                <div class="card" style="background:#69abff">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white"> Matching Bonus</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; @Model.dtDirectBusinessValues0.Rows[0]["MatchingBonus"].ToString()</h2></p>
+                                }
+                                else
+                                { 
+                            <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @*<div class="col-md-5 col-xl-4">
+                <div class="card" style="background:#ff6780">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Leadership Bonus</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p> <h2 class="mb-0 text-white">&#x20B9; @Model.dtDirectBusinessValues0.Rows[0]["LeadershipBonus"].ToString()</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>*@
+            <div class="col-md-5 col-xl-3">
+                <div class="card" style="background:#333333">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Gross Amount</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p> <h2 class="mb-0 text-white">&#x20B9; @Model.dtDirectBusinessValues0.Rows[0]["GrossAmount"].ToString()</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-3">
+                <div class="card" style="background:#ecac48">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3" style="height:116px;">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">TDS Amount</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; @Model.dtDirectBusinessValues0.Rows[0]["TDSAmount"].ToString()</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-3">
+                <div class="card" style="background: linear-gradient(to right,#ca4c64, #785153);">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Processing Fee</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; @Model.dtDirectBusinessValues0.Rows[0]["ProcessingFee"].ToString()</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-3">
+                <div class="card" style="background: linear-gradient(to right,#39a57d, #d1bbbb);">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white"> Net Amount</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; @Model.dtDirectBusinessValues0.Rows[0]["NetAmount"].ToString()</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-4">
+                <div class="card" style="background: linear-gradient(to right,#1e9bf2, #ea7da0);">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Business BV</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p> <h2 class="mb-0 text-white">@Model.dtDirectBusinessValues1.Rows[0]["BusinessBV"].ToString()</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-4">
+                <div class="card" style="background: linear-gradient(to right, #ff6958, #a6b4ff);">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Matching Amount</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p> <h2 class="mb-0 text-white">&#x20B9; @Model.dtDirectBusinessValues1.Rows[0]["MatchingAmt"].ToString()</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-5 col-xl-4">
+                <div class="card" style="background: linear-gradient(to right,#5f5465, #e47ea3);">
+                    <div class="card-body p-0 min-auto">
+                        <div class="media p-3" style="height:116px">
+                            <div class="media-body">
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Binary Distribution</span>
+                                @if (Model != null && Model.dtDirectBusinessValues0 != null)
+                                {
+                                    <p> <h2 class="mb-0 text-white">@Model.dtDirectBusinessValues1.Rows[0]["BinaryDist"].ToString() %</h2></p>
+                                }
+                                else
+                                {
+                                    <p><h2 class="mb-0 text-white">&#x20B9; 0</h2></p>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div id="no-more-tables">
+        <form id="form1" method="post">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-header">
+                                <h5> Paid Activation</h5>
+                            </div>
+                            <br />
+                            <div class="table-responsive" id="customers">
+                                <table class="table mb-0" id="tblCustomers">
+                                    <thead>
+                                        <tr>
+
+                                            <th>Package Name</th>
+                                            <th style="text-align:right">Business Amount</th>
+                                            <th style="text-align:right">Business BV</th>
+
+                                            <th style="text-align:right">Distribution Amount</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.dtPaidActivation != null && Model.dtPaidActivation.Rows.Count > 0)
+                                        {
+
+                                            for (var i = 0; i < Model.dtPaidActivation.Rows.Count; i++)
+                                            {
+
+                                                <tr>
+
+                                                    <td style="width:312px;">@Model.dtPaidActivation.Rows[i]["PackageName"].ToString()</td>
+                                                    <td style="text-align:right">@Model.dtPaidActivation.Rows[i]["BusinessAmount"].ToString()</td>
+                                                    <td style="text-align:right">@Model.dtPaidActivation.Rows[i]["BusinessBV"].ToString()</td>
+                                                    <td style="text-align:right">@Model.dtPaidActivation.Rows[i]["DisAmount"].ToString()</td>
+
+                                                </tr>
+                                            }
+                                        }
+
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <footer class="card-footer bg-white p-2">
+                        </footer>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <div class="col-lg-6">
+                    <div class="card">
+
+                        <div class="card-body">
+                            <div class="card-header">
+                                <h5>Free Activation</h5>
+                            </div>
+                            <br />
+                            <div class="table-responsive" id="customers">
+                                <table class="table mb-0" id="tblCustomers">
+                                    <thead>
+                                        <tr>
+                                            <th>Package Name</th>
+                                            <th style="text-align:right">Business Amount</th>
+                                            <th style="text-align:right">Business BV</th>
+
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.dtFreeActivation != null && Model.dtFreeActivation.Rows.Count > 0)
+                                        {
+
+                                            for (var i = 0; i < Model.dtFreeActivation.Rows.Count; i++)
+                                            {
+
+                                                <tr>
+
+                                                    <td style="width:312px;">@Model.dtFreeActivation.Rows[i]["PackageName"].ToString()</td>
+                                                    <td style="text-align:right">@Model.dtFreeActivation.Rows[i]["BusinessAmount"].ToString()</td>
+                                                    <td style="text-align:right">@Model.dtFreeActivation.Rows[i]["BusinessBV"].ToString()</td>
+
+
+
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                        <footer class="card-footer bg-white p-2">
+                        </footer>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+
+        </form>
+    </div>
+
+</div>
+<div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Order Details</h4>
+            </div>
+            <div class="modal-body">
+                <table class="table table-striped mb-0" id="tableOrderDetail">
+                    <thead>
+                        <tr>
+
+                            <th>Package Name</th>
+                            <th>Business Amount</th>
+                            <th>Business BV</th>
+                            <th>Dis Amount</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                    </tbody>
+                    <tfoot id="tablefoot">
+
+                    </tfoot>
+                </table>
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+<div id="tblpdff" style="font-size:50px;">
+
+</div>
+<script>
+    function fCallPaging(val) {
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+
+</script>

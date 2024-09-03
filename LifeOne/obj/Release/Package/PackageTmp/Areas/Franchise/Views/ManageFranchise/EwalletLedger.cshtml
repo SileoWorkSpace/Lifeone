@@ -1,0 +1,123 @@
+﻿@model LifeOne.Models.FranchiseManagement.FEntity.FranchiseEWalletledger
+
+@{
+    ViewBag.Title = "EwalletLedger";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Franchise Wallet Ledger</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Franchise-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Wallet</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Ledger</li>
+                    </ol>
+                </nav>*@
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped mb-0">
+            <thead>
+                <tr>
+                <tr>
+                    <th>S.No.</th>
+                    <th>Payment Date</th>
+                    <th>Narration </th>
+                    <th style="text-align:right">DrAmount</th>
+                    <th style="text-align:right">CrAmount</th>
+                    <th style="text-align:right">Balance</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null)
+                {
+                    if (Model.dtRequestDetails != null)
+                    {
+                        if (Model.dtRequestDetails.Rows.Count > 0)
+                        {
+                            var j = 1;
+                            //int i = 1;
+                            var page = Model.Pager.CurrentPage;
+                            page = (page - 1);
+                            j = ((page) * (Model.Pager.PageSize));
+                            for (int i = 0; i <= Model.dtRequestDetails.Rows.Count - 1; i++)
+                            {
+                                <tr class="text-left">
+                                    <td>@(j+1)</td>
+
+
+                                    <td>@Model.dtRequestDetails.Rows[i]["Paymentdate"].ToString()</td>
+                                    <td>@Model.dtRequestDetails.Rows[i]["Narration"].ToString()</td>
+                                    <td style="text-align:right">@Model.dtRequestDetails.Rows[i]["DrAmount"].ToString()</td>
+                                    <td style="text-align:right">@Model.dtRequestDetails.Rows[i]["CrAmount"].ToString()</td>
+                                    <td style="text-align:right">@Model.dtRequestDetails.Rows[i]["Amount"].ToString()</td>
+
+                                </tr>
+                                j++;
+                            }
+                        }
+
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <footer class="card-footer bg-white p-2">
+        <div class="d-md-flex align-items-center justify-content-between">
+
+            @if (Model != null)
+            {
+                if (Model.Pager != null)
+                {
+                    if (Model.Pager.EndPage > 1)
+                    {
+                        <div> <small class="text-muted inline">showing @Model.dtRequestDetails.Rows.Count  of @Model.dtRequestDetails.Rows[0]["TotalRecords"].ToString() items</small> </div>
+                        <div>
+
+
+                            <ul class="pagination pagination-sm m-t-none m-b-none">
+
+
+                                @if (Model.Pager.CurrentPage > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="/franchisewalletledger?page=@Model.Searchby">First</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/franchisewalletledger?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                    </li>
+                                }
+                                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                {
+                                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                        <a class="page-link" href="/franchisewalletledger?page=@page">@page</a>
+                                    </li>
+                                }
+                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" href="/franchisewalletledger?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                    </li>
+                                    <li class="page-item">
+                                        <a class="page-link" href="/franchisewalletledger?page=@(Model.Pager.TotalPages)">Last</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+
+            }
+
+        </div>
+    </footer>
+</div>
+
+
+
+

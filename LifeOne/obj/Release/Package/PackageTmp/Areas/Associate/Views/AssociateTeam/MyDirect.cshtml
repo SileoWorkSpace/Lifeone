@@ -1,0 +1,353 @@
+﻿@model LifeOne.Models.AssociateManagement.AssociateEntity.AssociateTeam
+@{
+    ViewBag.Title = "MyDirect";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+
+<style>
+    .alert-warning {
+        background-color: #fcf8e3 !important;
+        border-color: #faebcc !important;
+    }
+</style>
+<div class="content">
+    <div class="content-wrapper-before"></div>
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0 text-white">My Direct</h4>
+
+              
+            </div>
+          
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body p-0 pt-10" style="padding-top:15px !important;">
+                        @using (Html.BeginForm("MyDirect", "AssociateTeam", FormMethod.Post))
+                        {
+                            <div class="row">
+                                <div class="col-lg-3 offset-lg-1">
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <a href="/Associate/AssociateTeam/MyDirect" class="btn btn-secondary mr-2">Root</a>
+                                        <div class="input-group">
+                                            <select class="form-control" name="Status" id="ddlStatus">
+                                                <option value="">--All--</option>
+                                                <option value="P">Active</option>
+                                                <option value="T">InActive</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>                               
+                                @*<div class="col-lg-3">
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <div class="input-group">
+                                            <input type="date" class="form-control" placeholder="Joining Date" name="JoiningDate" value="@ViewBag.JoiningDate" />
+                                        </div>
+                                    </div>
+                                </div>*@
+                                <div class="col-lg-4">
+                                    <div class="d-flex align-items-center justify-content-center mb-3">
+                                        <div class="input-group" style="float:left">
+                                            @Html.TextBoxFor(m => m.SearchLoginId, new { @class = "form-control", @placeholder = "Enter Login ID" })
+
+                                            <button type="submit" class="btn btn-success mr-2" style="border-radius: 0 5px 5px 0px;"><i class="fa fa-search"></i></button>
+                                            @if (Model.Directs.Count > 0)
+                                            {
+                                                <a href="/Associate/AssociateTeam/MyDirect?Fk_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Directs[0].FK_sponsorId.ToString())" class="btn btn-secondary">Go Up</a>
+                                            }
+                                        </div>                                       
+                                      </div>
+                                    </div>
+                                </div>
+                        }
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0" id="MyDirectList">
+                                <thead>
+                                    <tr>
+                                        <th>#Sn.</th>
+                                        <th>Distributor Id</th>
+                                        <th>Distributor Name</th>
+                                        <th>Placement Id</th>
+                                        <th>Placement Name</th>
+                                        <th>Active Status</th>
+                                        <th>Activation Date</th>
+                                        <th>Joining Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Directs.Count > 0)
+                                    {
+                                        int SNo = 0;
+                                        foreach (var item in Model.Directs)
+                                        {
+                                    <tr>
+                                        <td>@(SNo = SNo + 1)</td>
+                                        <td>
+                                            <span>@item.MemberLoginId</span>
+                                        </td>
+                                        <td>
+                                            @item.MemberName
+
+                                            @if (@item.Place == "Left")
+                                            {
+                                                <span class="badge badge-danger float-lg-right">@item.Place</span>
+
+                                            }
+                                            @if (@item.Place == "Right")
+                                            {
+                                                <span class="badge badge-success float-lg-right">@item.Place</span>
+
+                                            }
+                                        </td>
+                                        <td>@item.ParentLoginId </td>
+                                        <td>@item.ParentName </td>
+
+                                        <td>
+                                            @if (@item.ActiveInactiveStatus == "Active")
+                                            {
+                                                <span class="badge badge-success">@item.ActiveInactiveStatus</span>
+                                            }
+                                            @if (@item.ActiveInactiveStatus == "InActive")
+                                            {
+                                                <span class="badge badge-danger">@item.ActiveInactiveStatus</span>
+                                            }
+
+                                        </td>
+
+                                        <td>@item.ActivationDate </td>
+                                        <td>@item.DateOfjoining </td>
+
+                                    </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @*<tr>
+                                                <td colspan="10">No Record Found..</td>
+                                            </tr>*@
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <footer class="card-footer bg-white p-2">
+                        <div class="d-md-flex align-items-center justify-content-between">
+
+                            @if (Model != null)
+                            {
+                                if (Model.Pager != null)
+                                {
+                                    if (Model.Pager.EndPage > 1)
+                                    {
+                                        <div> <small class="text-muted inline">showing @Model.Directs.Count  of @Model.Directs[0].TotalRecords items</small> </div>
+                                        <div>
+                                            <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                @if (Model.Pager.CurrentPage > 1)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Associate/AssociateTeam/MyDirect">First</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Associate/AssociateTeam/MyDirect?Page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                                    </li>
+                                                }
+                                                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                {
+                                                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                        <a class="page-link" href="/Associate/AssociateTeam/MyDirect?Page=@page">@page</a>
+                                                    </li>
+                                                }
+                                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Associate/AssociateTeam/MyDirect?Page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Associate/AssociateTeam/MyDirect?Page=@(Model.Pager.TotalPages)">Last</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+
+                            }
+
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container-fluid -->
+
+</div>
+<script>
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [8, 0]; // coloms to remove
+
+        var tbl = $('#MyDirectList').clone();
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 20,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                //orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'MyDirect List',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "My Direct");
+        doc.page++;
+        doc.save('MyDirectList.pdf');
+
+    });
+
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('MyDirectList').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>MyDirect List</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+</script>
