@@ -1,0 +1,315 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MPayoutReport
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "UpdateNow";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<div class="container-fluid">
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Update Payout Income</h4>
+            @*<nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item">
+                        <a href="#">
+                            Accounts
+                        </a>
+                    </li>
+                    <li class="breadcrumb-item active" aria-current="page">Update Payout Income</li>
+                </ol>
+            </nav>*@
+        </div>
+    </div>
+
+
+    <div id="no-more-tables">
+
+        <div id="no-more-tables">
+            <div class="row">
+                <div class="col-lg-5 offset-3">
+                    <div class="box">
+                        <div class="box-body">
+                            <div>
+                                <div class="row">
+                                    <div class="col-md-1 col-lg-1"></div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <input type="text" class="form-control focus" placeholder="Login ID" name="LoginId" id="LoginId" onchange="PayoutNoList()" />
+                                        <span class="text text-danger" id="valLID" style="display:none">Please check Login ID</span>
+                                    </div>
+                                    <div class="col-md-6 col-lg-4">
+                                        <select id="payoutNo" class="form-control">
+                                            <option value="">--Select Payout--</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-6 col-lg-3">
+                                        <input type="button" class="btn btn-success" name="btnSearch" value="Get" onclick="GetIncomeDetails();" />
+                                    </div>
+                                </div>
+                                <hr />
+                                <div class="col-lg-12">
+                                    <table class="table tableincome" id="TblList">
+                                        <tbody id="tblDataIncome"><tr><td class="text text-center text-danger">No records..</td></tr></tbody>
+                                    </table>
+                                </div>
+                                <hr />
+                                <span id="Pk_PaidMemberID" style="display:none"></span>
+                                @if (PermissionManager.IsActionPermit("Update Payout Income", ViewOptions.FormUpdate))
+                                {
+                                    <input type="submit" value="Update" class="btn btn-secondary pull-right" onclick="SavePayoutIncomeDetail()" />
+                                }
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    function GetIncomeDetails(ID, Payout) {
+        var LoginId = $("#LoginId").val();
+        ID = LoginId;
+        var Payout = $("#payoutNo").val();
+        if (LoginId != null && LoginId != undefined && LoginId != '') {
+            $.ajax({
+                method: 'POST',
+                url: '/Admin/UpdatePayoutIncome/IncomeReport',
+                data: { LoginId: ID, PayoutNo: Payout },
+                dataType: 'json',
+                success: function (data) {
+                    $('#tblDataIncome').html('');
+                    if (data.length != null) {
+                        for (var i = 0; i < data.length; i++) {
+                            $('#Pk_PaidMemberID').text(data[i].PaidMemberId);
+                            tr1 = $('<tr/>');
+                            tr1.append("<td>Self Income</td>");
+                            tr1.append("<td><input type='text' value='" + data[i].SelfIncome + "' maxlength='7' name='SelfIncome' id='SelfIncome' onkeyup='OnKeyPressAddAllIncome()'  onkeypress='return isNumberKey(event);' /></td>");
+                            $('#tblDataIncome').append(tr1);
+                            tr2 = $('<tr/>');
+                            tr2.append("<td>Team Income</td>");
+                            tr2.append("<td><input type='text' value='" + data[i].TeamIncome + "' maxlength='7' name='TeamIncome' id='TeamIncome' onkeyup='OnKeyPressAddAllIncome()' onkeypress='return isNumberKey(event)'/></td>");
+                            $('#tblDataIncome').append(tr2);
+                            tr3 = $('<tr/>');
+                            tr3.append("<td>Air Orbit Income</td>");
+                            tr3.append("<td><input type='text' value='" + data[i].AirOrbitIncome + "' maxlength='7' name='AirOrbitIncome' id='AirOrbitIncome'  onkeyup='OnKeyPressAddAllIncome()' onkeypress='return isNumberKey(event)'/></td>");
+                            $('#tblDataIncome').append(tr3);
+                            tr4 = $('<tr/>');
+                            tr4.append("<td>Water Orbit Income</td>");
+                            tr4.append("<td><input type='text' value='" + data[i].WaterOrbitIncome + "' maxlength='7' name='WaterOrbitIncome' id='WaterOrbitIncome' onkeyup='OnKeyPressAddAllIncome()'  onkeypress='return isNumberKey(event)'/></td>");
+                            $('#tblDataIncome').append(tr4);
+                            tr5 = $('<tr/>');
+                            tr5.append("<td>Space Orbit Income</td>");
+                            tr5.append("<td><input type='text' value='" + data[i].SpaceOrbitIncome + "' maxlength='7' name='SpaceOrbitIncome' id='SpaceOrbitIncome' onkeyup='OnKeyPressAddAllIncome()' onkeypress='return isNumberKey(event)'/></td>");
+                            $('#tblDataIncome').append(tr5);
+                            tr6 = $('<tr/>');
+                            tr6.append("<td>Smart Royalty Income</td>");
+                            tr6.append("<td><input type='text' value='" + data[i].SmartRoyaltyIncome + "' maxlength='7' name='SmartRoyaltyIncome' id='SmartRoyaltyIncome' onkeyup='OnKeyPressAddAllIncome()' onkeypress='return isNumberKey(event)'/></td>");
+                            $('#tblDataIncome').append(tr6);
+                            tr7 = $('<tr/>');
+                            tr7.append("<td>Orbit Royalty Income</td>");
+                            tr7.append("<td><input type='text' value='" + data[i].SmartOrbitRoyaltyIncome + "' maxlength='7' name='SmartOrbitRoyaltyIncome'  id='SmartOrbitRoyaltyIncome' onkeyup='OnKeyPressAddAllIncome()' onkeypress='return isNumberKey(event)'/></td>");
+                            $('#tblDataIncome').append(tr7);
+                            tr8 = $('<tr/>');
+                            tr8.append("<td>Leadership Income</td>");
+                            tr8.append("<td><input type='text' value='" + data[i].SmartLeadershipIncome + "' maxlength='7' name='SmartLeadershipIncome' id='SmartLeadershipIncome'  onkeypress='return isNumberKey(event)' onkeyup='OnKeyPressAddAllIncome()' /></td>");
+                            $('#tblDataIncome').append(tr8);
+                            tr9 = $('<tr/>');
+                            tr9.append("<td>Club Bonus</td>");
+                            tr9.append("<td><input type='text' value='" + data[i].GlobalAchieverClubBonus + "' maxlength='7' name='GlobalAchieverClubBonus' id='GlobalAchieverClubBonus' onkeypress='return isNumberKey(event)'  onkeyup='OnKeyPressAddAllIncome()'/></td>");
+                            $('#tblDataIncome').append(tr9);
+
+                            tr10 = $('<tr/>');
+                            tr10.append("<td></td>");
+                            tr10.append("<td></td>");
+                            $('#tblDataIncome').append(tr10);
+                            tr11 = $('<tr/>');
+                            tr11.append("<td>Total</td>");
+                            tr11.append("<td><span id=sumSpan>" + parseFloat(data[i].SelfIncome + data[i].TeamIncome + data[i].AirOrbitIncome + data[i].WaterOrbitIncome + data[i].SpaceOrbitIncome + data[i].SmartRoyaltyIncome + data[i].SmartOrbitRoyaltyIncome + data[i].SmartLeadershipIncome + data[i].GlobalAchieverClubBonus) + "</span></td>");
+                            $('#tblDataIncome').append(tr11);
+                        }
+                    }
+                }
+            });
+        }
+
+        else {
+            $('#LoginId').focus();
+            return false;
+        }
+    }
+
+    function OnKeyPressAddAllIncome() {
+        var _addValue = 0.00;
+        $("#tblDataIncome input").each(function () {
+            var value = $(this).val();
+            if (value != "" && value != undefined)
+                _addValue = parseFloat(_addValue) + parseFloat(value);
+        });
+        $("#sumSpan").text(_addValue);
+    }
+
+    function PayoutNoList() {
+        var LoginId = $("#LoginId").val();
+        if (LoginId != null && LoginId != undefined && LoginId != '') {
+            $.ajax({
+                method: 'POST',
+                url: '/Admin/UpdatePayoutIncome/PayoutNoList',
+                data: { LoginId: LoginId },
+                dataType: 'json',
+                success: function (data) {
+                    if (data.length > 0) {
+                        $('#valLID').hide();
+                        $('#payoutNo').html('');
+                        $("#payoutNo").prepend($("<option></option>").val("").html('--Select Payout--'));
+                        $.each(data[0].PayoutNoList, function (i, item) {
+                            $("#payoutNo").append($("<option></option>").val(item).html(item));
+                        });
+                    }
+
+                    else {
+                        $('#LoginId').focus();
+                        $('#valLID').show();
+                        $('#tblDataIncome').html('');
+                        tr = $('<tr/>');
+                        tr.append("<td class='text text-center text-danger'>No Records.....</td>");
+                        $('#tblDataIncome').append(tr);
+
+
+                        $('#tblDataIncome').append('');
+                        $('#payoutNo').html('');
+                        $("#payoutNo").prepend($("<option></option>").val("").html('--Select Payout--'));
+                    }
+                }
+            });
+        }
+        else {
+            $('#LoginId').focus();
+
+
+            $('#tblDataIncome').html('');
+            tr = $('<tr/>');
+            tr.append("<td class='text text-center text-danger'>No Records.....</td>");
+            $('#tblDataIncome').append(tr);
+
+
+            $('#payoutNo').html('');
+            $("#payoutNo").prepend($("<option></option>").val("").html('--Select Payout--'));
+            return false;
+        }
+    }
+
+    function SavePayoutIncomeDetail() {
+        var PaidMemberID = $('#Pk_PaidMemberID').text();
+        var SelfIncome = $('#SelfIncome').val();
+        var TeamIncome = $('#TeamIncome').val();
+        var AirOrbitIncome = $('#AirOrbitIncome').val();
+        var WaterOrbitIncome = $('#WaterOrbitIncome').val();
+        var SpaceOrbitIncome = $('#SpaceOrbitIncome').val();
+        var SmartRoyaltyIncome = $('#SmartRoyaltyIncome').val();
+        var SmartOrbitRoyaltyIncome = $('#SmartOrbitRoyaltyIncome').val();
+        var SmartLeadershipIncome = $('#SmartLeadershipIncome').val();
+        var GlobalAchieverClubBonus = $('#GlobalAchieverClubBonus').val();
+        var NetAmount = $('#sumSpan').text();
+
+        if (SelfIncome == null || SelfIncome == '' || SelfIncome == undefined) {
+            $('#SelfIncome').focus();
+            return false;
+        }
+
+
+        if (TeamIncome == null || TeamIncome == '' || TeamIncome == undefined) {
+            $('#TeamIncome').focus();
+            return false;
+        }
+
+
+        if (AirOrbitIncome == null || AirOrbitIncome == '' || AirOrbitIncome == undefined) {
+            $('#AirOrbitIncome').focus();
+            return false;
+        }
+
+        if (WaterOrbitIncome == null || WaterOrbitIncome == '' || WaterOrbitIncome == undefined) {
+            $('#WaterOrbitIncome').focus();
+            return false;
+        }
+
+        if (SpaceOrbitIncome == null || SpaceOrbitIncome == '' || SpaceOrbitIncome == undefined) {
+            $('#SpaceOrbitIncome').focus();
+            return false;
+        }
+
+        if (SmartRoyaltyIncome == null || SmartRoyaltyIncome == '' || SmartRoyaltyIncome == undefined) {
+            $('#SmartRoyaltyIncome').focus();
+            return false;
+        }
+
+        if (SmartOrbitRoyaltyIncome == null || SmartOrbitRoyaltyIncome == '' || SmartOrbitRoyaltyIncome == undefined) {
+            $('#SmartOrbitRoyaltyIncome').focus();
+            return false;
+        }
+
+
+        if (SmartLeadershipIncome == null || SmartLeadershipIncome == '' || SmartLeadershipIncome == undefined) {
+            $('#SmartLeadershipIncome').focus();
+            return false;
+        }
+
+        if (GlobalAchieverClubBonus == null || GlobalAchieverClubBonus == '' || GlobalAchieverClubBonus == undefined) {
+            $('#GlobalAchieverClubBonus').focus();
+            return false;
+        }
+
+
+
+        if (PaidMemberID != null && PaidMemberID != undefined && PaidMemberID != '' && PaidMemberID > 0) {
+            var model = {
+                PayoutNo: $('#payoutNo').val(),
+                PaidMemberId: PaidMemberID,
+                SelfIncome: SelfIncome,
+                TeamIncome: TeamIncome,
+                AirOrbitIncome: AirOrbitIncome,
+                WaterOrbitIncome: WaterOrbitIncome,
+                SpaceOrbitIncome: SpaceOrbitIncome,
+                SmartRoyaltyIncome: SmartRoyaltyIncome,
+                SmartOrbitRoyaltyIncome: SmartOrbitRoyaltyIncome,
+                SmartLeadershipIncome: SmartLeadershipIncome,
+                GlobalAchieverClubBonus: GlobalAchieverClubBonus,
+                NetAmount: NetAmount
+            }
+            $.ajax({
+                method: 'POST',
+                url: '/Admin/UpdatePayoutIncome/SavePayoutIncomeDetail',
+                data: model,
+                dataType: 'json',
+                success: function (data) {
+                    alert(data.Remark);
+                    $("#LoginId").val('');
+                    $('#tblDataIncome').html('');
+                    tr = $('<tr/>');
+                    tr.append("<td class='text text-center text-danger'>No Records.....</td>");
+                    $('#tblDataIncome').append(tr);
+
+
+                    $('#payoutNo').html('');
+                    $("#payoutNo").prepend($("<option></option>").val("").html('--Select Payout--'));
+                }
+            });
+        }
+        else
+            return false;
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+</script>

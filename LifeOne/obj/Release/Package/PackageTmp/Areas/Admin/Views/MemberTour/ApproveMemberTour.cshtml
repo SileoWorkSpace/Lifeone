@@ -1,0 +1,352 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.Tour_PassengerDetailViewModel
+@{
+    ViewBag.Title = "ApproveMemberTour";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Member Tour</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Tour Request report</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Member Tour</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Column -->
+        <div class="col-lg-5 col-md-5 col-12">
+            <div class="card profile-widget">
+                <div class="card-body text-center">
+                    <h5 class="mt-2 mb-0">@Model.Name</h5>
+                    <h6 class="text-muted font-weight-normal mt-2 mb-1">@Model.Mobile</h6>
+                </div>
+                <div class="card-body p-3">
+                    <div class="row mt-2 border-top">
+                        <div class="col-12">
+                            <div class="message-box">
+
+                                <!-- Message -->
+                                <div class="message-widget py-1">
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <h6>No. of Travellers</h6>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <h6>@Model.TotalPassenger</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Message -->
+                                <div class="message-widget py-1">
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <h6>Tour Type</h6>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <h6>@Model.TourType</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Message -->
+                                <div class="message-widget py-1">
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <h6>Days & Night</h6>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <h6>@Model.TotalDays Days , @Model.TotalNights Nights</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Message -->
+                                <div class="message-widget py-1">
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <h6>Hotel Category</h6>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <h6>@Model.HotelCategory</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Message -->
+                                <div class="message-widget py-1">
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <h6>Destination</h6>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <h6>@Model.Destination</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Message -->
+                                <div class="message-widget py-1">
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <h6>Return Airtour</h6>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <h6>@Model.ReturnAirTour</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Message -->
+                                <!-- Message -->
+                                <div class="message-widget py-1">
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <h6>Date</h6>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <h6><i class="fa fa-calendar-o"></i> @Model.From_Dt -  <i class="fa fa-calendar-o"></i> @Model.To_Dt</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Message -->
+                                <!-- Message -->
+                                <div class="message-widget py-1">
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <h6>Budget</h6>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <h5><span class="text-danger mb-1"><i class="fa fa-inr"></i> @Model.Your_Budget</span></h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Message -->
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Column -->
+        <div class="col-lg-7 col-md-7 col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4 class="header-title mt-0 mb-1">Member Details</h4>
+                            <p class="sub-header"> View all details of passangers </p>
+                        </div>
+                    </div>
+                    <div class="table-responsive" >
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Gender</th>
+                                    <th>Age</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.PassengerList.Count > 0)
+                                {
+                                    if (!String.IsNullOrEmpty(Model.PassengerList[0].Name))
+                                    {
+                                        int sno = 0;
+                                        foreach (var item in Model.PassengerList)
+                                        {
+                                            <tr>
+                                                <td>@item.Name</td>
+                                                <td>@item.Gender</td>
+                                                <td>@item.Age</td>
+                                            </tr>
+                                        }
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <input type="hidden" value="@Model.Tour_PKid" id="Tour_PKid" name="Tour_PKid" />
+                    @if (Model.IsPaid == "Pending")
+                    {
+                        <form class="pt-5">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <textarea class="form-control" id="Approval_Remark" name="Approval_Remark" placeholder="Remarks"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="BookingAmount" name="BookingAmount" placeholder="Booking Amount" maxlength="8" onkeypress="return isNumberKey(event)" />
+
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <input type="button" onclick="ApproveTourRequest();" class="btn btn-primary" value="Approve" />
+                                        <input type="button" onclick="DeclinePayment();" class="btn btn-danger" value="Decline" />
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    }
+                    </div>
+            </div>
+
+
+
+
+
+        </div>
+        <!-- Column -->
+    </div>
+  
+</div>
+
+
+<script>
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    function Cancel() {
+
+        $('textarea#Approval_Remark').val('');
+        $('#BookingAmount').val('');
+    }
+
+
+    function IsValidate() {
+
+        if ($('textarea#Approval_Remark').val() == '') {
+
+            alert('Please Enter Remark');
+            return false;
+
+        }
+        else if ($('#BookingAmount').val() == '') {
+
+            alert('Please Enter Booking Amount');
+            return false;
+
+        }
+        else if ($('#BookingAmount').val()<=0) {
+
+            alert('Please Enter Valid Booking Amount');
+            return false;
+
+        }
+        return true;
+
+
+    }
+    function IsDeclinedValidate() {
+
+        if ($('textarea#Approval_Remark').val() == '') {
+
+            alert('Please Enter Remark');
+            return false;
+
+        }
+       
+        return true;
+
+
+    }
+    function DeclinePayment() {
+        if (IsDeclinedValidate() == true) {
+            var Tour_PKid = $('#Tour_PKid').val();
+            var Approval_Remark = $('#Approval_Remark').val();
+            var BookingAmount = $('#BookingAmount').val() == '' ? 0 : $('#BookingAmount').val();
+
+          
+                var model = {
+                    Tour_PKid: Tour_PKid,
+                    Approval_Remark: Approval_Remark,
+                    BookingAmount: BookingAmount,
+                };
+
+                $.ajax({
+                    url: '/Admin/MemberTour/DeclineMemberTourRequest',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: model,
+                    success: function (data) {
+                        debugger
+                        window.location.href = "/Admin-TourRequest";
+                    },
+                    error: function (error, status) {
+                        alert(status);
+                    }
+
+                });
+            
+        }
+    }
+
+    function ApproveTourRequest() {
+        if (IsValidate() == true)
+        {
+            var Tour_PKid = $('#Tour_PKid').val();
+            var Approval_Remark = $('#Approval_Remark').val();
+            var BookingAmount = $('#BookingAmount').val();
+
+            if (BookingAmount != null && BookingAmount != undefined && BookingAmount != '' && BookingAmount > 0) {
+                var model = {
+                    Tour_PKid: Tour_PKid,
+                    Approval_Remark: Approval_Remark,
+                    BookingAmount: BookingAmount,
+                };
+
+                $.ajax({
+                    url: '/Admin/MemberTour/ApproveMemberTourRequest',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: model,
+                    success: function (data) {
+                        debugger
+                        window.location.href = "/Admin-TourRequest";
+                    },
+                    error: function (error, status) {
+                        alert(status);
+                    }
+
+                });
+            }
+            else {
+                alert("Please Fill Booking Amount");
+                return false;
+            }
+        }
+    }
+</script>

@@ -1847,6 +1847,30 @@ namespace LifeOne.Areas.Admin
                 new[] { "LifeOne.Areas.Admin.Controllers" });
 
             context.MapRoute(
+              "Admin-UploadImage",
+              "Admin-UploadImage/{action}/{id}",
+              new
+              {
+                  area = "Admin",
+                  controller = "Master",
+                  action = "UploadImage",
+                  id = UrlParameter.Optional
+              },
+              new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+             "Admin-UploadVideo",
+             "Admin-UploadVideo/{action}/{id}",
+             new
+             {
+                 area = "Admin",
+                 controller = "Master",
+                 action = "UploadVideo",
+                 id = UrlParameter.Optional
+             },
+             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
                 "Admin-RepurchaseIncomeType",
                 "Admin-RepurchaseIncomeType/{action}/{id}",
                 new
@@ -2684,6 +2708,42 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                    id = UrlParameter.Optional
                },
                new[] { "LifeOne.Areas.Admin.Controllers" });
+
+              context.MapRoute(
+               "Admin-UploadTermsandCondition_default",
+              "UploadTermsandCondition/{action}/{id}",
+             new
+             {
+                area = "Admin",
+                controller = "UploadTermsandCondition",
+                action = "UploadTermsandCondition",
+                id = UrlParameter.Optional
+             },
+             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+              "Admin-UploadTermsandConditionList_default",
+             "UploadTermsandConditionList/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "UploadTermsandCondition",
+                action = "UploadTermsandConditionList",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+           "Admin-PrintPayoutReportForBank",
+           "Print Payout-Report-For-Bank/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "AdminReport",
+               action = "PrintPayoutReportForBank",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

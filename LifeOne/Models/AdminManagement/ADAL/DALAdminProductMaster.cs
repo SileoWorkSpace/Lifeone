@@ -47,7 +47,6 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 throw ex;
             }
         }
-
         public static ResponseMaster UpdateProductMaster(MAdminProductMaster obj)
         {
             try
@@ -142,6 +141,6 @@ namespace LifeOne.Models.AdminManagement.ADAL
             {
                 throw ex;
             }
-        }
+        }        
     }
 }

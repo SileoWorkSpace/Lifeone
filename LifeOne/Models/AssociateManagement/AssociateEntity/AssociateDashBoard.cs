@@ -128,6 +128,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public decimal PreLeftBV { get; set; }
         public decimal PreRightBV { get; set; }
         public string ClosingDate { get; set; }
+        public string ActiveStatus { get; set; }
 
 
         public List<AssociateDetails> lstAssociates { get; set; } 

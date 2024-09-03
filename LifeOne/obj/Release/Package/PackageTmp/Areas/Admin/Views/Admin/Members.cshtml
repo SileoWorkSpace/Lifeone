@@ -1,0 +1,930 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MembersResponse
+@{
+    ViewBag.Title = "Members";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/dist/css/sweetalert.css" rel="stylesheet" />
+@{
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-success m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+
+
+
+        }
+    }
+
+}
+<div class="container-fluid">
+
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Direct Sellers List</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Direct Sellers</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Direct Seller List</li>
+                    </ol>
+                </nav>*@
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>*@
+
+
+                </span>
+                <span>
+                    @*<a class="btn btn-success btn-rounded btnPdf" style="cursor:pointer;color:white" onclick="Notification()"> <i class="fa fa-envelope"></i> </a>*@
+                    <a href="#" onclick="fCallPaging(1,1)" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" data-placement="top" title="Download Excel"><i class="fa fa-file-excel-o"></i></a>
+                    <button class="btn btn-success btn-rounded btngreen" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
+
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <form action="DirectSellers" method="post" style="height:0;">
+        <div id="no-more-tables">
+            <div class="row">
+                @using (Html.BeginForm("Members", "Admin", FormMethod.Post))
+                {
+
+                    <div class="col-lg-12">
+                        <div class="box">
+                            <div class="box-body">
+                                <div class="row" id="advance-search" style="display:none;">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-warning" style="color:#727272 !important">
+                                            <div class="row">
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        @Html.HiddenFor(m => m.Page)
+                                                        @Html.HiddenFor(m => m.IsExport)
+                                                        <label>Login Id</label>
+                                                        <input type="text" name="LoginID" id="LoginID" placeholder="Enter Login Id" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Direct Seller</label>
+                                                        <input type="text" name="MemberName" id="MemberName" placeholder="Enter Direct Seller" class="form-control">
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Mobile No</label>
+                                                        <input type="text" name="Mobile" id="Mobile" placeholder="Enter Mobile Number" class="form-control" maxlength="10" onkeypress="return isNumberKey(event)" />
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Place Under Name </label>
+                                                        <input type="text" name="InvitedBy" id="InvitedBy" placeholder="Enter Place Under Name" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>City </label>
+                                                        <input type="text" name="City" id="City" placeholder="Enter City" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>From Date </label>
+                                                        <input type="date" name="FromDate" id="FromDate" placeholder="" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>To Date </label>
+                                                        <input type="date" name="ToDate" id="ToDate" placeholder="" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <label style="display:block;"></label>
+                                                        <input type="submit" class="btn btn-success " style="margin-top:1.5em;display:none;" value="Search" id="BtnSearch">
+                                                        <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" onclick="fCallPaging(1,0)">
+                                                        <a href="/DirectSellers" class="btn btn-secondary" onClick="fclaer();" style="margin-top:1.5em;">Reset</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="table-responsive" style="height: 462px !important;">
+                                    <table class="table table-hover mb-0" id="tblMemberList">
+                                        <thead>
+                                            <tr>
+                                                <th><input type="checkbox" id="chkParent" /></th>
+                                                <th>#Sn.</th>
+                                                <th>Login Id</th>
+                                                <th>Password</th>
+                                                <th>Direct Seller</th>
+                                                <th>Sponsor's Id/Sponsor's Name</th>
+                                                <th>Email Id/Mobile No</th>
+                                                <th>State/City</th>
+                                                <th>Join on</th>
+                                                <th>Place Under Id</th>
+                                                <th>Place Under Name</th>
+                                                @*<th>DS Status</th>*@
+                                                @*<th>Referral Status</th>*@
+                                                <th>Actions</th>
+                                                <th style="display:none;"></th>
+                                                <th style="display:none;"></th>
+                                                <th style="display:none;"></th>
+                                            </tr>
+
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.List.Count > 0)
+                                            {
+
+                                                int i = 1;
+                                                int page = Model.Pager.CurrentPage;
+                                                page = (page - 1);
+                                                i = ((page) * (Model.Pager.PageSize));
+
+
+                                                foreach (var item in Model.List)
+                                                {
+
+                                                    <tr>
+                                                        <td><input type="checkbox" name="chk" class="chkchild" /></td>
+                                                        <td data-title="#SN:">@(i = i + 1)</td>
+                                                        <td data-title="Login:"><a href="/Downline?FK_MemId=@item.FK_MemId">@item.LoginId</a> </td>
+                                                        <td data-title="Password1:">@item.Password</td>
+                                                        <td data-title="Name:">
+                                                            @*<a href="/Admin/Team/Direct?Fk_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(item.FK_MemId.ToString())">*@
+                                                            <a href="/Admin-ViewProfile?FK_MemId=@item.FK_MemId">
+                                                                @item.MemberName
+                                                            </a>
+                                                        </td>
+                                                        <td data-title="Mobile:">@item.SponsorId <br /> @item.SponsorName</td>
+                                                        <td data-title="Email/Mobile:">@item.Email<br />@item.Mobile</td>
+                                                        <td data-title="City/State:"> @item.City <br />@item.state</td>
+                                                        <td data-title="Joining Date:">@item.joiningDate</td>
+                                                        <td>@item.InviteCode</td>
+                                                        <td>@item.InvitedBy </td>
+                                                        @*<td>
+                                                                @if (item.IsBusinessId == true)
+                                                                {
+                                                                    <lable class="btn btn-sm btn-primary">BID</lable>
+
+                                                                }
+
+                                                                else
+                                                                {
+                                                                    <lable class="btn btn-sm btn-danger">UID</lable>
+
+                                                                }
+                                                            </td>*@
+
+                                                    <td data-title="Action:">
+
+
+                                                        @if (item.isblocked == "block")
+                                                        {
+                                                            <a href="/Admin-EditUserDetails?FK_MemId=@item.FK_MemId" title="Edit"><i class="fa fa-pencil btn btn-sm btn-default text-primary"></i></a>
+                                                <a href="#" onclick="return fGetBlockUnBlock('@item.FK_MemId','@item.isblocked');" title="Block"><i class="fa fa-lock btn btn-sm btn-default text-danger"></i></a>
+                                                        }
+                                                        else if (item.isblocked == "unblock")
+                                                        {
+                                                            <a href="/Admin-EditUserDetails?FK_MemId=@item.FK_MemId" title="Edit"><i class="fa fa-pencil btn btn-sm btn-default text-primary"></i></a>
+                                                            <a href="#" onclick="return fGetBlockUnBlock('@item.FK_MemId','@item.isblocked');" title="Unblock"><i class="fa fa-unlock btn btn-sm btn-default text-danger"></i></a>
+                                                        }
+                                                        
+
+
+
+                                                        @*<a href="#" onclick="ChkPopupOnOrOff(@item.FK_MemId,'@item.IsReferralBlock')" class="btn btn-danger btn-sm">Refferal</a>*@
+
+                                                    </td>
+                                                        <td style="display:none;">@item.MemberName</td>
+                                                        <td style="display:none;">@item.FK_MemId</td>
+                                                        <td style="display:none;">@item.DeviceId</td>
+
+                                                    </tr>
+                                                }
+                                                i++;
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <footer class="card-footer bg-white p-2">
+                                    <div class="d-md-flex align-items-center justify-content-between">
+
+                                        @if (Model != null)
+                                        {
+                                            if (Model.Pager != null)
+                                            {
+                                                if (Model.Pager.EndPage > 1)
+                                                {
+                                                    <div> <small class="text-muted inline">showing @Model.List.Count  of @Model.Pager.TotalItems items</small> </div>
+                                                    <div>
+                                                        <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                            @if (Model.Pager.CurrentPage > 1)
+                                                            {
+                                                                <li class="page-item">
+                                                                    <a class="page-link" onclick="fCallPaging(1,0)" href="#">First</a>
+
+                                                                </li>
+                                                                <li class="page-item">
+
+                                                                    <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1),0)" href="#">Previous</a>
+                                                                </li>
+                                                            }
+                                                            @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                            {
+                                                                <li class="page-item @(page == Model.Pager.CurrentPage ? " active" : "" )">
+
+
+                                                                    <span><a class="page-link" onclick="fCallPaging(@page,0)" href="#">@page</a></span>
+                                                                </li>
+                                                            }
+                                                            @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                            {
+                                                                <li class="page-item">
+
+                                                                    <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1),0)" href="#">Next</a>
+
+                                                                </li>
+                                                                <li class="page-item">
+
+                                                                    <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages),0)" href="#">Last</a>
+                                                                </li>
+                                                            }
+                                                        </ul>
+                                                    </div>
+                                                }
+                                            }
+
+                                        }
+
+                                    </div>
+                                </footer>
+
+
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <!-- /.box -->
+
+                    </div>
+                }
+                <!-- /.col -->
+            </div>
+
+
+        </div>
+        <div id="myModal" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <form>
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Change Password</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-10">
+                                    <div class="form-group">
+                                        <label> New Password</label>
+                                        <input type="text" class="form-control" id="txtnewpassword" ng-model="newPwd" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label> Confirm Password</label>
+                                        <input type="text" class="form-control" id="txtConfirmpassword" ng-model="confirmPwd" ng-blur="changeFun()" />
+                                        <input type="hidden" class="form-control" id="memid" />
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-1"></div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+
+                            <button type="button" class="btn btn-primary" id="btnsubmit" ng-model="btnsubmit" ng-click="updatePassword()" disabled>Change</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <button type="button" class="btn btn-primary hide" style="display:none" data-toggle="modal" data-target="#blockunblockMember" id="BlockMember">
+            Launch demo modal
+        </button>
+        <div id="blockunblockMember" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width: 500px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Block Referral</h4>
+                    </div>
+                    <div class="modal-body">
+                        <span id="Fk_MemId" class="hide"></span>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Remark<em style="color:red">*</em></label>
+                                    <textarea id="remark" class="form-control"></textarea>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" onclick="BlockUnBlockRefferal($('#Fk_MemId').text(),$('#remark').val())">Decline</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+<div class="modal fade" id="sendNotification">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Send Notification</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body p-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <input type="text" id="txtnameNotification" name="txtnameNotification" class="form-control" disabled="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                            <input type="text" id="txtTitle" name="txtTitle" class="form-control" placeholder="Please Enter Title" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control input-sm" id="txtnotification" name="txtsmsnotification" rows="10" placeholder="Message"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button id="SendNotification" class="btn btn-info" value="Send Notification">Send Notification</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@*GetBlock*@
+<div id="blockMember12" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 500px;">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Block/UnBlock</h4>
+            </div>
+            <div class="modal-body">
+                <span id="Fk_MemId1" class="hide"></span>
+                <input type="hidden"id="statusID" />
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Remark<em style="color:red">*</em></label>
+                            <textarea id="Remark1" class="form-control"></textarea>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="fGetBlock();">Decline</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/dist/js/sweetalert.min.js"></script>
+<script>
+
+    function fGetBlockUnBlock(Fk_memID,Status) {
+        debugger
+       
+        $('#blockMember12').modal('show');
+        $('#Fk_MemId1').val(Fk_memID);
+        $('#statusID').val(Status);
+    }
+    function fGetBlock() {
+        debugger;
+        var fk_memID = $('#Fk_MemId1').val();
+        var remark = $('#Remark1').val();
+        var getStatus = $('#statusID').val();
+
+        
+        if (remark == null || remark == undefined || remark == '') {
+                $('#Remark1').focus();
+                return false;
+        }
+
+
+        if ((remark != null && remark != undefined)) {
+
+                var r = confirm("Are you sure to block/unblock user request?");
+                if (!r) {
+                    return false;
+                }
+                $.ajax({
+                    url: "/Admin/AdminReport/BlockUnblock_Mem",
+                    type: "post",
+                    data: { fk_memID: fk_memID, Status: getStatus, remark: remark },
+                    containtType: 'application/json;charset=utf-8',
+                    async: false,
+                    success: function (data) {
+                        if (data != null && data != "") {
+                            if (data.Flag == 1) {
+                                swal('', data.Msg, 'success');
+                                window.setTimeout(function () {
+                                    window.location.href = "/Admin/Admin/Members";
+                                }, 3000);
+                                $('#blockMember12').modal('hide');
+                                var fk_memID = $('#Fk_MemId1').val('');
+                                var remark = $('#Remark1').val('');
+                            }
+                            else {
+                                swal('', data.Msg, 'success');
+                                window.setTimeout(function () {
+                                    window.location.href = "/members";
+                                }, 3000);
+                            }
+                        }
+                    },
+                });
+            }
+            else
+                return false;
+    }
+
+    function fclaer() {
+        $(".fclear").val('');
+        $("#Page").val(1);
+        $("#IsExport").val(0);
+        window.location.reload();
+    }
+    function fCallPaging(val, IsExport) {
+
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#IsExport").val(IsExport);
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+
+
+
+    function ChangeIntuptType() {
+        var dllval = $('#SearchDll').val();
+        $('#search').attr('name', dllval);
+        return false;
+    }
+
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [0]; // coloms to remove
+
+        var tbl = $('#tblMemberList').clone();
+        $('.t').addClass('hide');
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 27,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Direct Seller List',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "Direct Sellers List");
+        doc.page++;
+        doc.save('Direct Sellers List.pdf');
+
+    });
+
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('tblMemberList').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Direct Sellers List</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    function BlockUnBlockRefferal(Fk_MemId, Remark) {
+        if (Remark == null || Remark == undefined || Remark == '') {
+            $('#remark').focus();
+            return false;
+        }
+
+
+        if ((Remark != null && Remark != undefined)) {
+
+            var r = confirm("Are you sure to block/unblock user referral request?");
+            if (!r) {
+                return false;
+            }
+
+            $.ajax({
+                url: "/Admin/Admin/BlockReferral",
+                type: "Get",
+                data: { Fk_MemId: Fk_MemId, Status: gloablReffral, Remark: Remark },
+                dataType: 'json',
+                containtType: 'application/json;charset=utf-8',
+                async: false,
+                success: function (data) {
+                    if (data != null && data != "") {
+                        if (data.Flag == 1) {
+                            swal('', data.Msg, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/members";
+                            }, 3000);
+                        }
+                        else {
+                            swal('', data.Msg, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/members";
+                            }, 3000);
+                        }
+                    }
+                },
+            });
+        }
+        else
+            return false;
+    }
+
+
+
+    function AllowTestimonical(Fk_MemId) {
+
+
+        if ((Fk_MemId != null && Fk_MemId != undefined)) {
+
+            var r = confirm("Are you sure to Allow user for Testimonial?");
+            if (!r) {
+                return false;
+            }
+
+            $.ajax({
+                url: "/Admin/Admin/BlockReferral",
+                type: "Get",
+                data: { Fk_MemId: Fk_MemId, Status: gloablReffral, Remark: Remark },
+                dataType: 'json',
+                containtType: 'application/json;charset=utf-8',
+                async: false,
+                success: function (data) {
+                    if (data != null && data != "") {
+                        if (data.Flag == 1) {
+                            swal('', data.Msg, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/members";
+                            }, 3000);
+                        }
+                        else {
+                            swal('', data.Msg, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/members";
+                            }, 3000);
+                        }
+                    }
+                },
+            });
+        }
+        else
+            return false;
+    }
+
+    var gloablReffral = 0;
+    function ChkPopupOnOrOff(fk_memid, status) {
+        gloablReffral = 0;
+        if (status == "UnBlock") {
+            gloablReffral = 1;
+            $("#BlockMember").click();
+        }
+        else {
+            gloablReffral = 0;
+            BlockUnBlockRefferal(fk_memid, "Unblock");
+        }
+    }
+
+
+
+    //Notification
+
+
+    $('#chkParent').on('click', function () {
+        if (this.checked) {
+            $('.chkchild').each(function () {
+                this.checked = true;
+                var name = [];
+                $.each($("input[name='chk']:checked"), function () {
+                    var data = $(this).parents('tr:eq(0)');
+                    name.push($(data).find('td:eq(12)').text());
+                });
+                $("#txtname").val(name);
+
+            });
+        } else {
+            $('.chkchild').each(function () {
+                this.checked = false;
+            });
+        }
+    });
+    $(document).on("click", ".chkchild", function () {
+        debugger
+        if ($('.chkchild:checked').length == $('.chkchild').length) {
+            var name = [];
+            $.each($("input[name='chk']:checked"), function () {
+                var data = $(this).parents('tr:eq(0)');
+                name.push($(data).find('td:eq(12)').text());
+            });
+            $("#txtname").val(name);
+            //$("#MemberId").val(MemberId);
+            $('#chkParent').prop('checked', true);
+        } else {
+            var name = [];
+            $.each($("input[name='chk']:checked"), function () {
+                var data = $(this).parents('tr:eq(0)');
+                name.push($(data).find('td:eq(12)').text());
+            });
+            $("#txtname").val(name);
+            $('#chkParent').prop('checked', false);
+        }
+    });
+    function Notification() {
+        debugger;
+        NameNotification = [];
+        if ($("input[name='chk']:checked").val() != undefined) {
+            $.each($("input[name='chk']:checked"), function () {
+                var data = $(this).parents('tr:eq(0)');
+                NameNotification.push($(data).find('td:eq(12)').text());
+            });
+            $("#txtnameNotification").val(NameNotification);
+            $('#sendNotification').modal('show');
+        } else {
+            swal("", "No record selected !!!.", "warning")
+            return false;
+        }
+    }
+
+    $("#SendNotification").click(function () {
+        debugger
+        var MemberId = [];
+        var DeviceId = [];
+        var Notificationmessage = $("#txtnotification").val();
+        var Title = $("#txtTitle").val();
+        if ($("#txtTitle").val() == "") {
+            swal("", "Please enter title", "warning");
+            return false;
+        }
+        if ($("#txtnotification").val() == "") {
+            swal("", "Please enter Message", "warning");
+            return false;
+        }
+        $.each($("input[name='chk']:checked"), function () {
+            var data = $(this).parents('tr:eq(0)');
+            MemberId.push($(data).find('td:eq(13)').text());
+            DeviceId.push($(data).find('td:eq(14)').text());
+        });
+        var model = {
+            Notificationmessage: Notificationmessage,
+            Title: Title,
+            LstMemberId: MemberId,
+            LstDeviceId: DeviceId
+        };
+        if (Notificationmessage != "") {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Admin/SaveNotificationForApp",
+                data: JSON.stringify(model),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+
+                    if (data != null && data != "") {
+                        if (data.Flag == '1') {
+                            swal("", data.Msg, "success");
+                            window.location.href = "/Members";
+                        }
+                        else {
+
+                            swal("", data.Msg, "warning");
+                            window.setTimeout(function () {
+                                window.location.href = "/Members";
+                            }, 3000);
+                        }
+                    }
+                },
+                failure: function (data) {
+                    swal("", "Something went wrong!!!", "error");
+                    window.setTimeout(function () {
+                        window.location.href = "/Members";
+                    }, 3000);
+                },
+                error: function (data) {
+                    swal("", "Something went wrong!!!", "error");
+                    window.setTimeout(function () {
+                        window.location.href = "/Members";
+                    }, 3000);
+                }
+            });
+
+        }
+    });
+
+</script>

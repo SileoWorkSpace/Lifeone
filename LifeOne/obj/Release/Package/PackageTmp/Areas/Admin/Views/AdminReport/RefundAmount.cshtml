@@ -1,0 +1,696 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.Member_RefundAmountModel
+@using LifeOne.Models.Manager
+
+@{
+    ViewBag.Title = "RefundAmount";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+@{
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-success m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+    }
+
+}
+<!-- Start Content-->
+
+
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Refund Amount</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Masters</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Refund Amount</li>
+                    </ol>
+                </nav>*@
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                @*<span>
+                        <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>
+                    </span>*@
+                <span>
+                    <a href="#" onclick="fCallPaging(1,1)" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" data-placement="top" title="Download Excel"><i class="fa fa-file-excel-o"></i></a>
+                    <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
+                </span>
+
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("RefundAmount", "AdminReport", FormMethod.Get, new { @id = "form1", enctype = "multipart/form-data", @style = "height:0;" }))
+    {
+        <div class="row" id="advance-search" style="display:none;">
+            <div class="col-md-12">
+                <div class="alert alert-warning" style="color:#727272 !important">
+                    <div class="row">
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                @Html.HiddenFor(m => m.Page)
+                                @Html.HiddenFor(m => m.IsExport)
+                                <label>Login Id</label>
+                                <input type="text" name="LoginId" id="LoginID" value="@Model.LoginId" placeholder="Enter Login Id" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label>Direct Seller</label>
+                                <input type="text" name="MemberName" id="DisplayName" value="@Model.MemberName" placeholder="Enter Direct Seller" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label>Mobile No</label>
+                                <input type="text" name="Mobile" id="Mobile" value="@Model.Mobile" placeholder="Enter Mobile No" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label>From Date</label>
+                                <input type="date" name="FromDate" id="FromDate" value="@Model.FromDate" placeholder="" class="form-control">
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label>To Date</label>
+                                <input type="date" name="ToDate" id="ToDate" value="@Model.ToDate" placeholder="" class="form-control ">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-2">
+                            <div class="form-group">
+                                <label style="display:block;"></label>
+                                <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" onclick="fCallPaging(1,0)">
+                                <input type="submit" class="btn btn-success " style="margin-top:1.5em;display:none;" value="Search" id="BtnSearch">
+                                <a href="/Admin-RefundAmount" class="btn btn-secondary" onClick="fclaer();" style="margin-top:1.5em;">Reset</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="no-more-tables">
+            <div class="row">
+
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-md-9"></div>
+                            </div>
+                            <div class="table-responsive" style="height: 462px !important;">
+                                <table class="table table-striped mb-0" id="tblCustomers">
+                                    <thead>
+                                        <tr>
+                                            <th>#Sn.</th>
+                                            <th>Login Id</th>
+                                            <th>Direct Seller </th>
+                                            <th>Mobile No</th>
+                                            <th>Transaction No</th>
+                                            <th>Transaction Date</th>
+                                            @*
+                                                <th>Utility</th>*@
+                                            <th>Credit Amount</th>
+                                            @*
+                                                <th>Debit Amount</th>
+                                                <th>Balance Amount</th>*@
+                                            <th>Remark</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.RefundAmountList != null && Model.RefundAmountList.Count > 0)
+                                        {
+                                            int i = 0;
+                                            int page = Model.RefundAmountList[0].Page ?? 0;
+                                            page = (page - 1);
+
+
+                                            i = ((page) * (Model.RefundAmountList[0].Size));
+                                            foreach (var item in Model.RefundAmountList)
+                                            {
+                                                <tr>
+                                                    <td>@(i = i + 1)</td>
+                                                    <td>@item.LoginId</td>
+                                                    <td>@item.MemberName</td>
+                                                    <td>@item.Mobile</td>
+                                                    <td>@item.TransNo</td>
+                                                    <td>@item.TransDate</td>
+                                                    @*
+                                                        <td>@item.UtilityName</td>*@
+                                                    <td>@item.CreditAmount</td>
+                                                    @*
+                                                        <td>@item.DebitAmount</td>
+                                                        <td>@item.BalanceAmount</td>*@
+                                                    <td>@item.Description</td>
+                                                    <td>
+                                                        @if (PermissionManager.IsActionPermit("Refund Amount", ViewOptions.FormView))
+                                                        {
+                                                            <a href="javascript:void(0);" onclick="OpenPopupRefundAmount(this,'@item.TransNo',@item.Pk_UniqueId,   @item.FK_MemId,@item.CreditAmount)"> Refund Amount</a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+
+                                            i++;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                            <footer class="card-footer bg-white p-2">
+                                <div class="d-md-flex align-items-center justify-content-between">
+
+                                    @if (Model != null)
+                                    {
+                                        if (Model.Pager != null)
+                                        {
+                                            if (Model.Pager.EndPage > 1)
+                                            {
+                                                <div> <small class="text-muted inline">showing @Model.RefundAmountList.Count  of @Model.Pager.TotalItems items</small> </div>
+                                                <div>
+                                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                        @if (Model.Pager.CurrentPage > 1)
+                                                        {
+                                                            <li class="page-item">
+                                                                <a class="page-link" onclick="fCallPaging(1,0)" href="#">First</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1),0)" href="#">Previous</a>
+                                                            </li>
+                                                        }
+                                                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                        {
+                                                            <li class="page-item @(page == Model.Pager.CurrentPage ? " active" : "" )">
+
+
+                                                                <span><a class="page-link" onclick="fCallPaging(@page,0)" href="#">@page</a></span>
+                                                            </li>
+                                                        }
+                                                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                        {
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1),0)" href="#">Next</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages),0)" href="#">Last</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </footer>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    }
+    @*@using (Html.BeginForm("RefundAmount", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+        {*@
+    <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Refund Amount To Member</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal">
+                        <div class="row">
+
+
+                            <div class="col-md-12">
+
+                                <label class="form-control-placeholder" for="name">Login Id</label>
+                                <input type="text" class="form-control" name="LoginId" id="LoginId" @*onchange="GetMemberDetail()"*@ readonly="readonly" />
+                                <span id="MemberName" class="text text-danger"></span><br />
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Mobile No*</label>
+                                <input type="text" class="form-control" name="Mobile" id="MobileNo" readonly="readonly" />
+                            </div>
+
+
+                            @*<div class="col-md-12">
+                                    <label class="form-control-placeholder" for="name">Utility *</label>
+                                    @Html.DropDownListFor(m => m.Fk_UtilityId, (IEnumerable<SelectListItem>)ViewBag.DllUtility, new { @class = "form-control" })
+                                </div>*@
+
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">TransNo*</label>
+                                <input type="text" class="form-control" name="TransNo" id="TransNo" readonly="readonly" />
+                            </div>
+
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Amount*</label>
+                                <input type="text" class="form-control" name="CreditAmount" id="CreditAmount" onkeypress="return isNumberKey(event)" readonly="readonly" />
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Description*</label>
+                                <textarea class="form-control" name="Description" id="Description" readonly="readonly"></textarea>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" id="btnRefund" name="Save" class="btn btn-primary" value="Refund Amount" onclick="return validate();" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="hidden" id="hfUniqueId" />
+                    <input type="hidden" id="hfMemId" />
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    @*}*@
+</div>
+
+<script>
+    function fCallPaging(val, IsExport) {
+        debugger
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#IsExport").val(IsExport);
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+    function fclaer() {
+        $(".fclear").val('');
+        $("#Page").val(1);
+        $("#IsExport").val(0);
+        window.location.reload();
+    }
+
+
+
+    var ResponseObj = {
+        id: "",
+        entity: "",
+        payment_id: "",
+        amount: ""
+    }
+    function GetMemberDetail() {
+        var _LoginID = $('#LoginId').val();
+        if (_LoginID != "") {
+            $.ajax({
+                url: "/Admin/MemberParent/BindMemberParentDetailByLoginID",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ LoginID: _LoginID }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result != null) {
+                        $('#FK_MemId').val(result.SponsorId);
+                        $('#MemberName').text(result.SponsorName);
+                    }
+                    else {
+                        showSnazzyErrorMessage("Invalid Mobile Number");
+                    }
+                }
+            });
+        }
+    }
+
+    function ResetPopup() {
+        $('#hfUniqueId').val('');
+        $('#hfMemId').val('');
+        $('#LoginId').val('');
+        $('#MemberName').text('');
+        $('#MobileNo').val('');
+        $('#TransNo').val('');
+        $('#CreditAmount').val('');
+        $('#Description').val('');
+
+    }
+
+    function validate() {
+        var Login = $('#LoginId').val();
+        var MemberName = $('#MemberName').text();
+        var Fk_UtilityId = $('#Fk_UtilityId').val();
+        var TransNo = $('#TransNo').val();
+        var CreditAmount = $('#CreditAmount').val();
+        var Description = $('#Description').val();
+
+        if ((Login == '' || Login == null || Login == undefined) || (MemberName == '' || MemberName == null || MemberName == undefined)) {
+            $('#LoginId').focus();
+            return false;
+        }
+
+        //if ($('#Fk_UtilityId').val() == '' || $('#Fk_UtilityId').val() == null || $('#Fk_UtilityId').val() == undefined || $('#Fk_UtilityId').val() == '0') {
+        //    $('#Fk_UtilityId').focus();
+        //    return false;
+        //}
+
+        if (TransNo == '' || TransNo == null || TransNo == undefined) {
+            $('#TransNo').focus();
+            return false;
+        }
+
+        if (CreditAmount == '' || CreditAmount == null || CreditAmount == undefined || CreditAmount <= 0) {
+            $('#CreditAmount').focus();
+            return false;
+        }
+
+        //if (Description == '' || Description == null || Description == undefined) {
+        //    $('#Description').focus();
+        //    return false;
+        //}
+
+        RazorPayRefund();
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    var vLoginId = '';
+    var vMemberName = '';
+    var vMobile = '';
+    var vTransactionNo = '';
+    var Amount = 0;
+    var vRemark = '';
+
+    function OpenPopupRefundAmount(elm, pTransactionNo, pUniqueId, pMemId, pAmount) {
+
+        vLoginId = $(elm).parents('tr').find('td').eq(1).text();
+        vMemberName = $(elm).parents('tr').find('td').eq(2).text();
+        vMobile = $(elm).parents('tr').find('td').eq(3).text();
+        vRemark = $(elm).parents('tr').find('td').eq(7).text();
+
+        $('#hfUniqueId').val(pUniqueId);
+        $('#hfMemId').val(pMemId);
+        $('#LoginId').val(vLoginId);
+        $('#MemberName').text(vMemberName);
+        $('#MobileNo').val(vMobile);
+        $('#TransNo').val(pTransactionNo);
+        $('#CreditAmount').val(pAmount);
+        $('#Description').val(vRemark);
+        $('#myModal4').modal('show');
+    }
+
+    function RazorPayRefund() {
+
+        if (confirm('Are you sure?')) {
+            if ($('#CreditAmount').val() > 0 && $('#TransNo').val() != '') {
+
+                $('#btnRefund').attr('disabled', true).val('Please wait...');
+
+                $.ajax({
+
+                    url: '/api/Web/GetRazorPayRefund',
+                    data: { Amount: $('#CreditAmount').val(), paymentId: $('#TransNo').val() },
+                    dataType: 'json',
+                    type: 'GET',
+                    // contentType: 'application/json;charset=utf-8',
+                    success: function (response) {
+
+                        if (response.code == "1") {
+
+                            ResponseObj.id = response.id;
+                            ResponseObj.entity = response.entity;
+                            ResponseObj.payment_id = response.payment_id;
+                            ResponseObj.amount = response.amount;
+
+                            RefundAmount();
+
+                        }
+                        else {
+                            alert(response.Msg);
+                            //swal('', response.Msg, 'info');
+                            location.href = '/Admin-RefundAmount';
+                            $('#btnRefund').attr('disabled', false).val('Refund Amount');
+                            return false;
+                        }
+                    },
+                    error: function (error) {
+                        alert(error);
+                        //swal('', 'Error', 'info');
+                        return false;
+                    }
+                });
+            }
+        }
+
+    }
+
+
+    function RefundAmount() {
+
+
+
+        var obj = {
+
+            Pk_UniqueId: $('#hfUniqueId').val(),
+            FK_MemId: $('#hfMemId').val(),
+            RefundId: ResponseObj.id,
+            PaymentId: ResponseObj.payment_id,
+            DebitAmount: parseFloat(ResponseObj.amount / 100)
+        }
+
+        if (obj.RefundId != "" && obj.Pk_UniqueId != "" && obj.DebitAmount > 0) {
+            $.ajax({
+
+                url: '/Adminreport/RefundAmount',
+                data: JSON.stringify({ model: obj }),
+                dataType: 'json',
+                type: 'POST',
+                contentType: 'application/json;charset=utf-8',
+
+                success: function (response) {
+
+                    if (response.code == "1") {
+                        alert(response.Message);
+                        location.href = '/Admin-RefundAmount';
+                        ResponseObj = {};
+                    }
+                    else {
+                        alert(response.Message);
+                        location.href = '/Admin-RefundAmount';
+                        $('#btnRefund').attr('disabled', false).val('Refund Amount');
+                        return false;
+                    }
+                },
+                error: function (error) {
+                    alert(error);
+                    location.href = '/Admin-RefundAmount';
+                    //swal('', 'Error', 'info');
+                    return false;
+                }
+            });
+        }
+    }
+
+
+    //PDF
+
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [0]; // coloms to remove
+
+        var tbl = $('#tblCustomers').clone();
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 28,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Refund Amount',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "Refund Amount");
+        doc.page++;
+        doc.save('Refund Amount.pdf');
+
+    });
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('tblCustomers').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Refund Amount</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+</script>
+
+

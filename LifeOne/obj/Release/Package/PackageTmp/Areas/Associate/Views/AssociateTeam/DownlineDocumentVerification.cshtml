@@ -1,0 +1,539 @@
+﻿@model LifeOne.Models.AssociateManagement.AssociateEntity.KYCDetails
+@{
+    ViewBag.Title = "DownlineDocumentVerification";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+<style>
+    .card-body {
+        padding: 10px; /* onlye for this page*/
+    }
+
+</style>
+<div class="content">
+    <div class="content-wrapper-before"></div>
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0 text-white">Upload KYC</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#">KYC</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Upload KYC</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body pt-10">
+                        <div class="col-md-12 mt-10">
+                            @using (Html.BeginForm("DownlineDocumentVerificationAction", "AssociateTeam", FormMethod.Post))
+                            {
+                                <div class="row">
+                                    <div class="col-md-6 mt-10">
+                                        <div class="form-group">
+                                            <label>Associate Id<span class="text-danger">*</span></label>
+                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "input-text form-control", @placeholder = "Enter Associate ID", autocomplete = "off" })
+                                        </div>
+                                    </div> <div class="col-md-3 mt-10">
+                                        <div class="form-group">
+                                            <label style="display:block">&nbsp;<span class="text-danger"></span></label>
+                                            <input type="Submit" id="btnSearch" value="Get Details" name="Search" class="btn btn-dark" onclick="return ValidateSearch();">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            @if (Model != null)
+            {
+                if (Model.lstKycDown != null)
+                {
+
+                    foreach (var item in Model.lstKycDown)
+                    {
+                        <div class="col-xl-3 hide">
+                            <div class="card">
+                                <div class="card-body pt-2">
+                                    <h6 class="header-title mb-0">Profile Image</h6>
+                                    <div class="">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="sub-header">
+                                                <p>
+                                                    <strong>Verfication Staus:</strong>
+                                                    @if (item.ProfileStatus == "Pending")
+                                                    {<span class="label label-warning">Pending</span>}
+                                                    else if (item.ProfileStatus == "Approved")
+                                                    { <span class="label label-success">Approved</span>}
+                                                    else if (item.ProfileStatus == "Rejected")
+                                                    { <span class="label label-danger">Rejected</span>}
+                                                </p>
+                                                </p>
+                                                <form action="/Associate/AssociateTeam/DocumentVerifyAction" method="post" enctype="multipart/form-data">
+                                                    @if (item.ProfileStatus == "Approved")
+                                                    {
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" onchange="uploadFile('PROFILE', this)" />
+                                                            @Html.HiddenFor(Model => Model.profileimagepath)
+                                                            @Html.HiddenFor(Model => Model.Fk_MemId)
+                                                            @Html.HiddenFor(Model => Model.LoginId)
+                                                        </div>
+                                                    }
+                                                    <div class="dropzone" style="margin-top:15px;">
+                                                        <div> <img id="output_image2" style="height:170px;width:200px;" onclick="ShowAllImage('@item.profilepic','ProfilePic')" src="@item.profilepic" class="my-img" altsrc="~/Content/Associate/assets/images/1200px-No_image_3x4.svg.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                                    </div>
+
+
+                                                    <div class="clearfix text-right mt-3">
+                                                        @if (item.ProfileStatus == "Approved")
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="submit" class="btn btn-success" onclick="return validate1()"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                                        }
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <p>Colour Passport size Photo</p>
+                                        <p>(Max. Resolution 300px X 450px)</p>
+                                        <p>Note:</p>
+                                        <ol>
+                                            <li>Upload JPG only, PDF file will not be accepted</li>
+                                            <li>After uploading, please, check that image should be visible for verification</li>
+                                            <li>Please call Customer Care in case of any problem</li>
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="card">
+                                <div class="card-body pt-2">
+                                    <h6 class="header-title mb-0">Pan Card Image</h6>
+                                    <div class="">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="sub-header">
+                                                <p>
+                                                    <strong>Verfication Staus:</strong>    @if (item.PanStatus == "Pending")
+                                                    {<span class="label label-warning">Pending</span>}
+                                                    else if (item.PanStatus == "Approved")
+                                                    { <span class="label label-success">Approved</span>}
+                                                    else if (item.PanStatus == "Rejected")
+                                                    { <span class="label label-danger">Rejected</span>}
+                                                </p>
+                                                </p>
+                                                <form action="/Associate/AssociateTeam/DocumentVerifyAction1" method="post" enctype="multipart/form-data">
+                                                    @if (item.PanStatus == "Approved")
+                                                    {
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" onchange="uploadFile('PAN', this)" />
+                                                            @Html.HiddenFor(Model => Model.pancardimagepath)
+                                                            @Html.HiddenFor(Model => Model.Fk_MemId)
+                                                            @Html.HiddenFor(Model => Model.LoginId)
+                                                        </div>
+                                                    }
+                                                    <div class="dropzone" style="margin-top:15px;">
+                                                        <div> <img id="output_image2" style="height:170px;width:200px;" onclick="ShowAllImage('@item.PanCardUrl','Pan Image')" src="@item.PanCardUrl" class="my-img" altsrc="~/Content/Associate/assets/images/1200px-No_image_3x4.svg.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                                    </div>
+
+
+                                                    <div class="clearfix text-right mt-3">
+                                                        @if (item.PanStatus == "Approved")
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="submit" class="btn btn-success" onclick="return validate2()"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                                        }
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="card">
+                                <div class="card-body pt-2">
+                                    <h6 class="header-title mb-0">ID Proof</h6>
+                                    <div class="">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="sub-header">
+                                                <p>
+                                                    <strong>Verfication Staus:</strong>    @if (item.AddressStatus == "Pending")
+                                                    {<span class="label label-warning">Pending</span>}
+                                                    else if (item.AadharStatus == "Approved")
+                                                    { <span class="label label-success">Approved</span>}
+                                                    else if (item.AadharStatus == "Rejected")
+                                                    { <span class="label label-danger">Rejected</span>}
+                                                </p>
+                                                </p>
+                                                <form action="/Associate/AssociateTeam/DocumentVerifyAction2" method="post" enctype="multipart/form-data">
+                                                    @if (item.AadharStatus == "Approved")
+                                                    {
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" onchange="uploadFile('AADHARFRONT', this)" />
+                                                            @Html.HiddenFor(Model => Model.aadharfrontimagepath)
+                                                            @Html.HiddenFor(Model => Model.Fk_MemId)
+                                                            @Html.HiddenFor(Model => Model.LoginId)
+                                                        </div>
+                                                    }
+                                                    <div class="dropzone" style="margin-top:15px;">
+                                                        <div> <img id="output_image2" onclick="ShowAllImage('@item.AddressFrontUrl','Id Proof Image')" style="height:170px;width:200px;" src="@item.AddressFrontUrl" class="my-img" altsrc="~/Content/Associate/assets/images/1200px-No_image_3x4.svg.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                                    </div>
+
+
+                                                    <div class="clearfix text-right mt-3">
+                                                        @if (item.AadharStatus == "Approved")
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="submit" class="btn btn-success" onclick="return validate3()"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                                        }
+                                                    </div>
+                                                </form>
+
+
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div> <div class="form-group">
+                                            <p>You can provide following documents</p>
+                                            <ol>
+                                                <li>Aadhar Card (Front Only)</li>
+                                                <li>Passport</li>
+                                                <li>PAN Card</li>
+                                                <li>Voter ID Card</li>
+                                                <li>ID Card Issued by Center/State</li>
+                                                <li>Permanent Driving License</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="card">
+                                <div class="card-body pt-2">
+                                    <h6 class="header-title mb-0">Address Proof</h6>
+                                    <div class="">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="sub-header">
+                                                <p>
+                                                    <strong>Verfication Staus:</strong>    @if (item.AddressStatus == "Pending")
+                                                    {<span class="label label-warning">Pending</span>}
+                                                    else if (item.AddressStatus == "Approved")
+                                                    { <span class="label label-success">Approved</span>}
+                                                    else if (item.AddressStatus == "Rejected")
+                                                    { <span class="label label-danger">Rejected</span>}
+                                                </p>
+                                                </p>
+                                                <form action="/Associate/AssociateTeam/DocumentVerifyAction3" method="post" enctype="multipart/form-data">
+                                                    @if (item.AddressStatus == "Approved")
+                                                    {
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" onchange="uploadFile('AADHARBACK', this)" />
+                                                            @Html.HiddenFor(Model => Model.aadharbackimagepath)
+                                                            @Html.HiddenFor(Model => Model.Fk_MemId)
+                                                            @Html.HiddenFor(Model => Model.LoginId)
+                                                        </div>
+                                                    }
+                                                    <div class="dropzone" style="margin-top:15px;">
+                                                        <div> <img id="output_image2" onclick="ShowAllImage('@item.AddressBackUrl','Address Proof Image')" style="height:170px;width:200px;" src="@item.AddressBackUrl" class="my-img" altsrc="~/Content/Associate/assets/images/1200px-No_image_3x4.svg.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                                    </div>
+                                                    <div class="clearfix text-right mt-3">
+                                                        @if (item.AddressStatus == "Approved")
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="submit" class="btn btn-success" onclick="return validate5()"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                                        }
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div> <div class="form-group">
+                                            <p>You can provide following documents</p>
+                                            <ol>
+                                                <li>Aadhar Card (Back Only)</li>
+                                                <li>Passport</li>
+                                                <li>Voter ID Card</li>
+                                                <li>ID Card Issued by Center/State</li>
+                                                <li>Permanent Driving License</li>
+                                                <li>Rent/Lease Agreement</li>
+                                                <li>Telephone/Electricity/Water Bill</li>
+                                                <li>Self-declaration attested by Gazetted officer</li>
+                                                <li>Ration Card</li>
+                                                <li>Flat allotment/possesion letter</li>
+                                                <li>LIC Policy</li>
+                                                <li>Bank/Credit Card Statement</li>
+                                                <li>Job Card issued by NREGA </li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-3">
+                            <div class="card">
+                                <div class="card-body pt-2" style="min-height:auto;">
+                                    <h6 class="header-title mb-0">Bank Details </h6>
+                                    <div class="">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="sub-header">
+                                                <p>
+                                                    <strong>Verfication Staus:</strong>    @if (item.BankStatus == "Pending")
+                                                    {<span class="label label-warning">Pending</span>}
+                                                    else if (item.BankStatus == "Approved")
+                                                    { <span class="label label-success">Approved</span>}
+                                                    else if (item.BankStatus == "Rejected")
+                                                    { <span class="label label-danger">Rejected</span>}
+                                                </p>
+                                                </p>
+                                                <form action="/Associate/AssociateTeam/DocumentVerifyAction4" method="post" enctype="multipart/form-data">
+                                                    @if (item.BankStatus == "Approved")
+                                                    {
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" onchange="uploadFile('CHEQUE', this)" />
+                                                            @Html.HiddenFor(Model => Model.chequeimagepath)
+                                                            @Html.HiddenFor(Model => Model.Fk_MemId)
+                                                            @Html.HiddenFor(Model => Model.LoginId)
+                                                        </div>
+                                                    }
+                                                    <div class="dropzone" style="margin-top:15px;">
+                                                        <div> <img id="output_image2" style="height:170px;width:200px;" onclick="ShowAllImage('@item.BankDocumentURL','Bank Proof Image')" src="@item.BankDocumentURL" class="my-img" altsrc="~/Content/Associate/assets/images/1200px-No_image_3x4.svg.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                                    </div>
+
+
+                                                    <div class="clearfix text-right mt-3">
+                                                        @if (item.BankStatus == "Approved")
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="submit" class="btn btn-success" onclick="return validate4()"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                                        }
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div> <div class="form-group">
+                                            <p>You can provide following documents</p>
+                                            <ol>
+                                                <li>Cancelled Cheque</li>
+                                                <li>Bank Passbook</li>
+                                                <li>Bank Certification</li>
+                                            </ol>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                }
+            }
+        </div>
+    </div>
+    <!-- container-fluid -->
+</div>
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body"> <img class="img-fluid" id="allImage" src="" alt="image" />  </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+
+    function ValidateSearch() {
+        if ($("#LoginId").val() == "") {
+            swal("","Please Enter Associate ID","warning");
+            $("#LoginId").focus();
+            return false;
+        }
+        return true;
+    }
+
+    function ShowAllImage(path, name) {
+         if (path == null || path == '') {
+            path = '~/Content/Associate/assets/images/1200px-No_image_3x4.svg.png';
+        }
+        $("#allImage").attr('src', path.replace("~", ""));
+        $('#myModalLabel').text(name);
+        $("#myModal").modal('show');
+    }
+
+
+ function uploadFile(documentType, fileobj)
+ {
+     debugger;
+        var fileInput = fileobj;
+        if (fileInput.files.length === 0) {
+            return;
+        }
+        var file = fileInput.files[0];
+        var formData = new FormData();
+        formData.append("documentType", documentType);
+        formData.append("file", file);
+     $.ajax({
+         url: "/api/Image/UploadKyc",
+         data: formData,
+         processData: false,
+         type: 'POST',
+         contentType: false,
+         success: function (data) {
+             if (data.response == "success") {
+                 debugger;
+                  if (documentType == "PAN")
+                {
+                      //$scope.pancardimage(data.imageUrl.replace('~', ''));
+                      $('#pancardimagepath').val(data.filepath);
+                }
+                else if (documentType == "AADHARFRONT")
+                {
+                      //$scope.aadharfrontimage = "http://webapi.FastKart.in/" +response.data.imageUrl.replace('~', '');
+                      $('#aadharfrontimagepath').val(data.filepath);
+                }
+                else if (documentType == "AADHARBACK") {
+                      //$scope.aadharbackimage = "http://webapi.FastKart.in/" +response.data.imageUrl.replace('~', '');
+                      $('#aadharbackimagepath').val(data.filepath)
+                }
+                else if (documentType == "CHEQUE") {
+                      //$scope.chequeimage = "http://webapi.FastKart.in/" + response.data.imageUrl.replace('~', '');
+                      $('#chequeimagepath').val(data.filepath);
+                }
+                else if (documentType == "PROFILE") {
+                    //$scope.profileimage ="http://webapi.FastKart.in/"+ response.data.imageUrl.replace('~', '');
+                   $('#profileimagepath').val(data.filepath);
+                }
+                 else {
+                      alert(data.msg);
+                 }
+             }
+         }
+    });
+    }
+
+    function validate1() {
+        debugger;
+        if ($('#profileimagepath').val() == '') {
+            swal('', "Please Upload your Profile Pic!!", 'warning');
+            $('#profileimagepath').focus();
+            return false;
+        }
+    }
+    function validate2() {
+        debugger;
+        if ($('#pancardimagepath').val() == '') {
+            swal('', "Please Upload Pan Front Image", 'warning');
+            $('#pancardimagepath').focus();
+            return false;
+        }
+
+
+    }
+    function validate3() {
+        if ($('#aadharfrontimagepath').val() == '') {
+            swal('', "Please Upload Adhar Image!!", 'warning');
+            $('#aadharfrontimagepath').focus();
+            return false;
+        }
+
+
+    }
+    function validate4() {
+        if ($('#chequeimagepath').val() == '') {
+            swal('', "Please Upload Cheque Book Image!!", 'warning');
+            $('#chequeimagepath').focus();
+            return false;
+        }
+    }
+    function validate5() {
+        if ($('#aadharbackimagepath').val() == '') {
+            swal('', "Please Upload Address Proof!!", 'warning');
+            $('#aadharbackimagepath').focus();
+            return false;
+        }
+
+    }
+      $(document).ready(function () {
+        if ('@TempData["Code"]' == 1) {
+            swal("", '@TempData["Document"]', 'success');
+        }
+        else if ('@TempData["Code"]' == 0) {
+             swal("", '@TempData["Document"]', 'warning');
+            }
+
+    });
+</script>
+

@@ -190,6 +190,7 @@ namespace LifeOne.Models.API
 
         public long FK_MemId { get; set; }
         public string Place { get; set; }
+        public string PackageName { get; set; }
     }
 
     public class DirectAPI
