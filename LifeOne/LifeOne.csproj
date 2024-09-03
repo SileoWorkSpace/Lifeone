@@ -4699,6 +4699,7 @@
     <Content Include="Views\Home\BusinessPlan.cshtml" />
     <Content Include="Views\Home\ImageGallery.cshtml" />
     <Content Include="Views\Home\Video.cshtml" />
+    <Content Include="Views\Shared\_PartialMobileMenuLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

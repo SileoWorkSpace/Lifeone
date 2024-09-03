@@ -2275,5 +2275,18 @@ namespace LifeOne.Controllers
             return View(obj);
             //  return View();
         }
+        [ChildActionOnly]
+        public ActionResult MobileMenu()
+        {
+            Products products = new Products();
+            if (products.Page == null || products.Page == 0)
+            {
+                products.Page = 1;
+            }
+            products.Size = SessionManager.Size;
+            products.LstMenu = products.GetAllCategoryDetail();
+            return PartialView("_PartialMobileMenuLayout", products);
+
+        }
     }
 }
