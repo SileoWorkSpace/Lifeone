@@ -263,7 +263,7 @@ namespace LifeOne.Models.AdminManagement.ADAL
             var queryParameters = new DynamicParameters();
             queryParameters.Add("@fromDate", obj.fdate);
             queryParameters.Add("@toDate", obj.tdate);
-            queryParameters.Add("@payoutNo", obj.PayoutNo);
+            queryParameters.Add("@payoutNo", obj.PayoutNo==0?null:obj.PayountNo);          
             queryParameters.Add("@memberLoginId", obj.MemberLoginId);
             queryParameters.Add("@Page", obj.Page);
             queryParameters.Add("@Size", obj.Size > 0 ? obj.Size : SessionManager.Size);

@@ -37,7 +37,7 @@ namespace LifeOne.Controllers
         string RazorPayLocalSecret = ConfigurationManager.AppSettings["RazorSecretLocaL"].ToString();
         string RazorPayLiveSecret = ConfigurationManager.AppSettings["RazorSecret"].ToString();
         string Aeskey = ConfigurationManager.AppSettings["Aeskey"].ToString();
-        string baseurl = ConfigurationManager.AppSettings["baseurl"].ToString();
+        string baseurl = ConfigurationManager.AppSettings["baseurluat"].ToString();
         string baseurlNoImg = ConfigurationManager.AppSettings["baseurlNoImg"].ToString();
         private readonly object _objService;
         //LifeOne.Models.API.ManageCartService _objservice = new LifeOne.Models.API.ManageCartService();
