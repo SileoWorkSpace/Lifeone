@@ -85,9 +85,6 @@ namespace LifeOne.Models
                 queryParameters.Add("@Fk_CategoryId", Fk_CategoryId);
                 List<Products> _iresult = DBHelperDapper.DAAddAndReturnModelList<Products>("GetProductDetails", queryParameters);
                 //_iresult = DBHelperDapper.DAAddAndReturnModelList<Products>("GetProductDetails", queryParameters);
-
-
-
                 return _iresult;
             }
             catch (Exception ex)
