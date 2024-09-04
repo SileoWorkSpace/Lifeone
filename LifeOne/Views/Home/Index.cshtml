@@ -15,6 +15,20 @@
 <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/owl-carousel/owl.carousel.min.css">
 
 <style>
+    @@media (max-width: 767px) {
+        .ps-wel-cat-bg2-side {
+            display: flex !important;
+            flex-direction: column-reverse !important;
+        }
+
+        .product-s {
+            padding: 20px 0px 0 0;
+        }
+        .pro {
+            display: block !important; /* or inline-block, depending on your needs */
+        }
+    }
+
     .owl-stage-outer {
         max-width: 100%;
     }
@@ -83,36 +97,36 @@
         background: url(/Content/NewAssests/images/hair.jpg) no-repeat right 10%;
     }
 
-    .product-s {
-        padding: 30% 0px 0 0 !important;
-    }
+   /* .product-s {
+        padding: 10px 0px 0 0 !important;
+    }*/
 
     .panel-lifeone p {
         padding: 10px 20%;
         font-size: 20px;
         line-height: 28px;
     }
-
-    @@media only screen and (max-width: 479px) {
-        h2.product-system {
-            font-size: 20px !important;
-            line-height: 26px !important;
-        }
-    }
-
-    @@media only screen and (max-width: 479px) {
-        .panel-lifeone h1 {
-            font-size: 30px;
+  
+        @@media only screen and (max-width: 479px) {
+            h2.product-system {
+                font-size: 20px !important;
+                line-height: 26px !important;
+            }
         }
 
         @@media only screen and (max-width: 479px) {
-            .panel-lifeone p {
-                line-height: 24px !important;
-                font-size: 17px !important;
-                padding: 5px 8% !important;
+            .panel-lifeone h1 {
+                font-size: 30px;
+            }
+
+            @@media only screen and (max-width: 479px) {
+                .panel-lifeone p {
+                    line-height: 24px !important;
+                    font-size: 17px !important;
+                    padding: 5px 8% !important;
+                }
             }
         }
-    }
 </style>
 <main class="main">
     <div class="page-content">
@@ -245,8 +259,8 @@
                         {
                             if (i % 2 == 0)
                             {
-                               <div class="row ps-wel-cat-bg3-side">
-                                   <div class="col-xs-12 col-md-6 col-xs-12 wellness vh-100 hidden-mb" style="background-image:url(@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString())"></div>
+                               <div class="row ps-wel-cat-bg3-side align-items-center">
+                                   <div class="col-xs-12 col-md-6 col-xs-12 wellness vh-100 " style="background-image:url(@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString())"></div>
                                    <div class="col-xs-12 col-md-6 col-xs-12">
                                        <div class="text-center product-s">
                                            <h2 class="product-system">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h2>
@@ -259,7 +273,7 @@
                             }
                             else
                             {
-                                <div class="row ps-wel-cat-bg2-side">
+                                <div class="row ps-wel-cat-bg2-side align-items-center">
                                     <div class="col-xs-12 col-md-6 col-xs-12">
                                         <div class="text-center product-s">
                                             <h2 class="product-system">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h2>
@@ -268,7 +282,7 @@
                                             <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View @Model.dtCategory.Rows[i]["ProductType"].ToString() <i class="d-icon-arrow-right"></i></a>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-md-6 col-xs-12 beauty-care vh-100 hidden-mb" style="background-image:url(@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString())"></div>
+                                    <div class="col-xs-12 col-md-6 col-xs-12 beauty-care pro vh-100" style="background-image:url(@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString())"></div>
                                 </div>
                             }
                         }
