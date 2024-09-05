@@ -26,6 +26,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public decimal ProcessingFee { get; set; }
         public decimal NetAmount { get; set; }
         public int? PayoutNo { get; set; }
+        public int? KycStatus { get; set; }
         public decimal LeadershipBonus { get; set; }
         public decimal MatchingBonus { get; set; }
         public decimal HybridMatchingBonus { get; set; }

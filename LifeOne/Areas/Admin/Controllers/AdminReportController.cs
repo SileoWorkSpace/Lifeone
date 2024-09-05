@@ -1606,6 +1606,7 @@ namespace LifeOne.Areas.Admin.Controllers
             }
             ViewBag.LoginId = model.MemberLoginId;
             ViewBag.PayoutNo = model.PayoutNo;
+            ViewBag.KycStatus = model.KycStatus;
             ViewBag.tdate = model.tdate;
             ViewBag.fdate = model.fdate;
 
