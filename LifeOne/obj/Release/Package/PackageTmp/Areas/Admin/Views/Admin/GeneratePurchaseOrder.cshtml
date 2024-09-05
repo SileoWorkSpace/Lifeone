@@ -1,0 +1,469 @@
+﻿@using LifeOne.Models.Manager
+@model LifeOne.Models.ProductsDetail
+@{
+    ViewBag.Title = "GeneratePurchaseOrder";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .modal-footer {
+        background: white;
+        width: 100%;
+    }
+
+    .modal-body {
+        position: relative;
+        padding: 5px;
+    }
+</style>
+
+<link href="~/Content/dist/css/ .css" rel="stylesheet" />
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Generate Purchase Order</h4>
+            @*<nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#">Manage Stock</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Generate Purchase Order</li>
+                    </ol>
+                </nav>*@
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <p style="color:red;">
+                    @TempData["AddStockMessage"]
+                </p>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+
+                @using (Html.BeginForm("GeneratePurchaseOrder", "Admin", FormMethod.Post))
+                {
+                    <div class="card-body">
+                        <div class="row" style="margin:0px;">
+                            <div class="col-md-12 navbar-custom pull-left" style="position:relative">
+                                <div class="row">
+                                    <div class="col-4 col-md-2">
+                                        <div class="form-group">
+                                            <label>Vendor Name</label>
+                                            @Html.DropDownListFor(m => m.Pk_SupplierId, new SelectList(ViewBag.ddlSupplierDetails, "Value", "Text"), new { @class = "form-control", @onchange = " return fGetSupplierDetails()" })
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2" style="position:relative">
+                                        <div class="form-group">
+                                            <label>Contact No.</label>
+                                            <input id="Mobile" type="text" name="Mobile" class="form-control" placeholder="Contact No." readonly="readonly" />
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2" style="position:relative">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2" style="position:relative">
+                                        <div class="form-group">
+                                            <label>Product Name</label>
+                                            <select id="ProductDropdown" name="Pk_ProductId"  class="form-control" onchange="return fGetProductGSTDetails()">
+                                                
+                                            </select>
+                                            
+                                            @*@Html.DropDownListFor(m => m.Pk_ProductId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", @onchange = " return fGetProductGSTDetails()" })*@
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-2">
+                                        <div class="form-group">
+                                            <label>Quantity</label>
+                                            <input id="Quantity" name="Quantity" type="text" class="form-control" placeholder="Quantity" onchange="return fcalculatetotalamt()" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-2">
+                                        <div class="form-group">
+                                            <label>Purchase Price</label>
+                                            <input id="PurchasePrice" type="text" name="PurchasePrice" class="form-control" placeholder="Purchase Price" onchange="return fcalculatetotalamt()" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 navbar-custom pull-left" style="position:relative">
+                                <div class="row">
+                                    <div class="col-4 col-md-2">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            <input id="Address" type="text" name="Address" class="form-control" placeholder="Address" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2">
+                                        <div class="form-group">
+                                            <label>GST No.</label>
+                                            <input id="GSTNo" type="text" name="GSTNo" class="form-control" placeholder="GST No." readonly="readonly" />
+                                        </div>
+                                    </div>
+                                    <div class="col-2 col-md-2" style="position:relative">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-2">
+                                        <div class="form-group">
+                                            <label>CGST</label>
+                                            <input id="CGST" type="text" name="CGST" class="form-control" placeholder="CGST" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-2">
+                                        <div class="form-group">
+                                            <label>SGST</label>
+                                            <input id="SGST" type="text" name="SGST" class="form-control" placeholder="SGST" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                    <div class="col-12 col-md-2">
+                                        <div class="form-group" style="padding-left: 10px;">
+                                            <label>IGST</label>
+                                            <input id="IGST" type="text" name="IGST" class="form-control" placeholder="IGST" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-12 navbar-custom pull-left" style="position:relative">
+                                <div class="row">
+                                    <div class="col-4 col-md-2" style="position:relative">
+                                        <div class="form-group">
+                                            <label>Bill No.</label>
+                                            @Html.TextBoxFor(m => m.BillNo, new { @class = "form-control", @placeholder = "Bill No." })
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2">
+                                        <div class="form-group">
+                                            <label>Bill Date</label>
+                                            @Html.TextBoxFor(m => m.BillDate, new { @class = "form-control", @placeholder = "Bill Date", @type = "date" })
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2" style="position:relative">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2">
+                                        <div class="form-group">
+                                            <label>Total Amount</label>
+                                            <input id="TotalAmount" name="TotalAmount" type="text" class="form-control" placeholder="Total Amount" readonly="readonly" />
+                                        </div>
+                                    </div>
+                                    <div class="col-4 col-md-2" style="position:relative">
+                                        <div class="form-group">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2" style="position:relative">
+                                        <div class="form-group">
+                                            <label></label>
+                                            <input type="submit" class="btn btn-success " onclick="return fcheck();" style="margin-top:1.5em;" name="Add" value="Add" id="BtnSearch">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 navbar-custom pull-left" style="position:relative">
+                                <div class="col-md-3"></div>
+                            </div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped mb-0" id="tblBillingOrdered">
+                                <thead>
+                                    <tr>
+                                        <th>Product Name</th>
+                                        <th style="text-align:right;">Quantity</th>
+                                        <th style="text-align:right;">Purchase Price</th>
+                                        <th style="text-align:right;">CGST</th>
+                                        <th style="text-align:right;">SGST</th>
+                                        <th style="text-align:right;">IGST</th>
+                                        <th style="text-align:right;">Total Amount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.dtProductQuantity.Rows.Count > 0)
+                                    {
+                                        for (var i = 0; i < Model.dtProductQuantity.Rows.Count; i++)
+                                        {
+                                            <tr>
+                                                <td>@Model.dtProductQuantity.Rows[i]["ProductName"].ToString()</td>
+                                                <td style="text-align:right;">@Model.dtProductQuantity.Rows[i]["Quantity"].ToString()</td>
+
+                                                <td style="text-align:right;">@Model.dtProductQuantity.Rows[i]["PurchasePrice"].ToString()</td>
+                                                <td style="text-align:right;">@Model.dtProductQuantity.Rows[i]["CGST"].ToString()</td>
+                                                <td style="text-align:right;">@Model.dtProductQuantity.Rows[i]["SGST"].ToString()</td>
+                                                <td style="text-align:right;">@Model.dtProductQuantity.Rows[i]["IGST"].ToString()</td>
+                                                <td style="text-align:right;">@Model.dtProductQuantity.Rows[i]["TotalAmount"].ToString()</td>
+                                                <td>
+                                                    <a href="/Admin/Admin/DeleteStock?id=@Model.dtProductQuantity.Rows[i]["PK_Id"].ToString()" onclick="return confirm('Are you sure to delete this?') " class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-3 col-xs-12">
+                                <div class="form-group">
+                                    <label class="hidden-phone">Payment Mode</label>
+                                    <select id="PaymentMode" name="PaymentMode" class="form-control">
+                                        <option value="0">Payment Mode</option>
+                                        <option value="Cash">Cash</option>
+                                        <option value="Cheque">Cheque</option>
+                                        <option value="Demand Draft">Demand Draft</option>
+                                        <option value="Bankers Cheque">Bankers Cheque</option>
+                                        <option value="NEFT">NEFT</option>
+                                        <option value="RTGS">RTGS</option>
+                                        <option value="IMPS">IMPS</option>
+                                        <option value="Online">Payment Gateway</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="divpaymenttype" style="display:none">
+                                <div class="form-group">
+                                    <label>Cheque/DD No./Bank Transaction No.</label>
+                                    @Html.TextBoxFor(m => m.ChequeDDNo, new { @class = "form-control", @maxlength = "30" })
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="transactiondate" style="display:none">
+                                <div class="form-group">
+                                    <label>Cheque/DD Date/Transaction Date</label>
+                                    @Html.TextBoxFor(m => m.ChequeDDDate, new { @class = "form-control", @maxlength = "30", @type = "date" })
+                                </div>
+                            </div>
+                            <div class="col-md-3" id="bankname" style="display:none">
+                                <div class="form-group">
+                                    <label>Bank Name</label>
+                                    @Html.TextBoxFor(m => m.BankName, new { @class = "form-control" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label></label>
+                                    <input type="submit" class="btn btn-success" onclick="return fcheckstock();" style="margin-top:1.5em;" name="Save" value="Save" id="BtnSearch">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function checknumber() {
+        if ($("#Quantity").val() - Math.floor($("#Quantity").val()) != 0) {
+            $("#Quantity").focus();
+            alert("Please Enter Correct Number");
+            return false;
+        }
+    }
+    function fcheck() {
+        if ($('#Pk_SupplierId').val() == "0") {
+            $('#Pk_SupplierId').focus();
+            alert('Please Enter Vendor Name');
+            return false;
+        }
+        else if ($('#BillNo').val() == "0") {
+            $('#BillNo').focus();
+            alert('Please Enter Valid PO No');
+            return false;
+        }
+        else if ($('#BillNo').val() == "") {
+            $('#BillNo').focus();
+            alert('Please Enter PO No');
+            return false;
+        }
+        else if ($('#BillDate').val() == "") {
+            $('#BillDate').focus();
+            alert('Please Select Date');
+            return false;
+        }
+        else if ($('#Pk_ProductId').val() == "0") {
+            $('#Pk_ProductId').focus();
+            alert('Please Select Product');
+            return false;
+        }
+        else if ($('#Quantity').val() == "") {
+            $('#Quantity').focus();
+            alert('Please Enter Quantity');
+            return false;
+        }
+        else if ($('#Quantity').val() == "0") {
+            $('#Quantity').focus();
+            alert('Please Enter Valid Quantity');
+            return false;
+        }
+        else if ($('#PurchasePrice').val() == "") {
+            $('#PurchasePrice').focus();
+            alert('Please Enter Purchase Price');
+            return false;
+        }
+        else if ($('#PurchasePrice').val() == "0") {
+            $('#PurchasePrice').focus();
+            alert('Please Enter Valid Purchase Price');
+            return false;
+        }
+        
+
+    }
+    function fcheckstock() {
+        var rowCount = $("#tblBillingOrdered td").closest("tr").length;
+        if (rowCount == 0) {
+            alert("Please Add Stock")
+            return false;
+        }
+        if ($('#Pk_SupplierId').val() == "0") {
+            $('#Pk_SupplierId').focus();
+            alert('Please Enter Vendor Name');
+            return false;
+        }
+        else if ($('#BillNo').val() == "0") {
+            $('#BillNo').focus();
+            alert('Please Enter Valid PO No');
+            return false;
+        }
+        else if ($('#BillNo').val() == "") {
+            $('#BillNo').focus();
+            alert('Please Enter Bill No');
+            return false;
+        }
+        else if ($('#BillDate').val() == "") {
+            $('#BillDate').focus();
+            alert('Please Select Bill Date');
+            return false;
+        }
+        else if ($('#PaymentMode').val() != "Cash" && $('#PaymentMode').val() != "0") {
+            if ($('#ChequeDDNo').val() == "") {
+                $('#ChequeDDNo').focus();
+                alert('Please Enter Transaction No.');
+                return false;
+            }
+            else if ($('#ChequeDDDate').val() == "") {
+                $('#ChequeDDDate').focus();
+                alert('Please Enter Transaction Date');
+                return false;
+            }
+            else if ($('#BankName').val() == "") {
+                $('#BankName').focus();
+                alert('Please Enter Bank Name');
+                return false;
+            }
+        }
+
+    }
+    function fcalculatetotalamt() {
+        var finalamount = Number($('#Quantity').val()) * Number($('#PurchasePrice').val());
+        $('#TotalAmount').val(finalamount);
+    }
+    function fGetProductGSTDetails() {
+        debugger;
+        var Pk_ProductId= $("#ProductDropdown").val();
+        //select.append($('<option></option>').val(value).html(value)
+        $.ajax({
+            type: "GET",
+            url: "/admin/admin/Add_Stock",
+            data: { Pk_productId: Pk_ProductId },
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response != null) {
+                    $('#IGST').val(response.IGST);
+                    $('#CGST').val(response.CGST);
+                    $('#SGST').val(response.SGST);
+                    $('#PurchasePrice').val(response.MRP);
+                } else {
+                    alert("Something went wrong");
+                }
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+
+                alert(response.responseText);
+            }
+        });
+    }
+    function fGetSupplierDetails() {
+        
+        if ($('#Pk_SupplierId').val() != "0") {
+            $.ajax({
+                type: "GET",
+                url: "/admin/admin/GetSupplierDetails",
+                data: { Pk_SupplierId: $('#Pk_SupplierId').val() },
+                //contentType: "application/json; charset=utf-8",
+                //dataType: "json",
+                success: function (response) {
+                    debugger;
+                   
+                    console.log(response);
+                    if (response != null) {
+                        console.log(response);
+                        var s = '<option value="-1">Please Select Product</option>';  
+                        $('#Mobile').val(response[0].Mobile);
+                        $('#Address').val(response[0].Address);
+                        $('#GSTNo').val(response[0].GSTNo);
+                        for (var i = 1; i < response.length; i++) {
+                            s += '<option value="' + response[i].Pk_ProductId + '">' + response[i].ProductName + '</option>';
+                        }
+                        $("#ProductDropdown").html(s);  
+                       // $('#Pk_ProductId').val(response.ProductName);
+                        //$("#ProductName").append($("<option></option>").html(value.ProductName));  
+                    } else {
+                        alert("Something went wrong");
+                    }
+                },
+                failure: function (response) {
+                    alert(response.responseText);
+                },
+                error: function (response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+        else {
+            $('#Mobile').val("");
+            $('#Address').val("");
+            $('#GSTNo').val("");
+        }
+    }
+    $('#PaymentMode').on('change', function () {
+        if ($('#PaymentMode').val() == "Cash" || $('#PaymentMode').val() == "0") {
+
+            $('#divpaymenttype').css('display', 'none');
+            $('#transactiondate').css('display', 'none');
+            $('#bankname').css('display', 'none');
+        }
+        else if ($('#PaymentMode').val() == "Online") {
+            $('#divpaymenttype').css('display', 'none');
+            $('#transactiondate').css('display', 'none');
+            $('#bankname').css('display', 'none');
+
+        }
+        else {
+            $('#divpaymenttype').css('display', 'block');
+            $('#divpaymenttypeSlip').css('display', 'block');
+            $('#transactiondate').css('display', 'block');
+            $('#bankname').css('display', 'block');
+        }
+    })
+
+
+
+
+</script>
+
+
+

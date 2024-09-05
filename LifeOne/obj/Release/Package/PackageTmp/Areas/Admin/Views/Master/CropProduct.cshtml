@@ -1,0 +1,250 @@
+﻿@model LifeOne.Models.API.CropProductModel
+@{
+    ViewBag.Title = "CropProduct";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+
+
+@{
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-danger m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+        }
+    }
+
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Performance Level Master</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Masters</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Performance Level Master</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <a href="" id="btnAdd" class="btn btn-success btn-sm" onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
+                    <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                </a>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="no-more-tables">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Category</th>
+                                        <th>Crop</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CropProductList)
+                                    {
+                                        <tr>
+                                            <td>@(count = count + 1)</td>
+                                            <td>@item.CategoryName</td>
+                                            <td>@item.Crop_ProductName</td>
+                                            <td class="text-right">
+                                                <button type="button" class="btn btn-primary btn-sm" onclick="return OpenPopUp('@item.Id', '@item.CategoryID', '@item.Crop_ProductName')" data-toggle="modal" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>
+                                                <a href="/Admin/PerformanceLevelMaster/PerformanceLevelMasterDelete?Id=@item.Id" onclick="return confirm('are you sure to delete this record?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+    </div>
+
+    @*@using (Html.BeginForm("PerformanceLevelMasterSave", "PerformanceLevelMaster", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+        <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Add/Update Performance Level Master</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+
+                            @Html.HiddenFor(m => m.Id)
+
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">PerformanceLevel <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="PerformanceLevel" id="PerformanceLevel" maxlength="100" />
+
+
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Target PVFrom <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="TargetPVFrom" id="TargetPVFrom" onkeypress="return isNumberKey(event)" maxlength="15" />
+
+
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Target PVTo <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="TargetPVTo" id="TargetPVTo" onkeypress="return isNumberKey(event)" maxlength="15" />
+
+
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Level Percentage <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="LevelPercentage" id="LevelPercentage" onkeypress="return isNumberKey(event)" maxlength="15" />
+
+
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Additional Criteria <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="AdditionalCriteria" id="AdditionalCriteria" maxlength="400" />
+
+
+
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Under LevelID <span class="text-danger">*</span> </label>
+                                @Html.DropDownListFor(m => m.UnderLevelID, (IEnumerable<SelectListItem>)ViewBag.DllPerformanceLevel, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Under Level Count <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="UnderLevelCount" id="UnderLevelCount" onkeypress="return isNumberKey(event)" maxlength="10" />
+
+                            </div>
+                            <div class="col-md-12">
+                                <label class="form-control-placeholder" for="name">Under Level Business <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="UnderLevelBusiness" id="UnderLevelBusiness" onkeypress="return isNumberKey(event)" maxlength="15" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            }
+
+        </div>
+    }*@
+</div>
+<script>
+    function ResetPopup() {
+        $('#Save').val('Save');
+        $('#PK_LevelId').val('');
+        $('#PerformanceLevel').val('');
+        $('#TargetPVFrom').val('');
+        $('#TargetPVTo').val('');
+        $('#UnderLevelID').val('0');
+        $('#LevelPercentage').val('');
+        $('#AdditionalCriteria').val('');
+        $('#UnderLevelCount').val('');
+        $('#UnderLevelBusiness').val('');
+        $("#divpreview").hide();
+        $("#divpreview").empty();
+    }
+
+    function OpenPopUp(PK_LevelId, PerformanceLevel, TargetPVFrom, TargetPVTo, LevelPercentage, AdditionalCriteria, UnderLevelID, UnderLevelCount, UnderLevelBusiness) {
+        debugger;
+        $('#Save').val('Update');
+        $('#PK_LevelId').val(PK_LevelId);
+        $('#PerformanceLevel').val(PerformanceLevel);
+        $('#TargetPVFrom').val(TargetPVFrom);
+        $('#TargetPVTo').val(TargetPVTo);
+        $('#LevelPercentage').val(LevelPercentage);
+        $('#AdditionalCriteria').val(AdditionalCriteria);
+        $('#UnderLevelID').val(UnderLevelID);
+        $('#UnderLevelCount').val(UnderLevelCount);
+        $('#UnderLevelBusiness').val(UnderLevelBusiness);
+
+
+    }
+
+    function validate() {
+        if ($('#PerformanceLevel').val() == '' || $('#PerformanceLevel').val() == null || $('#PerformanceLevel').val() == undefined) {
+            $('#PerformanceLevel').focus();
+            return false;
+        }
+        if ($('#TargetPVFrom').val() == '' || $('#TargetPVFrom').val() == null || $('#TargetPVFrom').val() == undefined) {
+            $('#TargetPVFrom').focus();
+            return false;
+        }
+        if ($('#TargetPVTo').val() == '' || $('#TargetPVTo').val() == null || $('#TargetPVTo').val() == undefined) {
+            $('#TargetPVTo').focus();
+            return false;
+        }
+        if ($('#AdditionalCriteria').val() == '' || $('#AdditionalCriteria').val() == null || $('#AdditionalCriteria').val() == undefined) {
+            $('#AdditionalCriteria').focus();
+            return false;
+        }
+        if ($('#AdditionalCriteria').val() == '' || $('#AdditionalCriteria').val() == null || $('#AdditionalCriteria').val() == undefined) {
+            $('#AdditionalCriteria').focus();
+            return false;
+        }
+        if ($('#UnderLevelID').val() == '0' || $('#UnderLevelID').val() == null || $('#UnderLevelID').val() == undefined) {
+            $('#UnderLevelID').focus();
+            return false;
+        }
+        if ($('#UnderLevelCount').val() == '' || $('#UnderLevelCount').val() == null || $('#UnderLevelCount').val() == undefined) {
+            $('#UnderLevelCount').focus();
+            return false;
+        }
+        if ($('#UnderLevelBusiness').val() == '' || $('#UnderLevelBusiness').val() == null || $('#UnderLevelBusiness').val() == undefined) {
+            $('#UnderLevelBusiness').CategoryIDegoryNameegoryIDoryIDtegoryIDs();
+            return false;
+        }
+
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evIddwhich) Id evt.which: event.keyCode;
+        item   if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+</script>
+

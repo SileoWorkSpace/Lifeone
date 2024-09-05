@@ -1,0 +1,110 @@
+﻿@model LifeOne.Models.Products
+
+@{
+    decimal FinalAmount = 0;
+    decimal TotalPV = 0;
+    decimal singleBV = 0;
+    var Quantity = "";    
+
+}
+<style>
+    .product-media-1 {
+        width: 66px;
+        height: 66px;
+    }
+   
+</style>
+<div class="dropdown-box">
+    <div class="products scrollable">
+        @if (Model != null && Model.LstMenu.Count > 0)
+        {
+            int Count = 0;
+            foreach (var item in Model.LstMenu)
+            {
+                int i = 0;
+                Quantity = "Quantity" + i;                
+                FinalAmount = FinalAmount + decimal.Parse(item.SubTotal);
+                <div class="product product-cart">
+                    <figure class="product-media-1">
+                        <a href="#">
+                            <img src="@item.ProductImage" alt="product" width="50"
+                                 height="50" />
+                        </a>
+                        @*<button class="btn btn-link btn-close" href="/Home/DeleteShoppingCart?id=@item.Pk_Id" onclick="return confirm('are you sure to delete ?')">
+            <i class="fas fa-times"></i><span class="sr-only">Close</span>
+        </button>*@
+                        <button class="btn btn-link btn-close" onclick="return DeleteProduct(@item.Pk_Id);">
+            <i class="fas fa-times"></i><span class="sr-only">Close</span>
+        </button>
+                    </figure>
+                    <div class="product-detail">
+                        <a href="#" class="product-name">@item.ProductName</a>
+                        <div class="price-box">
+                            <span class="product-quantity">@item.Quantity</span>
+                            <span class="product-price">₹@item.SalesPrice</span>
+                        </div>
+                    </div>
+                </div>               
+            }
+         }
+     </div>
+    <div class="cart-total">
+        <label>Subtotal:</label>
+        <span class="price">₹@FinalAmount</span>
+    </div>    
+    <div class="cart-action">
+        @*<a href="/Home/ShoppingCartList" class="btn btn-dark btn-link">View Cart</a>*@
+        <a href="/Home/ShoppingCartList" class="btn btn-primary"><span>Go To Checkout</span></a>
+    </div> 
+</div>
+
+<script src="~/Content/NewAssests/js/main.js"></script>
+<script>
+    function updateQty(count, Fk_ProductId) {
+        debugger;
+        var count1 = $('input[name="Count"]').val();
+        var a = $('#Quantity_' + count).val();
+        if (a < 1) {
+            $('#Quantity_' + count).val(1);
+        }
+        if (a == 0 || a >= 100 || a == null) {
+            return false;
+        }
+        // $('#Quantitybtn').val(a);
+        $('#Pk_ProductId').val(Fk_ProductId);
+        // $('#Qty').val($('#Quantity_' + count).val());
+        // $('#BtnSearch').trigger('click');
+
+        let Id = $('#Pk_ProductId').val();
+        //let Qty = $('#Qty').val();
+        let Qty = $('#Quantity_' + count).val();
+        $.ajax({
+            url: '/Home/UpdateShoppingQuantity',
+            type: 'Post',
+            data: { Id: Id, Qty: Qty },
+            success: function (response) {
+                console.log(response);
+                debugger;
+                var totalPrice = Number(response[0].Quantity) * Number(response[0].SalesPrice)
+                if (response != null) {
+                    var str = "";
+                    //console.log(response);
+                    $('#Pk_ProductId').text(response[0].Pk_ProductId);
+                    $('#updateQunatity_' + count).text(response[0].Quantity);
+                    $('#FianalAmount').text(response[0].TotalAmount);
+                }
+
+            }, error: function () {
+
+            }
+        });
+    }
+    function DeleteProduct(id) {
+        var abc = confirm('are you sure to delete ?');
+        if (abc == true) {
+            window.location.href = "/Home/DeleteShoppingCart?id=" + id;
+        }
+    }
+
+</script>
+

@@ -1,0 +1,143 @@
+﻿@model List<LifeOne.Models.AdminManagement.AEntity.FormMasterModel>
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "FormMasterList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    string msg = (string)TempData["msg"];
+    string code = (string)TempData["code"];
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-success m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+        }
+    }
+}
+<link href="~/assets/css/datatables.min.css" rel="stylesheet" />
+<script src="~/assets/js/core/datatables.min.js"></script>
+
+
+
+
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Form Master List</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#-">User Permission</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Form Master List</li>
+                </ol>
+            </nav>*@
+        </div>
+        <br/>
+        <div class="pbutton">
+            <div class="right text-right">
+                @if (PermissionManager.IsActionPermit("Form Master", ViewOptions.FormSave))
+                {
+                    <a href="/Form-Master" id="btnAdd" class="btn btn-success btn-sm">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add Form Master
+                    </a>
+                }
+                </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="box">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        @*<h4 class="header-title mt-0 mb-1">Product List</h4>*@
+                    </div>
+                </div>
+
+                <div class="table-responsive" id="DivProductList">
+                    <table id="myTable" class="table table-striped mb-0">
+
+                        <thead>
+                            <tr class="hdr">
+                                <th align="left" scope="col">S. No.</th>
+                                <th align="left" scope="col">Form Type</th>
+                                <th align="left" scope="col">Form Name</th>
+                                <th align="left" scope="col">Action</th>
+                            </tr>
+
+                        </thead>
+
+                        <tbody>
+
+                            @if (Model != null)
+                            {
+                                int SNO = 0;
+                                foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(SNO = SNO + 1)</td>
+
+                                        <td>@item.FK_FormTypeId</td>
+                                        <td>@item.FormName</td>
+
+                                        <td>
+                                            @if (PermissionManager.IsActionPermit("Form Master", ViewOptions.FormUpdate))
+                                            {
+                                                <a href="/Admin/UserPermission/FormMasterFill/?id=@item.PK_FormId" title="Edit" onclick="return confirm ('Are you sure to Edit?');" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
+                                            }
+                                            @if (PermissionManager.IsActionPermit("Form Master", ViewOptions.FormDelete))
+                                            {
+                                                <a href="/Admin/UserPermission/FormMasterDelete?id=@item.PK_FormId" title="Delete" onclick="return confirm ('Are you sure to Delete?');" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                            }
+
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div><!-- /.box-body -->
+            </div>
+        </div><!-- /.box -->
+
+    </div><!-- /.col -->
+
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+    $("#tblFormMaster").DataTable({
+        "lengthMenu": [[20, 50, 100, -1], [20, 50, 100, "All"]]
+    });
+</script>
+
+

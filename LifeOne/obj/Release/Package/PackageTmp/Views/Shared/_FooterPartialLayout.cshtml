@@ -1,0 +1,108 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.Contact
+<footer class="footer appear-animate" data-animation-options="{ 'delay': '.2s' }">
+    <div class="footer-middle">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xl-3 col-lg-4 col-sm-6">
+                    <div class="widget widget-about">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <a href="/Home/Index" class="logo-footer mb-5">
+                                    <img src="~/Content/NewAssests/images/lifeonelogo.png" alt="logo" width="230" />
+                                </a>
+                                
+                            </div>
+                            <div class="col-md-6">
+                                <img src="~/Content/NewAssests/images/indiasmosttrust.png" alt="logo" width="130" />
+                            </div>
+                        </div>
+
+                    </div>
+                    <!-- End of Widget -->
+                </div>
+                <div class="col-xl-2 col-lg-4 col-sm-6">
+                    <div class="widget">
+                        <h4 class="widget-title">Account</h4>
+                        <ul class="widget-body">
+                            <li><a href="#">Certificate</a></li>
+                            <li><a href="#">SOP & Bank Details</a></li>
+                            <li><a href="#">Memorandum of Associaiton</a></li>
+                            <li><a href="#">Article of Associaiton</a></li>
+                        </ul>
+                    </div>
+                    <!-- End of Widget -->
+                </div>
+                <div class="col-xl-2 col-lg-4 col-sm-6">
+                    <div class="widget">
+                        <h4 class="widget-title">Useful links</h4>
+                        <ul class="widget-body">
+                            <li><a href="/Home/About">About</a></li>
+                            <li><a href="/Home/Products">Product</a></li>
+                            <li><a href="/Home/VisionMission">Vision & Mission</a></li>
+                            <li><a href="/Home/Contact">Contact</a></li>
+                            <li><a href="/Home/CmdDesk">Cmd Desk</a></li>
+                        </ul>
+                    </div>
+                    <!-- End of Widget -->
+                </div>
+                <div class="col-xl-2 col-lg-4 col-sm-6">
+                    <div class="widget">
+                        <h4 class="widget-title">Information</h4>
+                        <ul class="widget-body">
+                            <li><a href="#">Start a Return</a></li>
+                            <li><a href="#">Shipping FAQ</a></li>
+                            <li><a href="/Home/TermsandConditions">Terms & Conditions</a></li>
+                            <li><a href="#">Privacy Policy</a></li>
+                            <li><a href="/Home/ImageGallery">Image Gallery</a></li>
+                            <li><a href="/Home/Video">Video Gallery</a></li>
+                        </ul>
+                    </div>
+                    <!-- End of Widget -->
+                </div>
+                <div class="col-xl-3 col-lg-8">
+                    <div class="widget mb-4">
+                        <h4 class="widget-title">Contact Us</h4>
+                        <ul class="widget-body">
+                            @{
+                                if (Model != null)
+                                {
+                                    <li>@Model.Email</li>
+                                    <li>@Model.Address1</li>
+                                }
+                            }
+
+                        </ul>
+                    </div>
+                    <div class="footer-info">
+                        <figure class="payment">
+                            <img src="~/Content/NewAssests/images/demos/demo19/payment.png" alt="payment" width="135" height="24" />
+                        </figure>
+                        <div class="social-links mt-3">
+                            <a target="_blank" href="https://www.facebook.com/profile.php?id=61558483911520&mibextid=LQQJ4d" title="social-link"
+                               class="social-link social-facebook fab fa-facebook-f"></a>
+                            <a target="_blank" href="https://www.instagram.com/lifeonewellness?igsh=MTNrMWxyZ3dxOGN0ZA%3D%3D&utm_source=qr" title="social-link"
+                               class="social-link social-twitter fab fa-instagram"></a>
+                            <a target="_blank" href="#" title="social-link"
+                               class="social-link social-linkedin fab fa-youtube"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End of FooterMiddle -->
+    <div class="footer-bottom">
+        <div class="px-4" style="width:100%;">
+            <div class="row align-items-center" style="width:100%;">
+                <div class="col-md-6 justify-content-sm-center">
+                    <p class="copyright">Lifeone Wellness &copy; 2024. All Rights Reserved</p>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end justify-content-sm-center">
+                    <strong style="font-size:13px;">Visitor No. :</strong>&nbsp;
+                    <a href="https://www.freecounterstat.com" title="hit counter"><img style="height:23px;" src="https://counter2.optistats.ovh/private/freecounterstat.php?c=p8zw7ch222g1ed8a9uub5dmz6d27sf6p" border="0" title="hit counter" alt="hit counter"></a>
+                </div>
+            </div>
+        </div>
+          </div>
+    <!-- End of FooterBottom -->
+</footer>

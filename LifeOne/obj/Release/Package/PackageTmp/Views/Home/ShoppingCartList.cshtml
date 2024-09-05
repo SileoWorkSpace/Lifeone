@@ -1,0 +1,256 @@
+﻿@model LifeOne.Models.Products
+@{
+    ViewBag.Title = "Shopping Cart List";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@{
+
+    decimal TotalAmount = 0;
+    var Quantity = "";
+}
+
+
+<main class="main cart">
+    <div class="page-header" style="background-image: url(/Content/NewAssests/images/page-header/contact-us.jpg) ">
+        <h1 class="page-title font-weight-bold text-capitalize ls-l">Shopping Cart</h1>
+        <nav class="breadcrumb-nav">
+            <ul class="breadcrumb">
+                <li><a href="/Home/Index"><i class="d-icon-home"></i> <i class="bi bi-chevron-right"></i></a></li>
+                <li>Shopping Cart</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page-content pt-7 pb-10">
+        @using (Html.BeginForm("ShoppingCartList", "Home"))
+        {
+            @Html.HiddenFor(M => M.Pk_ProductId)
+            @Html.HiddenFor(M => M.Qty)
+            @Html.HiddenFor(M => M.Update)
+            <div class="container mt-7 mb-2">
+                <div class="row">
+                    @if (Model.DtDetails != null && Model.DtDetails.Rows.Count > 0)
+                    {
+                        <div class="col-lg-8 col-md-12 pr-lg-4">
+
+                            <table class="shop-table cart-table">
+                                <thead>
+                                    <tr>
+                                        <th><span>Product</span></th>
+                                        <th></th>
+                                        <th><span>Price</span></th>
+                                        <th><span>quantity</span></th>
+                                        <th>Subtotal</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.DtDetails != null)
+                                        {
+                                            if (Model.DtDetails.Rows.Count > 0)
+                                            {
+                                                for (int i = 0; i <= Model.DtDetails.Rows.Count - 1; i++)
+                                                {
+                                                    Quantity = "Quantity" + i;
+                                                    TotalAmount += decimal.Parse(Model.DtDetails.Rows[i]["SubTotal"].ToString());
+                                                    <tr>
+                                                        <td class="product-thumbnail">
+                                                            <figure>
+
+                                                                <img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()" data-src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()" width="100" height="100"
+                                                                     alt="product">
+
+                                                            </figure>
+                                                        </td>
+                                                        <td class="product-name">
+                                                            <div class="product-name-section">
+                                                                <a href="#">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-subtotal">
+                                                            <span class="amount">@Model.DtDetails.Rows[i]["SalesPrice"].ToString()</span>
+                                                        </td>
+                                                        <td class="product-quantity">
+                                                            <div class="input-group">
+                                                                <button class="quantity-minus d-icon-minus" onclick="quantityChangeMinus(@i,'@Model.DtDetails.Rows[i]["Fk_ProductId"].ToString()');"></button>
+                                                                <input class="quantity form-control" type="number" min="1"
+                                                                       max="1000" value="@Model.DtDetails.Rows[i]["Quantity"].ToString()" id="Quantity" name="@Quantity" onchange="return GetAddQTY(@i,'@Model.DtDetails.Rows[i]["Fk_ProductId"].ToString()');">
+                                                                <button class="quantity-plus d-icon-plus" onclick="quantityChangePluse(@i,'@Model.DtDetails.Rows[i]["Fk_ProductId"].ToString()');"></button>
+                                                            </div>
+                                                        </td>
+                                                        <td class="product-price">
+                                                            <span class="amount">@Model.DtDetails.Rows[i]["SubTotal"].ToString()</span>
+                                                        </td>
+                                                        <td class="product-close">
+                                                            <a href="/Home/DeleteShoppingCart?id=@Model.DtDetails.Rows[i]["Pk_Id"].ToString()" onclick="return confirm('are you sure to delete ?')" class="product-remove" title="Remove this product">
+                                                                <i class="fas fa-times"></i>
+                                                            </a>
+                                                        </td>
+                                                    </tr>
+
+                                                }
+                                                <input type="submit" id="BtnSearch" name="Update" value="Update" hidden />
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="cart-actions mb-6 pt-4">
+                                <a href="/Home/Products" class="btn btn-primary btn-md btn-rounded btn-icon-left mr-4 mb-4">
+                                    <i class="d-icon-arrow-left"></i>Continue Shopping
+                                </a>
+
+                                @*<button type="submit"
+                                            class="btn btn-outline btn-dark btn-md btn-rounded btn-disabled">
+                                        Update
+                                        Cart
+                                    </button>*@
+                            </div>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="d-flex justify-content-center">
+                                    <img width="200" src="~/Content/NewAssests/images/no-products-found.png" />
+
+                                </div>
+                                <div class="cart-actions mb-6 pt-4 d-flex justify-content-center">
+                                    <a href="/Home/Products" class="btn btn-primary btn-md btn-rounded btn-icon-left mr-4 mb-4">
+                                        <i class="d-icon-arrow-left"></i>Continue Shopping
+                                    </a>
+
+                                    @*<button type="submit"
+                                                class="btn btn-outline btn-dark btn-md btn-rounded btn-disabled">
+                                            Update
+                                            Cart
+                                        </button>*@
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                    @if (LifeOne.Models.Manager.SessionManager.TotalItems == 0)
+                    {
+                    }
+                    else
+                    {
+                        <aside class="col-lg-4 sticky-sidebar-wrapper">
+                            <div class="sticky-sidebar" data-sticky-options="{'bottom': 20}">
+                                <div class="summary mb-4">
+                                    <h3 class="summary-title text-left">Cart Totals</h3>
+                                    <table class="shipping">
+                                        <tr class="summary-subtotal">
+                                            <td>
+                                                <h4 class="summary-subtitle">Subtotal</h4>
+                                            </td>
+                                            <td>
+                                                <p class="summary-subtotal-price">₹@TotalAmount</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="shipping">
+                                        <tr class="summary-subtotal">
+                                            <td>
+                                                <h4 class="summary-subtitle">Total Qty</h4>
+                                            </td>
+                                            <td>
+                                                <p class="summary-subtotal-price">@LifeOne.Models.Manager.SessionManager.TotalItems</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <table class="total">
+                                        <tr class="summary-subtotal">
+                                            <td>
+                                                <h4 class="summary-subtitle">Total</h4>
+                                            </td>
+                                            <td>
+                                                <p class="summary-total-price ls-s">₹@TotalAmount</p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <a href="/Home/GetAddress" class="btn btn-primary btn-rounded w-100">
+                                        Proceed to
+                                        checkout
+                                    </a>
+                                </div>
+                            </div>
+                        </aside>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</main>
+
+<script>
+
+    //function updatequantity(count, Fk_ProductId) {
+    //    debugger;
+    //    var a = "input[name='Quantity" + count + "']";
+
+    //    var b = parseInt($(a).val());
+    //    if (b < 1) {
+    //        //alert('quantity should be greater than zero')
+    //        //$('#Quantity').val(1);
+    //        $("input[name='Quantity" + count + "']").val(1);
+    //        //return false;
+    //    }
+    //    if (b == 0 || b >= 100 || b == null) {
+    //        return false;
+    //    }
+    //    $('#Quantitybtn').val(a);
+    //    $('#Pk_ProductId').val(Fk_ProductId);
+    //    $('#Qty').val($(a).val());
+    //    $('#BtnSearch').trigger('click');
+    //}
+
+
+
+    function quantityChangePluse(count, Fk_ProductId) {
+        debugger;
+        var qt = "input[name='Quantity" + count + "']";
+        var getQTY = parseInt($(qt).val());
+        var newValue = parseInt(getQTY) + 1;
+        $('#Pk_ProductId').val(Fk_ProductId);
+        $('#Qty').val(newValue);
+        $('#Update').val('Update');
+        $('#BtnSearch').trigger('click');
+    }
+    function quantityChangeMinus(count, Fk_ProductId) {
+        debugger;
+        var qt = "input[name='Quantity" + count + "']";
+        var getQTY = parseInt($(qt).val());
+        if (getQTY == "1") {
+            return false;
+        }
+        var newValue = parseInt(getQTY) - 1;
+        $('#Pk_ProductId').val(Fk_ProductId);
+        $('#Qty').val(newValue);
+        $('#Update').val('Update');
+        $('#BtnSearch').trigger('click');
+    }
+
+    function GetAddQTY(count, Fk_ProductId) {
+        debugger;
+        var qt = "input[name='Quantity" + count + "']";
+        var getQTY = parseInt($(qt).val());
+        if (getQTY == "0" || getQTY < "0") {
+            alert('Quantity must be greater than zero .!');
+            $(qt).val('');
+            return false;
+        }
+
+        $('#Pk_ProductId').val(Fk_ProductId);
+        $('#Qty').val(getQTY);
+        $('#Update').val('Update');
+        $('#BtnSearch').trigger('click');
+    }
+</script>
+
+
+

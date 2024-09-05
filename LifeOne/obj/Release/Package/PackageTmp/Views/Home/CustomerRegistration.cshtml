@@ -1,0 +1,1356 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.MCustomerRegistration
+@{
+    ViewBag.Title = "Register";
+
+}
+
+<style>
+    input {
+        -webkit-appearance: auto;
+    }
+    .card-1 {
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
+        border-radius: 10px;
+    }
+</style>
+
+<link href="~/Content/dist/css/sweetalert.css" rel="stylesheet" />
+<script src="~/Content/dist/js/sweetalert.min.js"></script>
+
+<main id="content" class="wrapper layout-page">
+    <div class="page-header" style="background-image: url(/Content/NewAssests/images/page-header/contact-us.jpg) ">
+        <h1 class="page-title font-weight-bold text-capitalize ls-l">Register with us!</h1>
+        <nav class="breadcrumb-nav">
+            <ul class="breadcrumb">
+                <li><a href="/Home/Index"><i class="d-icon-home"></i> <i class="bi bi-chevron-right"></i></a></li>
+                <li>Register</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page-content mt-10">
+        <section class="contact-section my-5">
+            <div class="container">
+                <div class="col-lg-10 col-md-10 mx-auto">
+                    <div class="card card-1">
+                        <div class="card-body p-5">
+                            <form name="reg-form" class="clearfix">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="invite_code">Sponsor Code<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.InviteCode, new { @class = "form-control", @autocomplete = "Off", @onchange = "GetReferDetails(this.id)", @placeholder = "Sponsor Code" })
+                                            @Html.HiddenFor(Model => Model.Fk_SponserId)
+                                            @Html.HiddenFor(Model => Model.Fk_MemId)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="sponsor_name">Sponsor Name<span style="color:red;">*</span></label>
+                                            <input id="sponsorName" name="sponsorName" class="form-control" type="text" disabled value="@Html.DisplayFor(Model => Model.SponserName)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="invite_code">Place Id<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.PlaceUnderId, new { @id = "PlaceUnderId", @class = "form-control", @autocomplete = "Off", @onchange = "GetPaceUnderIdReferDetails(this.id)", @placeholder = "Place Id" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="sponsor_name">Place Id Name<span style="color:red;">*</span></label>
+                                            <input id="placeIdName" name="sponsorName" class="form-control" type="text" disabled value="@Html.DisplayFor(Model => Model.SponserName)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label class="control-label">Placement <span style="color:red;">*</span></label>
+                                            <div class="custom_radio">
+                                                <span class="mr-3 mb-2">
+                                                    <input type="radio" id="Left" name="Leg" value="L">
+                                                    <label for="Left">Left</label>
+                                                </span>
+                                                <span class="mr-3 mb-2">
+                                                    <input type="radio" id="Right" name="Leg" value="R">
+                                                    <label for="Right">Right</label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="DOB">Date Of Birth <span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.DOB, new { @id = "DOB", @class = "form-control fdatepicker", @style = "height: 52px; border: 2px solid #e4ecf2;border-radius: inherit;" })
+                                            @*onchange = "Checkage(this.id)"*@
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="full_name">Full Name<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.Name, new { @id = "Name", @class = "form-control" })
+                                            <span class="small">(Full Name as on your PAN CARD)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="mobile_no">Mobile No.<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.MobileNo, new { @id = "MobileNo", @class = "form-control only-numeric", @onchange = "checkMobile(this.id)", @maxlength = "10" })
+                                            <span class="small">This mobile no. will be used for all official communications.</span>
+                                        </div>
+                                    </div>
+                                    @*<div class="col-md-2 col-lg-2">
+                            <div class="form-group">
+                                <label>Father/Husband<span class="text-danger">*</span></label>
+                                @Html.DropDownListFor(M => M.husbandOrFatherNamesuffix, new SelectList(new List<SelectListItem> {
+                                           new SelectListItem { Text = "S/O", Value = "S/O"},
+                                           new SelectListItem { Text = "W/O", Value = "W/O"},
+                                           new SelectListItem { Text = "D/O", Value = "D/O"},
+                                           new SelectListItem { Text = "H/O", Value = "H/O"} }, "Value", "Text"), new { @class = "form-control" })
+                                @Html.ValidationMessageFor(m => m.husbandOrFatherNamesuffix)
+
+                            </div>
+                        </div>*@
+                                    @*<div class="col-md-4 col-lg-4">
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @autocomplete = "off", @id = "FatherName", @onkeypress = "return isAlphabets(event)", @maxlength = "60" })
+                            </div>
+                        </div>*@
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="password">Password<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control", @id = "Password", @type = "password", @autocomplete = "off", onchange = "checkPassword()" })
+                                            <span class="small">Password must be minimum 6 characters long, you can use number or letters of your choice.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="confirm_password">Confirm Password<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.ConPassword, new { @id = "ConPassword", @class = "form-control", @type = "password" })
+                                            <span class="small">Confirm password should match password entered above.</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-4">
+                                            <label>Pin Code.<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.Pincode, new { @id = "Pincode", @class = "form-control only-numeric", @maxlength = "6", @minlength = "6", @onchange = " return GetDistrictCityStateDetailsByPincode(this.id)" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-4">
+                                            <label>State<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.StateName, new { @id = "StateName", @class = "form-control", @readonly = "readonly" })
+                                            @Html.HiddenFor(Model => Model.StateId, new { @id = "StateId" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-4">
+                                            <label>City<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.DistrictName, new { @id = "DistrictName", @class = "form-control", @readonly = "readonly" })
+                                            @*<input class="form-control" type="text" id="DistrictName" name="DistrictName">*@
+                                            @Html.HiddenFor(Model => Model.DistrictId, new { @id = "DistrictId" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="display:none" id="otp">
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-4">
+                                            <label>OTP<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.OTP, new { @id = "OTP", @class = "form-control" })
+                                            <input type="hidden" id="hdfotp" name="hdfotp" />
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-check mb-7">
+                                    <input type="checkbox" id="condition" name="condition" value="Bike">
+                                    <label for="condition"> I accept all your terms & conditions<span style="color:red;">*</span></label>
+                                </div>
+                                <div class="row d-flex justify-content-center">
+                                    <div class="col-md-4">
+                                        <div class="form-group mt-4 mb-4">
+                                            <button type="button" class="btn btn-primary btn-sm btn-block" id="sendotp" onclick="Savedata(2)" style="display:none">Send OTP</button>
+                                            <button type="button" class="btn btn-primary btn-sm btn-block" id="register" onclick="Savedata(1)">Register</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </section>
+    </div>
+</main>
+
+<!--<main id="content">
+    <section class="pb-11 pb-lg-15 pt-15">
+        <div class="bg-body-secondary py-5">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb breadcrumb-site py-0 d-flex justify-content-center">
+                    <li class="breadcrumb-item">
+                        <a class="text-decoration-none text-body" href="#">Home</a>
+                    </li>
+                    <li class="breadcrumb-item active pl-0 d-flex align-items-center" aria-current="page">
+                        Register
+                    </li>
+                </ol>
+            </nav>
+        </div>
+        <div class="container">
+            <div class="row no-gutters">
+                <div class="col-lg-10 mx-auto">
+                    <div class=" text-center pt-13 mb-12 mb-lg-15">
+                        <div class="text-center"><h2 class="fs-36px mb-11 mb-lg-14">Register with us!</h2></div>
+                    </div>
+                    <div class="row no-gutters">
+                        <div class="col-lg-12">
+                            <form name="reg-form" class="clearfix">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="invite_code">Sponsor Code<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.InviteCode, new { @class = "form-control", @autocomplete = "Off", @onchange = "GetReferDetails(this.id)", @placeholder = "Sponsor Code" })
+                                            @Html.HiddenFor(Model => Model.Fk_SponserId)
+                                            @Html.HiddenFor(Model => Model.Fk_MemId)
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="sponsor_name">Sponsor Name<span style="color:red;">*</span></label>
+                                            <input id="sponsorName" name="sponsorName" class="form-control" type="text" disabled value="@Html.DisplayFor(Model => Model.SponserName)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="invite_code">Place Id<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.PlaceUnderId, new { @id = "PlaceUnderId", @class = "form-control", @autocomplete = "Off", @onchange = "GetPaceUnderIdReferDetails(this.id)", @placeholder = "Place Id" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="sponsor_name">Place Id Name<span style="color:red;">*</span></label>
+                                            <input id="placeIdName" name="sponsorName" class="form-control" type="text" disabled value="@Html.DisplayFor(Model => Model.SponserName)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label class="control-label">Placement <span style="color:red;">*</span></label>
+                                            <div class="custom_radio">
+                                                <span class="mr-3 mb-2">
+                                                    <input type="radio" id="Left" name="Leg" value="L">
+                                                    <label for="Left">Left</label>
+                                                </span>
+                                                <span class="mr-3 mb-2">
+                                                    <input type="radio" id="Right" name="Leg" value="R">
+                                                    <label for="Right">Right</label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="DOB">Date Of Birth <span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.DOB, new { @id = "DOB", @class = "form-control", type = "Date", onchange = "Checkage(this.id)", @style = "height: 52px; border: 2px solid #e4ecf2;border-radius: inherit;" })
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="full_name">Full Name<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.Name, new { @id = "Name", @class = "form-control" })
+                                            <span class="small">(Full Name as on your PAN CARD)</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-1 col-lg-1">
+                                        <div class="form-group">
+                                            <label>Father/Husband<span class="text-danger">*</span></label>
+                                            @Html.DropDownListFor(M => M.husbandOrFatherNamesuffix, new SelectList(new List<SelectListItem> {
+                                                       new SelectListItem { Text = "S/O", Value = "S/O"},
+                                                       new SelectListItem { Text = "W/O", Value = "W/O"},
+                                                       new SelectListItem { Text = "D/O", Value = "D/O"},
+                                                       new SelectListItem { Text = "H/O", Value = "H/O"} }, "Value", "Text"), new { @class = "form-control" })
+                                            @Html.ValidationMessageFor(m => m.husbandOrFatherNamesuffix)
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-5 col-lg-5">
+                                        <div class="form-group">
+                                            <label>&nbsp;</label>
+                                            @Html.TextBoxFor(m => m.FatherName, new { @class = "form-control", @autocomplete = "off", @id = "FatherName", @onkeypress = "return isAlphabets(event)", @maxlength = "60" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="password">Password<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control", @id = "Password", @type = "password", @autocomplete = "off", onchange = "checkPassword()" })
+                                            <span class="small">Password must be minimum 6 characters long, you can use number or letters of your choice.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="confirm_password">Confirm Password<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.ConPassword, new { @id = "ConPassword", @class = "form-control", @type = "password" })
+                                            <span class="small">Confirm password should match password entered above.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label for="mobile_no">Mobile No.<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.MobileNo, new { @id = "MobileNo", @class = "form-control only-numeric", @onchange = "checkMobile(this.id)", @maxlength = "10" })
+                                            <span class="small">This mobile no. will be used for all official communications.</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <label>Email Id<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.EmailId, new { @id = "EmailId", @class = "form-control", @autocomplete = "off", @onchange = "validateEmail()" })
+                                            <span class="small">This email id will be used for all official mail communications.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group mb-4">
+                                            <label>Address<span style="color:red;">*</span></label>
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(Model => Model.Address1, new { @id = "Address1", @class = "form-control", @onchange = "validateAddress()" })
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-4">
+                                            <label>Pin Code.<span style="color:red;">*</span></label>
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(Model => Model.Pincode, new { @id = "Pincode", @class = "form-control only-numeric", @maxlength = "6", @minlength = "6", @onchange = " return GetDistrictCityStateDetailsByPincode(this.id)" })
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-4">
+                                            <label>State<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.StateName, new { @id = "StateName", @class = "form-control", @readonly = "readonly" })
+                                            @Html.HiddenFor(Model => Model.StateId, new { @id = "StateId" })
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-4">
+                                            <label>City<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.DistrictName, new { @id = "DistrictName", @class = "form-control", @readonly = "readonly" })-->
+@*<input class="form-control" type="text" id="DistrictName" name="DistrictName">*@
+<!--@Html.HiddenFor(Model => Model.DistrictId, new { @id = "DistrictId" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="display:none" id="otp">
+                                    <div class="col-md-4">
+                                        <div class="form-group mb-4">
+                                            <label>OTP<span style="color:red;">*</span></label>
+                                            @Html.TextBoxFor(Model => Model.OTP, new { @id = "OTP", @class = "form-control" })
+                                            <input type="hidden" id="hdfotp" name="hdfotp" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group mb-4">
+                                            <div class="custom-checkbox">
+                                                <input type="checkbox" id="condition" name="condition" value="Bike">
+                                                <label for="condition"> I accept all your terms & conditions<span style="color:red;">*</span></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3 mx-auto">
+                                        <div class="form-group mt-4 mb-4">
+                                            <button type="button" class="btn btn-primary btn-block" id="sendotp" onclick="Savedata(2)">Send OTP</button>
+                                            <button type="button" class="btn btn-primary btn-block" id="register" onclick="Savedata(1)" style="display:none">Register</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>-->
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+
+
+<script>
+    $('.fdatepicker').datepicker({
+        dateFormat: 'dd/mm/yy',
+        changeYear: true,
+        changeMonth: true,
+        yearRange: 'c-100:c+10'
+    });
+
+
+    $(function () {
+        debugger
+        var ValueLoginId = GetParameterValues("pid");
+        if (jQuery.type(ValueLoginId) != "undefined") {
+            var LegHere = GetParameterValues("leg");
+            if (LegHere == "L") {
+                $("#Left").prop("checked", true);
+            }
+            if (LegHere == "R") {
+                $("#Right").prop("checked", true);
+            }
+
+            $("#InviteCode").val(ValueLoginId);
+            GetReferDetails(id);
+        }
+    });
+
+    function GetParameterValues(param) {
+
+        var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+        for (var i = 0; i < url.length; i++) {
+            var urlparam = url[i].split('=');
+            if (urlparam[0] == param) {
+                return urlparam[1];
+            }
+        }
+    }
+
+
+    $(function () {
+        //Initialize Select2 Elements
+        //$(".select2").select2();
+
+        //Datemask dd/mm/yyyy
+        $("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+        //Datemask2 mm/dd/yyyy
+        $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
+        //Money Euro
+        $("[data-mask]").inputmask();
+
+        //Date range picker
+        $('#reservation').daterangepicker();
+        //Date range picker with time picker
+        $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' });
+        //Date range as a button
+        $('#daterange-btn').daterangepicker(
+            {
+                ranges: {
+                    'Today': [moment(), moment()],
+                    'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                    'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                    'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                    'This Month': [moment().startOf('month'), moment().endOf('month')],
+                    'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                },
+                startDate: moment().subtract(29, 'days'),
+                endDate: moment()
+            },
+            function (start, end) {
+                $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+            }
+        );
+    });
+</script>
+<script>
+    var savetab = 0;
+    var IsFirstStapComplete = 0;
+    var currentTab = 0; // Current tab is set to be the first tab (0)
+    var status = true;
+    showTab(currentTab); // Display the current tab
+    function showTab(n) {
+        //     // This function will display the specified tab of the form...
+        var x = document.getElementsByClassName("formtab");
+        x[n].style.display = "block";
+        //... and fix the Previous/Next buttons:
+        if (n == 0) {
+            document.getElementById("prevBtn").style.display = "none";
+        } else {
+            document.getElementById("prevBtn").style.display = "inline";
+        }
+        if (n == (x.length - 1)) {
+            document.getElementById("nextBtn").style.display = "none";
+        } else {
+            document.getElementById("nextBtn").style.display = "inline";
+            document.getElementById("nextBtn").innerHTML = "Next";
+        }
+        fixStepIndicator(n)
+
+        //... and run a function that will display the correct step indicator:
+
+    }
+    function getAge(dob) {
+        var ageInMilliseconds = new Date() - new Date(dob);
+        return Math.floor(ageInMilliseconds / 1000 / 60 / 60 / 24 / 365); // convert to years
+    }
+    //function Checkage(id) {
+    //    var dob = $('#DOB').val();
+
+    //    var age = getAge(dob);
+
+    //    if (age < 18) {
+    //        swal("", "Age Below 18", "warning");
+    //        document.getElementById(id).value = "";
+    //        //$("input:date[id=DOB]").val("");
+    //        //alert( "Age Below 18");
+
+    //    }
+
+    //}
+
+    function Savedata(i) {
+        debugger;
+        var InviteCode = $('#InviteCode').val();
+        var PlaceUnderId = $('#PlaceUnderId').val();
+        var SponserName = $('#sponsorName').text();
+        var Fk_SponserId = $('#Fk_SponserId').val();
+        var Name = $("#Name").val();
+        var DOB = $("#DOB").val();
+        var AccountPurpose = $('[name="AccountPurpose"]:checked').val();
+        var Leg = $('[name="Leg"]:checked').val();
+        var Gender = $('[name="Gender"]:checked').val();
+        var MaritalStatus = $('[name="MaritalStatus"]:checked').val();
+        var Password = $("#Password").val();
+        var ConPassword = $("#ConPassword").val();
+        var MobileNo = $("#MobileNo").val();
+        //var EmailId = $("#EmailId").val();
+        var AadharNo = $("#AadharNo").val();
+        var CustAadharImage = $("#HdnCustAadharImage").val();
+        var PanNo = $("#PanNo").val();
+        var Pincode = $("#Pincode").val();
+        var Tehsil = $("#Tehsil").val();
+        var DistrictName = $("#DistrictName").val();
+        var StateName = $("#StateName").val();
+        var Zone = $("#Zone").val();
+        //var husbandOrFatherNamesuffix = $("#husbandOrFatherNamesuffix").val();
+        // var FatherName = $("#FatherName").val();
+
+
+        if (InviteCode == '' || InviteCode == undefined || InviteCode == null) {
+            swal('', "Please Enter Referal Id", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+
+        }
+        else {
+            status = true;
+        }
+
+
+
+        if (PlaceUnderId == '' || PlaceUnderId == undefined || PlaceUnderId == null) {
+            swal('', "Please Enter Place Under Id", 'warning');
+            return false;
+        }
+
+        if (Leg == '' || Leg == undefined || Leg == null) {
+            swal('', "Please Select Leg", 'warning');
+            return false;
+        }
+        else {
+            status = true;
+        }
+
+
+        if (Name == '' || Name == undefined || Name == null) {
+            swal('', "Please enter name", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+
+
+        if (DOB == '' || DOB == undefined || DOB == null) {
+            swal('', "Please enter DOB", 'warning');
+            status = false; //CompanyId
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+        else {
+            status = true;
+
+        }
+
+        //if (MaritalStatus == '' || MaritalStatus == undefined || MaritalStatus == null) {
+        //    swal('', "Please Select Marital Status", 'warning');
+        //    status = false;
+        //    showTab(savetab - 1);
+        //    savetab = 0;
+        //    currentTab = 0;
+        //    return false;
+        //}
+        //else {
+        //    status = true;
+
+        //}
+        if (Password == '' || Password == undefined || Password == null) {
+            swal('', "Please enter Password", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+        else {
+
+            status = true;
+        }
+        if (ConPassword == '' || ConPassword == undefined || ConPassword == null) {
+            swal('', "Please enter Confirm Password", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+        else {
+
+            status = true;
+        }
+        if (Password != ConPassword) {
+            swal('', "password or Confirm Password does not match", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+        else {
+
+            status = true;
+        }
+        if (MobileNo == '' || MobileNo == undefined || MobileNo == null) {
+            swal('', "Please enter MobileNo.", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+        else {
+            status = true;
+
+        }
+        //if (EmailId == '' || EmailId == undefined || EmailId == null) {
+        //    swal('', "Please enter EmailId", 'warning');
+        //    status = false;
+        //    showTab(savetab - 1);
+        //    savetab = 0;
+        //    currentTab = 0;
+        //    return false;
+        //}
+        //else {
+        //    status = true;
+
+        //}
+        //if (AadharNo == '' || AadharNo == undefined || AadharNo == null) {
+        //    swal('', "Please enter AadharNo", 'warning');
+        //    status = false;
+        //    showTab(savetab - 1);
+        //    savetab = 0;
+        //    currentTab = 0;
+        //    return false;
+        //}
+        //else {
+        //    status = true;
+
+        //}
+        //if (CustAadharImage == '' || CustAadharImage == undefined || CustAadharImage == null) {
+        //    swal('', "Please Upload Aadhar Image", 'warning');
+        //    status = false;
+        //    showTab(savetab - 1);
+        //    savetab = 0;
+        //    currentTab = 0;
+        //    return false;
+        //}
+        //else {
+        //    status = true;
+
+        //}
+        //if (PanNo == '' || PanNo == undefined || PanNo == null) {
+        //    swal('', "Please enter PanNo", 'warning');
+        //    status = false;
+        //    showTab(savetab - 1);
+        //    savetab = 0;
+        //    currentTab = 0;
+        //    return false;
+        //}
+        //else {
+        //    status = true;
+
+        //}
+        //if ($('#Address1').val() == "") {
+        //    swal('', "Please enter Address", 'warning');
+        //    status = false;
+        //    showTab(savetab - 1);
+        //    savetab = 0;
+        //    currentTab = 0;
+        //    return false;
+        //}
+        if (Pincode == "" || Pincode == undefined || Pincode == '0') {
+            swal('', "Please enter Pincode", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+        if (StateName == "" || StateName == undefined) {
+            swal('', "Please enter State ", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+        if (DistrictName == "" || DistrictName == undefined) {
+            swal('', "Please enter District Name", 'warning');
+            status = false;
+            showTab(savetab - 1);
+            savetab = 0;
+            currentTab = 0;
+            return false;
+        }
+
+        var CustomerDetails = {
+
+            FirstName: $('#Name').val(),
+
+            MobileNo: $("#MobileNo").val()
+
+        }
+        if (i == 2) {
+            $.post("/Home/SendOTP", CustomerDetails, function (data, err) {
+                debugger;
+
+                if (data.Flag == "1") {
+                    swal('', "OTP Send Successfully", 'success');
+                    $('#sendotp').hide();
+                    $('#hdfotp').val(data.OTP);
+                    $('#register').show();
+                    $('#otp').show();
+                    $('#MobileNo').attr('readonly', true);
+
+                }
+                else {
+                    swal('', data.Msg, 'error');
+                    $('#sendotp').show();
+                    $('#register').hide();
+                    $('#otp').hide();
+                    $('#MobileNo').attr('readonly', false);
+                }
+            });
+
+        }
+        else {
+
+            if ($('#hdfotp').val() != $('#OTP').val()) {
+                swal('', "OTP Not Matched", 'warning');
+                return false;
+            }
+        }
+
+
+        var CustomerDetails = {
+            InvitedBy: InviteCode,
+            SponserName: SponserName,
+            Fk_SponserId: Fk_SponserId,
+            FirstName: Name,
+            DOB: DOB,
+            AccountPurpose: AccountPurpose,
+            Leg: Leg,
+            Gender: Gender,
+            MaritalStatus: MaritalStatus,
+            Password: Password,
+            MobileNo: MobileNo,
+            //Email: EmailId,
+            AadharNo: AadharNo,
+            CustAadharImage: CustAadharImage,
+            PanNo: PanNo,
+            Pincode: Pincode,
+            Tehsil: Tehsil,
+            City: DistrictName,
+            State: StateName,
+            Zone: Zone,
+            PlaceUnderId: PlaceUnderId,
+            //FatherName: FatherName,
+            //husbandOrFatherNamesuffix: husbandOrFatherNamesuffix,
+            //Address: $('#Address1').val()
+        }
+
+
+        $.post("/Home/CustomerPrimaryDetails", CustomerDetails, function (data, err) {
+            debugger;
+
+            if (data.Flag == "1") {
+                swal('', "Details Saved Successfull", 'success');
+                //window.setTimeout(function () {
+                //    window.location.reload();
+                //}, 3000);
+                window.location.href = "/Home/Congratulations";
+            }
+            else {
+                swal('', data.Msg, 'error');
+            }
+        });
+
+    }
+
+    function validateForm() {
+        // This function deals with validation of the form fields
+        var x, y, i, valid = true;
+        x = document.getElementsByClassName("formtab");
+        y = x[currentTab].getElementsByTagName("input");
+        // A loop that checks every input field in the current tab:
+        /*for (i = 0; i < y.length; i++) {
+            // If a field is empty...
+            if (y[i].value == "") {
+                // add an "invalid" class to the field:
+                y[i].className += " invalid";
+                // and set the current valid status to false
+                valid = false;
+            }
+        }*/
+        // If the valid status is true, mark the step as finished and valid:
+        if (valid) {
+            document.getElementsByClassName("step")[currentTab].className += " finish";
+        }
+        return valid; // return the valid status
+    }
+
+    function fixStepIndicator(n) {
+        // This function removes the "active" class of all steps...
+        var i, x = document.getElementsByClassName("step");
+        for (i = 0; i < x.length; i++) {
+            x[i].className = x[i].className.replace(" active", "");
+        }
+        //... and adds the "active" class on the current step:
+        x[n].className += " active";
+    }
+
+    function GetReferDetails(id) {
+
+        debugger;
+        if ($("#InviteCode").val() == "") {
+            swal("", "Please enter Sponsor Code", "warning");
+            document.getElementById('sponsorName').value = "";
+            return false;
+        }
+        $.ajax({
+            url: '/Home/GetReferDetailsWithPlaceHolderId',
+            type: 'post',
+            dataType: 'json',
+            data: { Fk_SponserId: $("#InviteCode").val() },
+            success: function (data) {
+
+
+                if (data.Code == 0) {
+                    swal('', data.Remark, 'error');
+                    document.getElementById(id).value = "";
+
+                    return;
+                }
+
+                if (data.Name == null) {
+                    $("#InviteCode").val('');
+                    $('#sponsorName').val('');
+                    $("#PlaceUnderId").val('')
+                    $("#placeIdName").val('')
+                    $("#PlaceUnderId").attr("disabled", false);
+                    swal('', "Invalid Id", 'error');
+                    document.getElementById(id).value = "";
+                    return;
+                }
+
+                if (data.Name != "" || data.Name != null) {
+
+                    if (data.PlaceIdName != "") {
+                        $("#PlaceUnderId").val(data.PlaceIdStatus)
+                        $("#placeIdName").val(data.PlaceIdName)
+                        $("#PlaceUnderId").attr("disabled", true);
+                    }
+                    else {
+                        $("#PlaceUnderId").val('')
+                        $("#placeIdName").val('')
+                        $("#PlaceUnderId").attr("disabled", false);
+                    }
+
+                    $("#Right").attr("disabled", false);
+                    $("#Left").attr("disabled", false);
+                    if (data.LeftLeg != "E") {
+                        $("#Left").attr("disabled", true);
+                    }
+                    if (data.RightLeg != "E") {
+                        $("#Right").attr("disabled", true);
+                    }
+
+                    $('#sponsorName').val(data.Name);
+                    $('#Fk_SponserId').val(data.Fk_MemId);
+                }
+
+
+            }
+        });
+    }
+
+
+
+    function GetPaceUnderIdReferDetails(id) {
+        if (!$('PlaceUnderId').is(':disabled')) {
+            //textbox is disabled
+            if ($("#PlaceUnderId").val() == "") {
+                swal("", "Please enter Place Id", "warning");
+                document.getElementById('placeIdName').value = "";
+                return false;
+            }
+            $.ajax({
+                url: '/Home/GetPalceUnderId',
+                type: 'post',
+                dataType: 'json',
+                data: { Fk_SponserId: $("#InviteCode").val(), Fk_PlaceId: $("#PlaceUnderId").val() },
+                success: function (data) {
+
+
+                    if (data.Code == 0) {
+                        swal('', data.Remark, 'error');
+                        $("#Left").attr("disabled", true);
+                        $("#Right").attr("disabled", true);
+                        document.getElementById(id).value = "";
+                        return;
+                    }
+
+
+                    if (data.Name != "") {
+                        //$("#PlaceUnderId").val(data.PlaceIdStatus)
+                        $("#placeIdName").val(data.Name)
+                    }
+                    else {
+                        $("#PlaceUnderId").val('');
+                        swal('', "Invalid Id", 'error');
+                        document.getElementById(id).value = "";
+                        return;
+                    }
+                    $("#Right").attr("disabled", false);
+                    $("#Left").attr("disabled", false);
+                    if (data.LeftLeg != "E") {
+                        $("#Left").attr("disabled", true);
+                    }
+
+                    if (data.RightLeg != "E") {
+                        $("#Right").attr("disabled", true);
+                    }
+
+                }
+            });
+        }
+
+    }
+
+    function GetDistrictCityStateDetailsByPincode(id) {
+        $('#loader').show();
+        $("#overlayer").show();       
+        if ($('#Pincode').val == "" || $('#Pincode').val() == 0 || $('#Pincode').val().length != 6) {
+            swal('', "Please Enter 6 digit valid Pincode", 'warning');
+            $("#StateId").val('');
+            $("#DistrictId").val('');
+            $('#loader').hide();
+            $("#overlayer").hide();
+            document.getElementById(id).value = "";
+            return false;
+        }
+
+        $.ajax({
+
+            url: '/Home/GetStateCityTehsilByPincode',
+            type: "POST",
+            data: JSON.stringify({ "Pincode": $('#Pincode').val() }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                console.log(response);
+                if (response != null) {
+
+                    $("#DistrictName").val(response.DistrictName);
+                    $("#StateName").val(response.StateName);
+                    //$("#DistrictName").append($("<option></option>").val("").html('--Select City--'));
+                    //  $.each(response, function (i, item) {
+                    //    $("#DistrictName").append($("<option></option>").val(item.District).html(item.District));
+                    //  });
+
+                    window.sessionStorage.setItem("regDistrictDetail", JSON.stringify(response));
+                    //debugger;
+                    //$('#StateName').val(response.StateName);
+                    //$('#StateId').val(response.StateId);
+                    //$('#DistrictName').val(response.DistrictName);
+                    //$('#DistrictId').val(response.DistrictId);
+                    //$('#Tehsil').val(response.Tehsil);
+                    //$('#CountryId').val(1);
+                }
+                else {
+                    swal('', "data does not exists", 'warning');
+                    $("#StateName").val('');
+                    $("#DistrictName").val('');
+                    return false;
+                }
+
+            },
+            error: function (er) {
+                swal('', "Please Re-enter the pincode", 'error');
+                document.getElementById(id).value = "";
+                $("#StateName").val('');
+                $("#DistrictName").val('');
+                return false;
+            } ,
+            complete: function () {
+                // Hide loader regardless of success or error
+                $('#loader').hide();
+                $("#overlayer").hide();
+            }
+        });
+    }
+
+</script>
+
+
+<script type="text/javascript">
+
+
+
+    var ArrFamilyDetails = [];
+    $("#addrow").on("click", function () {
+        debugger
+        var count = 0;
+        var ChildName = $("#ChildName").val();
+        var Relation = $('[name="Relation"]:checked').val();
+        var ChildAadhar = $("#ChildAadhar").val();
+        var ChildPanNo = $("#ChildPanNo").val();
+        var ChildAadharImage = $("#HdnChildAadharImage").val();
+        if (ChildName == "") {
+            swal('', "Please enter Child Name", 'warning');
+            return false;
+        }
+
+        if (Relation == "") {
+            swal('', "Please Choose Relation", 'warning');
+            return false;
+        }
+        if (ChildAadhar == "") {
+            swal('', "Please enter Child Aadhar", 'warning');
+            return false;
+        }
+        if (ChildPanNo == "") {
+            swal('', "Please enter Child PanNo", 'warning');
+            return false;
+        }
+        if (ChildAadharImage == "") {
+            swal('', "Please Upload Child Aadhar Image", 'warning');
+            return false;
+        }
+
+        $.each(ArrFamilyDetails, function (i) {
+            if (ArrFamilyDetails[i].ChildAadhar == $('#ChildAadhar').val()) {
+                count++;
+            }
+        });
+        if (count > 0) {
+            swal('', "Aadhar number already exists", 'warning');
+            return false;
+        }
+        AddFamilyDetails();
+    });
+    function AddFamilyDetails() {
+        ArrFamilyDetails.push({
+            ChildName: $('#ChildName').val(),
+            Relation: $('[name="Relation"]:checked').val(),
+            ChildAadhar: $('#ChildAadhar').val(),
+            ChildPanNo: $('#ChildPanNo').val(),
+            ChildAadharImage: $("#HdnChildAadharImage").val()
+        });
+
+        $('#hidFamilyDetails').val(JSON.stringify(ArrFamilyDetails));
+        BindMultipleFamilyDetails();
+    }
+    function BindMultipleFamilyDetails() {
+        //table start
+        var table = '<table class="table table-bordered success-bordered-table" id="tbodyData">';
+        //preparing html table row and data here
+        table += '< thead >' + '< tr > ' + '</tr > ' + '< tr class="bg-inverse" >' + '< th > S.No.</th > ' + ' < th > Child Name</th > ' + '< th > Relation</th > ' + ' < th > Aadhar No</th > ' + ' < th > PanNo</th > ' + ' < th > Action</th > ' + '</tr > ' + ' </thead > ';
+        var Sno = 0;
+        $.each(ArrFamilyDetails, function (e) {
+            Sno++;
+            table += ' < tr >' + ' < td > ' + Sno + '</td > ' + ' < td > ' + ArrFamilyDetails[e].ChildName + '</td > ' + '< td > ' + ArrFamilyDetails[e].Relation + '</td > ' + ' < td > ' + ArrFamilyDetails[e].ChildAadhar + '</td > ' + ' < td > ' + ArrFamilyDetails[e].ChildPanNo + '</td > ' + '< td > <a href="javascript:void(0);" onclick=RemoveMultiFamilyTable(this) > <i class="fa fa-trash text-danger"></i></a ></td > ' + ' </tr > ';
+        });
+        //table end
+        table += '</table > ';
+        //bind the table in to div
+        $('#divMultipleFamilyTable').html(table);
+        $('#ChildName').val(' ');
+        $('#ChildAadhar').val(' ');
+        $('#ChildPanNo').val(' ');
+    }
+    function RemoveMultiFamilyTable(idx) {
+        var RemoveMultiFamilyTableidx = $(idx).closest('tr').index();
+        ArrFamilyDetails.splice(RemoveMultiFamilyTableidx, 1);
+        $(idx).closest('tr').remove();
+
+    }
+
+
+    //function GetDistrictCityStateDetailsByPincode() {
+
+    //    if ($('#Pincode').val == "" || $('#Pincode').val() == 0 || $('#Pincode').val().length != 6) {
+    //        swal('', "Please Enter 6 digit valid Pincode", 'warning');
+    //        $('#StateId').val('');
+    //        $('#CityId').val('');
+    //        return false;
+    //    }
+
+    //    $.ajax({
+
+    //        url: '/Admin/FranchiseMaster/GetLocationByPin',
+    //        type: "POST",
+    //        data: JSON.stringify({ "pin": $('#Pincode').val() }),
+    //        dataType: 'json',
+    //        contentType: 'application/json',
+    //        success: function (response) {
+    //            if (response.length > 0) {
+
+    //                $("#DistrictName").val(response[0].District);
+    //                $("#StateName").val(response[0].State);
+    //                //$("#DistrictName").append($("<option></option>").val("").html('--Select City--'));
+    //                //  $.each(response, function (i, item) {
+    //                //    $("#DistrictName").append($("<option></option>").val(item.District).html(item.District));
+    //                //  });
+
+    //                window.sessionStorage.setItem("regDistrictDetail", JSON.stringify(response));
+    //                //debugger;
+    //                //$('#StateName').val(response.StateName);
+    //                //$('#StateId').val(response.StateId);
+    //                //$('#DistrictName').val(response.DistrictName);
+    //                //$('#DistrictId').val(response.DistrictId);
+    //                //$('#Tehsil').val(response.Tehsil);
+    //                //$('#CountryId').val(1);
+    //            }
+    //            else {
+    //                swal('', "data does not exists", 'warning');
+    //                $("#StateName").val('');
+    //                return false;
+    //            }
+
+    //        },
+    //        error: function (er) {
+    //            swal('', "Please Re-enter the pincode", 'error');
+    //            return false;
+    //        }
+    //    });
+    //}
+
+    function BindDistrictDetail() {
+
+        var data = JSON.parse(window.sessionStorage.getItem("regDistrictDetail"));
+        var district = $("#DistrictName").val();
+        if (data != null) {
+            sessionStorage.clear();
+            $.each(data, function (i, item) {
+                if (item.District == district) {
+                    $("#StateName").val(item.State);
+                    $("#Tehsil").val(item.DistrictDetail[0].Taluka);
+                    $("#Zone").val(item.DistrictDetail[0].Zone);
+                    $('#CountryId').val(1);
+                }
+
+            });
+
+        }
+
+    }
+</script>
+
+<script>
+        function UploadFile(obj, subdir) {
+
+        var Id = $(obj).attr("Id");
+        var data = new FormData();
+        var files = $("#" + Id).get(0).files;
+        if (files.length > 0) {
+            data.append("file", files[0]);
+            data.append("subdir", subdir);
+        }
+        else {
+            swal('',"Please select file to upload.",'warning');
+                      return false;
+        }
+        var extension = $("#" + Id).val().split('.').pop().toUpperCase();
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
+            swal('',"Invalid image file format.Only jpg,jpeg,png,bmp files are allow",'warning');
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("Uploadfile", "Home")',
+            type: "POST",
+            processData: false,
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response != null || response != '') {
+                    if (response.result == "success") {
+                        debugger
+                        $("#" + Id + "Path").val("");
+                        if (Id=="CustAadharImage") {
+                             $("#HdnCustAadharImage").val(response.Path);
+                        }
+                        else if (Id=="SpouseAadharImages") {
+                              $("#HdnSpouseAadharImages").val(response.Path);
+                        }
+                        else if (Id=="ChildAadharImage") {
+                              $("#HdnChildAadharImage").val(response.Path);
+                        }
+                    }
+
+                }
+            },
+            error: function (er) {
+                swal('',"An Error Occured.",'error');
+            }
+        });
+    }
+         $(".only-numeric").bind("keypress", function (e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            if (!(keyCode >= 48 && keyCode <= 57)) {
+                //swal("", "Please enter numeric digit only", "warning");
+                return false;
+            }
+            return true;
+        });
+
+
+         function ValidateAAdhar(id) {
+            var aadhar = document.getElementById(id).value;
+            var adharcardTwelveDigit = /^\d{12}$/;
+            var adharSixteenDigit = /^\d{16}$/;
+            if (aadhar != '') {
+                if (aadhar.match(adharcardTwelveDigit)) {
+                    return true;
+                }
+                else if (aadhar.match(adharSixteenDigit)) {
+                    return true;
+                }
+                else {
+                    swal('',"Please enter valid aadhar number",'warning');
+                   document.getElementById(id).value = "";
+                    return false;
+                }
+            }
+        }
+        function ValidatePAN(id) {
+            debugger;
+            var PanNo = document.getElementById(id).value;
+            if (PanNo.value != "") {
+                var panPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+                if (PanNo.search(panPattern) == -1) {
+                    swal('',"Please enter valid pan number",'warning');
+                   document.getElementById(id).value = "";
+                    return false;
+                }
+
+            }
+        }
+
+      function checkMobile(id) {
+            var charCode = document.getElementById(id).value;
+            var matchpattern = /^[6-9][0-9]{9}$/;
+            var val = matchpattern.test(charCode);
+
+            if (!val) {
+                swal('', "Please enter 10 digit mobile number",'warning');
+                document.getElementById(id).value = "";
+            }
+        }
+
+        function validateEmail() {
+
+            if ($("#EmailId").val()!="") {
+
+
+            var reg = /^([A-Za-z0-9_\-\.])+\@@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+            var emailField = $("#EmailId").val();
+            if (reg.test(emailField) == false) {
+                $("#EmailId").focus();
+                $("#EmailId").val('');
+                emailField.value = "";
+                swal('',"Please enter a valid email",'warning');
+                return false;
+                }
+            }
+        }
+
+        // Add the following code if you want the name of the file appear on select
+        $(".custom-file-input").on("change", function() {
+          var fileName = $(this).val().split("\\").pop();
+          $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+
+
+    function validateAddress() {
+        if ($("Address").val() == "") {
+            swal("Please Enter the Address");
+        }
+    }
+    function checkPassword() {
+        if ($("Password").val() == "") {
+            swal("Please Enter the Address");
+        }
+    }
+
+</script>
+
+
+

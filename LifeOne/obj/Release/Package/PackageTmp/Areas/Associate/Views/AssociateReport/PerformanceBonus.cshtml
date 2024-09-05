@@ -1,0 +1,94 @@
+﻿@model LifeOne.Models.ModelMatchingBonus
+@{
+    ViewBag.Title = "PerformanceBonus";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+@using (Html.BeginForm("PerformanceBonus", "AssociateReport", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="container-fluid">
+
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h3 class="text-themecolor">Performance Bonus</h3>
+                <ol class="breadcrumb"><li class="breadcrumb-item"></li></ol>
+            </div>
+            @*<div class="psearch" style="display:none;">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        </div>
+                        <input type="text" id="search" name="search" class="form-control fhover" placeholder="Login Id,Name,Mobile,Status">
+                        <button type="submit" name="Get" class="btn btn-success"><i class="ti-search"></i></button>
+                    </div>
+                </div>*@
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table  table-striped" id="datatables">
+                                <thead>
+                                    <tr>
+                                        <th>SNo.</th>
+                                        <th>Payout No</th>
+
+
+                                        <th class="text-right">Performance Bonus</th>
+                                        <th class="text-right">Previous Left</th>
+                                        <th class="text-right">Previous Right</th>
+                                        <th class="text-right">Current Left</th>
+                                        <th class="text-right">Current Right</th>
+                                        <th class="text-right">Balance Left</th>
+                                        <th class="text-right">Balance Right</th>
+                                        <th>Closing Date</th>
+
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.listMatchingBonus != null)
+                                        {
+                                            int i = 1;
+
+
+
+                                            foreach (var Item in Model.listMatchingBonus)
+                                            {
+
+                                                <tr class="text-left">
+                                                    <td>@(i++)</td>
+                                                    <td>@Html.DisplayFor(m => Item.PayoutNo)</td>
+
+                                                    <td align="right">@Html.DisplayFor(m => Item.PerformanceBonus)</td>
+                                                    <td align="right">@Html.DisplayFor(m => Item.PreviousLeft)</td>
+                                                    <td align="right">@Html.DisplayFor(m => Item.PreviousRight)</td>
+
+                                                    <td align="right">@Html.DisplayFor(m => Item.CurrentLeft)</td>
+                                                    <td align="right">@Html.DisplayFor(m => Item.CurrentRight)</td>
+                                                    <td align="right">@Html.DisplayFor(m => Item.BalanceLeft)</td>
+                                                    <td align="right">@Html.DisplayFor(m => Item.BalanceRight)</td>
+                                                    <td>@Html.DisplayFor(m => Item.ClosingDate)</td>
+                                                </tr>
+
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+    </div>
+}

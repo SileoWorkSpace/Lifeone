@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Return Policy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Section: page title -->
+<style>
+    .policy ol {
+        counter-reset: item;
+        margin: 0px;
+        padding: 0px;
+    }
+
+        .policy ol li {
+            display: block;
+            color: #666666;
+            font-size: 20px;
+            padding-left: 25px;
+            font-weight: 600;
+            position: relative;
+        }
+
+    .policy p {
+        font-size: 14px;
+        line-height: 21px;
+        padding: 5px 0 0px 0px;
+    }
+
+    .policy ol li:before {
+        content: counters(item, ".") ".";
+        counter-increment: item;
+        position: absolute;
+        left: 0px;
+    }
+
+    .policy ol li ol {
+        padding: 5px 0 15px 0px;
+        margin-bottom: 15px
+    }
+
+        .policy ol li ol li {
+            font-size: 14px;
+            line-height: 21px;
+            padding-top: 5px;
+            padding-left: 30px;
+        }
+</style>
+<div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image" data-bg="/Content/NewAssests/img/bg/5.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                    <div class="section-title-area ltn__section-title-2">
+                        <h6 class="section-subtitle ltn__secondary-color">//  Know about our Return Policy </h6>
+                        <h1 class="section-title white-color">Shipping and Return Policy</h1>
+                    </div>
+                    <div class="ltn__breadcrumb-list">
+                        <ul>
+                            <li><a href="/Home/Index">Home</a></li>
+                            <li>Shipping and Return Policy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<main id="content">
+    @*<section class="py-lg-15 py-14 bg-img-cover-center" style="background-image: url('/Content/image/product.jpg');background-color: #F2F2F2">
+            <div class="container container-xxl">
+                <h1 class="fs-40 fs-lg-70" data-animate="fadeInUp">Shipping and Return Policy</h1>
+            </div>
+        </section>*@
+    <section class="pt-10 pt-lg-13 policy">
+        <div class="container container-xxl">
+            <div class="row">
+                <ol>
+                    <li>
+                        What is a Shipping Policy?<br>
+                        <p>A shipping policy is a concise document or webpage that outlines important information about shipping when an order is placed online. It often includes details on shipping costs and methods, delivery times, and more.</p>
+                    </li>
+
+                    <li>
+                        Brief Introduction of Life One Willness Shipping Policy<br>
+                        <p>For a direct-selling business like Life One Willness, one of the best ways to increase order volume is to build trust with our customers/direct sellers who place their orders. Developing and implementing an effective shipping policy that&rsquo;s easily found on the company&rsquo;s website is a great way to do this. Life One Willness always aims to deliver the highest level of satisfaction to customers and associates. We ensure that the post- purchase experience of the customer/direct seller must be smooth, seamless, delightfol, and speedy. We are regolarly working and updating our software so that our customer/direct seller(s) get notified about the current status of his/her shipment.</p>
+                    </li>
+
+                    <li>
+                        Shipping Charges Highly Depend on Moltiple Factors<br>
+
+                        <ol>
+                            <li>Volumetric Weight (Length x Width x Height dived by a 4-digit number) of the box in which product(s) are being packed Vs Actual Weight of the Courier companies may have different 4- digit numbers according to their company policy. You pay the charges of that weight which is on the higher side, it may be the volumetric weight or the actual weight of the box.</li>
+                            <li>Distance of the delivery point/location from the shipment pickup point, delivery point/location is a city, village, or very remote area (delivery may not be possible).</li>
+                            <li>To protect your package from physical damage, you want to cover it with insurance or you don&rsquo;t choose this option. For insurance coverage, you pay</li>
+                            <li>Also, in a few states&rsquo; delivery charges are more compared to other states while the distance is the same.</li>
+                            <li>Additional courier charge applicable on selected PIN codes if they belong to ODA location. ODA stands for Out of Delivery Area. These are remote areas where the majority of courier partners refuse to deliver orders. In this case, courier companies tie up with local couriers/delivery boys to deliver the</li>
+                        </ol>
+                    </li>
+
+
+
+
+                    <li>
+                        Courier / Shipping Charges
+
+                        <ol>
+                            <li>First order with registration: Free Delivery</li>
+                            <li>Product(s) Repurchase Order by a Direct Seller (5000 BV or more): Free Delivery</li>
+                            <li>Team Orders (5000 BV or more): Free Delivery (one location/PIN Code only)</li>
+                            <li>All subsequent orders: Courier Charges will be different for different PIN It will also depend on the volumetric and/or product(s) weight.</li>
+                            <li>Additional courier charge applicable on selected PIN codes if they belong to ODA</li>
+                            <li>If the delivery location is in a very remote area that is 100% ODA, then Life One Willness will inform the customer/direct seller(s) and will ask to provide a different delivery location/PIN code (may be of the sponsor, friend, or relative) so that delivery can be made at that location/PIN</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Delivery Time
+
+                        <ol>
+                            <li>At Life One Willness, we try to ensure that your order reaches you in the fastest time and in good physical condition because we always choose big players in this</li>
+                            <li>Generally, it takes 2-6 working days from the day of payment received to deliver the products within</li>
+                            <li>Sometimes delivery may be delayed due to concerns raised by any governmental authority or any other entity acting on behalf of the government or acting as per the directions of the If in case the delivery period exceeds the normal delivery time, either due to mishap or unforeseen circumstances, we get the customer/direct seller(s) notified regarding the same.</li>
+                            <li>In delayed delivery cases, if the direct seller wants to accept the delivery, the order is delivered and if the customer/direct seller(s) wants the order to be cancelled, the refund (excluding courier/shipping charges) is made directly to his/her bank account using the same mode the payment was received and the goods are taken back by the</li>
+                        </ol>
+                    </li>
+                    <li>
+                        What is Must to Check
+
+                        <ol>
+                            <li>The customer/direct seller(s) are advised that if the packaging is tampered with or damaged at the time of accepting delivery of the goods, they shoold refuse to take delivery of the package and immediately call Life One Willness Lucknow office (0522-3516249) or write an e-mail to<a href="mailto:info@lifeonewellness.com"> info@lifeonewellness.com </a>mentioning the order We shall make our best efforts to ensure that a replacement delivery is sent to the customer/direct seller(s)at the earliest.</li>
+                            <li>In case the customer/direct seller(s) short-received any product(s), he/she must inform Life One Willness Lucknow office immediately and post an e-mail</li>
+                        </ol>
+                    </li>
+                    <li>
+                        Other T&amp;C
+                        <p>Courier/shipping charges are non-refundable.</p>
+                    </li>
+                </ol>
+            </div>
+        </div>
+    </section>
+</main>
+

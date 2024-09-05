@@ -1,0 +1,508 @@
+﻿@model LifeOne.Models.AssociateManagement.AssociateEntity.EwalletRequest
+
+
+@{
+    ViewBag.Title = "E-Wallet Request";
+    ViewBag.Controller = "EWalletRequest";
+    ViewBag.HeaderTitle = "E-Wallet Request";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+<style>
+    label {
+        font-weight: bold !important;
+    }
+
+    #alertBoxx {
+        position: fixed;
+        z-index: 1051;
+        top: 120px;
+        left: 15%;
+        right: 0%;
+    }
+</style>
+<div class="content-wrapper-before"></div>
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0 text-white">E-Wallet Request</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">My Income</a></li>
+                    <li class="breadcrumb-item"><a href="#">E-Wallet Request Details</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">E-Wallet Request</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+    <div class=" box-body">
+
+        @using (Html.BeginForm("EWalletRequestDetails", "EWalletRequest", FormMethod.Post, new { @id = "form1" }))
+        {
+
+            <div class="row">
+                <div class="col-md-12" id="alertBoxx">
+                    @Html.Raw(ViewBag.Alert)
+                </div>
+            </div>
+
+            <div class="content-body">
+                <!-- Zero configuration table -->
+                <section id="configuration">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card card-outline-info">
+                                <div class="card-body">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="RowStyle">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <span style="color:green;">@ViewBag.Msg</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-3"></div>
+
+                                            <div class="col-md-6">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>@Html.DisplayNameFor(m => m.LoginId) <span class="text-danger">*</span></label>
+                                                            @Html.TextBoxFor(m => m.LoginId, new
+                                                            {
+                                                                @class = "form-control",
+                                                                @readonly = "readonly"@*,@onload = "getmemberdetails()"*@})
+                                                            @Html.ValidationMessageFor(m => m.LoginId)
+                                                            @Html.HiddenFor(m => m.Fk_MemId)
+                                                            <span class="material-input"></span>
+                                                            <label id="lblMsgLogin"></label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12" id="divname" style="display: none">
+                                                        <div class="form-group">
+                                                            <label>Name</label>
+                                                            <span id="txtname" class="form-control"></span>
+                                                            <span class="material-input"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>@Html.DisplayNameFor(m => m.Amount) <span class="text-danger">*</span></label>
+                                                            @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @onkeypress = "return isNumberKey(event);" })
+                                                            @Html.ValidationMessageFor(m => m.Amount)
+                                                            <span class="material-input"></span>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group">
+                                                            <label>@Html.DisplayNameFor(m => m.PaymentMode) <span class="text-danger">*</span></label>
+                                                            @Html.DropDownListFor(m => m.PaymentMode, new SelectList(ViewBag.ddlpaymentmode, "Value", "Text"), new { @class = "form-control", @data_size = "7", @data_style = "select-with-transition", @onchange = "getpaymentdetails();" })
+                                                            @Html.ValidationMessageFor(m => m.PaymentMode)
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-9">
+                                                        <label>Upload Document</label>
+                                                        <fieldset class="form-group">
+                                                            <div class="custom-file">
+                                                                <input type="file" id="fileupload" class="custom-file-input inputfile inputfile-2" onchange="uploadFile('SLIP', this)">
+                                                                @*<input type="file" id="fileupload" class="custom-file-input inputfile inputfile-2" onchange="preview_image(event,'Q')">*@
+
+                                                                <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                                                                <input type="hidden" id="upImage" name="Document" />
+                                                            </div>
+                                                        </fieldset>
+                                                    </div>
+
+                                                    <div class="col-md-3">
+                                                        <label></label>
+                                                        <div class="avatar-img-box"> <img id="output_image3" style="width:50px;height:50px" /> </div>
+                                                    </div>
+
+                                                    <div class="col-md-12" id="bankname" style="display: none">
+                                                        <div class="form-group">
+                                                            <label>Bank Name <span class="text-danger">*</span></label>
+                                                            @Html.DropDownListFor(m => m.BankId, new SelectList(ViewBag.BankList, "Value", "Text"), new { @class = "form-control", @data_size = "7", @data_style = "select-with-transition" })
+                                                            @Html.ValidationMessageFor(m => m.BankId)
+                                                            @*<span class="material-input"></span>*@
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12" id="chequeno" style="display: none">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label>Transaction No <span class="text-danger">*</span></label>
+                                                                @Html.TextBoxFor(m => m.DDChequeNo, new { @class = "form-control" })
+                                                                <span class="material-input"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12" id="chequdate" style="display: none">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label>Date <span class="text-danger">*</span></label>
+                                                                @Html.TextBoxFor(m => m.DDChequeDate, new { @class = "form-control", type = "date" })
+                                                                <span class="material-input"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-12" id="bankbranch" style="display: none">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label>Branch <span class="text-danger">*</span></label>
+                                                                @Html.TextBoxFor(m => m.BankBranch, new { @class = "form-control" })
+                                                                <span class="material-input"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    @*<div class="col-md-12" style="display:none;" id="dvotp">
+                                                            <div class="form-group">
+                                                                <label>OTP</label>
+                                                                <input type="text" name="OTP" id="OTP" class="form-control" placeholder="OTP" required="required" autocomplete="off" maxlength="4" />
+                                                            </div>
+                                                        </div>*@
+
+                                                    <div class="col-md-12">
+                                                        <div class="form-group form-button">
+                                                            <hr />
+                                                            <input class="btn btn-primary mr-1" onclick="validateform()" id="btnEWalletRequest" type="button" value="EWallet Request" />
+                                                            <a href="/Associate/EWalletRequest/EWalletRequest" id="btnReset" class="btn btn-warning"><i class="ft-rotate-ccw"></i> Reset</a>
+                                                            <a href="/Associate/EWalletRequest/EWalletRequestDetails" id="btnReset" class="btn btn-danger pull-right"><i class="ft-rotate-ccw"></i> Back To Details</a>
+
+
+
+                                                            @*<a href="javascript:void(0);" id="btnResendOTP" class="btn btn-warning"><i class="ft-rotate-ccw"></i> Resend OTP</a>*@
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-3"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <input type="hidden" id="hdnOTP" name="hdnOTP" />
+
+        }
+
+    </div>
+
+</div>
+<script>
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+
+    function getpaymentdetails() {
+        debugger;
+        var paymentmode = ($("#PaymentMode option:selected").text());
+        if (paymentmode != "Cash") {
+            bankname.style.display = "block";
+            chequeno.style.display = "block";
+            chequdate.style.display = "block";
+            bankbranch.style.display = "block";
+        }
+        else {
+            bankname.style.display = "none";
+            chequeno.style.display = "none";
+            chequdate.style.display = "none";
+            bankbranch.style.display = "none";
+        }
+    }
+
+
+    function uploadFile(documentType, fileobj) {
+        debugger;
+        if (documentType == 'SLIP') {
+            var fileInput = fileobj;
+            if (fileInput.files.length === 0) {
+                return;
+            }
+            var file = fileInput.files[0];
+            var formData = new FormData();
+            formData.append("documentType", documentType);
+            formData.append("file", file);
+            $.ajax({
+                url: "/api/Image/UploadKyc",
+                data: formData,
+                processData: false,
+                type: 'POST',
+                contentType: false,
+                success: function (data) {
+                    if (data.response == "success") {
+                        //$scope.profileimage ="http://webapi.FastKart.in/"+ response.data.imageUrl.replace('~', '');
+                        $("#upImage").val(data.filepath);
+                        $("#output_image3").attr('src', data.filepath);
+                        //$('#profileimagepath').val(data.filepath);
+                    }
+                    else {
+                        alert(data.msg);
+                    }
+                }
+            });
+        }
+    }
+
+
+    function validateform() {
+
+        var paymentmode = ($("#PaymentMode option:selected").text());
+        var Fk_MemId = $('#Fk_MemId').val();
+        var BankName = $('#BankName').val();
+        var DDChequeNo = $('#DDChequeNo').val();
+        var DDChequeDate = $('#DDChequeDate').val();
+        var BankBranch = $('#BankBranch').val();
+        var BankId = $('#BankId').val();
+        var Amount = $('#TopupAmount').val();
+        var loginid = $('#LogInId').val();
+        var Pk_ProductId = $('#PK_ProductId').val();
+        //var hdnotp = $('#hdnOTP').val();
+        //var OTP = $('#OTP').val();
+        var formData = new FormData();
+        var input = document.getElementById("fileupload");
+        file = input.files[0];
+        var filename = "";
+
+        // $('#dvotp').css('display', "block");
+
+        //var hdnotp = $('#hdnOTP').val();
+        //var OTP = $('#OTP').val();
+
+        $(".errortext").removeClass("errortext");
+        if ($("#LoginId").val() == "") {
+            $("#LoginId").addClass('errortext');
+            $("#LoginId").focus();
+            $("#myModal4").modal('show');
+            return false;
+        }
+        else if ($("#Amount").val() == "") {
+            $("#Amount").addClass('errortext');
+            $("#Amount").focus();
+            $("#myModal4").modal('show');
+            return false;
+        }
+        else if ($("#Amount").val() == 0) {
+            $("#Amount").addClass('errortext');
+            $("#Amount").focus();
+            $("#myModal4").modal('show');
+            return false;
+        }
+        else if ($("#PaymentMode").val() == "") {
+            $("#PaymentMode").addClass('errortext');
+            $("#PaymentMode").focus();
+            $("#myModal4").modal('show');
+            return false;
+        }
+        else if (paymentmode != "Cash") {
+            if (BankName == "") {
+                $('#BankName').focus();
+                $("#myModal4").modal('show');
+                $('#alertBox').html(ReturnAlert('warning', "Please enter bank name"));
+                return;
+            }
+            if (DDChequeNo == "") {
+                $('#DDChequeNo').focus();
+                $("#myModal4").modal('show');
+                $('#alertBox').html(ReturnAlert('warning', "Please enter Transaction no."));
+                return;
+            }
+            if (DDChequeDate == "") {
+                $('#DDChequeDate').focus();
+                $("#myModal4").modal('show');
+                $('#alertBox').html(ReturnAlert('warning', "Please enter Transaction date."));
+                return;
+            }
+            if (BankBranch == "") {
+                $('#BankBranch').focus();
+                $("#myModal4").modal('show');
+                $('#alertBox').html(ReturnAlert('warning', "Please enter bank branch name"));
+                return;
+            }
+            //else if (hdnotp == '') {
+            //    debugger;
+            //    $('#btnResendOTP').show();
+            //    GetOtp();
+            //}
+            //else if (OTP == '') {
+            //    $('#alertBox').html(ReturnAlert('warning', "Enter OTP"));
+            //    $('#OTP').focus();
+            //    return false;
+            //}
+            //else if (OTP != hdnotp) {
+            //    $('#alertBox').html(ReturnAlert('warning', "InValid OTP"));
+            //    $('#OTP').val('');
+            //    $('#OTP').focus();
+            //    return false;
+            //}
+            else {
+
+                $.ajax({
+                    url: '/EWalletRequest/SaveEWalletRequest',
+                    type: "GET",
+                    dataType: "JSON",
+                    data: { Fk_MemId: Fk_MemId, Amount: $("#Amount").val(), PaymentMode: paymentmode, BankName: BankName, BankBranch: BankBranch, DDChequeNo: DDChequeNo, DDChequeDate: DDChequeDate, Document: $("#upImage").val(), BankId: $('#BankId').val() },
+
+                    success: function (data) {
+                        debugger;
+                        //$('#alertBox').html(ReturnAlert('success', data));
+                        alert(data);
+                        $('#Fk_MemId').html("");
+                        $('#Amount').html("");
+                        $('#BankName').html("");
+                        $('#BankBranch').html("");
+                        //$('#hdnOTP').val('');
+                        $('#DDChequeNo').html("");
+                        $('#DDChequeDate').html("");
+                        bankname.style.display = "none";
+                        chequeno.style.display = "none";
+                        chequdate.style.display = "none";
+                        bankbranch.style.display = "none";
+                        location.reload();
+                    }
+                });
+            }
+        }
+
+        //else if (file != undefined) {
+        //     if (!!file.type.match(/image.*/)) {
+        //         formData.append("image", file);
+        //     } else {
+        //         alert('Not a valid image!');
+        //         return false;
+        //     }
+        // }
+
+        //else if (file == undefined) {
+        //     filename = "";
+        // }
+
+        //else if(hdnotp=='')
+        //{
+        //    debugger;
+        //    $('#btnResendOTP').show();
+        //    GetOtp();
+        //}
+        //else if (OTP == '')
+        //{
+        //    $('#alertBox').html(ReturnAlert('warning', "Enter OTP"));
+        //    $('#OTP').focus();
+        //    return false;
+        //}
+        //else if (OTP != hdnotp) {
+        //    $('#alertBox').html(ReturnAlert('warning', "InValid OTP"));
+        //    $('#OTP').val('');
+        //    $('#OTP').focus();
+        //    return false;
+        //}
+        else {
+
+            $.ajax({
+                url: '/EWalletRequest/SaveEWalletRequest',
+                type: "GET",
+                dataType: "JSON",
+                data: { Fk_MemId: Fk_MemId, Amount: $("#Amount").val(), PaymentMode: paymentmode, BankName: BankName, BankBranch: BankBranch, DDChequeNo: DDChequeNo, DDChequeDate: DDChequeDate, Document: $("#upImage").val() },
+
+                success: function (data) {
+                    debugger;
+                    //$('#alertBox').html(ReturnAlert('success', data));
+                    alert(data);
+                    $('#Fk_MemId').html("");
+                    $('#Amount').html("");
+                    $('#BankName').html("");
+                    $('#BankBranch').html("");
+                    //$('#hdnOTP').val('');
+                    $('#DDChequeNo').html("");
+                    $('#DDChequeDate').html("");
+                    bankname.style.display = "none";
+                    chequeno.style.display = "none";
+                    chequdate.style.display = "none";
+                    bankbranch.style.display = "none";
+                    location.reload();
+                }
+            });
+        }
+    }
+
+    function GetOtp() {
+        $('#dvotp').css('display', "block");
+
+        $.ajax({
+            url: "/WalletTopup/GetOtp",
+            Type: "Get",
+            DataType: "JSON",
+            success: function (data) {
+                $('#dvotp').css('display', "block");
+                $('#alertBox').html(ReturnAlert('info', "OTP has been send on your Mobile no.!!!"));
+                $('#hdnOTP').val(data.OTP);
+            }
+
+        });
+
+    }
+
+    function getmemberdetails() {
+
+        debugger;
+        var LoginId = $('#LoginId').val();
+        var Mobile = $('#Mobile').val();
+        $.ajax({
+            url: '/EWalletRequest/GetMemberName',
+            type: "GET",
+            dataType: "JSON",
+            data: { LoginId: LoginId },
+            success: function (data) {
+                debugger;
+                if (data.Result == "Yes") {
+                    $('#txtname').html(data.DisplayName);
+                    $('#txtmobile').html(data.Mobile);
+                    $('#Fk_MemId').val(data.Fk_memId);
+                    divname.style.display = "block";
+                    divmobile.style.display = "block";
+                } else {
+                    //$('#alertBox').html(ReturnAlert('warning', "Invalid Sponsor Id"));
+                    alert(data.Result);
+                    $('#btnEWalletRequest').attr('disabled', true);
+                    $('#btnReset').attr("href", "#").css('background', 'gray').css('border', 'gray');
+                    $('#Amount').attr('disabled', 'disabled');
+                    $('#txtname').html("");
+                    $('#txtmobile').html("");
+                    $('#LoginId').val("");
+
+                    divname.style.display = "none";
+                    divmobile.style.display = "block";
+                }
+            }
+        });
+    }
+    $('#btnResendOTP').on('click', function () {
+        GetOtp();
+    });
+
+</script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+        background-color: #fff0f0 !important;
+    }
+</style>
+
