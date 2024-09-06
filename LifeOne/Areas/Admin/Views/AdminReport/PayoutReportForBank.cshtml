@@ -23,7 +23,7 @@
                 </span>
                 <span>
                     <a href="#" onclick="fCallPaging(1,1)" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" data-placement="top" title="Download Excel"><i class="fa fa-file-excel-o"></i></a>
-                    <a href="/Admin/AdminReport/PrintPayoutReportForBank" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" target="_blank" data-placement="top" title="Print"><i class="fa fa-print"></i></a>                    
+                    <a href="/Admin/AdminReport/PrintPayoutReportForBank" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" target="_blank" data-placement="top" title="Print"><i class="fa fa-print"></i></a>
                     @*<button class="btn btn-success btn-rounded btnprint" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>*@
                     <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
                 </span>
@@ -43,28 +43,20 @@
                                 <div class="col-md-12">
                                     <div class="alert alert-warning" style="color:#727272 !important">
                                         <div class="row">
-
                                             <div class="col-md-2">
                                                 @Html.HiddenFor(m => m.Page)
                                                 @Html.HiddenFor(m => m.IsExport)
                                                 <div class="form-group">
                                                     <label>From Date</label>
-
                                                     <input type="date" name="fdate" id="fdate" class="form-control" value="@ViewBag.fdate" />
-
                                                 </div>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    @*<label>To Date</label>*@
-
                                                     <label>To Date</label>
                                                     <input type="date" name="tdate" id="tdate" class="form-control" value="@ViewBag.tdate" />
-
                                                 </div>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Payout No</label>
@@ -74,7 +66,6 @@
 
                                                 </div>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Direct Seller Id</label>
@@ -82,17 +73,27 @@
                                                     <input type="text" id="MemberLoginId" name="MemberLoginId" placeholder="Enter Direct Seller Id" class="form-control" value="@ViewBag.LoginId" />
                                                 </div>
                                             </div>
-
-
-                                            <div class="col-12 col-md-4">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <label>KYC Status</label>
+                                                    <div class="input-group">
+                                                        <select class="form-control" name="KycStatus" id="ddlkycStatus">
+                                                            <option value="@ViewBag.KycStatus">--Select Kyc--</option>
+                                                            <option value="">KYC All</option>
+                                                            <option value="1">KYC Done</option>
+                                                            <option value="0">KYC Not Done</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
                                                 <div class="form-group">
                                                     <label style="display:block;"></label>
-                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch" >
-                                                    
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+
                                                     <a href="/Payout-Report-For-Bank" class="btn btn-secondary" onClick="fclaer();" style="margin-top:1.5em;">Reset</a>
                                                 </div>
                                             </div>
-
                                         </div>
                                     </div>
                                 </div>
@@ -118,7 +119,7 @@
                                 <tbody>
                                     @if (Model != null && Model.Objlist.Count > 0)
                                     {
-                                       
+
                                         int i = 1;
                                         int page = Model.Pager.CurrentPage;
                                         page = (page - 1);
@@ -143,7 +144,7 @@
                                             </tr>
                                             i++;
                                         }
-                                        i++; 
+                                        i++;
                                     }
                                     else
                                     {
@@ -226,7 +227,7 @@
 </div>
 <script>
     function fCallPaging(val, IsExport) {
-    
+
         if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
             val = 1;
         }
@@ -436,9 +437,9 @@
 
     //};
 
-//Create PDf
+    //Create PDf
 
-    
+
     // PRINT THE CONTENTS-----------------------------
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;

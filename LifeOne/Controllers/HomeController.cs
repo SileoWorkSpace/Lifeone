@@ -41,6 +41,7 @@ namespace LifeOne.Controllers
         string baseurlNoImg = ConfigurationManager.AppSettings["baseurlNoImg"].ToString();
         private readonly object _objService;
         //LifeOne.Models.API.ManageCartService _objservice = new LifeOne.Models.API.ManageCartService();
+
         //DataTable dt = _objservice.CreateCartProduct("0.80938891", "1", "hi", "2021/01/20");
         // LifeOne.Models.API.Common.SendEmailByAPICommonVerification("amar@qloginuaeretech.com", "Amar" + " " + "yadav", "7800444476", "123456");
         public ActionResult Index(Products products, string Add, string Fk_CategoryId, string ProductName)
@@ -534,6 +535,7 @@ namespace LifeOne.Controllers
                     listdata1.Pk_ProductId = int.Parse(dataSet3.Tables[0].Rows[i]["Pk_ProductId"].ToString());
                     listdata1.ProductName = dataSet3.Tables[0].Rows[i]["ProductName"].ToString();
                     listdata1.DP = decimal.Parse(dataSet3.Tables[0].Rows[i]["DP"].ToString());
+                    listdata1.MRP = dataSet3.Tables[0].Rows[i]["MRP"].ToString();                  
                     listdata1.OfferedPrice = dataSet3.Tables[0].Rows[i]["OfferedPrice"].ToString();
                     listdata1.ReviewCount = dataSet3.Tables[0].Rows[i]["ReviewCount"].ToString();
                     productsList1.Add(listdata1);

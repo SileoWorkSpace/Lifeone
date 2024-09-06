@@ -1589,6 +1589,7 @@ namespace LifeOne.Areas.Admin.Controllers
 
             ViewBag.LoginId = obj.MemberLoginId;
             ViewBag.PayoutNo = obj.PayoutNo;
+            ViewBag.KycStatus = obj.KycStatus;
             ViewBag.tdate = obj.tdate;
             ViewBag.fdate = obj.fdate;
             obj = AdminReportsService.GetPayoutReportForBankService(Page, obj);
@@ -1599,13 +1600,14 @@ namespace LifeOne.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult PayoutReportForBank(MPayoutReport model, int? Page)
         {
-
             if (!PermissionManager.IsActionPermit("Payout Report For Bank", ViewOptions.FormView))
             {
                 return Redirect("/Home/adminlogin");
             }
             ViewBag.LoginId = model.MemberLoginId;
             ViewBag.PayoutNo = model.PayoutNo;
+            ViewBag.KycStatus = model.KycStatus;
+            model.KycStatus = model.KycStatus;
             ViewBag.tdate = model.tdate;
             ViewBag.fdate = model.fdate;
 
