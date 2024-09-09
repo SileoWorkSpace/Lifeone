@@ -1276,7 +1276,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 obj.Objlist = new List<MAdminMembers>();
             }
             return View(obj);
-
         }
 
         [HttpGet]
@@ -1305,9 +1304,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 throw;
             }
-
             return RedirectToAction("BlockUnblockDetails", "AdminReport");
-
         }
 
         [HttpGet]
