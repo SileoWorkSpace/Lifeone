@@ -27,7 +27,6 @@
                     @*<button class="btn btn-success btn-rounded btnprint" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>*@
                     <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
                 </span>
-
             </div>
         </div>
     </div>
@@ -61,7 +60,6 @@
                                                 <div class="form-group">
                                                     <label>Payout No</label>
                                                     @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.PayoutMaster, "Value", "Text"), new { @class = "form-control", @id = "PayoutNo" })
-
                                                     @*<input type="text" id="payoutNo" name="payoutNo" class="form-control" value="@ViewBag.PayoutNo" />*@
 
                                                 </div>
@@ -143,7 +141,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <span class="badge badge-info">@item.KycStatus</span>
+                                                        <span class="badge badge-warning">@item.KycStatus</span>
                                                     }
                                                 </td>
                                                 <td>@item.MobileNo</td>
@@ -267,9 +265,6 @@
         window.location.reload();
     }
 
-
-
-
     function btnpdf() {
         var col = [0]; // coloms to remove
 
@@ -289,7 +284,6 @@
                 }
             }
         }
-
 
         var table1 =
             tableToJson(tbl.get(0)),
@@ -376,7 +370,6 @@
 
     }
 
-
     function tableToJson(table) {
         var data = [];
 
@@ -385,7 +378,6 @@
         for (var i = 0; i < table.rows[0].cells.length; i++) {
             headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
         }
-
 
         // go through cells
         for (var i = 0; i < table.rows.length; i++) {
@@ -439,7 +431,6 @@
         window.print();
         document.body.innerHTML = originalContents;
     }
-
 
     //function GetPayoutReport() {
 
