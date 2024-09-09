@@ -77,21 +77,23 @@
                                                 <div class="form-group">
                                                     <label>KYC Status</label>
                                                     <div class="input-group">
-                                                        <select class="form-control" name="KycStatus" id="ddlkycStatus">
-                                                            <option value="@ViewBag.KycStatus">--Select Kyc--</option>
-                                                            <option value="">KYC All</option>
+                                                        <select class="form-control" name="IsKyc" id="ddlIsKyc">
+                                                            <option value="">--ALL--</option>
+                                                            @*<option value="">KYC ALL</option>*@
                                                             <option value="1">KYC Done</option>
                                                             <option value="0">KYC Not Done</option>
                                                         </select>
+                                                        <input type="hidden" id="txtKyc" value="@ViewBag.Iskyc" />
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-2">
                                                 <div class="form-group">
                                                     <label style="display:block;"></label>
-                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
-
+                                                    <input type="submit" class="btn btn-success " style="margin-top: 1.5em; display: none;" value="Search" id="BtnSearch">
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" onclick="fCallPaging(1,0)">
                                                     <a href="/Payout-Report-For-Bank" class="btn btn-secondary" onClick="fclaer();" style="margin-top:1.5em;">Reset</a>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -106,6 +108,7 @@
                                         <th align="left" scope="col">#Sn.</th>
                                         <th align="left" scope="col">Direct Seller Id</th>
                                         <th align="left" scope="col">Direct Seller</th>
+                                        <th align="left" scope="col">Kyc Status</th>
                                         <th align="left" scope="col">Mobile No</th>
                                         <th align="left" scope="col">Payout No.</th>
                                         <th align="left" scope="col">Date</th>
@@ -133,6 +136,16 @@
                                                 <td data-title="#SN:">@(i+1)</td>
                                                 <td>@item.LoginId</td>
                                                 <td>@item.Name</td>
+                                                <td>
+                                                    @if (@item.KycStatus == "Kyc Done")
+                                                    {
+                                                        <span class="badge badge-success">@item.KycStatus</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-info">@item.KycStatus</span>
+                                                    }
+                                                </td>
                                                 <td>@item.MobileNo</td>
                                                 <td>@item.PayountNo</td>
                                                 <td>@item.ClosingDate</td>
@@ -226,6 +239,15 @@
 
 </div>
 <script>
+    $(document).ready(function () {
+
+
+        if ($('#txtKyc').val() != '' && $('#txtKyc').val() != undefined) {
+            $('#ddlIsKyc').val($('#txtKyc').val());
+        }
+    });
+
+
     function fCallPaging(val, IsExport) {
 
         if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
