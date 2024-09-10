@@ -753,6 +753,7 @@
     <Compile Include="Models\HomeManagement\HDAL\DALCustomerRegistration.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALForgotPassword.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALLogin.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\NewsandAnnouncement.cs" />
     <Compile Include="Models\HomeManagement\HEntity\UploadImageVideo.cs" />
     <Compile Include="Models\HomeManagement\HEntity\TermsCondition.cs" />
     <Compile Include="Models\HomeManagement\HEntity\Contact.cs" />
@@ -4700,6 +4701,7 @@
     <Content Include="Views\Home\ImageGallery.cshtml" />
     <Content Include="Views\Home\Video.cshtml" />
     <Content Include="Views\Shared\_PartialMobileMenuLayout.cshtml" />
+    <Content Include="Views\Home\NewsandAnnouncement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

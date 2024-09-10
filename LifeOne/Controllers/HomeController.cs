@@ -2291,5 +2291,9 @@ namespace LifeOne.Controllers
             return PartialView("_PartialMobileMenuLayout", products);
 
         }
+        public ActionResult NewsandAnnouncement()
+        {
+            return View();
+        }
     }
 }

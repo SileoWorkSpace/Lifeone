@@ -13,7 +13,6 @@ namespace LifeOne.Models.AdminManagement.AService
         ResponseUploadImage _objResponseModel = new ResponseUploadImage();        
         public ResponseUploadImage SaveImage(MAdminImageUpload _obj)
         {
-
             try
             {
                 ResponseUploadImage _objResponseModel = new ResponseUploadImage();                                                                              
@@ -32,7 +31,6 @@ namespace LifeOne.Models.AdminManagement.AService
             {
                 ResponseUploadImage _objResponseModel = new ResponseUploadImage();                
                 _objResponseModel = DALAdminImageUpload.ImageUpload(_obj);
-
                 return _objResponseModel;
             }
             catch (Exception ex)
@@ -45,11 +43,8 @@ namespace LifeOne.Models.AdminManagement.AService
             List<MAdminImageUpload> _objResponseModel = new List<MAdminImageUpload>();
             try
             {
-
                 //decrypt app team reponse
                 _objResponseModel = DALAdminImageUpload.GetImageList(_obj);
-
-
                 return _objResponseModel;
             }
             catch (Exception ex)
@@ -59,13 +54,10 @@ namespace LifeOne.Models.AdminManagement.AService
         }
         public ResponseUploadImage SaveVideo(MAdminImageUpload _obj)
         {
-
             try
             {
-                ResponseUploadImage _objResponseModel = new ResponseUploadImage();
-               
+                ResponseUploadImage _objResponseModel = new ResponseUploadImage();               
                 _objResponseModel = DALAdminImageUpload.VideoUpload(_obj);
-
                 return _objResponseModel;
             }
             catch (Exception ex)
@@ -75,13 +67,10 @@ namespace LifeOne.Models.AdminManagement.AService
         }
         public ResponseUploadImage DeleteVideo(MAdminImageUpload _obj)
         {
-
             try
             {
                 ResponseUploadImage _objResponseModel = new ResponseUploadImage();
-
                 _objResponseModel = DALAdminImageUpload.VideoUpload(_obj);
-
                 return _objResponseModel;
             }
             catch (Exception ex)
@@ -94,10 +83,8 @@ namespace LifeOne.Models.AdminManagement.AService
             List<MAdminImageUpload> _objResponseModel = new List<MAdminImageUpload>();
             try
             {
-
                 //decrypt app team reponse
                 _objResponseModel = DALAdminImageUpload.GetVideoDetails(_obj);
-
 
                 return _objResponseModel;
             }
