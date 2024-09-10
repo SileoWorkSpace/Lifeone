@@ -1,23 +1,25 @@
 ﻿
-@model LifeOne.Models.HomeManagement.HEntity.Contact
+@model LifeOne.Models.HomeManagement.HEntity.UploadImageVideo
 @{
     ViewBag.Title = "Image Gallery";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <style>
     .gallery {
-        display: grid;
+        display: flex;
         grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
         grid-gap: 2rem;
-        padding:40px 0px 40px 0px;
-        overflow:auto;
+        padding: 40px 0px 40px 0px;
+        overflow: auto;
     }
 
     .gallery__item {
         box-shadow: 0 .1875rem .625rem rgba(0, 0, 0, 0.4);
         overflow: hidden;
+        width: 350px;
+        height: 250px;
     }
+
     .gallery__item {
         position: relative; /* To position the title absolutely inside the figure */
         overflow: hidden; /* Ensures content doesn't spill out */
@@ -45,6 +47,7 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
     .gallery__image {
         display: block;
         object-fit: cover;
@@ -52,11 +55,13 @@
         height: 100%;
         width: 100%;
     }
+
         .gallery__image:hover {
             cursor: pointer;
             opacity: .7;
             transform: scale(1.15);
         }
+
             .gallery__image:hover + .gallery__image__caption {
                 display: block;
             }
@@ -79,6 +84,7 @@
         transition: opacity .2s ease-in-out;
         width: 42px;
     }
+
         .gallery__navigation--next:hover,
         .gallery__navigation--prev:hover,
         .gallery__navigation--close:hover {
@@ -147,7 +153,6 @@
             margin: auto;
             max-width: 90%;
             max-height: 90%;
-
         }
 
         .gallery__modal[aria-hidden="true"] {
@@ -157,7 +162,6 @@
         .gallery__modal[aria-hidden="false"] {
             display: flex;
         }
-  
 </style>
 
 <main class="main">
@@ -170,63 +174,72 @@
             </ul>
         </nav>
     </div>
- 
-            <section>
-                <!-- Image Gallery -->
-                <div class="container gallery">
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1036/1920/1200" alt="A tent in the snowy mountains">
-                        <figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1015/1920/1200" alt="A river between the mountains">
-                        <figcaption class="gallery__image__caption">A river between the mountains</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1016/1920/1200" alt="Rocky mountains">
-                        <figcaption class="gallery__image__caption">Rocky mountains</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1026/1920/1200" alt="Trains in a deposit">
-                        <figcaption class="gallery__image__caption">Trains in a deposit</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1018/1920/1200" alt="Greeny mountains">
-                        <figcaption class="gallery__image__caption">Greeny mountains</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1019/1920/1200" alt="Storm in the sea">
-                        <figcaption class="gallery__image__caption">Storm in the sea</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1021/1920/1200" alt="Fog in a valley of trees">
-                        <figcaption class="gallery__image__caption">Fog in a valley of trees</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1024/1920/1200" alt="Flying like a bird of prey">
-                        <figcaption class="gallery__image__caption">Flying like a bird of prey</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1006/1920/1200" alt="A woman and a dog looking at a foggy valley">
-                        <figcaption class="gallery__image__caption">A woman and a dog looking at a foggy valley</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1038/1920/1200" alt="Sea waves">
-                        <figcaption class="gallery__image__caption">Sea waves</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1050/1920/1200" alt="Rocky cliffs">
-                        <figcaption class="gallery__image__caption">Rocky cliffs</figcaption>
-                    </figure>
-                    <figure class="gallery__item">
-                        <img class="gallery__image" src="https://picsum.photos/id/1043/1920/1200" alt="Mountains seen through a forest">
-                        <figcaption class="gallery__image__caption">Mountains seen through a forest</figcaption>
-                    </figure>
-                </div>
-            </section>
-      
+    <section>
+        <!-- Image Gallery -->
+        <div class="container gallery">
+            @{
+                if (Model != null)
+                {
+                    if (Model.dtDetails != null)
+                    {
+                        for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
+                        {
+                            <figure class="gallery__item">
+                                <img class="gallery__image" src="@Model.dtDetails.Rows[i]["ImageUrl"].ToString()" >
+                                @*<img class="gallery__image" src="https://picsum.photos/id/1036/1920/1200" alt="A tent in the snowy mountains">*@
+                                @*<figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>*@
+                            </figure>
+                        }
+                    }
+                }
+            }
+            @*<figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1015/1920/1200" alt="A river between the mountains">
+            <figcaption class="gallery__image__caption">A river between the mountains</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1016/1920/1200" alt="Rocky mountains">
+            <figcaption class="gallery__image__caption">Rocky mountains</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1026/1920/1200" alt="Trains in a deposit">
+            <figcaption class="gallery__image__caption">Trains in a deposit</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1018/1920/1200" alt="Greeny mountains">
+            <figcaption class="gallery__image__caption">Greeny mountains</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1019/1920/1200" alt="Storm in the sea">
+            <figcaption class="gallery__image__caption">Storm in the sea</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1021/1920/1200" alt="Fog in a valley of trees">
+            <figcaption class="gallery__image__caption">Fog in a valley of trees</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1024/1920/1200" alt="Flying like a bird of prey">
+            <figcaption class="gallery__image__caption">Flying like a bird of prey</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1006/1920/1200" alt="A woman and a dog looking at a foggy valley">
+            <figcaption class="gallery__image__caption">A woman and a dog looking at a foggy valley</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1038/1920/1200" alt="Sea waves">
+            <figcaption class="gallery__image__caption">Sea waves</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1050/1920/1200" alt="Rocky cliffs">
+            <figcaption class="gallery__image__caption">Rocky cliffs</figcaption>
+        </figure>
+        <figure class="gallery__item">
+            <img class="gallery__image" src="https://picsum.photos/id/1043/1920/1200" alt="Mountains seen through a forest">
+            <figcaption class="gallery__image__caption">Mountains seen through a forest</figcaption>
+        </figure>*@
+        </div>
+    </section>  
 </main>
-
 <script>
     // Floating caption
     const imgContent = document.querySelectorAll('.gallery__image__caption');
@@ -354,5 +367,7 @@
         }
     })
 </script>
+
+
 
 

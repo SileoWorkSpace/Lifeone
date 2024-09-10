@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-
-
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="ptitle">
@@ -25,11 +23,10 @@
                 </span>
                 <span>
                     <a href="#" onclick="fCallPaging(1,1)" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" data-placement="top" title="Download Excel"><i class="fa fa-file-excel-o"></i></a>
-                    @*<button class="btn btn-default btn-custom btn-rounded btn-sm" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>*@
-                    <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF" ><i class="fa fa-file-pdf-o"></i></button>
-
+                    <a href="/Admin/AdminReport/PrintPayoutReportForBank" class="btn btn-success btn-rounded btngreen" data-toggle="tooltip" target="_blank" data-placement="top" title="Print"><i class="fa fa-print"></i></a>
+                    @*<button class="btn btn-success btn-rounded btnprint" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>*@
+                    <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
                 </span>
-
             </div>
         </div>
     </div>
@@ -45,38 +42,28 @@
                                 <div class="col-md-12">
                                     <div class="alert alert-warning" style="color:#727272 !important">
                                         <div class="row">
-
                                             <div class="col-md-2">
                                                 @Html.HiddenFor(m => m.Page)
                                                 @Html.HiddenFor(m => m.IsExport)
                                                 <div class="form-group">
                                                     <label>From Date</label>
-
                                                     <input type="date" name="fdate" id="fdate" class="form-control" value="@ViewBag.fdate" />
-
                                                 </div>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <div class="form-group">
-                                                    @*<label>To Date</label>*@
-
                                                     <label>To Date</label>
                                                     <input type="date" name="tdate" id="tdate" class="form-control" value="@ViewBag.tdate" />
-
                                                 </div>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Payout No</label>
                                                     @Html.DropDownListFor(m => m.PayoutNo, new SelectList(ViewBag.PayoutMaster, "Value", "Text"), new { @class = "form-control", @id = "PayoutNo" })
-
                                                     @*<input type="text" id="payoutNo" name="payoutNo" class="form-control" value="@ViewBag.PayoutNo" />*@
 
                                                 </div>
                                             </div>
-
                                             <div class="col-md-2">
                                                 <div class="form-group">
                                                     <label>Direct Seller Id</label>
@@ -84,17 +71,29 @@
                                                     <input type="text" id="MemberLoginId" name="MemberLoginId" placeholder="Enter Direct Seller Id" class="form-control" value="@ViewBag.LoginId" />
                                                 </div>
                                             </div>
-
-
-                                            <div class="col-12 col-md-4">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
-                                                    <label style="display:block;"></label>
-                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch" >
-                                                    
-                                                    <a href="/Payout-Report-For-Bank" class="btn btn-secondary" onClick="fclaer();" style="margin-top:1.5em;">Reset</a>
+                                                    <label>KYC Status</label>
+                                                    <div class="input-group">
+                                                        <select class="form-control" name="IsKyc" id="ddlIsKyc">
+                                                            <option value="">--ALL--</option>
+                                                            @*<option value="">KYC ALL</option>*@
+                                                            <option value="1">KYC Done</option>
+                                                            <option value="0">KYC Not Done</option>
+                                                        </select>
+                                                        <input type="hidden" id="txtKyc" value="@ViewBag.Iskyc" />
+                                                    </div>
                                                 </div>
                                             </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top: 1.5em; display: none;" value="Search" id="BtnSearch">
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" onclick="fCallPaging(1,0)">
+                                                    <a href="/Payout-Report-For-Bank" class="btn btn-secondary" onClick="fclaer();" style="margin-top:1.5em;">Reset</a>
 
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -107,6 +106,7 @@
                                         <th align="left" scope="col">#Sn.</th>
                                         <th align="left" scope="col">Direct Seller Id</th>
                                         <th align="left" scope="col">Direct Seller</th>
+                                        <th align="left" scope="col">Kyc Status</th>
                                         <th align="left" scope="col">Mobile No</th>
                                         <th align="left" scope="col">Payout No.</th>
                                         <th align="left" scope="col">Date</th>
@@ -120,7 +120,7 @@
                                 <tbody>
                                     @if (Model != null && Model.Objlist.Count > 0)
                                     {
-                                       
+
                                         int i = 1;
                                         int page = Model.Pager.CurrentPage;
                                         page = (page - 1);
@@ -134,6 +134,16 @@
                                                 <td data-title="#SN:">@(i+1)</td>
                                                 <td>@item.LoginId</td>
                                                 <td>@item.Name</td>
+                                                <td>
+                                                    @if (@item.KycStatus == "Kyc Done")
+                                                    {
+                                                        <span class="badge badge-success">@item.KycStatus</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="badge badge-warning">@item.KycStatus</span>
+                                                    }
+                                                </td>
                                                 <td>@item.MobileNo</td>
                                                 <td>@item.PayountNo</td>
                                                 <td>@item.ClosingDate</td>
@@ -145,7 +155,7 @@
                                             </tr>
                                             i++;
                                         }
-                                        i++; 
+                                        i++;
                                     }
                                     else
                                     {
@@ -227,8 +237,17 @@
 
 </div>
 <script>
+    $(document).ready(function () {
+
+
+        if ($('#txtKyc').val() != '' && $('#txtKyc').val() != undefined) {
+            $('#ddlIsKyc').val($('#txtKyc').val());
+        }
+    });
+
+
     function fCallPaging(val, IsExport) {
-    
+
         if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
             val = 1;
         }
@@ -245,9 +264,6 @@
         $("#IsExport").val(0);
         window.location.reload();
     }
-
-
-
 
     function btnpdf() {
         var col = [0]; // coloms to remove
@@ -268,7 +284,6 @@
                 }
             }
         }
-
 
         var table1 =
             tableToJson(tbl.get(0)),
@@ -355,7 +370,6 @@
 
     }
 
-
     function tableToJson(table) {
         var data = [];
 
@@ -364,7 +378,6 @@
         for (var i = 0; i < table.rows[0].cells.length; i++) {
             headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
         }
-
 
         // go through cells
         for (var i = 0; i < table.rows.length; i++) {
@@ -419,7 +432,6 @@
         document.body.innerHTML = originalContents;
     }
 
-
     //function GetPayoutReport() {
 
     //    var _fromdate = $("#fdate").val();
@@ -438,9 +450,9 @@
 
     //};
 
-//Create PDf
+    //Create PDf
 
-    
+
     // PRINT THE CONTENTS-----------------------------
     function printDiv(divName) {
         var printContents = document.getElementById(divName).innerHTML;

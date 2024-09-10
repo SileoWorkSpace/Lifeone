@@ -12,8 +12,6 @@ namespace LifeOne.Models.AdminManagement.AEntity
     public class MPayoutReport : MPaging
     {
         public string LoginId { get; set; }
-
-
         public string DisplayName { get; set; }
         public string ClosingDate { get; set; }
         public string IncomeMonth { get; set; }
@@ -26,6 +24,8 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public decimal ProcessingFee { get; set; }
         public decimal NetAmount { get; set; }
         public int? PayoutNo { get; set; }
+        public int? IsKyc { get; set; }
+        public string KycStatus { get; set; }       
         public decimal LeadershipBonus { get; set; }
         public decimal MatchingBonus { get; set; }
         public decimal HybridMatchingBonus { get; set; }

@@ -44,7 +44,13 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public double BoxPV { get; set; }
         public int FK_OrbitType { get; set; }
         public string HSNCode { get; set; }
+        public string Id { get; set; }
+        public string ImageUrl { get; set; }
+        public string CreatedDate { get; set; }
+        public string Videolink { get; set; }
+        public int OpCode { get; set; }
         public List<MAdminProductMaster> ProductMasterList { get; set; }
+        public List<MAdminProductMaster> ObjList{ get; set; }
          
     }
     public class Image 

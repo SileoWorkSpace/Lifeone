@@ -27,8 +27,6 @@ namespace LifeOne.Models.HomeManagement.HService
             MplaceUnderId obj = DALCustomerRegistration.InvokePlaceHolderIdWithParent(Fk_SponserId, Fk_PlaceId);
             return obj;
         }
-
-
         public static MCustomerRegistration InvokeGetDistrictDetails(string Pincode)
         {
             MCustomerRegistration obj = DALCustomerRegistration.DistrictDetails(Pincode);

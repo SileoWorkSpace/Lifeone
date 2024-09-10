@@ -19,6 +19,8 @@ using LifeOne.Models;
 using static LifeOne.Models.ShoppingRequest;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.Office2010.Excel;
+using DocumentFormat.OpenXml.EMMA;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -26,6 +28,8 @@ namespace LifeOne.Areas.Admin.Controllers
     [SessionTimeoutAttributeAdmin]
     public class MasterController : Controller
     {
+        //AdminProductMasterService _objService = new AdminProductMasterService();
+        AdminImageUploadService _objServices = new AdminImageUploadService();
         // GET: Admin/Master
         public ActionResult Index()
         {
@@ -579,9 +583,7 @@ namespace LifeOne.Areas.Admin.Controllers
         public JsonResult ChangeCMDStartDateTime(DynamicUtilityModel req)
         {
             return Json(UtilityService.ChangeCMDStartDateTime(req));
-        }
-
-     
+        }    
         #region Crop Product SubCategory
 
         public ActionResult CropSubCategory()
@@ -1741,48 +1743,171 @@ namespace LifeOne.Areas.Admin.Controllers
                 }
             }
             return Json(list);
-        }
-        [HttpGet]
-        public ActionResult UploadImage()
-        {
-            //if (!PermissionManager.IsActionPermit("Change WebSite Popup", ViewOptions.FormView))
-            //{
-            //    return Redirect("/Home/adminlogin");
-            //}
-
-            //WebSitePopup model = new WebSitePopup();
-            //model.ActiveType = "Select";
-            //ViewBag.WebSitePopup = ProductService.ChangeWebSitePopup(model);
-
-            //return View(model);
-            return View();
+        }               
+        public ActionResult UploadImage(MAdminImageUpload obj)
+        {            
+            List<MAdminImageUpload> objlst = new List<MAdminImageUpload>();
+            try
+            {
+                ResponseUploadImage _result = new ResponseUploadImage();
+                objlst = _objServices.ImageGetService(obj);
+                if (objlst != null)
+                {
+                    obj.ImageList = objlst;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return View(obj);
         }
         [HttpPost]
-        public ActionResult UploadImage(WebSitePopup model, HttpPostedFileBase file)
+        public ActionResult UploadImageSave(MAdminImageUpload obj)
         {
-          
-            Random rnd = new Random();
-            string path = "";
-            if (file != null)
+            ResponseUploadImage _result = new ResponseUploadImage();
+            try
             {
-                string pic = rnd.Next(1000000).ToString() + System.IO.Path.GetFileName(file.FileName);
-
-                path = System.IO.Path.Combine(
-                 Server.MapPath("~/Images/Users/Popup"), pic);
-
-                file.SaveAs(path);
-
-                model.ImageUrl = "~/Images/Users/Popup/" + pic;
-                using (MemoryStream ms = new MemoryStream())
+                if (obj.file != null && obj.file.ContentLength > 0)
                 {
-                    file.InputStream.CopyTo(ms);
-                    byte[] array = ms.GetBuffer();
+                    string ImageUrl = obj.file.FileName;
+                    var ImagePath = "~/Images/ImageUrl/";
+                    var extension = Path.GetExtension(ImageUrl);
+                    var fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + ImageUrl;
+                    obj.ImageUrl = ImagePath + fileName;
+
+                    var filename = Path.Combine(Server.MapPath(ImagePath), fileName);
+                    if (!Directory.Exists(Server.MapPath(ImagePath)))
+                    {
+                        Directory.CreateDirectory((Server.MapPath(ImagePath)));
+                    }
+                    obj.file.SaveAs(filename);
+
                 }
+                obj.OpCode = 1;
+                obj.CreatedBy = int.Parse(SessionManager.Fk_MemId.ToString());
+                _result = _objServices.SaveImage(obj);
+                if (_result != null)
+                {
 
-            }           
-            WebSitePopup status = ProductService.UpdateWebSitePopup(model);
+                    TempData["code"] = _result.Code.ToString();
+                    TempData["msg"] = _result.Msg.ToString();
+                    return Redirect("UploadImage");
+                }
+                else
+                {
+                    TempData["code"] = "0";
+                    TempData["msg"] = "Can not process the request";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Redirect("UploadImage");
+        }
+        public ActionResult ImageDelete(int Id)
+        {
+            MAdminImageUpload obj = new MAdminImageUpload();
+            obj.Id = Id.ToString();
+            obj.OpCode = 2;
+            try
+            {
+                ResponseUploadImage _result = new ResponseUploadImage();
+                _result = _objServices.DeleteImage(obj);
+                if (_result != null)
+                {
+                    TempData["code"] = _result.Code.ToString();
+                    TempData["msg"] = _result.Msg.ToString();
+                    return Redirect("UploadImage");
+                }
+                else
+                {
+                    TempData["code"] = "0";
+                    TempData["msg"] = "Can not process the request";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Redirect("UploadImage");
+        }
+        [HttpGet]
+        public ActionResult UploadVideo()
+        {
+            MAdminImageUpload obj = new MAdminImageUpload();
+            List<MAdminImageUpload> objlst = new List<MAdminImageUpload>();
+            try
+            {
+                objlst = _objServices.GetVideoService(obj);
+                if (objlst != null)
+                {
+                    obj.ImageList = objlst;
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return View(obj);
+        }
+        [HttpPost]
+        public ActionResult UploadVideo(MAdminImageUpload obj)
+        {
+            ResponseUploadImage _result = new ResponseUploadImage();
+            try
+            {
+                obj.OpCode = 1;
+                obj.CreatedBy = int.Parse(SessionManager.Fk_MemId.ToString());
+                _result = _objServices.SaveVideo(obj);
+                if (_result != null)
+                {
 
-            return RedirectToAction("UploadImage");
+                    TempData["code"] = _result.Code.ToString();
+                    TempData["msg"] = _result.Msg.ToString();
+                    return Redirect("UploadVideo");
+                }
+                else
+                {
+                    TempData["code"] = "0";
+                    TempData["msg"] = "Can not process the request";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Redirect("UploadVideo");
+        }
+        public ActionResult VideoDelete(int Id)
+        {
+            MAdminImageUpload obj = new MAdminImageUpload();
+            obj.Id = Id.ToString();
+            obj.OpCode = 2;
+            try
+            {
+                ResponseUploadImage _result = new ResponseUploadImage();
+
+                _result = _objServices.DeleteVideo(obj);
+                if (_result != null)
+                {
+
+                    TempData["code"] = _result.Code.ToString();
+                    TempData["msg"] = _result.Msg.ToString();
+                    return Redirect("UploadVideo");
+                }
+                else
+                {
+                    TempData["code"] = "0";
+                    TempData["msg"] = "Can not process the request";
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Redirect("UploadVideo");
         }
     }
 }

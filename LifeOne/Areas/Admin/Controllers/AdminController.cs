@@ -441,11 +441,6 @@ namespace LifeOne.Areas.Admin.Controllers
             }
             return Json(0);
         }
-
-
-
-
-
         [HttpPost]
         public JsonResult CustomerPrimaryDetails(MCustomerRegistration Obj)
         {
@@ -468,8 +463,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 throw;
             }
         }
-
-
         [HttpPost]
         public JsonResult CustomerAddressDetails(MCustomerRegistration Obj)
         {

@@ -1,11 +1,11 @@
-﻿
+﻿@model LifeOne.Models.HomeManagement.HEntity.UploadImageVideo
 @{
     ViewBag.Title = "Video";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <style>
     .gallery {
-        display: grid;
+        display: flex;
         grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
         grid-gap: 2rem;
         padding: 40px 0px 40px 0px;
@@ -15,6 +15,8 @@
     .gallery__item {
         box-shadow: 0 .1875rem .625rem rgba(0, 0, 0, 0.4);
         overflow: hidden;
+        width:350px;
+        height:250px;
     }
 
     .gallery__item {
@@ -168,7 +170,7 @@
 </style>
 <main class="main">
     <div class="page-header" style="background-image: url(/Content/NewAssests/images/page-header/contact-us.jpg) ">
-        <h1 class="page-title font-weight-bold text-capitalize ls-l">Video</h1>
+        <h1 class="page-title font-weight-bold text-capitalize ls-l">Video Gallery</h1>
         <nav class="breadcrumb-nav">
             <ul class="breadcrumb">
                 <li><a href="/Home/Index"><i class="d-icon-home"></i> <i class="bi bi-chevron-right"></i></a></li>
@@ -176,10 +178,24 @@
             </ul>
         </nav>
     </div>
-    <section>
-        <!-- Image Gallery -->
+    <section>              
         <div class="container gallery">
-            <figure class="gallery__item">
+            @{
+                if (Model != null)
+                {
+                    if (Model.dtDetails != null)
+                    {
+                        for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
+                        {
+                        <figure class="gallery__item">
+                            <iframe width="100%" height="250" src="@Model.dtDetails.Rows[i]["Videolink"].ToString()" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                            @*<figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>*@
+                        </figure>
+                        }
+                    }
+                }
+            }
+            @*<figure class="gallery__item">
                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/fD4xBhaBhAE?si=Nj5dNDuAGX2K7hp0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                 <figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>
             </figure>
@@ -190,11 +206,10 @@
             <figure class="gallery__item">
                 <iframe width="100%" height="250" src="https://www.youtube.com/embed/fD4xBhaBhAE?si=Nj5dNDuAGX2K7hp0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                 <figcaption class="gallery__image__caption">A river between the mountains</figcaption>
-            </figure>
+            </figure>*@
         </div>
-    </section>
+    </section>    
 </main>
-
 <script>
     // Floating caption
     const imgContent = document.querySelectorAll('.gallery__image__caption');
@@ -322,5 +337,7 @@
         }
     })
 </script>
+
+
 
 

@@ -1859,6 +1859,18 @@ namespace LifeOne.Areas.Admin
               new[] { "LifeOne.Areas.Admin.Controllers" });
 
             context.MapRoute(
+             "Admin-UploadVideo",
+             "Admin-UploadVideo/{action}/{id}",
+             new
+             {
+                 area = "Admin",
+                 controller = "Master",
+                 action = "UploadVideo",
+                 id = UrlParameter.Optional
+             },
+             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
                 "Admin-RepurchaseIncomeType",
                 "Admin-RepurchaseIncomeType/{action}/{id}",
                 new
@@ -2720,6 +2732,18 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                 id = UrlParameter.Optional
             },
             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+           "Admin-PrintPayoutReportForBank",
+           "Print Payout-Report-For-Bank/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "AdminReport",
+               action = "PrintPayoutReportForBank",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

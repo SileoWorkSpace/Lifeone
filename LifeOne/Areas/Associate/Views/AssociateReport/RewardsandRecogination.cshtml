@@ -100,7 +100,7 @@
                                                     <tr>
                                                         <td class="tdleft">@(SNO = SNO + 1)</td>
                                                         <td class="tdcenter">@item.LeftBusiness:@item.RightBusiness</td>
-                                                        @if (@item.RewardDetailName =="NULL")
+                                                        @if (@item.RewardDetailName == "NULL")
                                                         {
                                                             <td class="tdcenter">-</td>
                                                         }
@@ -116,7 +116,7 @@
                                                         {
                                                             <td class="tdcenter"><img src="@item.ToursImage" alt="" class="reimg"><br>@item.ToursName</td>
                                                         }
-                                                        @if (@item.RecognitionName== "NULL")
+                                                        @if (@item.RecognitionName == "NULL")
                                                         {
                                                             <td class="tdcenter">-</td>
                                                         }
@@ -138,8 +138,6 @@
                     </div>
                 </div>
             </div>
-
-
         }
     </div>
 </div>
