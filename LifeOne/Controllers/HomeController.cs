@@ -2293,7 +2293,39 @@ namespace LifeOne.Controllers
         }
         public ActionResult NewsandAnnouncement()
         {
-            return View();
+            NewsandAnnouncement obj = new NewsandAnnouncement();
+            try
+            {
+                List<NewsandAnnouncement> NewsList1 = new List<NewsandAnnouncement>();
+                DataSet ds = obj.getNewandAnnouncement();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        NewsandAnnouncement NewsList = new NewsandAnnouncement();
+                        if (!string.IsNullOrEmpty(ds.Tables[0].Rows[i]["InfoImgUrl"].ToString()))
+                        {
+                         NewsList.InfoImgUrl = baseurl + ds.Tables[0].Rows[i]["InfoImgUrl"].ToString();
+                        }
+                        else
+                        {
+
+                            NewsList.InfoImgUrl = baseurlNoImg;
+                        }                                                
+                        NewsList.NewsHeading = ds.Tables[0].Rows[i]["NewsHeading"].ToString();
+                        NewsList.News = ds.Tables[0].Rows[i]["News"].ToString();        
+                        NewsList1.Add(NewsList);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(NewsList1);
+                    obj.dtDetails = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(obj);            
         }
     }
 }
