@@ -802,39 +802,39 @@
     }
 
     function UpdateMemberKyc() {
-        //if (IsValidate() == true) {
-        debugger;
-        $.ajax({
+        if (IsValidate() == true) {
+            debugger;
+            $.ajax({
 
-            url: '/Admin/AdminReport/UpdateKycByAdmin',
-            data: {
-                Fk_MemId: $('#txtFk_MemId').val(), type: 'update', PanNo: $('#txteditPanNo').val(), AddressProofNo: $('#txtediAddressProofNo').val(), BankAccountNo: $('#txteditBankAcNo').val(), AddressFrontUrl: $('#aadharfrontimagepath').val(), AddressBackUrl: $('#aadharbackimagepath').val(), PanUrl: $('#pancardimagepath').val(), BankUrl: $('#chequeimagepath').val(),IfscCode: $('#txtIfscCode').val()
-
-
-            },
-            dataType: 'json',
-            type: 'POST',
-            containtType: 'application/json;charset=utf-8',
-            success: function (data) {
-                if (data != null) {
+                url: '/Admin/AdminReport/UpdateKycByAdmin',
+                data: {
+                    Fk_MemId: $('#txtFk_MemId').val(), type: 'update', PanNo: $('#txteditPanNo').val(), AddressProofNo: $('#txtediAddressProofNo').val(), BankAccountNo: $('#txteditBankAcNo').val(), AddressFrontUrl: $('#aadharfrontimagepath').val(), AddressBackUrl: $('#aadharbackimagepath').val(), PanUrl: $('#pancardimagepath').val(), BankUrl: $('#chequeimagepath').val(), IfscCode: $('#txtIfscCode').val()
 
 
-                    alert(data.Remark);
-                    if (data.Code == 1) {
-                        $('#EditUploadKyc').modal('hide');
-                        window.location.href = "/VerifyKyc";
+                },
+                dataType: 'json',
+                type: 'POST',
+                containtType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    if (data != null) {
+
+
+                        alert(data.Remark);
+                        if (data.Code == 1) {
+                            $('#EditUploadKyc').modal('hide');
+                            window.location.href = "/VerifyKyc";
+                        }
+
                     }
-                  
+
+                },
+                error: function (error) {
+
+
                 }
 
-            },
-            error: function (error) {
-
-
-            }
-
-        });
-        
+            });
+        }
     }
 
 

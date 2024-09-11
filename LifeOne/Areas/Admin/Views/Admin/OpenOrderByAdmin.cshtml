@@ -952,8 +952,12 @@
                 return false;
             }            
         }
-
-
+        if ($('#PaymentMode').val() == "UPI") {
+            if ($('#UpiNumber').val() == "") {
+                showSnazzyErrorMessage('Please select UpiNumber!');
+                return false
+            }           
+        }        
         if (confirm("Proceed With Paid Amount") == false) {
             return false;
         }
