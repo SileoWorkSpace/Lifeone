@@ -594,6 +594,17 @@ namespace LifeOne.Areas.Associate
             id = UrlParameter.Optional
         },
         new[] { "LifeOne.Areas.Associate.Controllers" });
+            context.MapRoute(
+        "EWalletRequest",
+        "EWalletRequest/{action}/{id}",
+        new
+        {
+            area = "Associate",
+            controller = "AssociatePlanIncome",
+            action = "Request",
+            id = UrlParameter.Optional
+        },
+        new[] { "LifeOne.Areas.Associate.Controllers" });
         }
     }
 }
