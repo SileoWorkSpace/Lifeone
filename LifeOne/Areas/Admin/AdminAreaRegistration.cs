@@ -2768,6 +2768,18 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                 id = UrlParameter.Optional
             },
             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+             "Admin-UploadFAQ_default",
+            "UploadFAQ/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "FAQMaster",
+               action = "UploadFAQ",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

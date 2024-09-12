@@ -494,9 +494,6 @@ namespace LifeOne.Areas.Associate
                 },
                 new[] { "LifeOne.Areas.Associate.Controllers" });
 
-
-
-
             context.MapRoute(
                 "Associate_ViewIdCard",
                 "View-IdCard/{action}/{id}",

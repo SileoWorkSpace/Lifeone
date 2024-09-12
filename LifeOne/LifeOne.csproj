@@ -300,6 +300,7 @@
     <Compile Include="Areas\Admin\Controllers\PlanIncomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductMasterController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductStockController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FAQMasterController.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadPrivacyPolicy.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadTermsandCondition.cs" />
     <Compile Include="Areas\Admin\Controllers\ProducTypeController.cs" />
@@ -1570,6 +1571,7 @@
     <Content Include="Areas\Admin\Views\AdminReport\PrintPayoutReportForBank.cshtml" />
     <Content Include="Areas\Admin\Views\UploadPrivacyPolicy\UploadPrivacyPolicy.cshtml" />
     <Content Include="Areas\Admin\Views\UploadPrivacyPolicy\UploadPrivacyPolicyList.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQMaster\UploadFAQ.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />
@@ -2115,7 +2117,17 @@
     <Content Include="Content\NewAssests\images\Food-Product-Range.png" />
     <Content Include="Content\NewAssests\images\HAir-care.jpg" />
     <Content Include="Content\NewAssests\images\hero-slider-01a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-02a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-03a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-05a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-06a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-07a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-08a.jpg" />
     <Content Include="Content\NewAssests\images\hero-slider-09a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-10a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-11a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-12a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-13a.jpg" />
     <Content Include="Content\NewAssests\images\icon-boxes\alret.svg" />
     <Content Include="Content\NewAssests\images\icon-boxes\alret_solid.svg" />
     <Content Include="Content\NewAssests\images\icon-boxes\check.svg" />
@@ -4710,6 +4722,7 @@
     <Content Include="Views\Shared\_PartialMobileMenuLayout.cshtml" />
     <Content Include="Views\Home\NewsandAnnouncement.cshtml" />
     <Content Include="Views\Home\Certificate.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

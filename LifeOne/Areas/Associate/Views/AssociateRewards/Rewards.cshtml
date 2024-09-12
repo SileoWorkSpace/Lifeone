@@ -15,11 +15,11 @@
     <div class="ptitle">
         <h3 class="text-themecolor text-white">LifeTime Reward Details</h3>
         @*<ol class="breadcrumb">
-            <li class="breadcrumb-item">
-            <li class="active breadcrumb-item" aria-current="page"> <a href="/Associate-Dashboard">Dashboard</a></li>
-            <li class="active breadcrumb-item" aria-current="page"><a href="#">Repurchase Income </a></li>
-            <li class="active breadcrumb-item" aria-current="page">Reward</li>
-        </ol>*@
+                <li class="breadcrumb-item">
+                <li class="active breadcrumb-item" aria-current="page"> <a href="/Associate-Dashboard">Dashboard</a></li>
+                <li class="active breadcrumb-item" aria-current="page"><a href="#">Repurchase Income </a></li>
+                <li class="active breadcrumb-item" aria-current="page">Reward</li>
+            </ol>*@
     </div>
 
 
@@ -35,13 +35,11 @@
                         <thead>
                             <tr>
                                 <th>S. No.</th>
-                                @*<th>Recognition</th>*@
                                 <th>Reward Name</th>
-                                <th>Business Amount</th>
+                                <th>Tours</th>
                                 <th>Left Point</th>
                                 <th>Right Point</th>
-                                <th>Matching Target Point</th>
-
+                                @*<th>Matching Target Point</th>*@
                                 <th>Status</th>
                                 <th>Acheived On</th>
                                 <th>Action</th>
@@ -58,9 +56,28 @@
                                     {
                                         <tr>
                                             <td>@(SNO = SNO + 1)</td>
-                                            @*<td><img src="@item.RewardImg" style="height:50px;width:50px;" /> <br/> @item.Recognition </td>*@
-                                            <td>@item.RewardName</td>
-                                            <td>@item.RewardAmount</td>
+                                            @if (item.RewardImg == "" || item.RewardImg =="NULL")
+                                            {
+                                                <td></td>
+                                            }
+                                            else
+                                            {
+                                                <td>
+                                                    <img src="@item.RewardImg" style="height:50px;width:50px;" />
+                                                    <br />
+                                                    @item.RewardName
+                                                </td>
+
+                                            }
+                                            @if (item.ToursImage == "" || item.ToursImage == "NULL")
+                                            {
+                                                <td></td>
+                                            }
+                                            else
+                                            {
+                                                <td><img src="@item.ToursImage" style="height:50px;width:50px;" /><br />@item.ToursName</td>
+
+                                            }
                                             <td>
                                                 @item.LeftBusiness
                                                 @if (!string.IsNullOrEmpty(item.BalanceLeft))
@@ -77,14 +94,13 @@
                                                     <span>Balance Right: <label class="badge badge-success">@item.BalanceRight</label></span>
                                                 }
                                             </td>
-                                            <td>
-                                                @item.TargetPoint
-                                            </td>
+                                            @*<td>
+                                                    @item.TargetPoint
+                                                </td>*@
                                             @*<td>@item.Rank</td>
-        <td>@item.Designation</td>*@
+                                                <td>@item.Designation</td>*@
 
                                             <td>
-                                                
                                                 @if (item.Status == "Achieved")
                                                 {
                                                     <span class="badge badge-success">@item.Status</span>
@@ -108,13 +124,10 @@
 
                                                 else if (item.Status == "Approved By Admin")
                                                 {
-                                                    @*<span class="badge badge-primary">@item.Status</span>*@
                                                     <a class="text-primary" style="cursor:pointer;text-decoration:underline" onclick="ShowBankDetails(@item.PK_RId)"><span class="badge badge-primary">@item.Status</span></a>
                                                 }
-
                                             </td>
                                             <td>@item.AchievedOn</td>
-
                                             @if (item.Status == "Achieved")
                                             {
                                                 <td>
@@ -134,9 +147,9 @@
                         </tbody>
 
                     </table>
-                    <div>
-                        <h4>1 Point = Rs. 50000 business.</h4>
-                    </div>
+                    @*<div>
+                            <h4>1 Point = Rs. 50000 business.</h4>
+                        </div>*@
                 </div>
             </div>
         </div>
@@ -153,7 +166,7 @@
                     </h4>
                 </div>
                 <div class="modal-body">
-                    <div class="table-responsive" >
+                    <div class="table-responsive">
 
                         <table class="table small table-hover">
                             <thead>
