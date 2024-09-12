@@ -2744,6 +2744,30 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                id = UrlParameter.Optional
            },
            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+              "Admin-UploadPrivacyPolicy_default",
+             "UploadPrivacyPolicy/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "UploadPrivacyPolicy",
+                action = "UploadPrivacyPolicy",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+              "Admin-UploadPrivacyPolicyList_default",
+             "UploadPrivacyPolicyList/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "UploadPrivacyPolicy",
+                action = "UploadPrivacyPolicyList",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

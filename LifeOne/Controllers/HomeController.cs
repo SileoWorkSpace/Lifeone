@@ -324,7 +324,30 @@ namespace LifeOne.Controllers
         //}
         public ActionResult PrivacyPolicy()
         {
-            return View();
+            PrivacyandPolicy obj = new PrivacyandPolicy();
+            try
+            {
+                List<PrivacyandPolicy> lstPrivacyandPolicy1 = new List<PrivacyandPolicy>();
+                DataSet ds = obj.getPrivacyPolicy();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        PrivacyandPolicy lstPrivacyandPolicy = new PrivacyandPolicy();
+                        lstPrivacyandPolicy.PrivacyPolicy = ds.Tables[0].Rows[i]["PrivacyPolicy"].ToString();
+                        lstPrivacyandPolicy1.Add(lstPrivacyandPolicy);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(lstPrivacyandPolicy1);
+                    obj.dtDetails = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(obj);           
         }
         [HttpPost]
         public ActionResult Contact(Contact _model)
@@ -2326,6 +2349,10 @@ namespace LifeOne.Controllers
                 throw ex;
             }
             return View(obj);            
+        }
+        public ActionResult Certificate()
+        {
+            return View();
         }
     }
 }

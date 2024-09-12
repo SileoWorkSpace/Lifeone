@@ -1,0 +1,89 @@
+﻿@using LifeOne.Models.AdminManagement.AEntity
+@model LifeOne.Models.AdminManagement.AEntity.FormPermissionModel
+<table class="table table-hover" id="tblSetPermission">
+    <thead>
+        <tr class="hdr">
+            <th align="left" scope="col" style="background:#ebf4fb;">S. No.</th>
+            <th align="left" scope="col" style="background:#ebf4fb;">Form Type</th>
+            <th align="left" scope="col" style="background:#ebf4fb;">Form Name</th>
+            <th align="left" scope="col" style="background:#ebf4fb;"><span>View</span> &nbsp;<input type="checkbox" id="chkSelectAllView" data-chktype="FormView" /></th>
+            <th align="left" scope="col" style="background:#ebf4fb;"><span>Save</span> &nbsp;<input type="checkbox" id="chkSelectAllSave" data-chktype="FormSave" /></th>
+            <th align="left" scope="col" style="background:#ebf4fb; "><span>Update</span> &nbsp;<input type="checkbox" id="chkSelectAllUpdate" data-chktype="FormUpdate" /></th>
+            <th align="left" scope="col" style="background:#ebf4fb; "><span>Delete</span> &nbsp;<input type="checkbox" id="chkSelectAllDelete" data-chktype="FormDelete" /></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.RolePermissionFormList != null)
+        {
+            int SrNo = 1;
+            foreach (var row in ((List<RolePermissionModel>)ViewBag.RolePermissionFormList))
+            {
+                <tr>
+                    <td>
+                        @(SrNo++)
+                        <input type="hidden" name="FK_UserId" value="@(Model != null && Model.FK_UserId != null ? Model.FK_UserId.ToString() : "")" />
+                        <input type="hidden" name="PK_PermissionId" value="@(Model != null && Model.FormPermissionList.Where(x => x.FK_FormTypeId == row.FK_FormTypeId && x.FK_FormId == row.FK_FormMasterId).FirstOrDefault() !=null ? Model.FormPermissionList.Where(x => x.FK_FormTypeId == row.FK_FormTypeId && x.FK_FormId == row.FK_FormMasterId).FirstOrDefault().PK_PermissionId : "")" />
+                    </td>
+                    <td>
+                        @row.FormType
+                        <input type="hidden" name="FK_FormTypeId" value="@row.FK_FormTypeId" />
+                    </td>
+                    <td>
+                        @row.FormName
+                        <input type="hidden" name="FK_FormMasterId" value="@row.FK_FormMasterId" />
+                    </td>
+                    @if (Model != null)
+                    {
+                        var model = Model.FormPermissionList.Where(x => x.FK_FormTypeId == row.FK_FormTypeId && x.FK_FormId == row.FK_FormMasterId).FirstOrDefault();
+                        if (model != null)
+                        {
+                            <td>
+                                <input type="checkbox" name="FormView" @( model.FormView ? "checked" : "" ) />
+                            </td>
+                            <td>
+                                <input type="checkbox" name="FormSave" @( model.FormSave ? "checked" : "" ) />
+                            </td>
+                            <td>
+                                <input type="checkbox" name="FormUpdate" @( model.FormUpdate ? "checked" : "" ) />
+                            </td>
+                            <td>
+                                <input type="checkbox" name="FormDelete" @( model.FormDelete ? "checked" : "") />
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                <input type="checkbox" name="FormView" />
+                            </td>
+                            <td>
+                                <input type="checkbox" name="FormSave" />
+                            </td>
+                            <td>
+                                <input type="checkbox" name="FormUpdate" />
+                            </td>
+                            <td>
+                                <input type="checkbox" name="FormDelete" />
+                            </td>
+                        }
+                    }
+                    else
+                    {
+                        <td>
+                            <input type="checkbox" name="FormView" @(row.FormView ? "checked" : "") />
+                        </td>
+                        <td>
+                            <input type="checkbox" name="FormSave" @(row.FormSave ? "checked" : "") />
+                        </td>
+                        <td>
+                            <input type="checkbox" name="FormUpdate" @(row.FormUpdate ? "checked" : "") />
+                        </td>
+                        <td>
+                            <input type="checkbox" name="FormDelete" @(row.FormDelete ? "checked" : "") />
+                        </td>
+                    }
+
+                </tr>
+            }
+        }
+    </tbody>
+</table>

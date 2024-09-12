@@ -1,0 +1,573 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.TestimonialPermissionViewModel
+@{
+    ViewBag.Title = "TestimonialPermission";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<link href="~/Content/dist/css/sweetalert.css" rel="stylesheet" />
+@{
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-success m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+
+
+
+        }
+    }
+
+}
+<div class="container-fluid">
+
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Testimonial Leader Permission</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Testimonial Leader Permission</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>*@
+
+
+                </span>
+                <span>
+                    <a href="@Url.Action("ExportToExcelMemberkDetails","Admin",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                    <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>
+
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <form action="" method="post">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Login Id</label>
+                                                    <input type="text" name="LoginID" id="LoginID" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" name="MemberName" id="MemberName" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Mobile No</label>
+                                                    <input type="text" name="Mobile" id="Mobile" placeholder="" class="form-control" maxlength="10" onkeypress="return isNumberKey(event)" />
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Testimonial Permission Status</label>
+                                                    @Html.DropDownListFor(model => model.IsAllowTestimonial, new List<SelectListItem>() {
+                                          new SelectListItem { Text="--Select--",Value=""},
+                                          new SelectListItem { Text="Disallow",Value="false"},
+                                          new SelectListItem { Text="Allow",Value="true"}
+                                          }, new { @class = "form-control" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                    <a href="/Admin-TestimonialPermission" class="btn btn-secondary" style="margin-top:1.5em;">Reset</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-responsive" >
+                            <table class="table table-hover mb-0" id="tblMemberList">
+                                <thead>
+                                    <tr>
+                                        <th>#Sn.</th>
+                                        <th>Login</th>
+                                        <th>Name</th>
+                                        <th>SponsorID/Name</th>
+                                        <th>Email/Mobile</th>
+                                        <th>State</th>
+                                        <th>Join on</th>
+                                        <th>Status</th>
+                                        <th class="text-right">Testimonial Allow/Disallow</th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                        <th style="display:none;"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.List.Count > 0)
+                                    {
+                                        int sno = 0;
+                                        foreach (var item in Model.List)
+                                        {
+
+                                            <tr>
+                                                <td data-title="#SN:">@(sno = sno + 1)</td>
+                                                <td data-title="Login:">@item.LoginId</td>
+                                                <td data-title="Name:">@item.MemberName</td>
+                                                <td data-title="Mobile:">@item.SponsorId <br /> @item.SponsorName</td>
+                                                <td data-title="Email/Mobile:">@item.Email<br />@item.Mobile</td>
+                                                <td data-title="City/State:"> @item.City <br />@item.state</td>
+                                                <td data-title="Joining Date:">@item.joiningDate</td>
+                                                <td>
+                                                    @if (item.IsAllowTestimonial == true)
+                                                    {
+                                                        <lable class="label btn-primary">Allow</lable>
+                                                    }
+                                                    else
+                                                    {
+                                                        <lable class="label btn-danger">DisAllow</lable>
+
+                                                    }
+                                                </td>
+
+                                                <td data-title="Action:" class="text-right">
+                                                    @if (item.IsAllowTestimonial == false)
+                                                    {
+                                                        <a href="/Admin/Admin/UpdateMemberTestimonialStatus?FK_MemId=@item.FK_MemId&Status=true" onclick="return confirm('Are you sure to Allow?')" title="Allow Testimonial" class="btn btn-sm btn-success">Allow</a>
+                                                        <button title="Disallow Testimonial" class="btn btn-sm btn-secondary" disabled>Disallow</button>
+                                                    }
+                                                    else
+                                                    {
+                                                        <button title="Allow Testimonial" class="btn btn-sm btn-success" disabled>Allow</button>
+                                                        <a href="/Admin/Admin/UpdateMemberTestimonialStatus?FK_MemId=@item.FK_MemId&Status=false" onclick="return  confirm('Are you sure to Disallow ?')" title="Disallow Testimonial" class="btn btn-sm btn-secondary">Disallow</a>
+                                                    }
+                                                </td>
+                                                <td style="display:none;">@item.MemberName</td>
+                                                <td style="display:none;">@item.FK_MemId</td>
+                                                <td style="display:none;">@item.DeviceId</td>
+
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between">
+                                @if (Model != null)
+                                {
+                                    if (Model.Pager != null)
+                                    {
+                                        if (Model.Pager.EndPage > 1)
+                                        {
+                                            <div> <small class="text-muted inline">showing @Model.List.Count  of @Model.List[0].ToatlRecord items</small> </div>
+                                            <div>
+                                                <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                    @if (Model.Pager.CurrentPage > 1)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Admin-TestimonialPermission?LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile&IsAllowTestimonial=@Model.IsAllowTestimonial">First</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Admin-TestimonialPermission?page=@(Model.Pager.CurrentPage - 1)&LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile&IsAllowTestimonial=@Model.IsAllowTestimonial">Previous</a>
+                                                        </li>
+                                                    }
+                                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                    {
+                                                        <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                            <a class="page-link" href="/Admin-TestimonialPermission?page=@page&LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile&IsAllowTestimonial=@Model.IsAllowTestimonial">@page</a>
+                                                        </li>
+                                                    }
+                                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Admin-TestimonialPermission?page=@(Model.Pager.CurrentPage + 1)&LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile&IsAllowTestimonial=@Model.IsAllowTestimonial">Next</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Admin-TestimonialPermission?page=@(Model.Pager.TotalPages)&LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile&IsAllowTestimonial=@Model.IsAllowTestimonial">Last</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+
+                                }
+
+                            </div>
+                        </footer>
+
+
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Change Password</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <label> New Password</label>
+                                <input type="text" class="form-control" id="txtnewpassword" ng-model="newPwd" />
+                            </div>
+                            <div class="form-group">
+                                <label> Confirm Password</label>
+                                <input type="text" class="form-control" id="txtConfirmpassword" ng-model="confirmPwd" ng-blur="changeFun()" />
+                                <input type="hidden" class="form-control" id="memid" />
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-1"></div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" id="btnsubmit" ng-model="btnsubmit" ng-click="updatePassword()" disabled>Change</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <button type="button" class="btn btn-primary hide" style="display:none" data-toggle="modal" data-target="#blockunblockMember" id="BlockMember">
+        Launch demo modal
+    </button>
+
+    <div id="blockunblockMember" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 500px;">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Block Referral</h4>
+                </div>
+                <div class="modal-body">
+                    <span id="Fk_MemId" class="hide"></span>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Remark<em style="color:red">*</em></label>
+                                <textarea id="remark" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="BlockUnBlockRefferal($('#Fk_MemId').text(),$('#remark').val())">Decline</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </form>
+</div>
+<div class="modal fade" id="sendNotification">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Send Notification</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body p-3">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                            </div>
+                            <input type="text" id="txtnameNotification" name="txtnameNotification" class="form-control" disabled="" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="input-group">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fa fa-envelope"></i>
+                                </span>
+                            </div>
+                            <input type="text" id="txtTitle" name="txtTitle" class="form-control" placeholder="Please Enter Title" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control input-sm" id="txtnotification" name="txtsmsnotification" rows="10" placeholder="Message"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                <button id="SendNotification" class="btn btn-info" value="Send Notification">Send Notification</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="~/Content/dist/js/sweetalert.min.js"></script>
+<script>
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [10, 0]; // coloms to remove
+
+        var tbl = $('#tblMemberList').clone();
+        $('.t').addClass('hide');
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 35,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Testimonial Leader Permission',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "TestimonialLeaderPermission");
+        doc.page++;
+        doc.save('TestimonialLeaderPermission.pdf');
+
+    });
+
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('DepartmentTable').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Testimonial Leader Permission</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    function AllowTestimonical(Fk_MemId) {
+
+
+        if ((Fk_MemId != null && Fk_MemId != undefined)) {
+
+            var r = confirm("Are you sure to Allow user for Testimonial?");
+            if (!r) {
+                return false;
+            }
+
+            $.ajax({
+                url: "/Admin/Admin/BlockReferral",
+                type: "Get",
+                data: { Fk_MemId: Fk_MemId, Status: gloablReffral, Remark: Remark },
+                dataType: 'json',
+                containtType: 'application/json;charset=utf-8',
+                async: false,
+                success: function (data) {
+                    if (data != null && data != "") {
+                        if (data.Flag == 1) {
+                            swal('', data.Msg, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/members";
+                            }, 3000);
+                        }
+                        else {
+                            swal('', data.Msg, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/members";
+                            }, 3000);
+                        }
+                    }
+                },
+            });
+        }
+        else
+            return false;
+    }
+</script>

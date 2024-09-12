@@ -1,0 +1,925 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.FranchiseApplicationFormModel
+@{
+    ViewBag.Title = "Franchise Application Form";
+}
+@section head{
+    <link href="~/Content/home-assets/css/bootstrap-datepicker.css" rel="stylesheet" />
+}
+<style>
+    .invalid {
+        color: red !important;
+    }
+</style>
+<div class="site-main" ng-app="My-App" ng-controller="My-Ctrl">
+    <div class="ttm-row login-12 padding-section">
+        <div class="container">
+            <div class="col-md-12">
+                <div class="row login-box-12 register-box">
+                    <div class="col-lg-12 col-sm-12 col-pad-0 align-self-center">
+                        <div class="login-inner-form register-page">
+                            <div class="details">
+                                @{
+                                    if (!string.IsNullOrEmpty(ViewBag.Msg))
+                                    {
+                                        if (ViewBag.Status == true)
+                                        {
+                                            <div class="alert alert-success m-t-30 msgdiv" id="divsuccess">
+                                                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong>  @ViewBag.Msg
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="alert alert-danger m-t-30 msgdiv" id="divUpdate">
+                                                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @ViewBag.Msg
+                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                                            </div>
+                                        }
+                                    }
+                                }
+                                <h3 class="yellow-clr">Franchise Application Form</h3>
+                                <div id="CustomMessages"></div>
+                                @*@using (Html.BeginForm("FranchiseApplicationForm", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                    {*@
+                                <form name="FranchiseApplicationForm" id="FranchiseApplicationForm" novalidate>
+                                    <div class="formtab">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Associate Id<span class="text-danger">*</span></label>
+                                                    <input type="text" name="AssociateId" id="AssociateId" ng-model="AssociateIdModel" class="form-control" , required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.AssociateId.$invalid">Enter Associate Id*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Associate Name<span class="text-danger">*</span></label>
+                                                    <input type="text" name="AssociateName" id="AssociateName" ng-model="AssociateNameModel" class="form-control only-Alpha" , required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.AssociateName.$invalid">Enter Associate Name*</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Applied For Pin Code<span class="text-danger">*</span></label>
+                                                    <input type="text" name="AppliedForPinCode" id="AppliedForPinCode" ng-model="AppliedForPinCodeModel" class="form-control only-numeric" , required="required" maxlength="6" minlength="6" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.AppliedForPinCode.$invalid">Enter 6 digit valid pincode*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Area Name<span class="text-danger">*</span></label>
+                                                    <input type="text" name="AreaName" id="AreaName" ng-model="AreaNameModel" class="form-control only-Alpha" , required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.AreaName.$invalid">Enter Area Name*</span>
+                                                </div>
+                                            </div>
+
+
+                                 <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Mobile No.<span class="text-danger">*</span></label>
+                                                    <input type="text" name="MobileNo" id="MobileNo" ng-model="MobileNoModel" class="form-control  only-numeric" pattern="/(6|7|8|9)\d{9}/" required="required" maxlength="10" minlength="10"/>
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.MobileNo.$invalid">Enter 10 digit valid mobile no.*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Email Id<span class="text-danger">*</span></label>
+                                                    <input type="email" name="EmailId" id="EmailId" ng-model="EmailIdModel" class="form-control" , required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.EmailId.$invalid">Enter valid email address*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="control-label">Address<span class="text-danger">*</span></label>
+                                                    <input type="text" name="Address" id="Address" ng-model="AddressModel" class="form-control" , required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.Address.$invalid">Enter Address*</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+
+                                                    <label class="control-label">Pin Code<span class="text-danger">*</span></label>
+                                                    <div class="input-group">
+                                                        <input type="text" name="PinCode" id="PinCode" ng-model="PinCodeModel" class="form-control only-numeric" required="required" maxlength="6" />
+                                                        <div class="input-group-append">
+                                                            <button type="button" class="btn btn-outline-secondary" ng-disabled="PinCodeModel.length!=6" ng-click="GetDistrictCityStateDetailsByPincode();">Search</button>
+                                                        </div>
+                                                    </div>
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.PinCode.$invalid" rows="5">Enter 6 digit valid pincode*</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Village<span class="text-danger">*</span></label>
+                                                    <input type="text" name="Village" id="Village" ng-model="VillageModel" class="form-control" , required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.Village.$invalid">Enter Village*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Taluka<span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="Taluka" name="Taluka" required ng-model="TalukaModel">
+                                                        <option value="">--Select--</option>
+                                                        <option ng-repeat="x in TalukaList" value="{{x.Taluka}}">{{x.Taluka}}</option>
+                                                    </select>
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.Taluka.$invalid">Enter Taluka*</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">District<span class="text-danger">*</span></label>
+                                                    <input type="text" readonly name="District" id="District" ng-model="DistrictModel" class="form-control" , required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.District.$invalid">required*</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">State<span class="text-danger">*</span></label>
+                                                    <input type="text" readonly name="State" id="State" ng-model="StateModel" class="form-control"  required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.State.$invalid">required*</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Franchise Name<span class="text-danger">*</span></label>
+                                                    <input type="text" name="FranchiseName" id="FranchiseName" ng-model="FranchiseNameModel" class="form-control only-Alpha" , required="required" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.FranchiseName.$invalid">Enter Franchise Name*</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <hr />
+                                                <h6> <center>Documents</center> </h6>
+                                                <hr />
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Document Type<span class="text-danger">*</span></label>
+                                                    <select class="form-control" id="DocType" name="DocType" required ng-model="DocTypeModel">
+                                                        <option value="">--Select--</option>
+                                                        <option value="Aadhar">Aadhar</option>
+                                                        <option value="PAN">PAN</option>
+                                                        <option value="VoterId">VoterId</option>
+                                                        <option value="GST">GST</option>
+                                                        <option value="UdyogAadhar">Udyog Aadhar </option>
+                                                        <option value="CIN"> CIN </option>
+                                                    </select>
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.DocType.$invalid">Select Document Type*</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" ng-if="DocTypeModel!='' && DocTypeModel!=null">{{DocTypeModel}} No.<span class="text-danger">*</span></label>
+                                                    <label class="control-label" ng-if="DocTypeModel=='' || DocTypeModel==null">Document No.<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="DocNo" id="DocNo" ng-model="DocNoModel" required />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.DocNo.$invalid">Enter Document No*</span>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" ng-if="DocTypeModel!='' && DocTypeModel!=null">{{DocTypeModel}} File.<span class="text-danger">*</span></label>
+                                                    <label class="control-label" ng-if="DocTypeModel=='' || DocTypeModel==null">Attachment File<span class="text-danger">*</span></label>
+                                                    <input type="file" class="form-control" name="AttachmentFile" id="AttachmentFile" ng-model="AttachmentFileModel" />
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                            <div class="col-md-12">
+                                                <hr />
+                                                <h6> <center>Bank Details</center> </h6>
+                                                <hr />
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Account No.<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control only-numeric" name="AccountNo" id="AccountNo" ng-model="AccountNoModel" required maxlength="18" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.AccountNo.$invalid">Enter valid Account number*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Bank Name<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control only-Alpha" name="BankName" id="BankName" ng-model="BankNameModel" required />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.BankName.$invalid">Enter valid bank name*</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">Branch<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control only-Alpha" name="Branch" id="Branch" ng-model="BranchModel" required />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.Branch.$invalid">Enter valid branch name*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">IFSC CODE<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="IFSC_CODE" id="IFSC_CODE" ng-model="IFSC_CODEModel" pattern="[A-Z|a-z]{4}[0][a-zA-Z0-9]{6}$" required minlength="11" maxlength="11" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.IFSC_CODE.$invalid">Enter 11 digit valid ifsc code*</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label">GSTNo.<span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="GSTNo" id="GSTNo" ng-model="GSTNoModel" pattern="^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$" required minlength="15" maxlength="15" />
+                                                    <span class="invalid" ng-if="FranchiseApplicationFormSubmitted && FranchiseApplicationForm.GSTNo.$invalid">Enter 15 digit valid GST No.*</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-4 text-center">
+                                        <button type="button" ng-click="SubmitRegistration(FranchiseApplicationForm);FranchiseApplicationFormSubmitted=true;" class="btn-md btn-theme" id="SubmitBtn_">Save</button>
+                                    </div>
+                                </form>
+                                @*}*@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section body{
+    <script src="~/Content/plugins/fastclick/fastclick.min.js"></script>
+    <script src="~/Content/home-assets/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.js"></script>
+    <script src="~/Content/plugins/input-mask/jquery.inputmask.extensions.js"></script>
+    <script src="~/Content/dist/js/app.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>
+    <script src="~/Content/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/Scripts/angular.min.js"></script>
+    <script>
+
+
+        var app = angular.module('My-App', []);
+        app.controller('My-Ctrl', function ($scope, $http) {
+            $scope.SubmitRegistration = function (FranchiseApplicationForm) {
+                if (FranchiseApplicationForm.$valid) {
+                    if ($("#AttachmentFile")[0].files[0] == undefined) {
+                        swal('', "Please upload document file", 'warning');
+                        return false;
+                    }
+                    if ($scope.DocTypeModel == 'Aadhar') {
+                        var regexp = /^\d{4}\d{4}\d{4}$/;
+                        if (!regexp.test($scope.DocNoModel)) {
+                            swal('', "Please enter 12 digit valid aadhar no.", 'warning');
+                            return false;
+                        }
+                    }
+                    if ($scope.DocTypeModel == 'PAN') {
+                        var regexp = /[a-zA-z]{5}\d{4}[a-zA-Z]{1}/;
+                        if (!regexp.test($scope.DocNoModel)) {
+                            swal('', "Please enter valid pan no.", 'warning');
+                            return false;
+                        }
+                    }
+                    if ($scope.DocTypeModel == 'GST') {
+                        var regexp = /^[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}Z[0-9A-Z]{1}$/;
+                        if (!regexp.test($scope.DocNoModel)) {
+                            swal('', "Please Enter Valid GSTIN Number", 'warning');
+                            return false;
+                        }
+                    }
+
+                    var formdata = new FormData();
+                    formdata.append("AssociateId", $scope.AssociateIdModel)
+                    formdata.append("AssociateName", $scope.AssociateNameModel)
+                    formdata.append("AppliedForPinCode", $scope.AppliedForPinCodeModel)
+                    formdata.append("AreaName", $scope.AreaNameModel)
+                    formdata.append("MobileNo", $scope.MobileNoModel)
+                    formdata.append("EmailId", $scope.EmailIdModel)
+                    formdata.append("Address", $scope.AddressModel)
+                    formdata.append("PinCode", $scope.PinCodeModel)
+                    formdata.append("Village", $scope.VillageModel)
+                    formdata.append("Taluka", $scope.TalukaModel)
+                    formdata.append("District", $scope.DistrictModel)
+                    formdata.append("State", $scope.StateModel)
+                    formdata.append("FranchiseName", $scope.FranchiseNameModel)
+                    formdata.append("DocType", $scope.DocTypeModel)//--Add new
+                    formdata.append("DocNo", $scope.DocNoModel)
+                    formdata.append("AttachmentFile", $("#AttachmentFile")[0].files[0])//--file add
+                    formdata.append("AccountNo", $scope.AccountNoModel)
+                    formdata.append("BankName", $scope.BankNameModel)
+                    formdata.append("Branch", $scope.BranchModel)
+                    formdata.append("IFSC_CODE", $scope.IFSC_CODEModel)
+                    formdata.append("GSTNo", $scope.GSTNoModel)
+                    $.ajax({
+                        url: '/Home/_FranchiseApplicationForm',
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        type: 'POST',
+                        success: function (response) {
+                            if (response.Flag == 1) {
+                                window.location.reload();
+                            }
+                            alert(response.Remark);
+                        }
+                    });
+                } else {
+                    angular.element('input.ng-invalid').first().focus();
+                    $scope.invalid = true;
+                }
+
+            }
+
+
+            $scope.GetDistrictCityStateDetailsByPincode = function () {
+                if ($('#PinCode').val == "" || $('#PinCode').val() == 0) {
+                    swal('', "Please Enter Pincode", 'warning');
+                    $('#StateId').val('');
+                    $('#CityId').val('');
+                    return false;
+                }
+                $.ajax({
+              @* url: '@Url.Action("GetStateCityTehsilByPincode", "Home")',*@
+                url: '/Home/GetPincodeDetails',
+                    type: "post",
+                        data: JSON.stringify({ "Pincode": $('#PinCode').val() }),
+                            dataType: 'json',
+                                contentType: 'application/json',
+                    success: function (response) {
+                        debugger
+                        if (response.length > 0) {
+                            $scope.TalukaList = response;
+                                            //$('#Taluka').empty();
+                                            //$('#Taluka').append('<option value="">--Select--</option>');
+                                            //$('#Taluka').val("");
+                                            //$.each(response, function (key, value) {
+                                            //    $('#Taluka').append($("<option></option>").attr("value", key).text(value.Taluka));
+                                            //});
+
+                                            $("#DistrictName").html('');
+                                            $("#State").val(response[0].StateName);
+                                            $scope.StateModel = response[0].StateName;
+                                           // $("#Taluka").val(response[0].Taluka);
+                                            $scope.TalukaModel = response[0].Taluka;
+                                            $("#District").val(response[0].DistrictName);
+                                            $scope.DistrictModel = response[0].DistrictName;
+                                            window.sessionStorage.setItem("regDistrictDetail", JSON.stringify(response));
+                                            //debugger;
+                                            //$('#StateName').val(response.StateName);
+                                            //$('#StateId').val(response.StateId);
+                                            //$('#DistrictName').val(response.DistrictName);
+                                            //$('#DistrictId').val(response.DistrictId);
+                                            //$('#Tehsil').val(response.Tehsil);
+                                            //$('#CountryId').val(1);
+                                        }
+                                        else {
+                                            swal('', "data does not exists", 'warning');
+                                            return false;
+                                        }
+
+                                    },
+                error: function (er) {
+                    swal('', "An Error Occured", 'error');
+                    return false;
+                }
+            });
+
+                }
+            $("#AssociateId").blur(function () {
+                debugger
+                $.ajax({
+                    url: '/Home/GetMemberDetailsForFranchiseApplicationForm',
+                    type: "post",
+                    data: JSON.stringify({ "BID": $('#AssociateId').val() }),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        console.log(response);
+                        if (response.Status) {
+                            $scope.AssociateNameModel = response.PersonName;
+                            $scope.MobileNoModel = response.Mobile;
+                            $scope.EmailIdModel = response.EmailAddress;
+                            $scope.AddressModel = response.Cr_Address;
+                            $scope.PinCodeModel = response.Cr_PinCode;
+                            $scope.TalukaModel = response.Co_Tehsil;
+                            $scope.DistrictModel = response.District;
+                            $scope.StateModel = response.Cr_State;
+                            $("#AssociateName").val(response.PersonName);
+                            $("#MobileNo").val(response.Mobile);
+                            $("#EmailId").val(response.EmailAddress);
+                            $("#Address").val(response.Cr_Address);
+                            $("#PinCode").val(response.Cr_PinCode);
+                            $("#Taluka").val(response.Co_Tehsil);
+                            $("#District").val(response.District);
+                            $("#State").val(response.Cr_State);
+
+                        }
+                        else {
+                            alert(response.Message);
+                        }
+                    }
+                });
+            });
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+        $(document).ready(function () {
+
+
+            $('#SubmitBtn').click(function () {
+                if ($("#AssociateId").val() == undefined || $("#AssociateId").val() == "") {
+                    alert('Associate Id must be required');
+                    $("#AssociateId").focus();
+                    return false;
+                }
+
+
+                else if ($("#AssociateName").val() == undefined || $("#AssociateName").val() == "") {
+                    alert('Associate Name must be required');
+                    $("#AssociateName").focus();
+                    return false;
+                }
+                else if ($("#AppliedForPinCode").val() == undefined || $("#AppliedForPinCode").val() == "") {
+                    alert('Please enter applied pin code');
+                    $("#AppliedForPinCode").focus();
+                    return false;
+                }
+                else if ($("#AreaName").val() == undefined || $("#AreaName").val() == "") {
+                    alert('Please enter area name');
+                    $("#AreaName").focus();
+                    return false;
+                }
+
+                else if ($("#AppliedForPinCode").val() == undefined || $("#AppliedForPinCode").val() == '') {
+                    alert('Applied Pin Code must be required');
+                    $("#AppliedForPinCode").focus();
+                    return false;
+                }
+                else if ($("#AreaName").val() == undefined || $("#AreaName").val() == '') {
+                    alert('Area Name  must be required');
+                    $("#AreaName").focus();
+                    return false;
+                }
+
+
+                else if ($("#MobileNo").val() == undefined || $("#MobileNo").val() == '') {
+                    alert(' Mobile No. must be required');
+                    $("#MobileNo").focus();
+                    return false;
+                }
+                else if ($("#EmailId").val() == undefined || $("#EmailId").val() == '') {
+                    alert('Email Id must be required');
+                    $("#EmailId").focus();
+                    return false;
+                }
+                else if ($("#Address").val() == undefined || $("#Address").val() == '') {
+                    alert('Address must be required');
+                    $("#Address").focus();
+                    return false;
+                }
+                else if ($("#PinCode").val() == undefined || $("#PinCode").val() == '') {
+                    alert('Pin Code must be required');
+                    $("#PinCode").focus();
+                    return false;
+                }
+                else if ($("#Village").val() == undefined || $("#Village").val() == '') {
+                    alert(' Village must be required');
+                    $("#Village").focus();
+                    return false;
+                }
+                else if ($("#Taluka").val() == undefined || $("#Taluka").val() == '') {
+                    alert(' Taluka must be required');
+                    $("#Taluka").focus();
+                    return false;
+                }
+                else if ($("#District").val() == undefined || $("#District").val() == '') {
+                    alert(' District must be required');
+                    $("#District").focus();
+                    return false;
+                } else if ($("#State").val() == undefined || $("#State").val() == '') {
+                    alert(' State must be required');
+                    $("#State").focus();
+                    return false;
+                }
+                else if ($("#FranchiseName").val() == undefined || $("#FranchiseName").val() == '') {
+                    alert('FranchiseName must be required');
+                    $("#FranchiseName").focus();
+                    return false;
+                }
+                else if ($("#FranchiseRequestDocumentList_1__DocNumber").val() == undefined || $("#FranchiseRequestDocumentList_1__DocNumber").val() == '') {
+                    alert('Aadhar No. must be required');
+                    $("#FranchiseRequestDocumentList_1__DocNumber").focus();
+                    return false;
+                }
+                else if ($("#FranchiseRequestDocumentList_0__DocNumber").val() == undefined || $("#FranchiseRequestDocumentList_0__DocNumber").val() == '') {
+                    alert(' PAN No. must be required');
+                    $("#FranchiseRequestDocumentList_0__DocNumber").focus();
+                    return false;
+                }
+                else if ($("#FranchiseRequestBankList_0__AccountNo").val() == undefined || $("#FranchiseRequestBankList_0__AccountNo").val() == '') {
+                    alert(' Account No. must be required');
+                    $("#FranchiseRequestBankList_0__AccountNo").focus();
+                    return false;
+                }
+                else if ($("#FranchiseRequestBankList_0__BankName").val() == undefined || $("#FranchiseRequestBankList_0__BankName").val() == '') {
+                    alert(' Bank Name must be required');
+                    $("#FranchiseRequestBankList_0__BankName").focus();
+                    return false;
+                }
+                else if ($("#FranchiseRequestBankList_0__Branch").val() == undefined || $("#FranchiseRequestBankList_0__Branch").val() == '') {
+                    alert(' Branch must be required');
+                    $("#FranchiseRequestBankList_0__Branch").focus();
+                    return false;
+                }
+                else if ($("#FranchiseRequestBankList_0__IFSC_CODE").val() == undefined || $("#FranchiseRequestBankList_0__IFSC_CODE").val() == '') {
+                    alert(' IFSC Code must be required');
+                    $("#FranchiseRequestBankList_0__IFSC_CODE").focus();
+                    return false;
+                }
+                else if ($("#FranchiseRequestBankList_0__GSTNo").val() == undefined || $("#FranchiseRequestBankList_0__GSTNo").val() == '') {
+                    alert(' GSTNo. must be required');
+                    $("#FranchiseRequestBankList_0__GSTNo").focus();
+                    return false;
+                }
+
+                else {
+                    if ($("#_AadharRequired").val() == 1) {
+                        if ($("#FranchiseRequestDocumentList_1__DocFile")[0].files.length < 1) {
+                            alert('Aadhar document must be required');
+                            $("#FranchiseRequestDocumentList_1__DocFile").focus();
+                            return false;
+                        }
+                    }
+                    if ($("#_PANRequired").val() == 1) {
+                        if ($("#FranchiseRequestDocumentList_0__DocFile")[0].files.length < 1) {
+                            alert('PAN document must be required');
+                            $("#FranchiseRequestDocumentList_0__DocFile").focus();
+                            return false;
+                        }
+                    }
+                    var regex = /([A-Z]){5}([0-9]){4}([A-Z]){1}$/;
+                    if (!regex.test($("#FranchiseRequestDocumentList_0__DocNumber").val().toUpperCase())) {
+                        alert('Enter valid PAN No.');
+                        return true;
+                    }
+
+                    $("#F_Submit").click();
+                }
+            })
+        })
+
+        $('.selectdate').datepicker({});
+
+        $(function () {
+            //Initialize Select2 Elements
+            //$(".select2").select2();
+
+            //Datemask dd/mm/yyyy
+            $("#datemask").inputmask("dd/mm/yyyy", { "placeholder": "dd/mm/yyyy" });
+            //Datemask2 mm/dd/yyyy
+            $("#datemask2").inputmask("mm/dd/yyyy", { "placeholder": "mm/dd/yyyy" });
+            //Money Euro
+            $("[data-mask]").inputmask();
+
+            //Date range picker
+            $('#reservation').daterangepicker();
+            //Date range picker with time picker
+            $('#reservationtime').daterangepicker({ timePicker: true, timePickerIncrement: 30, format: 'MM/DD/YYYY h:mm A' });
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function (start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+                }
+            );
+        });
+    </script>
+    <script>
+        var savetab = 0;
+        var IsFirstStapComplete = 0;
+        var currentTab = 0; // Current tab is set to be the first tab (0)
+        var status = true;
+        showTab(currentTab); // Display the current tab
+        function showTab(n) {
+            //     // This function will display the specified tab of the form...
+            var x = document.getElementsByClassName("formtab");
+            x[n].style.display = "block";
+            //... and fix the Previous/Next buttons:
+
+
+            fixStepIndicator(n)
+
+            //... and run a function that will display the correct step indicator:
+
+        }
+
+
+
+
+        function Savedata(i) {
+
+
+
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("formtab");
+            // Exit the function if any field in the current tab is invalid:
+            if (i == 1 && !validateForm()) return false;
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            if (savetab == -1) {
+                savetab = 0
+            }
+            // Increase or decrease the current tab by 1:
+            savetab = savetab + i;
+            currentTab = currentTab + i;
+
+
+
+        }
+
+        function nextPrev(n) {
+            debugger;
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("formtab");
+            // Exit the function if any field in the current tab is invalid:
+            if (n == 1 && !validateForm()) return false;
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            currentTab = currentTab + n;
+
+            savetab = currentTab + n;
+            // if you have reached the end of the form...
+
+
+
+
+
+
+
+
+        }
+
+        function Prev(n) {
+            // This function will figure out which tab to display
+            var x = document.getElementsByClassName("formtab");
+            // Exit the function if any field in the current tab is invalid:
+            if (n == 1 && !validateForm()) return false;
+            // Hide the current tab:
+            x[currentTab].style.display = "none";
+            // Increase or decrease the current tab by 1:
+            currentTab = currentTab + n;
+            savetab = savetab + n;
+            // if you have reached the end of the form...
+            if (currentTab >= x.length) {
+                // ... the form gets submitted:
+                document.getElementById("regForm").submit();
+                return false;
+            }
+            showTab(currentTab);
+
+            // Otherwise, display the correct tab:
+        }
+
+
+        function validateForm() {
+            // This function deals with validation of the form fields
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("formtab");
+            y = x[currentTab].getElementsByTagName("input");
+            // A loop that checks every input field in the current tab:
+            /*for (i = 0; i < y.length; i++) {
+                // If a field is empty...
+                if (y[i].value == "") {
+                    // add an "invalid" class to the field:
+                    y[i].className += " invalid";
+                    // and set the current valid status to false
+                    valid = false;
+                }
+            }*/
+            // If the valid status is true, mark the step as finished and valid:
+            if (valid) {
+                document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+            return valid; // return the valid status
+        }
+
+        function fixStepIndicator(n) {
+            // This function removes the "active" class of all steps...
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            //... and adds the "active" class on the current step:
+
+        }
+    </script>
+    <script>
+
+
+        var ArrFamilyDetails = [];
+
+        function GetReferDetails() {
+            debugger;
+            $.ajax({
+                url: '/Home/GetReferDetails',
+                type: 'post',
+                dataType: 'json',
+                data: { Fk_SponserId: $("#InviteCode").val() },
+                success: function (data) {
+                    if (data != null) {
+                        debugger;
+                        $('#sponsorName').text(data.Name);
+                        $('#Fk_SponserId').val(data.Fk_SponserId);
+                    }
+                    else {
+                        swal('', "Error", 'error');
+                    }
+
+                }
+            });
+        }
+
+
+        function BindDistrictDetail() {
+            debugger
+            var data = JSON.parse(window.sessionStorage.getItem("regDistrictDetail"));
+            var district = $("#DistrictName").val();
+            if (data != null) {
+                sessionStorage.clear();
+                $.each(data, function (i, item) {
+                    if (item.District == district) {
+                        $("#StateName").val(item.State);
+                        $("#Tehsil").val(item.DistrictDetail[0].Taluka);
+                        $("#Zone").val(item.DistrictDetail[0].Zone);
+                        $('#CountryId').val(1);
+                    }
+
+                });
+
+            }
+
+        }
+    </script>
+
+    <script>
+        function UploadFile(obj, subdir) {
+            debugger
+        var Id = $(obj).attr("Id");
+        var data = new FormData();
+        var files = $("#" + Id).get(0).files;
+        if (files.length > 0) {
+            data.append("file", files[0]);
+            data.append("subdir", subdir);
+        }
+        else {
+            swal('',"Please select file to upload.",'warning');
+                      return false;
+        }
+        var extension = $("#" + Id).val().split('.').pop().toUpperCase();
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
+            swal('',"Invalid image file format.Only jpg,jpeg,png,bmp files are allow",'warning');
+            return false;
+        }
+        $.ajax({
+            url: '@Url.Action("Uploadfile", "Home")',
+            type: "POST",
+            processData: false,
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response != null || response != '') {
+                    if (response.result == "success") {
+                        debugger
+                        $("#" + Id + "Path").val("");
+                        if (Id=="CustAadharImage") {
+                             $("#HdnCustAadharImage").val(response.Path);
+                        }
+                        else if (Id=="SpouseAadharImages") {
+                              $("#HdnSpouseAadharImages").val(response.Path);
+                        }
+                        else if (Id=="ChildAadharImage") {
+                              $("#HdnChildAadharImage").val(response.Path);
+                        }
+                    }
+
+                }
+            },
+            error: function (er) {
+                swal('',"An Error Occured.",'error');
+            }
+        });
+    }
+         $(".only-numeric").bind("keypress", function (e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            if (!(keyCode >= 48 && keyCode <= 57)) {
+                //swal("", "Please enter numeric digit only", "warning");
+                return false;
+            }
+            return true;
+        });
+
+         $(".only-Alpha").bind("keypress", function (e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            if ((keyCode >= 48 && keyCode <= 57)) {
+                return false;
+            }
+            return true;
+        });
+
+
+         function ValidateAAdhar(id) {
+            var aadhar = document.getElementById(id).value;
+            var adharcardTwelveDigit = /^\d{12}$/;
+            var adharSixteenDigit = /^\d{16}$/;
+            if (aadhar != '') {
+                if (aadhar.match(adharcardTwelveDigit)) {
+                    return true;
+                }
+                else if (aadhar.match(adharSixteenDigit)) {
+                    return true;
+                }
+                else {
+                    swal('',"Please enter valid aadhar number",'warning');
+                   document.getElementById(id).value = "";
+                    return false;
+                }
+            }
+        }
+        function ValidatePAN(id) {
+            debugger;
+            var PanNo = document.getElementById(id).value;
+            if (PanNo.value != "") {
+                var panPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+                if (PanNo.search(panPattern) == -1) {
+                    swal('',"Please enter valid pan number",'warning');
+                   document.getElementById(id).value = "";
+                    return false;
+                }
+
+            }
+        }
+
+      function checkMobile(id) {
+            var charCode = document.getElementById(id).value;
+            var matchpattern = /^[6-9][0-9]{9}$/;
+            var val = matchpattern.test(charCode);
+
+            if (!val) {
+                swal('', "Please enter 10 digit mobile number",'warning');
+                document.getElementById(id).value = "";
+            }
+        }
+              function validateEmail() {
+            var reg = /^([A-Za-z0-9_\-\.])+\@@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,3})$/;
+            var emailField = $("#EmailId").val();
+            if (reg.test(emailField) == false) {
+                $("#EmailId").focus();
+                $("#EmailId").val('');
+                emailField.value = "";
+                swal('',"Please enter a valid email",'warning');
+                return false;
+            }
+
+        }
+
+        // Add the following code if you want the name of the file appear on select
+$(".custom-file-input").on("change", function() {
+  var fileName = $(this).val().split("\\").pop();
+  $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+});
+    </script>
+}

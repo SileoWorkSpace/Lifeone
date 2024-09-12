@@ -1,0 +1,71 @@
+API - It enables us to know, what changes will be required for uitlity API implementation  
+--------------------------------------------------------------------------------------
+Things to be Changed:
+--------------------------------------------------------------------------------------
+1) Change RegisterRoutes class
+
+
+     public static void RegisterRoutes(RouteCollection routes)
+        {
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{*url}", new { url = @".*\.asmx(/.*)?" });
+            routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+            );
+        }
+
+2) Change WebApiConfig class
+
+  public static void Register(HttpConfiguration config)
+        {
+            config.EnableCors();
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                name: "DefaultApi",
+               routeTemplate: "api/{controller}/{action}/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+            JsonMediaTypeFormatter jsonFormatter = config.Formatters.JsonFormatter;
+        }
+
+3) Inside the web.config file add Key and base Url
+
+   <!--Utility-->     
+    <add key="AeskeyUtility" value="Utility@#@132XYZ"/>
+    <add key="MBaseUrlAPI" value="https://rmtapi.rightmovetech.com/api/LifeOneeWebAPIV2/" />
+
+4) Change the "Connectionstring" Key name As per your defined name (inside the DbHelper Class )
+
+5) After Recharge Successfully done, we are sending an email to the customer. Please add the recharge.html file inside the Template folder (Your can write folder name as per your Project).
+   Open the DALSednEmail.cs Class and change the Template Path.
+    
+
+6) please check the DAL Folder where you will get the all DALClass. Please create the all Table and Proc accordingly. 
+------------------------------------------------------------------------------------------------------------------------
+All API names
+
+CheckCompanyWalletBalance
+CheckMemberWalletBalance
+PrePaidRecharge
+PostpaidRecharge
+DTH
+DataCard
+BroadBandProvider
+BroadBandVerify
+WaterBillPayment
+WaterBillVerification
+ElectricityBillPayment
+ElectricityVerification
+GasBillPayment
+GasPaymentVerification
+JioMobilePrepaidRecharge
+TakaSkyBooking
+GetAllProviderStateWise
+GetRecentRecharge
+ForFetchPlanPrepaid
+GetAllProvider
+Insurance
+InsuranceVerify
+and all Beneficiary API

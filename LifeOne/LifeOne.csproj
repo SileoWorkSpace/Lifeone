@@ -300,6 +300,7 @@
     <Compile Include="Areas\Admin\Controllers\PlanIncomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductMasterController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductStockController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UploadPrivacyPolicy.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadTermsandCondition.cs" />
     <Compile Include="Areas\Admin\Controllers\ProducTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SocialActivityController.cs" />
@@ -380,6 +381,7 @@
     <Compile Include="Models\AdminManagement\ADAL\DALAdminPlanIncome.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminImageUpload.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProductMaster.cs" />
+    <Compile Include="Models\AdminManagement\ADAL\DALAdminPrivacyPolicy.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminTermsCondition.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProductType.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProfile.cs" />
@@ -422,6 +424,7 @@
     <Compile Include="Models\AdminManagement\AEntity\AdminBusinessReportModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\AdminIncomeDetailsModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\AdminOrder.cs" />
+    <Compile Include="Models\AdminManagement\AEntity\AdminPrivacyPolicy.cs" />
     <Compile Include="Models\AdminManagement\AEntity\AssociateBusinessReportModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\ChangeProfile.cs" />
     <Compile Include="Models\AdminManagement\AEntity\DynamicUtilityModel.cs" />
@@ -515,6 +518,7 @@
     <Compile Include="Models\AdminManagement\AService\PerformanceLevelService.cs" />
     <Compile Include="Models\AdminManagement\AService\PlanIncomeService.cs" />
     <Compile Include="Models\AdminManagement\AService\ProductService.cs" />
+    <Compile Include="Models\AdminManagement\AService\PrivacyPolicyService .cs" />
     <Compile Include="Models\AdminManagement\AService\TermsConditionService.cs" />
     <Compile Include="Models\AdminManagement\AService\ProductTypeService.cs" />
     <Compile Include="Models\AdminManagement\AService\SendNotificationService.cs" />
@@ -754,6 +758,7 @@
     <Compile Include="Models\HomeManagement\HDAL\DALForgotPassword.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALLogin.cs" />
     <Compile Include="Models\HomeManagement\HEntity\NewsandAnnouncement.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\PrivacyandPolicy.cs" />
     <Compile Include="Models\HomeManagement\HEntity\UploadImageVideo.cs" />
     <Compile Include="Models\HomeManagement\HEntity\TermsCondition.cs" />
     <Compile Include="Models\HomeManagement\HEntity\Contact.cs" />
@@ -1563,6 +1568,8 @@
     <Content Include="Areas\Admin\Views\Master\UploadImage.cshtml" />
     <Content Include="Areas\Admin\Views\Master\UploadVideo.cshtml" />
     <Content Include="Areas\Admin\Views\AdminReport\PrintPayoutReportForBank.cshtml" />
+    <Content Include="Areas\Admin\Views\UploadPrivacyPolicy\UploadPrivacyPolicy.cshtml" />
+    <Content Include="Areas\Admin\Views\UploadPrivacyPolicy\UploadPrivacyPolicyList.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />
@@ -4702,6 +4709,7 @@
     <Content Include="Views\Home\Video.cshtml" />
     <Content Include="Views\Shared\_PartialMobileMenuLayout.cshtml" />
     <Content Include="Views\Home\NewsandAnnouncement.cshtml" />
+    <Content Include="Views\Home\Certificate.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

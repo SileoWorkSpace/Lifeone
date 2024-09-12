@@ -1,0 +1,151 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminIncomeType
+
+@{
+    ViewBag.Title = "ReferalIncomeIdWiseList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+@*<section class="content-header">
+        <div class="col-md-4">
+            <h1> <small>User's Referral Income Details</small> </h1>
+            <ol class="breadcrumb" style="clear:both;background:none; padding:0px;">
+                <li><a href="#-">Home</a></li>
+                <li><a href="#-">Admin</a></li>
+                <li class="active">User's Referral Income Details</li>
+            </ol>
+        </div>
+
+        <div class="col-md-4">
+            <div class="pbutton">
+                <div class="right text-right">
+                    <span>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>*@
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">User's Referral Income</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Reports</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">User's Referral Income Report</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4 class="header-title mt-0 mb-1">User's Referral Income Report</h4>
+                            </div>
+                            <div class="col-md-3 pull-right text-right" style="position:relative">
+
+                                <a class="btn btn-outline-warning small advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom">Search&nbsp;<i class="fa fa-search"></i></a>
+
+                            </div>
+                        </div>
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <div class="row">
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Login ID</label>
+                                                <input type="text" name="LoginID" id="LoginID" placeholder="" class="form-control">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label style="display:block;"></label>
+                                                <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                <a href="#" class="btn btn-danger" style="margin-top:1.5em;">Reset</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>#Sn.</th>
+                                        <th>Login</th>
+                                        <th>Name</th>
+                                        <th>Mobile</th>
+                                        <th>Credit Amount</th>
+                                        <th>Debit Amount</th>
+                                        <th>Remark</th>
+                                        <th>Commisson Date</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.Objlist.Count > 0)
+                                    {
+                                        int SNo = 0;
+                                        foreach (var item in Model.Objlist)
+                                        {
+
+                                            <tr>
+                                                <td data-title="#SN:">@(SNo = SNo + 1)</td>
+                                                <td data-title="Name:">@item.LoginId</td>
+                                                <td data-title="Name:">@item.Name</td>
+                                                <td data-title="Mobile:">@item.Mobile</td>
+                                                <td data-title="Email:">@item.CrAmount</td>
+                                                <td data-title="Email:">@item.DrAmount</td>
+                                                <td data-title="Email:">@item.Remark</td>
+                                                <td data-title="Email:">@item.CreatedDate</td>
+
+
+                                            </tr>
+                                        }
+                                    }
+
+                                </tbody>
+                            </table>
+                            <!--<dir-pagination-controls max-size="10"
+                                                     direction-links="true"
+                                                     boundary-links="true" class="pull-right">
+                            </dir-pagination-controls>-->
+
+
+                        </div>
+
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
