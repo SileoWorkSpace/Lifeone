@@ -125,8 +125,6 @@ namespace LifeOne.Models
         public DataSet GenerateShoppingToken()
         {
 
-
-
             DataSet ds = DBHelper.ExecuteQuery("GenerateToken");
 
             return ds;

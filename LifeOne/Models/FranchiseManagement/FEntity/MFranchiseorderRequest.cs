@@ -61,6 +61,7 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
         public string CustomerAddress { get; set; }
         public string CustomerLoginId { get; set; }
         public string CustomerGstNo { get; set; }
+        public string UpiNumber { get; set; }
     }
 
 

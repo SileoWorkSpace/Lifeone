@@ -877,6 +877,7 @@ namespace LifeOne.Models.FranchiseManagement.FDAL
                 queryParameters.Add("@AddedBy", _param.Fk_Memid);
                 queryParameters.Add("@PaidAmount", _param.PaidAmount);
                 queryParameters.Add("@GSTNo", _param.CustomerGstNo);
+                queryParameters.Add("@UpiNumber", _param.UpiNumber);
 
 
                 MSimpleString _iresult = DBHelperDapper.DAAddAndReturnModel<MSimpleString>("CustomerOrderByAdmin", queryParameters);

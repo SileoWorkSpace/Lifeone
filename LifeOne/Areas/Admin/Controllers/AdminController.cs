@@ -1989,7 +1989,6 @@ namespace LifeOne.Areas.Admin.Controllers
             return Json(res, JsonRequestBehavior.AllowGet);
             // return Redirect("/CustomerOrder");
         }
-
         public ActionResult OpenOrderByAdmin()
         {
             try
