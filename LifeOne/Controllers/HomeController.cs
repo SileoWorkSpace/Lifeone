@@ -2356,7 +2356,30 @@ namespace LifeOne.Controllers
         }
         public ActionResult FAQ()
         {
-            return View();
+            FAQModel obj = new FAQModel();
+            try
+            {
+                List<FAQModel> FAQList1 = new List<FAQModel>();
+                DataSet ds = obj.getFAQ();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        FAQModel FAQList = new FAQModel();                       
+                        FAQList.Question = ds.Tables[0].Rows[i]["Question"].ToString();          
+                        FAQList.Answer = ds.Tables[0].Rows[i]["Answer"].ToString();
+                        FAQList1.Add(FAQList);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(FAQList1);
+                    obj.dtDetails = dataTable;                   
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(obj);          
         }
     }
 }

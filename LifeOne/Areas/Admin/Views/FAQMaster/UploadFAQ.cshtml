@@ -1,4 +1,4 @@
-﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminUnit
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminFAQ
 @using LifeOne.Models.Manager;
 @{
     ViewBag.Title = "UploadFAQ";
@@ -42,16 +42,16 @@
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="ptitle">
-            <h4 class="mb-1 mt-0">Upload FAQ</h4>          
+            <h4 class="mb-1 mt-0">Upload FAQ</h4>
         </div>
         <div class="pbutton">
-            <div class="right text-right">              
+            <div class="right text-right">
                 @if (PermissionManager.IsActionPermit("FAQ Master", ViewOptions.FormSave))
                 {
                     <a href="" id="btnAdd" class="btn btn-success btn-sm" onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
                         <i class="fa fa-plus" aria-hidden="true"></i> Add New
                     </a>
-                 }
+                }
             </div>
         </div>
     </div>
@@ -61,9 +61,9 @@
                 <div class="box">
                     <div class="box-body">
                         <div class="row">
-                            <div class="col-md-9">                               
-                            </div>                          
-                        </div>                       
+                            <div class="col-md-9">
+                            </div>
+                        </div>
                         <div class="table-responsive fixTableHead">
                             <table class="table table-striped mb-0">
                                 <thead>
@@ -74,9 +74,21 @@
                                         <th class="text-right">Actions</th>
                                     </tr>
                                 </thead>
-                               <tbody>
-
-                               </tbody>
+                                @foreach (var item in Model.objList)
+                                {
+                                    <tr>
+                                        <td>@(count = count + 1)</td>
+                                        <td>@item.Question</td>
+                                        <td>@item.Answer</td>
+                                        <td class="text-right">
+                                            <button type="button" class="btn btn-primary btn-sm" onclick="return BindFAQ('@item.Pk_FAQId')"><i class="fa fa-pencil"></i></button>
+                                            @*<button type="button" class="btn btn-primary btn-sm" onclick="return OpenPopUp('@item.Pk_FAQId','@item.Question','@item.Answer')"><i class="fa fa-pencil"></i></button>*@
+                                            <a href="/FAQMaster/UnitDelete?Id=@item.Pk_FAQId" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+                                <tbody>
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -95,64 +107,88 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-
-                        <h4 class="modal-title">Add/Update FAQ Master</h4>
+                        <h4 class="modal-title">Add/Update FAQ</h4>
                     </div>
                     <div class="modal-body">
                         <form class="form-horizontal">
+                            @Html.HiddenFor(m => m.Pk_FAQId, new { @id = "Pk_FAQId" })
                             <div class="row">
-
-                                @*@Html.HiddenFor(m => m.Pk_UnitId, new { @id = "Pk_UnitId" })*@
-
-                                <div class="col-md-12">
-                                    <label>Question</label>
-                                    <textarea id="Question" name="Question" rows="4" cols="50"></textarea>
-                                    @*<input type="text" class="form-control" name="Question" id="question">*@
-                                </div>                              
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <label class="form-control-placeholder" for="Answer">Answer</label>
-                                    <input type="text" class="form-control" name="Answer" id="answer"/>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label class="text-right">Question</label>
+                                        <textarea  class="form-control" type="text" id="Question" name="Question" rows="5" cols="60"></textarea>
+                                    </div>
                                 </div>
                             </div>
-
+                            <div class="row">
+                                <div class="form-group">  
+                                    <div class="col-md-12">
+                                        <label>Answer</label>
+                                        <textarea class="form-control" type="text" id="Answer" name="Answer" rows="5" cols="60"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="modal-footer">
                         <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
-
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-secondary" onclick="return ResetPopup()" data-dismiss="modal">Close</button>
                     </div>
-
                 </div>
             </div>
-
         </div>
     }
-
 </div>
 <script>
     function ResetPopup() {
-        $("#Loginid").val("")
-        $('#Unit').val("");
-        $("#IsActive").prop("checked", false);
-        $("#hf_fk_memid").val("")
+        $('#Question').val("");
+        $('#Answer').val("");
+        $('#Pk_FAQId').val("");
         $('#Save').val('Save')
         $("#Save").show();
     }
-
-    function OpenPopUp(pk_id, name) {        
+    function OpenPopUp(pk_id, Question, Answer) {
         $('#Save').val('Update');
-        $('#Pk_UnitId').val(pk_id);
-        $('#Unit').val(name);
+        $('#Pk_FAQId').val(pk_id);
+        $('#Question').val(Question);
+        $('#Answer').val(Answer);
+        $('#myModal4').modal('show');
     }
-
     function validate() {
-        if ($('#Unit').val() == '' || $('#Unit').val() == null || $('#Unit').val() == undefined) {
-            $('#Unit').focus();
+        if ($('#Question').val() == '' || $('#Question').val() == null || $('#Question').val() == undefined) {
+            $('#Question').focus();
             return false;
         }
+        if ($('#Answer').val() == '' || $('#Answer').val() == null || $('#Answer').val() == undefined) {
+            $('#Answer').focus();
+            return false;
+        }
+    }
+    function BindFAQ(Pk_FAQId) {
+        debugger;
+        var pk_id = Pk_FAQId;
+
+        $.ajax({
+            url: '/Admin/FAQMaster/UpdateFAQ',
+            type: 'POST',
+            processData: false,
+            data: JSON.stringify({ Pk_FAQId: pk_id }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                debugger;
+                if (response != null && response != undefined) {
+                    $("#Question").val(response[0].Question);
+                    $("#Answer").val(response[0].Answer);
+                    $('#Save').val('Update');
+                    $('#Pk_FAQId').val(pk_id);
+                    $('#myModal4').modal('show');
+                }
+            },
+            error: function (er) {
+                alert('Error: ' + er.responseText);
+            }
+        });
     }
 </script>
 

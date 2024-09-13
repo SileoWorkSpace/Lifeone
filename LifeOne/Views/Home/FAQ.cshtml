@@ -1,5 +1,5 @@
 ﻿
-@model LifeOne.Models.HomeManagement.HEntity.Contact
+@model LifeOne.Models.HomeManagement.HEntity.FAQModel
 @{
     ViewBag.Title = "FAQ";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -74,29 +74,28 @@
     <div class="page-content">
         <section class="customer-section appear-animate py-40">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
+                @{
+                    if (Model != null)
+                    {
                         <h2>Regarding Uploading Of KYC Documents</h2>
-                        <div class="accordion">
-                            <div class="heading">Question 1: How I Can Complete My KYC In My Distributor Panel </div>
-                            <div class="contents active">
-                                Answer: For this you have to login through distributor login panel of Company's Website. After login, click at link Profile there you will find Edit Profile Section, kindly fill all the details as per mentioned in your KYC Documents. After that now click the link KYC and here you can upload all the documents through same page. It takes 24 hours to verify your documents and get it approved. Post Approval when you relogin the distributor panel then you see at your home page there is no KYC Pendency reflecting now. Still if you feel any assistance then kindly get in touch with your Active Upline or Company's Staff to help you on this. We will be happy to help you.
-                            </div>
-
-                            <div class="heading">Accordion #2</div>
-                            <div class="contents">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </div>
-
-                            <div class="heading">Accordion #3</div>
-                            <div class="contents">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore magna aliqua.
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        if (Model.dtDetails != null)
+                        {
+                            for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
+                            {
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="accordion">
+                                            <div class="heading">Question @(i+1): @Model.dtDetails.Rows[i]["Question"].ToString() </div>
+                                            <div class="contents active">
+                                                Answer:@Model.dtDetails.Rows[i]["Answer"].ToString()
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    }
+                }
             </div>
         </section>
     </div>

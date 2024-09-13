@@ -240,6 +240,10 @@
                                         {
                                             <li><a href="/UploadPrivacyPolicyList">Upload Privacy Policy</a></li>
                                         }
+                                        @if (PermissionManager.IsViewPermit("Upload FAQ"))
+                                        {
+                                            <li><a href="/UploadFAQ">Upload FAQ</a></li>
+                                        }
                                         @if (PermissionManager.IsViewPermit("Upload Image"))
                                         {
                                             <li><a href="/Admin-UploadImage">Upload Image</a></li>

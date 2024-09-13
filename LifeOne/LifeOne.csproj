@@ -387,6 +387,7 @@
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProductType.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProfile.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminReports.cs" />
+    <Compile Include="Models\AdminManagement\ADAL\DALAdminFAQ.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminUnit.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminUtility.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALBusinessReport.cs" />
@@ -450,6 +451,7 @@
     <Compile Include="Models\AdminManagement\AEntity\MAdminProfile.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminReports.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminStockManagement.cs" />
+    <Compile Include="Models\AdminManagement\AEntity\MAdminFAQ.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminUnit.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminUntility.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminUploadKyc.cs" />
@@ -528,6 +530,7 @@
     <Compile Include="Models\AdminManagement\AService\SupportService.cs" />
     <Compile Include="Models\AdminManagement\AService\SupportTypeService.cs" />
     <Compile Include="Models\AdminManagement\AService\TransactionService.cs" />
+    <Compile Include="Models\AdminManagement\AService\FAQService.cs" />
     <Compile Include="Models\AdminManagement\AService\UnitService.cs" />
     <Compile Include="Models\AdminManagement\AService\UplineService.cs" />
     <Compile Include="Models\AdminManagement\AService\UtilityService.cs" />
@@ -758,6 +761,7 @@
     <Compile Include="Models\HomeManagement\HDAL\DALCustomerRegistration.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALForgotPassword.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALLogin.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\FAQModel.cs" />
     <Compile Include="Models\HomeManagement\HEntity\NewsandAnnouncement.cs" />
     <Compile Include="Models\HomeManagement\HEntity\PrivacyandPolicy.cs" />
     <Compile Include="Models\HomeManagement\HEntity\UploadImageVideo.cs" />
