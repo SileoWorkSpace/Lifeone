@@ -673,8 +673,6 @@ namespace LifeOne.Areas.Admin.Controllers
         }
         #endregion
 
-
-
         public ActionResult TopupByAdmin()
         {
             if (!PermissionManager.IsActionPermit("Topup", ViewOptions.FormView))

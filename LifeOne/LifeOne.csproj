@@ -326,6 +326,7 @@
     <Compile Include="Areas\Associate\Controllers\BuyPackageController.cs" />
     <Compile Include="Areas\Associate\Controllers\EWalletRequestController.cs" />
     <Compile Include="Areas\Associate\Controllers\PremimumclubController.cs" />
+    <Compile Include="Areas\Associate\Controllers\TopupByAssociateController.cs" />
     <Compile Include="Areas\Associate\Controllers\TreeController.cs" />
     <Compile Include="Areas\Franchise\Controllers\ChildFranchiseController.cs" />
     <Compile Include="Areas\Franchise\Controllers\FranchiseBusinessReportController.cs" />
@@ -1576,6 +1577,7 @@
     <Content Include="Areas\Admin\Views\UploadPrivacyPolicy\UploadPrivacyPolicy.cshtml" />
     <Content Include="Areas\Admin\Views\UploadPrivacyPolicy\UploadPrivacyPolicyList.cshtml" />
     <Content Include="Areas\Admin\Views\FAQMaster\UploadFAQ.cshtml" />
+    <Content Include="Areas\Associate\Views\TopupByAssociate\TopupbyAssociate.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />

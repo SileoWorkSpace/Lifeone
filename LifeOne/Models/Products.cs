@@ -44,6 +44,7 @@ namespace LifeOne.Models
         public string TotalAmount { get; set; }
         public string OfferedPrice { get; set; }
         public string DP { get; set; }
+        public string PV { get; set; }
         public string MRP { get; set; }
         public string SalesPrice { get; set; }
         public string Url { get; set; }

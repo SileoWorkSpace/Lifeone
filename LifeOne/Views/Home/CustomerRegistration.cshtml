@@ -5,6 +5,37 @@
 }
 
 <style>
+   .form-group {
+    margin-bottom: 1.5rem; /* Adds space between form group elements */
+}
+
+.control-label {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.custom_radio {
+    display: flex;
+    gap: 20px; /* Space between the radio options */
+}
+
+.radio_option {
+    display: inline-flex;
+    align-items: center;
+}
+
+.radio_option input[type="radio"] {
+    margin-right: 8px; /* Space between radio button and label */
+}
+
+@@media (max-width: 768px) {
+    .custom_radio {
+        flex-direction: column; /* Stack the radio buttons vertically on smaller screens */
+        gap: 10px;
+    }
+}
+
     input {
         -webkit-appearance: auto;
     }

@@ -430,6 +430,7 @@ namespace LifeOne.Controllers
                     listdata1.MRP = dataSet.Tables[0].Rows[i]["MRP"].ToString();
                     listdata1.OfferedPrice = dataSet.Tables[0].Rows[i]["OfferedPrice"].ToString();
                     listdata1.ReviewCount = dataSet.Tables[0].Rows[i]["ReviewCount"].ToString();
+                    listdata1.PV = dataSet.Tables[0].Rows[i]["BV"].ToString();
                     listdata1.TotalRecords = int.Parse(dataSet.Tables[0].Rows[i]["TotalRecords"].ToString());
                     productsList1.Add(listdata1);
                 }
