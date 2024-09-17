@@ -1565,7 +1565,9 @@
     <Content Include="Areas\Admin\Views\Master\UploadImage.cshtml" />
     <Content Include="Areas\Admin\Views\Master\UploadVideo.cshtml" />
     <Content Include="Areas\Admin\Views\AdminReport\PrintPayoutReportForBank.cshtml" />
-    <Content Include="Areas\Associate\Views\AssociatePlanIncome\Request.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociatePlanIncome\EWalletRequest.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociatePlanIncome\EWalletList.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\EWalletRequestList.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />

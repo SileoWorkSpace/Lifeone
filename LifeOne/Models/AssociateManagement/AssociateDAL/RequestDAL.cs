@@ -81,5 +81,80 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                 throw ex;
             }
         }
+
+        public List<AssosiateRequest> getRequest()
+        {
+            try
+            {
+                DataSet ds = DBHelper.ExecuteQuery("GetEwallet");
+                List<AssosiateRequest> lst = new List<AssosiateRequest>();
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in ds.Tables[0].Rows)
+                        {
+                            AssosiateRequest assosiateRequest = new AssosiateRequest();
+                            assosiateRequest.RequestId = dr["Pk_RequestId"].ToString();
+                            assosiateRequest.Fk_MemId = Convert.ToInt32(dr["FK_MemID"].ToString());
+                            assosiateRequest.Amount = Convert.ToDecimal(dr["Amount"].ToString());
+                            assosiateRequest.PaymentMode = dr["PaymentMode"].ToString();
+                            assosiateRequest.TransactionNo = dr["TransactionNo"].ToString();
+                            assosiateRequest.Date = dr["Tra_Date"].ToString();
+                            assosiateRequest.RequestDate = dr["Req_Date"].ToString();
+                            assosiateRequest.LoginId = dr["LoginId"].ToString();
+                            assosiateRequest.Status = dr["Status"].ToString();
+                            lst.Add(assosiateRequest);
+                        }
+                    }
+                   
+                }
+                return lst;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet Approove(AssosiateRequest assosiateRequest)
+        {
+              
+            try
+            {
+               
+                SqlParameter[] para = {
+                new SqlParameter("@Pk_RequestId",assosiateRequest.RequestId),
+                new SqlParameter("@Login_id",assosiateRequest.LoginId),
+                new SqlParameter("@CreditAmount",assosiateRequest.Amount),
+                new SqlParameter("@OpCode",assosiateRequest.OpCode)
+                };
+                DataSet ds = DBHelper.ExecuteQuery("Request_UpdateStatus", para);
+                return ds;
+ 
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public DataSet Declined(AssosiateRequest assosiateRequest)
+        {
+             
+            try
+            {
+                SqlParameter[] para = {
+               new SqlParameter("@Pk_RequestId",assosiateRequest.RequestId),
+                new SqlParameter("@OpCode",assosiateRequest.OpCode)
+                };
+                DataSet ds = DBHelper.ExecuteQuery("Request_UpdateStatus", para);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

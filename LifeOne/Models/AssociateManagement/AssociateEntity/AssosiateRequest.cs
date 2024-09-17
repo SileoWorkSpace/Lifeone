@@ -11,7 +11,11 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
     {
         
             public string LoginId { get; set; }                    
+            public string RequestId { get; set; }                    
+            public string RequestDate { get; set; }                    
             public string Name { get; set; }                   
+            public string Status { get; set; }                   
+            public string Amount1 { get; set; }               
             public decimal Amount { get; set; }               
             public string PaymentMode { get; set; }           
             public string ChequeDD_No { get; set; }           
@@ -27,7 +31,10 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
             public string Code { get; set; }            
             public string Message { get; set; }            
             public int Pk_BankId { get; set; }                   
-            public int AddedBy { get; set; }                   
-    
+            public int Fk_MemId { get; set; }                   
+            public int AddedBy { get; set; }   
+            public List<AssosiateRequest> lstAssosiateRequest { get; set; }
+
+
     }
 }
