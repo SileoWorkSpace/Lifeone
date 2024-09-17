@@ -1855,7 +1855,7 @@ namespace LifeOne.Areas.Admin.Controllers
         {
             ResponseUploadImage _result = new ResponseUploadImage();
             try
-            {
+            {               
                 obj.OpCode = 1;
                 obj.CreatedBy = int.Parse(SessionManager.Fk_MemId.ToString());
                 _result = _objServices.SaveVideo(obj);

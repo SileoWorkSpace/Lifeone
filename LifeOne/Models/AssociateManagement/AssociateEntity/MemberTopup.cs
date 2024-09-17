@@ -42,6 +42,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public string PayoutNo { get; set; }
         public string TopupRemark { get; set; }
         public string UPINumber { get; set; }
+        public long AddedBy {get; set; }
 
         public DataTable TopUpMemberByAdmin(MemberTopup obj)
         {
@@ -71,18 +72,10 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
             {
             new SqlParameter("@FK_MemId",obj.FK_MemId),
             new SqlParameter("@FK_PackageId",obj.FK_PackageId),
-            new SqlParameter("@UpdatedBy",obj.UpdatedBy),
-            new SqlParameter("@PaidAmount",obj.PaidAmount),
-            new SqlParameter("@BankName",obj.BankName),
-            new SqlParameter("@ChequeDDNo",obj.ChequeDDNo),
-            new SqlParameter("@ChequeDDDate",obj.ChequeDDDate),
-            new SqlParameter("@BankBranch",obj.BankBranch),
-            new SqlParameter("@TopupDate",obj.TopupDate),
-            new SqlParameter("@PaymentMode",obj.PaymentMode),
-            new SqlParameter("@TopupRemark",obj.TopupRemark)
+            new SqlParameter("@AddedBy",obj.AddedBy),            
             };
 
-            DataTable dt = API.DAL.DBHelper.ExecuteQuery("TopUpByAssociate", para).Tables[0];
+            DataTable dt = API.DAL.DBHelper.ExecuteQuery("TopUp", para).Tables[0];
             return dt;
         }
     }

@@ -1,81 +1,78 @@
 ﻿@model LifeOne.Models.AssociateManagement.AssociateEntity.MemberTopup
- @{
-        ViewBag.Title = "TopupbyAssociate";
-        Layout = "~/Views/Shared/_AssociateLayout.cshtml";
-  }
-    <style>
-        #alertBoxx {
-            position: relative;
-            z-index: 1;
-        }
-    </style>
-    <section class="content">
-        @using (Html.BeginForm("TopupbyAssociate", "TopupByAssociate", FormMethod.Post, new { @id = "form1" }))
-         {
-            <div class="row page-titles">
-                <div class="ptitle">
-                    <h3 class="text-themecolor">TopUp</h3>
-                </div>
-                <div class="psearch">
-                    <div class="input-group">
+@{
+    ViewBag.Title = "TopupbyAssociate";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+<style>
+    #alertBoxx {
+        position: relative;
+        z-index: 1;
+    }
+</style>
+<div class="content-wrapper-before"></div>
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0 text-white">TopUp</h4>            
+        </div>
+    </div>
+    
+    @using (Html.BeginForm("TopupbyAssociate", "TopupByAssociate", FormMethod.Post, new { @id = "form1" }))
+    {        
 
+        <div class="row">
+            @if (ViewBag.Alert != null)
+            {
+                <div class="col-md-12" id="alertBoxx">
+                    <div class="alert  alert-dismissible fade show" style="background-color:lightgreen;border-color:#faebcc;" role="alert">
+                        <strong> @Html.Raw(ViewBag.Alert)</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
                 </div>
-            </div>
-
-            <div class="row">
-                @if (ViewBag.Alert != null)
-                {
-                    <div class="col-md-12" id="alertBoxx">
-                        <div class="alert  alert-dismissible fade show" style="background-color:lightgreen;border-color:#faebcc;" role="alert">
-                            <strong> @Html.Raw(ViewBag.Alert)</strong>
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
+            }
+        </div>
+        <div class="box box-info">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-md-2">
                     </div>
-                 }
-            </div>
-            <div class="box box-info">
-                <div class="box-body">
-                    <div class="row">
-                        <div class="col-md-2">
-                        </div>
-                        <div class="col-md-8">
-                            <div class="card card-outline-info">
-                                <div class="card-body">
+                    <div class="col-md-8">
+                        <div class="card card-outline-info">
+                            <div class="card-body">
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group label-floating is-empty">
-                                                <label class="form-control-placeholder" for="name">Login Id</label>
-                                                <input type="text" class="form-control clearIniFields" name="LoginId" placeholder="Enter Login Id" id="txtLoginId" required />
-                                                <span id="SpnLogInId" style="color:green"></span>
-                                                <input type="hidden" class="clearIniFields" id="hdnMemId" name="FK_MemId" />
-                                                <input type="hidden" class="clearIniFields" id="hdnTemppermanent" name="TempPermanent" />
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group label-floating is-empty">
-                                                <label class="form-control-placeholder" for="name">Package</label>
-                                                @Html.DropDownListFor(m => m.FK_PackageId, new SelectList(ViewBag.ddlPackageList, "Value", "Text"), new { @class = "form-control clearIniFields", @onchange = "getPackageAmount()", @required = "required" })
-                                                <input type="hidden" id="hdnPackageName" name="ProductName" />
-                                            </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Login Id</label>
+                                            <input type="text" class="form-control clearIniFields" name="LoginId" placeholder="Enter Login Id" id="txtLoginId" required />
+                                            <span id="SpnLogInId" style="color:green"></span>
+                                            <input type="hidden" class="clearIniFields" id="hdnMemId" name="FK_MemId" />
+                                            <input type="hidden" class="clearIniFields" id="hdnTemppermanent" name="TempPermanent" />
                                         </div>
                                     </div>
 
-                                    <div class="row">
-                                        <div class="col-md-12">
-                                            <div class="form-group label-floating is-empty">
-                                                <label class="form-control-placeholder" for="name">Package Amount</label>
-                                                <input type="text" class="form-control clearIniFields" placeholder="Enter Package Amount" name="PaidAmount" id="txtPaidAmount" onkeypress="return onlyNos(event,this);" autocomplete="off" required readonly="readonly" />
-                                            </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Package</label>
+                                            @Html.DropDownListFor(m => m.FK_PackageId, new SelectList(ViewBag.ddlPackageList, "Value", "Text"), new { @class = "form-control clearIniFields", @onchange = "getPackageAmount()", @required = "required" })
+                                            <input type="hidden" id="hdnPackageName" name="ProductName" />
                                         </div>
                                     </div>
-                                    <div class="row">
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Package Amount</label>
+                                            <input type="text" class="form-control clearIniFields" placeholder="Enter Package Amount" name="PaidAmount" id="txtPaidAmount" onkeypress="return onlyNos(event,this);" autocomplete="off" required readonly="readonly" />
+                                        </div>
+                                    </div>
+                                </div>
+                                @*<div class="row">
                                         <div class="col-md-12">
                                             <div class="form-group label-floating is-empty">
                                                 <label class="form-control-placeholder" for="name">Payment Mode</label>
@@ -120,7 +117,7 @@
                                                 <label class="form-control-placeholder" for="name">UPI Number</label>
                                                 <input type="text" class="form-control clearIniFields" name="UPINumber" id="txtUPINumber" onkeypress="return onlyNos(event,this);" />
                                             </div>
-                                        </div>                                       
+                                        </div>
                                     </div>
 
                                     <div class="row" style="display:none;">
@@ -130,26 +127,26 @@
                                                 @Html.TextAreaFor(m => m.TopupRemark, new { @class = "form-control clearIniFields", @maxlength = "500" })
                                             </div>
                                         </div>
+                                    </div>*@
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="button" name="Save" class="btn btn-fill btn-success" onclick="onValidation()" style="display:@ViewBag.add;" value="Submit" />
+                                        <input type="submit" id="Save" name="Save" class="btn btn-fill btn-success" style="display:none;" value="Submit" />
                                     </div>
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <input type="button" name="Save" class="btn btn-fill btn-success" onclick="onValidation()" style="display:@ViewBag.add;" value="Submit" />
-                                            <input type="submit" id="Save" name="Save" class="btn btn-fill btn-success" style="display:none;" value="Submit" />
-                                        </div>
-                                    </div>
-
                                 </div>
+
                             </div>
                         </div>
+                    </div>
 
-                        <div class="col-md-2">
-                            <span id="dbResponse" style="color:red"></span>
-                        </div>
+                    <div class="col-md-2">
+                        <span id="dbResponse" style="color:red"></span>
                     </div>
                 </div>
             </div>
-        }
-    </section>
+        </div>
+    }
+</div>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -158,7 +155,7 @@
                 dateFormat: 'dd/mm/yy',
                 changeMonth: true,
                 changeYear: true,
-            });           
+            });
             $(".datepicker-all").datepicker({
                 maxDate: '0',
                 yearRange: "-100:",
@@ -287,46 +284,45 @@
                 $('#FK_PackageId').focus();
                 return false;
             }
-
             if ($('#txtPaidAmount').val() == 0 || $('#txtPaidAmount').val().trim() == "") {
                 alert('Please enter package amount');
                 $('#txtPaidAmount').focus();
                 return false;
             }
 
-            if ($('#ddlPaymentMode').val() == 0) {
-                alert('Please select payment mode');
-                $('#ddlPaymentMode').focus();
-                return false;
-            }
+            //if ($('#ddlPaymentMode').val() == 0) {
+            //    alert('Please select payment mode');
+            //    $('#ddlPaymentMode').focus();
+            //    return false;
+            //}
 
-            if ($('#ddlPaymentMode').val() != "Cash" && $('#ddlPaymentMode').val() != "Free" && $('#ddlPaymentMode').val() != "UPI") {
-                if ($('#txtChequeDDNo').val().trim() == "") {
-                    alert('Please enter Cheque/DD/RTGS/NEFT No.');
-                    $('#txtChequeDDNo').focus();
-                    return false;
-                }
-                if ($('#txtBankName').val().trim() == "") {
-                    alert('Please enter BankName');
-                    $('#txtBankName').focus();
-                    return false;
-                }
-                if ($('#mdate1').val().trim() == "") {
-                    alert('Please enter Date');
-                    $('#mdate1').focus();
-                    return false;
-                }
-                $('#Save').trigger('click');
-                return false;
-            }
-            if ($('#ddlPaymentMode').val() == "UPI") {
-                debugger;
-                if ($('#txtUPINumber').val() == 0 || $('#txtUPINumber').val().trim() == "") {
-                    alert('Please enter UPI No.');
-                    $('#txtUPINumber').focus();
-                    return false;
-                }
-            }
+            //if ($('#ddlPaymentMode').val() != "Cash" && $('#ddlPaymentMode').val() != "Free" && $('#ddlPaymentMode').val() != "UPI") {
+            //    if ($('#txtChequeDDNo').val().trim() == "") {
+            //        alert('Please enter Cheque/DD/RTGS/NEFT No.');
+            //        $('#txtChequeDDNo').focus();
+            //        return false;
+            //    }
+            //    if ($('#txtBankName').val().trim() == "") {
+            //        alert('Please enter BankName');
+            //        $('#txtBankName').focus();
+            //        return false;
+            //    }
+            //    if ($('#mdate1').val().trim() == "") {
+            //        alert('Please enter Date');
+            //        $('#mdate1').focus();
+            //        return false;
+            //    }
+            //    $('#Save').trigger('click');
+            //    return false;
+            //}
+            //if ($('#ddlPaymentMode').val() == "UPI") {
+            //    debugger;
+            //    if ($('#txtUPINumber').val() == 0 || $('#txtUPINumber').val().trim() == "") {
+            //        alert('Please enter UPI No.');
+            //        $('#txtUPINumber').focus();
+            //        return false;
+            //    }
+            //}
             $('#Save').trigger('click');
         }
 

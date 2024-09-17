@@ -21,6 +21,7 @@ namespace LifeOne.Areas.Associate.Controllers
         }         
         public ActionResult TopupbyAssociate()
         {
+            MemberTopup para = new MemberTopup();
             PackageMaster model = new PackageMaster();
             ViewBag.ddlPackageList = BindPckageMaster.BindPackageMasterAssociate();
             return View();            
@@ -29,19 +30,14 @@ namespace LifeOne.Areas.Associate.Controllers
         public ActionResult TopupbyAssociate(MemberTopup obj)
         {
             MemberTopup para = new MemberTopup();
-            para.FK_MemId = obj.FK_MemId;
+            para.FK_MemId = SessionManager.AssociateFk_MemId;
             para.FK_PackageId = obj.FK_PackageId;
             para.PaidAmount = obj.PaidAmount;
-            para.UpdatedBy = SessionManager.Fk_MemId.ToString();
-            para.BankName = string.IsNullOrEmpty(obj.BankName) ? null : (obj.BankName);
-            para.BankBranch = string.IsNullOrEmpty(obj.BankBranch) ? null : (obj.BankBranch);
-            para.ChequeDDNo = string.IsNullOrEmpty(obj.ChequeDDNo) ? null : (obj.ChequeDDNo);
-            para.ChequeDDDate = string.IsNullOrEmpty(obj.ChequeDDDate) ? null : DALCommon.ConvertToSystemDate(obj.ChequeDDDate, "dd/MM/yyyy");
-            para.PaymentMode = obj.PaymentMode;
-
+            para.AddedBy = SessionManager.AssociateFk_MemId;  
+            
             DataTable dt = obj.TopUpMemberByAssociate(para);
             if (dt.Rows.Count > 0)
-            {
+            {              
                 if (dt.Rows[0]["Msg"].ToString() == "1")
                 {
                     ViewBag.Alert = "You are upgraded successfully";
@@ -59,7 +55,7 @@ namespace LifeOne.Areas.Associate.Controllers
             {
                 ViewBag.Alert = "Error!!!";
             }
-            ViewBag.ddlPackageList = BindPckageMaster.BindPackageMasterAssociate();
+          ViewBag.ddlPackageList = BindPckageMaster.BindPackageMasterAssociate();
             return View();
         }
     }
