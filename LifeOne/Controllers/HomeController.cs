@@ -2277,7 +2277,7 @@ namespace LifeOne.Controllers
         public ActionResult Video()
         {
             UploadImageVideo obj = new UploadImageVideo();
-            try
+            try 
             {
                 List<UploadImageVideo> ImageList1 = new List<UploadImageVideo>();
                 DataSet ds = obj.getVideogallery();
@@ -2287,7 +2287,7 @@ namespace LifeOne.Controllers
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
                         UploadImageVideo ImageList = new UploadImageVideo();
-                        ImageList.Videolink = ds.Tables[0].Rows[i]["Videolink"].ToString();
+                        ImageList.Videolink = ds.Tables[0].Rows[i]["Videolink"].ToString();                       
                         ImageList1.Add(ImageList);
                     }
                     DataTable dataTable = DALCommon.ToDataTable(ImageList1);
@@ -2301,7 +2301,7 @@ namespace LifeOne.Controllers
 
             return View(obj);
             //  return View();
-        }
+        }       
         [ChildActionOnly]
         public ActionResult MobileMenu()
         {

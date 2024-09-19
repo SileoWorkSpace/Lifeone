@@ -113,7 +113,6 @@ namespace LifeOne.Areas.Associate.Controllers
                 return Redirect("MyDirect");
             }
         }
-
         public ActionResult MyDownline(int? Page, string FK_MemId, AssociateTeam team,string Leg, string FromDate, string ToDate)
         {
             int TotalRecords = 0;
@@ -139,8 +138,10 @@ namespace LifeOne.Areas.Associate.Controllers
                 Session["MemId"] = Fk_MemId;
             }
             ViewBag.PackageList = DALBindCommonDropdown.PackageBindDropdown(16, 0);
-            team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
-            team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");            
+            team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : team.FromDate;
+            team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : team.ToDate;
+            //team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
+            //team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");            
             team.Downlines = AssociateTeamService.GetDownlineList(Fk_MemId, team.SearchLoginId,team.Status, team.FromDate, team.ToDate, Page, PageSize,Leg,team.Pk_PackageID);
             //ViewBag.Email = team.Downlines.Select(x => x.Email).ToList();
             ViewBag.Email = DALBindCommonDropdown.BindDropdown(13, Fk_MemId);

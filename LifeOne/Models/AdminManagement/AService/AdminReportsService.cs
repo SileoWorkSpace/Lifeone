@@ -377,12 +377,7 @@ namespace LifeOne.Models.AdminManagement.AService
                 return _obj;
             }
         }
-
-
-
-        
-
-
+       
         public static MPayoutReport GetDownlinePayoutReportService(int? page, MPayoutReport _obj)
         {
             try
