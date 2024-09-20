@@ -2780,8 +2780,42 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                id = UrlParameter.Optional
            },
            new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "EWallet_RequestList",
+           "EWallet_RequestList/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Admin",
+               action = "EWalletRequestList",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+          "Approved_EWallet",
+          "Approved_EWallet/{action}/{id}",
+          new
+          {
+              area = "Admin",
+              controller = "Admin",
+              action = "Approved",
+              id = UrlParameter.Optional
+          },
+          new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+          "Declined_EWallet",
+          "Declined_EWallet/{action}/{id}",
+          new
+          {
+              area = "Admin",
+              controller = "Admin",
+              action = "Declined",
+              id = UrlParameter.Optional
+          },
+          new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 
     }
+    
 }
