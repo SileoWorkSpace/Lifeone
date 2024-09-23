@@ -6993,14 +6993,14 @@ input[type="radio"] ~ label:after {
             transition: transform 0.4s;
         }
 
-    .accordion {
+  /*  .accordion {
         overflow: hidden;
-    }
+    }*/
 
-        .accordion .collapsed,
+     /*   .accordion .collapsed,
         .accordion .expanding {
             display: none;
-        }
+        }*/
 
     .card-header {
         text-transform: capitalize;
