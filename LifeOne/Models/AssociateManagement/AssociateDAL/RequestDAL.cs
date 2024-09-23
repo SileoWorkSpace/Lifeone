@@ -82,11 +82,15 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
             }
         }
 
-        public List<AssosiateRequest> getRequest()
+        public List<AssosiateRequest> getRequest(AssosiateRequest assosiate)
         {
+            
             try
             {
-                DataSet ds = DBHelper.ExecuteQuery("GetEwallet");
+                SqlParameter[] para ={ 
+                new SqlParameter("@Fk_MemId", assosiate.LoginId)
+                };
+                DataSet ds = DBHelper.ExecuteQuery("GetEwallet",para);
                 List<AssosiateRequest> lst = new List<AssosiateRequest>();
                 if (ds != null)
                 {

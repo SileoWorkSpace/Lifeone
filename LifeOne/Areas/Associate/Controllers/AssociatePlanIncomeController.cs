@@ -59,11 +59,12 @@ namespace LifeOne.Areas.Associate.Controllers
         [HttpGet]
         public ActionResult EWalletList()
         {
-
+            
             Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity = new Models.AssociateManagement.AssociateEntity.AssosiateRequest();
             Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
-           
-            Entity.lstAssosiateRequest = para.getRequest();
+            Entity.LoginId = Convert.ToString(Session["AssociateFk_MemId"] ?? "0");
+
+            Entity.lstAssosiateRequest = para.getRequest(Entity);
             return View(Entity);
             
         }

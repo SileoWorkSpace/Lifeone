@@ -2338,8 +2338,8 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity = new Models.AssociateManagement.AssociateEntity.AssosiateRequest();
                 Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
-
-                Entity.lstAssosiateRequest = para.getRequest();
+                //Entity.LoginId = Convert.ToString(Session["LoginId"] ?? "0");
+                Entity.lstAssosiateRequest = para.getRequest(Entity);
                 return View(Entity);
             }
             catch (Exception ex)

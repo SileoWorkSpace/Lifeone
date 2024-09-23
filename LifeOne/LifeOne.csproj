@@ -149,9 +149,6 @@
     <Reference Include="Select.HtmlToPdf">
       <HintPath>C:\Users\ABCD\Downloads\SGDocument (2)\SGDocument\SGDocument\Select.HtmlToPdf.dll</HintPath>
     </Reference>
-    <Reference Include="SGCareWeb">
-      <HintPath>C:\Users\ABCD\Downloads\SGDocument (2)\SGDocument\SGDocument\SGCareWeb.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
