@@ -18,6 +18,7 @@ namespace LifeOne.Models.HomeManagement.HEntity
         public int CreatedBy { get; set; }
         public string Videolink { get; set; }
         public DataTable dtDetails { get; set; }
+        public string ConvertToEmbedLink { get; set; }
         public int OpCode { get; set; }
 
         public List<UploadImageVideo>ImageList { get; set; }
@@ -53,11 +54,11 @@ namespace LifeOne.Models.HomeManagement.HEntity
                 throw ex;
             }
             return ds;
-        }
+        }       
     }
     public class UploadImageVideoResponse
     {
         public string Flag { get; set; }
         public string Msg { get; set; }
-    }
+    }  
 }

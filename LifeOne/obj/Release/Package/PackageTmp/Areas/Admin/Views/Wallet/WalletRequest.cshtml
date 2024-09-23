@@ -1,0 +1,321 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminWallet
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "WalletRequest";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@{
+    int count = 0;
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-danger m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+        }
+    }
+
+}
+<!-- Start Content-->
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Wallet Request Approve/Decline</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Admin</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Wallet Request Approve/Decline</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>*@
+                </span>
+                @*<span>
+                        <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnprint"><i class="fa fa-print"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>*@
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="no-more-tables">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+
+                        @*@using (Html.BeginForm("WalletRequest", null, FormMethod.Post))
+                            {*@
+                        <form action="/WalletRequest" method="post">
+                            <div class="row" id="advance-search" style="display:none;">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" style="color:#727272 !important">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Login ID</label>
+                                                    <input type="text" name="LoginID" id="LoginID" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" name="DisplayName" id="DisplayName" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Transaction No</label>
+                                                    <input type="text" name="TransactionNo" id="TransactionNo" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                    <a class="btn btn-secondary" href="" style="margin-top:1.5em;">Reset</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </form>
+                        <div class="table-responsive" >
+                            <table class="table  mb-0">
+                                <thead>
+
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Login</th>
+                                        <th>Name</th>
+                                        <th>TransactionNo</th>
+                                        <th>Amount</th>
+                                        <th>Payment Mode</th>
+                                        <th>Request Date</th>
+                                        <th>Company Name/Bank Details</th>
+                                        <th>View Slip</th>
+                                        <th>Action</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.objList)
+                                    {
+                                        <tr>
+                                            <td>@(count = count + 1)</td>
+                                            <td>@item.LoginId</td>
+                                            <td>@item.DisplayName</td>
+                                            <td>@item.TransactionNo</td>
+                                            <td>@item.Amount</td>
+                                            <td>@item.PaymentMode</td>
+                                            <td>@item.RequestedDate</td>
+                                            <td>@item.CompanyName</td>
+                                            <td>
+                                                <a onclick="OpenPopUp('@item.SlipUpload');" data-toggle="modal" data-rel="tooltips" ToolTip="Approve Request" data-target="#myModal4"><i class="fa fa-eye fa-x"></i></a>
+
+                                            </td>
+                                            <td data-title="Action:">
+                                                @if (PermissionManager.IsActionPermit("Wallet Request Approval", ViewOptions.FormUpdate))
+                                                {
+                                                    <a href="/ApproveRequest?Id=@item.Pk_RequestId" onclick="return confirm('are you sure to approve this request?')" class="btn btn-success btn-sm fa fa-check" tooltip="Approve" data-original-title="" title="">
+                                                    </a>
+
+                                                    <a href="#" id="btnDecline" class="btn btn-danger btn-sm fa fa-trash" data-toggle="modal" data-rel="tooltips" ToolTip="Decline Request" data-target="#myModal5" onclick=" return FillIdForDecline(@item.Pk_RequestId);">
+                                                    </a>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between">
+
+                                @if (Model != null)
+                                {
+                                    if (Model.Pager != null)
+                                    {
+                                        if (Model.Pager.EndPage > 1)
+                                        {
+                                            <div> <small class="text-muted inline">showing @Model.objList.Count  of @Model.objList[0].TotalRecords items</small> </div>
+                                            <div>
+                                                <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                    @if (Model.Pager.CurrentPage > 1)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/WalletRequest?Name=@Model.DisplayName&LoginId=@Model.LoginId&Mobile=@Model.TransactionNo">First</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/WalletRequest?page=@(Model.Pager.CurrentPage - 1)&Name=@Model.DisplayName&LoginId=@Model.LoginId&Mobile=@Model.TransactionNo">Previous</a>
+                                                        </li>
+                                                    }
+                                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                    {
+                                                        <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                            <a class="page-link" href="/WalletRequest?page=@page&Name=@Model.DisplayName&LoginId=@Model.LoginId&Mobile=@Model.TransactionNo">@page</a>
+                                                        </li>
+                                                    }
+                                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/WalletRequest?page=@(Model.Pager.CurrentPage + 1)&Name=@Model.DisplayName&LoginId=@Model.LoginId&Mobile=@Model.TransactionNo">Next</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/WalletRequest?page=@(Model.Pager.TotalPages)&Name=@Model.DisplayName&LoginId=@Model.LoginId&Mobile=@Model.TransactionNo">Last</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+
+                                }
+
+                            </div>
+                        </footer>
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+
+
+    <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="card-title">View Image</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive" style="max-height:500px">
+                        <img src="" class="img-bordered img-responsive" id="SlipImg" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade in" id="myModal5" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Decline Request</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="row">
+                        <textarea class="form-control" id="ApprovelRemark" name="ApprovelRemark" maxlength="500"></textarea>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <input type="submit" id="Save" name="Save" class="btn btn-success" value="Decline" onclick="return validate();" />
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <input type="hidden" name="HDNPk_RequestId" id="HDNPk_RequestId" />
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<script>
+    function OpenPopUp(Img) {
+        debugger;
+        if (Img != "") {
+            $('#SlipImg').attr('src', Img);
+        }
+        else {
+            $('#SlipImg').attr('src', '~/Content/WebsiteCss/assets/images/others/logo.png');
+        }
+    }
+
+    function FillIdForDecline(Id) {
+
+        $('#HDNPk_RequestId').val(Id);
+    }
+
+    function validate() {
+        if ($('#HDNPk_RequestId').val() == "" || $('#HDNPk_RequestId').val() == "0" || $('#HDNPk_RequestId').val() == null || $('#HDNPk_RequestId').val() == undefined) {
+            alert('Something Went Wrong!!!Please Try again ');
+            return false;
+
+        }
+        else if ($('#ApprovelRemark').val() == '' || $('#ApprovelRemark').val() == null || $('#ApprovelRemark').val() == undefined) {
+            $('#ApprovelRemark').focus();
+            return false;
+        }
+        else {
+            var _model =
+            {
+                ApprovelRemark: $('#ApprovelRemark').val(),
+                Pk_RequestId: $('#HDNPk_RequestId').val()
+
+            }
+            $.ajax({
+                type: 'post',
+                datatype: 'json',
+                contentType: 'application/json;charset=utf-8',
+                traditional: true,
+                url: '/Admin/Wallet/DeclineRequest',
+                data: JSON.stringify({ model: _model }),
+                success: function (respons) {
+                    if (respons.Flag == 1) {
+
+                        window.setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    }
+                    else {
+                        window.setTimeout(function () {
+                            window.location.reload();
+                        }, 3000);
+                    }
+                }
+            });
+        }
+    }
+
+
+</script>
+
+
+
+
+

@@ -1,0 +1,140 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MemberKYC
+@{
+    ViewBag.Title = "KYCDecline";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<div class="content">
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">KYC Rejected List</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#">KYC</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">KYC Rejected List</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                    <span>
+                        <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnprint"><i class="fa fa-print"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                <h4 class="header-title mt-0 mb-1">KYC Rejected List</h4>
+                                <p class="sub-header">View KYC Rejected List</p>
+                            </div>
+                            <div class="col-md-3 navbar-custom pull-right" style="position:relative">
+                                <div class="app-search">
+                                    <form>
+                                        <div class="input-group">
+                                            <input type="text" class="form-control" placeholder="Search...">
+                                            <span data-feather="search"></span>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th><b>S. No.</b></th>
+                                        <th><b>Name</b></th>
+                                        <th><b>LoginId</b></th>
+                                        <th><b>Mobile</b></th>
+                                        <th><b>Aadhar card No.</b></th>
+                                        <th><b>Updated Date</b></th>
+                                        <th><b>Status</b></th>
+                                        <th><b>Remark</b></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.List != null && Model.List.Count > 0)
+                                        {
+                                            int sno = 0;
+                                            foreach (var item in Model.List)
+                                            {
+                                                <tr>
+                                                    <td align="left">@(sno = sno + 1)</td>
+                                                    <td align="left"><span>@item.Name</span></td>
+                                                    <td align="left"><span>@item.LoginId</span></td>
+                                                    <td align="left"><span>@item.Mobile</span></td>
+                                                    <td align="left"><span>@item.AdharCardNumber</span></td>
+                                                    <td align="left"><span>@item.date</span></td>
+                                                    <td align="left"><label class="badge badge-danger">@item.Status</label></td>
+                                                    <td align="left"><a onclick="ViewPopRemark('@item.AdharCardRejectRemark')"><i class="fa fa-eye" aria-hidden="true"></i></a></td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @Html.HiddenFor(Model => Model.LoginId)
+        @Html.HiddenFor(Model => Model.Status)
+    </div>
+    <!-- container-fluid -->
+
+</div>
+
+<div id="myModalremark" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Remark</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+
+                        <div class="col-md-10">
+                            <div class="form-group">
+                                <h4><span id="spnremark"></span></h4>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    function ViewPopRemark (remark) {
+        $('#myModalremark').modal('show');
+        $('#spnremark').text(remark);
+    }
+</script>

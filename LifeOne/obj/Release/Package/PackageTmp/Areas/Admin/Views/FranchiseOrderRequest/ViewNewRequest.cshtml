@@ -1,0 +1,1314 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MFAOrderRequest
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "ViewNewRequest";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<style>
+    .modal-footer {
+        background: white;
+        width: 100%;
+    }
+
+    /*.modal-body {
+            position: relative;
+            padding: 31px;
+        }*/
+
+    .custom-stokc-details img {
+        width: 35px;
+        background: #f6f6f6;
+        border-radius: 50%;
+        padding: 4px;
+        border: 1px solid #ddd;
+    }
+
+    .modal table > thead > tr > th {
+        border-bottom: 1px solid #f4f4f4;
+        /*font-size: 12px;*/
+        background: #fff;
+    }
+
+    /*  .modal table > tbody > tr > td {
+            font-size: 12px;
+        }
+    */
+    .modal table > tbody > tr > td > input, select {
+        width: 86px;
+    }
+
+    .modal table > tbody > tr > td > select {
+        width: 100px;
+    }
+</style>
+<div class="container-fluid">
+
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Order Request<small></small></h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Franchisees</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Order Request</li>
+                    </ol>
+                </nav>*@
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                @*<span>
+                        <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>
+                    </span>*@
+                <span>
+                    <a href="#" onclick="fCallPaging(1,1)" data-toggle="tooltip" data-placement="top" title="Download Excel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                </span> <span>
+                    <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
+                </span>
+                @*<span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>*@
+
+
+                @*<a href="" id="btnAdd" class="btn btn-success btn-sm" onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                    </a>*@
+            </div>
+        </div>
+    </div>
+    <form action="" method="post" style="height:0;">
+        <div id="no-more-tables">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-body">
+
+                            <div class="row" id="advance-search" style="display:none;">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" style="color:#727272 !important">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Franchisee Id</label>
+                                                    @Html.HiddenFor(m => m.Page)
+                                                    @Html.HiddenFor(m => m.IsExport)
+                                                    <input type="text" name="LoginID" id="LoginID" placeholder="Enter Franchisee Id" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" name="FName" id="FName" placeholder="Enter Name" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Mobile No.</label>
+                                                    <input type="text" name="Contact" id="Contact" placeholder="Enter Mobile No." class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Order No.</label>
+                                                    <input type="text" name="OrderNo" id="OrderNo" placeholder="Enter Order No." class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;display:none;" value="Search" id="BtnSearch">
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" onclick="fCallPaging(1,0)">
+                                                    <a href="/View-New-Request" class="btn btn-secondary" onclick="fclaer()" style="margin-top:1.5em;">Reset</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="table-responsive" id="customers" style="height: 462px !important;">
+                                <table id="myTable" class="table  table-hover table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th> #Sn.</th>
+                                            <th>Order No.</th>
+                                            <th>Franchisee Id</th>
+                                            <th>Franchisee Name</th>
+                                            @*<th>Firm Name</th>*@
+                                            <th>Mobile No.</th>
+                                            <th>Total Qty</th>
+                                            <th>Total Amount</th>
+                                            <th>Request Dt.</th>
+                                            <th>Order Sts.</th>
+                                            @*<th>Shipping Sts.</th>*@
+                                            @*<th>Shipped Dt. </th>*@
+                                            @*<th>Payment Approval</th>*@
+                                            @*<th>Approved Dt.</th>*@
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @if (Model.MFAOrderRequestList != null && Model.MFAOrderRequestList.Count > 0)
+                                        {
+                                            int i = 1;
+                                            int page = Model.Pager.CurrentPage;
+                                            page = (page - 1);
+                                            i = ((page) * (Model.Pager.PageSize));
+
+
+                                            foreach (var item in Model.MFAOrderRequestList)
+                                            {
+
+                                                <tr>
+                                                    <th>@(i+1)</th>
+                                                    <td><span> <a href="#" style="text-decoration:underline" data-toggle="modal" data-target="#myModal11" onclick="ShowItem22(@item.ReqId)">@item.OrderNo</a></span>   </td>
+                                                    <td>@item.LoginID</td>
+                                                    <td>@item.FName</td>
+                                                    @*<td>@item.CompanyName</td>*@
+                                                    <td>@item.Contact</td>
+                                                    <td>@item.TotalItems</td>
+                                                    <td>@item.TotalAmt</td>
+                                                    <td>@item.ReqDate</td>
+                                                    @if (item.OrderStatus == "Decline")
+                                                    {
+                                                        <td>
+                                                            <span class="label label-danger">@item.OrderStatus</span>
+                                                        </td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <span class="label label-warning">@item.OrderStatus</span>
+                                                        </td>
+                                                    }
+
+                                                    <td>
+                                                        @*@if (item.OrderStatus != "Approved")*@
+                                                        @if (item.OrderStatus == "Pending")
+
+                                                        {
+                                                            <a href="#" value="View Item" onclick="ShowItem(@item.ReqId)" title="Approve Quantity" data-toggle="modal" data-target="#myModal">Approve</a>
+                                                        }
+                                                        @*<button type="button" value="View payment" class="btn-xs btn btn-default" onclick="ShowPaymentStatus(@item.ReqId,'@item.PaymentStatus')" data-toggle="modal" data-target="#PaymentModal"><i class="fa fa-inr text-primary" aria-hidden="true"></i> </button>*@
+
+                                                        @*@if (item.ShippingStstId == "1")
+                                    {
+                                        if (PermissionManager.IsActionPermit("Stock Request Approval", ViewOptions.FormUpdate))
+                                        {
+                                            <button type="button" value="View payment" class="btn-xs btn btn-default" onclick="EditDeliveryInformation(@item.ReqId)"><i class="fa fa-truck text-danger" aria-hidden="true"></i></button>
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        if (item.OrderStatus == "Approved" || item.PaymentStatus == "Approved")
+                                        {
+                                            if (PermissionManager.IsActionPermit("Stock Request Approval", ViewOptions.FormUpdate))
+                                            {
+                                                <button type="button" value="View payment" class="btn-xs btn btn-default" onclick="AddDeliveryInformation(@item.ReqId)"><i class="fa fa-truck text-danger" aria-hidden="true"></i></button>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            <button type="button" value="View payment" disabled class="btn-xs btn btn-default"><i class="fa fa-truck text-danger" aria-hidden="true"></i></button>
+                                        }
+                                    }
+                                    @if (item.OrderStatus == "Approved" || item.PaymentStatus == "Approved")
+                                    {
+                                        <a href="/Admin/FranchiseOrderRequest/TaxInvoice?OrderId=@item.ReqId" target="_blank" class="btn-sm btn  btn-default " title="View Invoice" data-toggle="tooltip"><i class="fa fa-download text-secondary" aria-hidden="true"></i>&nbsp;</a>
+
+                                    }
+                                    else
+                                    {
+                                        <button href="#" class="btn-sm btn  btn-default " title="View Invoice" data-toggle="tooltip" disabled><i class="fa fa-download text-dark" aria-hidden="true"></i>&nbsp;</button>
+                                    }*@
+                                                    </td>
+                                                </tr>
+                                                i++;
+                                            }
+
+                                        }
+                                        else
+                                        {
+                                            <tr>
+                                                <td colspan="10" style="text-align:center">No Record Found</td>
+                                            </tr>
+                                        }
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            </div>
+                            <footer class="card-footer bg-white p-2">
+                                <div class="d-md-flex align-items-center justify-content-between">
+
+                                    @if (Model != null)
+                                    {
+                                        if (Model.Pager != null)
+                                        {
+                                            if (Model.Pager.EndPage > 1)
+                                            {
+                                                <div> <small class="text-muted inline">showing @Model.MFAOrderRequestList.Count  of @Model.Pager.TotalItems items</small> </div>
+                                                <div>
+                                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                        @if (Model.Pager.CurrentPage > 1)
+                                                        {
+                                                            <li class="page-item">
+                                                                <a class="page-link" onclick="fCallPaging(1,0)" href="#">First</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1),0)" href="#">Previous</a>
+                                                            </li>
+                                                        }
+                                                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                        {
+                                                            <li class="page-item @(page == Model.Pager.CurrentPage ? " active" : "" )">
+
+
+                                                                <span><a class="page-link" onclick="fCallPaging(@page,0)" href="#">@page</a></span>
+                                                            </li>
+                                                        }
+                                                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                        {
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1),0)" href="#">Next</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages),0)" href="#">Last</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </footer>
+
+
+
+
+                            <!-- /.box-body -->
+                        </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+
+
+        </div>
+    </form>
+    <div id="myModal" class="modal fade custom-stokc-details" role="dialog">
+
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content modal-lg">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> Item(s) Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="CustomMessages1"></div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div>
+                                <div>
+                                    <table id="Productdetails" class="table  table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th style="display:none">PrdId</th>
+                                                <th style="display:none">FKRqId</th>
+                                                <th style="display:none">FK_FID</th>
+                                                <th>Type</th>
+                                                <th>Name</th>
+                                                <th>Curr. Stock.</th>
+                                                <th>Requested Qty.</th>
+                                                <th>Approve Qty.</th>
+                                                <th>Remarks</th>
+                                                @*<th>Action</th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+
+                        </div>
+                        <!-- /.col -->
+
+                    </div>
+                </div>
+                <div class="modal-footer" id="ApproveFooter">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="PaymentModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content modal-lg">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Payment Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="CustomMessages1"></div>
+                    <div class="row" id="PaymentStatus">
+
+                    </div>
+                </div>
+                <div class="modal-footer" id="PaymentFooter">
+                    @*<button type="button" class="btn btn-success" data-dismiss="modal" onclick="PaymentUpdate()">Approve</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="FinalSubmit()">Decline</button>*@
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Trigger the modal with a button -->
+<button style="display:none" type="button" class="btn btn-info btn-lg hide" id="btnshowpopupdelivery" data-toggle="modal" data-target="#myModaldelivery">Click To View Particular Order</button>
+
+<!-- Modal -->
+<div id="myModaldelivery" class="modal fade">
+    <div class="modal-dialog modal-lg">
+
+        <!-- Modal content-->
+        <div class="modal-content ">
+            @*<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"> Add/Update Shipping Information</h4>
+                </div>*@
+
+            <div class="row">
+                <div class="col-md-9">
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    <h4 class="modal-header text-left"> Add/Update Shipping Information</h4>
+                </div>
+
+            </div>
+            <div class="modal-body">
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Doc No</label>
+                        <input name="txtDocNo" type="text" id="txtDocNo" class="form-control">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Doc Date</label>
+                        <input name="txtDocDate" type="date" id="txtDocDate" class="form-control datepicker-all">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label>No. of Carton</label>
+                        <input name="txtNoofCarton" type="text" id="txtNoofCarton" maxlength="6" class="form-control" onkeypress="return isNumberKey(event)">
+
+                    </div>
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-4">
+                        <label>Vehical No</label>
+                        <input name="txtVehicalNo" type="text" id="txtVehicalNo" class="form-control">
+
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label>PersonName</label>
+                        <input name="txtPersonName" type="text" id="txtPersonName" class="form-control">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label>MobileNo</label>
+                        <input name="txtMobileNo" type="text" maxlength="10" id="txtMobileNo" class="form-control" onkeypress="return isNumberKey(event)">
+
+                    </div>
+
+
+
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-sm-12">
+
+                        <label>Delivery Address</label>
+                        <textarea name="txtDeliAdd" rows="3" cols="100" id="txtDeliAdd" class="form-control"></textarea>
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>State</label>
+                        <input name="txtDelState" type="text" id="txtDelState" class="form-control">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label>City</label>
+                        <input name="txtDelCity" type="text" id="txtDelCity" class="form-control">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Pin Code</label>
+                        <input name="txtDelPinCode" type="text" maxlength="6" id="txtDelPinCode" class="form-control" onkeypress="return isNumberKey(event)">
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+
+                    <div class="col-sm-4">
+                        <label>Mode Of Transport</label>
+                        <select name="ddlModeOfTransport" id="ddlModeOfTransport" class="form-control">
+                            <option value="0">Select</option>
+                            <option value="Road">Road</option>
+                            <option value="Flight">Flight</option>
+                            <option value="Train">Train</option>
+                            <option value="Courier">Courier</option>
+
+                        </select>
+
+                    </div>
+
+                    <div class="col-sm-4">
+                        <label>Courier Name</label>
+                        <input name="txtCourierName" type="text" id="txtCourierName" class="form-control">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Courier Ref. No</label>
+                        <input name="txtRefNo" type="text" id="txtRefNo" class="form-control">
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <label>Freight Charges</label>
+                        <input name="txtFreightCharges" type="text" id="txtFreightCharges" class="form-control">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Discount</label>
+                        <input name="txtDiscount" type="text" id="txtDiscount" class="form-control">
+
+                    </div>
+                    <div class="col-sm-4">
+                        <label>Electronic Ref No</label>
+                        <input name="txtElectronicRefNo" type="text" id="txtElectronicRefNo" class="form-control">
+
+                    </div>
+
+                </div>
+
+
+
+            </div>
+            <div class="modal-footer pull-right">
+                <button type="button" class="btn btn-primary" onclick="SaveShippingInformation()">Submit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="myModal11" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content ">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Order Details</h4>
+            </div>
+            <div class="modal-body">
+                <div id="CustomMessages1"></div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table id="Productdetails11" class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Product&nbsp;Type</th>
+                                        <th>Product&nbsp;Name</th>
+                                        <th>Requsted&nbsp;Qty</th>
+                                        <th>BV</th>
+                                        <th>Total&nbsp;BV</th>
+                                        <th>Product&nbsp;Amt</th>
+                                        <th>Final&nbsp;Amt</th>
+                                        @*<th>Approved&nbsp;Qty</th>
+                                            <th>Remark</th>
+                                            <th>Status</th>*@
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Payment Detail</h3>
+
+                <div class="row" id="PaymentDetail">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<span id="spanRequetId" class="hide" style="display:none">0</span>
+<script>
+
+    function fclaer() {
+        $(".fclear").val('');
+        $("#Page").val(1);
+        $("#IsExport").val(0);
+        window.location.reload();
+    }
+
+
+    function fCallPaging(val, IsExport) {
+
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#IsExport").val(IsExport);
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+
+    $('#btnpdf').click(function () {
+        var col = [2, 0]; // coloms to remove
+
+        var tbl = $('#myTable').clone();
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 35,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Order Request',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "Order Request");
+        doc.page++;
+        doc.save('Order Request.pdf');
+
+    });
+
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('myTable').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Order Request</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+
+
+    var status = false;
+
+    function AddDeliveryInformation(value) {
+
+        $("#btnshowpopupdelivery").click();
+        $("#spanRequetId").text(value);
+        $("input[type='text']").val('');
+
+    }
+
+
+    function SaveShippingInformation() {
+
+        if ($("#txtDocNo").val() == "") {
+            $("#txtDocNo").focus();
+            return false;
+        }
+
+        if ($("#txtDocDate").val() == "") {
+            $("#txtDocDate").focus();
+            return false;
+        }
+
+
+        if ($("#txtNoofCarton").val() == "") {
+            $("#txtNoofCarton").focus();
+            return false;
+        }
+
+
+        if ($("#ddlModeOfTransport").val() == "") {
+            $("#ddlModeOfTransport").focus();
+            return false;
+        }
+
+        if ($("#txtVehicalNo").val() == "") {
+            $("#txtVehicalNo").focus();
+            return false;
+        }
+
+        if ($("#txtDeliAdd").val() == "") {
+            $("#txtDeliAdd").focus();
+            return false;
+        }
+
+        if ($("#txtDelState").val() == "") {
+            $("#txtDelState").focus();
+            return false;
+        }
+
+
+        if ($("#txtDelCity").val() == "") {
+            $("#txtDelCity").focus();
+            return false;
+        }
+
+
+        if ($("#txtCourierName").val() == "") {
+            $("#txtCourierName").focus();
+            return false;
+        }
+
+
+        if ($("#txtRefNo").val() == "") {
+            $("#txtRefNo").focus();
+            return false;
+        }
+
+        var deliveryArr = {};
+        deliveryArr.Fk_Rid = $("#spanRequetId").text();
+        deliveryArr.InvoiceId = $("#spanInvoiceid").text();
+        deliveryArr.DocNo = $("#txtDocNo").val();
+        deliveryArr.DocDate = $("#txtDocDate").val();
+        deliveryArr.NoOfCarton = $("#txtNoofCarton").val();
+        deliveryArr.ModeOfTrip = $("#ddlModeOfTransport").val();
+        deliveryArr.VehicalNo = $("#txtVehicalNo").val();
+        deliveryArr.DeliveryAddress = $("#txtDeliAdd").val();
+        deliveryArr.State = $("#txtDelState").val();
+        deliveryArr.City = $("#txtDelCity").val();
+        deliveryArr.PinCode = $("#txtDelPinCode").val();
+
+        deliveryArr.CourierName = $("#txtCourierName").val();
+        deliveryArr.RefNo = $("#txtRefNo").val();
+        deliveryArr.FreightCharge = $("#txtFreightCharges").val();
+        deliveryArr.Discount = $("#txtDiscount").val();
+        deliveryArr.PersonName = $("#txtPersonName").val();
+        deliveryArr.MobileNo = $("#txtMobileNo").val();
+        deliveryArr.ElectronicRefNo = $("#txtElectronicRefNo").val();
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/FranchiseOrderRequest/AddShipingInfroamtion",
+            data: JSON.stringify({ _param: deliveryArr }),
+            //  data: '{param: "' + JSON.stringify(deliveryArr) + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (response) {
+                //  alert(response);
+                alert("Shipping Details Saved Successfully.");
+                window.location.reload();
+            },
+            error: function (response) {
+                alert("failed");
+            }
+        });
+
+    }
+
+
+
+    function ShowItem(RequestId) {
+        var ReqId = RequestId;
+        $.ajax({
+            url: "/Admin/FranchiseOrderRequest/ViewNewRequestDetail",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ RequestId: ReqId }),
+            contentType: "application/json",
+            success: function (result) {
+                if (result != undefined && result != '') {
+                    status = true;
+                    $("#Productdetails tbody").html('');
+
+                    var str = "";
+                    var footer = "";
+                    var ApproveQty = "";
+                    for (var i = 0; i < result.length; i++) {
+                        ApproveQty = result[0].ApprovalQty;
+                        str += "<tr>";
+                        str += "<td style='display:none'>" + result[i].FK_PrdId + "</td><td style='display:none'>" + result[i].Fk_RId + "</td><td style='display:none'>" + result[i].FK_FId + "</td><td>" + result[i].ProductType + "</td><td>" + result[i].ProductName + "</td><td>" + result[i].AdminStock + "</td><td>" + result[i].ReqQnty + "</td><td><input type='text' class='form-control' id='txt_" + i + result[i].ReqQnty + "' value=" + result[i].ReqQnty + " onkeypress='return isNumberKey(event)' onfocusout='Check(" + i + ", " + result[i].ReqQnty + "," + result[i].AdminStock + ")'/></td><td><input class='form-control' type='text' name ='' value=" + result[i].PrdWiseRmrk + " ></td><td style='display:none'> <select class='form-control' disabled name='ddl' id='ddlstatus_" + i + "'><option value='5'>Approved</option> <option value='4'>Rejected</option><option value='7'>Out of stock</option></select></td></tr>";
+                        $("#ddlstatus_" + i).val(result[i].PrdWiseStsId);
+                    }
+                    $("#Productdetails tbody").html(str);
+                    debugger
+                    if (parseInt(ApproveQty) > 0) {
+                        footer = "<button class='btn btn-secondary' data-dismiss='modal'>Close</button>";
+                    }
+                    else {
+                        footer = "<button type='button' class='btn btn-success' data-dismiss='modal' onclick='FinalSubmit()'>Approve</button>";
+                        footer += "<button type='button' class='btn btn-danger' onclick='FranchiseCancelOrder(`" + result[0].OrderNo + "`)'>Decline</button>";
+                        footer += "<button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>";
+                    }
+                    $("#ApproveFooter").html(footer);
+
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+
+    function ShowPaymentStatus(RequestId, PaymentStatus) {
+
+        var ReqId = RequestId;
+        $.ajax({
+            url: "/Admin/FranchiseOrderRequest/ViewPaymentDetail",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ RequestId: ReqId }),
+            contentType: "application/json",
+            success: function (result) {
+
+                if (result != undefined && result != '') {
+
+                    $("#PaymentStatus").html('');
+
+                    var str = "";
+                    var footer = "";
+                    if (result[0].PayMode != "Cash") {
+                        str = `<div class="col-md-6 mb-10">
+                                <h6>Bank Name</h6>
+                                <h5>`+ result[0].BankName + `</h5>
+                            </div>
+                            <div class="col-md-6 mb-10">
+                                <h6>Transaction No.</h6>
+                                <h5>`+ result[0].TransactionId + `</h5>
+                            </div>
+                            <div class="col-md-6 mb-10">
+                                <h6>Payment Mode</h6>
+                                <h5>`+ result[0].PayMode + `</h5>
+                            </div>
+                            <div class="col-md-6 mb-10">
+                                <h6>Payment Date</h6>
+                                <h5>`+ result[0].PaymentDate + `</h5>
+                            </div>
+                         <div class="col-md-6 mb-10">
+                                <h6>Invoice No.</h6>
+                                <h5>`+ result[0].InvoiceNo + `</h5>
+                            </div>
+                      <div class="col-md-6 mb-10">
+                                <h6>Total Amount</h6>
+                                <h5>`+ result[0].TotalAmt + `</h5>
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                            </div>
+                            <div class="col-md-12">
+                                <h5 class="mb-10 text-center">Recipt Image</h5>
+                                <div class="reciept-img text-center">
+                                    <img src= '"+ result[0].ReciptImage + ' onClick="swipe();" id="largeImage" style="width:100%; max-width:600px; margin: 0 auto;" alt="Recipt" />
+                                </div>
+                            </div>`;
+                    }
+                    else {
+                        str = `<div class="col-md-6 mb-10">
+                                <h6>Payment Mode</h6>
+                                <h4>`+ result[0].PayMode + `</h4>
+                            </div><div class="col-md-6 mb-10">
+                                <h6>Payment Date</h6>
+                                <h4>`+ result[0].PaymentDate + `</h4>
+                            </div>  <div class="col-md-6 mb-10">
+                                <h6>Total Amount</h6>
+                                <h4>`+ result[0].TotalAmt + `</h4>
+                            </div>  `
+                    }
+                    $("#PaymentStatus").html(str);
+
+                    //if (PaymentStatus == "Pending") {
+                    //    footer = `<button type="button" class="btn btn-success" data-dismiss="modal" onclick="PaymentUpdate(` + result[0].ReqId + `,5)">Approve</button>
+                    //    <button type="button" class="btn btn-danger" data-dismiss="modal" onclick="PaymentUpdate(`+ result[0].ReqId + `,6)">Decline</button>
+                    //    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>`;
+                    //}
+                    //else {
+                    footer = `<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>`;
+                    //}
+                    $("#PaymentFooter").html(footer);
+
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+    function Check(key, qty, currqty) {
+        var id = "txt_" + key + qty;
+        var value = $("#" + id).val();
+        if (parseInt(value) <= 0) {
+            showSnazzyErrorMessage1("Quantity can not be zero");
+            return false;
+        }
+        if (parseInt(value) > parseInt(qty)) {
+            $("CustomMessages1").html('');
+            showSnazzyErrorMessage1("Quantity can not be greater than from requested quantity");
+            $("#" + id).val(0);
+            return false;
+        }
+
+        if (parseInt(value) > parseInt(currqty)) {
+            $("CustomMessages1").html('');
+            showSnazzyErrorMessage1("Quantity can not be greater than from current quantity");
+            $("#" + id).val(0);
+            return false;
+        }
+        status = true;
+    }
+
+    function showSnazzySuccessMessage1(text) {
+
+
+        $("#CustomMessages1").html(text);
+        $("#CustomMessages1").addClass("alert alert-success");
+        //Fade message in
+        $("#CustomMessages1").show('slow');
+        //Fade message out in 5 seconds
+        setTimeout('$("#CustomMessages1").hide("slow")', 5000);
+    }
+
+
+
+    function showSnazzyErrorMessage1(text) {
+
+        $("#CustomMessages1").html(text);
+        $("#CustomMessages1").addClass("alert alert-danger");
+        //Fade message in
+        $("#CustomMessages1").show('slow');
+        //Fade message out in 5 seconds
+        setTimeout('$("#CustomMessages1").hide("slow")', 5000);
+    }
+
+    function FinalSubmit() {
+        var ProductDetail = [];
+        if (!status || status == "false")   // For validation purpose
+        {
+            alert("Some internal problem");
+            return false;
+        }
+        status = false;
+        $("#Productdetails tbody tr").each(function () {
+            var row = $(this);
+            ProductDetail.push({
+                "FK_PrdId": row.find("td:eq(0)").html(),
+                "Fk_RId": row.find("td:eq(1)").html(),
+                "FK_FId": row.find("td:eq(2)").html(),
+                "ApprovalQty": row.find("td:eq(7) input").val(),
+                "PrdWiseRmrk": row.find("td:eq(8) input").val(),
+                "PrdWiseStsId": row.find("td:eq(9) select").val()
+            });
+        })
+
+
+        if (ProductDetail.length > 0) {
+            $.ajax({
+                url: '/Admin/FranchiseOrderRequest/ApproveNewRequestDetail',
+                type: "POST",
+                processData: false,
+                data: JSON.stringify({ productlist: ProductDetail }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result != null) {
+                        if (result.Code == 1) {
+                            $("CustomMessages1").html('');
+                            //window.location.href = "/Admin/FranchiseOrderRequest/ViewNewRequest";
+                            showSnazzySuccessMessage(result.Remark);
+                            window.location.reload();
+                        }
+                        else {
+                            $("CustomMessages1").html('');
+                            //window.location.href = "/Admin/FranchiseOrderRequest/ViewNewRequest";
+                            showSnazzyErrorMessage(result.Remark);
+                            window.location.reload();
+                        }
+                    }
+                },
+                error: function (er) {
+                    window.location.reload();
+                }
+
+            });
+        }
+        else {
+            $("CustomMessages1").html('');
+            showSnazzyErrorMessage1("Please Add approve quantity");
+        }
+    }
+
+
+    function PaymentUpdate(ReqId, status) {
+
+        $.ajax({
+            url: '/Admin/FranchiseOrderRequest/ApproveDeclinePaymentStatus',
+            type: "POST",
+            processData: false,
+            data: JSON.stringify({ ReqId: ReqId, status: status }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (result) {
+                if (result != null) {
+                    if (result.Code == 1) {
+                        $("CustomMessages1").html('');
+                        window.location.href = "/Admin/FranchiseOrderRequest/ViewNewRequest";
+                        showSnazzySuccessMessage(result.Remark);
+
+                    }
+                    else {
+                        window.location.href = "/Admin/FranchiseOrderRequest/ViewNewRequest";
+                        showSnazzyErrorMessage(result.Remark);
+
+                    }
+                }
+            },
+            error: function (er) {
+                swal("", "An error occured", "error");
+            }
+
+        });
+    }
+
+    function EditDeliveryInformation(RequestIdvalue) {
+
+        $("#btnshowpopupdelivery").click();
+        $("#spanRequetId").text(RequestIdvalue);
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/FranchiseOrderRequest/GetEditFranchiseItemInformation",
+            data: '{RequestId: "' + JSON.stringify(RequestIdvalue) + '"}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (deliveryArr) {
+                var i = 0;
+
+                $("#txtDocNo").val(deliveryArr[i].DocNo);
+                $("#txtDocDate").val(deliveryArr[i].DocDate);
+                $("#txtNoofCarton").val(deliveryArr[i].NoOfCarton);
+                $("#ddlModeOfTransport").val(deliveryArr[i].ModeOfTrip);
+                $("#txtVehicalNo").val(deliveryArr[i].VehicalNo);
+
+                $("#txtDeliAdd").val(deliveryArr[i].DeliveryAddress);
+                $("#txtDelState").val(deliveryArr[i].State);
+                $("#txtDelCity").val(deliveryArr[i].City);
+                $("#txtDelPinCode").val(deliveryArr[i].PinCode);
+
+
+                $("#txtCourierName").val(deliveryArr[i].CourierName);
+                $("#txtFreightCharges").val(deliveryArr[i].FreightCharge);
+                $("#txtDiscount").val(deliveryArr[i].Discount);
+
+
+                $("#txtPersonName").val(deliveryArr[i].PersonName);
+                $("#txtMobileNo").val(deliveryArr[i].MobileNo);
+                $("#txtElectronicRefNo").val(deliveryArr[i].ElectronicRefNo);
+
+                $("#txtRefNo").val(deliveryArr[i].RefNo);
+
+            },
+            error: function (response) {
+                alert(response.d);
+            }
+        });
+    }
+
+    function swipe() {
+        var largeImage = document.getElementById('largeImage');
+        largeImage.style.display = 'block';
+        largeImage.style.width = 200 + "px";
+        largeImage.style.height = 200 + "px";
+        var url = largeImage.getAttribute('src');
+        window.open(url, 'Image', 'width=largeImage.stylewidth,height=largeImage.style.height,resizable=1');
+    }
+
+    function ShowItem22(RequestId) {
+        var ReqId = RequestId;
+        $.ajax({
+            url: "/Admin/FranchiseOrderRequest/ViewRequestItemDetail",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ RequestId: ReqId }),
+            contentType: "application/json",
+            success: function (result) {
+
+                if (result != undefined && result != '') {
+
+                    $("#Productdetails11 tbody").html('');
+
+                    var str = "";
+                    var str1 = "";
+                    var TotalPVAmt = 0;
+                    var TotalReqQty = 0;
+                    var FinalAmt = 0;
+                    for (var i = 0; i < result.length; i++) {
+                        var status = ""
+                        var css = ""
+                        if (result[i].PrdWiseStsId == 5) {
+                            status = "Approved"
+                            css = "label label-success"
+                        }
+                        else if (result[i].PrdWiseStsId == 6) {
+                            status = "Decline"
+                            css = "label label-danger"
+                        }
+                        else {
+                            status = "Pending"
+                            css = "label label-danger"
+                        }
+
+                        TotalPVAmt = parseInt(TotalPVAmt) + parseFloat(result[i].TotalPV);
+                        TotalReqQty = parseInt(TotalReqQty) + parseFloat(result[i].ReqQnty);
+                        FinalAmt = parseInt(FinalAmt) + parseFloat(((result[i].Amount) * (result[i].ReqQnty)));
+
+                        //str += "<tr ><td nowrap>" + result[i].ProductType + "</td><td>" + result[i].ProductName + "</td><td>" + result[i].Amount + "</td><td>" + result[i].ReqQnty + "</td><td>" + ((result[i].Amount) * (result[i].ReqQnty)) + "</td><td>" + result[i].PointValue + "</td><td>" + result[i].TotalPV + "</td><td>" + result[i].ApprovalQty + "</td><td>" + result[i].PrdWiseRmrk + "</td><td><span class='" + css + "'>" + status + "</span></td></tr>";
+                        str += "<tr ><td nowrap>" + result[i].ProductType + "</td><td>" + result[i].ProductName + "</td><td>" + result[i].ReqQnty + "</td><td>" + result[i].PointValue + "</td><td>" + result[i].TotalPV + "</td><td>" + result[i].Amount + "</td><td>" + ((result[i].Amount) * (result[i].ReqQnty)) + "</td></tr>";
+                    }
+
+                    str += "<tr><th colspan='2'>Total</th><th>" + TotalReqQty + "</th><th>&nbsp;</th><th>" + TotalPVAmt + "</th><th>&nbsp;</th><th style=text-align:right>" + FinalAmt + "</th><th></th><th></th></tr>";
+
+                    $('#PaymentDetail').html('');
+                    var str2 = '<div class="col-md-3"><b>Total Amount:</b> ' + result[0].TotalAmt + '</div><div class="col-md-3" > <b>Transaction No. : </b>' + result[0].TransactionNo + '</div><div class="col-md-3"><b>Payment Mode:</b> ' + result[0].PayMode + '</div><div class="col-md-3"><b>Payment Date:</b> ' + result[0].PaymentDate + '</div>';
+                    if (result[0].PayMode != 'Cash') {
+                        if (result[0].ReciptImage != null && result[0].ReciptImage != undefined && result[0].ReciptImage != '')
+                            str2 += '<div class="col-md-6" ><b>Payment Slip:</b><img style="width:100px;height:160px" src="' + result[0].ReciptImage.replace('~', '') + '" onclick="swipe()" id="largeImage" alt="Recipt" /> </div> ';
+                        else
+                            str2 += '<div class="col-md-6" ><b>Payment Slip:</b><span class="text text-danger">No Image</span></div> ';
+                    }
+                    $('#PaymentDetail').html(str2);
+                    $("#Productdetails11 tbody").html(str);
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+
+    function FranchiseCancelOrder(OrderNo) {
+        if (confirm('Are you sure to cancel this order?')) {
+            $.ajax({
+                url: '/Admin/FranchiseOrderRequest/FranchiseCancelOrder',
+                type: "POST",
+                processData: false,
+                data: JSON.stringify({ OrderNo: OrderNo }),
+                dataType: 'json',
+                contentType: 'application/json',
+                success: function (result) {
+                    if (result != null) {
+                        if (result.Flag == 1) {
+                            $("CustomMessages1").html('');
+                            alert(result.Msg);
+                            window.location.href = "/Admin/FranchiseOrderRequest/ViewNewRequest";
+
+                        }
+                        else {
+                            alert(result.Msg);
+                            window.location.href = "/Admin/FranchiseOrderRequest/ViewNewRequest";
+                            //showSnazzyErrorMessage(result.Msg);
+
+                        }
+                    }
+                },
+                error: function (er) {
+                    swal("", "An error occured", "error");
+                }
+
+            });
+        }
+        else {
+            return false;
+        }
+    }
+</script>
+
+@*<img src="`+ result[0].ReciptImage + `" onClick="swipe();" id="largeImage" style="width:100%; max-width:600px; margin: 0 auto;" alt="Recipt" />*@
+
+
+
+
+

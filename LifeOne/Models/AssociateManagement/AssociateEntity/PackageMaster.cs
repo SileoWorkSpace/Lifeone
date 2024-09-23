@@ -120,6 +120,28 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
             }
             return Package;
         }
+        public static List<SelectListItem> BindPackageMasterAssociate()
+        {
+            List<SelectListItem> Package = new List<SelectListItem>();
+
+            SqlParameter[] Para =
+              {
+               new SqlParameter("@Fk_memid",SessionManager.AssociateFk_MemId)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("BindPackageMasterForAssociate", Para);
+            if (ds != null)
+            {
+                if (ds.Tables[0].Rows.Count > 0)
+                {
+                    Package.Add(new SelectListItem { Text = "--Select Package--", Value = "" });
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        Package.Add(new SelectListItem { Text = dr["PackageName"].ToString(), Value = dr["Pk_PackageID"].ToString() });
+                    }
+                }
+            }
+            return Package;
+        }
     }
 
   

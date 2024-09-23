@@ -1,0 +1,447 @@
+﻿@{
+    ViewBag.Title = "FranchiseDashboard";
+    Layout = "~/Views/Shared/_FranchiseChildLayout.cshtml";
+}
+
+<!-- Start Content-->
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Franchise Dashboard</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                </ol>
+            </nav>
+        </div>
+    </div>  @foreach (var item in Model.TotalMember)
+    {
+    <div class="row">
+        <div class="col-md-6 col-xl-3">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="media p-3">
+                        <div class="media-body">
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">
+                                Today Revenue
+                            </span>
+                            <h2 class="mb-0">&#x20B9;@item.TodayBusiness</h2>
+                        </div>
+                        <div class="align-self-end"> View More </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="media p-3">
+                        <div class="media-body">
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">
+                                Total Revenue
+                            </span>
+                            <h2 class="mb-0">&#x20B9;@item.TotalBusiness</h2>
+                        </div>
+                        <div class="align-self-end"> View More </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="media p-3">
+                        <div class="media-body">
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Commission Received</span>
+                            <h2 class="mb-0">&#x20B9;@item.CommissionReceived</h2>
+                        </div>
+                        <div class="align-self-end"> View Details </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-xl-3">
+            <div class="card">
+                <div class="card-body p-0">
+                    <div class="media p-3">
+                        <div class="media-body">
+                            <span class="text-muted text-uppercase font-size-12 font-weight-bold">Commission Distributed</span>
+                            <h2 class="mb-0">&#x20B9;@item.CommissionDistributed</h2>
+                        </div>
+                        <div class="align-self-end"> View Details </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+    <!-- stats + charts -->
+    <div class="row">
+        <div class="col-xl-3">
+            <div class="card">
+                <div class="card-body p-0">
+                    <h5 class="card-title header-title border-bottom p-3 mb-0">Overview</h5>
+                    <!-- stat 1 -->
+                    <div class="media px-3 py-4 border-bottom">
+                        <div class="media-body">
+                            <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">121,000</h4>
+                            <span class="text-muted">Total Customer</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users align-self-center icon-dual icon-lg">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="9" cy="7" r="4"></circle>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                        </svg>
+                    </div>
+
+                    <!-- stat 2 -->
+                    <div class="media px-3 py-4 border-bottom">
+                        <div class="media-body">
+                            <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">21,000</h4>
+                            <span class="text-muted">Total Product Sold</span>
+                        </div>
+                        <i class="fa fa-shopping-cart fa-2x"></i>
+                    </div>
+
+                    <!-- stat 3 -->
+                    <div class="media px-3 py-4">
+                        <div class="media-body">
+                            <h4 class="mt-0 mb-1 font-size-22 font-weight-normal">₹21.5</h4>
+                            <span class="text-muted">Total Income</span>
+                        </div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase align-self-center icon-dual icon-lg">
+                            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6">
+            <div class="card">
+                <div class="card-body pb-0">
+                    <ul class="nav card-nav float-right">
+                        <li class="nav-item"> <a class="nav-link text-muted" href="javascript: void(0);">Today</a> </li>
+                        <li class="nav-item"> <a class="nav-link text-muted" href="javascript: void(0);">7d</a> </li>
+                        <li class="nav-item"> <a class="nav-link active" href="javascript: void(0);">15d</a> </li>
+                        <li class="nav-item"> <a class="nav-link text-muted" href="javascript: void(0);">1m</a> </li>
+                        <li class="nav-item"> <a class="nav-link text-muted" href="javascript: void(0);">1y</a> </li>
+                    </ul>
+                    <h5 class="card-title mb-0 header-title">Revenue</h5>
+                    <div id="revenue-chart" class="apex-charts mt-3" dir="ltr"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3">
+            <div class="card">
+                <div class="card-body pb-0">
+                    <h5 class="card-title mt-0 mb-0 header-title">Profit's</h5>
+                    <div id="targets-chart" class="apex-charts mt-3" dir="ltr"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- row -->
+    <!-- products -->
+    <div class="row">
+        <div class="col-xl-5">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title mt-0 mb-0 header-title">Sales By Category</h5>
+                    <div id="sales-by-category-chart" class="apex-charts mb-0 mt-4" dir="ltr"></div>
+                </div>
+                <!-- end card-body-->
+            </div>
+            <!-- end card-->
+        </div>
+        <!-- end col-->
+        <div class="col-xl-7">
+            <div class="card">
+                <div class="card-body">
+                    <a href="javascript: void(0);" class="btn btn-primary btn-sm float-right"> <i class='uil uil-export ml-1'></i> Export </a>
+                    <h5 class="card-title mt-0 mb-0 header-title">Recent Orders</h5>
+                    <div class="table-responsive mt-4">
+                        <table class="table table-hover table-nowrap mb-0">
+                            <thead>
+                                <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col">Customer</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>#98754</td>
+                                    <td>ASOS Ridley High</td>
+                                    <td>Otto B</td>
+                                    <td>&#x20B9;79.49</td>
+                                    <td><span class="badge badge-soft-warning py-1">Pending</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#98753</td>
+                                    <td>Marco Lightweight Shirt</td>
+                                    <td>Mark P</td>
+                                    <td>&#x20B9;125.49</td>
+                                    <td><span class="badge badge-soft-success py-1">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#98752</td>
+                                    <td>Half Sleeve Shirt</td>
+                                    <td>Dave B</td>
+                                    <td>&#x20B9;35.49</td>
+                                    <td><span class="badge badge-soft-danger py-1">Declined</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#98751</td>
+                                    <td>Lightweight Jacket</td>
+                                    <td>Shreyu N</td>
+                                    <td>&#x20B9;49.49</td>
+                                    <td><span class="badge badge-soft-success py-1">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>#98750</td>
+                                    <td>Marco Shoes</td>
+                                    <td>Rik N</td>
+                                    <td>&#x20B9;69.49</td>
+                                    <td><span class="badge badge-soft-danger py-1">Declined</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- end table-responsive-->
+                </div>
+                <!-- end card-body-->
+            </div>
+            <!-- end card-->
+        </div>
+        <!-- end col-->
+    </div>
+    <!-- end row -->
+    <!-- widgets -->
+
+    <div class="row">
+        @foreach (var item in Model.TotalMember)
+        {
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body pt-2">
+                    <h5 class="mb-4 header-title">LifeOne</h5>
+                    <div class="media-list list-group">
+                        <div class="list-group-item list-group-item-action media p-1">
+                            <a class="media-link" href="/Admin/RecBaginCom">
+                                <div class="media-left">
+                                    <p class="text-bold-600 m-0">Total Received in Company</p>
+                                    <p class="font-small-2 text-muted m-0">Today's Transaction</p>
+                                    <p class="font-small-2 text-muted m-0">Last Transaction</p>
+                                </div>
+                                <div class="media-body text-right">
+                                    <p class="text-bold-600 m-0">@item.TotalRecievedInComAmt</p>
+                                    <p class="font-small-2 text-muted m-0 text-bold-600">INR @item.TodayReceived</p>
+                                    <p class="font-small-2 text-muted m-0 success">INR @item.LastReceived</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group-item list-group-item-action media p-1 bg-info bg-lighten-5">
+                            <a class="media-link" href="/Admin/TransferToBag">
+                                <div class="media-left">
+                                    <p class="text-bold-600 m-0">Transfer To Bag</p>
+                                    <p class="font-small-2 text-muted m-0">Today's Transaction</p>
+                                    <p class="font-small-2 text-muted m-0">Last Transaction</p>
+                                </div>
+                                <div class="media-body text-right">
+                                    <p class="text-bold-600 m-0">@item.TransaferToBag</p>
+                                    <p class="font-small-2 text-muted m-0 text-bold-600">INR @item.TodayTransfer</p>
+                                    <p class="font-small-2 text-muted m-0 success">INR @item.LastTransfer</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group-item list-group-item-action media p-1 border-bottom-0">
+                            <a class="media-link" href="/Admin/UsedFromBag">
+                                <div class="media-left">
+                                    <p class="text-bold-600 m-0">Used From Bag</p>
+                                    <p class="font-small-2 text-muted m-0">Today's Transaction</p>
+                                    <p class="font-small-2 text-muted m-0">Last Transaction</p>
+                                </div>
+                                <div class="media-body text-right">
+                                    <p class="text-bold-600 m-0">@item.UsedFromBag</p>
+                                    <p class="font-small-2 text-muted m-0 text-bold-600">INR @item.TodayUsed</p>
+                                    <p class="font-small-2 text-muted m-0 success">INR @item.LastUsed</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group-item list-group-item-action media p-1 bg-info bg-lighten-5">
+                            <a class="media-link" href="/Admin/BalanceinBag">
+                                <div class="media-left">
+                                    <p class="text-bold-600 m-0">Balance in Bag</p>
+                                    <p class="font-small-2 text-muted m-0">Today's Transaction</p>
+                                    <p class="font-small-2 text-muted m-0">Last Transaction</p>
+                                </div>
+                                <div class="media-body text-right">
+                                    <p class="text-bold-600 m-0">@item.BalanceInBag</p>
+                                    <p class="font-small-2 text-muted m-0 text-bold-600">INR @item.TodayBalance</p>
+                                    <p class="font-small-2 text-muted m-0 success">INR @item.LastBalance</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div class="list-group-item list-group-item-action media p-1 border-bottom-0">
+                            <a class="media-link" href="#">
+                                <div class="media-left">
+                                    <p class="text-bold-600 m-0"><!--Amount -->Received Against Card</p>
+                                    <p class="font-small-2 text-muted m-0">Today's Transaction</p>
+                                    <p class="font-small-2 text-muted m-0">Last Transaction</p>
+                                </div>
+                                <div class="media-body text-right">
+                                    <p class="text-bold-600 m-0">@item.TotalUsedFromCard</p>
+                                    <p class="font-small-2 text-muted m-0 text-bold-600">INR @item.TodaysTotalCard</p>
+                                    <p class="font-small-2 text-muted m-0 success">INR @item.LastUseFromCard</p>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body pt-2 pb-3">
+                    <a href="task-list.html" class="float-right"> View All </a>
+                    <h5 class="mb-4 header-title">Recent Member Joined</h5>
+                    <div class="slimScrollDiv" style="position: relative; overflow: hidden; width: auto; height: 507px;">
+                        <div class="slimscroll" style="max-height: 390px; overflow: hidden; width: auto; height: 507px;">
+                            <div class="message-box">
+
+                                @foreach (var recent in Model.RecentJoiners)
+                                {
+                                <div class="message-widget">
+                                    <!-- Message -->
+
+                                    <div class="mail-contnet">
+                                        <div class="payReq">
+                                            <div class="payDet">
+                                                <a href="#">
+                                                    <h5>@recent.MemberName</h5>
+                                                </a> <span class="mail-desc">Refer By: @recent.SponsorName</span>
+                                            </div>
+                                            <div class="payRwallet">
+                                                <a href="#">
+                                                    <h5>@recent.MemberId</h5>
+                                                </a> <span class="time"><i>@recent.JoiningDate</i></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                }
+                            </div>
+                        </div><div class="slimScrollBar" style="background: rgb(158, 165, 171); width: 4px; position: absolute; top: 0px; opacity: 0.4; display: none; border-radius: 7px; z-index: 99; right: 1px; height: 386.041px;"></div><div class="slimScrollRail" style="width: 4px; height: 100%; position: absolute; top: 0px; display: none; border-radius: 7px; background: rgb(51, 51, 51); opacity: 0.2; z-index: 90; right: 1px;"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4">
+            <div class="card">
+                <div class="card-body pt-2">
+                    <h5 class="mb-4 header-title">Top Performers Group</h5>
+                    <div class="media border-top pt-3">
+                        <img src="~/Content/admin-assets/images/users/avatar-7.jpg" class="avatar rounded mr-3"
+                             alt="shreyu">
+                        <div class="media-body">
+                            <h6 class="mt-1 mb-0 font-size-15">Team 1</h6>
+                            <h6 class="text-muted font-weight-normal mt-1 mb-3">Senior Sales Guy</h6>
+                        </div>
+                    </div>
+                    <div class="media mt-1 border-top pt-3">
+                        <img src="~/Content/admin-assets/images/users/avatar-9.jpg" class="avatar rounded mr-3"
+                             alt="shreyu">
+                        <div class="media-body">
+                            <h6 class="mt-1 mb-0 font-size-15">Team 2</h6>
+                            <h6 class="text-muted font-weight-normal mt-1 mb-3">Social Media Campaign</h6>
+                        </div>
+                    </div>
+                    <div class="media mt-1 border-top pt-3">
+                        <img src="~/Content/admin-assets/images/users/avatar-4.jpg" class="avatar rounded mr-3"
+                             alt="shreyu">
+                        <div class="media-body">
+                            <h6 class="mt-1 mb-0 font-size-15">Team 3</h6>
+                            <h6 class="text-muted font-weight-normal mt-1 mb-3">Inventory Manager</h6>
+                        </div>
+                    </div>
+                    <div class="media mt-1 border-top pt-3">
+                        <img src="~/Content/admin-assets/images/users/avatar-1.jpg" class="avatar rounded mr-3"
+                             alt="shreyu">
+                        <div class="media-body">
+                            <h6 class="mt-1 mb-0 font-size-15">Team 4</h6>
+                            <h6 class="text-muted font-weight-normal mt-1 mb-3">Sales Person</h6>
+                        </div>
+                    </div>
+                    <div class="media mt-1 border-top pt-3">
+                        <img src="~/Content/admin-assets/images/users/avatar-5.jpg" class="avatar rounded mr-3"
+                             alt="shreyu">
+                        <div class="media-body">
+                            <h6 class="mt-1 mb-0 font-size-15">Team 5</h6>
+                            <h6 class="text-muted font-weight-normal mt-1 mb-1">Sales Person</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </div>
+
+</div>
+
+
+
+<script src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+
+
+    google.load("visualization", "1", { packages: ["corechart"] });
+
+    google.setOnLoadCallback(ChartMembers);
+    function ChartMembers() {
+        var options = {
+            title: 'Date Wise Member Joining',
+            bar: { groupWidth: "100%" },
+            chartArea: { height: '50%', top: 50, width: '90%' },
+            bar: { groupheight: '40%' },
+            legend: { position: "none" },
+            height: 400,
+            titleTextStyle: { color: 'maroon' },
+            isStacked: true
+        };
+        $.ajax({
+            type: "GET",
+            //url: "/Admin/Admin/MemberChartDetails",
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            async: false,
+            success: function (r) {
+                var dataTable = [];
+                $.each(r, function (i, item) {
+                    if (i == 0) {
+                        dataTable.push(["Date", "Total Members", { role: 'style' }]);
+                        dataTable.push(item);
+                    }
+                    else {
+
+                        dataTable.push(item);
+                    }
+                }
+                );
+                var data = google.visualization.arrayToDataTable(dataTable);
+                var chart = new google.visualization.ColumnChart($("#ChartMember")[0]);
+                chart.draw(data, options);
+            },
+            error: function (ex) {
+                debugger;
+                alert('Failed to retrive !!' + ex);
+            }
+        });
+    }
+</script>
+

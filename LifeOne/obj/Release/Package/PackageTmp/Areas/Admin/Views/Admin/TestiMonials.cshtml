@@ -1,0 +1,585 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MemberTestimonialModel
+@{
+    ViewBag.Title = "TestiMonials";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .alert-warning {
+        background-color: #fcf8e3 !important;
+        border-color: #faebcc !important;
+    }
+
+    .other-btns {
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 9;
+        padding: 7px 13px;
+    }
+
+    .openCCBox, .openBCCBox {
+        cursor: pointer;
+    }
+
+    .btn.btn-file {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .fixedEmail {
+        position: fixed;
+        bottom: -0px;
+        right: 0px;
+        width: 500px;
+        max-height: 485px;
+        display: none;
+        z-index: 999;
+    }
+
+        .fixedEmail .input-group .input-group-addon {
+            background-color: #edf1f2;
+            border-color: #cfdadd;
+        }
+
+        .fixedEmail textarea.form-control.to-box {
+            border: 1px solid #cfdadd;
+            padding: 0 5px;
+            height: 60px;
+            font-size: 12px;
+        }
+
+        .fixedEmail .field-icon, .FixedSMS .field-icon {
+            position: absolute;
+            top: 7px;
+            right: 5px;
+            z-index: 2;
+        }
+
+        .fixedEmail .form-group {
+            margin-bottom: 3px;
+            position: relative;
+        }
+
+        .fixedEmail .form-control, .fixedEmail .select2-container--default .select2-selection--multiple {
+            border-color: #cfdadd;
+            border-radius: 0;
+            padding: 0 5px;
+            font-size: 12px;
+            height: 28px;
+        }
+
+        .fixedEmail .form-group.message-area {
+            border: 1px solid #cfdadd;
+        }
+
+    .select2-container {
+        width: 100% !important;
+    }
+
+    .openCCBox, .openBCCBox {
+        cursor: pointer;
+    }
+
+    .CCBox, .BCCBox {
+        display: none;
+    }
+
+    .fixedEmail textarea.form-control {
+        padding: 5px;
+        height: 150px;
+        resize: none;
+    }
+
+    .fixedEmail ul.wysihtml5-toolbar a.btn {
+        padding: 2px 5px;
+        font-size: 12px;
+    }
+
+    .btn-custom {
+        padding: 0 5px;
+    }
+
+    .custome-select {
+        height: 25px;
+        padding: 0 5px;
+    }
+
+    .btn.btn-file > input[type='file'] {
+        position: absolute;
+        top: 0;
+        right: 0;
+        min-width: 100%;
+        min-height: 100%;
+        font-size: 100px;
+        text-align: right;
+        opacity: 0;
+        filter: alpha(opacity=0);
+        outline: none;
+        background: white;
+        cursor: inherit;
+        display: block;
+    }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E=" crossorigin="anonymous" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js" integrity="sha256-wfVTTtJ2oeqlexBsfa3MmUoB77wDNRPqT1Q1WA2MMn4=" crossorigin="anonymous"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+<link href="~/Content/dist/css/sweetalert.css" rel="stylesheet" />
+
+<div class="container-fluid">
+
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Testimonial Approval</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Dashboard</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Testimonial Approval</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>*@
+                </span>
+                <span>
+                    <a href="@Url.Action("ExportToExcelTestimonials","Admin")" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                    <button class="btn btn-success btn-rounded btnPdf" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <form action="" method="post">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Login Id</label>
+                                                    <input type="text" name="LoginId" id="LoginId" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" name="Name" id="Name" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Mobile</label>
+                                                    <input type="text" name="Mobile" id="Mobile" placeholder="" class="form-control" onkeypress="return isNumberKey(event)" />
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                    <a href="/Admin-TestiMonialApproval" class="btn btn-secondary" style="margin-top:1.5em;">Reset</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-responsive" >
+                            <table class="table table-striped" id="tblMemberList">
+                                <thead>
+                                    <tr>
+                                        <th>S. No.</th>
+                                        <th>Name</th>
+                                        <th>Login Id</th>
+                                        <th>Mobile</th>
+                                        <th>Crop Category</th>
+                                        <th>Crop</th>
+                                        <th>Description</th>
+                                        <th>View</th>
+                                        <th>Status</th>
+                                        <th>Approved / Decline Remark</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.MemberTestimonialList.Count > 0)
+                                    {
+                                        int SNo = 0;
+                                        foreach (var item in Model.MemberTestimonialList)
+                                        {
+                                            <tr>
+                                                <td>@(SNo = SNo + 1)</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.LoginId</td>
+                                                <td>@item.Mobile</td>
+                                                <td>@item.CropCategory
+                                                <td>@item.Crop</td>
+                                                <td style="width: 38%;">@item.Description</td>
+                                                <td><a href="http://webapi.LifeOne.com/@item.FilePath" target="_blank">Image / Video</a></td>
+
+                                                @if (item.IsApprove == false && item.IsDecline == false)
+                                                {
+                                                    <td>
+                                                        <label class="label label-danger">Pending</label>
+                                                    </td>
+                                                }
+                                                else if (item.IsApprove || item.IsDecline == false)
+                                                {
+                                                    <td>
+                                                        <label class="label label-success">Approved</label>
+                                                    </td>
+                                                }
+                                                else if (item.IsApprove == false && item.IsDecline == true)
+                                                {
+                                                    <td>
+                                                        <label class="label label-danger">Declined</label>
+                                                    </td>
+                                                }
+                                                @if (String.IsNullOrEmpty(item.Remark))
+                                                {
+                                                    <td>
+                                                        -----------
+                                                    </td>
+                                                }
+                                                else
+                                                {
+                                                    <td>
+                                                        @item.Remark
+                                                    </td>
+                                                }
+
+                                                <td>
+                                                    <button class="btn btn-sm btn-success" onclick="return confirm('Are you sure to approve this Testimonial?') ? openModel(1, 0, '@item.Id') : false;">Approve</button>
+                                                    <button class="btn btn-sm btn-secondary" onclick="return confirm('Are you sure to decline this Testimonial?') ? openModel(0, 1, '@item.Id') : false;">Decline</button>
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+
+                    <footer class="card-footer bg-white p-2">
+                        <div class="d-md-flex align-items-center justify-content-between">
+                            @if (Model != null)
+                            {
+                                if (Model.Pager != null)
+                                {
+                                    if (Model.Pager.EndPage > 1)
+                                    {
+                                        <div> <small class="text-muted inline">showing @Model.MemberTestimonialList.Count  of @Model.MemberTestimonialList[0].TotalRecords items</small> </div>
+                                        <div>
+                                            <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                @if (Model.Pager.CurrentPage > 1)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-TestimonialApproval">First</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-TestimonialApproval?page=@(Model.Pager.CurrentPage - 1)">Previous</a>
+                                                    </li>
+                                                }
+                                                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                {
+                                                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                        <a class="page-link" href="/Admin-TestimonialApproval?page=@page">@page</a>
+                                                    </li>
+                                                }
+                                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-TestimonialApproval?page=@(Model.Pager.CurrentPage + 1)">Next</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-TestimonialApproval?page=@(Model.Pager.TotalPages)">Last</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+
+                            }
+
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- container-fluid -->
+</div>
+
+@*<div class="modal fade" id="sendNotification">*@
+<div class="modal fade" id="remarkModel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h5 class="modal-title" id="testimonialRemarkModel"></h5>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body p-3">
+
+                    <input type="hidden" id="ApproveValue" />
+                    <input type="hidden" id="DeclineValue" />
+                    <input type="hidden" id="TestimonialID" />
+                    <div class="form-group">
+                        <textarea class="form-control input-sm" id="txtRemark" name="txtRemark" rows="10" placeholder="Remark"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button id="Save" class="btn btn-success" value="Save" onclick="SaveTestimonial()">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Content/dist/js/sweetalert.min.js"></script>
+<script>
+    function openModel(Approve, Decline, TID) {
+        if (Approve == 1)
+            $('#testimonialRemarkModel').text('Approve Testimonial');
+        else
+            $('#testimonialRemarkModel').text('Decline Testimonial');
+
+        $('#ApproveValue').val(Approve);
+        $('#DeclineValue').val(Decline);
+        $('#TestimonialID').val(TID);
+        $('#remarkModel').modal('show');
+        return false;
+    }
+
+    function SaveTestimonial() {
+        var msg = $('#txtRemark').val();
+        if (msg == null || msg == undefined || msg == '') {
+            swal("", "Please Fill Remark !", "error");
+            $('#txtRemark').focus();
+            return false;
+        }
+        else {
+            var model = {
+                IsApprove: $('#ApproveValue').val() == "1" ? true : false,
+                IsDecline: $('#DeclineValue').val() == "1" ? true : false,
+                Id: $('#TestimonialID').val(),
+                Remark: msg
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Admin/Admin/SaveTestimonialStatus",
+                data: JSON.stringify(model),
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'json',
+                success: function (data) {
+                    if (data.Status == true) {
+                        window.location.href = "/Admin-TestiMonialApproval";
+                    }
+                    else {
+                        window.location.href = "/Admin-TestiMonialApproval";
+                    }
+
+                },
+                failure: function (data) {
+                    swal("", "Something went wrong!!!", "error");
+                    window.setTimeout(function () {
+                        window.location.href = "/Admin-TestiMonialApproval";
+                    }, 3000);
+                },
+                error: function (data) {
+                    swal("", "Something went wrong!!!", "error");
+                    window.setTimeout(function () {
+                        window.location.href = "/Admin-TestiMonialApproval";
+                    }, 3000);
+                }
+            });
+        }
+    }
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [9, 0]; // coloms to remove
+
+        var tbl = $('#tblMemberList').clone();
+        $('.t').addClass('hide');
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 35,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Testimonial Approval Detail',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "TestimonialApproval");
+        doc.page++;
+        doc.save('TestimonialApproval.pdf');
+
+    });
+
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('DepartmentTable').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>PaymentDetailsReport</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    }
+</script>
+

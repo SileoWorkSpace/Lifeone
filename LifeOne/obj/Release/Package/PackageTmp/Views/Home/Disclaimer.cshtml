@@ -1,0 +1,119 @@
+﻿
+@{
+    ViewBag.Title = " Disclaimer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}   <!-- Section: page title -->
+
+<style>
+    .policy ol {
+        counter-reset: item;
+        margin: 0px;
+        padding: 0px;
+    }
+
+        .policy ol li {
+            display: block;
+            color: #666666;
+            font-size: 20px;
+            padding-left: 25px;
+            font-weight: 600;
+            position: relative;
+        }
+
+    .policy p {
+        font-size: 14px;
+        line-height: 21px;
+        padding: 5px 0 0px 0px;
+        text-align: justify;
+    }
+
+    .policy ol li:before {
+        content: counters(item, ".") ".";
+        counter-increment: item;
+        position: absolute;
+        left: 0px;
+    }
+
+    .policy ol li ol {
+        padding: 5px 0 15px 0px;
+        margin-bottom: 15px
+    }
+
+        .policy ol li ol li {
+            font-size: 14px;
+            line-height: 21px;
+            padding-top: 5px;
+            padding-left: 30px;
+        }
+</style>
+<div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image" data-bg="/Content/NewAssests/img/bg/5.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                    <div class="section-title-area ltn__section-title-2">
+                        <h6 class="section-subtitle ltn__secondary-color">//  Welcome to our company</h6>
+                        <h1 class="section-title white-color">Disclaimer</h1>
+                    </div>
+                    <div class="ltn__breadcrumb-list">
+                        <ul>
+                            <li><a href="/Home/Index">Home</a></li>
+                            <li> Disclaimer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<main id="content">
+    @*<section class="py-lg-15 py-14 bg-img-cover-center" style="background-image: url('/Content/image/product.jpg'); background-color: #F2F2F2">
+        <div class="container container-xxl">
+
+            <h1 class="fs-40 fs-lg-70" data-animate="fadeInUp"> Products Disclaimer</h1>
+        </div>
+    </section>*@
+    <section class="pt-10 pt-lg-13">
+        <div class="container container-xxl policy">
+            <div class="row">
+                <div class="policy">
+                    @*<h2>DISCLAIMER</h2>*@
+                    <p>
+                        The information contained in this website is for general information purposes only. The
+                        information is provided by LifeOne INDUSTRIES PRIVATE LIMITED and while we endeavour to keep
+                        the information up to date and correct, we make no representations or warranties of any kind,
+                        express or implied, about the completeness, accuracy, reliability, suitability or availability with
+                        respect to the website or the information, products, services, or related graphics contained on the
+                        website for any purpose. Users are advised to rely on information posted herein for any purpose
+                        only after verification and confirmation of the same from authentic and authoritative sources.
+                        Neither LifeOne INDUSTRIES PRIVATE LIMITED nor the site developer is responsible for any
+                        consequences that may arise out of using such information without verification / confirmation.
+                        There may be time gap in internet / online posting / transmission of information and availability
+                        of such information at browsers’ end.
+                    </p>
+                    <p>
+                        In no event LifeOne INDUSTRIES PRIVATE LIMITED will be liable for any loss or damage including
+                        without limitation, indirect or consequential loss or damage, or any loss or damage whatsoever
+                        arising from loss of data or profits arising out of, or in connection with, the use of this website.
+                    </p>
+                    <p>
+                        Every effort is made to keep the website up and running smoothly. However, LifeOne INDUSTRIES
+                        PRIVATE LIMITED takes no responsibility for, and will not be liable for, the website being
+                        temporarily unavailable due to technical issues beyond our control. While browsing this website,
+                        link to other websites may create which is not under the control of LifeOne INDUSTRIES PRIVATE
+                        LIMITED. We have no control over the nature, content and availability of those sites.
+                    </p>
+                    <p>
+                        No contents / portion of the contents, graphics, picture or presentation in this site may be used
+                        without explicit permission in writing from the author of this site. Usage of contents / parts thereof
+                        without verifiable and expressed permission from author or his authorized person will attract legal
+                        consequences.
+                    </p>
+                    <p>For any query, suggestions regarding this website please contact at <a href="mailto:info@lifeoneindia.com">info@lifeoneindia.com</a></p>
+
+
+
+                </div>
+</div>
+</div></section>
+</main>

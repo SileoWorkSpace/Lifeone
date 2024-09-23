@@ -1276,7 +1276,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 obj.Objlist = new List<MAdminMembers>();
             }
             return View(obj);
-
         }
 
         [HttpGet]
@@ -1305,9 +1304,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 throw;
             }
-
             return RedirectToAction("BlockUnblockDetails", "AdminReport");
-
         }
 
         [HttpGet]
@@ -1588,8 +1585,8 @@ namespace LifeOne.Areas.Admin.Controllers
             }
 
             ViewBag.LoginId = obj.MemberLoginId;
-            ViewBag.PayoutNo = obj.PayoutNo;
-            ViewBag.KycStatus = obj.KycStatus;
+            ViewBag.PayoutNo = obj.PayoutNo;            
+            ViewBag.Iskyc = obj.IsKyc;
             ViewBag.tdate = obj.tdate;
             ViewBag.fdate = obj.fdate;
             obj = AdminReportsService.GetPayoutReportForBankService(Page, obj);
@@ -1605,9 +1602,8 @@ namespace LifeOne.Areas.Admin.Controllers
                 return Redirect("/Home/adminlogin");
             }
             ViewBag.LoginId = model.MemberLoginId;
-            ViewBag.PayoutNo = model.PayoutNo;
-            ViewBag.KycStatus = model.KycStatus;
-            model.KycStatus = model.KycStatus;
+            ViewBag.PayoutNo = model.PayoutNo;          
+            ViewBag.Iskyc = model.IsKyc;
             ViewBag.tdate = model.tdate;
             ViewBag.fdate = model.fdate;
 
@@ -1618,9 +1614,10 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 model.Objlist = DALAdminReports.GetPayoutReportForBank(model);
                 DataTable dt = new DataTable("Payout Report For Bank");
-                dt.Columns.AddRange(new DataColumn[10] {
+                dt.Columns.AddRange(new DataColumn[11] {
                                                      new DataColumn("Login Id"),
                                                      new DataColumn("Name"),
+                                                     new DataColumn("KycStatus"),
                                                      new DataColumn("Mobile No"),
                                                      new DataColumn("Payout No"),
                                                      new DataColumn("Closing Date"),
@@ -1634,7 +1631,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 {
                     foreach (var customer in model.Objlist)
                     {
-                        dt.Rows.Add(customer.LoginId, customer.Name, customer.MobileNo, customer.PayountNo, customer.ClosingDate, customer.BankName, customer.IFSCCode, customer.MemberBranch, customer.MemberAccNo, customer.NetIncome);
+                        dt.Rows.Add(customer.LoginId, customer.Name,customer.KycStatus, customer.MobileNo, customer.PayountNo, customer.ClosingDate, customer.BankName, customer.IFSCCode, customer.MemberBranch, customer.MemberAccNo, customer.NetIncome);
 
                     }
                     using (XLWorkbook wb = new XLWorkbook())

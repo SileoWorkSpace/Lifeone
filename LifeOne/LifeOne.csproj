@@ -303,6 +303,8 @@
     <Compile Include="Areas\Admin\Controllers\PlanIncomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductMasterController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductStockController.cs" />
+    <Compile Include="Areas\Admin\Controllers\FAQMasterController.cs" />
+    <Compile Include="Areas\Admin\Controllers\UploadPrivacyPolicy.cs" />
     <Compile Include="Areas\Admin\Controllers\UploadTermsandCondition.cs" />
     <Compile Include="Areas\Admin\Controllers\ProducTypeController.cs" />
     <Compile Include="Areas\Admin\Controllers\SocialActivityController.cs" />
@@ -327,6 +329,7 @@
     <Compile Include="Areas\Associate\Controllers\BuyPackageController.cs" />
     <Compile Include="Areas\Associate\Controllers\EWalletRequestController.cs" />
     <Compile Include="Areas\Associate\Controllers\PremimumclubController.cs" />
+    <Compile Include="Areas\Associate\Controllers\TopupByAssociateController.cs" />
     <Compile Include="Areas\Associate\Controllers\TreeController.cs" />
     <Compile Include="Areas\Franchise\Controllers\ChildFranchiseController.cs" />
     <Compile Include="Areas\Franchise\Controllers\FranchiseBusinessReportController.cs" />
@@ -383,10 +386,12 @@
     <Compile Include="Models\AdminManagement\ADAL\DALAdminPlanIncome.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminImageUpload.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProductMaster.cs" />
+    <Compile Include="Models\AdminManagement\ADAL\DALAdminPrivacyPolicy.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminTermsCondition.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProductType.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminProfile.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminReports.cs" />
+    <Compile Include="Models\AdminManagement\ADAL\DALAdminFAQ.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminUnit.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALAdminUtility.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALBusinessReport.cs" />
@@ -425,6 +430,7 @@
     <Compile Include="Models\AdminManagement\AEntity\AdminBusinessReportModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\AdminIncomeDetailsModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\AdminOrder.cs" />
+    <Compile Include="Models\AdminManagement\AEntity\AdminPrivacyPolicy.cs" />
     <Compile Include="Models\AdminManagement\AEntity\AssociateBusinessReportModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\ChangeProfile.cs" />
     <Compile Include="Models\AdminManagement\AEntity\DynamicUtilityModel.cs" />
@@ -449,6 +455,7 @@
     <Compile Include="Models\AdminManagement\AEntity\MAdminProfile.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminReports.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminStockManagement.cs" />
+    <Compile Include="Models\AdminManagement\AEntity\MAdminFAQ.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminUnit.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminUntility.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAdminUploadKyc.cs" />
@@ -518,6 +525,7 @@
     <Compile Include="Models\AdminManagement\AService\PerformanceLevelService.cs" />
     <Compile Include="Models\AdminManagement\AService\PlanIncomeService.cs" />
     <Compile Include="Models\AdminManagement\AService\ProductService.cs" />
+    <Compile Include="Models\AdminManagement\AService\PrivacyPolicyService .cs" />
     <Compile Include="Models\AdminManagement\AService\TermsConditionService.cs" />
     <Compile Include="Models\AdminManagement\AService\ProductTypeService.cs" />
     <Compile Include="Models\AdminManagement\AService\SendNotificationService.cs" />
@@ -526,6 +534,7 @@
     <Compile Include="Models\AdminManagement\AService\SupportService.cs" />
     <Compile Include="Models\AdminManagement\AService\SupportTypeService.cs" />
     <Compile Include="Models\AdminManagement\AService\TransactionService.cs" />
+    <Compile Include="Models\AdminManagement\AService\FAQService.cs" />
     <Compile Include="Models\AdminManagement\AService\UnitService.cs" />
     <Compile Include="Models\AdminManagement\AService\UplineService.cs" />
     <Compile Include="Models\AdminManagement\AService\UtilityService.cs" />
@@ -616,6 +625,7 @@
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALKYC.cs" />
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALNotification.cs" />
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALSMS.cs" />
+    <Compile Include="Models\AssociateManagement\AssociateDAL\RequestDAL.cs" />
     <Compile Include="Models\AssociateManagement\AssociateDAL\RequestForAssociateFranchiseDAL.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\AdvancePaymentModel.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\AssciateIncomeModel.cs" />
@@ -623,6 +633,7 @@
     <Compile Include="Models\AssociateManagement\AssociateEntity\AssociateProfile.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\AssociatePurchaseDetails.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\AssociateTeam.cs" />
+    <Compile Include="Models\AssociateManagement\AssociateEntity\AssosiateRequest.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\EwalletRequest.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\FranchiseList.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\FranchiseReqList.cs" />
@@ -756,6 +767,9 @@
     <Compile Include="Models\HomeManagement\HDAL\DALCustomerRegistration.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALForgotPassword.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALLogin.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\FAQModel.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\NewsandAnnouncement.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\PrivacyandPolicy.cs" />
     <Compile Include="Models\HomeManagement\HEntity\UploadImageVideo.cs" />
     <Compile Include="Models\HomeManagement\HEntity\TermsCondition.cs" />
     <Compile Include="Models\HomeManagement\HEntity\Contact.cs" />
@@ -1565,6 +1579,13 @@
     <Content Include="Areas\Admin\Views\Master\UploadImage.cshtml" />
     <Content Include="Areas\Admin\Views\Master\UploadVideo.cshtml" />
     <Content Include="Areas\Admin\Views\AdminReport\PrintPayoutReportForBank.cshtml" />
+    <Content Include="Areas\Admin\Views\UploadPrivacyPolicy\UploadPrivacyPolicy.cshtml" />
+    <Content Include="Areas\Admin\Views\UploadPrivacyPolicy\UploadPrivacyPolicyList.cshtml" />
+    <Content Include="Areas\Admin\Views\FAQMaster\UploadFAQ.cshtml" />
+    <Content Include="Areas\Associate\Views\TopupByAssociate\TopupbyAssociate.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociatePlanIncome\EWalletRequest.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociatePlanIncome\EWalletList.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\EWalletRequestList.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />
@@ -2110,7 +2131,17 @@
     <Content Include="Content\NewAssests\images\Food-Product-Range.png" />
     <Content Include="Content\NewAssests\images\HAir-care.jpg" />
     <Content Include="Content\NewAssests\images\hero-slider-01a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-02a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-03a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-05a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-06a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-07a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-08a.jpg" />
     <Content Include="Content\NewAssests\images\hero-slider-09a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-10a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-11a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-12a.jpg" />
+    <Content Include="Content\NewAssests\images\hero-slider-13a.jpg" />
     <Content Include="Content\NewAssests\images\icon-boxes\alret.svg" />
     <Content Include="Content\NewAssests\images\icon-boxes\alret_solid.svg" />
     <Content Include="Content\NewAssests\images\icon-boxes\check.svg" />
@@ -4703,6 +4734,9 @@
     <Content Include="Views\Home\ImageGallery.cshtml" />
     <Content Include="Views\Home\Video.cshtml" />
     <Content Include="Views\Shared\_PartialMobileMenuLayout.cshtml" />
+    <Content Include="Views\Home\NewsandAnnouncement.cshtml" />
+    <Content Include="Views\Home\Certificate.cshtml" />
+    <Content Include="Views\Home\FAQ.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,111 @@
+﻿
+@{
+    ViewBag.Title = "Product Return Policy ";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}   <!-- Section: page title -->
+
+<style>
+    .policy ol {
+        counter-reset: item;
+        margin: 0px;
+        padding: 0px;
+    }
+
+        .policy ol li {
+            display: block;
+            color: #666666;
+            font-size: 20px;
+            padding-left: 25px;
+            font-weight: 600;
+            position: relative;
+        }
+
+    .policy p {
+        font-size: 14px;
+        line-height: 21px;
+        padding: 5px 0 0px 0px;
+    }
+
+    .policy ol li:before {
+        content: counters(item, ".") ".";
+        counter-increment: item;
+        position: absolute;
+        left: 0px;
+    }
+
+    .policy ol li ol {
+        padding: 5px 0 15px 0px;
+        margin-bottom: 15px
+    }
+
+        .policy ol li ol li {
+            font-size: 14px;
+            line-height: 21px;
+            padding-top: 5px;
+            padding-left: 30px;
+        }
+</style>
+
+
+<div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image" data-bg="/Content/NewAssests/img/bg/5.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                    <div class="section-title-area ltn__section-title-2">
+                        <h6 class="section-subtitle ltn__secondary-color">//  Know about our product return policy</h6>
+                        <h1 class="section-title white-color">Product Retrun Plicy</h1>
+                    </div>
+                    <div class="ltn__breadcrumb-list">
+                        <ul>
+                            <li><a href="/Home/Index">Home</a></li>
+                            <li> Product Retrun Plicy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<main id="content">
+    @*<section class="py-lg-15 py-14 bg-img-cover-center" style="background-image: url('/Content/image/product.jpg'); background-color: #F2F2F2">
+        <div class="container container-xxl">
+
+            <h1 class="fs-40 fs-lg-70" data-animate="fadeInUp">Product Retrun Plicy</h1>
+        </div>
+    </section>*@
+    <section class="pt-10 pt-lg-13">
+        <div class="container container-xxl policy">
+            <div class="row">
+
+                <div class="policy">
+                    <h2>PRODUCT EXCHANGE, RETURN & MONEY REFUND POLICY OF LIFEONE</h2>
+                    <p>We at LIFE ONE WILLNESS INDUSTRIES PRIVATE LIMITED offer a 100% Satisfaction Guarantee on our products. This indicates that consumers of Life One Willness products will be satisfied with their purchases. In any case, if the customer/direct seller is not satisfied with the product quality or any manufacturing or packaging defect is found in the product then the customer/direct seller can return/exchange the product. The Product Return Policy is applicable on saleable product(s) as well as partially used product(s). The customer/direct seller must contact the company (LIFE ONE WILLNESS INDUSTRIES PRIVATE LIMITED) from whom he/she purchased the same. Product return/exchange is subjected to the following reasons:</p>
+                    <ol>
+                        <li>The customer/direct seller should have a valid reason for product return/exchange. </li>
+                        <li>The customer/direct seller may return/exchange the product(s) within 30 days from the date of purchase. After 30 days, product return/exchange is not possible.</li>
+                        <li>The product(s) exchange/return is only possible once within 30 days from the date of purchase.</li>
+                        <li>The customer/direct seller must have the original copy of the purchase invoice which he/she needs to deposit with the company along with duly filled and signed Product Return Form and product(s). A Softcopy of the Product Return Form is available in the download section of the company’s website <a href="http://lifeonewellness.com/">lifeonewellness.com</a></li>
+                        <li>In case of manufacturing or packaging defect in the product, the company will exchange the product(s) free of cost but the product(s) should be unopened, and unaltered.</li>
+                        <li>In case of customer/direct seller wants to exchange the product(s) with another product(s), the company will issue a credit note (Zero BV) of the same amount, which can be used by the customer/direct seller within 30 days of his/her first purchase for purchasing other products of his/her choice. Product(s) exchange is only possible if the product(s) are unopened (sealed), physically undamaged, and should be useable, resaleable, and unaltered.</li>
+                        <li>
+                            If the customer/direct seller wants his/her money back due to any reason, the Company shall initiate the money-back process and shall provide a full refund for the product(s) to the customer/direct seller after deducting GST amount. Money back is possible only if:<br>
+
+                            <ol>
+                                <li>Product(s) seal is open and customer/direct seller has used the product: used quantity of the product(s) should not be used more than 25% of the total product quantity. For example, if a product contains 60 capsules at the time of purchase, then at the time of return, the balance product quantity must not be less than 45 capsules.</li>
+                                <li>Product(s) are sealed: product(s) should not be physically damaged, and should be useable, resaleable, and unaltered.</li>
+                                <li>The company shall use the same mode to return the amount in lieu of the product(s) returned. It means, if the customer/direct seller has used the online transaction at the time of product(s) purchase, the company shall online transfer the amount to the same bank account of customer/direct seller.</li>
+                                <li>If the amount of refund in lieu of product(s) returned is up to Rs.1000/-, the company shall immediately return back cash amount to the customer/direct seller. However, if the amount will exceed Rs.1000/-, then the company shall transfer the said amount to the customer's/direct seller's bank account.</li>
+
+                            </ol>
+                        </li>
+                        <li>Product Return Policy is NOT APPLICABLE on Business Support Materials (BSM), Brochures, Product Literatures, Electric items if opened.</li>
+                        <li>If products return quantity is greater than or equal to 6 on a single invoice, 10% handling charges will be deducted.</li>
+                        <li>Total product return quantity cannot exceed the quantity appearing on the purchase invoice.</li>
+
+                    </ol>
+                </div>
+            </div>
+            </div>
+</section>
+</main>

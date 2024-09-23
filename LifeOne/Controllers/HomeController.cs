@@ -324,7 +324,30 @@ namespace LifeOne.Controllers
         //}
         public ActionResult PrivacyPolicy()
         {
-            return View();
+            PrivacyandPolicy obj = new PrivacyandPolicy();
+            try
+            {
+                List<PrivacyandPolicy> lstPrivacyandPolicy1 = new List<PrivacyandPolicy>();
+                DataSet ds = obj.getPrivacyPolicy();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        PrivacyandPolicy lstPrivacyandPolicy = new PrivacyandPolicy();
+                        lstPrivacyandPolicy.PrivacyPolicy = ds.Tables[0].Rows[i]["PrivacyPolicy"].ToString();
+                        lstPrivacyandPolicy1.Add(lstPrivacyandPolicy);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(lstPrivacyandPolicy1);
+                    obj.dtDetails = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+            return View(obj);           
         }
         [HttpPost]
         public ActionResult Contact(Contact _model)
@@ -407,6 +430,7 @@ namespace LifeOne.Controllers
                     listdata1.MRP = dataSet.Tables[0].Rows[i]["MRP"].ToString();
                     listdata1.OfferedPrice = dataSet.Tables[0].Rows[i]["OfferedPrice"].ToString();
                     listdata1.ReviewCount = dataSet.Tables[0].Rows[i]["ReviewCount"].ToString();
+                    listdata1.PV = dataSet.Tables[0].Rows[i]["BV"].ToString();
                     listdata1.TotalRecords = int.Parse(dataSet.Tables[0].Rows[i]["TotalRecords"].ToString());
                     productsList1.Add(listdata1);
                 }
@@ -2253,7 +2277,7 @@ namespace LifeOne.Controllers
         public ActionResult Video()
         {
             UploadImageVideo obj = new UploadImageVideo();
-            try
+            try 
             {
                 List<UploadImageVideo> ImageList1 = new List<UploadImageVideo>();
                 DataSet ds = obj.getVideogallery();
@@ -2263,7 +2287,7 @@ namespace LifeOne.Controllers
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
                         UploadImageVideo ImageList = new UploadImageVideo();
-                        ImageList.Videolink = ds.Tables[0].Rows[i]["Videolink"].ToString();
+                        ImageList.Videolink = ds.Tables[0].Rows[i]["Videolink"].ToString();                       
                         ImageList1.Add(ImageList);
                     }
                     DataTable dataTable = DALCommon.ToDataTable(ImageList1);
@@ -2277,7 +2301,7 @@ namespace LifeOne.Controllers
 
             return View(obj);
             //  return View();
-        }
+        }       
         [ChildActionOnly]
         public ActionResult MobileMenu()
         {
@@ -2290,6 +2314,73 @@ namespace LifeOne.Controllers
             products.LstMenu = products.GetAllCategoryDetail();
             return PartialView("_PartialMobileMenuLayout", products);
 
+        }
+        public ActionResult NewsandAnnouncement()
+        {
+            NewsandAnnouncement obj = new NewsandAnnouncement();
+            try
+            {
+                List<NewsandAnnouncement> NewsList1 = new List<NewsandAnnouncement>();
+                DataSet ds = obj.getNewandAnnouncement();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        NewsandAnnouncement NewsList = new NewsandAnnouncement();
+                        if (!string.IsNullOrEmpty(ds.Tables[0].Rows[i]["InfoImgUrl"].ToString()))
+                        {
+                         NewsList.InfoImgUrl = baseurl + ds.Tables[0].Rows[i]["InfoImgUrl"].ToString();
+                        }
+                        else
+                        {
+
+                            NewsList.InfoImgUrl = baseurlNoImg;
+                        }                                                
+                        NewsList.NewsHeading = ds.Tables[0].Rows[i]["NewsHeading"].ToString();
+                        NewsList.News = ds.Tables[0].Rows[i]["News"].ToString();        
+                        NewsList1.Add(NewsList);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(NewsList1);
+                    obj.dtDetails = dataTable;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(obj);            
+        }
+        public ActionResult Certificate()
+        {
+            return View();
+        }
+        public ActionResult FAQ()
+        {
+            FAQModel obj = new FAQModel();
+            try
+            {
+                List<FAQModel> FAQList1 = new List<FAQModel>();
+                DataSet ds = obj.getFAQ();
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        FAQModel FAQList = new FAQModel();                       
+                        FAQList.Question = ds.Tables[0].Rows[i]["Question"].ToString();          
+                        FAQList.Answer = ds.Tables[0].Rows[i]["Answer"].ToString();
+                        FAQList1.Add(FAQList);
+                    }
+                    DataTable dataTable = DALCommon.ToDataTable(FAQList1);
+                    obj.dtDetails = dataTable;                   
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return View(obj);          
         }
     }
 }

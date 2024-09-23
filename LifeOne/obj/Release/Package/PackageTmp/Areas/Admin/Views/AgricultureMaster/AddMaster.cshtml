@@ -1,0 +1,605 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAgricultureMaster
+
+@{
+    ViewBag.Title = "AddMaster";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<style>
+    .list-group-item.active {
+        z-index: 2;
+        color: #333;
+        background-color: #f6f6f6;
+        border-color: #f6f6f6;
+        border: 1px solid #ddd;
+    }
+    /* CSS REQUIRED */
+    .state-icon {
+        left: -5px;
+    }
+
+    .list-group-item-primary {
+        color: rgb(255, 255, 255);
+        background-color: rgb(66, 139, 202);
+    }
+
+    /* DEMO ONLY - REMOVES UNWANTED MARGIN */
+    .well .list-group {
+        margin-bottom: 0px;
+    }
+
+
+    .Product h4 {
+        font-size: 15px;
+    }
+
+    table.table td, table td {
+        font-weight: bold;
+    }
+
+    .table > tbody > tr > td, .table > tfoot > tr > td {
+        vertical-align: middle;
+    }
+
+    @@media screen and (max-width: 600px) {
+        table#cart tbody td .form-control {
+            width: 20%;
+            display: inline !important;
+        }
+
+        .actions .btn {
+            width: 36%;
+            margin: 1.5em 0;
+        }
+
+        .actions .btn-info {
+            float: left;
+        }
+
+        .actions .btn-danger {
+            float: right;
+        }
+
+        table#cart thead {
+            display: none;
+        }
+
+        table#cart tbody td {
+            display: block;
+            padding: .6rem;
+            min-width: 320px;
+        }
+
+        table#cart tbody tr td:first-child {
+            background: #333;
+            color: #fff;
+        }
+
+        table#cart tbody td:before {
+            content: attr(data-th);
+            font-weight: bold;
+            display: inline-block;
+            width: 8rem;
+        }
+
+
+        .table td:last-child, .table th:last-child {
+            text-align: left;
+        }
+
+        table#cart tfoot td {
+            display: block;
+        }
+
+            table#cart tfoot td .btn {
+                display: block;
+            }
+    }
+
+    .tab-pane input[type=text] {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + 1rem + 2px);
+        padding: .5rem .75rem;
+        font-size: .875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #4b4b5a;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #e2e7f1;
+        border-radius: .3rem;
+        -webkit-transition: border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+        transition: border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out
+    }
+
+    .tab-pane textarea {
+        display: block;
+        width: 100%;
+        height: 60px;
+        padding: .5rem .75rem;
+        font-size: .875rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #4b4b5a;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #e2e7f1;
+        border-radius: .3rem;
+        -webkit-transition: border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+        transition: border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out
+    }
+</style>
+<div class="content">
+
+    @{
+        if (!string.IsNullOrEmpty(ViewBag.Message))
+        {
+            if (ViewBag.Status == true)
+            {
+                <div class="alert alert-success m-t-30 msgdiv" id="divsuccess">
+                    <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong>  @ViewBag.Message
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger m-t-30 msgdiv" id="divUpdate">
+                    <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @ViewBag.Message
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                </div>
+            }
+        }
+    }
+
+
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Crops Master</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="#">Master</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Crops Master</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <!-- Nav tabs -->
+                    <ul class="nav nav-tabs profile-tab" role="tablist">
+                        <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#Soil" role="tab" onclick="OpenForm('Soil')">Soil Application</a> </li>
+                        <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#Soil" role="tab" onclick="OpenForm('Foliar')">Foliar Application</a> </li>
+                    </ul>
+                    <!-- Tab panes -->
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="Soil" role="tabpanel">
+                            <div class="card-body pt-0">
+                                <div class="box" id="MasterForm">
+                                    @using (Html.BeginForm("AddMaster", "AgricultureMaster", FormMethod.Post, new { id = "AddMasterForm" }))
+                                    {
+                                        <div class="box-body" style="max-height: 70vh;overflow: auto;overflow-x: hidden;">
+                                            <div class="row">
+                                                <div class="col-lg-10">
+                                                    <p><b id="ApplicationName">Soil Application</b></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <h5>Crop Category:</h5>
+
+                                                    @Html.DropDownListFor(m => m.CropCategory, (IEnumerable<SelectListItem>)ViewBag.CropCategory, new { @class = "select form-control", @onchange = "GetCropList(this)" })
+                                                </div>
+                                                <div class="col-lg-3">
+                                                    <h5>Crops Name:</h5>
+                                                    @Html.DropDownListFor(m => m.Crop_ProductId, new List<SelectListItem>() { new SelectListItem() { Text = "--Select--", Value = "0" } }, new { @class = "form-control", @onchange = "GetCropName(this)" })
+                                                    @Html.HiddenFor(m => m.CropName)
+                                                    @Html.HiddenFor(m => m.CropType, new { placeholder = "ApplicationType", id = "CropType", value = "Soil" })
+
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-3">
+                                                    <h5>Total days of Crop:</h5>
+                                                    @Html.TextBoxFor(m => m.TotalDaysOfCrop, new { placeholder = "Enter Total Days Of Crop", @onkeypress = "return isNumberKey(event);", maxlength = "5" })
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <h5> Method Of Application :</h5>
+                                                    @Html.TextAreaFor(m => m.MethodOfApplication, new { placeholder = "Enter method of application" })
+                                                </div>
+                                            </div>
+                                            <hr />
+                                            <div class="col-lg-1 pull-right">
+                                                <input type="button" value="Add" class="btn btn-primary pull-right" style="" onclick="CreateDynamicform();" />
+                                            </div>
+                                            <table class="table">
+                                                <tbody id="tbodyAgriculture">
+                                                </tbody>
+                                            </table>
+                                            <div class="text-center">
+                                                <a href="/Agriculture-Master-Report" class="btn btn-secondary">Back</a>
+                                                <button type="button" id="ValidationBtn" class="btn btn-success">Submit</button>
+                                                <button type="submit" hidden id="SubmitBtn" class="btn btn-success">Save</button>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <!--second tab-->
+
+                    </div>
+                </div>
+
+                <div class="box" style="display:none">
+                    <div class="box-body">
+                        <button onclick="OpenForm('Soil')" class="btn btn-success btn-sm"> </button>
+                        <button onclick="OpenForm('Foliar')" class="btn btn-secondary btn-sm"> </button>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="divCount" style="display:none">0</div>
+<script>
+
+    $(function () {
+
+        CreateDynamicform();
+        $('.list-group.checked-list-box .list-group-item').each(function () {
+
+            // Settings
+            var $widget = $(this),
+                $checkbox = $('<input type="checkbox" class="hidden" />'),
+                color = ($widget.data('color') ? $widget.data('color') : "primary"),
+                style = ($widget.data('style') == "button" ? "btn-" : "list-group-item-"),
+                settings = {
+                    on: {
+                        icon: 'glyphicon glyphicon-check'
+                    },
+                    off: {
+                        icon: 'glyphicon glyphicon-unchecked'
+                    }
+                };
+
+            $widget.css('cursor', 'pointer')
+            $widget.append($checkbox);
+
+            // Event Handlers
+            $widget.on('click', function () {
+                $checkbox.prop('checked', !$checkbox.is(':checked'));
+                $checkbox.triggerHandler('change');
+                updateDisplay();
+            });
+            $checkbox.on('change', function () {
+                updateDisplay();
+            });
+
+
+            // Actions
+            function updateDisplay() {
+                var isChecked = $checkbox.is(':checked');
+
+                // Set the button's state
+                $widget.data('state', (isChecked) ? "on" : "off");
+
+                // Set the button's icon
+                $widget.find('.state-icon')
+                    .removeClass()
+                    .addClass('state-icon ' + settings[$widget.data('state')].icon);
+
+                // Update the button's color
+                if (isChecked) {
+                    $widget.addClass(style + color + ' active');
+                } else {
+                    $widget.removeClass(style + color + ' active');
+                }
+            }
+
+            // Initialization
+            function init() {
+
+                if ($widget.data('checked') == true) {
+                    $checkbox.prop('checked', !$checkbox.is(':checked'));
+                }
+
+                updateDisplay();
+
+                // Inject the icon if applicable
+                if ($widget.find('.state-icon').length == 0) {
+                    $widget.prepend('<span class="state-icon ' + settings[$widget.data('state')].icon + '"></span>');
+                }
+            }
+            init();
+        });
+        $('#get-checked-data').on('click', function (event) {
+            event.preventDefault();
+            var checkedItems = {}, counter = 0;
+            $("#check-list-box li.active").each(function (idx, li) {
+                checkedItems[counter] = $(li).text();
+                counter++;
+            });
+            $('#display-json').html(JSON.stringify(checkedItems, null, '\t'));
+        });
+    });
+</script>
+
+
+<script>
+    function CreateDynamicform() {
+
+        var _rowcount = $("#divCount").text();
+        $("#tbodyAgriculture").append('<tr id="Row' + _rowcount + '">' +
+            '    <td  style="padding:0px;">                                                                                            ' +
+            '        <table class="table">                                                                                    ' +
+            '            <tr>                                                                                   ' +
+            '                <td>From days</td>                                                                      ' +
+            '                <td>                                                                               ' +
+            '                    <input type="number" style="display:none" value=' + _rowcount + ' class="form-control" name="_objDayList[' + _rowcount + '].CommonId"/>                         ' +
+            '                    <input type="number" id="DyDay" value="_objDayList[' + _rowcount + '].Day" class="form-control DaDay" name="_objDayList[' + _rowcount + '].Day" min="1" required />                         ' +
+            '                </td>                                                                              ' +
+            '                <td>To Days</td>                                                                      ' +
+            '                <td>                                                                               ' +
+            '                    <input type="number" id="DyToDay" value="_objDayList[' + _rowcount + '].ToDay" class="form-control DaToDay" name="_objDayList[' + _rowcount + '].ToDay" min="1" required />                         ' +
+            '                </td>                                                                              ' +
+            '                <td>Area</td>                                                                      ' +
+            '                <td>                                                                               ' +
+            '                    <input type="number" value="1" class="form-control _Area" name="_objDayList[' + _rowcount + '].Area" min="1" required readonly/>                         ' +
+            '                </td>                                                                              ' +
+            '                <td>Area Type</td>                                                                 ' +
+            '                <td>                                                                               ' +
+            '                    <select readonly class="form-control _AreaType" value="Hectare" name="_objDayList[' + _rowcount + '].AreaType" required>                                                  ' +
+            '                        <option value="">Area Type</option>                                                 ' +
+            '                        <option value="Hectare" selected>Hectare</option>                                                   ' +
+            '                        <option value="Square">Square</option>                                                    ' +
+            '                        <option value="Bigha">Bigha</option>                                                     ' +
+            '                    </select>                                                                      ' +
+            '                </td>                                                                              ' +
+            '                <td>                                                                               ' +
+            '                    <input type="button" class="btn btn-xs btn-danger" value="Map Product" data-toggle="collapse" data-target="#collapseExample' + _rowcount + '" aria-expanded="false" aria-controls="collapseExample' + _rowcount + '" />' +
+            '                    <input type="button" class="btn btn-xs btn-warning" value="Remove" onclick=RemoveRow(' + _rowcount + ') />          ' +
+            '                </td>                                                                              ' +
+            '            </tr>                                                                                  ' +
+            '                                                                                                   ' +
+            '            <tr>                                                                                   ' +
+            '                <td colspan="8" style="padding:0px;">                                                                   ' +
+            '                    <div class="collapse" id="collapseExample' + _rowcount + '">                                    ' +
+            '                        <div class="card card-body" id="Customcard' + _rowcount + '">                                               ' +
+            // '' + AddProductGridview(_rowcount)+''+
+            '                        </div>                                                                                          ' +
+            '                    </div>                                                                                              ' +
+            '                </td>                                                                                                   ' +
+            '            </tr>                                                                                                       ' +
+            '        </table>     ' +
+            '    </td> </tr>');
+
+        AddProductGridview(_rowcount);
+        _rowcount++;
+        $("#divCount").text(_rowcount);
+
+
+    }
+
+    function RemoveRow(value) {
+
+        $("#Row" + value).html('');
+    }
+    var x = 0;
+    function AddProductGridview(_rowcount) {
+        $.ajax
+            ({
+                type: 'POST',
+                url: '/Admin/AgricultureMaster/BindProductMster',
+                dataType: 'json',
+                success: function (data) {
+                    debugger
+                    $('#Customcard' + _rowcount + '').append('<table id="cart" class="table table-hover table-condensed Product" style="text-align: left !important;">' +
+                        '                                <thead>                                                                                 ' +
+                        '                                    <tr>                                                                                ' +
+                        '                                        <th style="width: 10%;">#</th>                                                  ' +
+                        '                                        <th style="width: 50%;">Product</th>                                            ' +
+                        '                                        <th style="width: 10%;">Price</th>                                              ' +
+                        '                                        <th style="width: 8%;">Quantity</th>                                            ' +
+                        '                                        <th style="width: 22%;" class="text-center">Description</th>                       ' +
+                        '                                    </tr>                                                                               ' +
+                        '                                </thead>                                                                                ' +
+                        '                                <tbody id="tbody' + _rowcount + '" class="TBODY">                                                                                 ' +
+
+                        '                                </tbody>                                                                                ' +
+                        '                            </table>');
+
+                    $(data).each(function (i, v) {
+                        $('#tbody' + _rowcount + '').append('<tr><td><input class=' + _rowcount + ' type="checkbox" id=' + x + ' value="' + v.ProductId + '"  ' + 'name="_objDayWiseProductList[' + x + '].ProductId"/></td>                                              ' +
+                            '                                        <td data-th="Product">                                                          ' +
+                            '                                            <div class="row">                                                           ' +
+                            '                                                <div class="col-sm-10">                                                 ' +
+                            '                                                    <h4 class="nomargin">' + v.ProductName + '</h4>               ' +
+                            '                    <input type="number" style="display:none" value=' + _rowcount + ' class="form-control" name="_objDayWiseProductList[' + x + ']._ChildCommonId"/>                         ' +
+                            '                                                </div>                                                                  ' +
+                            '                                            </div>                                                                      ' +
+                            '                                        </td>                                                                           ' +
+                            '                                        <td data-th="Price">' + v.SalePrice + '</td>' +
+                            '                                        <td data-th="Quantity">                                                         ' +
+                            '                                            <input type="number" id="P_Qty' + x + '" class="form-control text-center" value="1" name="_objDayWiseProductList[' + x + '].Quantity" min="1"/>          ' +
+                            '                                        </td>                                                                           ' +
+                            '                                        <td data-th="Description" class="text-center"><textarea id="Desc' + x + '"  class="form-control text-center" name="_objDayWiseProductList[' + x + '].Description"></textarea>                            </td > ' +
+                            '                                    </tr>');
+
+                        x++;
+                    });
+                }
+            });
+    }
+
+
+    function OpenForm(t) {
+        $("#MasterForm").css("display", "block")
+        $("#CropType").val(t);
+        $("#ApplicationName").text(t + " Application");
+    }
+    OpenForm('Soil');
+    $(document).ready(function () {
+        $("#ValidationBtn").click(function () {
+            var Status = true;
+            var DayLis = [];
+
+
+            if ($("#CropName").val() == undefined || $("#CropName").val() == "" || $("#CropName").val() == null) {
+                alert('Enter Crops Name!!!');
+                Status = false;
+                return false;
+            }
+
+            if ($("#CropName").val() == undefined || $("#CropName").val() == "" || $("#CropName").val() == null) {
+                alert('Enter Crops Name!!!');
+                Status = false;
+                return false;
+            }
+            if ($("#MethodOfApplication").val() == undefined || $("#MethodOfApplication").val() == "" || $("#MethodOfApplication").val() == null) {
+                alert('Enter Method Of Application!!!');
+                Status = false;
+                return false;
+            }
+
+
+            if (Status == true) {
+                $(".DaDay").each(function (x, v) {
+                    if (v.value == undefined || v.value == null || v.value == "") {
+                        alert('Enter Days!!!');
+                        Status = false;
+                        return false;
+                    }
+                    else {
+                        debugger
+                        if (DayLis.find(x => x == v.value) == undefined) {
+                            DayLis.push(v.value);
+                        }
+                        else {
+                            alert('Day ' + v.value + ' is already added!!!');
+                            Status = false;
+                            return false;
+                        }
+                    }
+                });
+                if (Status == true) {
+                    $("._Area").each(function (x, v) {
+                        if (v.value == undefined || v.value == null || v.value == "") {
+                            alert('Enter Area!!!');
+                            Status = false;
+                            return false;
+                        }
+                    });
+                }
+                if (Status == true) {
+                    $("._AreaType").each(function (x, v) {
+                        if (v.value == undefined || v.value == null || v.value == "") {
+                            alert('Enter Area Type!!!');
+                            Status = false;
+                            return false;
+                        }
+                    });
+                }
+            }
+            if (Status == true) {
+                if ($('.TBODY > tr> td input[type="checkbox"]:checked').length < 1) {
+                    alert('Select one or more product!!!');
+                    Status = false;
+                    return false;
+                }
+                $('.TBODY > tr> td input[type="checkbox"]:checked').each(function (x, v) {
+                    if ($("#P_Qty" + v.id).val() < 1) {
+                        alert('Quantity field is required!');
+                        Status = false;
+                        return false;
+                    }
+                    if ($("#Desc" + v.id).val() == undefined || $("#Desc" + v.id).val() == null || $("#Desc" + v.id).val() == "") {
+                        alert('Description field is required!');
+                        Status = false;
+                        return false;
+                    }
+                });
+            }
+
+            if (Status) {
+                $("#SubmitBtn").click();
+            }
+        });
+    });
+
+    function isNumberKey(evt) {
+        debugger
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+    //$('#SubmitBtn').click(function () {
+    //    debugger
+    //    $("#tbodyAgriculture > tr").each(function (x, v) {
+    //        debugger
+    //        var ttt = $(this).closest('tr').find("td:eq(2) input")[1];
+
+    //         var Days = $(this).closest('tr').find("td:eq(2) input")[1].value;
+    //        var Area = $(this).closest('tr').find("td:eq(3) input")[0].value;
+
+    //        //var Days = $("#tbodyAgriculture > tr> td :input[type='number']")[1].value;
+    //        //var Area = $("#tbodyAgriculture > tr> td :input[type='number']")[2].value;
+    //        console.log('Days :  '+Days + '--Area' + Area);
+    //    })
+    //    alert($("#CropName").val());
+    //});
+
+
+
+    function GetCropList() {
+        debugger;
+        if ($("#CropCategory").val() == 0) {
+            alert("Please select category")
+            $("#CropName").val('');
+            return false;
+        }
+        var CatId = $("#CropCategory").val();
+        $.ajax({
+            url: '/AgricultureMaster/GetCropDetail',
+            type: "POST",
+            data: JSON.stringify({ "catid": CatId }),
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (response) {
+                if (response != null || response != '') {
+                    var str = "";
+                    for (var i = 0; i < response.length; i++) {
+                        str += "<option value=" + response[i].Value + ">" + response[i].Text + "</option>";
+                    }
+
+                    $('#Crop_ProductId').html(str);
+
+                }
+
+            },
+            error: function (er) {
+                showSnazzyErrorMessage('An error occured');
+            }
+        });
+    }
+
+    function GetCropName() {
+        var CropName = $("#Crop_ProductId option:selected").html();
+        $("#CropName").val(CropName);
+    }
+</script>

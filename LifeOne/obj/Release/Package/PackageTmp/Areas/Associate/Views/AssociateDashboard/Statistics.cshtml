@@ -1,0 +1,151 @@
+﻿
+@model LifeOne.Models.AssociateManagement.AssociateEntity.AssociateDashBoard
+@using LifeOne.Models.Manager
+
+@{
+    ViewBag.Title = "Statistics";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+
+<div class="content">
+    <div class="content-wrapper-before"></div>
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0 text-white">Business Statistics</h4>
+
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Business Report</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Business Statistics</li>
+                    </ol>
+                </nav>
+            </div>
+
+        </div>
+        <!-- content -->
+        <!-- stats + charts -->
+
+        @if (SessionManager.IsBusinessId != "False")
+        {
+            <div class="row">
+                <div class="col-xl-4">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <h5 class="card-title header-title border-bottom p-3 mb-0">Business Stats Current</h5>
+                            <!-- stat 1 -->
+                            <div class="media mediaPv border-bottom">
+                                <div class="media-body">
+                                    <div class="row">
+                                        <div class="col-md-6 text-left">  <h4 class="mb-0">@Model.TotalSelfBusiness</h4><span class="text-muted text-uppercase">Personal PV</span></div>
+                                        <div class="col-md-6 text-right">  <h4 class="mb-0">@Model.QPV</h4><span class="text-muted text-uppercase">Personal Qualifying PV</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- stat 2 -->
+                            <div class="media mediaPv border-bottom">
+                                <div class="media-body">
+                                    <div class="row">
+                                        <div class="col-md-6 text-left">  <h4 class="mb-0">@Model.UIDBusiness</h4><span class="text-muted text-uppercase">User PV</span></div>
+                                        <div class="col-md-6 text-right">  <h4 class="mb-0">@Model.GPV</h4><span class="text-muted text-uppercase">User Qualifying PV</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- stat 3 -->
+                            <div class="media mediaPv border-bottom">
+                                <div class="media-body">
+                                    <div class="row">
+                                        <div class="col-md-6 text-left">  <h4 class="mb-0">@Model.TotalTeamBusiness</h4><span class="text-muted text-uppercase">Group PV</span></div>
+                                        <div class="col-md-6 text-right">  <h4 class="mb-0">@Model.TeamQPV</h4><span class="text-muted text-uppercase">Group Qualifying PV</span></div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="media mediaPv border-bottom">
+                                <div class="media-body">
+                                    <div class="row">
+                                        <div class="col-md-6 text-left">  <h4 class="mb-0">@Model.MaxBusinessId &nbsp;&nbsp;&nbsp; &nbsp; &nbsp;&nbsp;@Model.MaxLegBusiness</h4><span class="text-muted text-uppercase"> Maxbusiness Id &nbsp; &nbsp;Max Business</span></div>
+                                        <div class="col-md-6 text-right">  <h4 class="mb-0">@Model.RestBusiness</h4><span class="text-muted text-uppercase">Rest Business</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-4">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <h5 class="card-title header-title border-bottom p-3 mb-0">Business Stats Over All</h5>
+                            <!-- stat 1 -->
+                            <div class="media mediaPv border-bottom">
+                                <div class="media-body">
+                                    <div class="row">
+                                        <div class="col-md-6 text-left">  <h4 class="mb-0">@Model.CurrSelfBusiness</h4><span class="text-muted text-uppercase">Personal PV</span></div>
+                                        <div class="col-md-6 text-right">  <h4 class="mb-0">@Model.CurrSQPV</h4><span class="text-muted text-uppercase">Personal Qualifying PV</span></div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- stat 2 -->
+                            <div class="media mediaPv border-bottom">
+                                <div class="media-body">
+                                    <div class="row">
+
+                                        <div class="col-md-6 text-left">  <h4 class="mb-0">@Model.CurrentUIdBusiness</h4><span class="text-muted text-uppercase">User PV</span></div>
+                                        <div class="col-md-6 text-right">  <h4 class="mb-0">@Model.CurrUQPV</h4><span class="text-muted text-uppercase">User Qualifying PV</span></div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- stat 3 -->
+                            <div class="media mediaPv border-bottom">
+                                <div class="media-body">
+                                    <div class="row">
+
+                                        <div class="col-md-6 text-left">  <h4 class="mb-0">@Model.CurrTeamBusiness</h4><span class="text-muted text-uppercase">Group PV</span></div>
+                                        <div class="col-md-6 text-right">  <h4 class="mb-0">@Model.CurrGPV</h4><span class="text-muted text-uppercase">Group Qualifying PV</span></div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-xl-4 col-sm-12">
+                    <div class="card">
+                        <div class="card-body pb-0">
+                            <div class="associate-icon-block"> <img src="@Model.PerformanceImageurl" class="w-100" alt=""> </div>
+                            <h3 class="mt-3 mb-0 text-center">@Model.PermonaceType</h3>
+                            <div class="row mt-2 mb-1">
+                                <div class="col-md-4 text-center">
+                                    <h3 class="font-weight-bold">@Model.CurrentPV</h3>
+                                    <p class="text-uppercase text-muted small">Current PV</p>
+                                    <p class="text-uppercase text-dark small font-weight-bold">@Model.PermonaceType</p>
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <h3 class="font-weight-bold text-success">@Model.BalancePV</h3> <p class="text-uppercase text-muted small">Balance PV</p>
+                                    <div class="progress">
+                                        <div class="progress-bar" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width:@Model.TargetPercentage%"> <span class="sr-only">@Model.TargetPercentage Complete</span> </div>
+                                    </div>
+
+                                </div>
+                                <div class="col-md-4 text-center">
+                                    <h3 class="font-weight-bold">@Model.TargetPV</h3>
+                                    <p class="text-uppercase text-muted small">Target PV</p>
+                                    <p class="text-uppercase text-dark small font-weight-bold">@Model.targetLevel</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+    </div>
+    <!-- stats + charts -->
+</div>

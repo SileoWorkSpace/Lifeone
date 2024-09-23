@@ -30,10 +30,11 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public string Action { get; set; }
         public string Designation { get; set; }
         public long FkMemId { get; set; }
-        public string RewardImage { get; set; }
-        
+        public string RewardImage { get; set; }             
         public int FkSetRewardId { get; set; }
         public string RewardName { get; set; }
+        public string ToursName { get; set; }
+        public string ToursImage { get; set; }
         public decimal TargetAmount { get; set; }
         public int PK_RId { get; set; }
         public string Msg { get; set; }

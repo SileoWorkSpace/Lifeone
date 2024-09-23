@@ -1,74 +1,71 @@
-E:\github\Lifeone\LifeOne\bin\LifeOne.dll.config
-E:\github\Lifeone\LifeOne\bin\LifeOne.dll
-E:\github\Lifeone\LifeOne\bin\LifeOne.pdb
-E:\github\Lifeone\LifeOne\bin\AesEncryption.dll
-E:\github\Lifeone\LifeOne\bin\AjaxControlToolkit.dll
-E:\github\Lifeone\LifeOne\bin\Antlr3.Runtime.dll
-E:\github\Lifeone\LifeOne\bin\BouncyCastle.Crypto.dll
-E:\github\Lifeone\LifeOne\bin\ClosedXML.dll
-E:\github\Lifeone\LifeOne\bin\Dapper.dll
-E:\github\Lifeone\LifeOne\bin\DocumentFormat.OpenXml.dll
-E:\github\Lifeone\LifeOne\bin\Encryption.dll
-E:\github\Lifeone\LifeOne\bin\EntityFramework.dll
-E:\github\Lifeone\LifeOne\bin\EntityFramework.SqlServer.dll
-E:\github\Lifeone\LifeOne\bin\ExcelNumberFormat.dll
-E:\github\Lifeone\LifeOne\bin\extensionmethod.dll
-E:\github\Lifeone\LifeOne\bin\itextsharp.dll
-E:\github\Lifeone\LifeOne\bin\itextsharp.xmlworker.dll
-E:\github\Lifeone\LifeOne\bin\LitJSON.dll
-E:\github\Lifeone\LifeOne\bin\MCPG.CCA.Util.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.AspNetCore.Http.Features.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.Extensions.Logging.Abstractions.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.Extensions.Primitives.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.IdentityModel.JsonWebTokens.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.IdentityModel.Tokens.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.Owin.Host.SystemWeb.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.Owin.Security.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.Web.Infrastructure.dll
-E:\github\Lifeone\LifeOne\bin\Newtonsoft.Json.dll
-E:\github\Lifeone\LifeOne\bin\PagedList.dll
-E:\github\Lifeone\LifeOne\bin\PagedList.Mvc.dll
-E:\github\Lifeone\LifeOne\bin\Quartz.dll
-E:\github\Lifeone\LifeOne\bin\Razorpay.dll
-E:\github\Lifeone\LifeOne\bin\RestSharp.dll
-E:\github\Lifeone\LifeOne\bin\Select.HtmlToPdf.dll
-E:\github\Lifeone\LifeOne\bin\SGCareWeb.dll
-E:\github\Lifeone\LifeOne\bin\System.Buffers.dll
-E:\github\Lifeone\LifeOne\bin\System.Diagnostics.DiagnosticSource.dll
-E:\github\Lifeone\LifeOne\bin\System.IdentityModel.Tokens.Jwt.dll
-E:\github\Lifeone\LifeOne\bin\System.IO.Packaging.dll
-E:\github\Lifeone\LifeOne\bin\System.IO.Pipelines.dll
-E:\github\Lifeone\LifeOne\bin\System.Memory.dll
-E:\github\Lifeone\LifeOne\bin\System.Net.Http.Formatting.dll
-E:\github\Lifeone\LifeOne\bin\System.Numerics.Vectors.dll
-E:\github\Lifeone\LifeOne\bin\System.Runtime.CompilerServices.Unsafe.dll
-E:\github\Lifeone\LifeOne\bin\System.Threading.Tasks.Extensions.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.Cors.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.Helpers.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.Http.Cors.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.Http.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.Http.WebHost.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.Mvc.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.Optimization.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.Razor.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.WebPages.Deployment.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.WebPages.dll
-E:\github\Lifeone\LifeOne\bin\System.Web.WebPages.Razor.dll
-E:\github\Lifeone\LifeOne\bin\WebGrease.dll
-E:\github\Lifeone\LifeOne\bin\Microsoft.AspNetCore.Http.Features.xml
-E:\github\Lifeone\LifeOne\bin\Microsoft.Extensions.Primitives.xml
-E:\github\Lifeone\LifeOne\bin\Newtonsoft.Json.xml
-E:\github\Lifeone\LifeOne\bin\Select.HtmlToPdf.xml
-E:\github\Lifeone\LifeOne\bin\SGCareWeb.pdb
-E:\github\Lifeone\LifeOne\bin\SGCareWeb.dll.config
-E:\github\Lifeone\LifeOne\bin\System.IO.Pipelines.xml
-E:\github\Lifeone\LifeOne\bin\System.Net.Http.Formatting.xml
-E:\github\Lifeone\LifeOne\bin\System.Runtime.CompilerServices.Unsafe.xml
-E:\github\Lifeone\LifeOne\bin\System.Threading.Tasks.Extensions.xml
-E:\github\Lifeone\LifeOne\bin\Select.Html.dep
-E:\github\Lifeone\LifeOne\obj\Release\LifeOne.csproj.AssemblyReference.cache
-E:\github\Lifeone\LifeOne\obj\Release\LifeOne.csproj.CoreCompileInputs.cache
-E:\github\Lifeone\LifeOne\obj\Release\LifeOne.csproj.CopyComplete
-E:\github\Lifeone\LifeOne\obj\Release\LifeOne.dll
-E:\github\Lifeone\LifeOne\obj\Release\LifeOne.pdb
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\LifeOne.dll.config
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\LifeOne.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\LifeOne.pdb
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\AesEncryption.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\AjaxControlToolkit.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Antlr3.Runtime.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\BouncyCastle.Crypto.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\ClosedXML.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Dapper.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\DocumentFormat.OpenXml.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Encryption.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\EntityFramework.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\EntityFramework.SqlServer.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\ExcelNumberFormat.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\extensionmethod.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\itextsharp.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\itextsharp.xmlworker.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\LitJSON.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\MCPG.CCA.Util.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.AspNetCore.Http.Features.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.Extensions.Logging.Abstractions.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.Extensions.Primitives.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.IdentityModel.Tokens.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.Owin.Security.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.Web.Infrastructure.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Newtonsoft.Json.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\PagedList.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\PagedList.Mvc.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Quartz.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Razorpay.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\RestSharp.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Select.HtmlToPdf.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Buffers.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Diagnostics.DiagnosticSource.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.IdentityModel.Tokens.Jwt.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.IO.Packaging.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.IO.Pipelines.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Memory.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Net.Http.Formatting.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Numerics.Vectors.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Runtime.CompilerServices.Unsafe.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Threading.Tasks.Extensions.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.Cors.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.Helpers.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.Http.Cors.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.Http.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.Http.WebHost.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.Mvc.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.Optimization.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.Razor.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.WebPages.Deployment.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.WebPages.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Web.WebPages.Razor.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\WebGrease.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.AspNetCore.Http.Features.xml
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Microsoft.Extensions.Primitives.xml
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Newtonsoft.Json.xml
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Select.HtmlToPdf.xml
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.IO.Pipelines.xml
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Net.Http.Formatting.xml
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Runtime.CompilerServices.Unsafe.xml
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\System.Threading.Tasks.Extensions.xml
+D:\RINKU CHAUHAN\LifeOne\LifeOne\bin\Select.Html.dep
+D:\RINKU CHAUHAN\LifeOne\LifeOne\obj\Release\LifeOne.csproj.AssemblyReference.cache
+D:\RINKU CHAUHAN\LifeOne\LifeOne\obj\Release\LifeOne.csproj.CoreCompileInputs.cache
+D:\RINKU CHAUHAN\LifeOne\LifeOne\obj\Release\LifeOne.csproj.CopyComplete
+D:\RINKU CHAUHAN\LifeOne\LifeOne\obj\Release\LifeOne.dll
+D:\RINKU CHAUHAN\LifeOne\LifeOne\obj\Release\LifeOne.pdb
