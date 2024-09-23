@@ -25,6 +25,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string ProductImage { get; set; }
         public HttpPostedFileBase file { get; set; }
         public string PV { get; set; }
+        public string BV { get; set; }
         public string CGST { get; set; }
         public string IGST { get; set; }
         public string ProductType { get; set; }
