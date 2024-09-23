@@ -16,7 +16,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
 {
     public class RequestDAL
     {
-        public AssosiateRequest RequestKaryonPoints(AssosiateRequest obj)
+        public AssosiateRequest RequestwalletPoints(AssosiateRequest obj)
         {
            
             try

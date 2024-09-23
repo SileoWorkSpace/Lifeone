@@ -59,7 +59,7 @@ namespace LifeOne.Areas.Associate.Controllers
         [HttpGet]
         public ActionResult EWalletList()
         {
- 
+
             Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity = new Models.AssociateManagement.AssociateEntity.AssosiateRequest();
             Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
            
@@ -89,7 +89,7 @@ namespace LifeOne.Areas.Associate.Controllers
                         }
                         Entity.AddedBy = Convert.ToInt32(Session["AssociateFk_MemId"] ?? "0");
                         Entity.OpCode = 1;
-                        Models.AssociateManagement.AssociateEntity.AssosiateRequest Responce = para.RequestKaryonPoints(Entity);
+                        Models.AssociateManagement.AssociateEntity.AssosiateRequest Responce = para.RequestwalletPoints(Entity);
                         if (Responce.Code == "1")
                         {
                             TempData["Message"] = "Request Save Successfuly.!";

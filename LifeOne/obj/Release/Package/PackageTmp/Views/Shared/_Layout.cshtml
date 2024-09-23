@@ -1,0 +1,785 @@
+﻿@*@model LifeOne.Models.Products*@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<meta http-equiv="content-type" content="text/html;charset=utf-8" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lifeone Wellness</title>
+
+    <link rel="icon" type="image/png" href="~/Content/NewAssests/images/Lifeone-logo-Favicon.png">
+    <!-- Preload Font -->
+    <link rel="preload" href="~/Content/NewAssests/fonts/riode.ttf?5gap68" as="font" type="font/woff2" crossorigin="anonymous">
+    <link rel="preload" href="~/Content/NewAssests/vendor/fontawesome-free/webfonts/fa-solid-900.woff2" as="font" type="font/woff2"
+          crossorigin="anonymous">
+    <link rel="preload" href="~/Content/NewAssests/vendor/fontawesome-free/webfonts/fa-brands-400.woff2" as="font" type="font/woff2"
+          crossorigin="anonymous">
+    <link href="~/Content/NewAssests/vendor/photoswipe/photoswipe.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/css/style.min.css">
+    @*<link href="~/Content/NewAssests/vendor/photoswipe/default-skin/default-skin.min.css" rel="stylesheet" />*@
+    <script>
+        //WebFontConfig = {
+        //    google: { families: ['Poppins:400,500,600,700,800'] }
+        //};
+        //(function (d) {
+        //    var wf = d.createElement('script'), s = d.scripts[0];
+        //    wf.src = 'js/webfont.js';
+        //    wf.async = true;
+        //    s.parentNode.insertBefore(wf, s);
+        //})(document);
+    </script>
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/animate/animate.min.css">
+
+    <!-- Plugins CSS File -->
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/magnific-popup/magnific-popup.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/photoswipe/photoswipe.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/photoswipe/default-skin/default-skin.min.css">
+
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/sticky-icon/stickyicon.css">
+
+    <!-- Main CSS File -->
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/css/demo19.min.css">
+
+
+
+    <style>
+        .appear-animate {
+            visibility: visible !important;
+            opacity: 1;
+        }
+        .menu-sign li > ul {
+            min-width: 100% !important;
+        }
+
+        .menu-sign ul {
+            padding: 1rem 0 !important;
+        }
+
+        .loader {
+            border: 8px solid #f3f3f3;
+            width: 50px;
+            height: 50px;
+            animation: spin 2s linear infinite;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -25px;
+            margin-left: -25px;
+            z-index: 9999;
+        }
+
+        #overlayer {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            z-index: 1;
+            background: #b7adad;
+            opacity: 0.5;
+        }
+
+        .main-nav .menu li a.active {
+            color: #239d57;
+        }
+
+        .pro-c:hover {
+            color: #fff;
+        }
+
+        .btn-primary {
+            color: #fff;
+            border-color: #58b132;
+            background-color: #58b132;
+        }
+
+        .btn:focus-visible {
+            border-color: #1f5707;
+            background-color: #1f5707;
+        }
+
+        .btn-primary:active, .btn-primary:focus, .btn-primary:hover {
+            border-color: #1f5707;
+            background-color: #1f5707;
+        }
+
+        .btn-check:checked + .btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check) + .btn:active {
+            border-color: #1f5707;
+            background-color: #1f5707;
+        }
+
+        .lireg li a:after {
+            display: none;
+        }
+
+        .sbuttons {
+            position: fixed;
+            bottom: 100px;
+            right: 33px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+            .sbuttons a:hover {
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .sbuttons a {
+                cursor: pointer;
+            }
+
+        .sbutton {
+            display: none;
+            margin: 5px 0;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            border-radius: 50%;
+            background: #555;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .mainsbutton {
+            display: block;
+            background: #333;
+            color: white;
+            font-size: 30px;
+        }
+
+        .sbuttons.open .sbutton:not(.mainsbutton) {
+            display: block;
+        }
+
+        .sbuttons.open .sbutton {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+
+        .sbutton {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            color: white;
+            margin: 20px auto 0;
+            box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 0px 4px 12px -7px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            -webkit-transition: all .1s ease-out;
+            transition: all .1s ease-out;
+            position: relative;
+        }
+
+            .sbutton > i {
+                font-size: 25px;
+                line-height: 52px;
+                transition: all .2s ease-in-out;
+                transition-delay: 2s;
+            }
+
+            .sbutton:active,
+            .sbutton:focus,
+            .sbutton:hover {
+                box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+            }
+
+            .sbutton:not(:last-child) {
+                width: 50px;
+                height: 50px;
+                margin: 20px auto 0;
+                opacity: 0;
+            }
+
+                .sbutton:not(:last-child) > i {
+                    font-size: 25px;
+                    line-height: 52px;
+                    transition: all .3s ease-in-out;
+                }
+
+        .sbuttons:hover .sbutton:not(:last-child) {
+            opacity: 1;
+            width: 50px;
+            height: 50px;
+            margin: 15px auto 0;
+        }
+
+        .sbutton:nth-last-child(1) {
+            -webkit-transition-delay: 25ms;
+            transition-delay: 25ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(2) {
+            -webkit-transition-delay: 20ms;
+            transition-delay: 20ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(3) {
+            -webkit-transition-delay: 40ms;
+            transition-delay: 40ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(4) {
+            -webkit-transition-delay: 60ms;
+            transition-delay: 60ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(5) {
+            -webkit-transition-delay: 80ms;
+            transition-delay: 80ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(6) {
+            -webkit-transition-delay: 100ms;
+            transition-delay: 100ms;
+        }
+
+
+        .sbutton.mainsbutton {
+            background: #009b45;
+        }
+
+        .sbutton.gplus {
+            background: #F44336;
+        }
+
+        .sbutton.youtube {
+            background: #f40303;
+        }
+
+        .sbutton.insta {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #833ab4, #5851db, #405de6, #3f729b);
+        }
+
+        .sbutton.fb {
+            background: #3F51B5;
+        }
+
+        .sbutton.whatsapp {
+            background: #00e676;
+        }
+
+        .customer-care {
+            position: fixed;
+            bottom: 60px;
+            left: 20px;
+        }
+
+            .customer-care img {
+                width: 250px;
+            }
+    </style>
+</head>
+<body>
+    <div id="overlayer" style="display:none;"></div>
+    <div id="loader" class="loader" style="display:none;"></div>
+    <header class="header">
+        <marquee width="100%" direction="Left" onmouseover="this.stop();" onmouseout="this.start();" style="background: #177740;height: 35px; padding: 5px 0 0 0;margin-bottom: -9px;">
+            <span class="Scrollnews" style="color: #fff;">
+
+                <ul class="list-inline m-0">
+                    <li>
+                        Creating New Innovative Products In Healthcare Industry. We Make Our Products Sustainably, By Which You Can Build A Idealistic Diverse Global Team. You Make A Positive Impact In Communities Where You Live Work.
+                    </li>
+                </ul>
+            </span>
+        </marquee>
+        <input type="hidden" id="GLB_CookiesId" />
+        <div class="header-middle sticky-header fix-top sticky-content">
+            <div class="container-fluid">
+                <div class="header-left">
+                    <a href="#" class="mobile-menu-toggle">
+                        <i class="d-icon-bars2"></i>
+                    </a>
+                    <a href="/Home/Index" class="logo">
+                        <img src="~/Content/NewAssests/images/lifeonelogo.png" alt="logo" width="100" />
+                    </a>
+                    <!-- End Logo -->
+                    <nav class="main-nav">
+                        <ul class="menu" id="menuid">
+                            <li>
+                                <a href="/Home/Index">Home</a>
+                            </li>
+                            <li class="submenu">
+                                <a href="#">Company</a>
+                                <ul>
+                                    <li><a href="/Home/About">About Us</a></li>
+                                    <li><a href="#">Management Team</a></li>
+                                </ul>
+                            </li>
+                            @{
+                                Html.RenderAction("RenderMenu", "Home");
+                            }
+                            @*<li>
+                                    <a href="#">Products</a>
+
+                                    <ul>
+                                        <li><a href="#">Home Care</a></li>
+                                        <li><a href="#">Health Care</a></li>
+                                        <li><a href="#">Veda & Nutraceuticals</a></li>
+                                        <li><a href="#">Fashion</a></li>
+                                        <li><a href="/Home/Products">Personal Care</a></li>
+
+                                    </ul>
+
+                                </li>*@
+                            <li>
+                                <a href="/Home/BusinessPlan">Business Plan</a>
+                            </li>
+                            <li class="submenu">
+                                <a href="#">Compliance</a>
+                                <ul>
+                                    <li><a href="/Home/Certificate">Certificate</a></li>
+                                    <li><a href="#">SOP & Bank Details</a></li>
+                                    <li><a href="#">Memorandum of Associaiton</a></li>
+                                    <li><a href="#">Article of Associaiton</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="#">Media</a>
+                                <ul>
+                                    <li><a href="/Home/NewsandAnnouncement">News & Announcements</a></li>
+                                    <li><a href="/Home/FAQ">FAQ's</a></li>
+                                    <li><a href="#">Testimonials</a></li>
+                                    <li><a href="#">Downloads</a></li>
+                                </ul>
+                            </li>
+                            <li class="submenu">
+                                <a href="#">Gallery</a>
+                                <ul>
+                                    <li><a href="/Home/ImageGallery">Image Gallery</a></li>
+                                    <li><a href="/Home/Video">Video Gallery</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="/Home/Contact">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="header-center">
+
+                </div>
+                <div class="header-right">
+                    <!-- End Divider -->
+                    <!-- <div class="header-search hs-toggle mr-4">
+        <a href="#" class="search-toggle" title="search-toggle">
+            <i class="d-icon-search"></i>
+        </a>
+        <form action="#" class="input-wrapper">
+            <input type="text" class="form-control" name="search" autocomplete="off"
+                placeholder="Search your keyword..." required />
+            <button class="btn btn-search" type="submit" title="submit-button">
+                <i class="d-icon-search"></i>
+            </button>
+        </form>
+    </div> -->
+                    <!-- End Header Search -->
+                    @{ DateTime currentDate = DateTime.Now;
+                    }
+
+                    <div class="date-time-div">
+                        <div class="display-date">
+                            <span id="day">@DateTime.Now.DayOfWeek.ToString()</span>,
+                            <span id="Date">@currentDate.ToString("dd/MM/yyyy")</span>&nbsp;&nbsp;
+                            @*<span id="month">May</span>
+                <span id="year">2024 </span>*@
+                            <span class="display-time" id="time">@DateTime.Now.ToShortTimeString()</span>
+                        </div>
+                    </div>
+                    @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
+                    {
+
+                    }
+                    else
+                    {
+                        <li style="list-style-type:none;" title="Go to Dashboard">
+                            <a href="../Associate-Dashboard"> <i style="font-size:28px;" class="bi bi-speedometer"></i></a>
+                        </li>
+                    }
+
+                    @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
+                    {
+                    }
+                    else
+                    {
+
+                        if (LifeOne.Models.Manager.SessionManager.ProductCount == 0)
+                        {
+                        }
+                        else
+                        {
+                          
+                            <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
+                                <a href="" class="cart-toggle link">
+                                    <i class="bi bi-bag">
+                                        <span class="cart-count">@LifeOne.Models.Manager.SessionManager.ProductCount</span>
+                                        @*<span class="cart-count">@LifeOne.Models.Manager.SessionManager.TotalItems</span>*@
+                                    </i>
+                                </a>
+                                @if (LifeOne.Models.Manager.SessionManager.ProductCount == 0)
+                                {
+
+                                }
+                                else
+                                {
+                                    {
+                                        Html.RenderAction("CartPartialMenu", "Home");
+                                    }
+                                }
+                            </div>
+                        }
+                    }
+                    <div>
+                        <ul class="menu menu-sign lireg">
+                            <li>
+                                <a href="#"><i style="font-size: 28px;" class="bi bi-person"></i></a>
+                                @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
+                                {
+                                    <ul style="right: 0; left: -9.9rem !important;">
+                                        <li><a href="/Home/Login">Sign in</a></li>
+                                        <li><a href="/Home/CustomerRegistration">Register</a></li>
+                                    </ul>
+                                }
+                                else
+                                {
+
+                                    <ul style="right: 0; left: -9.9rem !important;">
+                                        <li><a href="/Home/Logout">Logout</a></li>
+                                    </ul>
+                                }
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- End Dropdown Box -->
+                </div>
+                    </div>
+        </div>
+    </header>
+    @RenderBody()
+    @{
+        Html.RenderAction("FooterRender", "Home");
+    }
+    <a href="tel:917985862783" class="customer-care">
+        <img src="~/home-assets/images/Contact_us.png" />
+    </a>
+    <a id="scroll-top" href="#top" title="Top" role="button" class="scroll-top"><i class="d-icon-arrow-up"></i></a>
+    <div class="sbuttons">
+        <a href="https://wa.me/917985862783" rel="noreferrer" target="_blank" class="sbutton whatsapp"><i class="fab fa-whatsapp"></i></a>
+
+        <a href="https://www.facebook.com/profile.php?id=61558483911520&mibextid=LQQJ4d" target="_blank" class="sbutton fb"><i class="fab fa-facebook-f"></i></a>
+
+        <a href="https://www.instagram.com/lifeonewellness?igsh=MTNrMWxyZ3dxOGN0ZA%3D%3D&utm_source=qr" target="_blank" class="sbutton insta"><i class="fab fa-instagram"></i></a>
+
+        <a href="https://youtube.com/%40lifeonewellness?si=GPfOZiB-A5TVegDd" target="_blank" class="sbutton youtube"><i class="fab fa-youtube"></i></a>
+
+        <a target="_blank" class="sbutton mainsbutton"><i class="fas fa-share-alt"></i></a>
+
+    </div>
+    <!-- MobileMenu -->
+    <div class="mobile-menu-wrapper">
+        <div class="mobile-menu-overlay">
+        </div>
+        <!-- End Overlay -->
+        <a class="mobile-menu-close" href="#"><i class="d-icon-times"></i></a>
+        <!-- End CloseButton -->
+        <div class="mobile-menu-container scrollable">
+            <a href="/Home/Index" class="logo">
+                <img src="~/Content/NewAssests/images/lifeonelogo.png" alt="logo" width="100" />
+            </a>
+
+            <!-- End Search Form -->
+            <ul class="mobile-menu mmenu-anim">
+                <li>
+                    <a href="/Home/Index" class="active">Home</a>
+                </li>
+                <li>
+                    <a href="#">Company</a>
+                    <ul>
+                        <li><a href="/Home/About">About Us</a></li>
+                        <li><a href="#">Management Team</a></li>
+                    </ul>
+                </li>
+                @{
+                    Html.RenderAction("MobileMenu", "Home");
+                }
+                @*<li>
+            <a href="#">Products</a>
+
+            <ul>
+                <li><a href="#">Home Care</a></li>
+                <li><a href="#">Health Care</a></li>
+                <li><a href="#">Veda & Nutraceuticals</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Personal Care</a></li>
+
+            </ul>
+
+        </li>*@
+                <li>
+                    <a href="#">Compliance</a>
+                    <ul>
+                        <li><a href="about-us.html">Certificate</a></li>
+                        <li><a href="contact-us.html">SOP & Bank Details</a></li>
+                        <li><a href="account.html">Memorandum of Associaiton</a></li>
+                        <li><a href="wishlist.html">Article of Associaiton</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Media</a>
+                    <ul>
+                        <li><a href="#">News & Announcements</a></li>
+                        <li><a href="#">FAQ's</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Downloads</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">Gallery</a>
+                    <ul>
+                        <li><a href="/Home/ImageGallery">Image Gallery</a></li>
+                        <li><a href="/Home/Video">Video Gallery</a></li>
+                    </ul>
+                </li>
+                <li><a href="/Home/Contact">Contact</a></li>
+            </ul>
+
+            <!-- End MobileMenu -->
+        </div>
+    </div>
+    <!-- Modal -->
+    @*<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <img src="" />
+                    </div>
+                </div>
+            </div>
+        </div>*@
+
+    <!-- newsletter-popup type2 -->
+    @*<div class="newsletter-popup newsletter-pop2 mfp-hide" id="newsletter-popup">
+            <figure>
+                <img src="images/newsletter-popup2.jpg" width="500" height="264" alt="newsletter2" />
+            </figure>
+            <div class="newsletter-content">
+                <h2 class="font-weight-bolder">Join Our Mailing List</h2>
+                <p class="text-grey">Stay Informed!Monthly Tips and Discount.</p>
+                <form action="#" method="get" class="input-wrapper input-wrapper-inline input-wrapper-round">
+                    <input type="email" class="form-control email" name="email" id="email2"
+                           placeholder="Email address here..." required="">
+                    <button class="btn btn-dark" type="submit">SUBMIT</button>
+                </form>
+                <div class="form-checkbox justify-content-center">
+                    <input type="checkbox" class="custom-checkbox" id="hide-newsletter-popup" name="hide-newsletter-popup"
+                           required />
+                    <label for="hide-newsletter-popup">Don't show this popup again</label>
+                </div>
+                <div class="social-links">
+                    <a href="#" title="social-link" class="social-link social-facebook fab fa-facebook-f"></a>
+                    <a href="#" title="social-link" class="social-link social-twitter fab fa-twitter"></a>
+                    <a href="#" title="social-link" class="social-link social-linkedin fab fa-linkedin-in"></a>
+                </div>
+            </div>
+        </div>*@
+    <!-- Plugins JS File -->
+    <script src="~/Content/NewAssests/js/main.min.js"></script>
+    <script src="~/Content/NewAssests/js/main.js"></script>
+    <script src="~/Content/NewAssests/vendor/jquery/jquery.js"></script>
+    <script src="~/Content/NewAssests/vendor/jquery/jquery.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/parallax/parallax.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/elevatezoom/jquery.elevatezoom.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/isotope/isotope.pkgd.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/sticky/sticky.min.js"></script>
+
+
+    <script src="~/Content/NewAssests/vendor/photoswipe/photoswipe.min.js"></script>
+    <script src="~/Content/NewAssests/vendor/photoswipe/photoswipe-ui-default.min.js"></script>
+    <!-- Main JS File -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Include Bootstrap JS -->
+
+
+
+
+    <script src="~/Content/ShoppingCart/Cookies.js"></script>
+    <script src="~/Content/ShoppingCart/ShoppingCart.js"></script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+    @*<script src="~/AutoFill/jquery-2.1.3.js"></script>*@
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>*@
+    <script>
+        //document.getElementById("mainButton").addEventListener("click", function (event) {
+        //    event.preventDefault(); // Prevent the default link behavior
+        //    var buttonsContainer = document.querySelector(".sbuttons");
+        //    buttonsContainer.classList.toggle("open");
+        //});
+
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            debugger;
+            var currentPath = window.location.pathname;
+            var links = document.querySelectorAll('#menuid a');
+            links.forEach(function (link) {
+                console.log(link);
+                if (link === currentPath) {
+                    link.classList.add('active');
+                }
+            });
+        })
+    </script>
+    <script>
+        function updateTime() {
+            const now = new Date();
+            const dayOfWeek = now.toLocaleString('default', { weekday: 'long' });
+            const formattedDate = now.toLocaleDateString('en-GB');
+            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            document.getElementById('day').textContent = dayOfWeek;
+            document.getElementById('Date').textContent = formattedDate;
+            document.getElementById('time').textContent = timeString;
+        }
+
+        // Update time every second
+        setInterval(updateTime, 1000);
+
+        updateTime();
+
+    </script>
+
+    <script>
+
+        function getproductdetailsList(ProductId) {
+            debugger;
+            $('#qty_amount').val('1');
+            $.ajax({
+                url: '/Home/ProductDetailsListView',
+                type: 'Post',
+                data: { Id: ProductId },
+                success: function (response) {
+                    debugger;
+                    if (response != null) {
+                        var str = "";
+                        var str1 = "";
+                        //alert(response);
+                        console.log(response);
+                        $('#txtproductName').text(response[0].ProductName);
+                        $('#txtproductdetails').text(response[0].ProductDescription);
+                        $('#CategoryName').text(response[0].CategoryName);
+                        $('#offeredPrice').text(response[0].DP);
+                        $('#mrp').text(response[0].MRP);
+                        $('#productimage').text(response[0].ProductImage);
+                        $('#Pk_ProductId').text(response[0].Pk_ProductId);
+                        $('#productimage').attr('data-src', response[0].ProductImage);
+                        $('#productimage').attr('src', response[0].ProductImage);
+
+                        if (response[0].AvgRating == "1") {
+                            str += '<span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > '
+
+                        }
+                        else if (response[0].AvgRating == "2") {
+                            str += '<span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > '
+                        }
+                        else if (response[0].AvgRating == "3") {
+                            str += '<span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > '
+                        }
+                        else if (response[0].AvgRating == "4") {
+                            str += '<span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > '
+                        }
+                        else if (response[0].AvgRating == "5") {
+                            str += '<span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > <span class="star">< svg class="icon star text-primary" ><use xlink:href="#star"></use> </svg ></span > '
+                        }
+                        $('#txtReviewCount').text(response[0].ReviewCount);
+                        $("#txtAvgRating").html(str)
+
+
+                    }
+
+                }, error: function () {
+                    //alert('Some Thing wrong!');
+                    $("#pre-loader").hide();
+
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // JavaScript to add 'active' class to the current page's menu item
+        document.addEventListener("DOMContentLoaded", function () {
+            var currentUrl = window.location.pathname; // Get the current URL
+            var menuItems = document.querySelectorAll('.main-nav .menu li a');
+
+            menuItems.forEach(function (item) {
+                // Check if the 'href' attribute matches the current URL
+                if (item.getAttribute('href') === currentUrl) {
+                    item.classList.add('active'); // Add 'active' class
+                }
+            });
+
+        });
+    </script>
+
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>*@
+    @*<script src="~/AutoFill/jquery-2.1.3.js"></script>*@
+
+
+    <!-- Main JS File -->
+
+    <script>
+        function AddToCart23(ProductId) {
+            debugger;
+            /*var ProductId = $('#Pk_ProductId').text();*/
+            var Qua = $('#Quantity123').val();
+            //alert($('#Quantity123').val());
+            // console.log(Quantity);
+            // AddToCart(ProductId, Qua);
+            fAddMultiQutyToCart12(ProductId, Qua);
+            $('#AddQuty').trigger('click');
+        }
+
+        function AddToOneproCart(ProductId) {
+            debugger;
+            fAddToCart(ProductId);
+            //  $('#AddOneQuty').trigger('click');
+            // $("#AddOneQuty").click();
+            // $('#AddOneQuty').trigger('click');
+            // $("#Product_Details")[0].submit();
+        }
+        function AddCartDetail(ProductId) {
+            debugger;
+            fAddMultiQutyToCart(ProductId);
+            $('#AddOneQuty').trigger('click');
+        }
+    </script>
+
+    <script>
+                    //function quantityChange() {
+                    //    debugger
+                    //    var qt = $('#Quantity123').val();
+                    //    if (qt == 1) {
+                    //        // alert('quantity less than zero');
+                    //        $('#Quantity123').val(2);
+                    //        //return false;
+                    //    }
+                    //}
+    </script>
+</body>
+</html>
+

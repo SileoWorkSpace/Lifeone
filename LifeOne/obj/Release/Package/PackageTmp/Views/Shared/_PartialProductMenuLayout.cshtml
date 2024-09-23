@@ -1,0 +1,22 @@
+﻿@model LifeOne.Models.Products
+
+<li class="nav-item transition-all-xl-1 py-0 dropdown">
+    <a class="nav-link d-flex justify-content-between position-relative text-uppercase fw-semibold ls-1 fs-15px dropdown-toggle" href="#" data-bs-toggle="dropdown" id="menu-item-pages-canvas" aria-haspopup="true" aria-expanded="false">Product</a>
+    <ul class="dropdown-menu py-6" aria-labelledby="menu-item-pages-canvas">
+        <li class="dropend" aria-haspopup="true" aria-expanded="false">
+            @if (Model != null && Model.LstMenu.Count > 0)
+            {
+                foreach (var item in Model.LstMenu)
+                {
+                <li>
+                    <a class="dropdown-item pe-6 border-hover" href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@item.Pk_ProductTypeId.ToString())">
+                        <span class="border-hover-target">
+                            @item.ProductType
+                        </span>
+                    </a>
+                </li>
+               }
+             }          
+    </ul>
+</li>
+

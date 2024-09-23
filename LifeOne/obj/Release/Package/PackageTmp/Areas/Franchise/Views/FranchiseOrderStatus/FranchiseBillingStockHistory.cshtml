@@ -1,0 +1,210 @@
+﻿@model LifeOne.Models.FranchiseManagement.FEntity.MFranchiseBillingStockHistory
+@using LifeOne.Models.Manager
+@{
+    ViewBag.Title = "FranchiseBillingStockHistory";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Stock History</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#">Manage Stock</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Stock History</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    <button onclick="BackPage();" class="btn btn-danger btn-sm"><i class="mdi mdi-arrow-left"></i> Back</button>
+                </span>
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                </span>
+
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                </span>
+
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <h4 class="header-title mt-0 mb-1"></h4>
+                            <p class="sub-header">  </p>
+                        </div>
+                                              
+                                <div class="col-md-12">
+                                    @using (Html.BeginForm("FranchiseBillingStockHistory", "FranchiseOrderStatus", FormMethod.Post))
+                                    {
+
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label>FromDate</label>
+                                                    <input type="date" name="FromDate" id="txtfromDate" placeholder="dd-mm-yyyy" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label>ToDate</label>
+                                                    <input type="date" name="ToDate" id="txttoDate" placeholder="dd-mm-yyyy" class="form-control">
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                    @*<a href="#" class="btn btn-danger" style="margin-top:1.5em;">Reset</a>*@
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    }
+
+                                </div>
+
+                           
+                      
+                    </div>
+                    <div class="table-responsive" >
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th><b>SNo.</b></th>
+                                    <th><b>Product Name</b></th>
+                                    <th><b>Date</b></th>
+                                    <th><b>Remark</b></th>
+
+
+                                    <th>Credit Qty.</th>
+                                    <th>Debit Qty.</th>
+                                                            @*<th><b>Invoice Number</b></th>
+                                <th><b>Order No</b></th>
+                                <th><b>Item Quantity</b></th>
+
+                                <th><b>Paid Amount</b></th>
+                                <th><b>Due Amount</b></th>
+                                <th><b>Total Amount</b></th>
+                                <th><b>Is Box</b></th>*@
+                                    <th><b>Available Stock</b></th>
+
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model != null && Model.LstStock != null && Model.LstStock.Count > 0)
+                                {
+                                    int i = 0;
+                                    foreach (var item in Model.LstStock)
+                                    {
+                                <tr>
+                                    <td align="left">@(i = i + 1)</td>
+                                    <td align="left"><span>@item.ProductName</span></td>
+                                    <td align="left"><span>@item.SellDate</span></td>
+                                    <td align="left"><span>@item.SellToName</span></td>
+
+
+                                    <td align="left"><span>@item.CreditQuantity</span></td>
+                                    <td align="left"><span>@item.DebitQuantity</span></td>
+                                    @*<td align="left"><span>@item.InvoiceNo</span></td>
+        <td align="left"><span>@item.OrderNo</span></td>
+        <td align="left"><span>@item.Quantity</span></td>
+
+
+        <td align="left"><span>@item.TotalAmt</span></td>
+        <td align="left"><span>@item.DueAmt</span></td>
+        <td align="left"><span>@item.TotalAmt</span></td>
+        <td align="left"><span>@item.IsBox</span></td>*@
+                                    <td align="left">
+                                        @*<span><a href="#" data-toggle="modal" data-target="#myStockHistory" onclick="BindStockHistory(@item.PrdId)" style="font-weight: bold;text-decoration: underline;">@item.AvailableStock</a></span>*@
+                                        @item.AvailableStock
+                                    </td>
+                                </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="myStockHistory" class="modal fade">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content modal-lg">
+            <div class="modal-header">
+                <h3 class="modal-title"> Stock History</h3>
+                <button type="button" class="close text-danger" data-dismiss="modal">&times;</button>
+
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <table class="table table-hover" id="grdHistory">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Credit</th>
+                                <th>Debit</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer pull-right">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    function BindStockHistory(Id) {
+        if (Id != 0) {
+            $.ajax({
+                type: "POST",
+                url: "/Franchise/FranchiseOrderStatus/BindStockHistory",
+                data: JSON.stringify({ PrdId: Id }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                async: false,
+                success: function (result) {
+                    if (result != null) {
+                        var html = "";
+                        for (var i = 0; i < result.length; i++) {
+                            html += "<tr><td>" + result[i].ProductName + "</td><td style='font-weight:bold;color:green'>" + result[i].CreditQuantity + "</td><td style='font-weight:bold;color:red'>" + result[i].DebitQuantity + "</td><td>" + result[i].TranDate + "</td></tr>"
+                        }
+
+                        $('#grdHistory tbody').html('');
+                        $('#grdHistory tbody').html(html);
+                    }
+                },
+                error: function (err) {
+
+                    return false;
+                }
+            });
+        }
+    }
+</script>

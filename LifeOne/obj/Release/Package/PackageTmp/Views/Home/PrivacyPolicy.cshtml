@@ -1,0 +1,46 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.PrivacyandPolicy
+@{
+    ViewBag.Title = "Privacy Policy";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}   <!-- Section: page title -->
+
+<main class="main">
+    <div class="page-header" style="background-image: url(/Content/NewAssests/images/page-header/contact-us.jpg) ">
+        <h1 class="page-title font-weight-bold text-capitalize ls-l">Privacy Policy</h1>
+        <nav class="breadcrumb-nav">
+            <ul class="breadcrumb">
+                <li><a href="/Home/Index"><i class="d-icon-home"></i> <i class="bi bi-chevron-right"></i></a></li>
+                <li>Privacy Policy</li>
+            </ul>
+        </nav>
+    </div>
+    <div class="page-content mt-7">
+        <!-- End About Section-->
+        <section class="customer-section pb-10 appear-animate">
+            <div class="container">
+                    @{
+                        if (Model != null)
+                        {
+                            if (Model.dtDetails != null)
+                            {
+                                for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
+                                {
+                                    <div class="row">
+                                        <div class="col-lg-12 px-xxl-18 mt-12 mt-lg-0" style="text-align:justify;">
+                                            <p>
+                                                @Html.Raw(Model.dtDetails.Rows[i]["PrivacyPolicy"].ToString())
+                                            </p>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    }
+
+                </div>
+        </section>
+        <!-- End Customer Section -->
+    </div>
+</main>
+
+

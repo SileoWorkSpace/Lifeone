@@ -1,0 +1,141 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminProfile
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "AdminChangeProfilePicture";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*@{
+        if (Model != null)
+        {
+            string msg = (string)TempData["msg"];
+            string code = Convert.ToString(TempData["code"]);
+            if (msg != null)
+            {
+                if (code.Equals("1"))
+                {
+                    <div class="alert alert-success m-t-30" id="divsuccess">
+                        <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                        <button type="button" class="close" data-dismiss="alert"  aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="alert alert-danger m-t-30" id="divUpdate">
+                        <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                        <button type="button" class="close" data-dismiss="alert"    aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                    </div>
+
+                }
+            }
+        }
+    }*@
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0"> Change Profile Picture </h4>
+        </div>
+        <div class="pbutton">
+        </div>
+    </div>
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-1"></div>
+                                <div class="col-md-8 mt-10">
+
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="form-group">
+                                                <label>Profile Picture</label>
+                                                <img src="@SessionManager.ProfilePic " id="imagePreview" alt="user-image" class="rounded-circle mt-3 ml-4 img-thumbnail avatar-xl" onerror="this.src='/Content/Associate/assets/images/no-img.jpg'" style="height:120px;width:120px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row ">
+                                        <div class="col-md-10">
+                                            <div class="form-group">
+                                                <br />
+                                                <label>Upload New Image<span style="color:red;">*</span></label>
+                                                @Html.TextBoxFor(m => m.file, new { @type = "file", @class = "input-text form-control", @onchange = "ShowImagePreview(this)" })
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2 mt-5">
+                                            <input type="Submit" value="Update" name="Update" class="btn btn-warning " onclick="return UploadFile() " id="BtnChangePassword">
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="col-md-1"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3"></div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    function UploadFile() {
+      
+        var data = new FormData();
+        var files = $("#file").get(0).files;
+        if (files.length > 0) {
+            data.append("file", files[0]);
+        }
+        else {
+            alert("Please select file to upload.");
+            $("#file").focus();
+            return false;
+        }
+        var extension = $("#file").val().split('.').pop().toUpperCase();
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
+            alert("Invalid image file format.Only jpg,jpeg,png,bmp files are allow");
+            return false;
+        }
+        $.ajax({
+            url: '/Admin/AdminProfile/Uploadfile',
+            type: "POST",
+            processData: false,
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+              
+                if (response.Flag == 1) {
+                    alert(response.Msg);
+                }
+                else {
+                    alert(response.Msg);
+                }
+                setTimeout(
+                    window.location.reload()
+                    , 50);
+            }
+        });
+    }
+    function ShowImagePreview(input) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#imagePreview').prop('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+</script>
+

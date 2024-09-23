@@ -1,0 +1,400 @@
+﻿@model LifeOne.Models.Reports
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "PackageMasterList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Package Master</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Masters</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Package Master</li>
+                    </ol>
+                </nav>*@
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>*@
+                </span>
+                <span>
+
+                    <!--<a href="@Url.Action("ExportToExcelPackageMasterList","AdminReport",new {page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+
+
+
+
+                    {
+                        <a href="" id="btnAdd" class="btn btn-success btn-sm"-->
+                    @*onclick="return ResetPopup();"*@ @*data-toggle="modal"*@
+                    <!--title="Add New" style="text-align:right" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                        </a>
+                    }-->
+
+
+                    @if (PermissionManager.IsActionPermit("Package Master", ViewOptions.FormSave))
+                    {
+                        <a href="/PackageMaster" id="btnAdd" class="btn btn-success btn-sm">
+                            <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                        </a>
+                    }
+
+                    @*<button class="btn btn-success btn-rounded btnprint" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>*@
+                    @*<button class="btn btn-success btn-rounded btnPdf" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>*@
+
+                </span>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="no-more-tables">
+        <form id="form1" method="post">
+
+
+
+            <div class="table-responsive fixTableHead" id="customers">
+                <table class="table mb-0" id="tblCustomers">
+                    <thead>
+                        <tr>
+                            <th>#Sn.</th>
+                            @*<th>Pk_PackageID</th>*@
+                            <th>Package Name</th>
+                            <th>Package Amount</th>
+                            <th>Price</th>
+                            <th>CGST</th>
+                            <th>SGST</th>
+                            <th>IGST</th>
+                            <th>BV</th>
+                            <th>DP</th>
+                            <th>Rate</th>
+                            <th>Percentage</th>
+                            <th @*style="text-align:left"*@>Capping Points</th>
+                            <th>Minimum BV</th>
+                            <th>IsFixed</th>
+                            <th>IsDiscount</th>
+                            <th>View</th>
+                            <th style="text-align:right">Action</th>
+
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.dtDetails.Rows.Count > 0)
+                        {
+                            var j = 1;
+                            for (var i = 0; i < Model.dtDetails.Rows.Count; i++)
+                            {
+
+                                <tr>
+
+                                    <td>@j</td>
+                                    @*<td>@Model.dtPackageMaster.Rows[i]["Pk_PackageID"].ToString()</td>*@
+                                    <td>@Model.dtDetails.Rows[i]["PackageName"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["PackageAmount"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["Price"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["CGST"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["SGST"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["IGST"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["BP"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["DP"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["Rate"].ToString()</td>
+                                    <td>@Model.dtDetails.Rows[i]["Percentage"].ToString()</td>
+                                    <td style="text-align:left">@Model.dtDetails.Rows[i]["CappingPoints"].ToString()</td>
+                                    <td style="text-align:left">@Model.dtDetails.Rows[i]["MinBV"].ToString()</td>
+                                    <td>
+                                        @if (@Model.dtDetails.Rows[i]["IsFixed"].ToString() == "True")
+                                        {
+                                            <span class="badge badge-success py-1">Yes</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-danger py-1">No</span>
+                                        }
+
+                                    </td>
+                                    <td>
+                                        @if (@Model.dtDetails.Rows[i]["IsDiscount"].ToString() == "True")
+                                        { 
+                                        <span class="badge badge-success">Yes</span>
+                                        }
+                                        else { 
+                                        
+                                        <span class="badge badge-danger">No</span>
+                                        }
+                                    </td>
+                                    <td>
+                                        @if (@Model.dtDetails.Rows[i]["IsFixed"].ToString() == "True")
+                                        {
+                                            <a href="#" class=""  data-toggle="modal" data-target="#myModal" onclick="return ShowItems('@Model.dtDetails.Rows[i]["Pk_PackageId"].ToString()')">
+                                              <i class="fa fa-eye"></i>
+                                            </a>
+                                        }
+                                    </td>
+                                    <td>
+
+
+                                        @if (PermissionManager.IsActionPermit("Package Master", ViewOptions.FormUpdate))
+                                        {
+                                            <a href="/PackageMaster?id=@Model.dtDetails.Rows[i]["Pk_PackageId"].ToString()" class="btn btn-primary btn-sm" onclick="return confirm('are you sure to Edit this record?')" style="display:@ViewBag.edit;">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                        }
+                                        @if (PermissionManager.IsActionPermit("Package Master", ViewOptions.FormDelete))
+                                        {
+                                            <a href="/Admin/Master/PackageMasterDelete?id=@Model.dtDetails.Rows[i]["Pk_PackageId"].ToString()" id="btnDelete" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to delete this record?')" ToolTip="Delete" style="display:@ViewBag.delete;">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        }
+
+                                    </td>
+                                </tr>
+                                j++;
+
+                            }
+                        }
+
+                    </tbody>
+                </table>
+
+            </div>
+    </div>
+    <footer class="card-footer bg-white p-2">
+        <div class="d-md-flex align-items-center justify-content-between">
+
+            @if (Model != null)
+            {
+                if (Model.Pager != null)
+                {
+                    if (Model.Pager.EndPage > 1)
+                    {
+                        <div> <small class="text-muted inline">showing @Model.LstOrder.Count  of @Model.LstOrder[0].TotalRecords items</small> </div>
+                        <div>
+                            <ul class="pagination pagination-sm m-t-none m-b-none">
+                                @if (Model.Pager.CurrentPage > 1)
+                                {
+                                    <li class="page-item">
+                                        <a class="page-link" onclick="fCallPaging(1)" href="#">First</a>
+                                        @*<a class="page-link" href="/Admin/ViewFranchiseSupplyOrderStatus">First</a>*@
+                                    </li>
+                                    <li class="page-item">
+                                        @*<a class="page-link" onclick="fPaging(@(Model.Pager.CurrentPage - 1))" href="/Admin/Admin/ViewFranchiseSupplyOrderStatus?Page=@(Model.Pager.CurrentPage - 1)">Previous</a>*@
+                                        <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1))" href="#">Previous</a>
+                                    </li>
+                                }
+                                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                {
+                                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                        @*<a class="page-link" onclick="fPaging(@page)" href="/Admin/Admin/ViewFranchiseSupplyOrderStatus?Page=@page">@page</a>*@
+
+                                        <span><a class="page-link" onclick="fCallPaging(@page)" href="#">@page</a></span>
+                                    </li>
+                                }
+                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                {
+                                    <li class="page-item">
+                                        @*<a class="page-link" onclick="fPaging(@(Model.Pager.CurrentPage + 1))" href="/Admin/Admin/ViewFranchiseSupplyOrderStatus?Page=@(Model.Pager.CurrentPage + 1)">Next</a>*@
+                                        <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1))" href="#">Next</a>
+
+                                    </li>
+                                    <li class="page-item">
+                                        @*<a class="page-link"  href="/Admin/Admin/ViewFranchiseSupplyOrderStatus?Page=@(Model.Pager.TotalPages)">Last</a>*@
+                                        <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages))" href="#">Last</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    }
+                }
+
+            }
+
+        </div>
+    </footer>
+    <!-- /.box-body -->
+</div>
+<!-- /.box -->
+                </div>
+<!-- /.col -->
+            </div>
+
+        </form>
+    </div>
+
+
+@*<div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 class="modal-title">Order Details</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-striped mb-0" id="tableOrderDetail">
+                        <thead>
+                            <tr>
+
+                                <th>LoginId</th>
+                                <th>Name</th>
+                                <th>Bonanza Name</th>
+                                <th>Total BV</th>
+
+
+                            </tr>
+                        </thead>
+                        <tbody id="tableBody">
+                        </tbody>
+                        <tfoot id="tablefoot">
+
+                        </tfoot>
+                    </table>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+
+    </div>*@
+<div id="tblpdff" style="font-size:50px;">
+
+
+    @using (Html.BeginForm("PackageMasterSave", "PackageMaster", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+        <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Add/Update Package Master</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="row">
+
+                                @Html.HiddenFor(m => m.Pk_PackageID, new { @id = "Pk_PackageId" })
+
+                                <div class="col-md-12">
+
+
+
+                                    <label class="form-control-placeholder" for="name"> Package Name *</label>
+                                    <input type="text" class="form-control" name="PackageName" id="PackageMaster" maxlength="80">
+
+                                    @Html.CheckBoxFor(m => m.IsActive, new { @style = "height:13px;", @id = "IsActive" })
+                                    <label class="form-control-placeholder" for="name">IsActive</label>
+
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Product Details</h4>
+            </div>
+            <div class="modal-body">
+                @*<div id="CustomMessages1"></div>*@
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="table-responsive">
+                            <table class="table " id="TmpProd">
+                                <thead>
+                                    <tr>
+                                        <th>Sn</th>
+                                        <th>Product</th>
+                                        <th>Price(₹)</th>
+                                        <th>BV</th>
+                                        <th>Sales Price</th>
+                                        <th>Quantity</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function fCallPaging(val) {
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+
+    function ShowItems(ProductId) {
+
+        var ReqId = ProductId;
+        $.ajax({
+            url: "/Master/GetPackageProduct",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ Pk_PackageID: ReqId }),
+            contentType: "application/json",
+            success: function (response) {
+                debugger
+                console.log(response)
+                var srno = 1;
+                var str = "";
+                if (response != null) {
+
+                    $("#TmpProd tbody").html('');
+                    for (var i = 0; i < response.length; i++) {
+                 
+
+                        str += "<tr><td>" + srno + "</td><td>" + response[i].ProductName + "</td><td>" + response[i].ProductMRP + "</td><td>" + response[i].ProductBV + "</td><td>" + response[i].ProductDP + "</td><td>" + response[i].ProductQTY + "</td></tr>";
+                        srno++
+                     }
+
+                    $("#TmpProd tbody").html(str);
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+
+</script>

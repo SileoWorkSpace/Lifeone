@@ -1,0 +1,186 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.StatementResponse
+@{
+    ViewBag.Title = "StatementDetails";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+
+
+<style>
+    .alert-warning {
+        background-color: #fcf8e3 !important;
+        border-color: #faebcc !important;
+    }
+
+    .tableincome {
+    }
+
+        .tableincome td:first-child {
+            background: #fbfbfb;
+            max-width: 40%;
+        }
+
+        .tableincome td {
+            font-weight: bold;
+        }
+        .modal-footer {
+        background: white;
+        width: 100%;
+    }
+
+    .modal-header {
+        display: block;
+    }
+
+    .modal-body {
+        position: relative;
+    }
+
+    @@media (min-width: 992px) .modal-lg, .modal-xl {
+        max-width: 1150px;
+    }
+</style>
+
+<div class="content">
+    <div class="content-wrapper-before"></div>
+    <!-- Start Content-->
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0 text-white">Statement Details</h4>
+                <nav aria-label="breadcrumb" class="float-left mt-1">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Associate</a></li>
+                        <li class="breadcrumb-item"><a href="#">My Income</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Statement Details</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                    <span>
+                        <a href="/Payout-Report" class="btn btn-secondary btn-sm text-white"><i class="mdi mdi-arrow-left"></i> Back</a>
+                    </span>
+                    @*<span>  <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a></span>
+                        <span>
+                            <a href="/Associate/AssociateReport/PayoutReportExportExcel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                        </span><span>
+                            <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                        </span>*@
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body p-0">
+
+
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                        <th nowrap>S. No.</th>
+                                        <th>Payout No</th>
+                                        <th>From ID</th>
+                                        <th>Display Name</th>
+                                        <th>Income Type</th>
+                                        <th>Closing Date</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                @{ decimal total = 0;}
+                                <tbody>
+
+                                    @if (Model != null && Model.lstStatement.Count > 0)
+                                    {
+
+                                        int SNo = 0;
+                                        foreach (var item in Model.lstStatement)
+                                        {
+
+                                            <tr>
+                                                <td>@(SNo = SNo + 1)</td>
+                                                <td>@item.PayoutNo</td>
+                                                <td>@item.LoginId</td>
+                                                <td>@item.DisplayName</td>
+                                                <td>@item.IncomeType</td>
+                                                <td>@item.CurrentDate</td>
+                                                <td>@item.Amount</td>
+
+                                            </tr>
+                                            total += item.Amount;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        @*<tr>
+                                                <td colspan="10">No Record Found..</td>
+                                            </tr>*@
+                                    }
+
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5"></td>
+                                        <td>Total</td>
+                                        <td>@total</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between">
+                                @if (Model != null)
+                                {
+                                    if (Model.Pager != null)
+                                    {
+                                        if (Model.Pager.EndPage > 1)
+                                        {
+                                            <div> <small class="text-muted inline">showing @Model.lstStatement.Count  of @Model.lstStatement[0].TotalRecords items</small> </div>
+                                            <div>
+                                                <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                    @if (Model.Pager.CurrentPage > 1)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/StatementDetails?FK_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Fk_MemId.ToString())&PayoutNo=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.PayoutNo.ToString())">First</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/StatementDetails?FK_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Fk_MemId.ToString())&PayoutNo=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.PayoutNo.ToString())&page=@(Model.Pager.CurrentPage - 1)&LoginId=1&FromDate=1&ToDate=1">Previous</a>
+                                                        </li>
+                                                    }
+                                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                    {
+                                                        <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                            <a class="page-link" href="/StatementDetails?page=@page&FK_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Fk_MemId.ToString())&PayoutNo=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.PayoutNo.ToString())">@page</a>
+                                                        </li>
+                                                    }
+                                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/StatementDetails?page=@(Model.Pager.CurrentPage + 1)FK_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Fk_MemId.ToString())&PayoutNo=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.PayoutNo.ToString())">Next</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/StatementDetails?page=@(Model.Pager.TotalPages)&FK_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Fk_MemId.ToString())&PayoutNo=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.PayoutNo.ToString())">Last</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+
+                                }
+
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <!-- container-fluid -->
+    <!-- container-fluid -->
+
+</div>

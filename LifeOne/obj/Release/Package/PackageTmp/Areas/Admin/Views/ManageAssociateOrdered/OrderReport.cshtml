@@ -1,0 +1,332 @@
+﻿@using LifeOne.Models.Manager;
+@model LifeOne.Models.FranchiseManagement.FEntity.MFranchiseorderRequest
+@{
+    ViewBag.Title = "Order Report";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<style>
+    .search-box-content {
+        display: none;
+        padding: 0 15px;
+    }
+
+    .btn-default {
+        color: black;
+    }
+    /*   @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 989px;
+        }
+    }*/
+    @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 1258px
+        }
+    }
+
+    .invalid {
+        color: red;
+    }
+
+    ul > li > a {
+        cursor: pointer;
+    }
+</style>
+<div class="container-fluid" ng-app="My-App" ng-controller="My-Ctrl">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">
+                Order Report<small></small>
+            </h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Transactions</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Other Shopping</li>
+                </ol>
+            </nav>*@
+        </div>
+
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#">Search</a>*@
+                </span>
+                @*<span>
+                        <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                    </span>
+                    <span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>*@
+                @*<a href="" id="btnAdd" class="btn btn-success btn-sm" onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                    </a>*@
+            </div>
+        </div>
+    </div>
+
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <form name="FilterForm" id="FilterForm" novalidate>
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Order No.</label>
+                                                    <input type="text" name="OrderNo" id="OrderNo" ng-model="OrderNoModel" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>From Date</label><br />
+                                                    <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                        <input type="date" class="form-control" name="FromDate" id="FromDate" ng-model="FromDateModel" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>To Date</label><br />
+                                                    <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                        <input type="date" class="form-control" name="ToDate" ng-model="ToDateModel" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Order Type</label><br />
+                                                    <select class="form-control" name="OrderType" id="OrderType" ng-model="OrderTypeModel">
+                                                        <option value="1">LifeOne</option>
+                                                        <option value="2">Karyon</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="button" class="btn btn-success" style="margin-top:1.5em;" value="Search" id="BtnSearch" ng-click="BindAll(1)">
+                                                    <a href="/OrderReport"  class="btn btn-danger" style="margin-top:1.5em;">Reset</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" >
+                            <p style="text-align:center;color:red" ng-show="OrderList.length < 1"> Data Not Found!</p>
+                            <table id="myTable" class="table  table-hover" ng-show="OrderList.length>0">
+                                <thead>
+                                    <tr>
+                                        <th>SNo.</th>
+                                        @*<th>Order No</th>*@
+                                        <th>Order No./Transaction No</th>
+                                        <th>Customer Name</th>
+                                        @*<th>Payment Type</th>*@
+                                        <th>Item Qty.</th>
+                                        @*<th>PV</th>*@
+                                        <th>Order Amt.(₹)</th>
+                                        <th>Ordered Dt.</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in OrderList">
+                                        <td>{{$index+1}}</td>
+                                        @*<td> {{x.OrderNo}}   </td>*@
+                                        <td><a href="javascript:void()" style="text-decoration:underline" ng-click="GetOrderDetails(x.PK_OrderId,x.OrderType)">{{x.TransactionNo}}</a> </td>
+                                        <td>{{x.SupplyToName}}</td>
+                                        <td>{{x.ItemQty}}</td>
+                                        @*<td>{{x.PointValue}}</td>*@
+                                        <td>{{x.Amount}}</td>
+                                        <td>{{x.OrderDate}}</td>
+                                        <td>
+                                            <a ng-click="openInvoice(x.OrderNo,x.OrderType)" class="btn-sm btn  btn-info text-white" title="View Invoice"><i class="fa fa-file"></i></a>
+                                        </td>
+                                    </tr>
+                                    <tr><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between" ng-if="Pager!=null">
+                                <div> <small class="text-muted inline">showing {{Pager.TotalItems}}  of {{OrderList.length}} items</small> </div>
+                                <div>
+                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                        <li class="page-item" ng-if="Pager.CurrentPage > 1">
+                                            <a class="page-link" ng-click="Paging(1)">First</a>
+                                        </li>
+                                        <li class="page-item" ng-if="Pager.CurrentPage > 1">
+                                            <a class="page-link" ng-click="Paging(Pager.CurrentPage-1)">Previous</a>
+                                        </li>
+                                        <li ng-if="PageList.length>1" ng-repeat="n in PageList" class="page-item" ng-class="{active: n== Pager.CurrentPage}">
+                                            <a class="page-link" ng-click="Paging(n)">{{n}}</a>
+                                        </li>
+
+                                        <li class="page-item" ng-if="Pager.CurrentPage < Pager.TotalPages">
+                                            <a class="page-link" ng-click="Paging(Pager.CurrentPage+1)">Next</a>
+                                        </li>
+                                        <li class="page-item" ng-if="Pager.CurrentPage < Pager.TotalPages">
+                                            <a class="page-link" ng-click="Paging(Pager.TotalPages)">Last</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="OrderDetailsModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content ">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ordered Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="CustomMessages1"></div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive" >
+                                <table id="Productdetails" class="table table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No.</th>
+                                            <th>Product&nbsp;Type</th>
+                                            <th>Product&nbsp;Name</th>
+                                            <th>Product&nbsp;Amt</th>
+                                            <th>Total&nbsp;Qty</th>
+                                            <th>Final&nbsp;Amt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="v in OrderProductDetails">
+                                            <td>{{$index+1}} </td>
+                                            <td> {{v.ProductType}}</td>
+                                            <td> {{v.ProductName}}</td>
+                                            <td> {{v.Amount}}</td>
+                                            <td> {{v.Quantity}}</td>
+                                            <td> {{v.Amount * v.Quantity}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var app = angular.module('My-App', []);
+    app.controller('My-Ctrl', function ($scope, $http) {
+        $scope.OrderTypeModel = "1";
+        $scope.OrderList = [];
+        $scope.PageNo = 1;
+        $scope.BindAll = function (PageNo) {
+            $scope.OrderList = null;
+            $http({
+                url: '/Admin/ManageAssociateOrdered/BindOrderReport',
+                method: 'post',
+                data: {
+                    OrderNo: $scope.OrderNoModel,
+                    FromDate: $scope.FromDateModel,
+                    ToDate: $scope.ToDateModel,
+                    OrderType: ($scope.OrderTypeModel == undefined ? 1 : $scope.OrderTypeModel),
+                    Page: PageNo
+                }
+            }).then(function (response) {
+                console.log(response.data.LstOrder);
+                $scope.Pager = response.data.Pager;
+                $scope.PageList = [];
+                if (response.data.LstOrder.length > 0) {
+                    for (var i = 1; i <= $scope.Pager.TotalPages; i++) {
+                        $scope.PageList.push(i);
+                    }
+                    $scope.OrderList = response.data.LstOrder;
+                } else {
+                    $scope.OrderList = [];
+                }
+            })
+        }
+        $scope.BindAll(1);
+        $scope.Paging = function (P) {
+            $scope.BindAll(P);
+        }
+
+        $scope.GetOrderDetails = function (OrderNo, Type) {
+            $http({
+                url: '/Admin/ManageAssociateOrdered/GetOrderDetails',
+                method: 'post',
+                data: { OrderNo: OrderNo, OrderType: Type }
+            }).then(function (response) {
+                $scope.OrderProductDetails = response.data;
+                $("#OrderDetailsModal").modal("show");
+            });
+        }
+
+        $scope.openInvoice = function (OrderNo, Type) {
+            if (Type == 1) {
+                window.open(
+                    "/Admin/ManageAssociateOrdered/Invoice?OrderId=" + OrderNo,
+                    '_blank'
+                );
+            } else if (Type == 2) {
+                window.open(
+                    "/Admin/ManageAssociateOrdered/Invoice_Karyon?OrderId=" + OrderNo,
+                    '_blank'
+                );
+            }
+        }
+    });
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+
+
+
+</script>
+
+
+
+
+
+
+

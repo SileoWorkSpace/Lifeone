@@ -1,0 +1,206 @@
+﻿@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "Manage App Dashboard";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<style>
+    .search-box-content {
+        display: none;
+        padding: 0 15px;
+    }
+
+    .btn-default {
+        color: black;
+    }
+
+    @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 1258px
+        }
+    }
+
+    .invalid {
+        color: red;
+    }
+
+    ul > li > a {
+        cursor: pointer;
+    }
+
+    
+    .fixTableHead {
+        overflow-y: auto;
+        height: 1000px;
+    }
+
+    .fixTableHead thead th {
+        position: sticky;
+        top: 0;
+    }
+</style>
+<div class="container-fluid" ng-app="My-App" ng-controller="My-Ctrl">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">
+                Manage App Dashboard<small></small>
+            </h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Masters</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage App Dashboard</li>
+                </ol>
+            </nav>*@
+        </div>
+    </div>
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="table-responsive fixTableHead">
+                            <p style="text-align:center;color:red" ng-show="_DataList.length < 1"> Data Not Found!</p>
+                            <table id="myTable" class="table  table-hover" ng-show="_DataList.length>0">
+                                <thead>
+                                    <tr>
+                                        <th>#Sn.</th>
+                                        <th> Utility Name </th>
+                                        <th>Icon</th>
+                                        <th>Created Date</th>
+                                        <th>CMP Start Date Time</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in _DataList">
+                                        <td>{{$index+1}}</td>
+                                        <td><a href="javascript:void()" ng-click="ViewRemark(x.Description)"> {{x.UtilityName}}</a></td>
+                                        <td><a href="{{x.Icon}}" target="_blank"> <img src="{{x.Icon}}" style="max-height:40px" /></a>  </td>
+                                        <td>{{x.CreatedDateStr}}</td>
+                                        @*<td>{{x.CreatedBy}}</td>*@
+                                        <td>
+                                            <input type="datetime-local" value="{{x._CampaignStartDate}}" class="form-control" name="CMPStartDate" id="CMPStartDate" ng-model="x._CampaignStartDate" />
+                                            @if (PermissionManager.IsActionPermit("Manage App Dashboard", ViewOptions.FormUpdate))
+                                            {
+                                                <button class="btn btn-success btn-sm" ng-disabled="x.Status!='CommingSoon'" ng-click="ChangeCMPDateTime(x.Id,x._CampaignStartDate)">Change</button>
+                                            }
+
+
+                                        </td>
+                                        <td class="text-right">
+                                            @if (PermissionManager.IsActionPermit("Manage App Dashboard", ViewOptions.FormUpdate))
+                                            {
+                                                <select class="form-control" style="float:right;max-width:200px" name="Status" ng-model="x.Status" value="{{x.Status}}" ng-change="ChangeStatus(x.Id,x.Status)">
+                                                    <option value="Active">Active</option>
+                                                    <option value="InActive">In-Active </option>
+                                                    <option value="CommingSoon">Comming-Soon </option>
+                                                </select>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal" id="Remark_Modal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Remark</h4>
+                </div>
+                <form enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                    <p>{{Remarks}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var app = angular.module('My-App', []);
+    app.controller('My-Ctrl', function ($scope, $http) {
+        $scope._DataList = [];
+        $scope.BindAll = function () {
+            $scope._DataList = null;
+            $http({
+                url: '/Admin/Master/BindAllUtilityMaster',
+                method: 'post'
+            }).then(function (response) {
+                console.log(response.data);
+                if (response.data.Status) {
+                    $scope._DataList = response.data.Data;
+                } else {
+                    $scope._DataList = [];
+                }
+            })
+        }
+        $scope.BindAll();
+
+        $scope.ViewRemark = function (Remark) {
+            if (Remark != null && Remark != '') {
+                $scope.Remarks = Remark;
+                $('#Remark_Modal').modal('show');
+            } else {
+                alert('No Remark!!!')
+            }
+        }
+        $scope.ChangeStatus = function (Id, Status) {
+            if (confirm('Are you sure you want change the status?')) {
+                $http({
+                    url: '/Admin/Master/ChangeUtilityMasterStatus',
+                    method: 'post',
+                    data: { Id: Id, Status: Status }
+                }).then(function (response) {
+                    console.log(response.data);
+                    if (response.data.Status) {
+                        $scope.BindAll();
+                    }
+                    alert(response.data.Message);
+                });
+            }
+        }
+
+        $scope.ChangeCMPDateTime = function (Id, CMDStartDateTime) {
+            if (confirm('Are you sure you want change the Campaign Start Date & time?')) {
+                $http({
+                    url: '/Admin/Master/ChangeCMDStartDateTime',
+                    method: 'post',
+                    data: { Id: Id, CampaignStartDate: CMDStartDateTime }
+                }).then(function (response) {
+                    if (response.data.Status) {
+                        $scope.BindAll();
+                    }
+                    alert(response.data.Message);
+                });
+
+            }
+        }
+
+    });
+</script>
+
+
+
+
+
+
+
+

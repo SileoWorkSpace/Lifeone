@@ -1,0 +1,84 @@
+﻿@model  List<LifeOne.Models.AdminManagement.AEntity._AgricultureMasterModel>
+@{
+    Layout = null;
+    int i = 1; int ii = 1;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ViewCropDetails</title>
+    <link rel="shortcut icon" href="~/Content/admin-assets/images/favicon.png">
+    <!-- plugins -->
+    <link href="~/Content/admin-assets/libs/flatpickr/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- App css -->
+    <link href="~/Content/admin-assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/admin-assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/admin-assets/css/app.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row" id="content">
+
+            @foreach (var x in Model)
+            {
+                foreach (var xx in x._OList.ToList()) {
+                    <div class="col-12 col-md-12">
+                        <div class="row">
+                            <div class="col-6 col-md-4"><h5><b>Crop Name :</b> @xx.CropName  </h5></div>
+                            <div class="col-6 col-md-4"><h5><b>Crop Type :</b> @xx.CropType  Application</h5></div>
+                            <div class="col-6 col-md-4"><h5><b>Total Days Of Crop :</b> @xx.TotalDaysOfCrop  </h5></div>
+                            <div class="col-6 col-md-12"><h5><b>Method Of Application :</b> @xx.MethodOfApplication </h5></div>
+                        </div>
+                        <div class="table-responsive" >
+                            <table class="table">
+
+                                @foreach (var v in xx._DayList)
+                                {
+                                    <tbody>
+                                        <tr style="background:#e0e0e0">
+                                            <th><b>Days :</b>@v.Day </th>
+                                            @*<th><b>To Days :</b> {{v.ToDays}}</th>*@
+                                            <th><b>Area :</b>@v.Area  </th>
+                                            <th><b>Area Type :</b>@v.AreaType </th>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3" style="padding:0px;">
+                                                <table class="table table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th class="text-center"># </th>
+                                                            <th class="text-left">Product </th>
+                                                            <th class="text-left">Description </th>
+                                                            <th>Quantity	 </th>
+                                                            <th class="text-right">Price </th>
+                                                        </tr>
+                                                    </thead>
+                                                    @foreach (var vv in v._DayWiseProductList)
+                                                    {
+                                                        <tr>
+                                                            <td class="text-center">@ii </td>
+                                                            <td class="text-left">@vv.ProductName   </td>
+                                                            <td class="text-left" style="">@vv.Description</td>
+                                                            <td>@vv.Quantity </td>
+                                                            <td class="text-right">@vv.Price </td>
+                                                        </tr>
+                                                    }
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                }
+                            </table>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</body>
+</html>
