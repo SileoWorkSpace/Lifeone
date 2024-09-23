@@ -1,0 +1,235 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.EmployeesViewModel
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "Employees";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/dist/css/sweetalert.css" rel="stylesheet" />
+@{
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-success m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+
+
+
+        }
+    }
+
+}
+<div class="container-fluid">
+
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Employee Details</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Users</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Employee Details</li>
+                </ol>
+            </nav>*@
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                @if (PermissionManager.IsViewPermit("Employee Registration"))
+                {
+                    <a href="/Employee-Registration" id="btnAdd" class="btn btn-success btn-sm">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add Employee
+                    </a>
+                }
+                @*<span>
+            <a href="/Employee-Registration" class="btn btn-success btn-rounded" style="cursor:pointer;color:white"> <i class="fa fa-plus"></i> Add Employee</a>
+
+        </span>*@
+            </div>
+        </div>
+
+    </div>
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <form action="" method="post">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Login Id</label>
+                                                    <input type="text" name="LoginID" id="LoginID" placeholder="Enter Login Id" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" name="MemberName" id="MemberName" placeholder="Enter Name" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Mobile No</label>
+                                                    <input type="text" name="Mobile" id="Mobile" placeholder="Enter Mobile No" class="form-control" maxlength="10" onkeypress="return isNumberKey(event)" />
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                    <a href="/Admin-Employees" class="btn btn-secondary" style="margin-top:1.5em;">Reset</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                        <div class="table-responsive" >
+                            <table class="table table-hover mb-0" id="tblMemberList">
+                                <thead>
+                                    <tr>
+                                        <th>#Sn.</th>
+                                        <th>Login Id</th>
+                                        <th>Password</th>
+                                        <th>Name</th>
+                                        <th>Email Id</th>
+                                        <th>Mobile No</th>
+                                        <th>Join On</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.EmployeeList.Count > 0)
+                                    {
+                                        int sno = 0;
+                                        foreach (var item in Model.EmployeeList)
+                                        {
+
+                                    <tr>
+                                        <td data-title="#SN:">@(sno = sno + 1)</td>
+                                        <td data-title="Login:">@item.LoginId</td>
+                                        <td data-title="Password">@item.Password</td>
+                                        <td data-title="Name:">
+                                            @item.MemberName
+                                        </td>
+                                        <td data-title="Email:">@item.Email</td>
+                                        <td data-title="Mobile:"> @item.Mobile </td>
+                                        <td data-title="Joining Date:">@item.joiningDate</td>
+                                        <td>
+                                            @if (PermissionManager.IsActionPermit("Employees", ViewOptions.FormUpdate))
+                                            {
+
+                                                <a href="#" onclick="EditEmployeeDetail('@item.FK_MemId')" class="btn btn-primary btn-sm"  data-rel="tooltips" ToolTip="Edit"><i class="fa fa-pencil"></i></a>
+                                            }
+                                            @if (PermissionManager.IsActionPermit("Employees", ViewOptions.FormDelete))
+                                            {
+
+                                                <a href="/Admin/Admin/DeleteEmployee?FK_MemId=@item.FK_MemId" onclick="return confirm('Are you sure to delete this employee ?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                            }
+                                        </td>
+                                    </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between">
+                                @if (Model != null)
+                                {
+                                    if (Model.Pager != null)
+                                    {
+                                        if (Model.Pager.EndPage > 1)
+                                        {
+                                            <div> <small class="text-muted inline">showing @Model.EmployeeList.Count  of @Model.EmployeeList[0].TotalRecord items</small> </div>
+                                            <div>
+                                                <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                    @if (Model.Pager.CurrentPage > 1)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Admin-Employees?LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile">First</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Admin-Employees?page=@(Model.Pager.CurrentPage - 1)&LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile">Previous</a>
+                                                        </li>
+                                                    }
+                                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                    {
+                                                        <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                            <a class="page-link" href="/Admin-Employees?page=@page&LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile">@page</a>
+                                                        </li>
+                                                    }
+                                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Admin-Employees?page=@(Model.Pager.CurrentPage + 1)&LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile">Next</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Admin-Employees?page=@(Model.Pager.TotalPages)&LoginId=@Model.LoginId&MemberName=@Model.MemberName&Mobile=@Model.Mobile">Last</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+
+                                }
+
+                            </div>
+                        </footer>
+
+
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+    </div>
+</div>
+
+<script src="~/Content/dist/js/sweetalert.min.js"></script>
+<script>
+    sessionStorage.setItem("Fk_MemID", null);
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    function EditEmployeeDetail(FkMemID) {
+        sessionStorage.setItem("Fk_MemID", FkMemID);
+        window.location.href = "/Employee-Registration";
+    }
+</script>
+
+

@@ -47,10 +47,9 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                         Rank = dr["Ranks"].ToString(),
                         Designation = dr["Designation"].ToString(),
                         Recognition = dr["Recognition"].ToString(),
-                        TargetPoint = dr["RawardTarget"].ToString()
-                        
-
-
+                        TargetPoint = dr["RawardTarget"].ToString(),
+                        ToursName = dr["ToursName"].ToString(),
+                        ToursImage = dr["ToursImage"].ToString(),                        
                     });
                 }
             }

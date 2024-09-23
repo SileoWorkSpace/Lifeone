@@ -1,0 +1,131 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.WalletDetailModel
+@{
+    ViewBag.Title = "MemberWalletDetail";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int SNO = 0;
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Member Wallet Details</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#">Member</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Member Wallet Details</li>
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+    <!-- content -->
+    <!-- Row -->
+    <div class="row">
+
+        <!-- Column -->
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                        </div>
+                    </div>
+                    <div class="table-responsive" >
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#Sn.</th>
+                                    <th>Utility Type</th>
+                                    <th>Transaction no.</th>
+                                    <th>Utility Status</th>
+                                    <th>Transaction date</th>
+                                    <th>Transaction Time</th>
+                                    <th>Transaction Amount</th>
+                                    <th>Transaction Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.WalletDetailMList != null && Model.WalletDetailMList.Count > 0)
+                                {
+                                    foreach (var item in Model.WalletDetailMList)
+                                    {
+                                        SNO = SNO+1;
+                                        <tr>
+                                            <td>@SNO</td>
+                                            <td>@item.UtilityType</td>
+                                            <td>@item.TransNo</td>
+                                            <td>@item.Remarks</td>
+                                            <td>@item.TransactionDate.ToShortDateString()</td>
+                                            <td>@item.TransactionDate.ToShortTimeString()</td>
+                                            <td><h5 class="text-danger m-0"><i class="fa fa-inr"></i> @item.TransactionAmount</h5></td>
+                                            @if (item.Status.ToLower() == "success")
+                                            {
+                                                <td><span class="badge badge-soft-success py-1">@item.Status</span></td>
+                                            }
+                                            else
+                                            {
+                                                <td><span class="badge badge-soft-danger py-1">@item.Status</span></td>
+                                            }
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <footer class="card-footer bg-white p-2">
+                        <div class="d-md-flex align-items-center justify-content-between">
+                            @if (Model != null)
+                            {
+                                if (Model.Pager != null)
+                                {
+                                    if (Model.Pager.EndPage > 1)
+                                    {
+                                        <div> <small class="text-muted inline">showing @Model.WalletDetailMList.Count  of @Model.WalletDetailMList[0].TotalRecord items</small> </div>
+                                        <div>
+                                            <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                @if (Model.Pager.CurrentPage > 1)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-MemberWalletDetail?Fk_MemId=@Model.Fk_MemId">First</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-MemberWalletDetail?page=@(Model.Pager.CurrentPage - 1)&Fk_MemId=@Model.Fk_MemId">Previous</a>
+                                                    </li>
+                                                }
+                                                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                {
+                                                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                        <a class="page-link" href="/Admin-MemberWalletDetail?page=@page&Fk_MemId=@Model.Fk_MemId">@page</a>
+                                                    </li>
+                                                }
+                                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-MemberWalletDetail?page=@(Model.Pager.CurrentPage + 1)&Fk_MemId=@Model.Fk_MemId">Next</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-MemberWalletDetail?page=@(Model.Pager.TotalPages)&Fk_MemId=@Model.Fk_MemId">Last</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+
+                            }
+
+                        </div>
+                    </footer>
+                </div>
+            </div>
+
+        </div>
+        <!-- Column -->
+    </div>
+    <!-- Row -->
+    <!-- end row -->
+
+</div>
+

@@ -1,0 +1,558 @@
+﻿@model LifeOne.Models.FranchiseManagement.FEntity.TopupByFranchise
+@{
+    ViewBag.Title = "TopupByFranchisee";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+}
+
+<style>
+    #alertBoxx {
+        position: relative;
+        z-index: 1051;
+    }
+</style>
+<section class="content">
+    @using (Html.BeginForm("TopupByFranchise", "Franchise", FormMethod.Post, new { @id = "form1" }))
+    {
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h3 class="text-themecolor">Direct Seller Activation</h3>
+                @*<ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Franchise-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="">Member Activation</a></li>
+                        <li class="active breadcrumb-item" aria-current="page">TopUp</li>
+                    </ol>*@
+            </div>
+
+            <div class="psearch">
+                <div class="input-group">
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            @if (TempData["Alert"] != null)
+            {
+                <div class="col-md-12" id="alertBoxx">
+
+                    <div class="alert @ViewBag.Colortxt alert-dismissible fade show" role="alert">
+                        <strong> @Html.Raw(TempData["Alert"])</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                </div>
+            }
+
+        </div>
+        <div class="box box-info">
+            <div class="box-body">
+
+                <div class="row">
+                    <div class="col-md-2">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card card-outline-info">
+                            <div class="card-body">
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Login Id</label>
+                                            @Html.TextBoxFor(m => m.txtLoginId, new { @class = "form-control", @placeholder = "LoginId" })
+                                            @*@if (!string.IsNullOrEmpty(@ViewBag.Name))
+                                                {
+                                                    <span style="color:blue">
+                                                        @ViewBag.Name
+                                                    </span>
+                                                }*@
+                                            @*else
+                                                {*@
+                                            <span id="SpnLogInId" style="color:blue"> @ViewBag.Name</span>
+                                            @*}*@
+
+
+
+                                            @Html.HiddenFor(m => m.FK_MemId)
+                                            <input type="hidden" id="hdnTemppermanent" name="TempPermanent" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Package</label>
+                                            @Html.DropDownListFor(m => m.FK_PackageId, new SelectList(ViewBag.ddlPackageList, "Value", "Text"), new { @class = "form-control", @onchange = "getPackageAmount()" })
+                                            <input type="hidden" id="hdnPackageName" name="ProductName" />
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="productdiv" style="display:none">
+                                    <div class="col-md-8">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Product</label>
+                                            @Html.DropDownListFor(m => m.ProductId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Quantity</label>
+                                            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @placeholder = "Quantity", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group label-floating is-empty">
+                                            <br />
+                                            <input type="submit" id="btnAdd" name="btnAdd" value="Add Product" class="btn btn-primary" onclick="return fvalidateAddProduct()" />
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="row" id="packageamt" style="display:none">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Package Amount</label>
+
+                                            @Html.TextBoxFor(m => m.txtPaidAmount, new { @class = "form-control", @placeholder = "Paid Amount", @readonly = "readonly" })
+
+                                        </div>
+                                    </div>
+
+
+                                    @*<div class="col-md-6">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="form-control-placeholder" for="name">Topup Date</label>
+                                                <input type="text" class="form-control" name="TopupDate" id="mdate" required autocomplete="off" />
+                                            </div>
+                                        </div>*@
+                                </div>
+                                <div class="row" id="producttable" style="display:none">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <table class="table " id="TmpProdgrd">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sn</th>
+                                                        <th>Product</th>
+
+                                                        <th>Price(₹)</th>
+                                                        <th>BV</th>
+                                                        <th>Quantity</th>
+                                                        <th>Total BV</th>
+
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+                                                    @if (Model != null)
+                                                    {
+                                                        if (Model.dtDetails != null)
+                                                        {
+                                                            if (Model.dtDetails.Rows.Count > 0)
+                                                            {
+                                                                for (int i = 0; i <= Model.dtDetails.Rows.Count - 1; i++)
+                                                                {
+                                                                    <tr>
+                                                                        <td>@(i+1)</td>
+                                                                        <td>@Model.dtDetails.Rows[i]["ProductName"].ToString()</td>
+                                                                        <td>@Model.dtDetails.Rows[i]["Price"].ToString()</td>
+                                                                        <td>@Model.dtDetails.Rows[i]["BV"].ToString()</td>
+                                                                        <td>@Model.dtDetails.Rows[i]["Quantity"].ToString()</td>
+                                                                        <td>@Model.dtDetails.Rows[i]["TotalBV"].ToString()</td>
+                                                                        <td>
+                                                                            <a class="btn btn-danger btn-sm" href="/Franchise/Franchise/DeleteTempActivationPro?id=@Model.dtDetails.Rows[i]["id"].ToString()&&FK_MemId=@Model.FK_MemId" onclick="return confirm('Are you sure for delete this product?')">Delete</a>
+                                                                        </td>
+                                                                    </tr>
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                </tbody>
+                                                <tfoot>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th></th>
+
+                                                        <th></th>
+                                                        <th></th>
+
+                                                        <th>Total BV</th>
+                                                        <th id="txttotalBV">@ViewBag.BV</th>
+                                                        <th></th>
+                                                    </tr>
+                                                </tfoot>
+                                            </table>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Payment Mode</label>
+                                            <select id="ddlPaymentMode" name="PaymentMode" class="form-control" >
+                                                <option value="0">Select</option>
+                                                @*<option value="Cash">Cash</option>*@
+                                                <option value="Cheque">Cheque</option>
+                                                <option value="DD">DD</option>
+                                                <option value="NEFT">NEFT</option>
+                                                <option value="RTGS">RTGS</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12" id="dv" style="display:none;">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">NEFT/RTGS/Check/DD No</label>
+                                            <input type="text" class="form-control" name="ChequeDDNo" id="txtChequeDDNo" onkeypress="return onlyNos(event,this);" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" id="dv1" style="display:none;">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Bank Name</label>
+                                            <input type="text" class="form-control" name="BankName" id="txtBankName" />
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Date</label>
+                                            <input type="text" class="form-control" name="ChequeDDDate" readonly placeholder="dd/mm/yyyy" id="mdate1" />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="display:none;">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Remark</label>
+                                            @Html.TextAreaFor(m => m.TopupRemark, new { @class = "form-control", @maxlength = "500" })
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+
+                                    <div class="col-md-6">
+                                        <input type="button" name="Save" id="txtSave" class="btn btn-fill btn-success" onclick="onValidation()" style="display:@ViewBag.add;" value="Submit" />
+                                        <input type="submit" id="Save" name="Save" class="btn btn-fill btn-success" style="display:none;" value="Submit" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <span id="dbResponse" style="color:red"></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        // @Html.HiddenFor(m=>m.txtFK_PackageId)
+        @Html.HiddenFor(m=>m.Fk_FranchiseId)
+        <input type="hidden" id="txtFK_PackageId" value="@TempData["txtFK_PackageId"]" />
+        <input type="hidden" id="txtPaymentMode1" value="@TempData["PaymentMode"]" />
+        <input type="hidden" id="txtChequeDDNo1" value="@TempData["ChequeDDNo"]" />
+        <input type="hidden" id="txtChequeDDDate1" value="@TempData["ChequeDDDate"]" />
+        <input type="hidden" id="txtBankName1" value="@TempData["BankName"]" />
+        
+    }
+</section>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
+
+<style>
+    .errortext {
+        border: 1px solid red !important;
+    }
+</style>
+
+
+<script type="text/javascript">
+debugger
+    $('#mdate1').datepicker({
+        autoclose: true,
+        orientation: "top",
+        format: 'dd/mm/yyyy',
+        endDate: "today"
+    });
+    //    on('click', function (e) {
+    //    $(this).datepicker('hide');
+    //});
+    var id = $('#txtFK_PackageId').val()
+    var txtPaymentMode = $('#txtPaymentMode1').val()
+    var txtChequeDDNo = $('#txtChequeDDNo1').val()
+    var txtChequeDDDate = $('#txtChequeDDDate1').val()
+    var txtBankName = $('#txtBankName1').val()
+    $(document).ready(function () {
+        debugger
+        //if ($('#txtLoginId').val() != '') {
+        //    GetMemberName()
+        //}
+        //else {
+        //    $("#FK_MemId").val(0);
+        //    $("#SpnLogInId").html("");
+        //}
+
+        if (id != "") {
+            $('#FK_PackageId').val(id)
+        }
+        if (txtPaymentMode !== "0") {
+            $('#ddlPaymentMode').val(txtPaymentMode)
+            $('#txtChequeDDNo').val(txtChequeDDNo)
+            $('#txtBankName').val(txtBankName)
+
+            $('#mdate1').val(txtChequeDDDate)
+        }
+        if ($('#txttotalBV').val() < 1000) {
+            $("txtSave").prop('disabled', true);
+        }
+        else {
+            $("txtSave").prop('disabled', false);
+        }
+
+        if (txtPaymentMode !== "0") {
+
+            if (txtPaymentMode == "Cash" ||  txtPaymentMode == "Free") {
+                $("#dv").css("display", "none");
+                $("#dv1").css("display", "none");
+                // $("#txtPaidAmount").val("");
+                $("#txtPaidAmount").prop('readonly', false);
+            }
+            else {
+                $("#dv").css("display", "block");
+                $("#dv1").css("display", "block");
+                $("#txtPaidAmount").prop('readonly', true);
+            }
+        }
+
+        getPackageAmount()
+    });
+    function fvalidateAddProduct() {
+        $(".errortext").removeClass("errortext");
+        if ($('#txtLoginId').val() == '') {
+            $("#txtLoginId").addClass('errortext');
+            $('#txtLoginId').focus();
+            return false;
+        }
+        if ($('#ProductId').val() == '0') {
+            $("#ProductId").addClass('errortext');
+            $('#ProductId').focus();
+            return false;
+        }
+        if ($('#Quantity').val() == '0' || $('#Quantity').val() == '' || $('#Quantity').val() == null) {
+            $("#Quantity").addClass('errortext');
+            $('#Quantity').focus();
+            return false;
+        }
+
+
+    }
+    $("#txtPaidAmount").change(function () {
+        var amount = $("#txtPaidAmount").val();
+        var PMode = $("#ddlPaymentMode").val();
+        if (PMode == "Cash" || PMode == "NEFT" || PMode == "RTGS" || PMode == "Cheque" || PMode == "DD" || PMode == "") {
+            if (parseInt(amount) < 3000) {
+                alert('Amount should not be less than 3000')
+                //$('#alertBox').html(ReturnAlert('warning', 'Amount should not be less than 10000'));
+                $("#txtPaidAmount").val("");
+                $("#txtPaidAmount").focus();
+            }
+            //if (parseInt(amount) > 150000) {
+            //    alert('Amount should not be greater than 150000')
+            //    //$('#alertBox').html(ReturnAlert('warning', 'Amount should not be greater than 150000'));
+            //    $("#txtPaidAmount").val("");
+            //    $("#txtPaidAmount").focus();
+            //}
+        }
+        else {
+            $("#txtPaidAmount").val("0");
+        }
+
+    });
+
+    $("#ddlPaymentMode").change(function () {
+
+        var PMode = $("#ddlPaymentMode").val();
+        if (PMode == "Cash" || PMode == "0" || PMode == "Free") {
+            $("#dv").css("display", "none");
+            $("#dv1").css("display", "none");
+            // $("#txtPaidAmount").val("");
+            $("#txtPaidAmount").prop('readonly', false);
+            $('#txtChequeDDNo').val("")
+            $('#txtBankName').val("")
+            $('#mdate1').val("")
+
+        }
+        //else if(PMode == "Free")
+        //{
+        //    $("#dv").css("display", "none");
+        //    $("#dv1").css("display", "none");
+        //    $("#txtPaidAmount").val("0");
+        //    $("#txtPaidAmount").prop('readonly', true);
+        //}
+        else {
+            $("#dv").css("display", "block");
+            $("#dv1").css("display", "block");
+            $("#txtPaidAmount").prop('readonly', true);
+        }
+    });
+
+    $("#txtLoginId").change(function () {
+        GetMemberName();
+    });
+
+
+    function GetMemberName() {
+        var loginid = $('#txtLoginId').val();
+        if ($(this).val != "") {
+            $.ajax({
+                type: 'POST',
+                url: '/BuyPackage/GetMemberTopup',
+                datatype: 'json',
+                data: { LoginId: loginid },
+                success: OnSuccess,
+                error: function (ex) {
+                    alert('Failed to retrive !!' + ex);
+                }
+
+            });
+            function OnSuccess(response) {
+
+                if (response.Result == "1") {
+                    $("#FK_MemId").val(response.Fk_MemId);
+                    $("#SpnLogInId").html(response.DisplayName);
+                }
+                else {
+                    alert('InValid Login Id!!!');
+                    //$('#alertBox').html(ReturnAlert('warning', 'InValid Login Id!!!'));
+                    $("#FK_MemId").val("");
+                    $("#SpnLogInId").html("");
+                    $("#txtLoginId").val("");
+                }
+
+            }
+
+
+
+        }
+    }
+    function getPackageAmount() {
+
+
+        var Pk_PackageID = $('#FK_PackageId').val();
+        var PackageAmt = 0
+        if ($('#FK_PackageId').val() != "") {
+            $.ajax({
+                type: 'POST',
+                url: '/BuyPackage/GetAmountPackageId',
+                datatype: 'json',
+                data: { Pk_PackageID: Pk_PackageID, FK_MemID: $('#Fk_FranchiseId').val() },
+                success: OnSuccess,
+                error: function (ex) {
+                    alert('Failed to retrive !!' + ex);
+                }
+
+            });
+            function OnSuccess(response) {
+
+                if (response[0].Msg == "1") {
+
+                    $("#txtPaidAmount").val(response[0].MRP);
+                    $('#hdnPackageName').html(response[0].ProductName);
+                    if (response[0].IsFixed == "No") {
+                        $('#packageamt').show();
+                        $('#productdiv').show();
+                        $('#producttable').show();
+                    }
+                    else {
+                        $('#packageamt').show();
+                        $('#productdiv').hide();
+                        $('#producttable').hide();
+
+                    }
+
+                }
+                else {
+                    alert('Something went wrong!!!');
+                    $("#txtPaidAmount").val(0);
+                    $('#hdnPackageName').html("");
+                }
+            }
+
+        }
+
+    }
+
+    function onValidation() {
+        debugger
+        $(".errortext").removeClass("errortext");
+        if ($('#txtLoginId').val() == '') {
+            $("#txtLoginId").addClass('errortext');
+            $('#txtLoginId').focus();
+            return false;
+        }
+        if ($('#FK_PackageId').val() == '0') {
+            $("#FK_PackageId").addClass('errortext');
+            $('#FK_PackageId').focus();
+            return false;
+        }
+        if ($('#txtPaidAmount').val() == '0') {
+            $("#txtPaidAmount").addClass('errortext');
+            $('#txtPaidAmount').focus();
+            return false;
+        }
+        if ($('#txtPaidAmount').val() == '') {
+            $("#txtPaidAmount").addClass('errortext');
+            $('#txtPaidAmount').focus();
+            return false;
+        }
+        if ($('#ddlPaymentMode').val() == '0') {
+            $("#ddlPaymentMode").addClass('errortext');
+            $('#ddlPaymentMode').focus();
+            return false;
+
+        }
+        else {
+            if ($('#txtChequeDDNo').val() == '') {
+                $("#txtChequeDDNo").addClass('errortext');
+                $('#txtChequeDDNo').focus();
+                return false;
+            }
+            if ($('#txtBankName').val() == '') {
+                $("#txtBankName").addClass('errortext');
+                $('#txtBankName').focus();
+                return false;
+            }
+            if ($('#mdate1').val() == '') {
+                $("#mdate1").addClass('errortext');
+                $('#mdate1').focus();
+                return false;
+            }
+            //if ($('#TopupRemark').val() == '') {
+            //    $("#TopupRemark").addClass('errortext');
+            //    $('#TopupRemark').focus();
+            //    return false;
+            //}
+
+        }
+
+
+
+        $('#Save').trigger('click');
+    }
+</script>

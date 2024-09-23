@@ -92,7 +92,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                 throw ex;
             }
         }
-        public static List<DownlineAPI> GetDownlineList(int? Fk_MemId, string SearchLoginId,string Status, string JoiningDate, int? Page, int PageSize,string Leg,string Pk_PackageID)
+        public static List<DownlineAPI> GetDownlineList(int? Fk_MemId, string SearchLoginId,string Status, string FromDate, string ToDate, int? Page, int PageSize,string Leg,string Pk_PackageID)
         {
             List<DownlineAPI> objlist = new List<DownlineAPI>();
             try
@@ -102,7 +102,8 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                     new SqlParameter("@Fk_memId",Fk_MemId),
                     new SqlParameter("@Search",string.IsNullOrEmpty(SearchLoginId)?null:SearchLoginId),
                     new SqlParameter("@Leg",string.IsNullOrEmpty(Leg)?null:Leg),
-                    //new SqlParameter("@JoiningDate",string.IsNullOrEmpty(JoiningDate)?null:JoiningDate),                 
+                    new SqlParameter("@FromDate",string.IsNullOrEmpty(FromDate)?null:FromDate),
+                    new SqlParameter("@ToDate",string.IsNullOrEmpty(ToDate)?null:ToDate),
                     new SqlParameter("@Pk_PackageID",Pk_PackageID=="0"?null:Pk_PackageID),
                     new SqlParameter("@Status",string.IsNullOrEmpty(Status)?null:Status),                   
                 };
@@ -129,9 +130,9 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                             SponsorName = dr["SponsorName"].ToString(),
                             Status=dr["ActiveStatus"].ToString(),
                             PackageName = dr["PackageName"].ToString(),
-
-                        });
-
+                            PV = dr["PV"].ToString(),
+                            
+                    });
                     }
                 }
                 return objlist;

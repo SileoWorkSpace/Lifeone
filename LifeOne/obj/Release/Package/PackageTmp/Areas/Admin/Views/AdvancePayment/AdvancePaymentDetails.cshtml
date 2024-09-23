@@ -1,0 +1,858 @@
+﻿@using LifeOne.Models.Manager;
+@model LifeOne.Models.FranchiseManagement.FEntity.MFranchiseorderRequest
+@{
+    ViewBag.Title = "AdvancePayment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<style>
+    .search-box-content {
+        display: none;
+        padding: 0 15px;
+    }
+
+    .btn-default {
+        color: black;
+    }
+    /*   @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 989px;
+        }
+    }*/
+    @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 1258px
+        }
+    }
+
+    .invalid {
+        color: red;
+    }
+
+    ul > li > a {
+        cursor: pointer;
+    }
+</style>
+<div class="container-fluid" ng-app="My-App" ng-controller="My-Ctrl">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">
+                Advance Payment Details<small></small>
+            </h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Admin</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Advance Payment</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Advance Payment Details</li>
+                </ol>
+            </nav>
+        </div>
+
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#">Search</a>
+                </span>
+                <span>
+                    <a href="@Url.Action("ExportToExcelAdvancePaymentDetails","AdvancePayment")" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                </span>
+                <span>
+                    <button type="button" class="btn btn-success btn-rounded btngreen" id="btnpdf"><i class="fa fa-file-pdf-o"></i></button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <form name="FilterForm" id="FilterForm" novalidate>
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Login Id</label>
+                                                    <input type="text" name="MID" id="MID" ng-model="LoginIdModel" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>From Date</label><br />
+                                                    <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                        <input type="date" class="form-control" name="FromDate" id="FromDate" ng-model="FromDateModel" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>To Date</label><br />
+                                                    <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                        <input type="date" class="form-control" name="ToDate" ng-model="ToDateModel" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Status</label><br />
+                                                    <select class="form-control" name="Status" id="Status" ng-model="StatusModel">
+                                                        <option value="">All</option>
+                                                        <option value="Pending">Pending</option>
+                                                        <option value="Approved">Approved</option>
+                                                        <option value="Rejected">Rejected</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-4">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="button" class="btn btn-success" style="margin-top:1.5em;" value="Search" id="BtnSearch" ng-click="BindAll(1)">
+                                                    <a href="/Advance-Payment" class="btn btn-danger " style="margin-top:1.5em;">Reset</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" >
+                            <p style="text-align:center;color:red" ng-show="AdvanceRequestList.length < 1"> Data Not Found!</p>
+                            <table id="myTable" class="table  table-hover" ng-show="AdvanceRequestList.length>0">
+                                <thead>
+                                    <tr>
+                                        <th>#Sn.</th>
+                                        <th>Request No.</th>
+                                        <th style="width: 20%;">Associate Name / Id</th>
+                                        <th>Request Amt.</th>
+                                        <th>Return Type</th>
+                                        <th>EMI Option</th>
+                                        <th>Month/Amount</th>
+                                        <th>Request Dt.</th>
+                                        <th>Status</th>
+                                        @*<th>Remark</th>*@
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="x in AdvanceRequestList">
+                                        <td>{{$index+1}}</td>
+                                        <td>{{x.RequestId}}</td>
+                                        <td>{{x.Name}} <br /> <span style="opacity0.8"><b>Remark:</b> {{x.Remark}}</span></td>
+                                        <td>{{x.RequestAmt}}</td>
+                                        <td>{{x.ReturnType}}</td>
+                                        <td>{{x.EMIOption}}</td>
+                                        <td>
+                                            <label ng-if="x.EMIOption=='Month'"> {{x.Month}} </label>
+                                            <label ng-if="x.EMIOption=='Amount'"> {{x.Amount}} </label>
+                                        </td>
+                                        <td>{{x.RequestDateStr}}</td>
+                                        <td>
+                                            <span ng-if="x.Status=='Pending'" class="label label-danger"> {{x.Status}}</span>
+                                            <span ng-if="x.Status=='Approved'" class="label label-success"> {{x.Status}}</span>
+                                            <span ng-if="x.Status=='Rejected'" class="label label-danger"> {{x.Status}}</span>
+                                            <span ng-if="x.Status=='Hold'" class="label btn-secondary"> {{x.Status}}</span>
+                                        </td>
+                                        @*<td>
+                                                <button type="button" ng-click="ViewRemark(x.Remark)" class="btn btn-sm btn-default text-danger" title="Remark"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                                <button ng-disabled="x.Status=='Pending'" type="button" ng-click="ViewRemark(x.NarrationByAdmin)" class="btn btn-sm btn-default text-danger" title="Narration By Admin"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                            </td>*@
+                                    <td>
+
+                                        @if (PermissionManager.IsActionPermit("Advance Payment Details", ViewOptions.FormUpdate))
+                                        {
+                                            <button ng-disabled="x.Status=='Approved'|| x.Status=='Rejected'" type="button" ng-click="Payment(x.RequestId,x.RequestAmt)" @*ng-click="ApproveAction(x.RequestId,'Approved')"*@ class="btn btn-default btn-sm btn-tbl-edit text-primary" title="Approve"><i class="fa fa-check" aria-hidden="true"></i> </button>
+                                            <button ng-disabled="x.Status=='Approved'|| x.Status=='Rejected'" type="button" ng-click="ApproveAction(x.RequestId,'Rejected')" class="btn btn-default btn-sm btn-tbl-edit text-danger" title="Reject"><i class="fa fa-times" aria-hidden="true"></i> </button>
+                                            <button ng-disabled="x.Status=='Pending' || x.Status=='Rejected'" type="button" ng-click="GetPaymentDetails(x.RequestId)" class="btn btn-default btn-sm btn-tbl-edit text-dark" title="View Payment Details"><i class="fa fa-eye" aria-hidden="true"></i> </button>
+                                        }
+
+                                    </td>
+                                    </tr>
+                                    <tr><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between" ng-if="Pager!=null">
+                                <div> <small class="text-muted inline">showing {{Pager.TotalItems}}  of {{AdvanceRequestList.length}} items</small> </div>
+                                <div>
+                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                        <li class="page-item" ng-if="Pager.CurrentPage > 1">
+                                            <a class="page-link" ng-click="Paging(1)">First</a>
+                                        </li>
+                                        <li class="page-item" ng-if="Pager.CurrentPage > 1">
+                                            <a class="page-link" ng-click="Paging(Pager.CurrentPage-1)">Previous</a>
+                                        </li>
+                                        <li ng-if="PageList.length>1" ng-repeat="n in PageList" class="page-item" ng-class="{active: n== Pager.CurrentPage}">
+                                            <a class="page-link" ng-click="Paging(n)">{{n}}</a>
+                                        </li>
+
+                                        <li class="page-item" ng-if="Pager.CurrentPage < Pager.TotalPages">
+                                            <a class="page-link" ng-click="Paging(Pager.CurrentPage+1)">Next</a>
+                                        </li>
+                                        <li class="page-item" ng-if="Pager.CurrentPage < Pager.TotalPages">
+                                            <a class="page-link" ng-click="Paging(Pager.TotalPages)">Last</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </footer>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="PaymentModal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Payment Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="box box-warning">
+                        <div class="box-body">
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label>Amount</label>
+                                        <input type="text" class="form-control" name="Amount" id="Amount" ng-model="AmountModel" required />
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <label>Adavnce Date.</label>
+                                        @Html.TextBoxFor(m => m.PaymentDate, new { @class = "form-control", @maxlength = "30", @type = "date" })
+                                        @*<input type="date" class="form-control" name="AdvanceDate" id="AdvanceDate" ng-model="AdvanceDateModel" required />*@
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label>Payment Mode</label>
+                                        <select id="PaymentMode" name="PaymentMode" class="form-control">
+                                            <option value="0">Payment Mode</option>
+                                            <option value="Cash">Cash</option>
+                                            <option value="Cheque">Cheque</option>
+                                            <option value="NEFT">NEFT</option>
+                                            <option value="RTGS">RTGS</option>
+                                            <option value="IMPS">IMPS</option>
+                                        </select>
+                                        <input type="hidden" id="hdnTotQty" name="hdnTotQty">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div style="display:none;" id="divpaymenttype">
+                                <div class="row">
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <label>Cheque/DD No./Bank Transaction No.</label>
+                                            @Html.TextBoxFor(m => m.ChequeDDNo, new { @class = "form-control", @maxlength = "30" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <label>Cheque/DD Date/Transaction Date</label>
+                                            @Html.TextBoxFor(m => m.ChequeDDDate, new { @class = "form-control", @maxlength = "30", @type = "date" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <label>Bank Name</label>
+                                            @Html.TextBoxFor(m => m.BankName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-12 col-lg-12" style="display:none;" id="divpaymenttypeSlip">
+                                        <div class="form-group">
+                                            <label>Payment Slip</label>
+                                            @Html.TextBoxFor(m => m.PaymentSlip, new { @type = "file", @class = "form-control" })
+                                            @Html.HiddenFor(m => m.HdnPaymentSlip)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+
+                                <button class="btn btn-success btn-block waves-effect waves-light" type="button" ng-click="SubmitPaymentRequest()" value="Submit Request">Submit Request</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+    @*----------------Payment Details Modal Dialogs-------------*@
+    <div class="modal fade" id="Payment_Modal" role="dialog">
+        <div class="modal-dialog modal-md" style="border-radius:0px">
+            <div class="modal-content" style="border-radius:0px">
+                <div class="modal-header" style="border-radius:0px">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Payment Details</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>Payment Date</th>
+                            <td colspan="3">{{PaymentDetails.AdPaymentdateStr}}</td>
+                        </tr>
+                        <tr>
+                            <th>Amount</th>
+                            <td>{{PaymentDetails.PaymentAmount}}</td>
+                            <th>Payment Mode</th>
+                            <td>{{PaymentDetails.PayMode}}</td>
+                        </tr>
+                        <tr ng-if="PaymentDetails.PayMode!='Cash'">
+                            <th>Cheque/DD No./Bank Transaction No.</th>
+                            <td>{{PaymentDetails.TransactionNo}}</td>
+                            <th>Cheque/DD Date/Transaction Date</th>
+                            <td>{{PaymentDetails.PaymentDate}}</td>
+                        </tr>
+                        <tr ng-if="PaymentDetails.PayMode!='Cash'">
+                            <th>Bank Name</th>
+                            <td>{{PaymentDetails.BankName}}</td>
+                            <th>Payment Slip</th>
+                            <td>
+                                <a ng-if="PaymentDetails.ReciptImage!=null && PaymentDetails.ReciptImage!=''" href="{{PaymentDetails.ReciptImage}}" target="_blank"><img class="img-responsive" src="{{PaymentDetails.ReciptImage}}" /></a>
+
+                                <small ng-if="PaymentDetails.ReciptImage==null || PaymentDetails.ReciptImage==''">No. Slip!</small>
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="modal" id="Remark_Modal" role="dialog">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Remarks</h4>
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                </div>
+                <!-- Modal body -->
+                <form enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="card-body">
+                                <div class="col-md-12">
+                                    <p>{{Remarks}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="Action_Modal" role="dialog">
+        <div class="modal-dialog modal-md" style="border-radius:0px">
+            <form name="ActionForm" id="ActionForm" novalidate>
+                <div class="modal-content" style="border-radius:0px">
+                    <div class="modal-header" style="border-radius:0px">
+                        <button type="button" class="close" data-dismiss="modal" ng-click="Reset()">&times;</button>
+                        <h4 class="modal-title">{{_Action}}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-12 col-md-12">
+                                <div class="form-group">
+                                    <label>Narration</label>
+                                    <textarea placeholder="" class="form-control" name="Narration" id="Narration" ng-model="NarrationModel" tabindex="1" rows="4" required maxlength="250"> </textarea>
+                                    <span class="invalid" ng-if="SubmittedActionForm && ActionForm.Narration.$invalid">Please enter narration, at most 250 words* </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" ng-click="Reset()">Close</button>
+                        <button type="button" ng-click="SubmitRequest(ActionForm);SubmittedActionForm=true;" class="btn btn-success" tabindex="2">{{_Action}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var app = angular.module('My-App', []);
+    app.controller('My-Ctrl', function ($scope, $http) {
+        $scope.AdvanceRequestList = [];
+        $scope.PageNo = 1;
+        $scope.BindAll = function (PageNo) {
+            $scope.AdvanceRequestList = null;
+            $http({
+                url: '/Admin/AdvancePayment/GetAllAdvancePaymentRequest',
+                method: 'post',
+                data: {
+                    //FK_MID: $scope.MIDModel,
+                    LoginId: $scope.LoginIdModel,
+                    FromDate: $scope.FromDateModel,
+                    ToDate: $scope.ToDateModel,
+                    Status: $scope.StatusModel,
+                    Page: PageNo
+                }
+            }).then(function (response) {
+                $scope.Pager = response.data.Pager;
+                $scope.PageList = [];
+                if (response.data.DataList != null && response.data.DataList.length > 0) {
+                    for (var i = 1; i <= $scope.Pager.TotalPages; i++) {
+                        $scope.PageList.push(i);
+                    }
+                    $scope.AdvanceRequestList = response.data.DataList;
+                } else {
+                    $scope.AdvanceRequestList = [];
+                }
+            })
+        }
+        $scope.BindAll(1);
+        $scope.Paging = function (P) {
+
+            $scope.BindAll(P);
+        }
+
+        $scope.ViewRemark = function (Remark) {
+            if (Remark != null && Remark != '') {
+                $scope.Remarks = Remark;
+                $('#Remark_Modal').modal('show');
+            } else {
+                alert('No Remark!!!')
+            }
+        }
+        $scope.ApproveAction = function (ReqId, Action) {
+            $scope.ReqId = ReqId;
+            $scope.Action = Action;
+            $scope._Action = '';
+            if (Action == 'Approved')
+                $scope._Action = 'Approve';
+            else if (Action == 'Rejected')
+                $scope._Action = 'Decline';
+            var Msg = 'Are you sure you want to ' + $scope._Action + '?';
+            if (confirm(Msg)) {
+                $('#Action_Modal').modal('show');
+            }
+            return false;
+        }
+        $scope.SubmitRequest = function (From) {
+            if (From.$valid) {
+                $http({
+                    url: '/Admin/AdvancePayment/ApproveRequest',
+                    method: 'post',
+                    data: {
+                        ReqId: $scope.ReqId,
+                        Action: $scope.Action,
+                        Narration: $scope.NarrationModel
+                    }
+                }).then(function (response) {
+                    if (response.data.Status) {
+                        $scope.BindAll();
+                        $('#Action_Modal').modal('hide')
+                        $("#ActionForm")[0].reset();
+                        alert(response.data.Message);
+                    } else {
+                        alert(response.data.Message);
+                    }
+                })
+            } else {
+                $scope.invalid = true;
+            }
+        }
+
+        $scope.Calculate = function (M) {
+            if (M > 0) {
+                $scope.Amount = $scope.RequestAmountModel;
+                $scope.EMI = Math.round($scope.Amount / M);
+            } else {
+                $scope.EMI = null;
+            }
+        }
+        $scope.Reset = function () {
+            $scope.ActionForm.$setPristine();
+            $scope.NarrationModel = "";
+        }
+
+        $scope.Payment = function (RequestId, Amount) {
+            $scope.RequestId = RequestId;
+            $scope.AmountModel = Amount;
+            $("#PaymentModal").modal("show");
+        }
+
+
+
+
+        $('#PaymentMode').on('change', function () {
+
+            if ($('#PaymentMode').val() == "Cash" || $('#PaymentMode').val() == "0") {
+
+                $('#divpaymenttype').css('display', 'none');
+                $('#divpaymenttypeSlip').css('display', 'none');
+                $('#divwalletbalnce').css('display', 'none');
+            }
+            else if ($("#PaymentMode").val() == "Wallet") {
+
+                $('#divwalletbalnce').css('display', 'block');
+
+
+                $("#divShowWallet").show();
+
+
+                var model = {
+                    Fk_MemId: sessionStorage.getItem("customerId")
+                }
+                $.ajax({
+                    type: 'POST',
+                    url: 'CustomermemberWalletBalance',
+                    data: JSON.stringify(model),
+                    dataType: 'json',
+                    contentType: 'application/json;charset=utf-8',
+                    async: false,
+                    success: function (data) {
+                        if (data == null || parseFloat(data.Balance) == parseFloat("0.00")) {
+                            $("#custommessage").append("<span>Insufficient wallet balance.</span>");
+                        }
+                        else {
+                            $("#spanbindwalletamt").text(data.Balance);
+                            $(".showewalletdiv").fadeIn();
+                            $(".showewalletdiv").fadeOut();
+                            $(".showewalletdiv").fadeIn();
+                            $(".showewalletdiv").fadeOut();
+                            $(".showewalletdiv").fadeIn();
+                        }
+                    },
+                    error: function (err) {
+                        alert(err.statusText);
+                        $("#spanbindwalletamt").text("0.00");
+                        $(".showewalletdiv").addClass("hide");
+                    }
+                });
+
+                $("#divShowWallet").show();
+                $('#divpaymenttype').css('display', 'none');
+                $('#divpaymenttypeSlip').css('display', 'none');
+            }
+            else {
+
+                $('#divpaymenttype').css('display', 'block');
+                $('#divpaymenttypeSlip').css('display', 'block');
+                $('#divwalletbalnce').css('display', 'none');
+            }
+            //else {
+            //    $('#divpaymenttype').css('display', 'block');
+            //    $('#divpaymenttypeSlip').css('display', 'block');
+            //}
+        })
+
+        $scope.SubmitPaymentRequest = function () {
+            if ($('#PaymentMode').val() == "0") {
+                alert('Please select Payment Mode!');
+                return false
+            }
+            if ($scope.AmountModel < 1) {
+                alert('Please enter amount !');
+                return false
+            }
+
+            else if ($('#PaymentDate').val() == undefined || $('#PaymentDate').val() == "") {
+                alert('Please enter advance payment Date !');
+                return false
+            }
+            if ($('#PaymentMode').val() != "Cash" && $('#PaymentMode').val() != "0") {
+                if ($('#ChequeDDNo').val() == "") {
+                    alert('Please enter Cheque/DD No/Bank Transaction Number !');
+
+                    return false
+                }
+                else if ($('#ChequeDDDate').val() == undefined || $('#ChequeDDDate').val() == "") {
+                    alert('Please enter Cheque/DD/Bank Date !');
+                    return false
+                }
+                else if ($('#BankName').val() == undefined || $('#BankName').val() == "") {
+                    alert('Please enter Bank Name !');
+                    return false
+                }
+            }
+
+
+
+            var PayMode = $('#PaymentMode').val();
+            var _hdnReceipt = $('#HdnPaymentSlip').val();
+            var _BankName = $('#BankName').val();
+            var _TranNo = $('#ChequeDDNo').val();
+            var _TranDate = $('#ChequeDDDate').val();
+            var _PaymentDate = $('#PaymentDate').val();
+            var _Remark = $('#PaymentRemark').val();
+            var fd = new FormData();
+            var files = $('#PaymentSlip')[0].files[0];
+            fd.append('RequestId', $scope.RequestId);
+            fd.append('Amount', $scope.AmountModel);
+            fd.append('PaymentMode', PayMode);
+            fd.append('ChequeDDNo', _TranNo);
+            fd.append('BankName', _BankName);
+            fd.append('HdnPaymentSlip', _hdnReceipt);
+            fd.append('ChequeDDDate', _TranDate);
+            fd.append('PaymentRemark', _Remark);
+            fd.append('FK_MemId', 0);
+            fd.append('PaymentDate', _PaymentDate);
+            fd.append('Doc', files);
+            $.ajax({
+                url: "/Admin/AdvancePayment/SaveAdvancePaymentDetails",
+                type: "POST",
+                data: fd,
+                contentType: false,
+                processData: false,
+                success: function (result) {
+                    if (result != null) {
+                        if (result.Code == 1) {
+                            alert("The process has been completed successfully!");
+                            window.location.reload();
+                        } else {
+                            alert(result.Message);
+                        }
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                    return false;
+                }
+            });
+        }
+        function Validate1() {
+            //JSON.stringify({
+            //       RequestId: $scope.RequestId,
+            //       Amount: $scope.AmountModel,
+            //       PaymentMode: PayMode,
+            //       ChequeDDNo: _TranNo,
+            //       BankName: _BankName,
+            //       HdnPaymentSlip: _hdnReceipt,
+            //       ChequeDDDate: _TranDate,
+            //       PaymentRemark: _Remark,
+            //       FK_MemId: 0,
+            //       PaymentDate: $scope.AdvanceDateModel,
+            //       Doc: $("#PaymentSlip")[0].files[0]
+            //   }),
+        }
+
+        $scope.GetPaymentDetails = function (ReqId) {
+            $http({
+                url: "/Admin/AdvancePayment/ViewAdvancePaymenthistory",
+                method: 'post',
+                data: { ReqId: ReqId }
+            }).then(function (response) {
+                debugger
+                if (response.data != null && response.data != "") {
+                    $scope.PaymentDetails = response.data;
+                    console.log($scope.PaymentDetails);
+                    $("#Payment_Modal").modal("show");
+                }
+                else {
+                    alert('Data not found!!!');
+                }
+            })
+        }
+
+    });
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [0]; // coloms to remove
+
+        var tbl = $('#myTable').clone();
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 35,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'Advance Payment Details',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "Advance Payment Details");
+        doc.page++;
+        doc.save('AdvancePaymentDetails.pdf');
+
+    });
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('DepartmentTable').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>Advance Payment Details</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+
+
+</script>
+
+
+
+
+
+

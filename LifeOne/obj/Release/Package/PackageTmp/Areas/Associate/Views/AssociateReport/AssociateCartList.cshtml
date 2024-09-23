@@ -1,0 +1,144 @@
+﻿@model LifeOne.Models.Reports
+
+@{
+    ViewBag.Title = "Associate-CartList";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="~/Content/dist/js/CommonJS.js?1.0"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+@if (Model != null && Model.dtCartList.Rows.Count > 0)
+{
+
+
+    <div class="content">
+        <div class="content-wrapper-before"></div>
+        <div class="container-fluid">
+
+            <div class="row page-titles">
+                <div class="ptitle">
+                    <h4 class="mb-1 mt-0" style="color:white;">Cart List</h4>
+                    <nav aria-label="breadcrumb" class="float-left">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#-">Shopping </a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Cart List</li>
+                        </ol>
+                    </nav>
+                </div>
+
+            </div>
+            <div id="no-more-tables">
+                <form id="form1" method="post">
+                    @{ decimal totalmrp = 0;
+                        decimal totalquantity = 0;
+                        decimal totalprice = 0;}
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+
+                                    <div class="table-responsive" id="customers">
+                                        <table class="table mb-0" id="tblCustomers">
+                                            <thead>
+                                                <tr>
+
+                                                    <th>Product Name</th>
+                                                    <th style="text-align:right">MRP</th>
+                                                    <th style="text-align:right">Quantity</th>
+                                                    <th style="text-align:right ">TotalPrice</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+
+                                                @for (var i = 0; i < Model.dtCartList.Rows.Count; i++)
+                                                {
+
+
+                                                    totalmrp += decimal.Parse(@Model.dtCartList.Rows[i]["MRP"].ToString());
+                                                    totalquantity += decimal.Parse(@Model.dtCartList.Rows[i]["Quantity"].ToString());
+                                                    totalprice += decimal.Parse(@Model.dtCartList.Rows[i]["Price"].ToString());
+
+                                                    <tr>
+                                                        <td style="width:312px;">@Model.dtCartList.Rows[i]["ProductName"].ToString()</td>
+                                                        <td style="text-align:right ">@Model.dtCartList.Rows[i]["MRP"].ToString()</td>
+                                                        <td style="text-align:right">@Model.dtCartList.Rows[i]["Quantity"].ToString()</td>
+
+                                                        <td style="text-align:right ">@Model.dtCartList.Rows[i]["Price"].ToString()</td>
+                                                        <td>
+                                                            <a href="/Associate/AssociateReport/AssociateCartDelete?id=@Model.dtCartList.Rows[i]["Pk_Id"]" id="btnDelete" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to delete this record?')" ToolTip="Delete" style="display:@ViewBag.delete;">
+                                                                <i class="fa fa-trash"></i>
+                                                            </a>
+
+                                                        </td>
+
+                                                    </tr>
+                                                }
+
+
+                                            </tbody>
+                                            <tfooter>
+
+                                                <tr>
+                                                    <td>Total</td>
+                                                    <td style="text-align:right">@totalmrp</td>
+                                                    <td style="text-align:right">@totalquantity</td>
+                                                    <td style="text-align:right">@totalprice</td>
+                                                </tr>
+                                            </tfooter>
+                                        </table>
+
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="/Associate/AssociateReport/AssociateProductList" class="btn btn-primary">Continue Shopping</a>
+                                        </div>
+                                        <div class="col-md-6" style="text-align:right">
+                                            <a href="/Associate/AssociateReport/GetAssociateAddress" class="btn btn-primary">Continue</a>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- /.box-body -->
+                            </div>
+                            <!-- /.box -->
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+}
+
+else
+{
+    <div class="row">
+        <div class="col-md-12 col-lg-12">
+            
+                <img style="width:80%;height:400px" src="https://media.istockphoto.com/photos/sad-3d-character-with-empty-shopping-cart-picture-id1132049279?k=20&m=1132049279&s=170667a&w=0&h=8MwjC0Bv6sJm-YiNWy7QDpdxopnreJTypDRTwThV950=">
+                
+           
+
+        </div>
+        <div class="col-md-12">
+            <br />
+            <a href="/Associate/AssociateReport/AssociateProductList" class="btn btn-primary">Continue Shopping</a>
+        </div>
+        
+    </div>
+    
+}
+@*<script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#EmptyCart').modal('show');
+
+        });
+    </script>*@

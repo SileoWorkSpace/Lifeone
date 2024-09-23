@@ -1,0 +1,145 @@
+﻿@model LifeOne.Models.HomeManagement.HEntity.WalletDetailModel
+@{
+    ViewBag.Title = "MemberCommision";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Commision Detail Ledger</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                    <li class="breadcrumb-item"><a href="#">Member</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Commision Detail Ledger</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                <span>
+                    @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>*@
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    <form action="" method="post">
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <div class="row">
+                                        <div class="col-12 col-md-2">
+                                            <div class="form-group">
+                                                <label>From Date</label>
+                                                <input type="date" name="FromDate" id="FromDate" placeholder="" class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-2">
+                                            <div class="form-group">
+                                                <label>To Date</label>
+                                                <input type="date" name="ToDate" id="ToDate" placeholder="" class="form-control ">
+                                            </div>
+                                        </div>
+                                        <div class="col-12 col-md-2">
+                                            <div class="form-group">
+                                                <label style="display:block;"></label>
+                                                <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                <a href="/Admin-MemberCommision?Fk_MemId=@Model.Fk_MemId" class="btn btn-secondary" style="margin-top:1.5em;">Reset</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                    <div class="table-responsive" >
+                        <table class="table table-striped mb-0">
+                            <thead>
+                                <tr>
+                                    <th><b>S. No.</b></th>
+                                    <th><b>Login ID</b></th>
+                                    <th><b>TransactionDate</b></th>
+                                    <th><b>Narration</b></th>
+                                    <th><b>CrAmount</b></th>
+                                    <th><b>DrAmount</b></th>
+                                    <th><b>Balance</b></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                @if (Model != null && Model.WalletDetailMList != null)
+                                {
+                                    int SNo = 0;
+                                    foreach (var item in Model.WalletDetailMList)
+                                    {
+                                        <tr>
+                                            <td data-title="#SN:">@(SNo = SNo + 1)</td>
+                                            <td data-title="Login:">@item.LoginId (@item.DisplayName)</td>
+                                            <td data-title="Login:">@item.TransDate</td>
+                                            <td data-title="Name:">@item.Remarks</td>
+                                            <td data-title="Mobile:">@item.CrAmount</td>
+                                            <td data-title="Email:">@item.DrAmount</td>
+                                            <td data-title="Email:">@item.TransactionAmount</td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <footer class="card-footer bg-white p-2">
+                        <div class="d-md-flex align-items-center justify-content-between">
+                            @if (Model != null)
+                            {
+                                if (Model.Pager != null)
+                                {
+                                    if (Model.Pager.EndPage > 1)
+                                    {
+                                        <div> <small class="text-muted inline">showing @Model.WalletDetailMList.Count  of @Model.WalletDetailMList[0].TotalRecord items</small> </div>
+                                        <div>
+                                            <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                @if (Model.Pager.CurrentPage > 1)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-MemberCommision?Fk_MemId=@Model.Fk_MemId">First</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-MemberCommision?page=@(Model.Pager.CurrentPage - 1)&Fk_MemId=@Model.Fk_MemId">Previous</a>
+                                                    </li>
+                                                }
+                                                @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                {
+                                                    <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                        <a class="page-link" href="/Admin-MemberCommision?page=@page&Fk_MemId=@Model.Fk_MemId">@page</a>
+                                                    </li>
+                                                }
+                                                @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                {
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-MemberCommision?page=@(Model.Pager.CurrentPage + 1)&Fk_MemId=@Model.Fk_MemId">Next</a>
+                                                    </li>
+                                                    <li class="page-item">
+                                                        <a class="page-link" href="/Admin-MemberCommision?page=@(Model.Pager.TotalPages)&Fk_MemId=@Model.Fk_MemId">Last</a>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        </div>
+                                    }
+                                }
+
+                            }
+
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

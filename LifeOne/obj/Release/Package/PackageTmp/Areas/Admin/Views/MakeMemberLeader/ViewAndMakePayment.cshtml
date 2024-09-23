@@ -1,0 +1,297 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MFranchiseLeaders
+@{
+    ViewBag.Title = "ViewAndMakePayment";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Member Leader Details</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Franchise</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Member Leader Details</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                @*<span>
+                        <a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>
+                    </span>*@
+                <span>
+                    <button class="btn btn-success btn-rounded" value="Add Member " style="cursor:pointer;color:white" type="button" data-toggle="modal" data-target="#myModal"> <i class="fa fa-plus"></i> Add Member</button>
+
+                    @*<a href="@Url.Action("ExportToExcelMemberkDetails","Admin",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>*@
+                    @*<button class="btn btn-success btn-rounded btnPdf" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>*@
+
+                </span>
+            </div>
+        </div>
+
+    </div>
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row" id="advance-search" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <form action="" method="post">
+                                        <div class="row">
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Login Id</label>
+                                                    <input type="text" name="LoginID" id="LoginID" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Name</label>
+                                                    <input type="text" name="FirstName" id="FirstName" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Mobile No</label>
+                                                    <input type="text" name="Phone" id="Phone" placeholder="" class="form-control" maxlength="10" onkeypress="return isNumberKey(event)" />
+                                                </div>
+                                            </div>
+
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                    <a href="/Make-Member-Leader" class="btn btn-secondary" style="margin-top:1.5em;">Reset<a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table-responsive" >
+                            <table class="table table-hover mb-0" id="tblMemberList">
+                                <tr>
+                                    <th>SNo.</th>
+                                    <th>Login Id</th>
+                                    <th>Name</th>
+                                    @*<th>Last Nmae</th>*@
+                                    <th>Mobile</th>
+                                    <th>Email</th>
+                                    <th>Action</th>
+                                </tr>
+                                <tbody>
+                                    @foreach (var item in Model.FranchiseLeaderList)
+                                    {
+                                        count = count + 1;
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.LoginId</td>
+                                            <td>@item.FirstName</td>
+                                            <td>@item.Phone</td>
+                                            <td>@item.Email</td>
+                                            <td>
+                                                <a href="#" class="btn btn-default btn-sm text-danger" onclick="Delele(@item.Fk_MemId )"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between">
+                                @if (Model != null)
+                                {
+                                    if (Model.Pager != null)
+                                    {
+                                        if (Model.Pager.EndPage > 1)
+                                        {
+                                            <div> <small class="text-muted inline">showing @Model.FranchiseLeaderList.Count  of @Model.FranchiseLeaderList[0].TotalRecord items</small> </div>
+                                            <div>
+                                                <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                    @if (Model.Pager.CurrentPage > 1)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Make-Member-Leader?LoginId=@Model.LoginId&FirstName=@Model.FirstName&Phone=@Model.Phone">First</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Make-Member-Leader?page=@(Model.Pager.CurrentPage - 1)&LoginId=@Model.LoginId&FirstName=@Model.FirstName&Phone=@Model.Phone">Previous</a>
+                                                        </li>
+                                                    }
+                                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                    {
+                                                        <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                            <a class="page-link" href="/Make-Member-Leader?page=@page&LoginId=@Model.LoginId&FirstName=@Model.FirstName&Phone=@Model.Phone">@page</a>
+                                                        </li>
+                                                    }
+                                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Make-Member-Leader?page=@(Model.Pager.CurrentPage + 1)&LoginId=@Model.LoginId&FirstName=@Model.FirstName&Phone=@Model.Phone">Next</a>
+                                                        </li>
+                                                        <li class="page-item">
+                                                            <a class="page-link" href="/Make-Member-Leader?page=@(Model.Pager.TotalPages)&LoginId=@Model.LoginId&FirstName=@Model.FirstName&Phone=@Model.Phone">Last</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+                                }
+                            </div>
+                        </footer>
+
+
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+                <!-- /.box -->
+
+            </div>
+            <!-- /.col -->
+        </div>
+
+
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Add-Member Leader</h4>
+                </div>
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <label for="id">Login ID</label>
+                        <input type="text" class="form-control" id="txtid" placeholder="Id" onchange="getbyID()" />
+                    </div>
+                    <div class="form-group">
+                        <label for="fname">First Name:</label>
+                        <input type="text" class="form-control" id="txtfname" placeholder="First Name" disabled="disabled" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="lname">Last Name:</label>
+                        <input type="text" class="form-control" id="txtlname" disabled="disabled" placeholder="First Name" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="eamil">Email Id:</label>
+                        <input type="text" class="form-control" id="txtemail" placeholder="Email Id" disabled="disabled" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile">MobileNo:</label>
+                        <input type="text" class="form-control" id="txtmobile" placeholder="MobileNo" disabled="disabled" />
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-primary" id="btnUpdate" onclick="addrecord();">Submit</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <span id="fk_memIDText" style="display:none"></span>
+</div>
+<script>
+    //getbyid
+    function getbyID() {
+
+        var ID = $('#txtid').val();
+        if (ID == "") {
+            alert("Please Enter LoginId");
+            $('#txtid').focus();
+            return false;
+        }
+        $.ajax({
+            url: "/Admin/MakeMemberLeader/getbyid?id=" + ID,
+            typr: "GET",
+            contentType: "application/json;charset=UTF-8",
+            dataType: "json",
+            success: function (result) {
+                if (result[0].Status == 1) {
+                    $('#fk_memIDText').text(result[0].Fk_MemId);
+                    $('#txtfname').val(result[0].FirstName);
+                    $('#txtlname').val(result[0].LastName);
+                    $('#txtemail').val(result[0].Email);
+                    $('#txtmobile').val(result[0].Phone);
+                }
+                else {
+                    alert("Invalid Id.");
+                    $('#txtid').val('');
+                    $('#txtfname').val('');
+                    $('#txtlname').val('');
+                    $('#txtemail').val('');
+                    $('#txtmobile').val('');
+                }
+            },
+            error: function (errormessage) {
+                alert(errormessage.responseText);
+            }
+        });
+    }
+    function addrecord() {
+
+        var ID = $('#fk_memIDText').text();
+        if (ID == "") {
+            alert("Please Enter LoginId");
+            $('#txtid').focus();
+            return false;
+        }
+        var empObj = {
+            Fk_MemId: $('#fk_memIDText').text()
+        };
+        $.ajax({
+            url: "/Admin/MakeMemberLeader/add",
+            data: JSON.stringify({ sh: empObj }),
+            type: "POST",
+            contentType: "application/json;charset=utf-8",
+            dataType: "json",
+            success: function (result) {
+                if (result < 0) {
+                    alert("This member is already added!");
+                    return false;
+                }
+
+
+                alert("Details Saved Successfully");
+                window.location.href = "/Make-Member-Leader";
+            }
+            //,
+            //error: function (errormessage) {
+            //    alert("invalid loginid");
+            //}
+        });
+    }
+    function Delele(id) {
+        var ans = confirm("Are you sure you want to delete this Record?");
+        if (ans) {
+            $.ajax({
+                url: "/Admin/MakeMemberLeader/delete/" + id,
+                type: "POST",
+                contentType: "application/json;charset=UTF-8",
+                dataType: "json",
+                success: function (result) {
+                    window.location.href = "/Make-Member-Leader";
+                },
+                error: function (errormessage) {
+                    alert(errormessage.responseText);
+                }
+            });
+        }
+    }
+</script>

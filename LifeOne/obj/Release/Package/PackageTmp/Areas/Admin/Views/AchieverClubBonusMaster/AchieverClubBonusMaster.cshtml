@@ -1,0 +1,331 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAchieverClubBonusMaster
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "AchieverClubBonusMaster";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+
+@{
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-danger m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+        }
+    }
+
+}
+
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Achiever Club Bonus Master</h4>
+            <nav aria-label="breadcrumb" class="float-left">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#-">Home</a></li>
+                    <li class="breadcrumb-item"><a href="#-">Master</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Achiever Club Bonus Master</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                @*<span>
+                        <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnprint"><i class="fa fa-print"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>*@
+                @if (PermissionManager.IsActionPermit("Achiever Club Bonus Master", ViewOptions.FormSave))
+                {
+                    <a href="" id="btnAdd" class="btn btn-success btn-sm" onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                    </a>
+                }
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="no-more-tables">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="table-responsive" >
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>Performance Level</th>
+                                        <th>Seminar Club</th>
+                                        <th>Car Club</th>
+                                        <th>Travel Club</th>
+                                        <th>Provident Club</th>
+                                        <th>Blue Diamond Club</th>
+                                        <th>House Club</th>
+                                        <th>Crown Ambassador Club</th>
+                                        <th>President Club</th>
+                                        <th>Level Percentage</th>
+                                        <th>Additional Criteria</th>
+                                        <th>Under Level Count</th>
+                                        <th>Under Level ID</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.objList)
+                                    {
+
+                                        <tr>
+                                            <td>@(count = count + 1)</td>
+                                            <td>@item.PerformanceLevel</td>
+                                            <td>@item.SeminarClub</td>
+                                            <td>@item.CarClub</td>
+                                            <td>@item.TravelClub</td>
+                                            <td>@item.ProvidentClub</td>
+                                            <td>@item.HouseClub </td>
+                                            <td>@item.BlueDiamondClub</td>
+                                            <td>@item.CrownAmbassadorClub</td>
+                                            <td>@item.PresidentClub</td>
+                                            <td>@item.LevelPercentage</td>
+                                            <td>@item.AdditionalCriteria</td>
+                                            <td>@item.UnderLevelCount</td>
+                                            <td>@item.UnderLevelID</td>
+                                            <td class="text-right">
+                                                @if (PermissionManager.IsActionPermit("Achiever Club Bonus Master", ViewOptions.FormUpdate))
+                                                {
+
+                                                    <button type="button" class="btn btn-primary btn-sm float-left" onclick="return OpenPopUp('@item.PK_LevelId','@item.PerformanceLevel','@item.SeminarClub','@item.CarClub','@item.TravelClub','@item.ProvidentClub','@item.HouseClub','@item.BlueDiamondClub','@item.CrownAmbassadorClub','@item.PresidentClub','@item.LevelPercentage','@item.AdditionalCriteria','@item.UnderLevelCount','@item.UnderLevelID')" data-toggle="modal" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>
+                                                }
+                                                @if (PermissionManager.IsActionPermit("Achiever Club Bonus Master", ViewOptions.FormDelete))
+                                                {
+                                                    <a href="/Admin/AchieverClubBonusMaster/AchieverClubBonusMasterDelete?Id=@item.PK_LevelId" onclick="return confirm('are you sure to delete this record?')" class="btn btn-danger btn-sm float-right"><i class="fa fa-trash"></i></a>
+                                                }
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("AchieverClubBonusMasterSave", "AchieverClubBonusMaster", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+        <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content" style="width:800px;">
+                    <div class="modal-header">
+
+                        <h4 class="modal-title">Add/Update Achiever Club Bonus Master</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="row">
+
+                            @Html.HiddenFor(m => m.PK_LevelId)
+
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">PerformanceLevel <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="PerformanceLevel" id="PerformanceLevel" maxlength="100" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Seminar Club <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="SeminarClub" id="SeminarClub" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Car Club <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="CarClub" id="CarClub" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Travel Club <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="TravelClub" id="TravelClub" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Provident Club<span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="ProvidentClub" id="ProvidentClub" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Blue Diamond Club <span class="text-danger">*</span> </label>
+                                <input type="text" class="form-control" name="BlueDiamondClub" id="BlueDiamondClub" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">House Club <span class="text-danger">*</span> </label>
+                                <input type="text" class="form-control" name="HouseClub" id="HouseClub" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Crown Ambassador Club <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="CrownAmbassadorClub" id="CrownAmbassadorClub" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">President Club <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="PresidentClub" id="PresidentClub" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Level Percentage <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="LevelPercentage" id="LevelPercentage" maxlength="15" onkeypress="return isNumberKey(event)" />
+
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Additional Criteria <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="AdditionalCriteria" id="AdditionalCriteria" maxlength="200" />
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Under Level ID<span class="text-danger">*</span></label>
+                                @Html.DropDownListFor(m => m.UnderLevelID, (IEnumerable<SelectListItem>)ViewBag.DllPerformanceLevel, new { @class = "form-control" })
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-control-placeholder" for="name">Under Level Count <span class="text-danger">*</span></label>
+                                <input type="text" class="form-control" name="UnderLevelCount" id="UnderLevelCount" maxlength="15" onkeypress="return isNumberKey(event)" />
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
+
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            }
+        </div>
+    }
+</div>
+<script>
+    function ResetPopup() {
+        $('#Save').val('Save');
+        $('#PK_LevelId').val('');
+        $('#PerformanceLevel').val('');
+        $('#SeminarClub').val('');
+        $('#CarClub').val('');
+        $('#TravelClub').val('');
+        $('#ProvidentClub').val('');
+        $('#BlueDiamondClub').val('');
+        $('#HouseClub').val('');
+        $('#CrownAmbassadorClub').val('');
+        $('#PresidentClub').val('');
+        $('#LevelPercentage').val('');
+        $('#AdditionalCriteria').val('');
+        $('#UnderLevelID').val('0');
+        $('#UnderLevelCount').val('');
+        $("#divpreview").hide();
+        $("#divpreview").empty();
+    }
+
+    function OpenPopUp(PK_LevelId, PerformanceLevel, SeminarClub, CarClub, TravelClub, ProvidentClub, HouseClub, BlueDiamondClub, CrownAmbassadorClub, PresidentClub, LevelPercentage, AdditionalCriteria, UnderLevelCount, UnderLevelID) {
+        debugger;
+        $('#Save').val('Update');
+        $('#PK_LevelId').val(PK_LevelId);
+        $('#PerformanceLevel').val(PerformanceLevel);
+        $('#SeminarClub').val(SeminarClub);
+        $('#CarClub').val(CarClub);
+        $('#TravelClub').val(TravelClub);
+        $('#ProvidentClub').val(ProvidentClub);
+        $('#HouseClub').val(HouseClub);
+        $('#BlueDiamondClub').val(BlueDiamondClub);
+        $('#CrownAmbassadorClub').val(CrownAmbassadorClub);
+        $('#PresidentClub').val(PresidentClub);
+        $('#LevelPercentage').val(LevelPercentage);
+        $('#AdditionalCriteria').val(AdditionalCriteria);
+        $('#UnderLevelID').val(UnderLevelID);
+        $('#UnderLevelCount').val(UnderLevelCount);
+    }
+
+    function validate() {
+        if ($('#PerformanceLevel').val() == '' || $('#PerformanceLevel').val() == null || $('#PerformanceLevel').val() == undefined) {
+            $('#PerformanceLevel').focus();
+            return false;
+        }
+        if ($('#SeminarClub').val() == '' || $('#SeminarClub').val() == null || $('#SeminarClub').val() == undefined) {
+            $('#SeminarClub').focus();
+            return false;
+        }
+        if ($('#CarClub').val() == '' || $('#CarClub').val() == null || $('#CarClub').val() == undefined) {
+            $('#CarClub').focus();
+            return false;
+        }
+        if ($('#TravelClub').val() == '' || $('#TravelClub').val() == null || $('#TravelClub').val() == undefined) {
+            $('#TravelClub').focus();
+            return false;
+        }
+        if ($('#ProvidentClub').val() == '' || $('#ProvidentClub').val() == null || $('#ProvidentClub').val() == undefined) {
+            $('#ProvidentClub').focus();
+            return false;
+        }
+        if ($('#HouseClub').val() == '' || $('#HouseClub').val() == null || $('#HouseClub').val() == undefined) {
+            $('#HouseClub').focus();
+            return false;
+        }
+        if ($('#BlueDiamondClub').val() == '' || $('#BlueDiamondClub').val() == null || $('#BlueDiamondClub').val() == undefined) {
+            $('#BlueDiamondClub').focus();
+            return false;
+        }
+        if ($('#CrownAmbassadorClub').val() == '' || $('#CrownAmbassadorClub').val() == null || $('#CrownAmbassadorClub').val() == undefined) {
+            $('#CrownAmbassadorClub').focus();
+            return false;
+        }
+        if ($('#PresidentClub').val() == '' || $('#PresidentClub').val() == null || $('#PresidentClub').val() == undefined) {
+            $('#PresidentClub').focus();
+            return false;
+        }
+        if ($('#LevelPercentage').val() == '' || $('#LevelPercentage').val() == null || $('#LevelPercentage').val() == undefined) {
+            $('#LevelPercentage').focus();
+            return false;
+        }
+        if ($('#AdditionalCriteria').val() == '' || $('#AdditionalCriteria').val() == null || $('#AdditionalCriteria').val() == undefined) {
+            $('#AdditionalCriteria').focus();
+            return false;
+        }
+
+        if ($('#UnderLevelID').val() == '0' || $('#UnderLevelID').val() == null || $('#UnderLevelID').val() == undefined) {
+            $('#UnderLevelID').focus();
+            return false;
+        }
+        if ($('#UnderLevelCount').val() == '' || $('#UnderLevelCount').val() == null || $('#UnderLevelCount').val() == undefined) {
+            $('#UnderLevelCount').focus();
+            return false;
+        }
+
+
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+</script>
+
+

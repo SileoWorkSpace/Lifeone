@@ -1,0 +1,797 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.VerifyPanOrVoterid
+@{
+    ViewBag.Title = "KYC";
+    Layout = "~/Views/Shared/_FranchiseLayout.cshtml";
+}
+
+@using (Html.BeginForm("FranchiseeKYC", "FranchiseProfile", FormMethod.Post, new { enctype = "multy-part/form" }))
+{
+    <div class="container-fluid">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Upload KYC</h4>
+                @*<nav aria-label="breadcrumb" class="float-left">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/Franchise-Dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="#-">Reports</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Ewallet Request</li>
+                        </ol>
+                    </nav>*@
+            </div>
+        </div>
+        <div class="row">
+            @if (Model != null)
+            {
+
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body pt-2">
+                            <h6 class="header-title mb-0">Pan Card Image</h6>
+                            <div class="">
+                                <div>
+                                    <div>
+                                        <p class="sub-header">
+                                        <p>
+                                            <strong>Verfication Staus:</strong>    @if (Model.PanCardStatus == "P")
+                                            {<span class="label label-warning">Pending</span>}
+                                            else if (Model.PanCardStatus == "A")
+                                            { <span class="label label-success">Approved</span>}
+                                            else if (Model.PanCardStatus == "D")
+                                            { <span class="label label-danger">Rejected</span>}
+                                        </p>
+                                        </p>
+
+                                        @if (Model.PanCardStatus == "A")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <div class="fallback">
+                                                <input type="file" name="PanNo" id="PanNo" class="form-control"  onchange="uploadFranchiseeKYC('PAN', this);" />
+                                                <input type="hidden" id="Panimagepath" />
+
+                                            </div>
+                                        }
+                                        <div class="dropzone" style="margin-top:15px;">
+                                            <div> <img id="PAN" style="height:170px;width:200px;" onclick="ShowAllImage('/@Model.PanImage', 'PanImage')" src="/@Model.PanImage" class="my-img"/> </div>
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <label>Pan No<span style="color:red;">*</span></label>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <label>
+                                                    @if (Model.PanCardStatus == "A")
+                                                    {
+                                                        <input onchange="ValidatePAN(this.id)" type="text" name="PanCard" class="form-control" id="txteditPanNo" placeholder="Enter Pan Card Number" value="@Model.PanCard" readonly="readonly" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" onchange="ValidatePAN(this.id)" name="PanCard" class="form-control" id="txteditPanNo" placeholder="Enter Pan Card Number" value="@Model.PanCard" />
+                                                    }
+
+                                                </label>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="clearfix text-right mt-3">
+                                            @if (Model.PanCardStatus == "A")
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-success" onclick="return UpdateKYC();"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                            }
+                                        </div>
+
+                                    </div>
+                                    <!-- end card-body -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body pt-2">
+                            <h6 class="header-title mb-0">ID Proof</h6>
+                            <div class="">
+                                <div>
+                                    <div>
+                                        <p class="sub-header">
+                                        <p>
+                                            <strong>Verfication Staus:</strong>
+                                            @if (Model.AddressProofStatus == "P")
+                                            {
+                                                <span class="label label-warning">Pending</span>
+                                            }
+                                            else if (Model.AddressProofStatus == "A")
+                                            {
+                                                <span class="label label-success">Approved</span>
+                                            }
+                                            else if (Model.AddressProofStatus == "D")
+                                            {
+                                                <span class="label label-danger">Rejected</span>
+                                            }
+                                        </p>
+                                        </p>
+
+                                        @if (Model.AddressProofStatus == "A")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <div class="fallback">
+                                                <input type="file" name="AddressProofNo" id="AddressProofNo" class="form-control" onchange="uploadFranchiseeKYC('AADHARFRONT', this);" />
+                                                <input type="hidden" id="AadharFrontimagepath" />
+                                            </div>
+                                        }
+                                        <div class="dropzone" style="margin-top:15px;">
+                                            <div> <img id="AADHARFRONT" onclick="ShowAllImage('/@Model.AadharImage','Id Proof Image')" style="height:170px;width:200px;" src="/@Model.AadharImage" class="my-img" altsrc="http://lifeonewellness.com/Content/WebsiteCss/assets/images/others/logo.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <label>Id Proof No<span style="color:red;">*</span></label>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-sm-12">
+                                                <label>
+                                                    @if (Model.AddressProofStatus == "A")
+                                                    {
+                                                        <input type="text" onchange="ValidateAAdhar(this.id)" name="AddressProofNo" class="form-control only-numeric" id="txtediAddressProofNo" placeholder="Enter Id Proof Number" readonly="readonly" value="@Model.AadharNumber" />
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="text" onchange="ValidateAAdhar(this.id)" name="AddressProofNo" class="form-control only-numeric" id="txtediAddressProofNo" placeholder="Enter Id Proof Number" value="@Model.AadharNumber" />
+                                                    }
+                                                </label>
+                                            </div>
+
+
+                                        </div>
+
+                                        <div class="clearfix text-right mt-3">
+                                            @if (Model.AddressProofStatus == "A")
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-success" onclick="return IDProof();"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                            }
+                                        </div>
+
+
+
+                                    </div>
+                                    <!-- end card-body -->
+                                </div> <div class="form-group">
+                                    <p>You can provide following documents</p>
+                                    <ol>
+                                        <li>Aadhar Card (Front Only)</li>
+                                        <li>Passport</li>
+                                        <li>PAN Card</li>
+                                        <li>Voter ID Card</li>
+                                        <li>ID Card Issued by Center/State</li>
+                                        <li>Permanent Driving License</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body pt-2">
+                            <h6 class="header-title mb-0">Address Proof Back</h6>
+                            <div class="">
+                                <div>
+                                    <div>
+                                        <p class="sub-header">
+                                        <p>
+                                            <strong>Verfication Staus:</strong>
+                                            @if (Model.AddressProofBackStatus == "P")
+                                            {
+                                                <span class="label label-warning">Pending</span>
+                                            }
+                                            else if (Model.AddressProofBackStatus == "A")
+                                            {
+                                                <span class="label label-success">Approved</span>
+                                            }
+                                            else if (Model.AddressProofBackStatus == "D")
+                                            {
+                                                <span class="label label-danger">Rejected</span>
+                                            }
+                                        </p>
+                                        </p>
+
+                                        @if (Model.AddressProofBackStatus == "A")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <div class="fallback">
+                                                <input type="file" name="AddressProofFront" id="AddressProofFront" class="form-control" onchange="uploadFranchiseeKYC('AADHARBACK', this);" />
+                                                <input type="hidden" id="AadharBackimagepath" />
+
+                                            </div>
+                                        }
+                                        <div class="dropzone" style="margin-top:15px;">
+                                            <div> <img id="AADHARBACK" onclick="ShowAllImage('/@Model.AadharBackImage','Address Proof Image')" style="height:170px;width:200px;" src="/@Model.AadharBackImage" class="my-img" altsrc="http://lifeonewellness.com/Content/WebsiteCss/assets/images/others/logo.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                        </div>
+                                        <div class="clearfix text-right mt-3">
+                                            @if (Model.AddressProofBackStatus == "A")
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-success" onclick="return AddressProofBack();"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                            }
+                                        </div>
+
+
+                                    </div>
+                                    <!-- end card-body -->
+                                </div> <div class="form-group">
+                                    <p>You can provide following documents</p>
+                                    <ol>
+                                        <li>Aadhar Card (Back Only)</li>
+                                        <li>Passport</li>
+                                        <li>Voter ID Card</li>
+                                        <li>ID Card Issued by Center/State</li>
+                                        <li>Permanent Driving License</li>
+                                        <li>Rent/Lease Agreement</li>
+                                        <li>Telephone/Electricity/Water Bill</li>
+                                        <li>Self-declaration attested by Gazetted officer</li>
+                                        <li>Ration Card</li>
+                                        <li>Flat allotment/possesion letter</li>
+                                        <li>LIC Policy</li>
+                                        <li>Bank/Credit Card Statement</li>
+                                        <li>Job Card issued by NREGA </li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3">
+                    <div class="card">
+                        <div class="card-body pt-2" style="min-height:auto;">
+                            <h6 class="header-title mb-0">Bank Details </h6>
+                            <div class="">
+                                <div>
+                                    <div>
+                                        <p class="sub-header">
+                                        <p>
+                                            <strong>Verfication Staus:</strong>
+                                            @if (Model.BankStatus == "P")
+                                            {
+                                                <span class="label label-warning">Pending</span>
+                                            }
+                                            else if (Model.BankStatus == "A")
+                                            {
+                                                <span class="label label-success">Approved</span>
+                                            }
+                                            else if (Model.BankStatus == "D")
+                                            {
+                                                <span class="label label-danger">Rejected</span>
+                                            }
+                                        </p>
+                                        </p>
+
+                                        @if (Model.BankStatus == "A")
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <div class="fallback">
+                                                <input type="file" name="AddressProofFront" id="AddressProofFront" class="form-control" onchange="uploadFranchiseeKYC('BANK', this);" />
+                                                <input type="hidden" id="Bankimagepath" />
+                                            </div>
+                                        }
+                                        <div class="dropzone" style="margin-top:15px;">
+                                            <div> <img id="BANK" style="height:170px;width:200px;" onclick="ShowAllImage('/@Model.BankImage','Bank Proof Image')" src="/@Model.BankImage" class="my-img" altsrc="http://lifeonewellness.com/Content/WebsiteCss/assets/images/others/logo.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+
+                                                    <div class="col-sm-12">
+                                                        <label>Bank A/C Number <span style="color:red;">*</span></label>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-sm-12">
+                                                        <label>
+                                                            @if (!string.IsNullOrEmpty(Model.AccountNumber))
+                                                            {
+                                                                <input type="text" name="MemberAccNo" class="form-control only-numeric" id="txteditBankAcNo" placeholder="Enter Account Number" readonly="readonly" value="@Model.AccountNumber" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input name="MemberAccNo" type="text" class="form-control only-numeric" id="txteditBankAcNo" placeholder="Enter Account Number" value="@Model.AccountNumber" />
+                                                            }
+
+
+                                                        </label>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+
+                                                    <div class="col-sm-12">
+                                                        <label>IFSC Code <span style="color:red;">*</span></label>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-sm-12">
+                                                        <label>
+                                                            @if (!string.IsNullOrEmpty(Model.IfscCode))
+                                                            {
+                                                                <input type="text" name="Ifsc" class="form-control" id="txtIfscCode" placeholder="Enter IFSC Code" readonly="readonly" value="@Model.IfscCode" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input name="Ifsc" type="text" class="form-control" id="txtIfscCode" placeholder="Enter IFSC Code" value="@Model.IfscCode" />
+                                                            }
+
+
+                                                        </label>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="row">
+
+                                                    <div class="col-sm-12">
+                                                        <label>Bank Name <span style="color:red;">*</span></label>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-sm-12">
+                                                        <label>
+                                                            @if (!string.IsNullOrEmpty(Model.BankName))
+                                                            {
+                                                                <input type="text" name="Ifsc" class="form-control" id="txtBankname" placeholder="Enter Bank Name" readonly="readonly" value="@Model.BankName" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input name="BankName" type="text" class="form-control" id="txtBankname" placeholder="Enter Bank Name" value="@Model.BankName" />
+                                                            }
+
+
+                                                        </label>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="row">
+
+                                                    <div class="col-sm-12">
+                                                        <label>Account Holder <span style="color:red;">*</span></label>
+                                                    </div>
+
+
+                                                </div>
+                                                <div class="row">
+
+                                                    <div class="col-sm-12">
+                                                        <label>
+                                                            @if (!string.IsNullOrEmpty(Model.BankName))
+                                                            {
+                                                                <input type="text" name="Ifsc" class="form-control" id="txtaccountholder" placeholder="Enter Account Holder Name" readonly="readonly" value="@Model.AccountHolder" />
+                                                            }
+                                                            else
+                                                            {
+                                                                <input name="BankName" type="text" class="form-control" id="txtaccountholder" placeholder="Enter Account Holder Name" value="@Model.AccountHolder" />
+                                                            }
+
+
+                                                        </label>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                       
+                                       
+                                        <div class="clearfix text-right mt-3">
+                                            @if (Model.BankStatus == "A")
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <button type="submit" class="btn btn-success" onclick="return BankDetails();"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                            }
+                                        </div>
+
+
+                                    </div>
+                                    <!-- end card-body -->
+                                </div> <div class="form-group">
+                                    <p>You can provide following documents</p>
+                                    <ol>
+                                        <li>Cancelled Cheque</li>
+                                        <li>Bank Passbook</li>
+                                        <li>Bank Certification</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+        </div>
+    </div>
+    <!-- container-fluid -->
+}
+
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span aria-hidden="true">&times;</span> </button>
+            </div>
+            <div class="modal-body"> <img class="img-fluid" id="allImage" src="" alt="image" />  </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script>
+
+    function ShowAllImage(path, name) {
+        if (path == null || path == '') {
+            path = 'http://lifeonewellness.com/Content/WebsiteCss/assets/images/others/logo.png';
+        }
+        $("#allImage").attr('src', path.replace("~", ""));
+        $('#myModalLabel').text(name);
+        $("#myModal").modal('show');
+    }
+
+
+    function uploadFranchiseeKYC(documentType, fileobj) {
+
+
+        var fileInput = fileobj;
+        if (fileInput.files.length === 0) {
+            return;
+        }
+        var file = fileInput.files[0];
+        var formData = new FormData();
+        formData.append("documentType", documentType);
+        formData.append("file", file);
+        $.ajax({
+            url: "/api/Image/UploadFranchiseeKyc",
+            data: formData,
+            processData: false,
+            type: 'POST',
+            contentType: false,
+            success: function (data) {
+                if (data.response == "success") {
+
+                    if (documentType == "PAN") {
+                        $('#Panimagepath').val(data.filepath);
+                        showdocument(fileobj, documentType);
+                    }
+                    else if (documentType == "AADHARFRONT") {
+                        $('#AadharFrontimagepath').val(data.filepath);
+                        showdocument(fileobj, documentType);
+                    }
+                    else if (documentType == "AADHARBACK") {
+                        $('#AadharBackimagepath').val(data.filepath)
+                        showdocument(fileobj, documentType);
+                    }
+                    else if (documentType == "BANK") {
+                        $('#Bankimagepath').val(data.filepath);
+                        showdocument(fileobj, documentType);
+                    }
+
+                    else {
+                        alert(data.msg);
+                    }
+                }
+            }
+        });
+    }
+    function showdocument(input, id) {
+
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $('#' + id).prop('src', e.target.result);
+            };
+            reader.readAsDataURL(input.files[0]);
+
+        }
+    }
+    function UpdateKYC() {
+        debugger;
+      
+        if ($('#Panimagepath').val() != 'http://lifeonewellness.com/Content/WebsiteCss/assets/images/others/logo.png' || $('#Panimagepath').val() != '') {
+            if ($('#txteditPanNo').val() == '') {
+                alert('Please enter Pan No');
+                $('#txteditPanNo').focus();
+                return false;
+            }
+        }
+        
+        if ($('#Panimagepath').val() != '') {
+            $.ajax({
+                url: '/Franchise/FranchiseProfile/UploadFranchiseeKyc',
+                data: {
+                    Fk_MemId: $('#txtFk_MemId').val(),
+                    PanCardNo: $('#txteditPanNo').val(),
+                    PanUrl: $('#Panimagepath').val()
+                },
+                dataType: 'json',
+                type: 'GET',
+                containtType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    if (data != null && data != "") {
+                        if (data.Code == 1) {
+                            console.log(data);
+                            alert(data.Remark);
+                            swal('', data.Remark, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/Franchisee-KYC";
+                            }, 1000);
+                        }
+                        else {
+                            swal('', data.Remark, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/Franchisee-KYC";
+                            }, 1000);
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            swal('', 'Please Upload Any Document', 'warning');
+        }
+
+
+    }
+    function IDProof() {
+        if ($('#AadharFrontimagepath').val() != 'http://lifeonewellness.com/Content/WebsiteCss/assets/images/others/logo.png' || $('#AadharFrontimagepath').val() != '') {
+            if ($('#txtediAddressProofNo').val() == '') {
+                alert('Please enter Aadhar no');
+                $('#txtediAddressProofNo').focus();
+                return false;
+            }
+        }
+        if ($('#AadharFrontimagepath').val() != '') {
+            $.ajax({
+                url: '/Franchise/FranchiseProfile/UploadFranchiseeKyc',
+                data: {
+                    Fk_MemId: $('#txtFk_MemId').val(),
+                    AddressProofNo: $('#txtediAddressProofNo').val(),
+                    AddressFrontUrl: $('#AadharFrontimagepath').val()
+                },
+                dataType: 'json',
+                type: 'GET',
+                containtType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    if (data != null && data != "") {
+                        if (data.Code == 1) {
+                            console.log(data);
+                            alert(data.Remark);
+                            swal('', data.Remark, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/Franchisee-KYC";
+                            }, 1000);
+                        }
+                        else {
+                            swal('', data.Remark, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/Franchisee-KYC";
+                            }, 1000);
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            swal('', 'Please Upload Any Document', 'warning');
+        }
+    }
+    function AddressProofBack() {
+        if ($('#AadharBackimagepath').val() != 'http://lifeonewellness.com/Content/WebsiteCss/assets/images/others/logo.png' || $('#AadharBackimagepath').val() != '') {
+            if ($('#txtediAddressProofNo').val() == '') {
+                alert('Please enter Aadhar no');
+                $('#txtediAddressProofNo').focus();
+                return false;
+            }
+        } 
+        if ($('#AadharBackimagepath').val() != '') {
+            $.ajax({
+                url: '/Franchise/FranchiseProfile/UploadFranchiseeKyc',
+                data: {
+                    Fk_MemId: $('#txtFk_MemId').val(),
+                   AddressProofNo: $('#txtediAddressProofNo').val(),
+                    AddressBackUrl: $('#AadharBackimagepath').val()
+                },
+                dataType: 'json',
+                type: 'GET',
+                containtType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    if (data != null && data != "") {
+                        if (data.Code == 1) {
+                            console.log(data);
+                            alert(data.Remark);
+                            swal('', data.Remark, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/Franchisee-KYC";
+                            }, 1000);
+                        }
+                        else {
+                            swal('', data.Remark, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/Franchisee-KYC";
+                            }, 1000);
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            swal('', 'Please Upload Any Document', 'warning');
+        }
+    }
+    function BankDetails() {
+        if ($('#Bankimagepath').val() != 'http://lifeonewellness.com/Content/WebsiteCss/assets/images/others/logo.png' || $('#Bankimagepath').val() != '') {
+            if ($('#txteditBankAcNo').val() == '') {
+                alert('Please enter Bank Account No');
+                $('#txteditBankAcNo').focus();
+                return false;
+            }
+            if ($('#txtIfscCode').val() == '') {
+                alert('Please enter IFSC Code');
+                $('#txtIfscCode').focus();
+                return false;
+            }
+            if ($('#txtBankname').val() == '') {
+                alert('Please enter Bank Name');
+                $('#txtBankname').focus();
+                return false;
+            }
+            if ($('#txtaccountholder').val() == '') {
+                alert('Please enter Account Holder');
+                $('#txtaccountholder').focus();
+                return false;
+            }
+        }
+        if ($('#Bankimagepath').val() != '') {
+            $.ajax({
+                url: '/Franchise/FranchiseProfile/UploadFranchiseeKyc',
+                data: {
+                    Fk_MemId: $('#txtFk_MemId').val(),
+                    IfscCode: $('#txtIfscCode').val(),
+                    BankName: $('#txtBankname').val(),
+                    AccountHolder: $('#txtaccountholder').val(),
+                    BankACNo: $('#txteditBankAcNo').val(),
+                    BankUrl: $('#Bankimagepath').val()
+                },
+                dataType: 'json',
+                type: 'GET',
+                containtType: 'application/json;charset=utf-8',
+                success: function (data) {
+                    if (data != null && data != "") {
+                        if (data.Code == 1) {
+                            console.log(data);
+                            alert(data.Remark);
+                            swal('', data.Remark, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/Franchisee-KYC";
+                            }, 1000);
+                        }
+                        else {
+                            swal('', data.Remark, 'success');
+                            window.setTimeout(function () {
+                                window.location.href = "/Franchisee-KYC";
+                            }, 1000);
+                        }
+                    }
+                }
+            });
+        }
+        else {
+            swal('', 'Please Upload Any Document', 'warning');
+        }
+    }
+
+
+     function ValidatePAN(id) {
+            debugger;
+            var PanNo = document.getElementById(id).value;
+            if (PanNo.value != "") {
+                var panPattern = /^([a-zA-Z]{5})(\d{4})([a-zA-Z]{1})$/;
+                if (PanNo.search(panPattern) == -1) {
+                    swal('','Please enter valid pan number','warning');
+                   document.getElementById(id).value = "";
+                    return false;
+                }
+
+            }
+    }
+
+      function ValidateAAdhar(id) {
+            var aadhar = document.getElementById(id).value;
+            var adharcardTwelveDigit = /^\d{12}$/;
+            var adharSixteenDigit = /^\d{16}$/;
+            if (aadhar != '') {
+                if (aadhar.match(adharcardTwelveDigit)) {
+                    return true;
+                }
+                else if (aadhar.match(adharSixteenDigit)) {
+                    return true;
+                }
+                else {
+                    swal('','Please enter valid aadhar number','warning');
+                   document.getElementById(id).value = "";
+                    return false;
+                }
+            }
+    }
+    $(".only-numeric").bind("keypress", function (e) {
+            var keyCode = e.which ? e.which : e.keyCode
+            if (!(keyCode >= 48 && keyCode <= 57)) {
+                //swal("", "Please enter numeric digit only", "warning");
+                return false;
+            }
+            return true;
+        });
+</script>
+
+

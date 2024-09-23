@@ -48,10 +48,7 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 queryParameters.Add("@Pk_UnitId", obj.Pk_UnitId);
                 queryParameters.Add("@UnitName", obj.UnitName);
                 queryParameters.Add("@CreatedBy", obj.CreatedBy);
-                queryParameters.Add("@ProcId", obj.ProcId);
-                //queryParameters.Add("@DueDate", _objDetails.billerResponse.dueDate);
-                // string _qury = "Unit @Pk_UnitId=" + obj.Pk_UnitId + ",@UnitName=" + obj.UnitName + ", @CreatedBy = " + obj.CreatedBy + ", @ProcId = " + obj.ProcId + "";
-                // ResponseUnitModel _iresult = DBHelperDapper.DASave<ResponseUnitModel>(_qury);
+                queryParameters.Add("@ProcId", obj.ProcId);                
                 ResponseUnitModel _iresult = DBHelperDapper.DAAddAndReturnModel<ResponseUnitModel>("Unit", queryParameters);
                 return _iresult;
             }

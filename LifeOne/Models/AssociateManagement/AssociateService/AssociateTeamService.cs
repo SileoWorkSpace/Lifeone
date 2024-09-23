@@ -27,9 +27,9 @@ namespace LifeOne.Models.AssociateManagement.AssociateService
             return obj;
         }
 
-        public static List<DownlineAPI> GetDownlineList(int? Fk_MemId, string SearchLoginId,string Status, string JoiningDate, int? Page, int PageSize,string Leg,string Pk_PackageID)
+        public static List<DownlineAPI> GetDownlineList(int? Fk_MemId, string SearchLoginId,string Status, string FromDate, string ToDate, int? Page, int PageSize,string Leg,string Pk_PackageID)
         {
-            List<DownlineAPI> obj = DALAssociateTeam.GetDownlineList(Fk_MemId, SearchLoginId, Status, JoiningDate, Page, PageSize, Leg, Pk_PackageID);
+            List<DownlineAPI> obj = DALAssociateTeam.GetDownlineList(Fk_MemId, SearchLoginId, Status, FromDate, ToDate, Page, PageSize, Leg, Pk_PackageID);
             return obj;
         }
 

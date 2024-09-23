@@ -1,0 +1,89 @@
+﻿
+@{
+    ViewBag.Title = " Products Disclaimer";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}   <!-- Section: page title -->
+
+<style>
+    .policy ol {
+        counter-reset: item;
+        margin: 0px;
+        padding: 0px;
+    }
+
+        .policy ol li {
+            display: block;
+            color: #666666;
+            font-size: 20px;
+            padding-left: 25px;
+            font-weight: 600;
+            position: relative;
+        }
+
+    .policy p {
+        font-size: 14px;
+        line-height: 21px;
+        padding: 5px 0 0px 0px;
+        text-align: justify;
+    }
+
+    .policy ol li:before {
+        content: counters(item, ".") ".";
+        counter-increment: item;
+        position: absolute;
+        left: 0px;
+    }
+
+    .policy ol li ol {
+        padding: 5px 0 15px 0px;
+        margin-bottom: 15px
+    }
+
+        .policy ol li ol li {
+            font-size: 14px;
+            line-height: 21px;
+            padding-top: 5px;
+            padding-left: 30px;
+        }
+</style>
+<div class="ltn__breadcrumb-area ltn__breadcrumb-area-2 ltn__breadcrumb-color-white bg-overlay-theme-black-90 bg-image" data-bg="/Content/NewAssests/img/bg/5.jpg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="ltn__breadcrumb-inner ltn__breadcrumb-inner-2 justify-content-between">
+                    <div class="section-title-area ltn__section-title-2">
+                        <h6 class="section-subtitle ltn__secondary-color">//  Know about our Product Disclaimer</h6>
+                        <h1 class="section-title white-color"> Products Disclaimer</h1>
+                    </div>
+                    <div class="ltn__breadcrumb-list">
+                        <ul>
+                            <li><a href="/Home/Index">Home</a></li>
+                            <li> Products Disclaimer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<main id="content">
+    @*<section class="py-lg-15 py-14 bg-img-cover-center" style="background-image: url('/Content/image/product.jpg'); background-color: #F2F2F2">
+        <div class="container container-xxl">
+
+            <h1 class="fs-40 fs-lg-70" data-animate="fadeInUp"> Products Disclaimer</h1>
+        </div>
+    </section>*@
+    <section class="pt-10 pt-lg-13">
+        <div class="container container-xxl policy">
+            <div class="row">
+                <div class="policy">
+                    @*<h2>PRODUCT DISCLAIMER</h2>*@
+                    <p>We are not professionally qualified doctors and we do not prescribe any product that can cure your disease. We understand that our products are in no way a substitute for the advice and medicines prescribed by a qualified doctor. Direct Selling companies like us cannot market medicines as each individual direct seller in the company would have to be registered with a Drug License. Information about LIFEONE Products as shown on this website and in digital product brochures of LIFEONE INDUSTRIES PRIVATE LIMITED is not intended to Diagnose, Treat, Cure, or Prevent any disease.</p>
+                    <p>Many times, the reason for un-healthiness or any diseases may be due to a poor diet or lacking the essential nutrients that our body needs in order to perform properly. A nutritional deficiency occurs when the body does not absorb or get from food the necessary amount of a nutrient. Deficiencies can lead to a variety of health problems. Our products aim at providing proper nutrition to the human body through antioxidants which in turn improves the body's immune system.</p>
+                    <p>LIFEONE INDUSTRIES PRIVATE LIMITED advises you to consult your doctor about your diseases/health issues and if the doctor suggests taking health/food supplements, and/or nutraceuticals then you may use LIFEONE Product(s). We always suggest purchasing LIFEONE Quality Product(s) from LIFEONE authorized direct sellers or you may online order the product(s) through our website. This will ensure that you get a genuine LIFEONE Product(s). Don’t purchase LIFEONE Product(s) from an unauthorized source. We also declare that our product(s) are not available on any other e-commerce platform.</p>
+
+
+
+                </div>
+</div></div></section>
+</main>

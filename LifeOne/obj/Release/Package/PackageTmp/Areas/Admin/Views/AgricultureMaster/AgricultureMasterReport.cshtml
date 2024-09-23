@@ -1,0 +1,472 @@
+﻿@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "AgricultureMasterReport";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+<style>
+    .search-box-content {
+        display: none;
+        padding: 0 15px;
+    }
+
+    .btn-default {
+        color: black;
+    }
+    /*   @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 989px;
+        }
+    }*/
+    @@media (min-width: 992px) {
+        .modal-lg, .modal-xl {
+            max-width: 1258px
+        }
+    }
+
+    .invalid {
+        color: red;
+    }
+
+    ul > li > a {
+        cursor: pointer;
+    }
+
+    .text-fix {
+        width: 600px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
+</style>
+<div class="content">
+
+    @{
+        string msg = Convert.ToString(TempData["Message"]);
+        if (!string.IsNullOrEmpty(msg))
+        {
+            TempData["Message"] = null;
+            if (Convert.ToBoolean(TempData["Status"].ToString()) == true)
+            {
+                <div class="alert alert-success m-t-30 msgdiv" id="divsuccess">
+                    <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger m-t-30 msgdiv" id="divUpdate">
+                    <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+                </div>
+            }
+
+        }
+    }
+    <div class="container-fluid" ng-app="My-App" ng-controller="My-Ctrl">
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">
+                    Agriculture Master Report<small></small>
+                </h4>
+                <nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#-">Admin</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Master</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Agriculture Master</li>
+                    </ol>
+                </nav>
+            </div>
+
+            <div class="pbutton">
+                <div class="right text-right">
+                    <span>
+                        @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>*@
+                    </span>
+                    <span>
+                        @if (PermissionManager.IsActionPermit("Agriculture Master", ViewOptions.FormSave))
+                        {
+                            <a class="btn btn-secondary" title="Click to add" href="/Agriculture-Master">Add New</a>
+                        }
+
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="no-more-tables">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row" id="advance-search" style="display:none;">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" style="color:#727272 !important">
+                                        <form name="FilterForm" id="FilterForm" novalidate>
+                                            <div class="row">
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Crop Name</label>
+                                                        <input type="text" name="CropName" id="CropName" ng-model="CropNameModel" placeholder="" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>From Date</label><br />
+                                                        <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                            <input type="date" class="form-control" name="FromDate" id="FromDate" ng-model="FromDateModel" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>To Date</label><br />
+                                                        <div id="Datetime" class="input-group date " data-date-format="dd-mm-yyyy">
+                                                            <input type="date" class="form-control" name="ToDate" ng-model="ToDateModel" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Crop Type</label><br />
+                                                        <select class="form-control" name="CropType" id="CropType" ng-model="CropTypeModel">
+                                                            <option value="">All</option>
+                                                            <option value="Soil">Soil Application</option>
+                                                            <option value="Foliar">Foliar Application </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <label style="display:block;"></label>
+                                                        <input type="button" class="btn btn-success btn-sm" style="margin-top:1.5em;" value="Search" id="BtnSearch" ng-click="BindAll(1)">
+                                                        <button class="btn btn-danger  btn-sm" type="reset" style="margin-top:1.5em;">Reset</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="table-responsive" >
+                                <p style="text-align:center;color:red" ng-show="AgricultureMasterList.length < 1"> Data Not Found!</p>
+                                <table id="myTable" class="table  table-hover" ng-show="AgricultureMasterList.length>0">
+                                    <thead>
+                                        <tr>
+                                            <th>#Sn.</th>
+                                            <th>Crop Code</th>
+                                            <th>Crop Category</th>
+                                            <th>Crop Name</th>
+                                            <th>Crop Type</th>
+                                            <th>Total days of Crop</th>
+                                            <th>Method Of Application</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="x in AgricultureMasterList">
+                                            <td>{{$index+1}}</td>
+                                            <td>{{x.CropCode}}</td>
+                                            <td>{{x.CropCategory}}</td>
+                                            <td>{{x.CropName}}</td>
+                                            <td>{{x.CropType}}</td>
+                                            <td>{{x.TotalDaysOfCrop}}</td>
+                                            <td><p class="text-fix">{{x.MethodOfApplication}}</p> </td>
+                                            <td>
+                                                @if (PermissionManager.IsActionPermit("Agriculture Master", ViewOptions.FormSave))
+                                                {
+                                                    <button type="button" ng-click="ViewFullDetails(x.CropCode,x.CropType)" class="btn btn-sm btn-default text-danger" title="Remark"><i class="fa fa-eye" aria-hidden="true"></i></button>
+                                                }
+
+                                                @if (PermissionManager.IsActionPermit("Agriculture Master", ViewOptions.FormUpdate))
+                                                {
+                                                    <a href="/Edit-Agriculture-Master?CropCode={{x.CropCode}}&CropType={{x.CropType}}" class="btn btn-primary btn-sm" title="Edit"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                                }
+                                                @if (PermissionManager.IsActionPermit("Agriculture Master", ViewOptions.FormDelete))
+                                                {
+                                                    <button type="button" ng-click="DeleteCrop(x.CropCode,x.CropType)" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-times" aria-hidden="true"></i></button>
+                                                }
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <footer class="card-footer bg-white p-2">
+                                <div class="d-md-flex align-items-center justify-content-between" ng-if="Pager!=null">
+                                    <div> <small class="text-muted inline">showing {{Pager.TotalItems}}  of {{AgricultureMasterList.length}} items</small> </div>
+                                    <div>
+                                        <ul class="pagination pagination-sm m-t-none m-b-none">
+                                            <li class="page-item" ng-if="Pager.CurrentPage > 1">
+                                                <a class="page-link" ng-click="Paging(1)">First</a>
+                                            </li>
+                                            <li class="page-item" ng-if="Pager.CurrentPage > 1">
+                                                <a class="page-link" ng-click="Paging(Pager.CurrentPage-1)">Previous</a>
+                                            </li>
+                                            <li ng-if="PageList.length>1" ng-repeat="n in PageList" class="page-item" ng-class="{active: n== Pager.CurrentPage}">
+                                                <a class="page-link" ng-click="Paging(n)">{{n}}</a>
+                                            </li>
+
+                                            <li class="page-item" ng-if="Pager.CurrentPage < Pager.TotalPages">
+                                                <a class="page-link" ng-click="Paging(Pager.CurrentPage+1)">Next</a>
+                                            </li>
+                                            <li class="page-item" ng-if="Pager.CurrentPage < Pager.TotalPages">
+                                                <a class="page-link" ng-click="Paging(Pager.TotalPages)">Last</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="Remark_Modal" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Remarks</h4>
+                        @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    </div>
+                    <!-- Modal body -->
+                    <form enctype="multipart/form-data" method="post">
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="card-body">
+                                    <div class="col-md-12">
+                                        <p>{{Remarks}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade" id="CropDetails_Modal" role="dialog">
+            <div class="modal-dialog modal-lg" style="border-radius:0px">
+                <form name="ActionForm" id="ActionForm" novalidate>
+                    <div class="modal-content" style="border-radius:0px">
+                        <div class="modal-header" style="border-radius:0px">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Crop Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12 col-md-12" ng-repeat="z in CropDetails">
+                                    <h4>CropType :  {{z.CropType}}</h4>
+                                    <div class="row">
+                                        <div class="col-6 col-md-4"><h5><b>Crop Category :</b>  {{z._OList[0].CropCategory}}</h5></div>
+                                        <div class="col-6 col-md-4"><h5><b>Crop Type :</b>  {{z._OList[0].CropType}} Application</h5></div>
+                                        <div class="col-6 col-md-4"><h5><b>Crop Name :</b> {{z._OList[0].CropName}} </h5></div>
+                                        <div class="col-6 col-md-4"><h5><b>Total Days Of Crop :</b> {{z._OList[0].TotalDaysOfCrop}} </h5></div>
+                                        <div class="col-6 col-md-12"><h5><b>Method Of Application :</b> {{z._OList[0].MethodOfApplication}}</h5></div>
+                                    </div>
+
+                                    <div class="table-responsive" style="max-height:700px; overflow:auto;">
+                                        <table class="table">
+                                            <tbody ng-repeat="v in z._OList[0]._DayList">
+
+                                                <tr style="background:#e0e0e0">
+                                                    <th><b>From Days :</b> {{v.Day}}</th>
+                                                    <th><b>To Days :</b> {{v.ToDays}}</th>
+                                                    <th><b>Area :</b>  {{v.Area}}</th>
+                                                    <th><b>Area Type :</b> {{v.AreaType}}</th>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="4" style="padding:0px;">
+                                                        <table class="table table-hover">
+                                                            <thead>
+                                                                <tr>
+                                                                    <th class="text-center"># </th>
+                                                                    <th class="text-left">Product </th>
+                                                                    <th class="text-left">Description </th>
+                                                                    <th>Quantity	 </th>
+                                                                    <th class="text-right">Price </th>
+                                                                </tr>
+                                                            </thead>
+                                                            <tr ng-repeat="vv in v._DayWiseProductList">
+                                                                <td class="text-center">{{$index+1}} </td>
+                                                                <td class="text-left">{{vv.ProductName}}  </td>
+                                                                <td class="text-left" style="">{{vv.Description}}  </td>
+                                                                <td>{{vv.Quantity}}  </td>
+                                                                <td class="text-right">{{vv.Price}}  </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                        </table>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+<script src="~/Scripts/angular.min.js"></script>
+<script>
+    var app = angular.module('My-App', []);
+    app.controller('My-Ctrl', function ($scope, $http) {
+        $scope.AdvanceRequestList = [];
+        $scope.PageNo = 1;
+        $scope.BindAll = function (PageNo) {
+            $scope.AdvanceRequestList = null;
+            $http({
+                url: '/Admin/AgricultureMaster/BindAgricultureMasterReport',
+                method: 'post',
+                data: {
+                    CropName: $scope.CropNameModel,
+                    CropCode: $scope.CropCodeModel,
+                    CropType: $scope.CropTypeModel,
+                    FromDate: $scope.FromDateModel,
+                    ToDate: $scope.ToDateModel,
+                    Page: PageNo
+                }
+            }).then(function (response) {
+                debugger
+                $scope.Pager = response.data.Pager;
+                $scope.PageList = [];
+                if (response.data.AgricultureMasterList != null && response.data.AgricultureMasterList.length > 0) {
+                    for (var i = 1; i <= $scope.Pager.TotalPages; i++) {
+                        $scope.PageList.push(i);
+                    }
+                    $scope.AgricultureMasterList = response.data.AgricultureMasterList;
+                } else {
+                    $scope.AgricultureMasterList = [];
+                }
+            })
+        }
+        $scope.BindAll(1);
+        $scope.Paging = function (P) {
+
+            $scope.BindAll(P);
+        }
+        $scope.ViewFullDetails = function (CCode, CType) {
+            $http({
+                url: '/Admin/AgricultureMaster/GetCropFullDetais',
+                method: 'post',
+                data: { CropCode: CCode, CropType: CType }
+            }).then(function (response) {
+                console.log(response.data);
+                if (response.data != null && response.data != "") {
+                    $scope.CropDetails = response.data;
+                    $('#CropDetails_Modal').modal('show');
+
+                }
+            });
+        }
+
+        $scope.DeleteCrop = function (CCode, CType) {
+            var r = confirm("Are you sure, You want to delete this record ?");
+            if (r == true) {
+
+                $http({
+                    url: '/Admin/AgricultureMaster/DeleteCrop',
+                    method: 'post',
+                    data: { CropCode: CCode, CropType: CType }
+                }).then(function (response) {
+                    debugger
+                    if (response.data.Status) {
+                        $scope.BindAll(1);
+                        //alert(response.data.Message);
+                    } else {
+                        //alert(response.data.Message);
+                    }
+                });
+            }
+            else {
+                return false;
+            }
+        }
+
+
+        $scope.ViewRemark = function (Remark) {
+            if (Remark != null && Remark != '') {
+                $scope.Remarks = Remark;
+                $('#Remark_Modal').modal('show');
+            } else {
+                alert('No Remark!!!')
+            }
+        }
+        $scope.ApproveAction = function (ReqId, Action) {
+            $scope.ReqId = ReqId;
+            $scope.Action = Action;
+            $scope._Action = '';
+            if (Action == 'Approved')
+                $scope._Action = 'Approve';
+            else if (Action == 'Rejected')
+                $scope._Action = 'Reject';
+            var Msg = 'Are you sure you want to ' + $scope._Action + '?';
+            if (confirm(Msg)) {
+                $('#Action_Modal').modal('show');
+            }
+            return false;
+        }
+        $scope.SubmitRequest = function (From) {
+            if (From.$valid) {
+                $http({
+                    url: '/Admin/AdvancePayment/ApproveRequest',
+                    method: 'post',
+                    data: {
+                        ReqId: $scope.ReqId,
+                        Action: $scope.Action,
+                        Narration: $scope.NarrationModel
+                    }
+                }).then(function (response) {
+                    if (response.data.Status) {
+                        $scope.BindAll();
+                        $('#Action_Modal').modal('hide')
+                        $("#ActionForm")[0].reset();
+                        alert(response.data.Message);
+                    } else {
+                        alert(response.data.Message);
+                    }
+                })
+            } else {
+                $scope.invalid = true;
+            }
+        }
+
+        $scope.Calculate = function (M) {
+            if (M > 0) {
+                $scope.Amount = $scope.RequestAmountModel;
+                $scope.EMI = Math.round($scope.Amount / M);
+            } else {
+                $scope.EMI = null;
+            }
+        }
+        $scope.Reset = function () {
+            $scope.ActionForm.$setPristine();
+            $scope.NarrationModel = "";
+        }
+    });
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+</script>
+
+

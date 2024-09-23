@@ -1,0 +1,1063 @@
+﻿
+@using LifeOne.Models.Manager;
+@model LifeOne.Models.FranchiseManagement.FEntity.MFranchiseorderRequest
+
+
+@{
+    ViewBag.Title = "Add Order For Customer";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+@*<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />*@
+<link href="~/Content/admin-assets/libs/select2/select2.min.css" rel="stylesheet" />
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<style>
+
+    .list-inline > li {
+        display: inline-block;
+        padding-right: 15px;
+        padding-left: 5px;
+    }
+
+    .dv_Orbit {
+        display: none;
+    }
+
+    .boxhide {
+        display: none;
+    }
+
+    .hide {
+        display: none;
+    }
+
+    .fa-trash {
+        color: white;
+    }
+</style>
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Create Order</h4>
+            <nav aria-label="breadcrumb" class="float-left mt-1">
+                <ol class="breadcrumb">
+                    <!-- <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                     <li class="breadcrumb-item"><a href="#">Direct Seller Order</a></li>
+                     <li class="breadcrumb-item active" aria-current="page">Create Order </li>-->
+                </ol>
+            </nav>
+        </div>
+    </div>
+
+
+    <div id="no-more-tables">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <d iv class="row">
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="form-group">
+                                    <label for="Product">Product<span class="text-danger"></span></label>
+                                    @Html.DropDownListFor(m => m.PrdId, (IEnumerable<SelectListItem>)ViewBag.Product, new { @class = "select form-control", @onchange = "GetProductDetails(this)" })
+
+                                    <span style="display:none">   <label>Is Box</label> @Html.CheckBoxFor(m => m.IsBox, new { @class = "margin-top: 3%;", @onchange = "CheckProduct()" })</span>
+                                    <span class="boxhide" style="font-size:13px; padding-top:10px;">
+                                        @*<label class="text-danger">Box PV <span id="spBoxPV"></span> | </label>
+                                            <label class="text-danger">Box Qty <span id="spBoxQty"></span></label>*@
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2 dv_Orbit">
+                                <div class="form-group">
+                                    <label>Box Qty<span class="text-danger"></span></label>
+                                    @Html.TextBoxFor(m => m.BoxQty, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2 dv_Orbit">
+                                <div class="form-group">
+                                    <label>PV<span class="text-danger"></span></label>
+                                    @Html.TextBoxFor(m => m.BoxPV, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+
+                            <div class="col-sm-6 col-md-4 col-lg-1" style="display:none;">
+                                <div class="form-group">
+                                    <label>Available&nbsp;Stock<span class="text-danger"></span></label>
+                                    @Html.TextBoxFor(m => m.AvailableStock, new { @class = "form-control", @readonly = "readonly" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-1">
+                                <div class="form-group">
+                                    <label>Amount<span class="text-danger"></span></label>
+                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control" ,@placeholder= "Enter Amount" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-1" id="dvPointVal3">
+                                <div class="form-group">
+                                    <label>BV<span class="text-danger"></span></label>
+                                    @Html.TextBoxFor(m => m.PointValue, new { @class = "form-control", @readonly = "readonly" ,@placeholder="Enter PV" })
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="form-group">
+                                    <label for="emailAddress">Quantity<span class="text-danger"></span></label>
+                                    @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @onchange = "UpdateSubTotal(this);",@placeholder= "Enter Quantity", @onkeypress = "return isNumberKey(event)", @maxlength = "5" })
+                                </div>
+                            </div>
+                            @*<div class="col-sm-6 col-md-4 col-lg-2">
+                                    <div class="form-group">
+                                        <label for="emailAddress">Discount&nbsp;Amt.<span class="text-danger"></span></label>
+                                        @Html.TextBoxFor(m => m.DiscountAmt, new { @class = "form-control", @onchange = "UpdateSubTotal(this);", @onkeypress = "return isNumberKey(event)", @maxlength = "5" })
+                                    </div>
+                                </div>*@
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <div class="form-group">
+                                    <label for="emailAddress">Sub Total<span class="text-danger"></span></label>
+                                    @Html.TextBoxFor(m => m.TotalAmt, new { @class = "form-control", @readonly = "readonly" ,@placeholder= "Enter Sub Total " })
+                                </div>
+                            </div>
+                            <div class="col-sm-6 col-md-4 col-lg-2">
+                                <label style="visibility:hidden;">btn</label>
+                                <div>
+                                    <input type="button" value="Add Item" class="btn btn-success" onclick="AddItem()">
+                                </div>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12">
+            <div class="box">
+                <div class="box-body">
+                    <div class="text-xs-center">
+                        <div class="row">
+                            <div class="col-md-12" id="replacetarget">
+                                <div>
+                                    <div class="box-body">
+                                        <div class="table-responsive">
+                                            <table class="table " id="TmpProdgrd">
+                                                <thead>
+                                                    <tr>
+                                                        <th>#Sn.</th>
+                                                        <th>Product</th>
+                                                        <th>Product&nbsp;Type</th>
+
+
+                                                        <th>Req Quantity</th>
+                                                        <th>Price(₹)</th>
+                                                        <th>PV</th>
+                                                        <th>Total PV</th>
+
+                                                        <th>Amount(₹)</th>
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td colspan="8">no records founds..</td>
+                                                    </tr>
+                                                </tbody>
+                                                <tfoot style="background: aliceblue">
+                                                </tfoot>
+                                            </table>
+                                        </div>
+
+                                        <table id="grdSummary" class="table  table-hover table-sm hide" style="height:50px;">
+
+                                            @*<tr>
+                                                    <td style="text-align:right"><h5>Due Amount:</h5></td>
+                                                    <td class="text-right" style="width:80px;"><input type="text" class="form-control" onkeypress="return isNumberKey(event)" maxlength="5" onchange="calculateDueAmt()" id="txtDueAmt" placeholder="0.00" /></td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="text-align:right"><h5>Sub Total</h5></td>
+                                                    <td class="text-right" style="width:80px;"><h5><strong id="txtSubTotal"></strong></h5></td>
+                                                </tr>*@
+                                            @*<tr>
+                                                    <td style="text-align:right"><h5>Estimated shipping</h5></td>
+                                                    <td class="text-right"><h5><strong>0.00</strong></h5></td>
+                                                </tr>*@
+                                            <tr>
+                                                <td style="text-align:right"> <h4><b>Total</b></h4></td>
+                                                <td class="text-right" style="width:80px;"><h4><strong id="txtFinalTotal">0.00</strong></h4></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="box box-warning">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-sm-9 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Remark</label>
+                                            @Html.TextAreaFor(m => m.PaymentRemark, new { @class = "form-control", @rows = "4", @col = "4" })
+                                        </div>
+
+                                    </div>
+                                    <div class="col-sm-3 col-xs-12">
+                                        <div class="form-group">
+                                            <label>Payment Mode</label>
+
+                                            <select id="PaymentMode" name="PaymentMode" class="form-control">
+                                                <option value="0">Payment Mode</option>
+                                                <option value="Cash">Cash</option>
+                                                @*<option value="Wallet">Wallet</option>*@
+                                                <option value="NEFT">NEFT</option>
+                                                <option value="RTGS">RTGS</option>
+                                                <option value="IMPS">IMPS</option>
+                                                <option value="UPI">UPI</option>
+                                            </select>
+                                            <input type="hidden" id="hdnTotQty" name="hdnTotQty">
+                                        </div>
+                                        @*<div class="form-group" id="GST" style="display:none;">
+                    <label>GST No.</label>
+                    @Html.TextBoxFor(m => m.CustomerGstNo, new { @class = "form-control", @maxlength = "30" })
+                </div>*@
+                                    </div>
+
+
+                                </div>
+                                <div class="row" style="display:none;" id="divchkfree">
+                                    <div class="col-md-8">
+                                        <div class="row" id="">
+                                            <div class="col-md-12" style="padding-bottom: 13px;font-size: 17px;font-weight: bold;">
+                                                <label class="form-check-label">IsFree</label>
+                                                @Html.CheckBoxFor(m => m.IsFree, new { @class = "form-box" })
+                                                @*<input type="checkbox" name="IsFree" id="IsFree" class="form-box" />*@
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row" style="display:none;" id="divwalletbalnce">
+                                    <div class="col-md-8">
+                                        <div class="row showewalletdiv " id="divShowWallet">
+                                            <div class="col-md-12" style="padding-bottom: 13px;font-size: 17px;font-weight: bold;">
+                                                Current Wallet Balance : <span id="spanbindwalletamt" style="color:red"><b>0.00</b> </span>
+                                                <span style="font-size:17px;font-weight: bold;color:red" id="custommessage"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>                               
+                                <div style="display:none;" id="divpaymenttype">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-4 col-lg-3">
+                                            <div class="form-group">
+                                                <label>Cheque/DD No./Bank Transaction No.</label>
+                                                @Html.TextBoxFor(m => m.ChequeDDNo, new { @class = "form-control", @maxlength = "30" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-3">
+                                            <div class="form-group">
+                                                <label>Cheque/DD Date/Transaction Date</label>
+                                                @Html.TextBoxFor(m => m.ChequeDDDate, new { @class = "form-control", @type = "date" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-3">
+                                            <div class="form-group">
+                                                <label>Bank Name</label>
+                                                @Html.TextBoxFor(m => m.BankName, new { @class = "form-control" })
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6 col-md-4 col-lg-3" style="display:none;" id="divpaymenttypeSlip">
+                                            <div class="form-group">
+                                                <label>Payment Slip</label>
+                                                @Html.TextBoxFor(m => m.PaymentSlip, new { @type = "file", @class = "form-control", onchange = "UploadFile(this,'OpenOrderPaymentSlip')" })
+                                                @Html.HiddenFor(m => m.HdnPaymentSlip)
+                                            </div>
+                                        </div>                                       
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <div class="form-group" style="display:none;">
+                                            <label>&nbsp;</label><br />
+                                            <input type="radio" id="ForAssociate" value="Associate" name="rdb1" onchange="fshowdiv()" style="display:none" /> @*Associate*@
+                                            <input type="radio" id="ForOther" value="Other" name="rdb1" onchange="fshowdiv()" checked style="display:none" />@*Other*@
+
+
+                                        </div>
+                                        <div class="form-group" id="GST" style="display:none;">
+                                            <label>GST No.</label>
+                                            @Html.TextBoxFor(m => m.CustomerGstNo, new { @class = "form-control", @maxlength = "30" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3" id="Name" style="display:none;">
+                                        <div class="form-group">
+                                            <label>Customer Name</label>
+                                            @Html.TextBoxFor(m => m.CustomerName, new { @class = "form-control", @Placeholder = "Customer Name" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3" id="Mobile" style="display:none;">
+                                        <div class="form-group">
+                                            <label>Mobile No.</label>
+                                            @Html.TextBoxFor(m => m.CustomerMobile, new { @class = "form-control", @Placeholder = "Mobile No.", @maxlength = "10", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3" id="Email" style="display:none;">
+                                        <div class="form-group">
+                                            <label>Email Id </label>
+                                            @Html.TextBoxFor(m => m.CustomerEmail, new { @class = "form-control", @Placeholder = " Email Id" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3" id="PinCode" style="display:none;">
+                                        <div class="form-group">
+                                            <label>PinCode</label>
+                                            @Html.TextBoxFor(m => m.CustomerPinCode, new { @class = "form-control", @Placeholder = "PinCode", @maxlength = "6", @onkeypress = "return isNumberKey(event)" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3" id="Address" style="display:none;">
+                                        <div class="form-group">
+                                            <label>Address</label>
+                                            @Html.TextBoxFor(m => m.CustomerAddress, new { @class = "form-control", @Placeholder = "Address" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3" id="LoginId">
+                                        <div class="form-group">
+                                            <label>LoginId</label>
+                                            @Html.TextBoxFor(m => m.CustomerLoginId, new { @class = "form-control", @Placeholder = "Login Id", @onchange = "return GetAssociateDetails()" })
+
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label>Order Amount</label>
+                                            @Html.TextBoxFor(m => m.PaidAmount, new { @class = "form-control", @Placeholder = "Order Amount" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3" id="UpiNo" style="display:none;">
+                                        <div class="form-group">
+                                            <label>UPI Number</label>
+                                            @Html.TextBoxFor(m => m.UpiNumber, new { @class = "form-control", @Placeholder = "UPI Number" })
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6 col-md-4 col-lg-3">
+                                        <div class="form-group">
+                                            <label>&nbsp;</label>
+                                            <button class="btn btn-success btn-block waves-effect waves-light" type="button" onclick="return Validate()" value="Submit Request">Submit Request</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" id="TotalProductAmount" />
+
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        fshowdiv();
+    });
+    function fshowdiv() {
+
+        if ($('input[name="rdb1"]:checked').val() == "Associate") {
+            $('#Name').css('display', 'none');
+            $('#Mobile').css('display', 'none');
+            $('#Email').css('display', 'none');
+            $('#Address').css('display', 'none');
+            $('#PinCode').css('display', 'none');
+            $('#GST').css('display', 'none');
+            $('#LoginId').css('display', '');
+            $('#CustomerName').val("");
+            $('#CustomerMobile').val("");
+            $('#CustomerEmail').val("");
+            $('#CustomerAddress').val("");
+            $('#CustomerPinCode').val("");
+        }
+
+        if ($('input[name="rdb1"]:checked').val() == "Other") {
+            $('#Name').css('display', '');
+            $('#Mobile').css('display', '');
+            $('#Email').css('display', '');
+            $('#Address').css('display', '');
+            $('#PinCode').css('display', '');
+            $('#GST').css('display', '');
+            $('#LoginId').css('display', 'none');
+            $('#CustomerLoginId').val('');
+        }
+
+    }
+
+    $(".select").select2({
+        allowClear: false
+    });
+</script>
+
+<script>
+
+
+    function CheckProduct() {
+        $('.dv_Orbit').css('display', 'none');
+        $('.boxhide').css('display', 'none');
+        $('#dvPointVal').css('display', '');
+        //if ($('#IsBox').prop('checked') && $('#PrdId').val() != "0") {
+        var _prdId = $('#PrdId').val();
+        $.ajax({
+            url: "/Franchise/ManageFranchise/CheckProduct",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ prdId: _prdId }),
+            contentType: "application/json",
+            success: function (result) {
+                if (result != null) {
+                    if (result.Code == 1) {
+                        // $('.dv_Orbit').css('display', 'block');
+                        $('.boxhide').css('display', 'inline-block');
+                        $('#dvPointVal').css('display', 'none');
+                        $('#BoxQty').val(result.BoxQty);
+                        $('#BoxPV').val(result.BoxPV);
+                        $('#spBoxQty').text(result.BoxQty);
+                        $('#spBoxPV').text(result.BoxPV);
+                    }
+                    else {
+
+                        showSnazzyErrorMessage(result.Remark)
+                        $('#IsBox').prop('checked', '');
+                    }
+                }
+
+            },
+            error: function (err) {
+                showSnazzyErrorMessage(err.statusText);
+                return false;
+            }
+        });
+        // }
+    }
+
+    function BindOrbit() {
+        $('.dv_Orbit').css('display', 'block');
+        $('#FK_OrbitType').html('');
+        $.ajax({
+            url: "/Franchise/ManageFranchise/BindOrbit",
+            type: "POST",
+            dataType: 'json',
+            contentType: "application/json",
+            success: function (result) {
+                if (result != null) {
+                    var htmlText = "";
+                    for (var i = 0; i < result.length; i++) {
+                        htmlText += "<option value=" + result[i].Value + ">" + result[i].Text + "</option>"
+                    }
+                    $('#FK_OrbitType').html(htmlText);
+                    var _OrbitId = ''
+                    if (_OrbitId != "" && _OrbitId != "0") {
+                        $('#FK_OrbitType').val(_OrbitId);
+                    }
+                }
+
+            },
+            error: function (err) {
+                showSnazzyErrorMessage(err.statusText);
+                return false;
+            }
+        });
+    }
+    function calculateDueAmt() {
+        var total = $('#TotalProductAmount').val();
+        var dueAmt = $('#txtDueAmt').val();
+        var finalTotal = parseFloat(total) - parseFloat(dueAmt);
+        $('#txtSubTotal').text(finalTotal);
+        $('#txtFinalTotal').text(finalTotal);
+    }
+
+    function GetAssociateDetails() {
+
+        var LoginId = $('#CustomerLoginId').val();
+        if (LoginId != "") {
+            $.ajax({
+                url: "/Franchise/FranchiseCustomerOrder/BindCustomerDetails",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ CustomerMobile: LoginId }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result != null) {
+                        console.log(result);
+                        if (result.Code == 0) {
+                            $('#CustomerLoginId').val('');
+                            alert("Invalid Login Id!");
+                            return false;
+                        }
+
+                    }
+
+                },
+                error: function (err) {
+                    showSnazzyErrorMessage(err.statusText);
+                    return false;
+                }
+            });
+        }
+    }
+
+    function BindProduct() {
+        var _catId = $('#CategoryId').val()
+        if (_catId != undefined && _catId != "") {
+            $.ajax({
+                url: "/Franchise/ManageFranchise/BindProduct",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ CategoryId: _catId }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result != null) {
+                        var htmlText = "";
+                        for (var i = 0; i < result.length; i++) {
+                            htmlText += "<option value=" + result[i].Value + ">" + result[i].Text + "</option>"
+                        }
+                        $('#PrdId').html(htmlText)
+                    }
+
+                },
+                error: function (err) {
+                    showSnazzyErrorMessage(err.statusText);
+                    return false;
+                }
+            });
+        }
+    }
+
+    function GetProductDetails(obj) {
+        $('#IsBox').prop('checked', '');
+        $('.boxhide').css('display', 'none');
+        var _prId = $('#' + obj.id + '').val()
+        if (_prId != undefined && _prId != "" && _prId != "0") {
+            $.ajax({
+                url: "/Franchise/ManageFranchise/GetProductDetails",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ PrdId: _prId }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result != null) {
+                        //if (result.IsBox == true)
+                        //{
+                        //    $('#IsBox').prop('checked', 'checked');
+                        //}
+                        //$('#IsBox').trigger('change');
+                        $('#AvailableStock').val(result.AvailableStock);
+                        $('#Amount').val(result.Amount);
+                        $('#PointValue').val(result.PointValue)
+                        CheckProduct();
+                    }
+
+                },
+                error: function (err) {
+                    showSnazzyErrorMessage(err.statusText);
+                    return false;
+                }
+            });
+        }
+
+    }
+
+    function Cleartext() {
+        $('#PrdId').val(0);
+        $('#CategoryId').val(0);
+        $('#Amount').val('');
+        $('#PointValue').val('');
+        $('#Quantity').val('');
+        $('#TotalAmt').val('');
+        $('#AvailableStock').val('');
+        $('#DiscountAmt').val('');
+    }
+
+    function AddItem() {
+
+        var prdId = $('#PrdId').val();
+        var amount = $('#Amount').val();
+        var pV = $('#PointValue').val();
+        var quantity = $('#Quantity').val();
+        var totalAmt = $('#TotalAmt').val();
+        var AvailStock = $('#AvailableStock').val();
+        if (prdId == "" || prdId == "0") {
+
+            showSnazzyErrorMessage("Please select Product");
+            return false;
+        }
+        else if (quantity == "") {
+
+            showSnazzyErrorMessage("Please enter Quantity");
+            return false;
+        }
+        //else if (parseInt(AvailStock) < parseInt(quantity)) {
+
+        //    showSnazzyErrorMessage("Insufficient Stock");
+        //    return false;
+
+        //}
+        else if (parseInt(quantity) == 0) {
+            showSnazzyErrorMessage("Requested quantity can not be 0.");
+            return false;
+
+        }
+        else {
+
+            $.ajax({
+                url: "/Admin/Admin/AddProduct",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ PrdId: prdId, Amount: amount, PointValue: pV, Quantity: quantity, TotalAmt: totalAmt, AvailableStock: AvailStock }),
+                contentType: "application/json",
+                async: false,
+                success: function (result) {
+
+                    if (result != null) {
+                        if (result.Code == 1) {
+                            GetOrderTemp();
+                            showSnazzySuccessMessage("Item Added Successfully.");
+                            Cleartext();
+                        }
+                        else {
+
+                            showSnazzyErrorMessage(result.Remark);
+                        }
+                    }
+
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                    return false;
+                }
+            });
+
+        }
+    }
+
+    function GetOrderTemp() {
+
+        $.ajax({
+            url: "/Admin/Admin/GetOrderTemp",
+            type: "POST",
+            dataType: 'json',
+            contentType: "application/json",
+            async: false,
+            success: function (result) {
+
+                if (result != null) {
+                    var html = "";
+                    var html1 = ""
+                    var TotalItemAmt = 0;
+                    var TotalPv = 0;
+                    var ItemAmt = 0;
+                    var TotalDiscount = 0;
+                    var TotalQty = 0;
+                    var TotalPvSum = 0;
+                    var TotalAmtItem = 0;
+                    for (var i = 0; i < result.length; i++) {
+
+
+                        ItemAmt = ItemAmt + parseFloat(result[i].Amount);
+                        TotalDiscount = TotalDiscount + parseFloat(result[i].DiscountAmt);
+                        TotalItemAmt = TotalItemAmt + (parseFloat(result[i].TotalAmt));
+                        FinalAmount = (parseFloat(result[i].Amount) * (parseFloat(result[i].ReqBoxQty) * parseFloat(result[i].BoxQty))) - parseFloat(result[i].DiscountAmt);
+                        TotalPv = TotalPv + parseFloat(result[i].PointValue);
+                        TotalQty = TotalQty + parseInt(result[i].Quantity);
+                        TotalPvSum = TotalPvSum + (parseInt(result[i].PointValue) * parseInt(result[i].Quantity));
+                        TotalAmtItem = parseFloat(result[i].TotalAmt);
+
+                        html += "<tr>"
+                        html += "<td>" + (i + 1) + "</td><td>" + result[i].ProductName + "</td><td>" + result[i].ProductType + "</td><td>" + result[i].Quantity + " </td><td id='tdPrice'>" + result[i].Amount + "</td><td id='tdPV'>" + result[i].PointValue + "</td><td>" + parseInt(result[i].TotalPv) + "</td><td id='tdAmt'>" + TotalAmtItem + "</td><td><a id='btn_del' title='Delete' data-toggle='tooltip' class='btn btn-secondary btn-sm' onclick='DeleteProduct(" + result[i].PK_KeyId + ");'><i class='fa fa-trash'></i></a></td></tr>";
+
+
+                    }
+                    html1 += "<tr><th colspan='2'>Total</th><th></th><th>" + TotalQty + "</th><th>" + ItemAmt + "</th><th>" + TotalPv + "</th><th>" + TotalPvSum + "</th><th id='FinalAmountt'>" + TotalItemAmt + "</th><th></th></tr>"
+                    $('#TmpProdgrd tbody').html('');
+                    $('#TmpProdgrd tfoot').html('');
+                    $('#TmpProdgrd tbody').append(html);
+                    $('#TmpProdgrd tfoot').append(html1)
+                    $('#TotalProductAmount').val(TotalItemAmt)   //Use For Final Save
+                    $('#txtSubTotal').text(TotalItemAmt);
+                    $('#txtFinalTotal').text(TotalItemAmt);
+                    $('#grdSummary').removeClass('hide');
+                    $('#PaidAmount').val(TotalItemAmt);
+
+
+                }
+
+
+            },
+            error: function (err) {
+                alert(err.statusText);
+                return false;
+            }
+        });
+    }
+
+    function BindUpdatedFigureAmt(obj, Id, ProdId) {
+        var qty = parseInt(obj.value);
+        var ReqQty = qty;
+        if (parseInt(ReqQty) <= 0) {
+            showSnazzyErrorMessage("Quantity can not be Zero");
+            $(obj).val('0')
+        }
+        var prodType = $(obj).parent().parent().find('[id=tdProdType]').text();
+        var avlStock = $(obj).parent().parent().find('[id=tdAvlStock]').text();
+        var prodAmt = $(obj).parent().parent().find('[id=tdPrice]').text();
+        var totalPV = parseInt($(obj).parent().parent().find('[id=tdPV]').text()) * qty;
+        var Amt = parseFloat(prodAmt) * qty;
+        var _ReqId = sessionStorage.getItem("customerRequestId");
+        if (prodType == "Box") {
+            var BoxQty = $(obj).parent().parent().find('[id=tdBoxQty]').text();
+            qty = qty * parseInt(BoxQty);
+        }
+        if (parseInt(avlStock) < qty) {
+            showSnazzyErrorMessage("Quantity can not be greater than from current quantity");
+            $(obj).val('0')
+
+            $.ajax({
+                url: "/Franchise/FranchiseCustomerOrder/BindUpdatedFigureAmtCustomer",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ ReqId: _ReqId, PK_KeyId: Id, Quantity: 0, TotalPv: totalPV, TotalAmt: Amt, PrdId: ProdId, reqQty: 0 }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result != null && result.Code == 1)
+                        GetOrderTemp();
+                    else
+                        showSnazzyErrorMessage(result.Remark);
+                },
+                error: function (err) {
+                    showSnazzyErrorMessage(err.statusText);
+                    return false;
+                }
+            });
+            //return false;
+        }
+        if (obj.value != "0") {
+            $.ajax({
+                url: "/Franchise/FranchiseCustomerOrder/BindUpdatedFigureAmtCustomer",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ ReqId: _ReqId, PK_KeyId: Id, Quantity: qty, TotalPv: totalPV, TotalAmt: Amt, PrdId: ProdId, reqQty: ReqQty }),
+                contentType: "application/json",
+                success: function (result) {
+                    if (result != null && result.Code == 1)
+                        GetOrderTemp();
+                    else
+                        showSnazzyErrorMessage(result.Remark);
+                },
+                error: function (err) {
+                    showSnazzyErrorMessage(err.statusText);
+                    return false;
+                }
+            });
+        }
+    }
+
+    function UpdateSubTotal() {
+
+
+        if ($('#Quantity').val() != "" && $('#Amount').val() != "") {
+
+            var Discount = 0;
+            var Qty = $('#Quantity').val();
+            var Amount = $('#Amount').val();
+            var TotalAmt = (parseInt(Qty) == NaN ? 0 : parseInt(Qty)) * (parseFloat(Amount));
+            var boxQty = $('#spBoxQty').text();
+            if ($('#DiscountAmt').val() != "" && $('#DiscountAmt').val() != undefined) {
+                Discount = parseFloat($('#DiscountAmt').val());
+                if (Discount > TotalAmt) {
+                    $('#DiscountAmt').val('0')
+                    showSnazzyErrorMessage('Discount Amount can not be Greater than Total Amount !');
+                    return false
+                }
+            }
+            if ($('#IsBox').prop('checked')) {
+                var TotalAmt = ((parseInt(Qty) * parseInt(boxQty)) * (parseFloat(Amount)) - Discount);
+                $('#TotalAmt').val(TotalAmt);
+            }
+            else {
+
+                var TotalAmt = ((parseInt(Qty) == NaN ? 0 : parseInt(Qty)) * (parseFloat(Amount)) - Discount);
+                $('#TotalAmt').val(TotalAmt);
+            }
+        }
+
+    }
+
+    $('#PaymentMode').on('change', function () {
+
+        if ($('#PaymentMode').val() == "0" || $("#PaymentMode").val() == "Cash") {
+
+            $('#divpaymenttype').css('display', 'none');
+            $('#divpaymenttypeSlip').css('display', 'none');
+            $('#divwalletbalnce').css('display', 'none');
+            $('#UpiNo').css('display', 'none');
+            $('#divpaymenttype').val('');
+            $('#divpaymenttypeSlip').val('');
+            $('#divwalletbalnce').val('');
+        }
+        else if ($("#PaymentMode").val() == "UPI") {
+            $('#UpiNo').show();
+            $('#divpaymenttype').css('display', 'none');
+            $('#divpaymenttypeSlip').css('display', 'none');
+            $('#divwalletbalnce').css('display', 'none');  
+            $('#divpaymenttype').val('');
+            $('#divpaymenttypeSlip').val('');
+            $('#divwalletbalnce').val('');
+        }
+        else if ($("#PaymentMode").val() == "Wallet") {
+
+            $('#divwalletbalnce').css('display', 'block');
+
+
+            $("#divShowWallet").show();
+
+
+            var model = {
+                Fk_MemId: sessionStorage.getItem("customerId")
+            }
+            $.ajax({
+                type: 'POST',
+                url: 'GetFranchiseEwallet',
+                data: JSON.stringify(model),
+                dataType: 'json',
+                contentType: 'application/json;charset=utf-8',
+                async: false,
+                success: function (data) {
+                    if (data == null || parseFloat(data.Balance) == parseFloat("0.00")) {
+                        $("#custommessage").append("<span>Insufficient wallet balance.</span>");
+                    }
+                    else {
+                        $("#spanbindwalletamt").text(data.Balance);
+                        $(".showewalletdiv").fadeIn();
+                        $(".showewalletdiv").fadeOut();
+                        $(".showewalletdiv").fadeIn();
+                        $(".showewalletdiv").fadeOut();
+                        $(".showewalletdiv").fadeIn();
+                    }
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                    $("#spanbindwalletamt").text("0.00");
+                    $(".showewalletdiv").addClass("hide");
+                }
+            });
+
+            $("#divShowWallet").show();
+            $('#divpaymenttype').css('display', 'none');
+            $('#divpaymenttypeSlip').css('display', 'none');
+        }               
+        else {
+
+            $('#divpaymenttype').css('display', 'block');
+            $('#divpaymenttypeSlip').css('display', 'block');
+            $('#divwalletbalnce').css('display', 'none');
+            $('#UpiNo').css('display', 'none');
+        }
+        //else {
+        //    $('#divpaymenttype').css('display', 'block');
+        //    $('#divpaymenttypeSlip').css('display', 'block');
+        //}
+    })
+
+    function DeleteProduct(Id) {
+
+        if (confirm("Are you sure want to delete this Item ?")) {
+            if (Id != null && Id != undefined && Id != "0") {
+                $.ajax({
+                    url: "/Admin/Admin/DeleteProductTemp",
+                    type: "POST",
+                    dataType: 'json',
+                    data: JSON.stringify({ PK_KeyId: Id }),
+                    contentType: "application/json",
+                    success: function (result) {
+                        if (result != null) {
+                            if (result.Code == 1) {
+                                showSnazzySuccessMessage(result.Remark);
+                                GetOrderTemp();
+                            }
+                        }
+
+                    },
+                    error: function (err) {
+                        showSnazzyErrorMessage(err.statusText);
+                        return false;
+                    }
+                });
+            }
+        }
+    }
+
+    function Validate() {
+
+
+        //if ($('#TotalProductAmount').val() == undefined || $('#TotalProductAmount').val() == null) {
+        //    showSnazzyErrorMessage('Some internal problem');
+        //    return false
+        //}
+        //if ($('#PrdId').val() == "0") {
+        //    showSnazzyErrorMessage('Please add any product!');
+        //    return false
+        //}
+        if ($('#PaymentMode').val() == "0") {
+            showSnazzyErrorMessage('Please select Payment Mode!');
+            return false
+        }
+        if ($('#PaymentMode').val() != "Cash" && $('#PaymentMode').val() != "0" && $('#PaymentMode').val() != "UPI") {
+            if ($('#ChequeDDNo').val() == "") {
+                showSnazzyErrorMessage('Please enter Cheque/DD No/Bank Transaction Number !');
+                return false
+            }
+            else if ($('#ChequeDDDate').val() == undefined || $('#ChequeDDDate').val() == "") {
+                showSnazzyErrorMessage('Please enter Cheque/DD/Bank Date !');
+                return false
+            }
+            else if ($('#BankName').val() == undefined || $('#BankName').val() == "") {
+                showSnazzyErrorMessage('Please enter Bank Name !');
+                return false
+            }
+        }                                  
+        //if ($('#CustomerEmail').val() == "") {
+        //    showSnazzyErrorMessage('Please Add Customer Email!');
+        //    return false
+        //}
+
+        if ($('input[name="rdb1"]:checked').val() == "Associate") {
+            if ($('#CustomerLoginId').val() == "") {
+                showSnazzyErrorMessage('Please Add LoginId');
+                return false
+            }
+        }
+        if ($('input[name="rdb1"]:checked').val() == "Other") {
+            if ($('#CustomerName').val() == "") {
+                showSnazzyErrorMessage('Please Add Customer Name!');
+                return false
+            }
+            if ($('#CustomerMobile').val() == "") {
+                showSnazzyErrorMessage('Please Add Customer Mobile!');
+                return false
+            }
+            if ($('#CustomerPinCode').val() == "") {
+                showSnazzyErrorMessage('Please Add Customer Pincode!');
+                return false
+            }
+            if ($('#CustomerAddress').val() == "") {
+                showSnazzyErrorMessage('Please Add Customer Address!');
+                return false;
+            }            
+        }
+        if ($('#PaymentMode').val() == "UPI") {
+            if ($('#UpiNumber').val() == "") {
+                showSnazzyErrorMessage('Please select UpiNumber!');
+                return false
+            }           
+        }        
+        if (confirm("Proceed With Paid Amount") == false) {
+            return false;
+        }
+        var PayMode = $('#PaymentMode').val();
+        var _hdnReceipt = $('#HdnPaymentSlip').val();
+        var _BankName = $('#BankName').val();
+        var _TranNo = $('#ChequeDDNo').val();
+        var _TranDate = $('#ChequeDDDate').val();
+        var _Remark = $('#PaymentRemark').val();       
+
+        $.ajax({
+            url: "/Admin/Admin/SaveProduct",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({
+                PaymentMode: PayMode, ChequeDDNo: _TranNo, BankName: _BankName, HdnPaymentSlip: _hdnReceipt, ChequeDDDate: _TranDate,
+                PaymentRemark: _Remark, CustomerName: $('#CustomerName').val(), CustomerMobile: $('#CustomerMobile').val(), CustomerEmail: $('#CustomerEmail').val(),
+                PaidAmount: $('#PaidAmount').val(), CustomerPinCode: $('#CustomerPinCode').val(), CustomerAddress: $('#CustomerAddress').val(), CustomerLoginId: $('#CustomerLoginId').val(), CustomerGstNo: $('#CustomerGstNo').val(),
+                 UpiNumber: $('#UpiNumber').val() 
+            }),
+            contentType: "application/json",
+            success: function (result) {
+                if (result != null) {
+                    if (result.Code == 1) {
+                        showSnazzySuccessMessage(result.Remark);
+                        window.location.href = "/Admin/Admin/OpenOrderList";
+                    }
+                    else {
+                        showSnazzySuccessMessage(result.Remark);
+                    }
+
+                }
+            },
+            error: function (err) {
+                alert(err.statusText);
+                return false;
+            }
+        });
+    }
+
+    function UploadFile(obj, subdir) {
+        var Id = $(obj).attr("Id");
+        var data = new FormData();
+        var files = $("#" + Id).get(0).files;
+
+        if (files.length > 0) {
+            data.append("file", files[0]);
+            data.append("subdir", subdir);
+        }
+        else {
+            showSnazzyErrorMessage('Please select file to upload.');
+            return false;
+        }
+        var extension = $("#" + Id).val().split('.').pop().toUpperCase();
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
+            showSnazzyErrorMessage('Invalid image file format.Only jpg,jpeg,png,bmp files are allow');
+            return false;
+        }
+        $.ajax({
+            url: '/Common/Uploadfile',
+            type: "POST",
+            processData: false,
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response != null || response != '') {
+                    if (response.Result == "success") {
+                        $("#" + Id + "Path").val("");
+                        $("#HdnPaymentSlip").val(response.Path);
+                        showSnazzySuccessMessage(response.Msg)
+                    }
+                    else
+                        showSnazzyErrorMessage(response.Msg);
+                }
+
+            },
+            error: function (er) {
+                showSnazzyErrorMessage('An error occured');
+            }
+        });
+
+
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    function isAlphabets(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123) || charCode == 32) {
+            return true;
+        }
+        return false;
+    }
+
+</script>
+

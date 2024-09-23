@@ -1,0 +1,258 @@
+﻿
+@{
+    ViewBag.Title = "Track";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="content-page">
+    <div class="content">
+        <!-- Start Content-->
+        <div class="container-fluid">
+            <div class="row page-title">
+                <div class="col-sm-12 col-xl-12">
+                    <h4 class="mb-1 mt-0">Dashboard</h4>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="media p-3">
+                                <div class="media-body">
+                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Total Direct Seller</span>
+                                    <h2 class="mb-0">500</h2>
+                                </div>
+                                <div class="align-self-end">
+                                    <div class="icon-box">
+                                        <i data-feather="users" class="align-self-center icon-dual icon-lg text-info"></i>
+                                    </div>
+                                    <a href="javascript:void(0);" class="text-info font-weight-bold font-size-13">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="media p-3">
+                                <div class="media-body">
+                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Packages</span>
+                                    <h2 class="mb-0">200</h2>
+                                </div>
+                                <div class="align-self-end">
+                                    <div class="icon-box">
+                                        <i data-feather="briefcase" class="align-self-center icon-dual icon-lg text-danger"></i>
+                                    </div>
+                                    <a href="javascript:void(0);" class="text-danger font-weight-bold font-size-13">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="media p-3">
+                                <div class="media-body">
+                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Repurchase Order</span>
+                                    <h2 class="mb-0">350</h2>
+                                </div>
+                                <div class="align-self-end">
+                                    <div class="icon-box">
+                                        <i data-feather="shopping-cart" class="align-self-center icon-dual icon-lg text-warning"></i>
+                                    </div>
+                                    <a href="javascript:void(0);" class="text-warning font-weight-bold font-size-13">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-xl-3">
+                    <div class="card">
+                        <div class="card-body p-0">
+                            <div class="media p-3">
+                                <div class="media-body">
+                                    <span class="text-muted text-uppercase font-size-12 font-weight-bold">Today's Repurchase Order</span>
+                                    <h2 class="mb-0">50</h2>
+                                </div>
+                                <div class="align-self-end">
+                                    <div class="icon-box">
+                                        <i data-feather="shopping-cart" class="align-self-center icon-dual icon-lg text-primary"></i>
+                                    </div>
+                                    <a href="javascript:void(0);" class="text-primary font-weight-bold font-size-13">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- stats + charts -->
+            <div class="row">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mt-0 mb-0 header-title">Associate Demography</h5>
+                            <div class="chart">
+                                <div id="AssociateChart" style="width: 100%; height: 400px; margin: 0 auto"></div>
+                                <a href="javascript:void(0);" class="label label-info pull-right">More Details..</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mt-0 mb-0 header-title">Packages</h5>
+                            <div class="chart">
+                                <div id="PackageChart" style="width: 100%; height: 400px; margin: 0 auto"></div>
+                                <a href="javascript:void(0);" class="label label-info pull-right">More Details..</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mt-0 mb-0 header-title">Bonus</h5>
+                            <div class="chart">
+                                <div id="BonusChart" style="width: 100%; height: 400px; margin: 0 auto"></div>
+                                <a href="javascript:void(0);" class="label label-info pull-right">More Details..</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title mt-0 mb-0 header-title">Repurchase Orders</h5>
+                            <div class="chart">
+                                <div id="RepurchaseOrder" style="width: 100%; height: 400px; margin: 0 auto"></div>
+                                <a href="javascript:void(0);" class="label label-info pull-right">More Details..</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- row -->
+        </div>
+    </div>
+
+
+    <!-- end Footer -->
+</div>
+
+<!-- page js -->
+<script src="assets/js/pages/dashboard.init.js"></script>
+
+<!-- App js -->
+<script src="assets/js/app.min.js"></script>
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script language="JavaScript">
+		/************Associate Chart***************/
+		google.charts.load('current', {packages: ['corechart']});
+
+		function associateChart() {
+            // Define the chart to be drawn.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Associate');
+            data.addColumn('number', 'Percentage');
+            data.addRows([
+               ['Active', 150],
+               ['InActive', 50],
+               ['Blocked', 10]
+            ]);
+
+            // Set chart options
+            var options = {
+               'width':700,
+               'height':400
+            };
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.PieChart(document.getElementById('AssociateChart'));
+            chart.draw(data, options);
+         }
+         google.charts.setOnLoadCallback(associateChart);
+
+		 /************Packages Chart***************/
+		google.charts.load('current', {packages: ['corechart']});
+
+         function packageChart() {
+            // Define the chart to be drawn.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Orders');
+            data.addColumn('number', 'Percentage');
+            data.addRows([
+               ['Total', 50],
+               ['Package-12000', 15],
+               ['Package-6000', 5],
+               ['Package-3000', 30]
+            ]);
+
+            // Set chart options
+            var options = {
+               'width':700,
+               'height':400,
+               pieHole: 0.4
+            };
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.PieChart(document.getElementById('PackageChart'));
+            chart.draw(data, options);
+         }
+         google.charts.setOnLoadCallback(packageChart);
+
+
+		 /************Bonus Chart***************/
+		 google.charts.load('current', {packages: ['corechart']});
+		 function drawChart() {
+            // Define the chart to be drawn.
+            var data = google.visualization.arrayToDataTable([
+               ['Amount', 'All'],
+               ['Matching Bonus Fresh',  100],
+               ['Matching Bonus Repurchase',  200],
+               ['Level Bonus',  400]
+            ]);
+
+            var options = {title: ''};
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.ColumnChart(document.getElementById('BonusChart'));
+            chart.draw(data, options);
+         }
+         google.charts.setOnLoadCallback(drawChart);
+
+
+		/************Repurchase Order Chart***************/
+		google.charts.load('current', {packages: ['corechart']});
+
+         function repurchase() {
+            // Define the chart to be drawn.
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Orders');
+            data.addColumn('number', 'Percentage');
+            data.addRows([
+               ['Active Order', 20],
+               ['Pending Order', 10],
+               ['Cancelled Order', 5],
+               ['Dispatched Order', 12],
+               ['Delivered Order', 10]
+            ]);
+
+            // Set chart options
+            var options = {
+               'width':700,
+               'height':400,
+               pieHole: 0.4
+            };
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.PieChart(document.getElementById('RepurchaseOrder'));
+            chart.draw(data, options);
+         }
+         google.charts.setOnLoadCallback(repurchase);
+</script>

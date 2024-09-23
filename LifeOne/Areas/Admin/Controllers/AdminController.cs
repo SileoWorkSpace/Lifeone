@@ -28,6 +28,10 @@ using LifeOne.Models;
 using LifeOne.Models.FranchiseManagement.FDAL;
 using Newtonsoft.Json;
 using System.Configuration;
+using iTextSharp.text.pdf;
+using static LifeOne.Models.ShoppingRequest;
+using AesEncryption;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -2325,6 +2329,81 @@ namespace LifeOne.Areas.Admin.Controllers
                
             }
             return Json(adminGraph, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet] 
+        public ActionResult EWalletRequestList()
+        {
+            try
+            {
+                Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity = new Models.AssociateManagement.AssociateEntity.AssosiateRequest();
+                Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
+
+                Entity.lstAssosiateRequest = para.getRequest();
+                return View(Entity);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public ActionResult Approved(string fk_MemId, string amount)
+        {
+            try
+            {
+                
+                Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity = new Models.AssociateManagement.AssociateEntity.AssosiateRequest();
+                Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
+                fk_MemId = fk_MemId.Replace(" ", "+");
+                Entity.RequestId = Crypto.Decryption("LifeWellAP1234@Z", fk_MemId);
+                amount = amount.Replace(" ", "+");
+                Entity.Amount1 = Convert.ToString(Crypto.Decryption("LifeWellAP1234@Z", amount));
+                Entity.LoginId = Convert.ToString(Session["LoginId"] ?? "0");
+               
+                Entity.Amount = Convert.ToDecimal(Entity.Amount1);
+                Entity.OpCode = 1;
+                DataSet ds = para.Approove(Entity);
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        return RedirectToAction("EWalletRequestList", "Admin");
+                    }
+                }
+                return RedirectToAction("EWalletRequestList", "Admin");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult Declined(string fk_MemId)
+        {
+            try
+            {
+                Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity = new Models.AssociateManagement.AssociateEntity.AssosiateRequest();
+                Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
+
+                Entity.RequestId = Convert.ToString(Crypto.Decryption("LifeWellAP1234@Z", fk_MemId));
+                Entity.LoginId = Convert.ToString(Session["LoginId"] ?? "0");
+                
+                
+                Entity.OpCode = 2;
+                DataSet ds = para.Declined(Entity);
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        return RedirectToAction("EWalletRequestList","Admin");
+                    }
+                }
+                return RedirectToAction("EWalletRequestList", "Admin");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
 

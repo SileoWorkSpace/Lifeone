@@ -1,0 +1,475 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MNews
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "News";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    int count = 0;
+}
+
+
+@{
+    string msg = (string)TempData["msg"];
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != null)
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+        }
+        else
+        {
+            <div class="alert alert-danger m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+
+
+
+
+        }
+    }
+
+}
+
+<link href="~/Scripts/choices.min.css" rel="stylesheet" />
+<script src="~/Scripts/choices.min.js"></script>
+<div class="container-fluid">
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">News Master</h4>
+            @*<nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Masters</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">News Master</li>
+                    </ol>
+                </nav>*@
+        </div>
+        <div class="pbutton">
+            <div class="right text-right">
+                @*<span>
+                        <button type="button" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnprint"><i class="fa fa-print"></i></button>
+                    </span> <span>
+                        <button type="button" class="btn btn-success btn-rounded btnPdf"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>*@
+
+                @if (PermissionManager.IsActionPermit("News Master", ViewOptions.FormSave))
+                {
+                    <a href="" id="btnAdd" class="btn btn-success btn-sm" onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
+                        <i class="fa fa-plus" aria-hidden="true"></i> Add New
+                    </a>
+                }
+
+            </div>
+        </div>
+    </div>
+
+
+    <div id="no-more-tables">
+        <div class="row">
+
+            <div class="col-lg-12">
+                <div class="box">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                                @* <h4 class="header-title mt-0 mb-1">News Master List</h4>*@
+                            </div>
+                            @*<div class="col-md-3 pull-right text-right" style="position:relative">
+
+                                    <a class="btn btn-outline-warning small advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom">Search&nbsp;<i class="fa fa-search"></i></a>
+
+                                </div>*@
+                        </div>
+                        <div class="row" style="display:none;">
+                            <div class="col-md-12">
+                                <div class="alert alert-warning" style="color:#727272 !important">
+                                    <div class="row">
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label>Login Id</label>
+                                                <input type="text" name="LoginID" id="LoginID" placeholder="Enter Login Id" class="form-control">
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-12 col-md-4">
+                                            <div class="form-group">
+                                                <label style="display:block;"></label>
+                                                <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                <a href="/PlotBooking/BookingDetails" class="btn btn-danger" style="margin-top:1.5em;">Reset</a>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped mb-0">
+                                <thead>
+                                    <tr>
+                                    <tr>
+                                        <th>#Sn.</th>
+                                        <th>News</th>
+                                        <th>News Heading</th>
+                                        <th>News Preference</th>
+                                        <th>Info Link</th>
+                                        <th>News For</th>
+                                        <th class="text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.objList)
+                                    {
+                                        <tr>
+                                            <td>@(count = count + 1)</td>
+                                            <td style=" width: 55%;">@item.News</td>
+                                            <td>@item.NewsHeading</td>
+                                            <td>@item.NewsPreference</td>
+                                            <td>@item.InfoLink</td>
+                                            <td>
+                                                @if (item.AssignToValue == "1")
+                                                {
+                                                    <span class="badge badge-success">Associate</span>
+                                                }
+                                                else if (item.AssignToValue == "2")
+                                                {
+                                                    <span class="badge badge-info">Website</span>
+                                                }
+                                                else
+                                                {
+                                                    <span></span>
+                                                }
+                                            </td>
+                                            <td class="text-right">
+
+                                                @if (PermissionManager.IsActionPermit("News Master", ViewOptions.FormUpdate))
+                                                {
+
+                                                    <button type="button" class="btn btn-primary btn-sm" onclick="return OpenPopUp('@item.Pk_NewsId', '@item.News', '@item.NewsHeading', '@item.NewsPreference', '@item.InfoLink', '@item.InfoImgUrl', '@item.AssignToValue')" data-toggle="modal" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>
+                                                }
+                                                @* <a href="/Admin/?Id=@item.Pk_BankId" class="btn btn-primary" onclick="return confirm('Are yor sure to UnAssigne Kit')"><i class="fa fa-pencil"></i></a>*@
+                                                @if (PermissionManager.IsActionPermit("News Master", ViewOptions.FormDelete))
+                                                {
+                                                    <a href="/Admin/NewsMaster/NewsDelete?Id=@item.Pk_NewsId" onclick="return confirm('Are you sure to delete this record?')" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
+                                                }
+                                                @*<button type="button" class="btn btn-danger" ng-click="Delete(Utiliy.Pk_BankId)"><i class="fa fa-trash"></i></button>*@
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("NewsSave", "NewsMaster", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+        <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static" data-keyboard="false">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title float-left">Add/Update News Master</h4>
+                        <a href="/News" class="float-right">&times;</a>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="row">
+
+                                @Html.HiddenFor(m => m.Pk_NewsId, new { @id = "Pk_NewsId" })
+
+                                <div class="col-md-12 form-group">
+                                    <label class="form-control-placeholder" for="name">News Name</label>
+                                    <input type="text" class="form-control" name="News" id="News">
+
+
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="form-control-placeholder" for="name">News Heading</label>
+                                    <input type="text" class="form-control" name="NewsHeading" id="NewsHeading">
+
+
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="form-control-placeholder" for="name">News Preference</label>
+                                    <input type="text" class="form-control" name="NewsPreference" id="NewsPreference" onkeypress="return isNumberKey(event)">
+
+
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="form-control-placeholder" for="name">Info Link</label>
+                                    <input type="text" class="form-control" name="InfoLink" id="InfoLink">
+
+
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="form-control-placeholder" for="name">Info Img Url</label>
+                                    <input type="file" class="form-control" onchange="UploadFile(this,'NewsPic')" name="InfoImgUrl" id="InfoImgUrl">
+                                    <div class="col-lg-4 p-t-20 m-t-10" id="divpreview" style="display:none;">
+
+                                    </div>
+
+                                    @Html.HiddenFor(m => m.InfoImgUrl, new { @Id = "HdnProfilePicPath" })
+
+                                </div>
+                                <div class="col-md-12 form-group">
+                                    <label class="form-control-placeholder" for="name">News For</label>
+                                    <select class="form-control" id="AssignTo" name="AssignTo" multiple></select>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
+                        <a href="/News" class="btn btn-secondary">Close</a>
+                        @*<button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="">Close</button>*@
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    }
+
+</div>
+
+<script>
+    function ResetPopup() {
+        $('#Save').val('Save');
+        $('#Pk_NewsId').val('');
+        $('#News').val('');
+        $('#NewsHeading').val('');
+        $('#NewsPreference').val('');
+        $('#InfoLink').val('');
+        $('#InfoImgUrl').val('');
+        $("#divpreview").hide();
+        $("#divpreview").empty();
+        BindEmployeSupportList();
+    }
+
+    function OpenPopUp(pk_id, News, NewsHeading, NewsPreference, InfoLink, InfoImgUrl, PerformanceList) {
+        //data - target="#myModal4"
+        // $("#myModal4").modal("show");
+        $('#Save').val('Update');
+        $('#Pk_NewsId').val(pk_id);
+        $('#News').val(News);
+        $('#NewsHeading').val(NewsHeading);
+        $('#NewsPreference').val(NewsPreference);
+        $('#InfoLink').val(InfoLink);
+        $("#divpreview").show();
+        $("#divpreview").empty();
+        $('img').attr('src', '');
+
+        if (InfoImgUrl != null && InfoImgUrl != undefined && InfoImgUrl != '') {
+            $("#HdnProfilePicPath").val(InfoImgUrl);
+            $("#divpreview").append('<img class="m-t-20" src="' + InfoImgUrl.replace('~', '') + '" height="80px" width="70px"/>');
+        }
+        else {
+            InfoImgUrl = '/Content/Associate / assets / images / users / avatar - 1.jpg';
+            $("#HdnProfilePicPath").val(InfoImgUrl);
+            $("#divpreview").append('<img class="m-t-20" src="' + InfoImgUrl.replace('~', '') + '" height="80px" width="70px"/>');
+        }
+        BindEmployeSupportList(PerformanceList);
+    }
+
+    function validate() {
+        if ($('#News').val() == '' || $('#News').val() == null || $('#News').val() == undefined) {
+            $('#News').focus();
+            return false;
+        }
+        if ($('#NewsHeading').val() == '' || $('#NewsHeading').val() == null || $('#NewsHeading').val() == undefined) {
+            $('#NewsHeading').focus();
+            return false;
+        }
+        if ($('#NewsPreference').val() == '' || $('#NewsPreference').val() == null || $('#NewsPreference').val() == undefined) {
+            $('#NewsPreference').focus();
+            return false;
+        }
+
+        //if ($('#HdnProfilePicPath').val() == '' || $('#HdnProfilePicPath').val() == null || $('#HdnProfilePicPath').val() == undefined) {
+        //    $('#InfoImgUrl').focus();
+        //    return false;
+        //}
+        var SupportRequestList = $("#AssignTo").val();
+        if (SupportRequestList == null || SupportRequestList.length <= 0 || SupportRequestList == undefined || SupportRequestList == '') {
+            //$("#AssignTo").focus();
+            alert("Please select atleast one.")
+            return false;
+        }
+    }
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+
+    function UploadFile(obj, subdir) {
+
+        var Id = $(obj).attr("Id");
+
+        var data = new FormData();
+        var files = $("#" + Id).get(0).files;
+
+        if (files.length > 0) {
+            data.append("file", files[0]);
+            data.append("subdir", subdir);
+        }
+        else {
+
+            swal('', 'Please select file to upload.', 'warning');
+            return false;
+        }
+        var extension = $("#" + Id).val().split('.').pop().toUpperCase();
+        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP") {
+            swal("", 'Invalid image file format.Only jpg,jpeg,png,bmp files are allow', 'warning');
+            return false;
+        }
+        $.ajax({
+            url: '/Admin/NewsMaster/Uploadfile',
+            type: "POST",
+            processData: false,
+            data: data,
+            dataType: 'json',
+            contentType: false,
+            success: function (response) {
+                if (response != null || response != '') {
+                    if (response.result == "success") {
+                        $("#" + Id + "Path").val("");
+                        $("#HdnProfilePicPath").val(response.Path);
+
+                        $("#divpreview").show();
+                        $("#divpreview").empty();
+                        $('img').attr('src', '');
+                        $("#divpreview").append('<img class="m-t-20" src="' + response.Path.replace('~', '') + '" height="80px" width="70px"/>');
+                    }
+                    alert("Image uploaded sucessfully");
+                }
+
+            },
+            error: function (er) {
+                alert("An error occured");
+            }
+        });
+
+
+    }
+
+    function BindEmployeSupportList(value) {
+        debugger;
+        $.ajax({
+            url: "/Admin/NewsMaster/PerformanceLevelList",
+            type: "POST",
+            dataType: 'json',
+            contentType: "application/json",
+            async: false,
+            success: function (result) {
+                debugger
+                $("#AssignTo").html('');
+                var lary = [];
+                var list = null;
+                if (result.length > 0) {
+                    result.splice(0, 1);
+                    if (value != null && value != undefined && value.length > 0) {
+                        list = value.split(',');
+                    }
+
+                    var selectedValue = 0;
+                    $.each(result, function (i, item) {
+
+                        if (list != null && list != undefined && list.length > 0) {
+                            selectedValue = list.find(x => x == item.Value);
+
+                            if (selectedValue != null && selectedValue != undefined && selectedValue.length > 0) {
+                                lary.push({ value: item.Value, label: item.Text, selected: true });
+                            }
+
+                            else
+                                lary.push({ value: item.Value, label: item.Text, selected: false });
+                        }
+
+                        else {
+                            lary.push({ value: item.Value, label: item.Text, selected: true });
+                        }
+
+
+                    });
+                }
+
+
+
+
+                //var choicesSelect = new Choices('#SupportRequestList', {
+                //    removeItemButton: true,
+                //    choices: [
+                //        { value: '0', label: 'Label One' },
+                //        { value: '1', label: 'Label Two', disabled: true },
+                //        { value: '2', label: 'Label Three' },
+                //    ],
+                //}).setChoices(
+                //    [
+                //        { value: '3', label: 'Label Four', disabled: true },
+                //        { value: '4', label: 'Label Five' },
+                //        { value: '5', label: 'Label Six', selected: true },
+                //    ],
+                //    'value',
+                //    'label',
+                //    false
+                //);
+
+                var chitemicesSelect = new Choices('#AssignTo', {
+                    removeItemButton: true,
+                    choices: lary
+                });
+
+                //choicesSelect.passedElement.element.addEventListener(
+                //    'addItem',
+                //    function (event) {
+                //        debugger
+                //        //if (event.detail.value != SuprtReqstlst.find(event.detail.value))
+                //        //if (SuprtReqstlst.length > 0) {
+                //        //    if (jQuery.inArray(event.detail.value, SuprtReqstlst) == 0)
+                //        //        SuprtReqstlst.push(event.detail.value);
+                //        //}
+                //        //else
+                //        //    SuprtReqstlst.push(event.detail.value);
+                //    }
+                //);
+
+                //choicesSelect.passedElement.element.addEventListener(
+                //    'removeItem',
+                //    function (event) {
+                //        debugger
+                //        //if (SuprtReqstlst.length > 0) {
+                //        //    if (jQuery.inArray(event.detail.value, SuprtReqstlst) == 0)
+                //        //        SuprtReqstlst.splice(SuprtReqstlst.findIndex(event.detail.value), 1);
+                //        //}
+                //    }
+                //);
+
+            },
+
+            error: function (err) {
+                alert(err.statusText);
+                return false;
+            }
+        });
+    }
+</script>

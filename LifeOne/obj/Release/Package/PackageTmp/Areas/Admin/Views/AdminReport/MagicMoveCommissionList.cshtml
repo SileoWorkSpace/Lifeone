@@ -1,0 +1,384 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.MAdminIncomeType
+
+@{
+    ViewBag.Title = "MagicMoveCommissionList";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="~/Content/dist/js/CommonJS.js?1.0"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<div class="container-fluid">
+    @using (Html.BeginForm("MagicMoveCommissionList", "AdminReport", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    {
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Magic Move Commission Report</h4>
+                <nav aria-label="breadcrumb" class="float-left">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#-">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#-">Reports</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Magic Move Commission</li>
+                    </ol>
+                </nav>
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                    <span>
+                        <a href="@Url.Action("ExportToExcelMagicMoveCommissionList","AdminReport",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                        <button class="btn btn-default btn-custom btn-rounded btn-sm" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>
+                        <button class="btn btn-danger btn-custom btn-rounded btn-sm" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>
+
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <div class="right text-right">
+                <span>
+                    Total Amount : @(Model != null && Model.Objlist.Count > 0 && Model.Objlist[0].TotalAmount != null ? Model.Objlist[0].TotalAmount : 0)
+                </span>
+            </div>
+        </div>
+
+
+        <div id="no-more-tables">
+            <form id="form1" method="post">
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="box">
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-9">
+                                        <h4 class="header-title mt-0 mb-1">Magic Move Commission</h4>
+                                    </div>
+                                    <div class="col-md-3 pull-right text-right" style="position:relative">
+
+                                        <a class="btn btn-outline-warning small advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom">Search&nbsp;<i class="fa fa-search"></i></a>
+
+                                    </div>
+                                </div>
+                                <div class="row" id="advance-search" style="display:none;">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-warning" style="color:#727272 !important">
+                                            <div class="row">
+                                                <div class="col-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Login ID</label>
+                                                        <input type="text" name="LoginId" id="LoginID" placeholder="" class="form-control">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Mobile</label>
+                                                        <input type="text" name="Mobile" id="Mobile" placeholder="" class="form-control">
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <label>Name</label>
+                                                        <input type="text" name="Name" id="Name" placeholder="" class="form-control">
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-4">
+                                                    <div class="form-group">
+                                                        <label style="display:block;"></label>
+                                                        <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                        <a href="/Admin/AdminReport/MagicMoveCommissionList" class="btn btn-danger" style="margin-top:1.5em;">Reset</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="table-responsive" id="customers">
+                                    <table class="table table-striped mb-0" id="tblCustomers">
+                                        <thead>
+                                            <tr>
+                                                <th>#Sn.</th>
+                                                <th>Login</th>
+                                                <th>Name</th>
+                                                <th>Mobile</th>
+                                                <th>Amount</th>
+                                                <th>Remark</th>
+                                                <th>Action</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @if (Model != null && Model.Objlist.Count > 0)
+                                            {
+                                                int SNo = 0;
+                                                foreach (var item in Model.Objlist)
+                                                {
+
+                                                    <tr>
+                                                        <td data-title="#SN:">@(SNo = SNo + 1)</td>
+                                                        <td data-title="Login:">@item.LoginId</td>
+                                                        <td data-title="Name:">@item.Name</td>
+                                                        <td data-title="Mobile:">@item.Mobile</td>
+                                                        <td data-title="Email:">@item.Amount</td>
+                                                        <td data-title="Email:">@item.Remark</td>
+                                                        <td data-title="Mobile:">
+                                                            <a href="/Admin/AdminReport/GetMagicMoveIdWise?Fk_Memid=@item.Fk_memId" class="text-green"><i class="fa fa-eye"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                                <!-- /.box-body -->
+                            </div>
+                            <footer class="panel-footer">
+                                <div class="row">
+
+
+                                    @if (Model != null)
+                                    {
+                                        if (Model.Pager != null)
+                                        {
+                                            if (Model.Pager.EndPage > 1)
+                                            {
+                                                <div class="col-sm-6 text-left"> <small class="text-muted inline">showing @Model.Objlist.Count of @Model.Objlist[0].TotalRecord items</small> </div>
+                                                <div class="col-sm-6 text-right text-center-xs">
+                                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                        @if (Model.Pager.CurrentPage > 1)
+                                                        {
+                                                            <li>
+                                                                <a href="/Admin/AdminReport/MagicMoveCommissionList?Name=@Model.Name&LoginId=@Model.LoginId&Mobile=@Model.Mobile">First</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/Admin/AdminReport/MagicMoveCommissionList?page=@(Model.Pager.CurrentPage - 1)&Name=@Model.Name&LoginId=@Model.LoginId&Mobile=@Model.Mobile">Previous</a>
+                                                            </li>
+                                                        }
+                                                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                        {
+                                                            <li class="@(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                                <a href="/Admin/AdminReport/MagicMoveCommissionList?page=@page&Name=@Model.Name&LoginId=@Model.LoginId&Mobile=@Model.Mobile">@page</a>
+                                                            </li>
+                                                        }
+                                                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                        {
+                                                            <li>
+                                                                <a href="/Admin/AdminReport/MagicMoveCommissionList?page=@(Model.Pager.CurrentPage + 1)&Name=@Model.Name&LoginId=@Model.LoginId&Mobile=@Model.Mobile">Next</a>
+                                                            </li>
+                                                            <li>
+                                                                <a href="/Admin/AdminReport/MagicMoveCommissionList?page=@(Model.Pager.TotalPages)&Name=@Model.Name&LoginId=@Model.LoginId&Mobile=@Model.Mobile">Last</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </footer>
+                            <!-- /.box -->
+
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    }
+</div>
+
+<div id="tblpdff" style="font-size:50px;">
+
+</div>
+
+<script>
+    function ChangeIntuptType() {
+        var dllval = $('#SearchDll').val();
+        $('#search').attr('name', dllval);
+        return false;
+    }
+
+</script>
+<script>
+    $('#btnpdf').click(function () {
+        debugger;
+        var col = [2, 0]; // coloms to remove
+
+        var tbl = $('#tblCustomers').clone();
+        var tablenew = tbl.get(0);
+
+        for (var c = 0; c < col.length; c++) {
+            for (var i = 0; i < tablenew.rows.length; i++) {
+
+                var tableRow = tablenew.rows[i];
+
+                for (var j = 0; j < tableRow.cells.length; j++) {
+                    if (j == col[c]) {
+                        tableRow.cells[j].remove();
+
+                    }
+                }
+            }
+        }
+
+
+        var table1 =
+            tableToJson(tbl.get(0)),
+            cellWidth = 35,
+            rowCount = 0,
+            cellContents,
+            leftMargin = 2,
+            topMargin = 12,
+            topMarginTable = 55,
+            headerRowHeight = 13,
+            rowHeight = 9,
+
+            l = {
+                orientation: 'l',
+                unit: 'mm',
+                format: 'a4',
+                compress: true,
+                fontSize: 8,
+                lineHeight: 1,
+                autoSize: false,
+                printHeaders: true
+            };
+        var doc = new jsPDF(l, '', '', '');
+        doc.page = 1; // use this as a counter.
+
+        function footer() {
+            doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+
+            doc.page++;
+        };
+
+        doc.setProperties({
+            title: 'MagicMoveCommission List',
+            subject: 'This is the subject',
+            author: 'author',
+            keywords: 'generated, javascript, web 2.0, ajax',
+            creator: 'author'
+        });
+
+        doc.cellInitialize();
+
+        $.each(table1, function (i, row) {
+
+            rowCount++;
+
+            $.each(row, function (j, cellContent) {
+
+                if (rowCount == 1) {
+                    doc.margins = 1;
+                    doc.setFont("helvetica");
+                    doc.setFontType("bold");
+                    doc.setFontSize(9);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, headerRowHeight, cellContent, i)
+                }
+                else if (rowCount == 2) {
+                    doc.margins = 1;
+                    doc.setFont("times");
+                    doc.setFontType("Times New Roman");  // or for normal font type use ------ doc.setFontType("normal");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);
+                }
+                else {
+
+                    doc.margins = 1;
+                    doc.setFont("courier ");
+                    doc.setFontType("Times New Roman ");
+                    doc.setFontSize(8.5);
+
+                    doc.cell(leftMargin, topMargin, cellWidth, rowHeight, cellContent, i);  // 1st=left margin    2nd parameter=top margin,     3rd=row cell width      4th=Row height
+                }
+            })
+        })
+
+        doc.text(150, 285, 'page ' + doc.page); //print number bottom right
+        doc.setFontSize(25);
+        doc.setFillColor('#DCDCDC');
+        doc.rect(1, 0, 400, 10, "F");
+        doc.setTextColor(0, 0, 0);
+        doc.text(110, 8, "MagicMoveCommissionList");
+        doc.page++;
+        doc.save('MagicMoveCommissionList.pdf');
+
+    });
+
+
+    function tableToJson(table) {
+        var data = [];
+
+        // first row needs to be headers
+        var headers = [];
+        for (var i = 0; i < table.rows[0].cells.length; i++) {
+            headers[i] = table.rows[0].cells[i].innerHTML.toLowerCase().replace(/ /gi, '');
+        }
+
+
+        // go through cells
+        for (var i = 0; i < table.rows.length; i++) {
+
+            var tableRow = table.rows[i];
+            var rowData = {};
+
+            for (var j = 0; j < tableRow.cells.length; j++) {
+
+                rowData[headers[j]] = tableRow.cells[j].textContent.trim() == "" ? "-" : tableRow.cells[j].textContent.trim();
+
+            }
+
+            data.push(rowData);
+        }
+
+        return data;
+    }
+
+    // createPDF--------------
+    function createPDF() {
+        var sTable = document.getElementById('DepartmentTable').innerHTML;
+
+        var style = "<style>";
+        style = style + "table {width: 100%;font: 17px Calibri;}";
+        style = style + "table, th, td {border: solid 1px #DDD; border-collapse: collapse;";
+        style = style + "padding: 2px 3px;text-align: center;}";
+        style = style + "</style>";
+
+        // CREATE A WINDOW OBJECT.
+        var win = window.open('', '', 'height=700,width=700');
+
+        win.document.write('<html><head>');
+        win.document.write('<title>PaymentDetailsReport</title>');   // <title> FOR PDF HEADER.
+        win.document.write(style);          // ADD STYLE INSIDE THE HEAD TAG.
+        win.document.write('</head>');
+        win.document.write('<body>');
+        win.document.write(sTable);         // THE TABLE CONTENTS INSIDE THE BODY TAG.
+        win.document.write('</body></html>');
+
+        win.document.close(); // CLOSE THE CURRENT WINDOW.
+
+        win.print();    // PRINT THE CONTENTS.
+    }
+
+    // PRINT THE CONTENTS-----------------------------
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
