@@ -551,20 +551,24 @@
 
     function UploadFile() {
         debugger;
-
         var files = $("#file").get(0).files;
-
         if (files.length == 0) {
             alert("Please select an image to upload.");
             return false;
         }
-        var extension = files[0].name.split('.').pop().toUpperCase();
+        var file = files[0];
+        var extension = file.name.split('.').pop().toUpperCase();
         var allowedExtensions = ["PNG", "JPG", "JPEG", "BMP"];
         if (!allowedExtensions.includes(extension)) {
             alert("Invalid image file format. Only JPG, JPEG, PNG, and BMP files are allowed.");
             return false;
         }
-        var file = files[0];
+        var maxSizeInBytes = 2 * 1024 * 1024;
+        if (file.size > maxSizeInBytes) {
+            alert("File size exceeds 2 MB. Please select a smaller file.");
+            return false;
+        }
+
         var reader = new FileReader();
         reader.onload = function (e) {
             $('#imagePreview').attr('src', e.target.result);
