@@ -189,7 +189,11 @@
                                     @Html.TextBoxFor(m => m.HSNCode, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Offer Quantity<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.OfferQuantity, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
+                                </div>
 
                                 @*<div class="col-md-3 form-group">
             <label>Image<span style="color:red;">*</span></label>
@@ -383,6 +387,7 @@
         var BoxQty = $('#BoxQty').val();
         var BoxPV = $('#BoxPV').val();
         var HSNCode = $('#HSNCode').val();
+        var OfferQuantity = $('#OfferQuantity').val();
         var Packing = $('#Packing').val();
         var file = $('#file').val();
         var ProductID = $('#Pk_ProductId').val()
@@ -436,6 +441,11 @@
         }
         else if ((HSNCode == null || HSNCode == 0)) {
             alert("Please Add HSN Code");
+            return false;
+
+        }
+        else if ((OfferQuantity == null || OfferQuantity == 0)) {
+            alert("Please Add Offer Quantity");
             return false;
 
         }

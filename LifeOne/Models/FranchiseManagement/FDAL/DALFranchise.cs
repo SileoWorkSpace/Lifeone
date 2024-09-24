@@ -26,10 +26,15 @@ namespace LifeOne.Models.FranchiseManagement.FDAL
                 {
                     _qury = "Proc_GetProductDetail @ProductId=" + _param.PrdId + ",@Fk_MemId=" + SessionManager.Fk_MemId + ",@Type=1";
                 }
-                else///For Franchisee
+                else if(SessionManager.Usertype == "1") //for Associate
+                {
+                    _qury = "Proc_GetProductDetail @ProductId=" + _param.PrdId + ",@Fk_MemId=" + SessionManager.AssociateFk_MemId + ",@Type=1";
+                }
+                else ///For Franchisee
                 {
                     _qury = "Proc_GetProductDetail @ProductId=" + _param.PrdId + ",@Fk_MemId=" + SessionManager.FranchiseFk_MemId + ",@Type=2";
                 }
+                
                 MFranchiseorderRequest _iresult = DBHelperDapper.DAGetDetailsInList<MFranchiseorderRequest>(_qury).FirstOrDefault();
                 return _iresult;
             }
