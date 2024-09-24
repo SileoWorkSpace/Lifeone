@@ -6,23 +6,25 @@
 }
 <style>
     .gallery {
-        display: flex;
+       /* display: flex;*/
         grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-        grid-gap: 2rem;
+        grid-gap: 4rem;
         padding: 40px 0px 40px 0px;
-        overflow: auto;
+        /*overflow: auto;*/
     }
 
     .gallery__item {
         box-shadow: 0 .1875rem .625rem rgba(0, 0, 0, 0.4);
         overflow: hidden;
         width: 350px;
-        height: 250px;
+        height: 360px;
+        margin-left: 20px;
     }
 
     .gallery__item {
         position: relative; /* To position the title absolutely inside the figure */
         overflow: hidden; /* Ensures content doesn't spill out */
+        
     }
 
     .gallery__image {
@@ -162,6 +164,11 @@
         .gallery__modal[aria-hidden="false"] {
             display: flex;
         }
+    @@media (max-width: 767px) {
+        .gallery__item {
+            margin-left: 0;
+        }
+    }
 </style>
 
 <main class="main">
@@ -176,23 +183,23 @@
     </div>
     <section>
         <!-- Image Gallery -->
-        <div class="container gallery">
-            @{
-                if (Model != null)
-                {
-                    if (Model.dtDetails != null)
+        <div class=" gallery row justify-content-center">
+                @{
+                    if (Model != null)
                     {
-                        for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
+                        if (Model.dtDetails != null)
                         {
-                            <figure class="gallery__item">
-                                <img class="gallery__image" src="@Model.dtDetails.Rows[i]["ImageUrl"].ToString()" >
-                                @*<img class="gallery__image" src="https://picsum.photos/id/1036/1920/1200" alt="A tent in the snowy mountains">*@
-                                @*<figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>*@
-                            </figure>
+                            for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
+                            {
+                                <figure class="gallery__item col-md-3 mb-4 p-0">
+                                    <img class="gallery__image" src="@Model.dtDetails.Rows[i]["ImageUrl"].ToString()">
+                                    @*<img class="gallery__image" src="https://picsum.photos/id/1036/1920/1200" alt="A tent in the snowy mountains">*@
+                                    <figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>
+                                </figure>
+                            }
                         }
                     }
                 }
-            }
             @*<figure class="gallery__item">
             <img class="gallery__image" src="https://picsum.photos/id/1015/1920/1200" alt="A river between the mountains">
             <figcaption class="gallery__image__caption">A river between the mountains</figcaption>

@@ -1,4 +1,10 @@
+
+
 @charset "UTF-8";
+
+@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i");
+@import url("https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700");
+
 .owl-carousel .owl-item img {
   height: auto;
 }
@@ -443,7 +449,7 @@ html.dark-theme {
 body {
   margin: 0;
   overflow-x: hidden;
-  font-family: Poppins, sans-serif;
+      font-family: 'Oswald', sans-serif !important;
   font-size: 1.4rem;
   line-height: 1.6;
   color: #666;
@@ -453,9 +459,9 @@ main {
   position: relative;
   background-color: #fff;
 }
-body:not(.loaded) * {
+/*body:not(.loaded) * {
   transition: all 0s !important;
-}
+}*/
 .page-wrapper {
   position: relative;
   transition: margin 0.4s;
@@ -1181,7 +1187,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: Poppins, sans-serif;
+      font-family: 'Oswald', sans-serif !important;
   font-weight: 600;
   line-height: 1.4;
   color: #222;
@@ -4179,7 +4185,7 @@ blockquote {
         padding: 1.22em 2.78em;
         font-weight: 700;
         font-size: 1.4rem;
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         letter-spacing: 0;
         line-height: 1.2;
         text-transform: uppercase;
@@ -6993,14 +6999,14 @@ input[type="radio"] ~ label:after {
             transition: transform 0.4s;
         }
 
-    .accordion {
+  /*  .accordion {
         overflow: hidden;
-    }
+    }*/
 
-        .accordion .collapsed,
+     /*   .accordion .collapsed,
         .accordion .expanding {
             display: none;
-        }
+        }*/
 
     .card-header {
         text-transform: capitalize;
@@ -7988,7 +7994,7 @@ input[type="radio"] ~ label:after {
         flex-wrap: wrap;
         align-items: center;
         color: #666;
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         font-size: 1.4rem;
     }
 
@@ -8958,7 +8964,7 @@ input[type="radio"] ~ label:after {
     .product {
         position: relative;
         overflow: hidden;
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         font-size: 1.4rem;
         color: #999;
         transition: 0.3s;
@@ -9090,7 +9096,7 @@ input[type="radio"] ~ label:after {
         padding: 1.14em 0;
         background-color: #58b132;
         color: #fff;
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         font-size: 1.4rem;
         font-weight: 700;
         line-height: 1.2;
@@ -11840,7 +11846,7 @@ input[type="radio"] ~ label:after {
         }
 
     .tooltiptext {
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         position: absolute;
         padding: 1rem 0.7rem;
         bottom: 150%;
@@ -12134,7 +12140,7 @@ input[type="radio"] ~ label:after {
     }
 
     .header {
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         letter-spacing: -0.025em;
         background: #fff;
     }
@@ -13500,7 +13506,7 @@ input[type="radio"] ~ label:after {
             font-weight: 600;
             line-height: 1.34;
             letter-spacing: -0.35px;
-            font-family: Poppins, sans-serif;
+                font-family: 'Oswald', sans-serif !important;
             color: #666;
         }
 
@@ -14125,7 +14131,7 @@ input[type="radio"] ~ label:after {
         right: 0;
         bottom: 0;
         z-index: 10000;
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         transition: visibility 0.4s;
     }
 
@@ -14432,7 +14438,7 @@ input[type="radio"] ~ label:after {
             text-transform: capitalize;
             font-size: 1.8rem;
             font-weight: 700;
-            font-family: Poppins, sans-serif;
+                font-family: 'Oswald', sans-serif !important;
             line-height: 1;
             letter-spacing: -0.05em;
             color: #222;
@@ -14577,7 +14583,7 @@ input[type="radio"] ~ label:after {
         .category-menu ul {
             padding: 2rem 0;
             background: #fff;
-            font-family: Poppins, sans-serif;
+                font-family: 'Oswald', sans-serif !important;
             font-size: 1.4rem;
             line-height: 1.5;
             letter-spacing: 0;
@@ -14591,7 +14597,7 @@ input[type="radio"] ~ label:after {
     }
 
     .footer {
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         font-size: 1.3rem;
         background: #032813;
     }
@@ -14645,7 +14651,7 @@ input[type="radio"] ~ label:after {
     .footer-middle {
         padding: 7.5rem 0 5.1rem;
         border-bottom: 1px solid #333;
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         font-weight: 400;
         border-color: #333;
     }
@@ -14777,7 +14783,7 @@ input[type="radio"] ~ label:after {
 
     .footer .copyright {
         margin: 0;
-        font-family: Poppins, sans-serif;
+            font-family: 'Oswald', sans-serif !important;
         font-size: 1.4rem;
         font-weight: 500;
         color: #777;
@@ -17018,12 +17024,14 @@ input[type="radio"] ~ label:after {
         font-size: 3.6em;
         line-height: 1.15;
         margin-bottom: 4px;
+        color:#fff;
     }
 
-    .intro-banners .banner-subtitle {
-        font-size: 1.6em;
-        letter-spacing: -0.02em;
-    }
+.intro-banners .banner-subtitle {
+    font-size: 1.6em;
+    letter-spacing: -0.02em;
+    color: #fff;
+}
 
     .intro-banners hr {
         width: 3.5rem;
@@ -17033,7 +17041,7 @@ input[type="radio"] ~ label:after {
     }
 
     .intro-banners img {
-        min-height: 30rem;
+        min-height: 20rem;
         object-fit: cover;
     }
 
@@ -17064,11 +17072,12 @@ input[type="radio"] ~ label:after {
         font-size: 1.3rem;
     }
 
-    .banner-2 h4 {
-        font-size: 1.6em;
-        line-height: 1.3;
-        letter-spacing: -0.3px;
-    }
+.banner-2 h4 {
+    font-size: 1.6em;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+    color: #fff;
+}
 
     .banner-2 p {
         font-size: 1.4em;
@@ -17234,7 +17243,7 @@ input[type="radio"] ~ label:after {
             padding: 0 1.5rem;
             font-size: 1.2rem;
             font-weight: 400;
-            font-family: Poppins, sans-serif;
+                font-family: 'Oswald', sans-serif !important;
             letter-spacing: 0.005em;
             border-radius: 0 0.3rem 0.3rem 0;
         }
