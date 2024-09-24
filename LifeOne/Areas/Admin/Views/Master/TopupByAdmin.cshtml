@@ -17,9 +17,9 @@
             <div class="ptitle">
                 <h3 class="text-themecolor">TopUp</h3>
                 @*<ol class="breadcrumb">
-                <li class="breadcrumb-item"> <a href="/Admin-Dashboard">Dashboard</a></li>
-                <li class="breadcrumb-item"> <a href="">Transactions</a></li>
-                <li class="active breadcrumb-item" aria-current="page">TopUp</li></ol>*@
+                    <li class="breadcrumb-item"> <a href="/Admin-Dashboard">Dashboard</a></li>
+                    <li class="breadcrumb-item"> <a href="">Transactions</a></li>
+                    <li class="active breadcrumb-item" aria-current="page">TopUp</li></ol>*@
             </div>
 
             <div class="psearch">
@@ -163,6 +163,11 @@
 
     }
 </section>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- jQuery UI -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 
 <script type="text/javascript">
     $(document).ready(function () {
@@ -189,7 +194,7 @@
             changeMonth: true,
             changeYear: true,
         });
-        
+
     });
     function Resetfields() {
         debugger
@@ -231,8 +236,7 @@
             // $("#txtPaidAmount").val("");
             $("#txtPaidAmount").prop('readonly', false);
         }
-        else if (PMode == "UPI")
-        {
+        else if (PMode == "UPI") {
             $('#changeLabelName').text('UPI Number');
             $("#dv").css("display", "block");
             $("#dv1").css("display", "none");
@@ -270,12 +274,8 @@
             function OnSuccess(response) {
                 debugger
                 if (response.Result == "0") {
-
-                  
-                        $("#hdnMemId").val(response.Fk_MemId);
-                        $("#SpnLogInId").html(response.DisplayName);
-                    
-
+                    $("#hdnMemId").val(response.Fk_MemId);
+                    $("#SpnLogInId").html(response.DisplayName);
                 }
                 else {
                     alert('InValid Login Id!!!');
@@ -351,7 +351,7 @@
             return false;
         }
 
-        if ($('#ddlPaymentMode').val() != "Cash" && $('#ddlPaymentMode').val() != "Free") {
+        if ($('#ddlPaymentMode').val() != "Cash" && $('#ddlPaymentMode').val() != "Free" && $('#ddlPaymentMode').val() != "UPI") {
             if ($('#txtChequeDDNo').val().trim() == "") {
                 alert('Please enter Cheque/DD/RTGS/NEFT No.');
                 $('#txtChequeDDNo').focus();
@@ -372,4 +372,5 @@
         }
         $('#Save').trigger('click');
     }
+
 </script>

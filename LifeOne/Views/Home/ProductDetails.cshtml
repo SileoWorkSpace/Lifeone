@@ -234,7 +234,7 @@
                                 <div class="col-md-6">
                                     <div class="product-details">
                                         <h1 class="product-name pt-2">@Model.ProductName</h1>
-                                        <div class="product-price">₹@Model.DP</div>
+                                        <div class="product-price">₹@Model.OfferedPrice</div>
                                         <div class="ratings-container">
                                             <div class="ratings-full">
                                                 @if (Model.ReviewCount == "1")
@@ -294,10 +294,10 @@
                                             <div class="d-flex justify-content-start">
                                                 <span id="Pk_ProductId" style="display:none;"></span>
                                                 <div class="input-group mr-3">
-                                                    <button class="quantity-minus d-icon-minus" onclick="return quantityChangeMinus();"></button>
+                                                    <button class=" d-icon-minus" onclick="return quantityChangeMinus();"></button>
                                                     <input class="quantity form-control" type="number" min="1"
                                                            value="1" id="Quantity123" onchange="return GetAddQTY();">
-                                                    <button class="quantity-plus d-icon-plus" onclick="return quantityChangePluse();"></button>
+                                                    <button class=" d-icon-plus" onclick="return quantityChangePluse();"></button>
                                                 </div>
                                                 <a href="/Home/ShoppingCartList?id=@Model.Pk_ProductId" class="btn btn-sm btn-primary" onclick="return AddToCart23(@Model.Pk_ProductId)" id="btnAddCard">
                                                     <i class="d-icon-bag"></i>&nbsp; Add
@@ -503,9 +503,10 @@
                                         <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.dtProductDetails.Rows[i]["ProductName"].ToString()</a>
                                     </h3>
                                     <div class="product-price">
-                                        <span class="price">₹@Model.dtProductDetails.Rows[i]["DP"].ToString()
-                                            <del class="old-price">₹@Model.dtProductDetails.Rows[i]["OfferedPrice"].ToString()</del>
-                                        </span>
+                                        @*<span class="price">@Model.dtProductDetails.Rows[i]["OfferedPrice"].ToString()
+                                            </span>>*@
+                                           <span class="old-price"><small>MRP:</small> @Model.dtProductDetails.Rows[i]["MRP"].ToString()</span>
+                                       
                                     </div>
                                     <div class="ratings-container">
                                         <div class="ratings-full">

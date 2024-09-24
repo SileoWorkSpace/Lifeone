@@ -145,19 +145,19 @@ namespace LifeOne.Areas.Associate
               },
               new[] { "LifeOne.Areas.Associate.Controllers" });
 
-            
 
-                 context.MapRoute(
-              "Associate-PayoutIncomeDetails",
-              "Associate-PayoutIncomeDetails/{action}/{id}",
-              new
-              {
-                  area = "Associate",
-                  controller = "AssociateReport",
-                  action = "AssociatePayoutReport",
-                  id = UrlParameter.Optional
-              },
-              new[] { "LifeOne.Areas.Associate.Controllers" });
+
+            context.MapRoute(
+         "Associate-PayoutIncomeDetails",
+         "Associate-PayoutIncomeDetails/{action}/{id}",
+         new
+         {
+             area = "Associate",
+             controller = "AssociateReport",
+             action = "AssociatePayoutReport",
+             id = UrlParameter.Optional
+         },
+         new[] { "LifeOne.Areas.Associate.Controllers" });
 
             context.MapRoute(
               "StatementDetails",
@@ -256,17 +256,17 @@ namespace LifeOne.Areas.Associate
            new[] { "LifeOne.Areas.Associate.Controllers" });
 
 
-          context.MapRoute(
-          "AssociateAdvancePayment",
-          "Associate-Advance-Payment/{action}/{id}",
-          new
-          {
-              area = "Associate",
-              controller = "AssociateAdvancePayment",
-              action = "AdvancePaymentRequest",
-              id = UrlParameter.Optional
-          },
-          new[] { "LifeOne.Areas.Associate.Controllers" });
+            context.MapRoute(
+            "AssociateAdvancePayment",
+            "Associate-Advance-Payment/{action}/{id}",
+            new
+            {
+                area = "Associate",
+                controller = "AssociateAdvancePayment",
+                action = "AdvancePaymentRequest",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Associate.Controllers" });
 
 
             context.MapRoute(
@@ -345,19 +345,19 @@ namespace LifeOne.Areas.Associate
      },
      new[] { "LifeOne.Areas.Associate.Controllers" });
 
-            
 
-                context.MapRoute(
-     "Associate-Bonanza",
-     "Associate-Bonanza/{action}/{id}",
-     new
-     {
-         area = "Associate",
-         controller = "AssociateRewards",
-         action = "AssociateBonanza",
-         id = UrlParameter.Optional
-     },
-     new[] { "LifeOne.Areas.Associate.Controllers" });
+
+            context.MapRoute(
+ "Associate-Bonanza",
+ "Associate-Bonanza/{action}/{id}",
+ new
+ {
+     area = "Associate",
+     controller = "AssociateRewards",
+     action = "AssociateBonanza",
+     id = UrlParameter.Optional
+ },
+ new[] { "LifeOne.Areas.Associate.Controllers" });
 
 
             context.MapRoute(
@@ -408,7 +408,7 @@ namespace LifeOne.Areas.Associate
                  id = UrlParameter.Optional
              },
              new[] { "LifeOne.Areas.Associate.Controllers" });
-            
+
             context.MapRoute(
              "MyPackage",
              "MyPackage/{action}/{id}",
@@ -445,7 +445,7 @@ namespace LifeOne.Areas.Associate
          id = UrlParameter.Optional
      },
      new[] { "LifeOne.Areas.Associate.Controllers" });
-            
+
             context.MapRoute(
      "Associate-Products",
      "Associate-Products/{action}/{id}",
@@ -458,18 +458,18 @@ namespace LifeOne.Areas.Associate
      },
      new[] { "LifeOne.Areas.Associate.Controllers" });
 
-                context.MapRoute(
-     "Associate-ProductsDetails",
-     "Associate-ProductsDetails/{action}/{id}",
-     new
-     {
-         area = "Associate",
-         controller = "AssociateReport",
-         action = "AssociateProductDetails",
-         id = UrlParameter.Optional
-     },
-     new[] { "LifeOne.Areas.Associate.Controllers" });
-            
+            context.MapRoute(
+ "Associate-ProductsDetails",
+ "Associate-ProductsDetails/{action}/{id}",
+ new
+ {
+     area = "Associate",
+     controller = "AssociateReport",
+     action = "AssociateProductDetails",
+     id = UrlParameter.Optional
+ },
+ new[] { "LifeOne.Areas.Associate.Controllers" });
+
             context.MapRoute(
      "Associate-Order-Details",
      "Associate-Order-Details/{action}/{id}",
@@ -494,9 +494,6 @@ namespace LifeOne.Areas.Associate
                 },
                 new[] { "LifeOne.Areas.Associate.Controllers" });
 
-
-
-
             context.MapRoute(
                 "Associate_ViewIdCard",
                 "View-IdCard/{action}/{id}",
@@ -520,6 +517,18 @@ namespace LifeOne.Areas.Associate
                    id = UrlParameter.Optional
                },
                new[] { "LifeOne.Areas.Associate.Controllers" });
+
+            context.MapRoute(
+              "Associate_RewardsandRecogination",
+              "Associate_RewardsandRecogination/{action}/{id}",
+              new
+              {
+                  area = "Associate",
+                  controller = "AssociateReport",
+                  action = "RewardsandRecogination",
+                  id = UrlParameter.Optional
+              },
+              new[] { "LifeOne.Areas.Associate.Controllers" });
 
             context.MapRoute(
               "Associate_PinRecognition",
@@ -557,6 +566,8 @@ namespace LifeOne.Areas.Associate
              },
              new[] { "LifeOne.Areas.Associate.Controllers" });
 
+
+
             context.MapRoute(
              "AssociateReport/PlaceOrder",
              "AssociateReport/PlaceOrder/{action}/{id}",
@@ -577,6 +588,40 @@ namespace LifeOne.Areas.Associate
             area = "Associate",
             controller = "AssociateRegistration",
             action = "AssociateCongratulations",
+            id = UrlParameter.Optional
+        },
+        new[] { "LifeOne.Areas.Associate.Controllers" });
+
+            context.MapRoute(
+             "TopupbyAssociate",
+             "TopupbyAssociate/{action}/{id}",
+             new
+             {
+                 area = "Associate",
+                 controller = "TopupByAssociate",
+                 action = "TopupbyAssociate",
+                 id = UrlParameter.Optional
+             },
+             new[] { "LifeOne.Areas.Associate.Controllers" });
+            context.MapRoute(
+        "EWalletList",
+        "EWalletList/{action}/{id}",
+        new
+        {
+            area = "Associate",
+            controller = "AssociatePlanIncome",
+            action = "EWalletList",
+            id = UrlParameter.Optional
+        },
+        new[] { "LifeOne.Areas.Associate.Controllers" });
+            context.MapRoute(
+        "EWallet_Request",
+        "EWallet_Request/{action}/{id}",
+        new
+        {
+            area = "Associate",
+            controller = "AssociatePlanIncome",
+            action = "EWalletRequest",
             id = UrlParameter.Optional
         },
         new[] { "LifeOne.Areas.Associate.Controllers" });

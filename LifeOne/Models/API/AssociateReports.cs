@@ -157,7 +157,8 @@ namespace LifeOne.Models.API
     }
 
     public class DownlineAPI
-    {        public string FirstName { get; set; }
+    { 
+        public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string LoginId { get; set; }
@@ -190,6 +191,8 @@ namespace LifeOne.Models.API
 
         public long FK_MemId { get; set; }
         public string Place { get; set; }
+        public string PackageName { get; set; }
+        public string PV { get; set; }
     }
 
     public class DirectAPI
@@ -219,7 +222,7 @@ namespace LifeOne.Models.API
         public string DateOfActivation { get; set; }
         public string DateOfjoining { get; set; }
         public string ParentLoginId { get; set; }
-       public string Place { get; set; }
+        public string Place { get; set; }
         public string ParentName { get; set; }
         public string ActiveInactiveStatus { get; set; }
 

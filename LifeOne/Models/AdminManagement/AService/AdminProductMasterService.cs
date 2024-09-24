@@ -89,6 +89,6 @@ namespace LifeOne.Models.AdminManagement.AService
             {
                 return _objResponseModel;
             }
-        }
+        }       
     }
 }

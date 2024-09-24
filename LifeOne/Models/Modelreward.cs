@@ -122,11 +122,10 @@ namespace LifeOne.Models
             }
             return pilist;
 
-        }
-
+        }      
     }
     public class RewardDeatilsAdmin
-        {
+    {
             public List<RewardDeatilsAdmin> RewardlistAdmin { get; set; }
             public string LoginId { get; set; }
             public string Fk_memId { get; set; }
@@ -144,6 +143,49 @@ namespace LifeOne.Models
 
             public string Status { get; set; }
 
+    }
+    public class RewardsRecognition
+    {
+        public int FkMemId { get; set; }
+        public string RewardDetailName { get; set; }
+        public string RewardImage { get; set; }
+        public decimal LeftBusiness { get; set; }
+        public decimal RightBusiness { get; set; }
+        public string ToursName { get; set; }
+        public string ToursImage { get; set; }
+        public string RecognitionName { get; set; }
+        public string RecognitionImage { get; set; }
+        public List<RewardsRecognition> RewardsDetail { get; set; }
+
+        public List<RewardsRecognition> RewardsandRecognitionDetails()
+        {
+            List<RewardsRecognition> datalist = new List<RewardsRecognition>();
+            SqlParameter[] para = new SqlParameter[] {
+            new SqlParameter ("@fk_memid",FkMemId)
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("RewardsandRecoginationList", para);
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                foreach (DataRow dr in ds.Tables[0].Rows)
+                {
+                    datalist.Add(new RewardsRecognition
+                    {
+                        RewardDetailName = dr["RewardDetailName"].ToString(),
+                        RewardImage = dr["RewardImage"].ToString(),
+                        LeftBusiness = Convert.ToDecimal(dr["LeftBusiness"].ToString()),
+                        RightBusiness = Convert.ToDecimal(dr["RightBusiness"].ToString()),
+                        ToursName = dr["ToursName"].ToString(),
+                        ToursImage = dr["ToursImage"].ToString(),
+                        RecognitionName = dr["RecognitionName"].ToString(),
+                        RecognitionImage = dr["RecognitionImage"].ToString(),
+
+                    });
+                }
+            }
+            return datalist;
+
         }
+    }
  
 }

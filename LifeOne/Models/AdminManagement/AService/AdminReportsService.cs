@@ -377,12 +377,7 @@ namespace LifeOne.Models.AdminManagement.AService
                 return _obj;
             }
         }
-
-
-
-        
-
-
+       
         public static MPayoutReport GetDownlinePayoutReportService(int? page, MPayoutReport _obj)
         {
             try
@@ -420,7 +415,7 @@ namespace LifeOne.Models.AdminManagement.AService
                 {
                     _obj.Page = 1;
                 }
-                _obj.SearchValue = "fadte=" + _obj.fdate + "&tdate=" + _obj.tdate + "&payoutNo=" + _obj.PayoutNo + "&MemberLoginId=" + _obj.MemberLoginId;
+                _obj.SearchValue = "fadte=" + _obj.fdate + "&tdate=" + _obj.tdate + "&payoutNo=" + _obj.PayoutNo + "&MemberLoginId=" + _obj.MemberLoginId + "&Iskyc=" + _obj.IsKyc;
                 _obj.Objlist = DALAdminReports.GetPayoutReportForBank(_obj);
                 int totalRecords = 0;
                 if (_obj.Objlist.Count > 0)

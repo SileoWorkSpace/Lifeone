@@ -39,9 +39,7 @@ namespace LifeOne.Models.Common
 
     public class SessionTimeoutAttributeAdmin : ActionFilterAttribute
     {
-        public override void OnActionExecuting(ActionExecutingContext filterContext)
-        
-        
+        public override void OnActionExecuting(ActionExecutingContext filterContext)            
         {
             if (HttpContext.Current.Session["Fk_MemId"] == null)
             {

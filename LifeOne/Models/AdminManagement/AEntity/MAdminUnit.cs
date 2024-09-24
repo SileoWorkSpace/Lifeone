@@ -35,5 +35,4 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public int Code { get; set; }
 
     }
-
 }

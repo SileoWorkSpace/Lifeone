@@ -44,6 +44,7 @@ namespace LifeOne.Models
         public string TotalAmount { get; set; }
         public string OfferedPrice { get; set; }
         public string DP { get; set; }
+        public string PV { get; set; }
         public string MRP { get; set; }
         public string SalesPrice { get; set; }
         public string Url { get; set; }
@@ -85,9 +86,6 @@ namespace LifeOne.Models
                 queryParameters.Add("@Fk_CategoryId", Fk_CategoryId);
                 List<Products> _iresult = DBHelperDapper.DAAddAndReturnModelList<Products>("GetProductDetails", queryParameters);
                 //_iresult = DBHelperDapper.DAAddAndReturnModelList<Products>("GetProductDetails", queryParameters);
-
-
-
                 return _iresult;
             }
             catch (Exception ex)
@@ -127,8 +125,6 @@ namespace LifeOne.Models
         }
         public DataSet GenerateShoppingToken()
         {
-
-
 
             DataSet ds = DBHelper.ExecuteQuery("GenerateToken");
 

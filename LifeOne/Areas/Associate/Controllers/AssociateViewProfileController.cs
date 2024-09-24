@@ -54,7 +54,6 @@ namespace LifeOne.Areas.Associate.Controllers
             }
         }
 
-
         public ActionResult Edit()
         {
             AssociateProfile objres = new AssociateProfile();

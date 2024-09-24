@@ -1847,6 +1847,30 @@ namespace LifeOne.Areas.Admin
                 new[] { "LifeOne.Areas.Admin.Controllers" });
 
             context.MapRoute(
+              "Admin-UploadImage",
+              "Admin-UploadImage/{action}/{id}",
+              new
+              {
+                  area = "Admin",
+                  controller = "Master",
+                  action = "UploadImage",
+                  id = UrlParameter.Optional
+              },
+              new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+             "Admin-UploadVideo",
+             "Admin-UploadVideo/{action}/{id}",
+             new
+             {
+                 area = "Admin",
+                 controller = "Master",
+                 action = "UploadVideo",
+                 id = UrlParameter.Optional
+             },
+             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
                 "Admin-RepurchaseIncomeType",
                 "Admin-RepurchaseIncomeType/{action}/{id}",
                 new
@@ -2684,8 +2708,114 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                    id = UrlParameter.Optional
                },
                new[] { "LifeOne.Areas.Admin.Controllers" });
+
+              context.MapRoute(
+               "Admin-UploadTermsandCondition_default",
+              "UploadTermsandCondition/{action}/{id}",
+             new
+             {
+                area = "Admin",
+                controller = "UploadTermsandCondition",
+                action = "UploadTermsandCondition",
+                id = UrlParameter.Optional
+             },
+             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+              "Admin-UploadTermsandConditionList_default",
+             "UploadTermsandConditionList/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "UploadTermsandCondition",
+                action = "UploadTermsandConditionList",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+           "Admin-PrintPayoutReportForBank",
+           "Print Payout-Report-For-Bank/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "AdminReport",
+               action = "PrintPayoutReportForBank",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+              "Admin-UploadPrivacyPolicy_default",
+             "UploadPrivacyPolicy/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "UploadPrivacyPolicy",
+                action = "UploadPrivacyPolicy",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+              "Admin-UploadPrivacyPolicyList_default",
+             "UploadPrivacyPolicyList/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "UploadPrivacyPolicy",
+                action = "UploadPrivacyPolicyList",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+             "Admin-UploadFAQ_default",
+            "UploadFAQ/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "FAQMaster",
+               action = "UploadFAQ",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "EWallet_RequestList",
+           "EWallet_RequestList/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Admin",
+               action = "EWalletRequestList",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+          "Approved_EWallet",
+          "Approved_EWallet/{action}/{id}",
+          new
+          {
+              area = "Admin",
+              controller = "Admin",
+              action = "Approved",
+              id = UrlParameter.Optional
+          },
+          new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+          "Declined_EWallet",
+          "Declined_EWallet/{action}/{id}",
+          new
+          {
+              area = "Admin",
+              controller = "Admin",
+              action = "Declined",
+              id = UrlParameter.Optional
+          },
+          new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 
     }
+    
 }

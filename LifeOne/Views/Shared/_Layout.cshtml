@@ -19,17 +19,18 @@
     <link href="~/Content/NewAssests/vendor/photoswipe/photoswipe.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/css/style.min.css">
     @*<link href="~/Content/NewAssests/vendor/photoswipe/default-skin/default-skin.min.css" rel="stylesheet" />*@
     <script>
-        WebFontConfig = {
-            google: { families: ['Poppins:400,500,600,700,800'] }
-        };
-        (function (d) {
-            var wf = d.createElement('script'), s = d.scripts[0];
-            wf.src = 'js/webfont.js';
-            wf.async = true;
-            s.parentNode.insertBefore(wf, s);
-        })(document);
+        //WebFontConfig = {
+        //    google: { families: ['Poppins:400,500,600,700,800'] }
+        //};
+        //(function (d) {
+        //    var wf = d.createElement('script'), s = d.scripts[0];
+        //    wf.src = 'js/webfont.js';
+        //    wf.async = true;
+        //    s.parentNode.insertBefore(wf, s);
+        //})(document);
     </script>
     <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/fontawesome-free/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/animate/animate.min.css">
@@ -45,9 +46,13 @@
     <!-- Main CSS File -->
     <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/css/demo19.min.css">
 
-    <script src="~/Content/NewAssests/vendor/jquery/jquery.min.js"></script>
+
 
     <style>
+        .appear-animate {
+            visibility: visible !important;
+            opacity: 1;
+        }
         .menu-sign li > ul {
             min-width: 100% !important;
         }
@@ -106,9 +111,169 @@
             border-color: #1f5707;
             background-color: #1f5707;
         }
-        .lireg li a:after{
-            display:none;
+
+        .lireg li a:after {
+            display: none;
         }
+
+        .sbuttons {
+            position: fixed;
+            bottom: 100px;
+            right: 33px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+            .sbuttons a:hover {
+                color: #fff;
+                cursor: pointer;
+            }
+
+            .sbuttons a {
+                cursor: pointer;
+            }
+
+        .sbutton {
+            display: none;
+            margin: 5px 0;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            border-radius: 50%;
+            background: #555;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .mainsbutton {
+            display: block;
+            background: #333;
+            color: white;
+            font-size: 30px;
+        }
+
+        .sbuttons.open .sbutton:not(.mainsbutton) {
+            display: block;
+        }
+
+        .sbuttons.open .sbutton {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+
+        .sbutton {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            text-align: center;
+            color: white;
+            margin: 20px auto 0;
+            box-shadow: 0px 5px 11px -2px rgba(0, 0, 0, 0.18), 0px 4px 12px -7px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            -webkit-transition: all .1s ease-out;
+            transition: all .1s ease-out;
+            position: relative;
+        }
+
+            .sbutton > i {
+                font-size: 25px;
+                line-height: 52px;
+                transition: all .2s ease-in-out;
+                transition-delay: 2s;
+            }
+
+            .sbutton:active,
+            .sbutton:focus,
+            .sbutton:hover {
+                box-shadow: 0 0 4px rgba(0, 0, 0, .14), 0 4px 8px rgba(0, 0, 0, .28);
+            }
+
+            .sbutton:not(:last-child) {
+                width: 50px;
+                height: 50px;
+                margin: 20px auto 0;
+                opacity: 0;
+            }
+
+                .sbutton:not(:last-child) > i {
+                    font-size: 25px;
+                    line-height: 52px;
+                    transition: all .3s ease-in-out;
+                }
+
+        .sbuttons:hover .sbutton:not(:last-child) {
+            opacity: 1;
+            width: 50px;
+            height: 50px;
+            margin: 15px auto 0;
+        }
+
+        .sbutton:nth-last-child(1) {
+            -webkit-transition-delay: 25ms;
+            transition-delay: 25ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(2) {
+            -webkit-transition-delay: 20ms;
+            transition-delay: 20ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(3) {
+            -webkit-transition-delay: 40ms;
+            transition-delay: 40ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(4) {
+            -webkit-transition-delay: 60ms;
+            transition-delay: 60ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(5) {
+            -webkit-transition-delay: 80ms;
+            transition-delay: 80ms;
+        }
+
+        .sbutton:not(:last-child):nth-last-child(6) {
+            -webkit-transition-delay: 100ms;
+            transition-delay: 100ms;
+        }
+
+
+        .sbutton.mainsbutton {
+            background: #009b45;
+        }
+
+        .sbutton.gplus {
+            background: #F44336;
+        }
+
+        .sbutton.youtube {
+            background: #f40303;
+        }
+
+        .sbutton.insta {
+            background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888, #833ab4, #5851db, #405de6, #3f729b);
+        }
+
+        .sbutton.fb {
+            background: #3F51B5;
+        }
+
+        .sbutton.whatsapp {
+            background: #00e676;
+        }
+
+        .customer-care {
+            position: fixed;
+            bottom: 60px;
+            left: 20px;
+        }
+
+            .customer-care img {
+                width: 250px;
+            }
     </style>
 </head>
 <body>
@@ -170,7 +335,7 @@
                             <li class="submenu">
                                 <a href="#">Compliance</a>
                                 <ul>
-                                    <li><a href="#">Certificate</a></li>
+                                    <li><a href="/Home/Certificate">Certificate</a></li>
                                     <li><a href="#">SOP & Bank Details</a></li>
                                     <li><a href="#">Memorandum of Associaiton</a></li>
                                     <li><a href="#">Article of Associaiton</a></li>
@@ -179,8 +344,8 @@
                             <li class="submenu">
                                 <a href="#">Media</a>
                                 <ul>
-                                    <li><a href="#">News & Announcements</a></li>
-                                    <li><a href="#">FAQ's</a></li>
+                                    <li><a href="/Home/NewsandAnnouncement">News & Announcements</a></li>
+                                    <li><a href="/Home/FAQ">FAQ's</a></li>
                                     <li><a href="#">Testimonials</a></li>
                                     <li><a href="#">Downloads</a></li>
                                 </ul>
@@ -204,17 +369,17 @@
                 <div class="header-right">
                     <!-- End Divider -->
                     <!-- <div class="header-search hs-toggle mr-4">
-                        <a href="#" class="search-toggle" title="search-toggle">
-                            <i class="d-icon-search"></i>
-                        </a>
-                        <form action="#" class="input-wrapper">
-                            <input type="text" class="form-control" name="search" autocomplete="off"
-                                placeholder="Search your keyword..." required />
-                            <button class="btn btn-search" type="submit" title="submit-button">
-                                <i class="d-icon-search"></i>
-                            </button>
-                        </form>
-                    </div> -->
+        <a href="#" class="search-toggle" title="search-toggle">
+            <i class="d-icon-search"></i>
+        </a>
+        <form action="#" class="input-wrapper">
+            <input type="text" class="form-control" name="search" autocomplete="off"
+                placeholder="Search your keyword..." required />
+            <button class="btn btn-search" type="submit" title="submit-button">
+                <i class="d-icon-search"></i>
+            </button>
+        </form>
+    </div> -->
                     <!-- End Header Search -->
                     @{ DateTime currentDate = DateTime.Now;
                     }
@@ -224,93 +389,52 @@
                             <span id="day">@DateTime.Now.DayOfWeek.ToString()</span>,
                             <span id="Date">@currentDate.ToString("dd/MM/yyyy")</span>&nbsp;&nbsp;
                             @*<span id="month">May</span>
-                                <span id="year">2024 </span>*@
+                <span id="year">2024 </span>*@
                             <span class="display-time" id="time">@DateTime.Now.ToShortTimeString()</span>
                         </div>
                     </div>
                     @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
                     {
+
                     }
                     else
                     {
-                        <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
-                            <a href="" class="cart-toggle link">
-                                <i class="bi bi-bag">
-                                    <span class="cart-count">@LifeOne.Models.Manager.SessionManager.ProductCount</span>
-                                    @*<span class="cart-count">@LifeOne.Models.Manager.SessionManager.TotalItems</span>*@
-                                </i>
-                            </a>
-                            @if (LifeOne.Models.Manager.SessionManager.ProductCount == 0)
-                            {
+                        <li style="list-style-type:none;" title="Go to Dashboard">
+                            <a href="../Associate-Dashboard"> <i style="font-size:28px;" class="bi bi-speedometer"></i></a>
+                        </li>
+                    }
 
-                            }
-                            else
-                            {
+                    @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
+                    {
+                    }
+                    else
+                    {
+
+                        if (LifeOne.Models.Manager.SessionManager.ProductCount == 0)
+                        {
+                        }
+                        else
+                        {
+                          
+                            <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
+                                <a href="" class="cart-toggle link">
+                                    <i class="bi bi-bag">
+                                        <span class="cart-count">@LifeOne.Models.Manager.SessionManager.ProductCount</span>
+                                        @*<span class="cart-count">@LifeOne.Models.Manager.SessionManager.TotalItems</span>*@
+                                    </i>
+                                </a>
+                                @if (LifeOne.Models.Manager.SessionManager.ProductCount == 0)
                                 {
-                                    Html.RenderAction("CartPartialMenu", "Home");
+
                                 }
-                            }
-
-
-                            @*<div class="dropdown-box">
-                                    <div class="products scrollable">
-                                        <div class="product product-cart">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="~/Content/NewAssests/images/cart/product-1.jpg" alt="product" width="80"
-                                                         height="88" />
-                                                </a>
-                                                <button class="btn btn-link btn-close">
-                                                    <i class="fas fa-times"></i><span class="sr-only">Close</span>
-                                                </button>
-                                            </figure>
-                                            <div class="product-detail">
-                                                <a href="product.html" class="product-name">Riode White Trends</a>
-                                                <div class="price-box">
-                                                    <span class="product-quantity">1</span>
-                                                    <span class="product-price">$21.00</span>
-                                                </div>
-                                            </div>
-
-                                        </div>
-                                         End of Cart Product
-                                        <div class="product product-cart">
-                                            <figure class="product-media">
-                                                <a href="product.html">
-                                                    <img src="~/Content/NewAssests/images/cart/product-2.jpg" alt="product" width="80"
-                                                         height="88" />
-                                                </a>
-                                                <button class="btn btn-link btn-close">
-                                                    <i class="fas fa-times"></i><span class="sr-only">Close</span>
-                                                </button>
-                                            </figure>
-                                            <div class="product-detail">
-                                                <a href="product.html" class="product-name">
-                                                    Dark Blue Women’s
-                                                    Leomora Hat
-                                                </a>
-                                                <div class="price-box">
-                                                    <span class="product-quantity">1</span>
-                                                    <span class="product-price">$118.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                         End of Cart Product
-                                    </div>
-                                     End of Products
-                                    <div class="cart-total">
-                                        <label>Subtotal:</label>
-                                        <span class="price">$139.00</span>
-                                    </div>
-                                     End of Cart Total
-                                    <div class="cart-action">
-                                        <a href="cart.html" class="btn btn-dark btn-link">View Cart</a>
-                                        <a href="checkout.html" class="btn btn-dark"><span>Go To Checkout</span></a>
-                                    </div>
-                                     End of Cart Action
-                                </div>*@
-                        </div>
-
+                                else
+                                {
+                                    {
+                                        Html.RenderAction("CartPartialMenu", "Home");
+                                    }
+                                }
+                            </div>
+                        }
                     }
                     <div>
                         <ul class="menu menu-sign lireg">
@@ -325,6 +449,7 @@
                                 }
                                 else
                                 {
+
                                     <ul style="right: 0; left: -9.9rem !important;">
                                         <li><a href="/Home/Logout">Logout</a></li>
                                     </ul>
@@ -334,16 +459,29 @@
                     </div>
                     <!-- End Dropdown Box -->
                 </div>
-            </div>
+                    </div>
         </div>
-
     </header>
     @RenderBody()
     @{
         Html.RenderAction("FooterRender", "Home");
     }
+    <a href="tel:917985862783" class="customer-care">
+        <img src="~/home-assets/images/Contact_us.png" />
+    </a>
     <a id="scroll-top" href="#top" title="Top" role="button" class="scroll-top"><i class="d-icon-arrow-up"></i></a>
+    <div class="sbuttons">
+        <a href="https://wa.me/917985862783" rel="noreferrer" target="_blank" class="sbutton whatsapp"><i class="fab fa-whatsapp"></i></a>
 
+        <a href="https://www.facebook.com/profile.php?id=61558483911520&mibextid=LQQJ4d" target="_blank" class="sbutton fb"><i class="fab fa-facebook-f"></i></a>
+
+        <a href="https://www.instagram.com/lifeonewellness?igsh=MTNrMWxyZ3dxOGN0ZA%3D%3D&utm_source=qr" target="_blank" class="sbutton insta"><i class="fab fa-instagram"></i></a>
+
+        <a href="https://youtube.com/%40lifeonewellness?si=GPfOZiB-A5TVegDd" target="_blank" class="sbutton youtube"><i class="fab fa-youtube"></i></a>
+
+        <a target="_blank" class="sbutton mainsbutton"><i class="fas fa-share-alt"></i></a>
+
+    </div>
     <!-- MobileMenu -->
     <div class="mobile-menu-wrapper">
         <div class="mobile-menu-overlay">
@@ -352,7 +490,7 @@
         <a class="mobile-menu-close" href="#"><i class="d-icon-times"></i></a>
         <!-- End CloseButton -->
         <div class="mobile-menu-container scrollable">
-            <a href="#" class="logo">
+            <a href="/Home/Index" class="logo">
                 <img src="~/Content/NewAssests/images/lifeonelogo.png" alt="logo" width="100" />
             </a>
 
@@ -368,19 +506,22 @@
                         <li><a href="#">Management Team</a></li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#">Products</a>
+                @{
+                    Html.RenderAction("MobileMenu", "Home");
+                }
+                @*<li>
+            <a href="#">Products</a>
 
-                    <ul>
-                        <li><a href="#">Home Care</a></li>
-                        <li><a href="#">Health Care</a></li>
-                        <li><a href="#">Veda & Nutraceuticals</a></li>
-                        <li><a href="#">Fashion</a></li>
-                        <li><a href="#">Personal Care</a></li>
+            <ul>
+                <li><a href="#">Home Care</a></li>
+                <li><a href="#">Health Care</a></li>
+                <li><a href="#">Veda & Nutraceuticals</a></li>
+                <li><a href="#">Fashion</a></li>
+                <li><a href="#">Personal Care</a></li>
 
-                    </ul>
+            </ul>
 
-                </li>
+        </li>*@
                 <li>
                     <a href="#">Compliance</a>
                     <ul>
@@ -402,17 +543,30 @@
                 <li>
                     <a href="#">Gallery</a>
                     <ul>
-                        <li><a href="#">Image Gallery</a></li>
-                        <li><a href="#">Video Gallery</a></li>
+                        <li><a href="/Home/ImageGallery">Image Gallery</a></li>
+                        <li><a href="/Home/Video">Video Gallery</a></li>
                     </ul>
                 </li>
-
                 <li><a href="/Home/Contact">Contact</a></li>
             </ul>
 
             <!-- End MobileMenu -->
         </div>
     </div>
+    <!-- Modal -->
+    @*<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                            <img src="" />
+                    </div>
+                </div>
+            </div>
+        </div>*@
 
     <!-- newsletter-popup type2 -->
     @*<div class="newsletter-popup newsletter-pop2 mfp-hide" id="newsletter-popup">
@@ -440,7 +594,10 @@
             </div>
         </div>*@
     <!-- Plugins JS File -->
-   
+    <script src="~/Content/NewAssests/js/main.min.js"></script>
+    <script src="~/Content/NewAssests/js/main.js"></script>
+    <script src="~/Content/NewAssests/vendor/jquery/jquery.js"></script>
+    <script src="~/Content/NewAssests/vendor/jquery/jquery.min.js"></script>
     <script src="~/Content/NewAssests/vendor/parallax/parallax.min.js"></script>
     <script src="~/Content/NewAssests/vendor/elevatezoom/jquery.elevatezoom.min.js"></script>
     <script src="~/Content/NewAssests/vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
@@ -448,21 +605,30 @@
     <script src="~/Content/NewAssests/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="~/Content/NewAssests/vendor/isotope/isotope.pkgd.min.js"></script>
     <script src="~/Content/NewAssests/vendor/sticky/sticky.min.js"></script>
-    <script src="~/Content/NewAssests/js/main.min.js"></script>
-<script src="~/Content/NewAssests/js/main.js"></script>
+
 
     <script src="~/Content/NewAssests/vendor/photoswipe/photoswipe.min.js"></script>
     <script src="~/Content/NewAssests/vendor/photoswipe/photoswipe-ui-default.min.js"></script>
     <!-- Main JS File -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Include Bootstrap JS -->
+
 
 
 
     <script src="~/Content/ShoppingCart/Cookies.js"></script>
     <script src="~/Content/ShoppingCart/ShoppingCart.js"></script>
-    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>*@
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
     @*<script src="~/AutoFill/jquery-2.1.3.js"></script>*@
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>*@
+    <script>
+        //document.getElementById("mainButton").addEventListener("click", function (event) {
+        //    event.preventDefault(); // Prevent the default link behavior
+        //    var buttonsContainer = document.querySelector(".sbuttons");
+        //    buttonsContainer.classList.toggle("open");
+        //});
 
+    </script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function () {
@@ -604,17 +770,16 @@
     </script>
 
     <script>
-        function quantityChange() {
-            debugger
-            var qt = $('#Quantity123').val();
-            if (qt == 1) {
-                // alert('quantity less than zero');
-                $('#Quantity123').val(2);
-                //return false;
-            }
-        }
+                    //function quantityChange() {
+                    //    debugger
+                    //    var qt = $('#Quantity123').val();
+                    //    if (qt == 1) {
+                    //        // alert('quantity less than zero');
+                    //        $('#Quantity123').val(2);
+                    //        //return false;
+                    //    }
+                    //}
     </script>
-
 </body>
 </html>
 

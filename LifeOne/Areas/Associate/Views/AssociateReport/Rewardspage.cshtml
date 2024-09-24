@@ -40,8 +40,6 @@
 
         @using (Html.BeginForm("Rewardspage", "AssociateReport", FormMethod.Post, new { @id = "form1" }))
         {
-
-
             <div class="row">
                 <div class="col-12">
                     <div class="card">
@@ -105,10 +103,6 @@
                                                             @if (item.RewardAmount.ToString() != "0.00")
                                                             {@item.RewardAmount.ToString()}
                                                         </td>
-
-
-
-
                                                     </tr>
                                                 }
                                             }
@@ -120,11 +114,7 @@
                     </div>
                 </div>
             </div>
-
-
-        }
-
-
+         }
     </div>
 </div>
 

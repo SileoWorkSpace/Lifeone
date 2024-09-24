@@ -131,6 +131,7 @@ namespace LifeOne.Areas.Admin.Controllers
             if (file != null && file.ContentLength > 0)
             {
                 var ImagePath = "~/ReadWriteData/" + subdir + "/";
+                //var ImagePath = "~/Images/ImageUrl/";
                 var fileName = Path.GetFileName(file.FileName);
                 var extension = Path.GetExtension(file.FileName);
                 if (extension.ToUpper() == ".PNG" || extension.ToUpper() == ".JPG" || extension.ToUpper() == ".JPEG" || extension.ToUpper() == ".BMP" || extension.ToUpper() == ".PDF" || extension.ToUpper() == ".DOCX" || extension.ToUpper() == ".XLSX")
