@@ -271,17 +271,10 @@
                 debugger
                 if (response.Result == "0") {
 
-                    if (response.TempPermanent == "P") {
-                        alert("Member has been already Top-Up");
-                        $("#hdnMemId").val("");
-                        $("#SpnLogInId").html("");
-                        $("#txtLoginId").val("");
-                        return false;
-                    }
-                    else {
+                  
                         $("#hdnMemId").val(response.Fk_MemId);
                         $("#SpnLogInId").html(response.DisplayName);
-                    }
+                    
 
                 }
                 else {

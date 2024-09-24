@@ -286,20 +286,12 @@
             $('#NewsPreference').focus();
             return false;
         }
-        if ($('#InfoLink').val() == '' || $('#InfoLink').val() == null || $('#InfoLink').val() == undefined) {
-            $('#InfoLink').focus();
-            return false;
-        }
+       
         //if ($('#HdnProfilePicPath').val() == '' || $('#HdnProfilePicPath').val() == null || $('#HdnProfilePicPath').val() == undefined) {
         //    $('#InfoImgUrl').focus();
         //    return false;
         //}
-        var SupportRequestList = $("#AssignTo").val();
-        if (SupportRequestList == null || SupportRequestList.length <= 0 || SupportRequestList == undefined || SupportRequestList == '') {
-            //$("#AssignTo").focus();
-            alert("Please select atleast one.")
-            return false;
-        }
+      
     }
 
     function isNumberKey(evt) {
