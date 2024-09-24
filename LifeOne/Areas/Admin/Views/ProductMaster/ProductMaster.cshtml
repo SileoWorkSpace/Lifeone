@@ -366,6 +366,7 @@
 
     function validate()
     {
+        debugger
         var ProductName = $('#ProductName').val();
         var Fk_ProductTypeId = $('#Fk_ProductTypeId').val();
         var MRP = $('#MRP').val();
@@ -384,6 +385,7 @@
         var HSNCode = $('#HSNCode').val();
         var Packing = $('#Packing').val();
         var file = $('#file').val();
+        var ProductID = $('#Pk_ProductId').val()
         //UploadFile();
         if (ProductType == "Box")
         {
@@ -466,14 +468,26 @@
             alert("Please Add Packing");
             return false;
         }
-        else if (file == null || file == "") {
-            alert("Please select the Image");
-            return false;
+        if (ProductID == "" || ProductID == "0" || ProductID == null) { // Check only for new products
+            if (file == null || file == "") {
+                alert("Please select the Image");
+                return false;
+            }
         }
 
-        else {
-            $('#idfinalsubmit').click();
-        }
+        // Submit the form if all validations pass
+        $('#idfinalsubmit').click();
+        //else if (ProductID == 0 || ProductID == "0" || ProductID == null) {
+        //    if (file == null || file == "") {
+        //        alert("Please select the Image");
+        //        return false;
+        //    }
+           
+        //}
+
+        //else {
+        //    $('#idfinalsubmit').click();
+        //}
     }
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
