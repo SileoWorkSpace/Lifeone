@@ -1,0 +1,44 @@
+﻿@using Microsoft.AspNetCore.Http;
+@{
+    Layout = null;
+}   <!-- Section: page title -->
+
+<input type="hidden" id="orderId" value="@Session["orderId"]" />
+<input type="hidden" id="amount" value="@Session["amount"]" />
+<input type="hidden" id="status" value="@Session["status"]" />
+
+<script src="~/home-assets/js/jquery.js"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+    $(document).ready(function () {
+        var options = {
+            "key": "rzp_live_VZtS0GT0Ibqodg", // Enter the Key ID generated from the Dashboard //rzp_test_dUtqKgNQUPcSDE //rzp_live_BwhTaXRxeklaAI
+            "amount": $('#amount').val(), // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+            "currency": "INR",
+            "name": "LifeOne",
+            "description": "Wallet Request",
+            "image": "https://lifeonewellness.com/Content/NewAssests/images/lifeonelogo.png",
+            "order_id": $('#orderId').val(), //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+            "handler": function (response) {
+
+                window.location = "/Associate/AssociatePlanIncome/PaymentSuccess?paymentid=" + response.razorpay_payment_id;
+
+            },
+
+            "notes": {
+                "address": "Razorpay Corporate Office"
+            },
+            "theme": {
+                "color": "#2fc6c4"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.on('payment.failed', function (response) {
+            alert("Payment Failed");
+
+        });
+        rzp1.open();
+        e.preventDefault();
+    });
+</script>
