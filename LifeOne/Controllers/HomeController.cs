@@ -65,9 +65,9 @@ namespace LifeOne.Controllers
               
             }
             string time = DateTime.Now.ToString("ddMMyyyyhhMMss") + "_" + 4050;
-            WebSitePopup model = DALProductServices.WebSitePopup();
-            ViewBag.PopupStatus = model.Status;
-            ViewBag.ImageUrl = model.ImageUrl;
+            //WebSitePopup model = DALProductServices.WebSitePopup();
+            //ViewBag.PopupStatus = model.Status;
+            //ViewBag.ImageUrl = model.ImageUrl;
 
 
             products.TokenNo = SessionManager.TokenNo;
