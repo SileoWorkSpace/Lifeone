@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,7 +14,54 @@ namespace LifeOne.Models.API
 {
     public class Common
     {
-       
+        public static string HITAPI(string APIurl, string body)
+        {
+            var result = "";
+            var httpWebRequest = (HttpWebRequest)WebRequest.Create(APIurl);
+            httpWebRequest.ContentType = "application/json";
+            httpWebRequest.Method = "POST";
+            using (var streamWriter = new
+
+            StreamWriter(httpWebRequest.GetRequestStream()))
+            {
+                string json = new JavaScriptSerializer().Serialize(new
+                {
+                    body = body
+
+                });
+
+                streamWriter.Write(json);
+            }
+            var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+            using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+            {
+                result = streamReader.ReadToEnd();
+            }
+            return result;
+        }
+        public DataSet SaveRequestResponse(int OpCode, string Fk_MemId, string Request, string Response, string Type, string OrderId, string PaymentId, string Status)
+        {
+            try
+            {
+                SqlParameter[] para = {
+                                      new SqlParameter("@Fk_MemId", Fk_MemId),
+                                      new SqlParameter("@Request", Request),
+                                      new SqlParameter("@Response", Response),
+                                      new SqlParameter("@Type", Type),
+                                      new SqlParameter("@OrderId", OrderId),
+                                      new SqlParameter("@PaymentId", PaymentId),
+                                      new SqlParameter("@Status", Status),
+                                      new SqlParameter("@OpCode", OpCode),
+                                  };
+                DataSet ds = Connection.ExecuteQuery("SaveResponseLog", para);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public static void SendEmailByAPI(string To, string Cc, string Bcc, string Subject, string msg, Stream stream, string filename)
         {
             string mailbody = "";
@@ -82,6 +131,11 @@ namespace LifeOne.Models.API
             public static string CreateOrderCashFree = "https://sandbox.cashfree.com/pg/orders";
             public static string CreateOrderForShipping = "https://apiv2.shiprocket.in/v1/external/orders/create/adhoc";
             public static string Authorization = "https://apiv2.shiprocket.in/v1/external/auth/login";
+
+
+            #region Piyush
+            public static string CreateOrderRazorpay = "https://localhost:44380/api/Razorpay/CreateRazorPayOrder";
+            #endregion
         }
         public static void SendEmailByAPICommon(string To, string Cc, string Bcc, string Subject, string msg, string filename)
         {

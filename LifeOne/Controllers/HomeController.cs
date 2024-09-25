@@ -26,6 +26,7 @@ using System.Net;
 using System.Web.UI.WebControls;
 using DocumentFormat.OpenXml.EMMA;
 using static LifeOne.Models.ShoppingRequest;
+using LifeOne.Models.AssociateManagement.AssociateEntity;
 
 namespace LifeOne.Controllers
 {
@@ -347,7 +348,7 @@ namespace LifeOne.Controllers
                 throw ex;
             }
 
-            return View(obj);           
+            return View(obj);
         }
         [HttpPost]
         public ActionResult Contact(Contact _model)
@@ -559,7 +560,7 @@ namespace LifeOne.Controllers
                     listdata1.Pk_ProductId = int.Parse(dataSet3.Tables[0].Rows[i]["Pk_ProductId"].ToString());
                     listdata1.ProductName = dataSet3.Tables[0].Rows[i]["ProductName"].ToString();
                     listdata1.DP = decimal.Parse(dataSet3.Tables[0].Rows[i]["DP"].ToString());
-                    listdata1.MRP = dataSet3.Tables[0].Rows[i]["MRP"].ToString();                  
+                    listdata1.MRP = dataSet3.Tables[0].Rows[i]["MRP"].ToString();
                     listdata1.OfferedPrice = dataSet3.Tables[0].Rows[i]["OfferedPrice"].ToString();
                     listdata1.ReviewCount = dataSet3.Tables[0].Rows[i]["ReviewCount"].ToString();
                     productsList1.Add(listdata1);
@@ -1824,6 +1825,7 @@ namespace LifeOne.Controllers
                     SessionManager.ProfilePic = _objres.ProfilePic;
                     SessionManager.PerformanceLevel = _objres.PerformanceLevel;
                     SessionManager.IsBusinessId = _objres.IsBusinessId;
+
                     // SessionManager.Fk_UserTypeId = Convert.ToInt32(_objres.UserType);
                     TempData["Msg"] = _objres.response;
                     return RedirectToAction("Franchise/FranchiseChildDashboard", "Franchise");
@@ -2260,7 +2262,7 @@ namespace LifeOne.Controllers
                             ImageList.ImageUrl = baseurlNoImg;
                         }
                         //ImageList.ImageUrl = ds.Tables[0].Rows[i]["ImageUrl"].ToString();
-                        ImageList1.Add(ImageList);                                               
+                        ImageList1.Add(ImageList);
                     }
                     DataTable dataTable = DALCommon.ToDataTable(ImageList1);
                     obj.dtDetails = dataTable;
@@ -2277,7 +2279,7 @@ namespace LifeOne.Controllers
         public ActionResult Video()
         {
             UploadImageVideo obj = new UploadImageVideo();
-            try 
+            try
             {
                 List<UploadImageVideo> ImageList1 = new List<UploadImageVideo>();
                 DataSet ds = obj.getVideogallery();
@@ -2287,7 +2289,7 @@ namespace LifeOne.Controllers
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
                         UploadImageVideo ImageList = new UploadImageVideo();
-                        ImageList.Videolink = ds.Tables[0].Rows[i]["Videolink"].ToString();                       
+                        ImageList.Videolink = ds.Tables[0].Rows[i]["Videolink"].ToString();
                         ImageList1.Add(ImageList);
                     }
                     DataTable dataTable = DALCommon.ToDataTable(ImageList1);
@@ -2301,7 +2303,7 @@ namespace LifeOne.Controllers
 
             return View(obj);
             //  return View();
-        }       
+        }
         [ChildActionOnly]
         public ActionResult MobileMenu()
         {
@@ -2330,15 +2332,15 @@ namespace LifeOne.Controllers
                         NewsandAnnouncement NewsList = new NewsandAnnouncement();
                         if (!string.IsNullOrEmpty(ds.Tables[0].Rows[i]["InfoImgUrl"].ToString()))
                         {
-                         NewsList.InfoImgUrl = baseurl + ds.Tables[0].Rows[i]["InfoImgUrl"].ToString();
+                            NewsList.InfoImgUrl = baseurl + ds.Tables[0].Rows[i]["InfoImgUrl"].ToString();
                         }
                         else
                         {
 
                             NewsList.InfoImgUrl = baseurlNoImg;
-                        }                                                
+                        }
                         NewsList.NewsHeading = ds.Tables[0].Rows[i]["NewsHeading"].ToString();
-                        NewsList.News = ds.Tables[0].Rows[i]["News"].ToString();        
+                        NewsList.News = ds.Tables[0].Rows[i]["News"].ToString();
                         NewsList1.Add(NewsList);
                     }
                     DataTable dataTable = DALCommon.ToDataTable(NewsList1);
@@ -2349,7 +2351,7 @@ namespace LifeOne.Controllers
             {
                 throw ex;
             }
-            return View(obj);            
+            return View(obj);
         }
         public ActionResult Certificate()
         {
@@ -2367,20 +2369,25 @@ namespace LifeOne.Controllers
                 {
                     for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
                     {
-                        FAQModel FAQList = new FAQModel();                       
-                        FAQList.Question = ds.Tables[0].Rows[i]["Question"].ToString();          
+                        FAQModel FAQList = new FAQModel();
+                        FAQList.Question = ds.Tables[0].Rows[i]["Question"].ToString();
                         FAQList.Answer = ds.Tables[0].Rows[i]["Answer"].ToString();
                         FAQList1.Add(FAQList);
                     }
                     DataTable dataTable = DALCommon.ToDataTable(FAQList1);
-                    obj.dtDetails = dataTable;                   
+                    obj.dtDetails = dataTable;
                 }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return View(obj);          
+            return View(obj);
         }
+        public ActionResult RazorPayPaymentPage()
+        {
+            return View();
+        }
+       
     }
 }

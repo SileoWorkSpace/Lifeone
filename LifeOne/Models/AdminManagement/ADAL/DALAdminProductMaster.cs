@@ -21,6 +21,7 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 queryParameters.Add("@MRP", obj.MRP );
                 queryParameters.Add("@SalesPrice", obj.SalesPrice );
                 queryParameters.Add("@PV", obj.PV );
+                queryParameters.Add("@BV", obj.BV );
                 queryParameters.Add("@ProductImage", obj.ProductImage );
                 queryParameters.Add("@CGST", obj.CGST );
                 queryParameters.Add("@IGST", obj.IGST );
@@ -58,6 +59,7 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 queryParameters.Add("@MRP", obj.MRP);
                 queryParameters.Add("@SalesPrice", obj.SalesPrice);
                 queryParameters.Add("@PV", string.IsNullOrEmpty(obj.PV)?"0": obj.PV);
+                queryParameters.Add("@BV", string.IsNullOrEmpty(obj.BV)?"0": obj.BV);
                 queryParameters.Add("@ProductImage", obj.ProductImage);
                 queryParameters.Add("@CGST", obj.CGST);
                 queryParameters.Add("@IGST", obj.IGST);
