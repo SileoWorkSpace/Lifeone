@@ -354,6 +354,7 @@
     <Compile Include="Controllers\MigrationController.cs" />
     <Compile Include="Controllers\PayAddaTransactionController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RazorpayController.cs" />
     <Compile Include="Controllers\ShiprocketController.cs" />
     <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Controllers\TBOHotelBookingController.cs" />
@@ -789,6 +790,8 @@
     <Compile Include="Models\ProductManagement\PEntity\MProductDetails.cs" />
     <Compile Include="Models\ProductManagement\PService\ProductDetailsService.cs" />
     <Compile Include="Models\DALReports.cs" />
+    <Compile Include="Models\Razorpay\Razorpay.cs" />
+    <Compile Include="Models\Razorpay\RazorpayCommon.cs" />
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\QUtility\API\GenericAPI.cs" />
@@ -4751,7 +4754,6 @@
     <Folder Include="Images\Users\VoterId\" />
     <Folder Include="landing-page-files\" />
     <Folder Include="Models\TBOHotelAPI\DBLayer\" />
-    <Folder Include="obj\" />
     <Folder Include="Properties\" />
     <Folder Include="ReadWriteData\AadharImages\" />
     <Folder Include="ReadWriteData\PaymentSlip\" />

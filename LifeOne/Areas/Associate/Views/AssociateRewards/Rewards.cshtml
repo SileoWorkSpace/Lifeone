@@ -9,6 +9,12 @@
     .pull-right {
         float: right;
     }
+    .reimg {
+        max-width: 100px;
+        border: 1px solid #d8d8d8;
+        border-radius: 50%;
+        padding: 3px;
+    }
 </style>
 <div class="content-wrapper-before"></div>
 <div class="row page-titles">
@@ -28,19 +34,19 @@
 
     <div class="col-lg-12 stretch-card">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body p-0">
 
                 <div class="table-responsive" id="testTable">
-                    <table class="table color-table inverse-table table-bordered">
+                    <table class="table color-table inverse-table">
                         <thead>
                             <tr>
                                 <th>S. No.</th>
                                 <th>Reward Name</th>
-                                <th>Tours</th>
+                                <th class="text-center">Tours</thclass="text-center">
                                 <th>Left Point</th>
                                 <th>Right Point</th>
                                 @*<th>Matching Target Point</th>*@
-                                <th>Status</th>
+                                <th class="text-center">Status</th>
                                 <th>Acheived On</th>
                                 <th>Action</th>
 
@@ -56,14 +62,14 @@
                                     {
                                         <tr>
                                             <td>@(SNO = SNO + 1)</td>
-                                            @if (item.RewardImg == "" || item.RewardImg =="NULL")
+                                            @if (item.RewardImg == "" || item.RewardImg == "NULL")
                                             {
                                                 <td></td>
                                             }
                                             else
                                             {
-                                                <td>
-                                                    <img src="@item.RewardImg" style="height:50px;width:50px;" />
+                                                <td class="text-center">
+                                                    <img src="@item.RewardImg" class="reimg" />
                                                     <br />
                                                     @item.RewardName
                                                 </td>
@@ -75,7 +81,7 @@
                                             }
                                             else
                                             {
-                                                <td><img src="@item.ToursImage" style="height:50px;width:50px;" /><br />@item.ToursName</td>
+                                                <td class="text-center"><img src="@item.ToursImage" class="reimg" /><br />@item.ToursName</td>
 
                                             }
                                             <td>
@@ -95,10 +101,10 @@
                                                 }
                                             </td>
                                             @*<td>
-                                                    @item.TargetPoint
-                                                </td>*@
+            @item.TargetPoint
+        </td>*@
                                             @*<td>@item.Rank</td>
-                                                <td>@item.Designation</td>*@
+        <td>@item.Designation</td>*@
 
                                             <td>
                                                 @if (item.Status == "Achieved")
