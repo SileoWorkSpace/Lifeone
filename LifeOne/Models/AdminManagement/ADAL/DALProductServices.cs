@@ -230,6 +230,7 @@ namespace LifeOne.Models.AdminManagement.ADAL
         {
             var queryParameters = new DynamicParameters();
 
+            queryParameters.Add("@Id", obj.Id);
             queryParameters.Add("@ImageUrl", obj.ImageUrl);
             queryParameters.Add("@IsActive", obj.IsActive);
             queryParameters.Add("@ActionType", obj.ActiveType);
