@@ -26,6 +26,8 @@ namespace LifeOne.Areas.Associate.Controllers
             return View();
         }
 
+
+
         public JsonResult RootTree(string Loginid)
         {
 

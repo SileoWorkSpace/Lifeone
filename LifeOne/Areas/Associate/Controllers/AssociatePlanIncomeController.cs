@@ -1,16 +1,25 @@
 ﻿using DocumentFormat.OpenXml.EMMA;
+using iTextSharp.text.pdf;
+using LifeOne.Models;
 using LifeOne.Models.AdminManagement.AService;
+using LifeOne.Models.API;
 using LifeOne.Models.AssociateManagement.AssociateDAL;
 using LifeOne.Models.AssociateManagement.AssociateEntity;
+using LifeOne.Models.BillAvenueUtility.Entity;
 using LifeOne.Models.Common;
 using LifeOne.Models.Manager;
+using Newtonsoft.Json;
 using Razorpay.Api;
+using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using static LifeOne.Models.API.Common;
 
 namespace LifeOne.Areas.Associate.Controllers
 {
@@ -41,7 +50,7 @@ namespace LifeOne.Areas.Associate.Controllers
                 string IncomeType = item.PlanName;
                 ViewBag.IncomeType = IncomeType;
                 break;
-            }        
+            }
             int totalRecords = 0;
             if (mdl.AssciateIncomeList.Count > 0)
             {
@@ -59,7 +68,7 @@ namespace LifeOne.Areas.Associate.Controllers
         [HttpGet]
         public ActionResult EWalletList()
         {
-            
+
             Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity = new Models.AssociateManagement.AssociateEntity.AssosiateRequest();
             Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
             Entity.LoginId = Convert.ToString(Session["AssociateFk_MemId"] ?? "0");
@@ -68,7 +77,7 @@ namespace LifeOne.Areas.Associate.Controllers
             return View(Entity);
 
         }
-        public ActionResult EWalletRequest(Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity,string Save)
+        public ActionResult EWalletRequest(Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity, string Save)
         {
             try
             {
@@ -78,41 +87,90 @@ namespace LifeOne.Areas.Associate.Controllers
                 Models.AssociateManagement.AssociateDAL.RequestDAL obj = new Models.AssociateManagement.AssociateDAL.RequestDAL();
                 ViewBag.BankDDL = obj.GetBank(Entity);
                 #endregion
-                if (!string.IsNullOrEmpty(Save))
-                {
-                    if (Save == "Save")
-                    {
-                        Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
 
-                        if (string.IsNullOrEmpty(Entity.Date) == false)
-                        {
-                            Entity.Convert_date = DsResultModel.ConvertToSystemDate(Entity.Date, "dd/MM/yyyy");
-                        }
-                        Entity.AddedBy = Convert.ToInt32(Session["AssociateFk_MemId"] ?? "0");
-                        Entity.OpCode = 1;
-                        Models.AssociateManagement.AssociateEntity.AssosiateRequest Responce = para.RequestwalletPoints(Entity);
-                        if (Responce.Code == "1")
-                        {
-                            TempData["Message"] = "Request Save Successfuly.!";
-                            TempData["Flag"] = "1";
-                            return RedirectToAction("EWalletList", "AssociatePlanIncome");
-                        }
-                        else
-                        {
-                            TempData["Message"] = "Request not Saved.!";
-                            TempData["Flag"] = "1";
-                        }
-                    }
-                }
-               
+
                 return View(Entity);
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-           
+
 
         }
+        public ActionResult PaymentSuccess(string paymentid)
+        {
+
+            AssosiateRequest Entity = new AssosiateRequest();
+            Entity.ChequeDDNo = Session["status"].ToString();
+            Entity.AddedBy = Convert.ToInt32(Session["AssociateFk_MemId"] ?? "0");
+            Entity.paymentid = paymentid;
+            DataSet dataSet = Entity.UpdateWalletByGateway();
+
+            return View(Entity);
+        }
+        public ActionResult RequestEwallet(string LoginId, int Amount, string PaymentMode, string ChequeDD_No, int BankId)
+        {
+            AssosiateRequest Entity = new AssosiateRequest();
+
+            Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
+
+            if (string.IsNullOrEmpty(Entity.Date) == false)
+            {
+                Entity.Convert_date = DsResultModel.ConvertToSystemDate(Entity.Date, "dd/MM/yyyy");
+            }
+            Entity.AddedBy = Convert.ToInt32(Session["AssociateFk_MemId"] ?? "0");
+            Entity.OpCode = 1;
+            Entity.LoginId = LoginId;
+
+            Entity.Amount = Amount;
+            Entity.PaymentMode = PaymentMode;
+            Entity.ChequeDD_No = PaymentMode=="Gateway"?DateTime.Now.ToString("ddMMyyyyhhmmss"):ChequeDD_No;
+            Entity.BankId = BankId;
+            Entity.OpCode = 1;
+
+            AssosiateRequest Responce = para.RequestwalletPoints(Entity);
+            if (Responce.Code == "1")
+            {
+                if(PaymentMode=="Gateway")
+                {
+                    Razorpay.Api.Order objorder = null;
+                    ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+                    RazorpayClient client = null;
+
+                    client = new RazorpayClient(CommonRazorPay.Key, CommonRazorPay.SecretKey);
+
+
+
+                    Dictionary<string, object> options = new Dictionary<string, object>();
+                    options.Add("amount", Amount * 100);
+                    options.Add("receipt", "");
+                    options.Add("currency", "INR");
+                    options.Add("payment_capture", 1);
+                    objorder = client.Order.Create(options);
+                    string orderId = objorder["id"].ToString();
+
+
+
+                    Session["orderId"] = orderId;
+                    Session["amount"] = Amount;
+                    Session["status"] = Entity.ChequeDD_No;
+                    
+                }
+
+                Entity.Flag = 1;
+
+            }
+            else
+            {
+                Entity.Message = Responce.Message;
+                Entity.Flag = 0;
+            }
+
+            return Json(Entity);
+
+        }
+
+
     }
 }

@@ -5817,11 +5817,14 @@ namespace LifeOne.Areas.Admin.Controllers
         }
         public ActionResult PrintPayoutReportForBank(int? Page)
         {
-            MPayoutReport obj = new MPayoutReport();          
-            ViewBag.LoginId = obj.MemberLoginId;                      
-            obj = AdminReportsService.GetPayoutReportForBankService(Page, obj);           
-            Session["PReportBank"] = obj.Objlist;
+            MPayoutReport obj = new MPayoutReport();
+            List<MPayoutReport> reportBankList = Session["PReportBank"] as List<MPayoutReport>;
+            //ViewBag.LoginId = obj.MemberLoginId;
+            //MPayoutReport reportFromSession = Session["PReportBank"] as MPayoutReport;
+            //  obj = Session["PReportBank"];
+
             //return RedirectToAction("PayoutReportForBank", "AdminReport");
+            obj.Objlist = reportBankList;
             return View(obj);
 
         }
