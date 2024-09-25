@@ -260,14 +260,14 @@
                                         }
 
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
-                                            {
-                                                <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
-                                            }
+                    {
+                        <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
+                    }
 
-                                            @if (PermissionManager.IsViewPermit("Bonanza Detail"))
-                                            {
-                                                <li><a href="/Admin-BonanzaDetail">Bonanza Details Master</a></li>
-                                            }*@
+                    @if (PermissionManager.IsViewPermit("Bonanza Detail"))
+                    {
+                        <li><a href="/Admin-BonanzaDetail">Bonanza Details Master</a></li>
+                    }*@
 
 
 
@@ -278,9 +278,9 @@
 
 
                                         @*@if (PermissionManager.IsViewPermit("Offer Date Master"))
-                                            {
-                                                <li><a href="/GetOfferDateMaster">Offer Date Master</a></li>
-                                            }*@
+                    {
+                        <li><a href="/GetOfferDateMaster">Offer Date Master</a></li>
+                    }*@
                                         @if (PermissionManager.IsViewPermit("Role Master"))
                                         {
                                             <li><a href="/Role-Master-List">Role Master</a></li>
@@ -308,8 +308,8 @@
                                             </ul>
                                         </li>
                                         @* <li>
-                                                                        <a href="javascript: void(0);" aria-expanded="false">Users<span class="menu-arrow"></span> </a>
-                                                                        <ul class="nav-second-level" aria-expanded="false">
+                                                <a href="javascript: void(0);" aria-expanded="false">Users<span class="menu-arrow"></span> </a>
+                                                <ul class="nav-second-level" aria-expanded="false">
 
 
 
@@ -320,24 +320,24 @@
 
 
 
-                                                                           @if (PermissionManager.IsViewPermit("Employee Registration"))
-                                            {
-                                                <li><a href="/Employee-Registration">Add Employees</a></li>
-                                            }*@
+                                                   @if (PermissionManager.IsViewPermit("Employee Registration"))
+                    {
+                        <li><a href="/Employee-Registration">Add Employees</a></li>
+                    }*@
                                         @*@if (PermissionManager.IsViewPermit("Role Master"))
-                                            {
-                                                <li><a href="/Role-Master-List">Role Master</a></li>
-                                            }*@
+                    {
+                        <li><a href="/Role-Master-List">Role Master</a></li>
+                    }*@
                                         @*@if (PermissionManager.IsViewPermit("Form Type"))
-                                            {
-                                                <li><a href="/Form-Type-List">Form Type</a></li>
-                                            }
-                                            @if (PermissionManager.IsViewPermit("Form Master"))
-                                            {
-                                                <li><a href="/Form-Master-List">Form Master</a></li>
-                                            }
-                                                                        </ul>
-                                                                            </li>*@
+                    {
+                        <li><a href="/Form-Type-List">Form Type</a></li>
+                    }
+                    @if (PermissionManager.IsViewPermit("Form Master"))
+                    {
+                        <li><a href="/Form-Master-List">Form Master</a></li>
+                    }
+                                                </ul>
+                                                    </li>*@
 
                                     </ul>
                                 </li>
@@ -387,36 +387,36 @@
                                         }
 
                                         @*@if (PermissionManager.IsViewPermit("KYC Approval"))
-                                                {
-                                                    <li> <a href="/KYCSection">KYC Approval</a> </li>
-                                            }*@
+                        {
+                            <li> <a href="/KYCSection">KYC Approval</a> </li>
+                    }*@
 
                                         @if (PermissionManager.IsViewPermit("Verify KYC"))
                                         {
                                             <li> <a href="/VerifyKyc">Verify KYC</a> </li>
                                         }
                                         @*@if (PermissionManager.IsViewPermit("Advance Payment Details"))
-                                            {
-                                             <li><a href="/Advance-Payment">Advance Payment Details</a></li>
-                                             }*@
+                    {
+                     <li><a href="/Advance-Payment">Advance Payment Details</a></li>
+                     }*@
                                         @*@if (PermissionManager.IsViewPermit("Notify Direct Sellers"))
-                                            {
-                                                <li> <a href="/Admin-NotifyMembers">Notify Direct Sellers</a> </li>
+                    {
+                        <li> <a href="/Admin-NotifyMembers">Notify Direct Sellers</a> </li>
 
-                                            }*@
+                    }*@
 
 
 
 
 
                                         @*@if (PermissionManager.IsViewPermit("Downline"))
-                                            {
-                                                <li><a href="/Downline">Downline</a></li>
-                                            }
-                                            @if (PermissionManager.IsViewPermit("UpLine"))
-                                            {
-                                                <li><a href="/Upline">Upline</a></li>
-                                            }*@
+                    {
+                        <li><a href="/Downline">Downline</a></li>
+                    }
+                    @if (PermissionManager.IsViewPermit("UpLine"))
+                    {
+                        <li><a href="/Upline">Upline</a></li>
+                    }*@
                                         @*<li> <a href="/Admin-TestimonialApproval">Approve Testimonial</a> </li>*@
                                     </ul>
                                 </li>
@@ -437,83 +437,83 @@
                                         }
 
                                         @*@if (PermissionManager.IsViewPermit("Recharge/Bill Payment"))
-                                            {
+                    {
 
-                                                <li><a href="/RechargeBillPaymentReport">Recharge/Bill Payment</a></li>
-                                            }*@
+                        <li><a href="/RechargeBillPaymentReport">Recharge/Bill Payment</a></li>
+                    }*@
                                         @*@if (PermissionManager.IsViewPermit("Razor Pay Payment Details"))
-                                            {
-                                                <li class="hide"><a href="/RazorPaymentSearch">RazorPay Payment</a></li>
-                                            }*@
+                    {
+                        <li class="hide"><a href="/RazorPaymentSearch">RazorPay Payment</a></li>
+                    }*@
 
                                         @*@if (PermissionManager.IsViewPermit("Affiliate Shopping"))
-                                            {
-                                                <li><a href="/OtherShopping">Affiliate Shopping</a></li>
-                                            }*@
+                    {
+                        <li><a href="/OtherShopping">Affiliate Shopping</a></li>
+                    }*@
                                         @*@if (PermissionManager.IsViewPermit("Other Shopping"))
-                                            {
-                                                <li><a href="/OrderReport">Other Shopping</a></li>
-                                            }*@
+                    {
+                        <li><a href="/OrderReport">Other Shopping</a></li>
+                    }*@
 
 
                                         @*@if (PermissionManager.IsViewPermit("All Wallet Details"))
-                                                 {
-                                               <li><a href="/Allwalletdetails">All Wallet Details</a></li>
-                                                       }
-                                               @if (PermissionManager.IsViewPermit("Wallet Request Approval"))
-                                                   {
-                                            <li><a href="/WalletRequest">Wallet Request Approval</a></li>
-                                               }
-                                            @if (PermissionManager.IsViewPermit("Wallet Detail Ledger"))
-                                                  {
-                                            <li><a href="/WalletDetails">Wallet Detail Ledger</a></li>
-                                                   }
-                                            @if (PermissionManager.IsViewPermit("Refund Wallet Amount"))
-                                                   {
-                                            <li> <a href="/Admin-RefundAmount">Refund Wallet Amount</a> </li>
-                                                }*@
+                         {
+                       <li><a href="/Allwalletdetails">All Wallet Details</a></li>
+                               }
+                       @if (PermissionManager.IsViewPermit("Wallet Request Approval"))
+                           {
+                    <li><a href="/WalletRequest">Wallet Request Approval</a></li>
+                       }
+                    @if (PermissionManager.IsViewPermit("Wallet Detail Ledger"))
+                          {
+                    <li><a href="/WalletDetails">Wallet Detail Ledger</a></li>
+                           }
+                    @if (PermissionManager.IsViewPermit("Refund Wallet Amount"))
+                           {
+                    <li> <a href="/Admin-RefundAmount">Refund Wallet Amount</a> </li>
+                        }*@
                                         @*@if (PermissionManager.IsViewPermit("Block/Unblock Direct Seller"))
-                                            {
-                                                <li><a href="/BlockUnblockDetails">Block/Unblock Direct Seller</a></li>
-                                            }
+                    {
+                        <li><a href="/BlockUnblockDetails">Block/Unblock Direct Seller</a></li>
+                    }
 
-                                            @if (PermissionManager.IsViewPermit("Change Direct Seller Sponsor"))
-                                            {
-                                                <li> <a href="/Admin-Change-Member-Sponsor">Change Direct Seller Sponsor</a> </li>
-                                            }
-                                            @if (PermissionManager.IsViewPermit("Change Profile"))
-                                            {
-                                                <li>
-                                                    <a href="/Admin-Change-Profile-List">
-                                                        <span class="sub-item">Change Profile </span>
-                                                    </a>
-                                                </li>
-                                            }
+                    @if (PermissionManager.IsViewPermit("Change Direct Seller Sponsor"))
+                    {
+                        <li> <a href="/Admin-Change-Member-Sponsor">Change Direct Seller Sponsor</a> </li>
+                    }
+                    @if (PermissionManager.IsViewPermit("Change Profile"))
+                    {
+                        <li>
+                            <a href="/Admin-Change-Profile-List">
+                                <span class="sub-item">Change Profile </span>
+                            </a>
+                        </li>
+                    }
 
-                                            @if (PermissionManager.IsViewPermit("KYC Approval"))
-                                                    {
-                                                        <li> <a href="/KYCSection">KYC Approval</a> </li>
-                                                }
+                    @if (PermissionManager.IsViewPermit("KYC Approval"))
+                            {
+                                <li> <a href="/KYCSection">KYC Approval</a> </li>
+                        }
 
-                                            @if (PermissionManager.IsViewPermit("Verify KYC"))
-                                            {
-                                                <li> <a href="/VerifyKyc">Verify KYC</a> </li>
-                                            }
-                                            @if (PermissionManager.IsViewPermit("Advance Payment Details"))
-                                                {
-                                                 <li><a href="/Advance-Payment">Advance Payment Details</a></li>
-                                                 }
-                                            @if (PermissionManager.IsViewPermit("Notify Direct Sellers"))
-                                            {
-                                                <li> <a href="/Admin-NotifyMembers">Notify Direct Sellers</a> </li>
+                    @if (PermissionManager.IsViewPermit("Verify KYC"))
+                    {
+                        <li> <a href="/VerifyKyc">Verify KYC</a> </li>
+                    }
+                    @if (PermissionManager.IsViewPermit("Advance Payment Details"))
+                        {
+                         <li><a href="/Advance-Payment">Advance Payment Details</a></li>
+                         }
+                    @if (PermissionManager.IsViewPermit("Notify Direct Sellers"))
+                    {
+                        <li> <a href="/Admin-NotifyMembers">Notify Direct Sellers</a> </li>
 
-                                            }*@
+                    }*@
 
 
                                         @*@if (PermissionManager.IsViewPermit("Product GST Report"))
-                                            {
-                                                <li><a href="/ProductGSTReport">Product GST Report</a></li>
-                                            }*@
+                    {
+                        <li><a href="/ProductGSTReport">Product GST Report</a></li>
+                    }*@
 
                                     </ul>
                                 </li>
@@ -549,15 +549,6 @@
 
 
 
-                                        @if (PermissionManager.IsViewPermit("Cancel Invoice Report"))
-                                        {
-                                            <li><a href="/CancelInvoicRequest">Cancel Invoice Report</a></li>
-                                        }
-                                        @if (PermissionManager.IsViewPermit("EWallet RequestList"))
-                                        {
-                                            <li> <a href="/EWallet_RequestList">EWallet RequestList</a> </li>
-                                        }
-
 
 
 
@@ -566,7 +557,48 @@
                                 </li>
                             }
 
+                            @if (PermissionManager.IsTabPermit("Ewallet"))
+                            {
+                                @*<i class="fa fa-credit-card"></i>*@
+                                <li>
+                                    <a href="#">  <span>Ewallet</span>  <span class="menu-arrow"></span> </a>
+                                    <ul class="nav-second-level" aria-expanded="false">
 
+
+                                        @if (PermissionManager.IsViewPermit("EWallet RequestList"))
+                                        {
+                                            <li> <a href="/EWallet_RequestList">EWallet RequestList</a> </li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("EWallet Ledger"))
+                                        {
+                                            <li> <a href="/EWalletLedger">EWallet Ledger</a> </li>
+                                        }
+
+
+                                    </ul>
+                                </li>
+                            }
+                            @if (PermissionManager.IsTabPermit("Shopping"))
+                            {
+                                @*<i class="fa fa-credit-card"></i>*@
+                                <li>
+                                    <a href="#">  <span>Shopping</span>  <span class="menu-arrow"></span> </a>
+                                    <ul class="nav-second-level" aria-expanded="false">
+
+
+                                        @if (PermissionManager.IsViewPermit("Geust Shopping"))
+                                        {
+                                            <li><a href="/GeustShoppingOrderDetail"> Geust Shopping</a></li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("Member Shopping"))
+                                        {
+                                            <li> <a href="/ShoppingOrderDetails">Member Shopping</a> </li>
+                                        }
+
+
+                                    </ul>
+                                </li>
+                            }
                             @if (PermissionManager.IsTabPermit("Report"))
                             {
                                 <li>
@@ -733,9 +765,9 @@
                                                     <li><a href="/LifeTimeReward">Lifetime Reward</a></li>
                                                 }
                                                 @*@if (PermissionManager.IsViewPermit("Premium Club Direct Seller"))
-                                                    {
-                                                        <li><a href="/PremiumClubMember">Premium Club Direct Seller</a></li>
-                                                    }*@
+                            {
+                                <li><a href="/PremiumClubMember">Premium Club Direct Seller</a></li>
+                            }*@
                                                 @if (PermissionManager.IsViewPermit("Premium Club Qualifier"))
                                                 {
                                                     <li><a href="/PremiumClubQualifier">Premium Club Qualifier</a></li>
@@ -751,10 +783,6 @@
 
 
 
-                                        @if (PermissionManager.IsViewPermit("Shopping Order Details"))
-                                        {
-                                            <li><a href="/ShoppingOrderDetails"> Shopping Order Details</a></li>
-                                        }
                                         @if (PermissionManager.IsViewPermit("Refund Amount"))
                                         {
                                             <li><a href="/Admin-RefundAmount">Refund Amount</a></li>
@@ -794,33 +822,33 @@
                                             <li><a href="/PurchaseOrderDetails">Purchase Order Details</a></li>
                                         }
                                         @*@if (PermissionManager.IsViewPermit("Purchase Order List"))
-                                            {
-                                                <li><a href="/PurchasrOrderList">Purchase Order List</a></li>
-                                            }*@
+                    {
+                        <li><a href="/PurchasrOrderList">Purchase Order List</a></li>
+                    }*@
 
                                         @*@if (PermissionManager.IsViewPermit("Stock Report"))
-                                            {
-                                                <li><a href="/Stock-Report">Stock Report</a></li>
-                                            }*@
+                    {
+                        <li><a href="/Stock-Report">Stock Report</a></li>
+                    }*@
                                         @*@if (PermissionManager.IsViewPermit("Manage Stock"))
-                                            {
-                                                <li><a href="/Manage-Stock">Manage Stock</a></li>
-                                            }*@
+                    {
+                        <li><a href="/Manage-Stock">Manage Stock</a></li>
+                    }*@
 
 
 
                                         @*@if (PermissionManager.IsViewPermit("Member Orders"))
-                                            {
-                                                <li><a href="/OrderedDetails">Member Orders</a></li>
-                                            }*@
+                    {
+                        <li><a href="/OrderedDetails">Member Orders</a></li>
+                    }*@
                                         @*@if (PermissionManager.IsViewPermit("Create Order"))
-                                            {
-                                                <li><a href="/CustomerDetail">Create Order</a></li>
-                                            }*@
+                    {
+                        <li><a href="/CustomerDetail">Create Order</a></li>
+                    }*@
                                         @*@if (PermissionManager.IsViewPermit("Upgrade Package"))
-                                            {
-                                                <li><a href="/Admin-PackageUpgrade">Upgrade Package</a></li>
-                                            }*@
+                    {
+                        <li><a href="/Admin-PackageUpgrade">Upgrade Package</a></li>
+                    }*@
                                         @if (PermissionManager.IsViewPermit("Ordered List"))
                                         {
                                             <li><a href="/Admin-OrderList">Ordered List</a></li>
@@ -905,59 +933,7 @@
                                     </ul>
                                 </li>
                             }
-                            @*@if (PermissionManager.IsTabPermit("Business Report"))
-                                {
-                                    <li>
-                                        <a href="#"> <i class="fa fa-credit-card"></i> <span>Business Report</span>  <span class="menu-arrow"></span> </a>
-                                        <ul class="nav-second-level" aria-expanded="false">
-                                            @if (PermissionManager.IsViewPermit("Business Summary"))
-                                            {
-                                                <li><a href="#">Business Summary</a></li>
-                                            }
-                                        </ul>
-                                    </li>
-                                }*@
 
-                            @*@if (PermissionManager.IsTabPermit("Users"))
-                                {
-                                    <li>
-                                        <a href="#">  <span>Users</span>  <span class="menu-arrow"></span> </a>
-                                        <ul class="nav-second-level" aria-expanded="false">
-
-
-                                            @if (PermissionManager.IsViewPermit("Employee Registration"))
-                                            {
-                                                <li><a href="/Employee-Registration">Add Employees</a></li>
-                                            }
-
-                                            @if (PermissionManager.IsViewPermit("Employees"))
-                                            {
-                                                <li><a href="/Admin-Employees">Employees</a></li>
-                                            }
-
-                                            @if (PermissionManager.IsViewPermit("Role Master"))
-                                            {
-                                                <li><a href="/Role-Master-List">Role Master</a></li>
-                                            }
-                                            @if (PermissionManager.IsViewPermit("Form Type"))
-                                                {
-                                                    <li><a href="/Form-Type-List">Form Type</a></li>
-                                                }
-                                                @if (PermissionManager.IsViewPermit("Form Master"))
-                                                {
-                                                    <li><a href="/Form-Master-List">Form Master</a></li>
-                                                }
-                                            @if (PermissionManager.IsViewPermit("Role Permission"))
-                                            {
-                                                <li><a href="/Role-Permission-List">Role Permission</a></li>
-                                            }
-                                            @if (PermissionManager.IsViewPermit("Set Permission"))
-                                            {
-                                                <li><a href="/Set-Permission-List">Set Permission</a></li>
-                                            }
-                                        </ul>
-                                    </li>
-                                }*@
                             @if (PermissionManager.IsTabPermit("Permission Master"))
                             {
                                 <li>
