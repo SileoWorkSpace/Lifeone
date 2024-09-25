@@ -2402,5 +2402,9 @@ namespace LifeOne.Controllers
             return View(reports);
         }
 
+        public ActionResult GalleryPhoto()
+        {
+            return View();
+        }
     }
 }

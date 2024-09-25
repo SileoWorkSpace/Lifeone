@@ -623,10 +623,10 @@
                                                      height="338">
                                             </a>
                                             <div class="product-action-vertical">
-                                                <a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart" data-toggle="modal" title="Add to cart" value="Add" name="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())"
-                                                   data-target="#addCartModal">
-                                                    <i class="d-icon-bag"></i>
-                                                </a>
+                                                @*<a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart" data-toggle="modal" title="Add to cart" value="Add" name="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())"
+                                                       data-target="#addCartModal">
+                                                        <i class="d-icon-bag"></i>
+                                                    </a>*@
                                                 @*<a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
                                                         <i class="d-icon-heart"></i>
                                                     </a>*@
@@ -699,7 +699,7 @@
                 </div>
             </section>
         }
-        <section class="brand-section grey-section pt-10 pb-10 appear-animate" style="background: #eff1d9;">
+        <!--<section class="brand-section grey-section pt-10 pb-10 appear-animate" style="background: #eff1d9;">
             <div class="container mt-8 mb-10">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center mb-4">
@@ -737,25 +737,25 @@
                     <figure class="brand-wrap bg-white banner-radius">
                         <iframe width="100%" height="150" src="https://www.youtube.com/embed/fD4xBhaBhAE?si=Nj5dNDuAGX2K7hp0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
                     </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
+                    <figure class="brand-wrap bg-white banner-radius">-->
                         <!-- Second Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/oXnpcrXkqXI?si=4HZFmrr-ajptx1n4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!--<iframe width="100%" height="150" src="https://www.youtube.com/embed/oXnpcrXkqXI?si=4HZFmrr-ajptx1n4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
+                    <figure class="brand-wrap bg-white banner-radius">-->
                         <!-- Third Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/TYqcZj487bI?si=qrDISJuzR6F6s-fj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!--<iframe width="100%" height="150" src="https://www.youtube.com/embed/TYqcZj487bI?si=qrDISJuzR6F6s-fj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
+                    <figure class="brand-wrap bg-white banner-radius">-->
                         <!-- Fourth Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/CAkdPfxVFYs?si=xyU1iOIHBquDVZhv" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!--<iframe width="100%" height="150" src="https://www.youtube.com/embed/CAkdPfxVFYs?si=xyU1iOIHBquDVZhv" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
+                    <figure class="brand-wrap bg-white banner-radius">-->
                         <!-- Fourth Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/DpA8HKG0Z5w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        <!--<iframe width="100%" height="150" src="https://www.youtube.com/embed/DpA8HKG0Z5w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                     </figure>
                 </div>
             </div>
-        </section>
+        </section>-->
         @{
             if (ViewBag.PopupStatus == "Active")
             {
@@ -763,9 +763,30 @@
                     <div class="modal-dialog">
                         <div class="modal-content" style="position:relative;">
                             <a type="button" class="popupbtn" data-bs-dismiss="modal" aria-label="Close">x</a>
-                            <div class="modal-body">
-                                <img src="@ViewBag.ImageUrl" />
-                            </div>
+                                <div class="modal-body">
+                                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src="@ViewBag.ImageUrl" class="d-block w-100" alt="">
+                                            </div>
+                                            @*<div class="carousel-item">
+                                                <img src="@ViewBag.ImageUrl" class="d-block w-100" alt="">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="@ViewBag.ImageUrl" class="d-block w-100" alt="">
+                                            </div>*@
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                    @*<img src="@ViewBag.ImageUrl" />*@
+                                </div>
                         </div>
                     </div>
                 </div>

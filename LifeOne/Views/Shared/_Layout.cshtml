@@ -6,7 +6,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Lifeone Wellness</title>
+    <title>Lifeone Wellness - Holistic Health & Wellness Center | Personalized Care</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="Discover personalized wellness solutions at Lifeone Wellness. From holistic treatments, fitness programs, and nutritional guidance, we help you achieve optimal health and balance. Book a consultation today!">
+
+    <!-- SEO Keywords -->
+    <meta name="keywords" content="Lifeone Wellness, holistic health, wellness center, personalized care, fitness programs, nutritional guidance, health consultation, mental wellness, alternative medicine, healthy living">
+
+
 
     <link rel="icon" type="image/png" href="~/Content/NewAssests/images/Lifeone-logo-Favicon.png">
     <!-- Preload Font -->
@@ -52,6 +60,7 @@
             visibility: visible !important;
             opacity: 1;
         }
+
         .menu-sign li > ul {
             min-width: 100% !important;
         }
@@ -268,12 +277,55 @@
             position: fixed;
             bottom: 40px;
             left: 9px;
+            z-index: 999;
         }
 
             .customer-care img {
                 width: 245px;
             }
+
+        .date-time-div {
+            font-size: 12px;
+            font-weight: 400;
+        }
+        .sbutton {
+            display: none; /* Initially hide all social buttons */
+            margin: 5px;
+        }
+
+        .sbuttons.open .sbutton {
+            display: inline-block; /* Show buttons when the container has the "open" class */
+        }
+
+        .sbutton.mainsbutton {
+            display: inline-block; /* Always show the main share button */
+        }
     </style>
+
+    <!-- Schema Markup for SEO -->
+    <script type="application/ld+json">
+    {
+      "@@context": "https://schema.org",
+      "@@type": "HealthAndBeautyBusiness",
+      "name": "Lifeone Wellness",
+      "description": "A wellness center offering holistic treatments, fitness programs, and nutritional guidance for personalized health solutions.",
+      "url": "https://www.lifeonewellness.com",
+      "address": {
+        "@@type": "PostalAddress",
+        "streetAddress": "78 Raj nagar K.N. Kanpur",
+        "addressLocality": "Kanpur",
+        "postalCode": "227105",
+        "addressCountry": "India"
+      },
+      "contactPoint": {
+        "@@type": "ContactPoint",
+        "telephone": "+918090839393",
+        "contactType": "Customer Service"
+      },
+      "openingHours": "Mo-Fri 09:00-18:00",
+      "priceRange": "200-150000"
+    }
+    </script>
 </head>
 <body>
     <div id="overlayer" style="display:none;"></div>
@@ -291,7 +343,7 @@
         </marquee>
         <input type="hidden" id="GLB_CookiesId" />
         <div class="header-middle sticky-header fix-top sticky-content">
-            <div class="container-fluid">
+            <div class="container">
                 <div class="header-left">
                     <a href="#" class="mobile-menu-toggle">
                         <i class="d-icon-bars2"></i>
@@ -368,17 +420,17 @@
                 <div class="header-right">
                     <!-- End Divider -->
                     <!-- <div class="header-search hs-toggle mr-4">
-        <a href="#" class="search-toggle" title="search-toggle">
-            <i class="d-icon-search"></i>
-        </a>
-        <form action="#" class="input-wrapper">
-            <input type="text" class="form-control" name="search" autocomplete="off"
-                placeholder="Search your keyword..." required />
-            <button class="btn btn-search" type="submit" title="submit-button">
-                <i class="d-icon-search"></i>
-            </button>
-        </form>
-    </div> -->
+                        <a href="#" class="search-toggle" title="search-toggle">
+                            <i class="d-icon-search"></i>
+                        </a>
+                        <form action="#" class="input-wrapper">
+                            <input type="text" class="form-control" name="search" autocomplete="off"
+                                placeholder="Search your keyword..." required />
+                            <button class="btn btn-search" type="submit" title="submit-button">
+                                <i class="d-icon-search"></i>
+                            </button>
+                        </form>
+                    </div> -->
                     <!-- End Header Search -->
                     @{ DateTime currentDate = DateTime.Now;
                     }
@@ -388,7 +440,7 @@
                             <span id="day">@DateTime.Now.DayOfWeek.ToString()</span>,
                             <span id="Date">@currentDate.ToString("dd/MM/yyyy")</span>&nbsp;&nbsp;
                             @*<span id="month">May</span>
-                <span id="year">2024 </span>*@
+                                <span id="year">2024 </span>*@
                             <span class="display-time" id="time">@DateTime.Now.ToShortTimeString()</span>
                         </div>
                     </div>
@@ -414,7 +466,7 @@
                         }
                         else
                         {
-                          
+
                             <div class="dropdown cart-dropdown type2 mr-0 mr-lg-2">
                                 <a href="" class="cart-toggle link">
                                     <i class="bi bi-bag">
@@ -458,7 +510,7 @@
                     </div>
                     <!-- End Dropdown Box -->
                 </div>
-                    </div>
+            </div>
         </div>
     </header>
     @RenderBody()
@@ -509,18 +561,18 @@
                     Html.RenderAction("MobileMenu", "Home");
                 }
                 @*<li>
-            <a href="#">Products</a>
+                        <a href="#">Products</a>
 
-            <ul>
-                <li><a href="#">Home Care</a></li>
-                <li><a href="#">Health Care</a></li>
-                <li><a href="#">Veda & Nutraceuticals</a></li>
-                <li><a href="#">Fashion</a></li>
-                <li><a href="#">Personal Care</a></li>
+                        <ul>
+                            <li><a href="#">Home Care</a></li>
+                            <li><a href="#">Health Care</a></li>
+                            <li><a href="#">Veda & Nutraceuticals</a></li>
+                            <li><a href="#">Fashion</a></li>
+                            <li><a href="#">Personal Care</a></li>
 
-            </ul>
+                        </ul>
 
-        </li>*@
+                    </li>*@
                 <li>
                     <a href="#">Compliance</a>
                     <ul>
@@ -769,16 +821,21 @@
     </script>
 
     <script>
-                    //function quantityChange() {
-                    //    debugger
-                    //    var qt = $('#Quantity123').val();
-                    //    if (qt == 1) {
-                    //        // alert('quantity less than zero');
-                    //        $('#Quantity123').val(2);
-                    //        //return false;
-                    //    }
-                    //}
+        //function quantityChange() {
+        //    debugger
+        //    var qt = $('#Quantity123').val();
+        //    if (qt == 1) {
+        //        // alert('quantity less than zero');
+        //        $('#Quantity123').val(2);
+        //        //return false;
+        //    }
+        //}
+        document.querySelector('.mainsbutton').addEventListener('click', function () {
+            document.querySelector('.sbuttons').classList.toggle('open');
+        });
     </script>
+   
+
 </body>
 </html>
 

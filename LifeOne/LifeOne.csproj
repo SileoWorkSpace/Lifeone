@@ -4800,6 +4800,7 @@
     <Content Include="Views\Home\FAQ.cshtml" />
     <Content Include="Views\Home\RazorPayPaymentPage.cshtml" />
     <Content Include="Views\Home\PlaceOrder.cshtml" />
+    <Content Include="Views\Home\GalleryPhoto.cshtml" />
   </ItemGroup>
 
   <ItemGroup />

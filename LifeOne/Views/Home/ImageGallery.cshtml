@@ -6,9 +6,9 @@
 }
 <style>
     .gallery {
-       /* display: flex;*/
-        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-        grid-gap: 4rem;
+        /* display: flex;*/
+        grid-template-columns: repeat(auto-fit, minmax(30rem, 4fr));
+        grid-gap: 10px;
         padding: 40px 0px 40px 0px;
         /*overflow: auto;*/
     }
@@ -17,8 +17,7 @@
         box-shadow: 0 .1875rem .625rem rgba(0, 0, 0, 0.4);
         overflow: hidden;
         width: 350px;
-        height: 360px;
-        margin-left: 20px;
+        height: 350px;
     }
 
     .gallery__item {
@@ -184,196 +183,69 @@
     <section>
         <!-- Image Gallery -->
         <div class=" gallery row justify-content-center">
-                @{
-                    if (Model != null)
+            @{
+                if (Model != null)
+                {
+                    if (Model.dtDetails != null)
                     {
-                        if (Model.dtDetails != null)
+                        for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
                         {
-                            for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
-                            {
-                                <figure class="gallery__item col-md-3 mb-4 p-0">
-                                    <img class="gallery__image" src="@Model.dtDetails.Rows[i]["ImageUrl"].ToString()">
-                                    @*<img class="gallery__image" src="https://picsum.photos/id/1036/1920/1200" alt="A tent in the snowy mountains">*@
-                                    <figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>
-                                </figure>
-                            }
+                            <figure class="gallery__item col-md-3 mb-4 p-0">
+                                <img class="gallery__image" src="@Model.dtDetails.Rows[i]["ImageUrl"].ToString()">
+                                @*<img class="gallery__image" src="https://picsum.photos/id/1036/1920/1200" alt="A tent in the snowy mountains">*@
+                                <figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>
+                            </figure>
                         }
                     }
                 }
+            }
             @*<figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1015/1920/1200" alt="A river between the mountains">
-            <figcaption class="gallery__image__caption">A river between the mountains</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1016/1920/1200" alt="Rocky mountains">
-            <figcaption class="gallery__image__caption">Rocky mountains</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1026/1920/1200" alt="Trains in a deposit">
-            <figcaption class="gallery__image__caption">Trains in a deposit</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1018/1920/1200" alt="Greeny mountains">
-            <figcaption class="gallery__image__caption">Greeny mountains</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1019/1920/1200" alt="Storm in the sea">
-            <figcaption class="gallery__image__caption">Storm in the sea</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1021/1920/1200" alt="Fog in a valley of trees">
-            <figcaption class="gallery__image__caption">Fog in a valley of trees</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1024/1920/1200" alt="Flying like a bird of prey">
-            <figcaption class="gallery__image__caption">Flying like a bird of prey</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1006/1920/1200" alt="A woman and a dog looking at a foggy valley">
-            <figcaption class="gallery__image__caption">A woman and a dog looking at a foggy valley</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1038/1920/1200" alt="Sea waves">
-            <figcaption class="gallery__image__caption">Sea waves</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1050/1920/1200" alt="Rocky cliffs">
-            <figcaption class="gallery__image__caption">Rocky cliffs</figcaption>
-        </figure>
-        <figure class="gallery__item">
-            <img class="gallery__image" src="https://picsum.photos/id/1043/1920/1200" alt="Mountains seen through a forest">
-            <figcaption class="gallery__image__caption">Mountains seen through a forest</figcaption>
-        </figure>*@
+                    <img class="gallery__image" src="https://picsum.photos/id/1015/1920/1200" alt="A river between the mountains">
+                    <figcaption class="gallery__image__caption">A river between the mountains</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1016/1920/1200" alt="Rocky mountains">
+                    <figcaption class="gallery__image__caption">Rocky mountains</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1026/1920/1200" alt="Trains in a deposit">
+                    <figcaption class="gallery__image__caption">Trains in a deposit</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1018/1920/1200" alt="Greeny mountains">
+                    <figcaption class="gallery__image__caption">Greeny mountains</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1019/1920/1200" alt="Storm in the sea">
+                    <figcaption class="gallery__image__caption">Storm in the sea</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1021/1920/1200" alt="Fog in a valley of trees">
+                    <figcaption class="gallery__image__caption">Fog in a valley of trees</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1024/1920/1200" alt="Flying like a bird of prey">
+                    <figcaption class="gallery__image__caption">Flying like a bird of prey</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1006/1920/1200" alt="A woman and a dog looking at a foggy valley">
+                    <figcaption class="gallery__image__caption">A woman and a dog looking at a foggy valley</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1038/1920/1200" alt="Sea waves">
+                    <figcaption class="gallery__image__caption">Sea waves</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1050/1920/1200" alt="Rocky cliffs">
+                    <figcaption class="gallery__image__caption">Rocky cliffs</figcaption>
+                </figure>
+                <figure class="gallery__item">
+                    <img class="gallery__image" src="https://picsum.photos/id/1043/1920/1200" alt="Mountains seen through a forest">
+                    <figcaption class="gallery__image__caption">Mountains seen through a forest</figcaption>
+                </figure>*@
         </div>
-    </section>  
+    </section>
 </main>
-<script>
-    // Floating caption
-    const imgContent = document.querySelectorAll('.gallery__image__caption');
-    var x, y;
-
-    function showImgContent(e) {
-        for (var i = 0; i < imgContent.length; i++) {
-            x = e.pageX;
-            y = e.pageY;
-           /* imgContent[i].style.transform = `translate(${x}px, ${y}px)`;*/
-        }
-    };
-
-    document.addEventListener('mousemove', showImgContent);
-
-
-    // Lightbox modal
-    const body = document.body;
-    const items = document.querySelectorAll(".gallery__item");
-    const modal = document.createElement("section");
-    const modalImg = document.createElement("img");
-    const modalPrev = createButton(prevItem);
-    const modalNext = createButton(nextItem);
-    const modalClose = createButton(closeModal);
-    let currentItem = 0;
-    let modalInstance;
-
-    modal.classList.add("gallery__modal");
-    modalPrev.classList.add("gallery__navigation--prev");
-    modalNext.classList.add("gallery__navigation--next");
-    modalClose.classList.add("gallery__navigation--close");
-
-    function createButton(action) {
-        const button = document.createElement("button");
-        button.addEventListener("click", action);
-        return button;
-    }
-
-    function prevItem() {
-        currentItem = (currentItem - 1 + items.length) % items.length;
-        showModal();
-    }
-
-    function nextItem() {
-        currentItem = (currentItem + 1) % items.length;
-        showModal();
-    }
-
-    function closeModal() {
-        modal.remove();
-    }
-
-    function showModal() {
-        modalImg.image = items[currentItem].querySelector("img");
-        modalImg.src = modalImg.image.src;
-        modalImg.alt = modalImg.image.alt;
-        modal.append(modalImg, modalPrev, modalNext, modalClose);
-        document.body.appendChild(modal);
-    }
-
-    items.forEach(function (image) {
-        image.addEventListener('click', function () {
-            /* Detect the image class name */
-            var overlayOpen = this.className === 'gallery__item';
-
-            /**
-             * Storing a reference to the opening image
-             */
-            if (overlayOpen) {
-                modalInstance = this;
-            }
-
-            /**
-             * Toggle the aria-hidden state on the overlay and the
-             * no-scroll class on the body
-             */
-            modal.setAttribute('aria-hidden', !overlayOpen);
-            body.classList.toggle('noscroll', overlayOpen);
-
-            /**
-             * Run the function that creates the modal content
-             * and that appends it to the body
-             */
-            showModal();
-
-            /**
-             * On some mobile browser when the overlay was previously
-             * opened and scrolled, if you open it again it doesn't
-             * reset its scrollTop property
-             */
-            modal.scrollTop = 0;
-
-            /**
-             * Forcing focus for Assistive technologies.
-             * Note that:
-             * - if the modal has just a phrase and a button move the
-             *   focus on the button,
-             * - if the modal has a long text inside (e.g. a privacy
-             *   statement) move the focus on the first heading inside
-             *   the modal,
-             * - otherwise just focus the modal.
-             *
-             * When you close the overlay restore the focus on the
-             * button that opened the modal.
-             */
-            if (overlayOpen) {
-                modal.focus();
-            } else {
-                modalInstance.focus();
-                modalInstance = null;
-            }
-        }, false);
-    });
-
-    /**
-     * Attach class `noscroll` to the body to prevent background scrolling
-     * and set `aria` attributes for accessible devices
-     */
-    document.body.addEventListener('keyup', (ev) => {
-        if (ev.key === "Escape" && modal.getAttribute('aria-hidden') === 'false') {
-            modal.setAttribute('aria-hidden', 'true');
-            body.classList.toggle('noscroll', false);
-            modalInstance.focus();
-            modalInstance = null;
-        }
-    })
-</script>
 
 
 
