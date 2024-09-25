@@ -18459,21 +18459,23 @@ aside .owl-nav-top .owl-nav {
 .regisec {
     background: #6cb535;
     padding: 50px;
-    border-radius: 10px ;
+    border-radius: 0px 10px 10px 0px ;
     color: #fff;
 }
 .logisec {
     background: #fff;
     padding: 40px 50px 20px 50px;
-    border-radius: 10px;
+    border-radius: 10px 0px 0px 10px;
 }
 
 @media (max-width: 767px) {
     .logisec {
         padding: 20px 20px 20px 20px;
+        border-radius: 10px 10px 0px 0px;
     }
     .regisec {
         padding: 20px 25px 20px 25px;
+        border-radius: 0px 0px 10px 10px;
     }
     .login-page-bg {
         padding: 30px 0px 30px 0;
