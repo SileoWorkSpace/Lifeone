@@ -15,167 +15,138 @@
     }
 </style>
 <script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<div class="content-wrapper-before"></div>
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="ptitle">
-            <h4 class="mb-1 mt-0">Order By Associate</h4>
-        </div>
-    </div>
+            <h4 class="mb-1 mt-0 text-white">Place Order</h4>
 
+        </div>
+
+    </div>
     <div id="no-more-tables">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="box">
-                    <div class="box-body">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-4 col-lg-2">
-                                <div class="form-group">
-                                    <label>Product<span class="text-danger"></span></label>
-                                    @Html.DropDownListFor(m => m.PrdId, (IEnumerable<SelectListItem>)ViewBag.Product, new { @class = "select form-control", @onchange = "GetProductDetails(this)" })<br />
-                                    <label id="OrbitName"></label> <label id="BoxQty"></label>
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2">
-                                <div class="form-group">
-                                    <label>Amount<span class="text-danger"></span></label>
-                                    @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @readonly = "readonly" })
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2">
-                                <div class="form-group">
-                                    <label>Point Value<span class="text-danger"></span></label>
-                                    @Html.TextBoxFor(m => m.PointValue, new { @class = "form-control", @readonly = "readonly" })
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2">
-                                <div class="form-group">
-                                    <label>Quantity<span class="text-danger"></span></label>
-                                    @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @onchange = "UpdateSubTotal(this);", @onkeypress = "return isNumberKey(event)", @maxlength = "5" })
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2">
-                                <div class="form-group">
-                                    <label>SubTotal<span class="text-danger"></span></label>
-                                    @Html.TextBoxFor(m => m.TotalAmt, new { @class = "form-control", @readonly = "readonly" })
-                                </div>
-                            </div>
-                            <div class="col-sm-6 col-md-4 col-lg-2">
-                                <label style="visibility:hidden;">btn</label>
-                                <div style="padding-left: 5%;">
-                                    <input type="button" value="Add Item" class="btn btn-success" onclick="AddItem()">
-                                </div>
-                            </div>
-                        </div>
+                       <div class="card">
+                           <div class="card-body">
+                               <div class="row p-0">
+                                   <div class="col-sm-6 col-md-4 col-lg-2">
+                                       <div class="form-group">
+                                           <label>Product<span class="text-danger"></span></label>
+                                           @Html.DropDownListFor(m => m.PrdId, (IEnumerable<SelectListItem>)ViewBag.Product, new { @class = "select form-control", @onchange = "GetProductDetails(this)" })<br />       
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-6 col-md-4 col-lg-2">
+                                       <div class="form-group">
+                                           <label>Amount<span class="text-danger"></span></label>
+                                           @Html.TextBoxFor(m => m.Amount, new { @class = "form-control", @readonly = "readonly" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-6 col-md-4 col-lg-2">
+                                       <div class="form-group">
+                                           <label>Point Value<span class="text-danger"></span></label>
+                                           @Html.TextBoxFor(m => m.PointValue, new { @class = "form-control", @readonly = "readonly" })
+                                       </div>
+                                       @Html.HiddenFor(m => m.OfferQuantity)
+                                   </div>
+                                   <div class="col-sm-6 col-md-4 col-lg-2">
+                                       <div class="form-group">
+                                           <label>Quantity<span class="text-danger"></span></label>
+                                           @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @onchange = "UpdateSubTotal(this);", @onkeypress = "return isNumberKey(event)", @maxlength = "5" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-6 col-md-4 col-lg-2">
+                                       <div class="form-group">
+                                           <label>SubTotal<span class="text-danger"></span></label>
+                                           @Html.TextBoxFor(m => m.TotalAmt, new { @class = "form-control", @readonly = "readonly" })
+                                       </div>
+                                   </div>
+                                   <div class="col-sm-6 col-md-4 col-lg-2">
+                                       <label style="visibility:hidden;">btn</label>
+                                       <div style="padding-left: 5%;">
+                                           <input type="button" value="Add Item" class="btn btn-success" onclick="AddItem()">
+                                       </div>
+                                   </div>
+                               </div>
+                           </div>
+                       </div>
                     </div>
-                </div>
-            </div>
+                
 
-            <div class="col-lg-12">
-                <div class="box">
-                    <div class="box-body">
-                        <div>
+        
                             <div class="row">
-                                <div class="col-md-12" id="replacetarget">
-                                    <div>
-                                        <div class="box-body">
-                                            <table class="table table-striped table-hover table-sm" id="TmpProdgrd">
-                                                <thead>
-                                                    <tr>
-                                                        <th>Sn</th>
-                                                        <th>Product</th>
-                                                        <th>Quantity</th>
-                                                        <th>Price(₹)</th>
-                                                        <th>PV</th>
-                                                        <th>Total BV</th>
-                                                        <th>Amount(₹)</th>
-                                                        <th>Action</th>
-                                                    </tr>
-                                                </thead>
+                                <div class="col-md-12 p-0" id="replacetarget">
+                                    <div class="card">
+                                        <div class="card-body"
+                                            <div class="table table-responsive">
+                                                <table class="table table-striped table-hover table-sm" id="TmpProdgrd">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Sn</th>
+                                                            <th>Product</th>
+                                                            <th>Quantity</th>
+                                                            <th>Price(₹)</th>
+                                                            <th>PV</th>
+                                                            <th>Total PV</th>
+                                                            <th>Amount(₹)</th>
+                                                            <th>Action</th>
+                                                        </tr>
+                                                    </thead>
 
-                                                <tbody>
-                                                </tbody>
-                                                <tfoot>
-                                                </tfoot>
-                                            </table>
+                                                    <tbody>
+                                                    </tbody>
+                                                    <tfoot>
+                                                    </tfoot>
+                                                </table>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <form action="/Franchise/OrderProducts" enctype="multipart/form-data" method="post">
-                                <div class="box box-warning">
-                                    <div class="box-body">
-                                        <div class="row">
-                                            <div class="col-sm-9 col-xs-12">
-                                                <div class="form-group">
-                                                    <label>Remark</label>
-                                                    @Html.TextAreaFor(m => m.PaymentRemark, new { @class = "form-control", @rows = "4", @col = "4" })
-                                                </div>
-                                            </div>
-                                            <div class="col-sm-3 col-xs-12">
-                                                @*<div class="form-group">
-                                                    <label class="hidden-phone">Payment Mode</label>
-                                                    <select id="PaymentMode" name="PaymentMode" class="form-control">
-                                                        <option value="0">Payment Mode</option>
-                                                        <option value="Cash">Cash</option>
-                                                        <option value="Cheque">Cheque</option>
-                                                        <option value="Demand Draft">Demand Draft</option>
-                                                        <option value="Bankers Cheque">Bankers Cheque</option>
-                                                        <option value="NEFT">NEFT</option>
-                                                        <option value="RTGS">RTGS</option>
-                                                        <option value="IMPS">IMPS</option>
-                                                        <option value="Online">Payment Gateway</option>
-                                                    </select>
-                                                    <input type="hidden" id="hdnTotQty" name="hdnTotQty">
-                                                </div>*@
-                                                <div class="form-group">
-                                                    <button class="btn btn-success btn-block waves-effect waves-light" type="button" onclick="return Validate1()" value="Submit Request">Submit Request</button>
-                                                </div>
-                                            </div>
-                                        </div>
+                           <div class="card">
+                               <div class="card-body">
+                                   <form action="" enctype="multipart/form-data" method="post">
+                                       <div class="box box-warning">
+                                           <div class="box-body">
+                                               <div class="row">
+                                                   <div class="col-md-3 form-group">
+                                                       <label>Pin Code<span style="color:red;">*</span></label>
+                                                       @*<input type="text" id="Pincode" onchange="GetDistrictCityStateDetailsByPincode()" name="PinCode" class="form-control" onkeypress="return isNumberKey(event)" />*@
+                                                       @Html.TextBoxFor(m => m.PinCode, new { @class = "form-control", @id = "Pincode", @onkeypress = "return isNumberKey(event)", @onchange = "GetDistrictCityStateDetailsByPincode()", @MaxLength = "6" })
+                                                   </div>
 
-                                        @*<div style="display:none;" id="divpaymenttype">
+                                                   <div class="col-md-3  mb-2">
+                                                       <label>City<span style="color:red;">*</span></label>
+                                                       @Html.TextBoxFor(m => m.City, new { @class = "form-control", @readonly = "readonly" })
+                                                       @*<select id="DistrictName" class="form-control city-name" name="City" onchange="BindDistrictDetail()"><option value="">--Select City--</option></select>*@
+                                                       @Html.HiddenFor(m => m.DistrictId)
+                                                   </div>
+                                                   <div class="col-md-3 mb-2">
+                                                       <label>State<span style="color:red;">*</span></label>
+                                                       @Html.TextBoxFor(m => m.State, new { @class = "form-control", @readonly = "readonly" })
+                                                       @Html.HiddenFor(m => m.StateId)
 
-                                            <div class="row">
-                                                <div class="col-sm-6 col-md-4 col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Cheque/DD No./Bank Transaction No.</label>
-                                                        @Html.TextBoxFor(m => m.ChequeDDNo, new { @class = "form-control", @maxlength = "30" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-4 col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Cheque/DD Date/Transaction Date</label>
-                                                        @Html.TextBoxFor(m => m.ChequeDDDate, new { @class = "form-control", @maxlength = "30", @type = "date" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-4 col-lg-3">
-                                                    <div class="form-group">
-                                                        <label>Bank Name</label>
-                                                        @Html.TextBoxFor(m => m.BankName, new { @class = "form-control" })
-                                                    </div>
-                                                </div>
-                                                <div class="col-sm-6 col-md-4 col-lg-3" style="display:none;" id="divpaymenttypeSlip">
-                                                    <div class="form-group">
-                                                        <label>Payment Slip</label>
-                                                        @Html.TextBoxFor(m => m.PaymentSlip, new { @type = "file", @class = "form-control", onchange = "UploadFile(this,'PaymentSlip','ManageFranchise')" })
-                                                        @Html.HiddenFor(m => m.HdnPaymentSlip)
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>*@
-
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                                   </div>
+                                                   <div class="col-md-12">
+                                                       <div class="form-group">
+                                                           <label>Address</label>
+                                                           @Html.TextAreaFor(m => m.CustomerAddress, new { @class = "form-control", @rows = "4", @col = "4" })
+                                                       </div>-
+                                                   </div>
+                                                   <div class="col-md-3">
+                                                       <div class="form-group">
+                                                           <button class="btn btn-success btn-block waves-effect waves-light" type="button" onclick="return Validate1()" value="Submit Request">Place Order</button>
+                                                       </div>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                       </div>
+                                   </form>
+                               </div>
+                           </div>
+                        
         </div>
-    </div>
+   
     <input type="hidden" id="TotalProductAmount" />
 
-</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 <script>
     $(".select").select2({
@@ -187,11 +158,6 @@
 <script>
     $(document).ready(function ()
     {
-        if (sessionStorage.getItem("requestId") == null)
-        {
-            sessionStorage.setItem("requestId","0")
-        }
-
         GetOrderTemp();
     })
 
@@ -210,7 +176,7 @@
             $('#dv_Ordit').css('display','block');
             $('#Fk_OrbitId').html('');
             $.ajax({
-                url: "/Franchise/ManageFranchise/BindOrbit",
+                url: "/Associate/AssociateOrder/BindOrbit",
                 type: "POST",
                 dataType: 'json',
                 contentType: "application/json",
@@ -238,7 +204,7 @@
         if (_catId != undefined && _catId != "")
         {
                 $.ajax({
-                    url: "/Franchise/ManageFranchise/BindProduct",
+                    url: "/Associate/AssociateOrder/BindProduct",
                     type: "POST",
                     dataType: 'json',
                     data: JSON.stringify({ CategoryId: _catId }),
@@ -264,7 +230,8 @@
     }
 
     function GetProductDetails(obj)
-        {
+    {
+        debugger;
             var _prId = $('#' + obj.id + '').val()
             if (_prId != undefined && _prId != "" && _prId != "0") {
                 $.ajax({
@@ -274,113 +241,102 @@
                     data: JSON.stringify({ PrdId: _prId }),
                     contentType: "application/json",
                     success: function (result) {
+                        debugger;
+                        console.log(result);
+                        
                         if (result != null) {
                             $('#OrbitName').text(result.OrbitName);
                             $('#BoxQty').text('| Box Qty: ' + result.BoxQty);
                             $('#Amount').val(result.Amount);
-                            $('#PointValue').val(result.PointValue)
-
+                            $('#PointValue').val(result.PointValue); 
+                            $('#OfferQuantity').val(result.OfferQuantity);
                         }
-
                     },
                     error: function (err) {
                         showSnazzyErrorMessage(err.statusText);
                         return false;
                     }
                 });
-        }
-        else {
-                             $('#OrbitName').text('');
-            $('#BoxQty').text('');
-                        }
+            }
+        
     }
 
-    function Cleartext() {
-        $('#PrdId').val(0);
-        $('#CategoryId').val(0);
-
-
+    function Cleartext() { 
+        debugger;
+        $('#PrdId').val(0);      
         $('#Amount').val('');
         $('#PointValue').val('');
         $('#Quantity').val('');
         $('#TotalAmt').val('');
     }
+    function AddItem() {
+        debugger;
+        //var catId = $('#CategoryId').val();
+       // var reqId = sessionStorage.getItem("requestId");//$('#RequestId').val();
+        var prdId = $('#PrdId').val();
+        var amount = $('#Amount').val();
+        var pV = $('#PointValue').val();
+        var quantity = $('#Quantity').val();
+        var totalAmt = $('#TotalAmt').val();
 
-    function AddItem()
-    {
+        if (prdId == "" || prdId == "0") {
 
-                var catId = $('#CategoryId').val();
-                var reqId = sessionStorage.getItem("requestId");//$('#RequestId').val();
-                var prdId =    $('#PrdId').val();
-                var amount =   $('#Amount').val();
-                var pV =       $('#PointValue').val();
-                var quantity = $('#Quantity').val();
-                var totalAmt = $('#TotalAmt').val();
-
-                if (catId == "" || catId == "0") {
-
-                    showSnazzyErrorMessage("Please select Product Category")
-                    return false;
-                }
-                else if (prdId == "" || prdId == "0") {
-
-                    showSnazzyErrorMessage("Please select Product");
-                    return false;
-                }
-                else if (quantity == "") {
-
-                    showSnazzyErrorMessage("Please enter Quantity");
-                    return false;
-                }
-                else if (parseInt(quantity) == 0) {
-                    showSnazzyErrorMessage("Quantity can not be 0.");
-                    return false;
-                }
-                else
-                {
-
-                    $.ajax({                    
-                        url: "/Associate/AssociateOrder/GetProductDetails",
-                    type: "POST",
-                    dataType: 'json',
-                    data: JSON.stringify({CategoryId:catId ,PrdId: prdId,Amount:amount,PointValue:pV,Quantity:quantity,TotalAmt:totalAmt,ReqId:reqId}),
-                        contentType: "application/json",
-                    async:false,
-                    success: function (result) {
-                        if (result != null)
-                        {
-                            if (result.Code == 1) {
-
-                                $('#RequestId').val(result.RequestId);
-                                sessionStorage.setItem("requestId",result.RequestId);
-                                GetOrderTemp(); // window.location.reload();//
-                                showSnazzySuccessMessage("Item Added Successfully.");
-                                Cleartext();
-                            }
-                            else {
-
-                                showSnazzyErrorMessage("Please try again later");
-                            }
-                        }
-
-                    },
-                    error: function (err) {
-                        alert(err.statusText);
-                        return false;
-                    }
-                });
-
-                }
+            showSnazzyErrorMessage("Please select Product");
+            return false;
         }
+        else if (quantity == "") {
+
+            showSnazzyErrorMessage("Please enter Quantity");
+            return false;
+        }
+        else if (parseInt(quantity) == 0) {
+            showSnazzyErrorMessage("Quantity can not be 0.");
+            return false;
+        }
+        else {
+
+            $.ajax({
+                url: "/Associate/AssociateOrder/AddProduct",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ PrdId: prdId, Amount: amount, PointValue: pV, Quantity: quantity, TotalAmt: totalAmt }),
+                contentType: "application/json",
+                async: false,
+                success: function (result) {
+                    if (result != null) {
+                        if (result.Code == 1) {
+
+                            //$('#RequestId').val(result.RequestId);
+                            //sessionStorage.setItem("requestId", result.RequestId);
+                            GetOrderTemp(); // window.location.reload();//
+                            showSnazzySuccessMessage("Item Added Successfully.");
+                            Cleartext();
+                        }
+                        else {
+
+                            showSnazzyErrorMessage("Please try again later");
+                        }
+                    }
+
+                },
+                error: function (err) {
+                    alert(err.statusText);
+                    return false;
+                }
+            });
+
+        }
+    }
 
     function GetOrderTemp()
     {
+        debugger;
         var reqId = 0;
-            if (sessionStorage.getItem("requestId")!=0) {
-                reqId = sessionStorage.getItem("requestId");
-            }
+            //if (sessionStorage.getItem("requestId")!=0) {
+            //    reqId = sessionStorage.getItem("requestId");
+            //}
 
-              var reqId = sessionStorage.getItem("requestId");//$('#RequestId').val();@*'@SessionManager.RequestId';*@
+             // var reqId = sessionStorage.getItem("requestId");//$('#RequestId').val();@*'@SessionManager.RequestId';*@
               $.ajax({
                 url: "/Associate/AssociateOrder/GetOrderTemp",
               type: "POST",
@@ -389,6 +345,7 @@
               contentType: "application/json",
               async:false,
                   success: function (result) {
+                      console.log(result)
                 if (result != null)
                 {
                     var html = "";
@@ -401,12 +358,14 @@
                     {
                         TotalQty = TotalQty + parseInt(result[i].Quantity);
                         TotalItemAmt = TotalItemAmt + parseFloat(result[i].Amount);
-                        TotalPv = TotalPv + (parseFloat(result[i].PointValue)*parseInt(result[i].Quantity));
-                        FinalAmount=FinalAmount+parseInt(result[i].Amount) * parseInt(result[i].Quantity);
+                        TotalPv = TotalPv + (parseFloat(result[i].PointValue) * parseInt(result[i].Quantity));
+                        FinalAmount = FinalAmount + parseInt(result[i].TotalAmt)
+                        //FinalAmount = FinalAmount+ result[i].TotalAmt
+                       /* FinalAmount=FinalAmount+parseInt(result[i].Amount) * parseInt(result[i].Quantity);*/
                         html += "<tr>"
-                        html += "<td>" + (i + 1) + "</td><td>" + result[i].ProductName + "</td><td><input style='width: 53px' maxlength='5' onkeypress = 'return isNumberKey(event)' type='text' value=" + result[i].Quantity + " onchange='BindUpdatedFigureAmt(this," + result[i].PK_KeyId +")'></td><td id='tdPrice'>" + result[i].Amount + "</td><td id='tdPV'>" + result[i].PointValue + "</td><td>" + (parseInt(result[i].PointValue) * parseInt(result[i].Quantity)) + "</td><td id='tdAmt'>" + (parseInt(result[i].Amount) * parseInt(result[i].Quantity)) + "</td></td><td><a id='btn_del' title='Delete' data-toggle='tooltip' class='btn btn-danger btn-xs' onclick='DeleteProduct(" + result[i].PK_KeyId + ");'><i class='fa fa-trash'></i></a></td></tr>";
+                        html += "<td>" + (i + 1) + "</td><td>" + result[i].ProductName + "</td><td>"+ result[i].Quantity +"</td><td id='tdPrice'>" + result[i].Amount + "</td><td id='tdPV'>" + result[i].PointValue + "</td><td>" + (parseInt(result[i].PointValue) * parseInt(result[i].Quantity)) + "</td><td id='tdAmt'>" + result[i].TotalAmt + "</td></td><td><a id='btn_del' title='Delete' data-toggle='tooltip' class='' onclick='DeleteProduct(" + result[i].PK_Id + ");'><i class='fa fa-trash text-danger'></i></a></td></tr>";
                     }
-                    html1 += "<tr><th colspan='2'>Total:</th><th>" + TotalQty +"</th><th></th><th></th><th>"+TotalPv+"</th><th style='text-align:left'>"+FinalAmount+"</th></tr>"
+                    html1 += "<tr><th colspan='2'>Total:</th><th>" + TotalQty +"</th><th></th><th></th><th>"+TotalPv+"</th><th style='text-align:left'>"+FinalAmount+"</th><th></th></tr>"
                     $('#TmpProdgrd tbody').html('');
                     $('#TmpProdgrd tfoot').html('');
                     $('#TmpProdgrd tbody').append(html);
@@ -454,32 +413,24 @@
 
     function UpdateSubTotal()
     {
-        debugger;
-         var Qty = $('#Quantity').val();
-         var Amount = $('#Amount').val();
-         var TotalAmt = (parseInt(Qty) == NaN ? 0 : parseInt(Qty)) * (parseFloat(Amount));
-         $('#TotalAmt').val(TotalAmt);
-    }
-
-    $('#PaymentMode').on('change', function ()
-    {
-        if ($('#PaymentMode').val() == "Cash" || $('#PaymentMode').val() == "0") {
-            $('#divpaymenttype').css('display', 'none');
-            $('#divpaymenttypeSlip').css('display', 'none');
-        }
-        else if ($('#PaymentMode').val() == "Online") {
-             $('#divpaymenttype').css('display', 'none');
-            $('#divpaymenttypeSlip').css('display', 'none');
-
+        debugger;        
+        var Qty = $('#Quantity').val();
+        var Amount = $('#Amount').val();
+        var OfferQty = $('#OfferQuantity').val();       
+        var Quantity = (parseInt(Qty) * parseInt(OfferQty));
+        var TotalAmt = (parseInt(Quantity)) * (parseFloat(Amount));
+        var TotalAmount = (parseInt(Qty)) * (parseFloat(Amount));
+        if (OfferQty == "") {
+            $('#TotalAmt').val(TotalAmount);
         }
         else {
-             $('#divpaymenttype').css('display', 'block');
-            $('#divpaymenttypeSlip').css('display', 'block');
-        }
-    })
-
+            $('#TotalAmt').val(TotalAmt);
+        }            
+    }
+    
     function DeleteProduct(Id)
     {
+        debugger;
         if (confirm("Are you sure want to delete this Item ?"))
         {
             if (Id != null && Id != undefined) {
@@ -509,61 +460,38 @@
     }
 
     function Validate1()
-    {
+    {       
         debugger
-      if ($('#TotalProductAmount').val() == undefined || $('#TotalProductAmount').val() == null) {
-          showSnazzyErrorMessage('Some internal problem');
-          return false
+          
+        var State = $('#State').val();       
+        var City = $('#City').val();       
+        var PinCode = $('#Pincode').val();       
+        var Address = $('#CustomerAddress').val();
+
+        if (PinCode == "" || PinCode == null) {
+            alert('Please Enter Pincode')
+            return false;
         }
-        if ($('#PaymentMode').val() == "0") {
-                    showSnazzyErrorMessage('Please select Payment Mode!');
-                    return false
-                }
-      if ($('#PaymentMode').val() != "Cash" && $('#PaymentMode').val() != "Online" && $('#PaymentMode').val() != "0") {
-            if ($('#ChequeDDNo').val() == "") {
-                showSnazzyErrorMessage('Please enter Cheque/DD No/Bank Transaction Number !');
-                return false
-            }
-            else if ($('#ChequeDDDate').val() == undefined || $('#ChequeDDDate').val() == "") {
-                showSnazzyErrorMessage('Please enter Cheque/DD/Bank Date !');
-                return false
-            }
-            else if ($('#BankName').val() == undefined || $('#BankName').val() == "") {
-                showSnazzyErrorMessage('Please enter Bank Name !');
-                return false
-          }
-            else if ($('#HdnPaymentSlip').val() == undefined || $('#HdnPaymentSlip').val() == "") {
-                showSnazzyErrorMessage('Please upload Payment Receipt !');
-                return false
-            }
+        if (Address == "" || Address == null) {
+            alert('Please Enter Address')
+            return false;
         }
-        var _totalItemAmt = $('#TotalProductAmount').val();
-        var PayMode = $('#PaymentMode').val();
-        var _hdnReceipt = $('#HdnPaymentSlip').val();
-        var _BankName = $('#BankName').val();
-        var _TranNo = $('#ChequeDDNo').val();
-        var _TranDate = $('#ChequeDDDate').val();
-        var _Remark = $('#PaymentRemark').val();
-        var _ReqId = sessionStorage.getItem("requestId");
+        
         $.ajax({
             url: "/Associate/AssociateOrder/SaveProduct",
                type: "POST",
                dataType: 'json',
-               data: JSON.stringify({ TotalItemAmt: _totalItemAmt,PaymentMode: PayMode,ChequeDDNo:_TranNo,BankName:_BankName,HdnPaymentSlip:_hdnReceipt,ChequeDDDate:_TranDate,PaymentRemark:_Remark,ReqId:_ReqId}),
+            data: JSON.stringify({ State: State, City: City, PinCode: PinCode, CustomerAddress: Address }),
                contentType: "application/json",
                success: function (result) {
-                   if (result != null) {
-                       if (result.Response == "Online") {
-                        window.location.href = "/Franchise/ManageFranchise/CreateOrder";
-                       }
-                       else if (result.Code == 1) {
-                           showSnazzySuccessMessage(result.Remark);
-                          // window.location.href = "/Franchise/FranchiseOrderStatus/ViewRequestdOrderStatus";
-                           window.location.href = "/Franchise-View-Requested-OrderStatus";
+                   if (result != null) {                       
+                       if (result.Code == 1) {
+                           alert(result.Remark);                        
+                           window.location.href = "/Associate/AssociateOrder/OrderByAssociate";
                        }
                        else
                        {
-                           showSnazzyErrorMessage('Server Internal Error !');
+                           showSnazzyErrorMessage(result.Message);
                        }
                    }
                },
@@ -573,62 +501,7 @@
                    return false;
                }
               });
-    }
-
-    function UploadFile(obj, subdir, type)
-    {
-        var Id = $(obj).attr("Id");
-        var data = new FormData();
-        var files = $("#" + Id).get(0).files;
-
-        if (files.length > 0) {
-            data.append("file", files[0]);
-             data.append("subdir", subdir);
-        }
-        else
-        {
-            showSnazzyErrorMessage('Please select file to upload.');
-            return false;
-        }
-        var extension = $("#" + Id).val().split('.').pop().toUpperCase();
-        if (extension != "PNG" && extension != "JPG" && extension != "JPEG" && extension != "BMP")
-        {
-            showSnazzyErrorMessage('Invalid image file format.Only jpg,jpeg,png,bmp files are allow');
-            return false;
-        }
-        $.ajax({
-            url: '/Common/Uploadfile',
-            type: "POST",
-            processData: false,
-            data: data,
-            dataType: 'json',
-            contentType: false,
-            success: function (response) {
-                if (response != null || response != '') {
-                    if (response.Result == "success") {
-                        $("#" + Id + "Path").val("");
-                        $("#HdnPaymentSlip").val(response.Path);
-                        //$("#divpreview").show();
-                        //$("#divpreview").empty();
-                        //$('#imgStudent').attr('src', '');
-                        //$("#divpreview").append('<img id="imgStudent" class="m-t-20" src="' + response.Path.replace('~', '') + '" height="40px" width="40px"/>');
-                        showSnazzySuccessMessage(response.Msg);
-                    }
-                    else {
-                         showSnazzyErrorMessage(response.Msg);
-                    }
-
-                }
-
-            },
-            error: function (er) {
-                showSnazzyErrorMessage('An error occured');
-            }
-        });
-
-
-    }
-
+    }  
     function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode;
             if (charCode != 46 && charCode > 31
@@ -644,6 +517,55 @@
                 return true;
             }
             return false;
+    }
+
+    function GetDistrictCityStateDetailsByPincode() {
+        // Show loader
+        $('#loader').show();
+        $("#overlayer").show();
+
+        if ($('#Pincode').val() == "" || $('#Pincode').val() == 0) {
+            // If Pincode is empty or 0, clear City and State fields
+            $('#City').val('');
+            $('#State').val('');
+            // Hide loader
+            $('#loader').hide();
+            $("#overlayer").hide();
+            return false;
         }
+
+        $.ajax({
+            url: '/Home/GetLocationByPin',
+            type: "POST",
+            data: JSON.stringify({ "pin": $('#Pincode').val() }),
+            dataType: 'json',
+            contentType: 'application/json',
+            success: function (response) {
+                if (response != null && response.length > 0) {
+                    // Set City and State based on response
+                    $("#City").val(response[0].District);
+                    $("#State").val(response[0].State);
+                } else {
+                    // If response is empty or null, show warning
+                    swal('', "Data does not exist", 'warning');
+                }
+            },
+            error: function (er) {
+                // Show error message
+                swal('', "An Error Occurred", 'error');
+            },
+            complete: function () {
+                // Hide loader regardless of success or error
+                $('#loader').hide();
+                $("#overlayer").hide();
+            }
+        });
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
 </script>
 

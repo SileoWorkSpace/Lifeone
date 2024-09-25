@@ -25,23 +25,20 @@ namespace LifeOne.Areas.Associate.Controllers
         public ActionResult OrderByAssociate()
         {
             try
-            {
-                ViewBag.ProductCategory = DALBindCommonDropdown.BindDropdown(2, 0);
-                ViewBag.Product = DALBindCommonDropdown.BindDropdown(1, 0);
-
+            {               
+                ViewBag.Product = DALBindCommonDropdown.BindProductDropdown(0, 0);
             }
             catch (Exception)
             {
                 throw;
             }
-
             return View();
         }
         public JsonResult GetProductDetails(MFranchiseorderRequest _data)
         {
             try
             {
-                MFranchiseorderRequest obj = new DALFranchise().GetProductDetails(_data);
+                MFranchiseorderRequest obj = new DALFranchise().GetAllProductDetails(_data);
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -54,7 +51,7 @@ namespace LifeOne.Areas.Associate.Controllers
         {
             try
             {
-                MSimpleString obj = FranchiseOrderService.AddProductService(_data);
+                MSimpleString obj = FranchiseOrderService.AddAssociateProduct(_data);
                 return Json(obj, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -62,15 +59,14 @@ namespace LifeOne.Areas.Associate.Controllers
 
                 throw;
             }
-
         }
-
         public JsonResult GetOrderTemp(MSimpleString _data)
-        {
+       {
             try
             {
                 MFranchiseorderRequest obj = new MFranchiseorderRequest();
-                List<MFranchiseorderRequest> _objlst = DALFranchise.GetOrderTemp(_data);
+                _data.Fk_MemId  = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+                List<MFranchiseorderRequest> _objlst = DALFranchise.AssociateOrderTemp(_data);
                 return Json(_objlst, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -83,7 +79,7 @@ namespace LifeOne.Areas.Associate.Controllers
         {
             try
             {
-                MSimpleString _objlst = DALFranchise.DeleteProductTemp(_data);
+                MSimpleString _objlst = DALFranchise.DeleteAssociateProductTemp(_data);
                 return Json(_objlst, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)
@@ -109,17 +105,10 @@ namespace LifeOne.Areas.Associate.Controllers
 
             try
             {
-                if (_data.PaymentMode == "Online" && !_data.isOnlinePayDone)
-                {
-                    Session["OrderSession"] = _data;
-                    return Json(new { Response = "Online" }, JsonRequestBehavior.AllowGet);
-                }
-                else
-                {
-                    MSimpleString result = FranchiseOrderService.SaveProductService(_data);
+                _data.Fk_Memid = SessionManager.AssociateFk_MemId;
+                MSimpleString result = FranchiseOrderService.SaveAssociateProduct(_data);
                     return Json(result, JsonRequestBehavior.AllowGet);
-                }
-
+               
             }
             catch (Exception)
             {
