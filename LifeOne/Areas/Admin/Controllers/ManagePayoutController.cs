@@ -269,8 +269,6 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(ObjList);
         }
 
-
-
         public ActionResult AssociateBusinessReport(AssociateBusinessModel model)
         {
             if (!PermissionManager.IsActionPermit("DS Direct Business Report", ViewOptions.FormView))

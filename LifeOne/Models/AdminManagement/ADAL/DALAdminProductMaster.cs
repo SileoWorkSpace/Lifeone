@@ -34,6 +34,7 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 queryParameters.Add("@BoxPv", obj.BoxPV);
                 queryParameters.Add("@Fk_OrbitType", obj.FK_OrbitType);
                 queryParameters.Add("@HSNCode", obj.HSNCode);
+                queryParameters.Add("@OfferedQty", obj.OfferQuantity);
                 queryParameters.Add("@DirectionOfUse", obj.DirectionOfUse);
                 queryParameters.Add("@Doses", obj.Doses);
                 queryParameters.Add("@Avalibility", obj.Avalibility);
@@ -74,6 +75,7 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 queryParameters.Add("@Fk_OrbitType", obj.FK_OrbitType);
                 queryParameters.Add("@Updatedby", SessionManager.Fk_MemId);
                 queryParameters.Add("@HSNCode", obj.HSNCode);
+                queryParameters.Add("@OfferedQty", obj.OfferQuantity);
                 queryParameters.Add("@DirectionOfUse", obj.DirectionOfUse);
                 queryParameters.Add("@Doses", obj.Doses);
                 queryParameters.Add("@Avalibility", obj.Avalibility);
