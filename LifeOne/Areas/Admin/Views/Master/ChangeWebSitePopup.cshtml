@@ -4,7 +4,28 @@
     ViewBag.Title = "Change Website Pop-up";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@{
+    string msg = Convert.ToString(TempData["msg"]);
+    string code = Convert.ToString(TempData["code"]);
+    if (msg != "")
+    {
+        if (code.Equals("1"))
+        {
+            <div class="alert alert-success m-t-30" id="divsuccess">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i> <strong>Success!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
 
+        }
+        else
+        {
+            <div class="alert alert-danger m-t-30" id="divUpdate">
+                <i class="mdi mdi-checkbox-multiple-marked-outline"></i>  <strong>Error!</strong> @msg
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"> <span aria-hidden="true">×</span> </button>
+            </div>
+        }
+    }
+}
 <!-- Start Content-->
 <div class="container-fluid">
     <div class="row page-titles">
@@ -21,7 +42,7 @@
         <div class="pbutton">
             <div class="right text-right">
                 <a href="" id="btnAdd" class="btn btn-success btn-sm" onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
-                    <i class="fa fa-plus" aria-hidden="true"></i>Add New 
+                    <i class="fa fa-plus" aria-hidden="true"></i>Add New
                 </a>
             </div>
         </div>
@@ -74,15 +95,15 @@
                                                 <td>@item.CreationDate</td>
                                                 <td>@item.UpdateDate</td>
                                                 <td>
-                                                <a href="/Admin/Master/DeleteWebSidePopup?abc=@item.Id"><i class="fa fa-trash"></i></a>
+                                                    <a href="/Admin/Master/DeleteWebSidePopup?abc=@item.Id"><i class="fa fa-trash"></i></a>
                                                 </td>
                                                 @if (PermissionManager.IsActionPermit("Manage App Dashboard", ViewOptions.FormUpdate))
                                                 {
                                                     @*<td>
-                                                        <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>
-                                                    </td>*@
+                                                            <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>
+                                                        </td>*@
 
-                                                    
+
                                                 }
 
 
@@ -193,7 +214,7 @@
 
     </script>*@
 
-@using (Html.BeginForm("ChangeWebSitePopup", "Master",new { area = "Admin" }, FormMethod.Post, new {@id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("ChangeWebSitePopup", "Master", new { area = "Admin" }, FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -221,7 +242,7 @@
                 </div>
                 <div class="modal-footer">
                     <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
-                  
+
                     <a href="/Admin-UploadImage" class="btn btn-danger"> Cancel</a>
                 </div>
             </div>

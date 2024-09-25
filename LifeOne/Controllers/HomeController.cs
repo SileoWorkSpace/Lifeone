@@ -49,8 +49,13 @@ namespace LifeOne.Controllers
         {
             string time = DateTime.Now.ToString("ddMMyyyyhhMMss") + "_" + 4050;
             WebSitePopup model = DALProductServices.WebSitePopup();
-            ViewBag.PopupStatus = model.Status;
-            ViewBag.ImageUrl = model.ImageUrl;
+
+            if (model != null)
+            {
+                ViewBag.PopupStatus = model.Status;
+                ViewBag.ImageUrl = model.ImageUrl;
+            }
+            
 
 
             if (!string.IsNullOrEmpty(Add))

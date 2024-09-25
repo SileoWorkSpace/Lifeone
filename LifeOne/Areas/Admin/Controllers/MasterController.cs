@@ -768,8 +768,20 @@ namespace LifeOne.Areas.Admin.Controllers
 
             model.ActiveType = "Save";
             WebSitePopup status = ProductService.UpdateWebSitePopup(model);
+            if (status != null)
+            {
+                TempData["msg"] = status.Status;
+                TempData["code"] = Convert.ToString(status.Code);
+                return RedirectToAction("ChangeWebSitePopup");
+            }
+            else
+            {
+                TempData["msg"] = status.Status;
+                TempData["code"] = Convert.ToString(status.Code);
+            }
+            return View(model);
 
-            return RedirectToAction("ChangeWebSitePopup");
+            
         }
 
         public ActionResult DeleteWebSidePopup(string abc)
@@ -780,7 +792,19 @@ namespace LifeOne.Areas.Admin.Controllers
                 model.Id = abc;
                 model.ActiveType = "Delete";
                 WebSitePopup status = ProductService.UpdateWebSitePopup(model);
+                if (status != null)
+                {
+                    TempData["msg"] = status.Status;
+                    TempData["code"] = Convert.ToString(status.Code);
+                    return RedirectToAction("ChangeWebSitePopup");
+                }
+                else
+                {
+                    TempData["msg"] = status.Status;
+                    TempData["code"] = Convert.ToString(status.Code);
+                }
                 return RedirectToAction("ChangeWebSitePopup");
+
             }
             catch (Exception ex)
             {
