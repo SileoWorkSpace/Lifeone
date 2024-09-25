@@ -789,6 +789,8 @@
     <Compile Include="Models\ProductManagement\PEntity\MProductDetails.cs" />
     <Compile Include="Models\ProductManagement\PService\ProductDetailsService.cs" />
     <Compile Include="Models\DALReports.cs" />
+    <Compile Include="Models\Razorpay\Razorpay.cs" />
+    <Compile Include="Models\Razorpay\RazorpayCommon.cs" />
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\QUtility\API\GenericAPI.cs" />
@@ -4734,6 +4736,7 @@
     <Content Include="Views\Home\NewsandAnnouncement.cshtml" />
     <Content Include="Views\Home\Certificate.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\GalleryPhoto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -12,7 +12,7 @@
     decimal TotalAmount = 0;
     var Quantity = "";
 }
-<style>
+@*<style>
 
 
     .card-wrapper {
@@ -184,133 +184,134 @@
             padding-top: 0;
         }
     }
-</style>
+</style>*@
 <main class="main border-top single-product">
-    <div class="page-content mb-10 pb-6 d-flex justify-content-center">
-        <div class="col-md-10 mt-10">
-            @{
-                if (Model != null)
-                {
-                    using (Html.BeginForm("ProductDetails", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+    <div class="container">
+        <div class="page-content mb-10 pb-6 d-flex justify-content-center">
+            <div class="col-md-10 mt-10">
+                @{
+                    if (Model != null)
                     {
-                        <div class="row product product-single">
-                            <!-- card left -->
-                            <div class="col-md-6">
-                                <div class="product-imgs">
-                                    <div class="img-display">
-                                        <div class="img-showcase">
-                                            <img src="@Model.ProductImage" alt="@Model.ProductName">
-                                            <img src="@Model.ProductImage" alt="@Model.ProductName">
-                                            <img src="@Model.ProductImage" alt="@Model.ProductName">
-                                            <img src="@Model.ProductImage" alt="@Model.ProductName">
-                                        </div>
-                                    </div>
-                                    <div class="img-select">
-                                        <div class="img-item">
-                                            <a href="#" data-id="1">
+                        using (Html.BeginForm("ProductDetails", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                        {
+                            <div class="row product product-single">
+                                <!-- card left -->
+                                <div class="col-md-6">
+                                    <div class="product-imgs">
+                                        <div class="img-display">
+                                            <div class="img-showcase">
                                                 <img src="@Model.ProductImage" alt="@Model.ProductName">
-                                            </a>
-                                        </div>
-                                        <div class="img-item">
-                                            <a href="#" data-id="2">
                                                 <img src="@Model.ProductImage" alt="@Model.ProductName">
-                                            </a>
-                                        </div>
-                                        <div class="img-item">
-                                            <a href="#" data-id="3">
                                                 <img src="@Model.ProductImage" alt="@Model.ProductName">
-                                            </a>
-                                        </div>
-                                        <div class="img-item">
-                                            <a href="#" data-id="4">
                                                 <img src="@Model.ProductImage" alt="@Model.ProductName">
-                                            </a>
+                                            </div>
+                                        </div>
+                                        <div class="img-select">
+                                            <div class="img-item">
+                                                <a href="#" data-id="1">
+                                                    <img src="@Model.ProductImage" alt="@Model.ProductName">
+                                                </a>
+                                            </div>
+                                            <div class="img-item">
+                                                <a href="#" data-id="2">
+                                                    <img src="@Model.ProductImage" alt="@Model.ProductName">
+                                                </a>
+                                            </div>
+                                            <div class="img-item">
+                                                <a href="#" data-id="3">
+                                                    <img src="@Model.ProductImage" alt="@Model.ProductName">
+                                                </a>
+                                            </div>
+                                            <div class="img-item">
+                                                <a href="#" data-id="4">
+                                                    <img src="@Model.ProductImage" alt="@Model.ProductName">
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- card right -->
-                            <div class="col-md-6">
+                                <!-- card right -->
                                 <div class="col-md-6">
-                                    <div class="product-details">
-                                        <h1 class="product-name pt-2">@Model.ProductName</h1>
-                                        <div class="product-price">₹@Model.OfferedPrice</div>
-                                        <div class="ratings-container">
-                                            <div class="ratings-full">
-                                                @if (Model.ReviewCount == "1")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                    <div class="col-md-6">
+                                        <div class="product-details">
+                                            <h1 class="product-name pt-2">@Model.ProductName</h1>
+                                            <div class="product-price">₹@Model.OfferedPrice</div>
+                                            <div class="ratings-container">
+                                                <div class="ratings-full">
+                                                    @if (Model.ReviewCount == "1")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
 
-                                                }
-                                                @if (Model.ReviewCount == "2")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    @if (Model.ReviewCount == "2")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
 
-                                                }
-                                                @if (Model.ReviewCount == "3")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    @if (Model.ReviewCount == "3")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
 
-                                                }
-                                                @if (Model.ReviewCount == "4")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    @if (Model.ReviewCount == "4")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
 
-                                                }
-                                                @if (Model.ReviewCount == "5")
-                                                {
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
-                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    }
+                                                    @if (Model.ReviewCount == "5")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
 
-                                                }
-                                            </div>
-                                            @if (@Model.ReviewCount == "0")
-                                            {
-
-                                            }
-                                            else
-                                            {
-                                                <a href="#product-tab-reviews" class="link-to-tab rating-reviews">
-                                                    @Model.ReviewCount
-                                                </a>
-                                            }
-
-                                        </div>
-                                        <p class="product-short-desc mb-5">
-                                            @Model.ProductDescription
-                                        </p>
-                                        <hr class="product-divider">
-
-                                        <div class="product-form product-qty">
-                                            <div class="d-flex justify-content-start">
-                                                <span id="Pk_ProductId" style="display:none;"></span>
-                                                <div class="input-group mr-3">
-                                                    <button class=" d-icon-minus" onclick="return quantityChangeMinus();"></button>
-                                                    <input class="quantity form-control" type="number" min="1"
-                                                           value="1" id="Quantity123" onchange="return GetAddQTY();">
-                                                    <button class=" d-icon-plus" onclick="return quantityChangePluse();"></button>
+                                                    }
                                                 </div>
-                                                <a href="/Home/ShoppingCartList?id=@Model.Pk_ProductId" class="btn btn-sm btn-primary" onclick="return AddToCart23(@Model.Pk_ProductId)" id="btnAddCard">
-                                                    <i class="d-icon-bag"></i>&nbsp; Add
-                                                    To Cart
-                                                </a>
-                                                @*<button type="submit" class="btn-hover-bg-primary btn-hover-border-primary btn btn-lg btn-dark w-100" name="Add" value="Add to Cart" id="AddQuty" style="display:none">
+                                                @if (@Model.ReviewCount == "0")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    <a href="#product-tab-reviews" class="link-to-tab rating-reviews">
+                                                        @Model.ReviewCount
+                                                    </a>
+                                                }
+
+                                            </div>
+                                            <p class="product-short-desc mb-5">
+                                                @Model.ProductDescription
+                                            </p>
+                                            <hr class="product-divider">
+
+                                            <div class="product-form product-qty">
+                                                <div class="d-flex justify-content-start">
+                                                    <span id="Pk_ProductId" style="display:none;"></span>
+                                                    <div class="input-group mr-3">
+                                                        <button class=" d-icon-minus" onclick="return quantityChangeMinus();"></button>
+                                                        <input class="quantity form-control" type="number" min="1"
+                                                               value="1" id="Quantity123" onchange="return GetAddQTY();">
+                                                        <button class=" d-icon-plus" onclick="return quantityChangePluse();"></button>
+                                                    </div>
+                                                    <a href="/Home/ShoppingCartList?id=@Model.Pk_ProductId" class="btn btn-sm btn-primary" onclick="return AddToCart23(@Model.Pk_ProductId)" id="btnAddCard">
+                                                        <i class="d-icon-bag"></i>&nbsp; Add
+                                                        To Cart
+                                                    </a>
+                                                    @*<button type="submit" class="btn-hover-bg-primary btn-hover-border-primary btn btn-lg btn-dark w-100" name="Add" value="Add to Cart" id="AddQuty" style="display:none">
                                                         Add To Bag
                                                     </button>*@
+                                                </div>
                                             </div>
-                                        </div>
-                                        <hr class="product-divider mb-3">
+                                            <hr class="product-divider mb-3">
 
-                                        @*<div class="product-footer">
+                                            @*<div class="product-footer">
                                                 <div class="social-links mr-4">
                                                     <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
                                                     <a href="#" class="social-link social-twitter fab fa-twitter"></a>
@@ -329,120 +330,120 @@
                                                     </div>
                                             </div>*@
 
-                                        <!-- End Comments -->
-                                        <div class="review-form-section">
-                                            <div class="review-overlay"></div>
-                                            <div class="review-form-wrapper">
-                                                <div class="title-wrapper text-left">
-                                                    <h3 class="title title-simple text-left text-normal">
-                                                        Add
-                                                        a Review
-                                                    </h3>
-                                                    <p>
-                                                        Your email address will not be published. Required
-                                                        fields are marked *
-                                                    </p>
-                                                </div>
-                                                <div class="rating-form">
-                                                    <label for="rating" class="text-dark">
-                                                        Your rating *
-                                                    </label>
-                                                    <span class="rating-stars selected">
-                                                        <a class="star-1" href="#">1</a>
-                                                        <a class="star-2" href="#">2</a>
-                                                        <a class="star-3" href="#">3</a>
-                                                        <a class="star-4 active" href="#">4</a>
-                                                        <a class="star-5" href="#">5</a>
-                                                    </span>
-
-                                                    <select name="rating" id="rating" required=""
-                                                            style="display: none;">
-                                                        <option value="">Rate…</option>
-                                                        <option value="5">Perfect</option>
-                                                        <option value="4">Good</option>
-                                                        <option value="3">Average</option>
-                                                        <option value="2">Not that bad</option>
-                                                        <option value="1">Very poor</option>
-                                                    </select>
-                                                </div>
-                                                <form action="#">
-                                                    <textarea id="reply-message" cols="30" rows="6"
-                                                              class="form-control mb-4" placeholder="Comment *"
-                                                              required></textarea>
-
-                                                    <div class="review-medias">
-                                                        <div class="file-input form-control image-input"
-                                                             style="background-image: url(images/product/placeholder.png);">
-                                                            <div class="file-input-wrapper">
-                                                            </div>
-                                                            <label class="btn-action btn-upload"
-                                                                   title="Upload Media">
-                                                                <input type="file"
-                                                                       accept=".png, .jpg, .jpeg"
-                                                                       name="riode_comment_medias_image_1">
-                                                            </label>
-                                                            <label class="btn-action btn-remove"
-                                                                   title="Remove Media">
-                                                            </label>
-                                                        </div>
-                                                        <div class="file-input form-control image-input"
-                                                             style="background-image: url(images/product/placeholder.png);">
-                                                            <div class="file-input-wrapper">
-                                                            </div>
-                                                            <label class=" btn-action btn-upload"
-                                                                   title="Upload Media">
-                                                                <input type="file"
-                                                                       accept=".png, .jpg, .jpeg"
-                                                                       name="riode_comment_medias_image_2">
-                                                            </label>
-                                                            <label class="btn-action btn-remove"
-                                                                   title="Remove Media">
-                                                            </label>
-                                                        </div>
-                                                        <div class="file-input form-control video-input"
-                                                             style="background-image: url(images/product/placeholder.png);">
-                                                            <video class="file-input-wrapper"
-                                                                   controls=""></video>
-                                                            <label class="btn-action btn-upload"
-                                                                   title="Upload Media">
-                                                                <input type="file" accept=".avi, .mp4"
-                                                                       name="riode_comment_medias_video_1">
-                                                            </label>
-                                                            <label class="btn-action btn-remove"
-                                                                   title="Remove Media">
-                                                            </label>
-                                                        </div>
+                                            <!-- End Comments -->
+                                            <div class="review-form-section">
+                                                <div class="review-overlay"></div>
+                                                <div class="review-form-wrapper">
+                                                    <div class="title-wrapper text-left">
+                                                        <h3 class="title title-simple text-left text-normal">
+                                                            Add
+                                                            a Review
+                                                        </h3>
+                                                        <p>
+                                                            Your email address will not be published. Required
+                                                            fields are marked *
+                                                        </p>
                                                     </div>
-                                                    <p>
-                                                        Upload images and videos. Maximum count: 3, size: 2MB
-                                                    </p>
-                                                    <button type="submit"
-                                                            class="btn btn-primary btn-rounded">
-                                                        Submit<i class="d-icon-arrow-right"></i>
-                                                    </button>
-                                                </form>
+                                                    <div class="rating-form">
+                                                        <label for="rating" class="text-dark">
+                                                            Your rating *
+                                                        </label>
+                                                        <span class="rating-stars selected">
+                                                            <a class="star-1" href="#">1</a>
+                                                            <a class="star-2" href="#">2</a>
+                                                            <a class="star-3" href="#">3</a>
+                                                            <a class="star-4 active" href="#">4</a>
+                                                            <a class="star-5" href="#">5</a>
+                                                        </span>
+
+                                                        <select name="rating" id="rating" required=""
+                                                                style="display: none;">
+                                                            <option value="">Rate…</option>
+                                                            <option value="5">Perfect</option>
+                                                            <option value="4">Good</option>
+                                                            <option value="3">Average</option>
+                                                            <option value="2">Not that bad</option>
+                                                            <option value="1">Very poor</option>
+                                                        </select>
+                                                    </div>
+                                                    <form action="#">
+                                                        <textarea id="reply-message" cols="30" rows="6"
+                                                                  class="form-control mb-4" placeholder="Comment *"
+                                                                  required></textarea>
+
+                                                        <div class="review-medias">
+                                                            <div class="file-input form-control image-input"
+                                                                 style="background-image: url(images/product/placeholder.png);">
+                                                                <div class="file-input-wrapper">
+                                                                </div>
+                                                                <label class="btn-action btn-upload"
+                                                                       title="Upload Media">
+                                                                    <input type="file"
+                                                                           accept=".png, .jpg, .jpeg"
+                                                                           name="riode_comment_medias_image_1">
+                                                                </label>
+                                                                <label class="btn-action btn-remove"
+                                                                       title="Remove Media">
+                                                                </label>
+                                                            </div>
+                                                            <div class="file-input form-control image-input"
+                                                                 style="background-image: url(images/product/placeholder.png);">
+                                                                <div class="file-input-wrapper">
+                                                                </div>
+                                                                <label class=" btn-action btn-upload"
+                                                                       title="Upload Media">
+                                                                    <input type="file"
+                                                                           accept=".png, .jpg, .jpeg"
+                                                                           name="riode_comment_medias_image_2">
+                                                                </label>
+                                                                <label class="btn-action btn-remove"
+                                                                       title="Remove Media">
+                                                                </label>
+                                                            </div>
+                                                            <div class="file-input form-control video-input"
+                                                                 style="background-image: url(images/product/placeholder.png);">
+                                                                <video class="file-input-wrapper"
+                                                                       controls=""></video>
+                                                                <label class="btn-action btn-upload"
+                                                                       title="Upload Media">
+                                                                    <input type="file" accept=".avi, .mp4"
+                                                                           name="riode_comment_medias_video_1">
+                                                                </label>
+                                                                <label class="btn-action btn-remove"
+                                                                       title="Remove Media">
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <p>
+                                                            Upload images and videos. Maximum count: 3, size: 2MB
+                                                        </p>
+                                                        <button type="submit"
+                                                                class="btn btn-primary btn-rounded">
+                                                            Submit<i class="d-icon-arrow-right"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
+                                            <!-- End Reply -->
                                         </div>
-                                        <!-- End Reply -->
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        }
                     }
                 }
-            }
+
+            </div>
 
         </div>
-
-    </div>
-    <div class="col-md-12">
-        <h2 class="title title-link mb-4">
-            <a href="/Home/Products" class="btn btn-link btn-slide-right">
-                View more<i class="fa fa-chevron-right"></i>
-            </a>
-        </h2>
-        <div class="owl-carousel owl-theme owl-nav-full row cols-2 cols-md-3 cols-lg-4 cols-xl-5"
-             data-owl-options="{
+        <div class="col-md-12 py-5">
+            <h2 class="title title-link mb-4">
+                <a href="/Home/Products" class="btn btn-link btn-slide-right">
+                    View more<i class="fa fa-chevron-right"></i>
+                </a>
+            </h2>
+            <div class="owl-carousel owl-theme owl-nav-full row cols-2 cols-md-3 cols-lg-4 cols-xl-5"
+                 data-owl-options="{
 	'items': 5,
 	'nav': false,
 	'loop': false,
@@ -466,113 +467,114 @@
 		}
 	}
 }">
-            @{
-                if (Model != null)
-                {
-                    if (Model.dtProductDetails != null)
+                @{
+                    if (Model != null)
                     {
-                        for (int i = 0; i < Model.dtProductDetails.Rows.Count; i++)
+                        if (Model.dtProductDetails != null)
                         {
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">
-                                        <img src="@Model.dtProductDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="280"
-                                             height="315">
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        @*<a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+                            for (int i = 0; i < Model.dtProductDetails.Rows.Count; i++)
+                            {
+                                <div class="product text-center">
+                                    <figure class="product-media">
+                                        <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">
+                                            <img src="@Model.dtProductDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="280"
+                                                 height="315">
+                                        </a>
+                                        <div class="product-action-vertical">
+                                            @*<a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
                                                data-target="#addCartModal" title="Add to cart">
                                                 <i class="d-icon-bag"></i>
                                             </a>*@
-                                        <a href="/Home/ShoppingCartList?id=@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart" data-toggle="modal"
-                                           data-target="#addCartModal" title="Add to cart" name="Add" value="Add" onclick="return fAddToCart(@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">
-                                            <i class="d-icon-bag"></i>
-                                        </a>
-                                        @*<a href="#" class="btn-product-icon btn-wishlist"
+                                            <a href="/Home/ShoppingCartList?id=@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart" data-toggle="modal"
+                                               data-target="#addCartModal" title="Add to cart" name="Add" value="Add" onclick="return fAddToCart(@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">
+                                                <i class="d-icon-bag"></i>
+                                            </a>
+                                            @*<a href="#" class="btn-product-icon btn-wishlist"
                                             title="Add to wishlist"><i class="d-icon-heart"></i></a>*@
-                                    </div>
-                                    <div class="product-action">
-                                        <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())" class="btn-product btn-quickview" title="Quick View">
-                                            Quick
-                                            View
-                                        </a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <h3 class="product-name">
-                                        <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.dtProductDetails.Rows[i]["ProductName"].ToString()</a>
-                                    </h3>
-                                    <div class="product-price">
-                                        @*<span class="price">@Model.dtProductDetails.Rows[i]["OfferedPrice"].ToString()
-                                            </span>>*@
-                                           <span class="old-price"><small>MRP:</small> @Model.dtProductDetails.Rows[i]["MRP"].ToString()</span>
-                                       
-                                    </div>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "1")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "2")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "3")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "4")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "5")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
                                         </div>
-                                        @if (@Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "0")
-                                        {
+                                        <div class="product-action">
+                                            <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())" class="btn-product btn-quickview" title="Quick View">
+                                                Quick
+                                                View
+                                            </a>
+                                        </div>
+                                    </figure>
+                                    <div class="product-details">
+                                        <h3 class="product-name">
+                                            <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.dtProductDetails.Rows[i]["ProductName"].ToString()</a>
+                                        </h3>
+                                        <div class="product-price">
+                                            @*<span class="price">@Model.dtProductDetails.Rows[i]["OfferedPrice"].ToString()
+                                            </span>>*@
+                                            <span class="old-price"><small>MRP:</small> @Model.dtProductDetails.Rows[i]["MRP"].ToString()</span>
 
-                                        }
-                                        else
-                                        {
-                                            <a href="#" class="rating-reviews">@Model.dtProductDetails.Rows[i]["ReviewCount"].ToString()</a>
-                                        }
+                                        </div>
+                                        <div class="ratings-container">
+                                            <div class="ratings-full">
+                                                @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "1")
+                                                {
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
 
-                                    </div>
-                                    @*<div class="ratings-container">
+                                                }
+                                                @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "2")
+                                                {
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                }
+                                                @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "3")
+                                                {
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                }
+                                                @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "4")
+                                                {
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                }
+                                                @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "5")
+                                                {
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                }
+                                            </div>
+                                            @if (@Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "0")
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="rating-reviews">@Model.dtProductDetails.Rows[i]["ReviewCount"].ToString()</a>
+                                            }
+
+                                        </div>
+                                        @*<div class="ratings-container">
                                             <div class="ratings-full">
                                                 <span class="ratings" style="width:100%"></span>
                                                 <span class="tooltiptext tooltip-top"></span>
                                             </div>
                                             <a href="#" class="rating-reviews">@Model.dtProductDetails.Rows[i]["ReviewCount"].ToString()</a>
                                         </div>*@
-                                    <input type="hidden" id="QTYGet" />
+                                        <input type="hidden" id="QTYGet" />
+                                    </div>
                                 </div>
-                            </div>
-                        }
+                            }
 
+                        }
                     }
                 }
-            }
 
 
+            </div>
         </div>
     </div>
 </main>
