@@ -418,7 +418,6 @@
     <Compile Include="Controllers\TravelAPIV2Controller.cs" />
     <Compile Include="Controllers\UtilitiesController.cs" />
     <Compile Include="Controllers\WebController.cs" />
-    <Compile Include="Controllers\WebHookApiTestingController.cs" />
     <Compile Include="Filters\AuthorizeAdmin.cs" />
     <Compile Include="Filters\AuthorizeFilter.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
@@ -1647,6 +1646,8 @@
     <Content Include="Areas\Admin\Views\Admin\EWalletRequestList.cshtml" />
     <Content Include="Areas\Associate\Views\AssociatePlanIncome\PaymentSuccess.cshtml" />
     <Content Include="Areas\Associate\Views\EWalletRequest\GetEwalletLedger.cshtml" />
+    <Content Include="Areas\Admin\Views\Wallet\EWalletLedger.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminReport\GeustShoppingOrderDetail.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />

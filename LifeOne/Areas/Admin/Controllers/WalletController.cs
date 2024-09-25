@@ -14,6 +14,8 @@ using LifeOne.Models.AssociateManagement.AssociateService;
 using ClosedXML.Excel;
 using System.IO;
 using System.Data;
+using DocumentFormat.OpenXml.EMMA;
+using LifeOne.Models;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -401,7 +403,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 customers.ForEach(customer =>
                 {
-                    dt.Rows.Add(customer.AssociateId, customer.AssociateName, customer.FranchiseName, customer.MobileNo, customer.NoofShares, customer.Amount, customer.PaymentDate,customer.ApprovedDate,customer.Status);
+                    dt.Rows.Add(customer.AssociateId, customer.AssociateName, customer.FranchiseName, customer.MobileNo, customer.NoofShares, customer.Amount, customer.PaymentDate, customer.ApprovedDate, customer.Status);
                 });
                 using (XLWorkbook wb = new XLWorkbook())
                 {
@@ -479,7 +481,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 customers.ForEach(customer =>
                 {
-                    dt.Rows.Add(customer.LoginId, customer.DisplayName, customer.CompanyName, customer.RequestAmount, customer.Amount,customer.PaymentCount, customer.PinCode, customer.PaymentStatus);
+                    dt.Rows.Add(customer.LoginId, customer.DisplayName, customer.CompanyName, customer.RequestAmount, customer.Amount, customer.PaymentCount, customer.PinCode, customer.PaymentStatus);
                 });
                 using (XLWorkbook wb = new XLWorkbook())
                 {
@@ -499,7 +501,91 @@ namespace LifeOne.Areas.Admin.Controllers
             // return View();
         }
 
+        public ActionResult EWalletLedger()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult EWalletLedger(MAdminWallet model, int? Page)
+        {
+            if (!PermissionManager.IsActionPermit("EWallet Ledger", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
 
+            if (Page == null || Page == 0)
+            {
+                Page = 1;
+            }
+            model.Page = Page;
+            MAdminWallet _result = new MAdminWallet();
+            try
+            {
+
+                WalletService _objService = new WalletService();
+
+                _result.objList = _objService.GetEWalletLedgerService(model);
+                if (model.LoginId != null)
+                {
+                    _result.LoginId = model.LoginId;
+                }
+                if (model.IsExport == 1)
+                {
+                    
+                    DataTable dt = new DataTable("EWallet Ledger");
+                    dt.Columns.AddRange(new DataColumn[5] {
+                                                     new DataColumn("Transaction Date"),
+                                                     new DataColumn("Narration"),
+                                                     new DataColumn("Credit"),
+                                                     new DataColumn("Debit"),
+                                                     new DataColumn("Balance")
+                                                    
+
+            });
+                    if (_result.objList.Count > 0)
+                    {
+                        foreach (var customer in _result.objList)
+                        {
+                            dt.Rows.Add(customer.TransactionDate, customer.Narration, customer.Credit, customer.Debit, customer.Balance);
+
+                        }
+                        using (XLWorkbook wb = new XLWorkbook())
+                        {
+                            wb.Worksheets.Add(dt);
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                wb.SaveAs(stream);
+                                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "EWallet Ledger.xlsx");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        TempData["alert"] = "Data Not Found";
+                        return RedirectToAction("EWalletLedger", "Wallet");
+                    }
+
+                }
+                int totalRecords = 0;
+                if (_result.objList.Count > 0)
+                {
+
+                    totalRecords = Convert.ToInt32(_result.objList[0].TotalRecords);
+                    var pager = new Pager(totalRecords, model.Page, SessionManager.Size);
+                    _result.Pager = pager;
+                }
+                else
+                {
+                    _result.objList = new List<MAdminWallet>();
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return View(_result);
+        }
 
     }
 }

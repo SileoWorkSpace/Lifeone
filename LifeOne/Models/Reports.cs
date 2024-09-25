@@ -685,6 +685,8 @@ namespace LifeOne.Models
                                         new SqlParameter("@OpCode",4 ),
                                         new SqlParameter("@LoginId",LoginId),
                                         new SqlParameter("@OrderNo",OrderNo),
+                                        new SqlParameter("@Page",Page),
+                                        new SqlParameter("@Size",Size),
 
 
             };
@@ -801,8 +803,6 @@ namespace LifeOne.Models
             return ds;
 
         }
-
-
 
           public DataSet CancelInvoicRequest(Reports reports)
 
@@ -1368,6 +1368,22 @@ namespace LifeOne.Models
                 new SqlParameter("@Createdby",AddedBy)
                 };
             DataSet ds = DBHelper.ExecuteQuery("GetPackageProducts", para);
+            return ds;
+
+        }
+
+        public DataSet GetGeustShoppingOrderDetails()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@OpCode",8),
+                                        new SqlParameter("@LoginId",LoginId),
+                                        new SqlParameter("@OrderNo",OrderNo),
+                                        new SqlParameter("@Page",Page),
+                                        new SqlParameter("@Size",Size),
+
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PlaceShoppingOrder", para);
             return ds;
 
         }

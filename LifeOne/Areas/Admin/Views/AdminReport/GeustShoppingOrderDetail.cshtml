@@ -1,7 +1,7 @@
 ﻿@model LifeOne.Models.Reports
 
 @{
-    ViewBag.Title = "Shopping-Order-Details";
+    ViewBag.Title = "GeustShoppingOrderDetail";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 <script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
@@ -13,7 +13,7 @@
 
     <div class="row page-titles">
         <div class="ptitle">
-            <h4 class="mb-1 mt-0">Shopping Order Details</h4>
+            <h4 class="mb-1 mt-0">Geust Shopping Order Detail</h4>
             @*<nav aria-label="breadcrumb" class="float-left">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
@@ -45,19 +45,19 @@
                                                     <div class="form-group">
                                                         <label>Order No.</label>
                                                         @Html.TextBoxFor(m => m.OrderNo, new { @class = "form-control", @placeholder = "Order No." })
-                                                        @Html.HiddenFor(m=>m.Page)
-                                                        
-                                                    </div>
-                                                </div>
-
-                                                <div class="col-12 col-md-2">
-                                                    <div class="form-group">
-                                                        <label>Login Id</label>
-                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Login Id" })
                                                         @Html.HiddenFor(m => m.Page)
 
                                                     </div>
                                                 </div>
+                                                @Html.HiddenFor(m => m.Page)
+                                                @*<div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Login Id</label>
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Login Id" })
+
+
+                                                    </div>
+                                                </div>*@
 
                                                 <div class="col-12 col-md-2">
                                                     <div class="form-group">
@@ -79,7 +79,7 @@
                                         <tr>
                                             <th>#Sn.</th>
                                             <th>Order No</th>
-                                            <th>Login Id</th>
+                                            @*<th>Login Id</th>*@
                                             <th>Direct Seller Name</th>
                                             <th>Mobile No</th>
                                             <th>Landmark</th>
@@ -120,7 +120,7 @@
                                                         </a>
 
                                                     </td>
-                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["LoginId"].ToString()</td>
+                                                    @*<td>@Model.dtGetShoppingOrderDetails.Rows[i]["LoginId"].ToString()</td>*@
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Name"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["MobileNo"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Landmark"].ToString()</td>

@@ -37,10 +37,16 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public int? PaymentCount { get; set; }
         public int? Page { get; set; }
         public int Size { get; set; }
+        public int IsExport { get; set; }
         public long TotalRecords { get; set; }        
         public Pager Pager { get; set; }
         public decimal RequestAmount { get; set; }
         public int CompanionStatus { get; set; }
+        public string TransactionDate { get; set; }
+        public string Credit { get; set; }
+        public string Debit { get; set; }
+        public string Narration { get; set; }
+        public string Balance { get; set; }
         public List<MAdminWallet> objList { get; set; }
 
 
