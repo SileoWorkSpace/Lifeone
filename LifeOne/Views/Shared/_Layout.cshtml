@@ -289,6 +289,18 @@
             font-size: 12px;
             font-weight: 400;
         }
+        .sbutton {
+            display: none; /* Initially hide all social buttons */
+            margin: 5px;
+        }
+
+        .sbuttons.open .sbutton {
+            display: inline-block; /* Show buttons when the container has the "open" class */
+        }
+
+        .sbutton.mainsbutton {
+            display: inline-block; /* Always show the main share button */
+        }
     </style>
 
     <!-- Schema Markup for SEO -->
@@ -819,7 +831,12 @@
         //        //return false;
         //    }
         //}
+        document.querySelector('.mainsbutton').addEventListener('click', function () {
+            document.querySelector('.sbuttons').classList.toggle('open');
+        });
     </script>
+   
+
 </body>
 </html>
 
