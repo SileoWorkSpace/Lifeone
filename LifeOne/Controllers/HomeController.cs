@@ -93,8 +93,8 @@ namespace LifeOne.Controllers
                     }
                     listdata1.Pk_ProductId = int.Parse(dataSet.Tables[0].Rows[i]["Pk_ProductId"].ToString());
                     listdata1.ProductName = dataSet.Tables[0].Rows[i]["ProductName"].ToString();
-                    listdata1.DP = dataSet.Tables[0].Rows[i]["DP"].ToString();
-                    listdata1.OfferedPrice = dataSet.Tables[0].Rows[i]["OfferedPrice"].ToString();
+                    listdata1.PV = dataSet.Tables[0].Rows[i]["PV"].ToString();
+                    listdata1.MRP = dataSet.Tables[0].Rows[i]["MRP"].ToString();
                     listdata1.ReviewCount = dataSet.Tables[0].Rows[i]["ReviewCount"].ToString();
                     listdata1.TotalRecords = int.Parse(dataSet.Tables[0].Rows[i]["TotalRecord"].ToString());
                     productsList1.Add(listdata1);
@@ -128,6 +128,13 @@ namespace LifeOne.Controllers
                 DataTable dataTable = DALCommon.ToDataTable(productsList);
                 products.dtCategory = dataTable;
             }
+           
+            DataSet dataSet12 = products.getvedioLink();
+            if(dataSet12!=null && dataSet12.Tables.Count > 0)
+            {
+                products.dtVedioLink = dataSet12.Tables[0];
+            }
+            
             return View(products);
         }
 
@@ -523,6 +530,7 @@ namespace LifeOne.Controllers
             productDetails.ProductName = dataSet.Tables[0].Rows[0]["ProductName"].ToString();
             productDetails.ReviewCount = dataSet.Tables[0].Rows[0]["ReviewCount"].ToString();
             productDetails.MRP = dataSet.Tables[0].Rows[0]["MRP"].ToString();
+            productDetails.PV = dataSet.Tables[0].Rows[0]["PV"].ToString();
             productDetails.OfferedPrice = dataSet.Tables[0].Rows[0]["OfferedPrice"].ToString();
             productDetails.ProductImage = baseurl + dataSet.Tables[0].Rows[0]["ProductImage"].ToString();
             productDetails.ProductDescription = dataSet.Tables[0].Rows[0]["ProductDescription"].ToString();
@@ -561,6 +569,7 @@ namespace LifeOne.Controllers
                     listdata1.ProductName = dataSet3.Tables[0].Rows[i]["ProductName"].ToString();
                     listdata1.DP = decimal.Parse(dataSet3.Tables[0].Rows[i]["DP"].ToString());
                     listdata1.MRP = dataSet3.Tables[0].Rows[i]["MRP"].ToString();
+                    listdata1.PV = dataSet3.Tables[0].Rows[i]["PV"].ToString();
                     listdata1.OfferedPrice = dataSet3.Tables[0].Rows[i]["OfferedPrice"].ToString();
                     listdata1.ReviewCount = dataSet3.Tables[0].Rows[i]["ReviewCount"].ToString();
                     productsList1.Add(listdata1);
@@ -2389,5 +2398,6 @@ namespace LifeOne.Controllers
             return View();
         }
        
+        
     }
 }

@@ -60,6 +60,7 @@ namespace LifeOne.Models
         public List<Products> objList { get; set; }
         public List<Products> LstMenu { get; set; }
         public List<Products> lstDetails { get; set; }
+        public DataTable dtVedioLink { get; set; }
         public DataSet GetAllProducts()
         {
             SqlParameter[] para = {
@@ -225,7 +226,22 @@ namespace LifeOne.Models
         //    return ds;
         //}
 
+        public DataSet getvedioLink()
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                SqlParameter[] para = {
 
+                };
+                ds = DBHelper.ExecuteQuery("WebsiteVideoList", para);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return ds;
+        }
 
     }
     public class ProductsDetail
@@ -240,6 +256,7 @@ namespace LifeOne.Models
         public string CategoryName { get; set; }
         public string PurchasePrice { get; set; }
         public string MRP { get; set; }
+        public string PV { get; set; }
         public string TotalAmount { get; set; }
         public string CGST { get; set; }
         public string IGST { get; set; }

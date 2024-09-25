@@ -503,9 +503,10 @@
                                         <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.dtProductDetails.Rows[i]["ProductName"].ToString()</a>
                                     </h3>
                                     <div class="product-price">
-                                        @*<span class="price">@Model.dtProductDetails.Rows[i]["OfferedPrice"].ToString()
-                                            </span>>*@
-                                           <span class="old-price"><small>MRP:</small> @Model.dtProductDetails.Rows[i]["MRP"].ToString()</span>
+                                        <span class="price">
+                                            <small>MRP</small> ₹@Model.dtProductDetails.Rows[i]["MRP"].ToString()
+                                        </span>
+                                           <span class="price"><small>PV</small> @Model.dtProductDetails.Rows[i]["PV"].ToString()</span>
                                        
                                     </div>
                                     <div class="ratings-container">

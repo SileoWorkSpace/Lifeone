@@ -516,7 +516,7 @@
                                                 <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
                                             </h3>
                                             <div class="product-price">
-                                                <ins class="new-price">₹@Model.DtDetails.Rows[i]["DP"].ToString()</ins><del class="old-price">₹@Model.DtDetails.Rows[i]["OfferedPrice"].ToString()</del>
+                                                <ins class="new-price">MRP ₹@Model.DtDetails.Rows[i]["MRP"].ToString()</ins><del class="new-price">PV @Model.DtDetails.Rows[i]["PV"].ToString()</del>
                                             </div>
                                             <div class="ratings-container">
                                                 <div class="ratings-full">
@@ -632,7 +632,7 @@
                                                 <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
                                             </h3>
                                             <div class="product-price">
-                                                <ins class="new-price">₹@Model.DtDetails.Rows[i]["DP"].ToString()</ins><del class="old-price">₹@Model.DtDetails.Rows[i]["OfferedPrice"].ToString()</del>
+                                                <ins class="new-price">MRP ₹@Model.DtDetails.Rows[i]["MRP"].ToString()</ins><ins class="new-price">PV @Model.DtDetails.Rows[i]["PV"].ToString()</ins>
                                             </div>
                                             <div class="ratings-container">
                                                 <div class="ratings-full">
@@ -726,25 +726,23 @@
                     }
                 }
             }">
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/fD4xBhaBhAE?si=Nj5dNDuAGX2K7hp0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-                    </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <!-- Second Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/oXnpcrXkqXI?si=4HZFmrr-ajptx1n4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <!-- Third Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/TYqcZj487bI?si=qrDISJuzR6F6s-fj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <!-- Fourth Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/CAkdPfxVFYs?si=xyU1iOIHBquDVZhv" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <!-- Fourth Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/DpA8HKG0Z5w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </figure>
+
+                    @{
+                        if (Model != null)
+                        {
+                            if (Model.dtVedioLink != null && Model.dtVedioLink.Rows.Count>0)
+                            {
+                                for (int i = 0; i < Model.dtVedioLink.Rows.Count; i++)
+                                {
+                                    
+                                    <figure class="brand-wrap bg-white banner-radius">
+                                        <iframe width="100%" height="150" src="@Model.dtVedioLink.Rows[i]["Videolink"].ToString()" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                                    </figure>
+                                }
+                            }
+                        }
+                    }
+                    
                 </div>
             </div>
         </section>
