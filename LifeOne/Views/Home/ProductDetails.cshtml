@@ -191,8 +191,7 @@
             @{
                 if (Model != null)
                 {
-                    using (Html.BeginForm("ProductDetails", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
-                    {
+                  
                         <div class="row product product-single">
                             <!-- card left -->
                             <div class="col-md-6">
@@ -234,7 +233,7 @@
                                 <div class="col-md-6">
                                     <div class="product-details">
                                         <h1 class="product-name pt-2">@Model.ProductName</h1>
-                                        <div class="product-price">₹@Model.OfferedPrice</div>
+                                        <div class="product-price">₹@Model.MRP</div>
                                         <div class="ratings-container">
                                             <div class="ratings-full">
                                                 @if (Model.ReviewCount == "1")
@@ -299,7 +298,7 @@
                                                            value="1" id="Quantity123" onchange="return GetAddQTY();">
                                                     <button class=" d-icon-plus" onclick="return quantityChangePluse();"></button>
                                                 </div>
-                                                <a href="/Home/ShoppingCartList?id=@Model.Pk_ProductId" class="btn btn-sm btn-primary" onclick="return AddToCart23(@Model.Pk_ProductId)" id="btnAddCard">
+                                                <a href="#" onclick="return addcartdata('@Model.Pk_ProductId')" class="btn btn-sm btn-primary" id="btnAddCard">
                                                     <i class="d-icon-bag"></i>&nbsp; Add
                                                     To Cart
                                                 </a>
@@ -310,26 +309,7 @@
                                         </div>
                                         <hr class="product-divider mb-3">
 
-                                        @*<div class="product-footer">
-                                                <div class="social-links mr-4">
-                                                    <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
-                                                    <a href="#" class="social-link social-twitter fab fa-twitter"></a>
-                                                    <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
-                                                </div>
-                                                <span class="divider d-lg-show"></span>
-                                                <div class="product-action">
-                                                        <a href="#" class="btn-product btn-wishlist mr-6">
-                                                            <i class="d-icon-heart"></i>Add to
-                                                            wishlist
-                                                        </a>
-                                                        <span class="divider d-lg-show"></span>
-                                                        <a href="#" class="btn-product btn-compare">
-                                                            <i class="d-icon-compare"></i>Compare
-                                                        </a>
-                                                    </div>
-                                            </div>*@
-
-                                        <!-- End Comments -->
+                                    
                                         <div class="review-form-section">
                                             <div class="review-overlay"></div>
                                             <div class="review-form-wrapper">
@@ -428,153 +408,14 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                   
                 }
             }
 
         </div>
 
     </div>
-    <div class="col-md-12">
-        <h2 class="title title-link mb-4">
-            <a href="/Home/Products" class="btn btn-link btn-slide-right">
-                View more<i class="fa fa-chevron-right"></i>
-            </a>
-        </h2>
-        <div class="owl-carousel owl-theme owl-nav-full row cols-2 cols-md-3 cols-lg-4 cols-xl-5"
-             data-owl-options="{
-	'items': 5,
-	'nav': false,
-	'loop': false,
-	'dots': true,
-	'margin': 20,
-	'responsive': {
-		'0': {
-			'items': 2
-		},
-		'768': {
-			'items': 3
-		},
-		'992': {
-			'items': 4,
-			'dots': false,
-			'nav': true
-		},
-		'1200': {
-			'items': 5,
-			'dots': false
-		}
-	}
-}">
-            @{
-                if (Model != null)
-                {
-                    if (Model.dtProductDetails != null)
-                    {
-                        for (int i = 0; i < Model.dtProductDetails.Rows.Count; i++)
-                        {
-                            <div class="product text-center">
-                                <figure class="product-media">
-                                    <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">
-                                        <img src="@Model.dtProductDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="280"
-                                             height="315">
-                                    </a>
-                                    <div class="product-action-vertical">
-                                        @*<a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
-                                               data-target="#addCartModal" title="Add to cart">
-                                                <i class="d-icon-bag"></i>
-                                            </a>*@
-                                        <a href="/Home/ShoppingCartList?id=@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart" data-toggle="modal"
-                                           data-target="#addCartModal" title="Add to cart" name="Add" value="Add" onclick="return fAddToCart(@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">
-                                            <i class="d-icon-bag"></i>
-                                        </a>
-                                        @*<a href="#" class="btn-product-icon btn-wishlist"
-                                            title="Add to wishlist"><i class="d-icon-heart"></i></a>*@
-                                    </div>
-                                    <div class="product-action">
-                                        <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())" class="btn-product btn-quickview" title="Quick View">
-                                            Quick
-                                            View
-                                        </a>
-                                    </div>
-                                </figure>
-                                <div class="product-details">
-                                    <h3 class="product-name">
-                                        <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.dtProductDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.dtProductDetails.Rows[i]["ProductName"].ToString()</a>
-                                    </h3>
-                                    <div class="product-price">
-                                        @*<span class="price">@Model.dtProductDetails.Rows[i]["OfferedPrice"].ToString()
-                                            </span>>*@
-                                           <span class="old-price"><small>MRP:</small> @Model.dtProductDetails.Rows[i]["MRP"].ToString()</span>
-                                       
-                                    </div>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "1")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "2")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "3")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "4")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "5")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                        </div>
-                                        @if (@Model.dtProductDetails.Rows[i]["ReviewCount"].ToString() == "0")
-                                        {
-
-                                        }
-                                        else
-                                        {
-                                            <a href="#" class="rating-reviews">@Model.dtProductDetails.Rows[i]["ReviewCount"].ToString()</a>
-                                        }
-
-                                    </div>
-                                    @*<div class="ratings-container">
-                                            <div class="ratings-full">
-                                                <span class="ratings" style="width:100%"></span>
-                                                <span class="tooltiptext tooltip-top"></span>
-                                            </div>
-                                            <a href="#" class="rating-reviews">@Model.dtProductDetails.Rows[i]["ReviewCount"].ToString()</a>
-                                        </div>*@
-                                    <input type="hidden" id="QTYGet" />
-                                </div>
-                            </div>
-                        }
-
-                    }
-                }
-            }
-
-
-        </div>
-    </div>
+    
 </main>
 
 <script>
@@ -602,111 +443,6 @@
 <script>
 
 
-    function ReviewDetail(click_val, ProductId) {
-        debugger;
-        //alert(click_val);
-        var obj = {};
-        obj.buttonId = click_val;
-
-        obj.Pk_ProductId = ProductId;
-        debugger;
-        var star = $('[name="starRate"]:checked').val();
-        //var Email = $('[name="Email"]').val();
-        var Review = $('[name="Review"]').val();
-        $('#Rating').val(star);
-        if (star == '' || star == undefined || star == null) {
-            swal('', "Please Select star", 'warning');
-            return false;
-        }
-        //if (Name == '' || Name == undefined || Name == null) {
-        //    swal('', "Please Enter Name", 'warning');
-        //    return false;
-        //}
-
-        if (Review == '' || Review == undefined || Review == null) {
-            swal('', "Please Enter Review", 'warning');
-            return false;
-        }
-        $.ajax({
-            url: '/Home/ProductRating',
-            type: "POST",
-            dataType: "JSON",
-            data: { Rating: $("#Rating").val(), Review: $("#Review").val(), btnReview: obj.buttonId, ProductId: obj.Pk_ProductId },
-            success: function (data) {
-                debugger;
-                if (data.Status == "1") {
-                    alert(data.Message);
-                    //console.log(data.Status)
-                    window.location.reload(true);
-                } else {
-                    alert(data.Message);
-                    window.location.reload(true);
-                }
-            }
-        });
-    }
-
-    function getproductdetails12345(ProductId) {
-
-        $('#qty_amount').val('1');
-        $.ajax({
-            url: '/Home/ProductDetailsListView',
-            type: 'Post',
-            data: { Id: ProductId },
-            success: function (response) {
-                debugger;
-
-                if (response != null) {
-                    var str = "";
-
-                    $("#productAvgstr").html("")
-                    //console.log(response);
-                    $('#txtproductName').text(response[0].ProductName);
-                    $('#txtproductdetails').text(response[0].ProductDescription);
-                    $('#CategoryName').text(response[0].CategoryName);
-                    $('#offeredPrice').text(response[0].DP);
-                    $('#mrp').text(response[0].MRP);
-                    $('#productimage').text(response[0].ProductImage);
-                    $('#Pk_ProductId').text(response[0].Pk_ProductId);
-                    /*$('#reviewCount').text(response[0].ReviewCount);*/
-                    $('#productimage').attr('src', response[0].ProductImage);
-
-                    if (response[0].AvgRating == "1") {
-                        str += '<li><i class="fas fa-star"></i></li>'
-
-                    }
-                    else if (response[0].AvgRating == "2") {
-                        str += '<li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li>'
-                    }
-                    else if (response[0].AvgRating == "3") {
-                        str += '<li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li>'
-                    }
-                    else if (response[0].AvgRating == "4") {
-                        str += '<li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li>'
-                    }
-                    else if (response[0].AvgRating == "5") {
-                        str += '<li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li><li><i class="fas fa-star"></i></li>'
-                    }
-                    $("#productAvgstr").html(str)
-                }
-
-            }, error: function () {
-                //alert('Some Thing wrong!');
-                $("#pre-loader").hide();
-
-            }
-        });
-    }
-
-    function quantityChange() {
-        debugger
-        var qt = $('#Quantity123').val();
-        if (qt == 1) {
-            // alert('quantity less than zero');
-            $('#Quantity123').val(2);
-            //return false;
-        }
-    }
     function quantityChangePluse() {
         debugger;
         var qt = $('#Quantity123').val();
@@ -723,15 +459,9 @@
         $('#Quantity123').val(newValue);
     }
 
-    function GetAddQTY() {
-        debugger;
-        var qt = $('#Quantity123').val();
-        if (qt <= "0") {
-            alert('Quantity must be greater than zero .!');
-            $('#Quantity123').val(1);
-            return false;
-        }
-        $('#Quantity123').val(qt);
+    function addcartdata(productid) {
+        window.location.href = "/Home/ShoppingCartList?id=" + productid + "&&qty=" + $('#Quantity123').val()+"&&add=add";
+        
     }
 
 </script>

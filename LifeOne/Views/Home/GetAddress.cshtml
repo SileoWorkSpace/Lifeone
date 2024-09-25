@@ -150,16 +150,7 @@
                                                 <label>TotalAmount<span style="color:red;"></span></label>
                                                 @Html.TextBoxFor(m => m.TotalAmount, new { @class = "form-control input-focus", @readonly = "readonly", @id = "TotalAmount" })
                                             </div>
-                                            <div class="col-md-3">
-                                                <label>WalletAmount<span style="color:red;"></span></label>
-
-                                                @Html.TextBoxFor(m => m.WalletAmount, new { @class = "form-control input-focus", @readonly = "readonly", @Id = "WalletAmount" })
-                                            </div>
-                                            <div class="col-md-3">
-                                                <label>GatewayAmount<span style="color:red;"></span></label>
-                                                @Html.TextBoxFor(m => m.GatewayAmount, new { @class = "form-control input-focus", @readonly = "readonly" })
-                                            </div>
-
+                                            
                                             <div class="col-md-3" style="text-align:right;">
                                                 <label style="display:block;color:white">PaymentMode</label>
                                                 <input type="submit" class=" btn btn-primary btn-sm" id="PlaceOrder" onclick="return fcheckaddres()" value="Place Order" />
@@ -206,10 +197,7 @@
             alert('Please Select Address');
             return false;
         }
-        if (parseFloat($('#WalletAmount').val()) < parseFloat($('#TotalAmount').val())) {       
-            alert('Insufficient Balance');
-            return false;
-        }        
+       
         $('#loader').show();
         //$("#loader").delay(2000).fadeOut("slow");
         $("#overlayer").show();     

@@ -988,8 +988,8 @@ namespace LifeOne.Areas.Associate.Controllers
             reports.Token = SessionManager.TokenNo.ToString();
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             reports.Pk_AddressId = Session["Pk_AddressId"].ToString();
-           // dtPaymentDetails.Rows.Add("Gateway", Session["RazorPayTotalAmt"].ToString());
-            dtPaymentDetails.Rows.Add("Wallet", Session["WalletAmount"].ToString());
+            dtPaymentDetails.Rows.Add("Gateway", Session["RazorPayTotalAmt"].ToString());
+           
             reports.dtPaymentDetails = dtPaymentDetails;
             DataSet dataSet = reports.PlaceOrderForWeb();
             if (dataSet != null)

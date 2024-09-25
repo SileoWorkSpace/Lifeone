@@ -13,20 +13,16 @@ using System.Configuration;
 using LifeOne.Models.Common;
 using LifeOne.Models.AdminManagement.AEntity;
 using System.Net.Http;
-using LifeOne.Models.FranchiseManagement.FService;
 using LifeOne.Models.HomeManagement.HDAL;
 using LifeOne.Models.HomeManagement.HEntity;
 using LifeOne.Models.HomeManagement.HService;
 using LifeOne.Models.Manager;
 using LifeOne.Models.AdminManagement.ADAL;
-using LifeOne.Models;
-using LifeOne.Models.AdminManagement.AService;
 using Razorpay.Api;
 using System.Net;
 using System.Web.UI.WebControls;
-using DocumentFormat.OpenXml.EMMA;
-using static LifeOne.Models.ShoppingRequest;
-using LifeOne.Models.AssociateManagement.AssociateEntity;
+using System.Net.NetworkInformation;
+using LifeOne.Models;
 
 namespace LifeOne.Controllers
 {
@@ -41,28 +37,42 @@ namespace LifeOne.Controllers
         string baseurl = ConfigurationManager.AppSettings["baseurl"].ToString();
         string baseurlNoImg = ConfigurationManager.AppSettings["baseurlNoImg"].ToString();
         private readonly object _objService;
-        //LifeOne.Models.API.ManageCartService _objservice = new LifeOne.Models.API.ManageCartService();
+        static string GetMacAddress()
+        {
+            // Get all network interfaces
+            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
 
-        //DataTable dt = _objservice.CreateCartProduct("0.80938891", "1", "hi", "2021/01/20");
-        // LifeOne.Models.API.Common.SendEmailByAPICommonVerification("amar@qloginuaeretech.com", "Amar" + " " + "yadav", "7800444476", "123456");
+            // Iterate through network interfaces and return the first valid MAC address
+            foreach (NetworkInterface nic in nics)
+            {
+                // Make sure the network interface has a MAC address
+                if (nic.NetworkInterfaceType != NetworkInterfaceType.Loopback && !nic.GetPhysicalAddress().Equals(PhysicalAddress.None))
+                {
+                    return nic.GetPhysicalAddress().ToString();
+                }
+            }
+
+            return string.Empty; // Return empty if no valid MAC address is found
+        }
         public ActionResult Index(Products products, string Add, string Fk_CategoryId, string ProductName)
         {
+            SessionManager.TokenNo = GetMacAddress();
             string time = DateTime.Now.ToString("ddMMyyyyhhMMss") + "_" + 4050;
             WebSitePopup model = DALProductServices.WebSitePopup();
             ViewBag.PopupStatus = model.Status;
             ViewBag.ImageUrl = model.ImageUrl;
 
 
-            if (!string.IsNullOrEmpty(Add))
+            products.TokenNo = SessionManager.TokenNo;
+            products.OpCode = 2;
+
+            DataSet dataSetPro = products.ManageShoppingCart();
+            products.DtDetails = dataSetPro.Tables[0];
+            if (products.DtDetails.Rows.Count > 0)
             {
-                products.Quantity = 1;
-                products.OpCode = 1;
-
-
-                DataSet dataSet1 = products.ManageShoppingCart();
-                products.DtDetails = dataSet1.Tables[0];
-                SessionManager.TotalItems = int.Parse(products.DtDetails.Rows[0]["Quantity"].ToString());
-
+                SessionManager.TotalItems = Convert.ToInt32(products.DtDetails.Compute("SUM(TotalItems)", string.Empty));
+                Session["ShoppingPrice"] = products.DtDetails.Compute("SUM(SubTotal)", string.Empty);
+                SessionManager.ProductCount = Convert.ToInt32(products.DtDetails.Compute("SUM(ProductCount)", string.Empty));
             }
             if (products.Page == null || products.Page == 0)
             {
@@ -131,28 +141,6 @@ namespace LifeOne.Controllers
             return View(products);
         }
 
-        [HttpPost]
-        public ActionResult Index(Products products, string Add)
-        {
-            if (products.Quantity == null || products.Quantity == 0)
-            {
-                products.Quantity = 1;
-            }
-            if (!string.IsNullOrEmpty(Add))
-            {
-                Session["Pk_ProductId"] = products.Pk_ProductId;
-
-                if (string.IsNullOrEmpty(SessionManager.LoginId))
-                {
-                    return RedirectToAction("Login", "Home");
-                }
-
-                return RedirectToAction("ShoppingCartList", "Home");
-            }
-
-
-            return View(products);
-        }
         [HttpPost]
         public JsonResult ProductListDetail(Products products, string Fk_CategoryId)
         {
@@ -392,7 +380,7 @@ namespace LifeOne.Controllers
 
                 products.Quantity = 1;
                 products.OpCode = 1;
-                SessionManager.TokenNo = products.TokenNo;
+                //SessionManager.TokenNo = products.TokenNo;
                 products.Pk_ProductId = int.Parse(id);
                 DataSet dataSet1 = products.ManageShoppingCart();
                 products.DtDetails = dataSet1.Tables[0];
@@ -735,32 +723,17 @@ namespace LifeOne.Controllers
             //return View(products);
             return Redirect("ShoppingCartList");
         }
-        public ActionResult ShoppingCartList(Products products, string id, string Update, string Checkout, string Status)
+        public ActionResult ShoppingCartList(Products products, string id, string Update, string Checkout, string Status, int? qty, string add)
         {
+            SessionManager.TokenNo = string.IsNullOrEmpty(SessionManager.TokenNo) ? DateTime.Now.ToString("ddMMyyyyHHmmss") : SessionManager.TokenNo;
             Update = products.Update;
             Session["Pk_ProductId"] = products.id;
             DataSet dataSet = new DataSet();
             products.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
-            //products.Status = Session["Status"].ToString();            
-            if (string.IsNullOrEmpty(SessionManager.LoginId))
-            {
-                return RedirectToAction("Login", "Home");
-            }
-
-            //if (!string.IsNullOrEmpty(products.Status))
-            //{
-            //    products.Pk_ProductId = int.Parse(Session["Pk_ProductId"].ToString());
-            //    products.Quantity = int.Parse(Session["Quantity"].ToString());
-
-            //    products.OpCode = 1;
-            //    products.TokenNo = SessionManager.TokenNo;
-            //    dataSet = products.ManageShoppingCart();
-            //    products.DtDetails = dataSet.Tables[0];
-            //}
 
             if (!string.IsNullOrEmpty(Update))
             {
-                products.Quantity = products.Qty;
+                products.Quantity = qty;
                 products.OpCode = 4;
                 products.TokenNo = SessionManager.TokenNo;
                 dataSet = products.ManageShoppingCart();
@@ -775,8 +748,18 @@ namespace LifeOne.Controllers
                 return RedirectToAction("GetAddress");
             }
             List<Products> productsList1 = new List<Products>();
+            if (!string.IsNullOrEmpty(add))
+            {
+                products.TokenNo = SessionManager.TokenNo;
+                products.OpCode = 1;
+                products.Pk_ProductId = int.Parse(id);
+                products.Quantity = qty;
+                dataSet = products.ManageShoppingCart();
+
+            }
             products.TokenNo = SessionManager.TokenNo;
             products.OpCode = 2;
+
             dataSet = products.ManageShoppingCart();
             products.DtDetails = dataSet.Tables[0];
             if (products.DtDetails.Rows.Count > 0)
@@ -847,22 +830,12 @@ namespace LifeOne.Controllers
         {
             Reports report = new Reports();
             report.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            report.Token = SessionManager.TokenNo;
             DataSet dataSet = report.GetAssociateAddress();
             report.dtaddressdetails = dataSet.Tables[0];
-            DataSet dataset1 = report.GetWalletAmount();
-            report.WalletAmount = decimal.Parse(dataset1.Tables[0].Rows[0]["WalletAmount"].ToString());
+
             report.TotalAmount = decimal.Parse(Session["ShoppingPrice"].ToString());
-            if (report.TotalAmount > report.WalletAmount)
-            {
-                report.GatewayAmount = 0;
-                //ViewBag.InsufficientBalance = "InsufficientBalance";
-            }
-            else
-            {
-                report.WalletAmount = report.TotalAmount;
-                report.GatewayAmount = 0;
-                //ViewBag.InsufficientBalance = "Valid";
-            }
+            report.GatewayAmount = report.TotalAmount;
 
             return View(report);
         }
@@ -926,6 +899,7 @@ namespace LifeOne.Controllers
             {
                 DataSet _result = new DataSet();
                 report.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+                report.Token = SessionManager.TokenNo;
                 if (Save == "Save")
                 {
                     _result = report.AssociateAddAddress(report);
@@ -2009,39 +1983,37 @@ namespace LifeOne.Controllers
         {
             //TotalAmount = "1";
             //Reports reports = new Reports();
+            LifeOne.Models.Products products = new LifeOne.Models.Products();
+            products.OpCode = 2;
+            products.TokenNo = SessionManager.TokenNo;
+            DataSet dataSetP = products.ManageShoppingCart();
+            reports.TotalAmount = decimal.Parse(dataSetP.Tables[0].Compute("sum(SubTotal)", "").ToString());
+
             reports.OpCode = 1;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             Session["Pk_AddressId"] = reports.Pk_AddressId;
-            Session["WalletAmount"] = reports.WalletAmount;
-            // DataSet dataSet = reports.GetCartList();
-            //string TotalAmount = double.Parse(dataSet.Tables[0].Compute("sum(price)", "").ToString()).ToString("0.00");
-            if (reports.GatewayAmount > 0)
-            {
-                Session["RazorPayTotalAmt"] = reports.GatewayAmount;
+            Session["RazorPayTotalAmt"] = reports.TotalAmount;
 
-                string orderId = "";
+            string orderId = "";
 
-                Razorpay.Api.Order objorder = null;
-                ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-                RazorpayClient client = null;
-                client = new RazorpayClient(RazorPayLocalKey, RazorPayLocalSecret);
-                Dictionary<string, object> options = new Dictionary<string, object>();
-                options.Add("amount", (reports.GatewayAmount) * 100);
-                options.Add("receipt", "");
-                options.Add("currency", "INR");
-                options.Add("payment_capture", 1);
-                objorder = client.Order.Create(options);
-                orderId = objorder["id"].ToString();
+            Razorpay.Api.Order objorder = null;
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            RazorpayClient client = null;
+            client = new RazorpayClient(LifeOne.Models.CommonRazorPay.Key, LifeOne.Models.CommonRazorPay.SecretKey);
+            Dictionary<string, object> options = new Dictionary<string, object>();
+            options.Add("amount", (reports.TotalAmount) * 100);
+            options.Add("receipt", "Shopping Order");
+            options.Add("currency", "INR");
+            options.Add("payment_capture", 1);
+            objorder = client.Order.Create(options);
+            orderId = objorder["id"].ToString();
+            LifeOne.Models.RazCreateOrder createOrder = new LifeOne.Models.RazCreateOrder();
+            createOrder.OrderId = orderId;
 
 
-                reports.OrderNo = orderId;
-                reports.RazorPayAmount = ((reports.GatewayAmount) * 100).ToString();
-            }
-            else
-            {
-                return RedirectToAction("../AssociateReport/PlaceOrder");
-
-            }
+            reports.OrderNo = orderId;
+            reports.Key = LifeOne.Models.CommonRazorPay.Key;
+            reports.RazorPayAmount = ((reports.GatewayAmount) * 100).ToString();
             return View(reports);
 
         }
@@ -2060,7 +2032,7 @@ namespace LifeOne.Controllers
             return new JsonResult { Data = Result, JsonRequestBehavior = System.Web.Mvc.JsonRequestBehavior.AllowGet };
         }
         [HttpPost]
-        public ActionResult AddToCart(Products model)
+        public ActionResult AddToCart(LifeOne.Models.Products model)
         {
             //string Status = "AddToCart";
             //if (string.IsNullOrEmpty(SessionManager.LoginId))
@@ -2078,7 +2050,7 @@ namespace LifeOne.Controllers
                 model.DtDetails = dataSet1.Tables[0];
                 Result = int.Parse(model.DtDetails.Rows[0]["Quantity"].ToString());
                 SessionManager.TotalItems = int.Parse(model.DtDetails.Rows[0]["Quantity"].ToString());
-                SessionManager.TokenNo = model.TokenNo;
+                //SessionManager.TokenNo = model.TokenNo;
 
             }
             return new JsonResult { Data = Result, JsonRequestBehavior = System.Web.Mvc.JsonRequestBehavior.AllowGet };
@@ -2388,6 +2360,40 @@ namespace LifeOne.Controllers
         {
             return View();
         }
-       
+        public ActionResult PlaceOrder(string paymentid)
+        {
+            DataTable dtPaymentDetails = new DataTable();
+            dtPaymentDetails.Columns.Add("PaymentMode");
+            dtPaymentDetails.Columns.Add("Amount");
+
+            Reports reports = new Reports();
+            reports.paymentId = paymentid;
+            reports.Token = SessionManager.TokenNo.ToString();
+            reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            reports.Pk_AddressId = Session["Pk_AddressId"].ToString();
+            dtPaymentDetails.Rows.Add("Gateway", Session["RazorPayTotalAmt"].ToString());
+
+            reports.dtPaymentDetails = dtPaymentDetails;
+            DataSet dataSet = reports.PlaceOrderForWeb();
+            if (dataSet != null)
+            {
+                if (dataSet.Tables[0].Rows.Count > 0)
+                {
+                    if (dataSet.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        ViewBag.Msg = "Order Placed Successfully.";
+                        reports.OrderNo = dataSet.Tables[0].Rows[0]["OrderNo"].ToString();
+                        reports.paymentId = paymentid;
+                    }
+                    else
+                    {
+                        ViewBag.Msg = dataSet.Tables[0].Rows[0]["Msg"].ToString();
+                        reports.paymentId = paymentid;
+                    }
+                }
+            }
+            return View(reports);
+        }
+
     }
 }

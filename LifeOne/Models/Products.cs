@@ -40,7 +40,7 @@ namespace LifeOne.Models
         public DataTable DtDetails2 { get; set; }
         public DataTable DtDetailsecond { get; set; }
        
-        public long TokenNo { get; set; }
+        public string TokenNo { get; set; }
         public string TotalAmount { get; set; }
         public string OfferedPrice { get; set; }
         public string DP { get; set; }

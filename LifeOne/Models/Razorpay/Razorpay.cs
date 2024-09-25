@@ -2,6 +2,7 @@
 using System.Data.SqlClient;
 using System.Data;
 using System;
+using Razorpay.Api;
 
 namespace LifeOne.Models
 {
@@ -28,6 +29,7 @@ namespace LifeOne.Models
         public string OrderId { get; set; }
         public string Request { get; set; }
         public string RechargeNo { get; set; }
+        public string Token { get; set; }
         public DataSet CreateRazOrder()
         {
             try
@@ -40,7 +42,8 @@ namespace LifeOne.Models
                                       new SqlParameter("@Type",Type),
                                       new SqlParameter("@OrderId",OrderId),
                                       new SqlParameter("@Request",Request),
-                                      new SqlParameter("@RechargeNo",RechargeNo)
+                                      new SqlParameter("@RechargeNo",RechargeNo),
+                                      new SqlParameter("@Token",Token)
                                   };
 
                 DataSet ds = Connection.ExecuteQuery("CreateRazOrder", para);

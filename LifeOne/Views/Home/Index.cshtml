@@ -498,14 +498,11 @@
                                                       data-target="#addCartModal" title="Add to cart">
                                                     <i class="d-icon-bag"></i>
                                                 </a>*@
-                                                <a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart"
+                                                @*<a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart"
                                                    title="Add to cart" value="Add" name="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">
                                                     <i class="d-icon-bag"></i>
-                                                </a>
-                                                @*<input type="submit" class="btn-product-icon btn-cart" name="Add" value="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())" />*@
-                                                @*<a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
-                                                    <i class="d-icon-heart"></i>
                                                 </a>*@
+                                              
                                             </div>
                                             <div class="product-action">
                                                 <a class="btn-product btn-quickview" title="Quick View" href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">Quick View</a>
