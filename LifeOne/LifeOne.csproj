@@ -1584,6 +1584,8 @@
     <Content Include="Areas\Associate\Views\AssociatePlanIncome\EWalletRequest.cshtml" />
     <Content Include="Areas\Associate\Views\AssociatePlanIncome\EWalletList.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\EWalletRequestList.cshtml" />
+    <Content Include="Areas\Admin\Views\Wallet\EWalletLedger.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminReport\GeustShoppingOrderDetail.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />
