@@ -104,6 +104,7 @@
                                         <th class="text-right">Advance</th>
                                         <th class="text-right">Adjusted Amount</th>
                                         <th class="text-right">Net Amount</th>
+                                        <th class="text-right">Payout Status</th>
 
                                         <th class="text-right">View</th>
                                         <!--<th nowrap>#Sn.</th>
@@ -137,7 +138,7 @@
                                         decimal TotalTDSAmount = 0;
                                         decimal TotalProcessingFee = 0;
                                         decimal TotalNetAmount = 0;
-
+                                        string cssclss = "";
 
                                         foreach (var item in Model.Objlist)
                                         {
@@ -150,7 +151,6 @@
                                             TotalTDSAmount += @item.TDSAmount;
                                             TotalProcessingFee += @item.ProcessingFee;
                                             TotalNetAmount += @item.NetAmount;
-
 
                                             <tr>
                                                 <td data-title="#SN:">@(SNo = SNo + 1)</td>
@@ -168,40 +168,27 @@
                                                 <td class="text-right" data-title="Net Amount:">@item.Advance</td>
                                                 <td class="text-right" data-title="Closing Date:">@item.AdjustedAmount</td>
                                                 <td class="text-right" data-title="Closing Date:">@item.NetAmount</td>
+                                                <td class="text-right" data-title="Payout Status:">
+                                                    @if (item.PayoutStatus == "Hold")
+                                                    {
+                                                        <span class="btn btn-warning btn-sm"> @item.PayoutStatus</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class="btn btn-success btn-sm"> @item.PayoutStatus</span>
+                                                    }
+                                                </td>
                                                 <td>
 
                                                     <input type="button" onclick="GetStatementDetails(@item.PayoutNo)" value="Statement" class="btn btn-success btn-sm" />
-                                                    @*<input type="button" onclick="GetIncomeDetails('@item.LoginId',@item.PayoutNo)" value="Income" class="btn btn-secondary btn-sm" />*@
+                                                    
                                                 </td>
-                                                @*<td>
-                                                        <a onclick="ShowDetails('@item.PrevLeft','@item.PrevRight','@item.CurrLeft','@item.CurrRight','@item.BalLeft','@item.BalRight');" class="text-info"><i class="fa fa-eye text-inverse m-r-10"></i></a>
-                                                    </td>*@
+                                              
                                             </tr>
                                         }
 
-                                        @*< !--<tr>
-                                            <td></td>
-                                            <td><b>Total :</b></td>-->*@
-                                        @*<td class="text-right">@TotalDirectIncome</td>*@
-                                        @*<td class="text-right">@TotalDirectIncome</td>*@
-                                        @*<td class="text-right">@TotalBinaryIncome</td>
-                                        <td class="text-right">@TotalLeaderBonusIncome</td>
-                                        <td class="text-right">@TotalAdvance</td><td class="text-right">@TotalAdjustmentAmount</td>
-                                        <td class="text-right">@TotalGrossAmount</td>
-                                            <td class="text-right">@TotalTDSAmount</td>
-                                            <td class="text-right">@TotalProcessingFee</td>
-                                            <td class="text-right">@TotalNetAmount</td>
-                                            <td></td>
-                                            <td></td>
-                                        </tr>*@
                                     }
-                                    else
-                                    {
-                                        @*<tr>
-                                                <td colspan="10">No Record Found..</td>
-                                            </tr>*@
-                                    }
-
+                                    
                                 </tbody>
                             </table>
                         </div>

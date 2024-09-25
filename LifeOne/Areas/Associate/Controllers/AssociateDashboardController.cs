@@ -10,6 +10,7 @@ using LifeOne.Models.Manager;
 using LifeOne.Models.Common;
 using LifeOne.Models.API.DAL;
 using LifeOne.Models.API;
+using LifeOne.Models.AssociateManagement.AssociateDAL;
 
 namespace LifeOne.Areas.Associate.Controllers
 {
@@ -64,7 +65,10 @@ namespace LifeOne.Areas.Associate.Controllers
                 {
                     Value.payoutSummaries = item._payoutSummaries;
                 }
-
+                AssociateRewardsDAL obj = new AssociateRewardsDAL();
+                RewardsModel obj2 = new RewardsModel();
+                Value.FkMemId = SessionManager.AssociateFk_MemId;
+                Value.Rewardslst = obj.Rewards(obj2);
                 return View(Value);
 
             }

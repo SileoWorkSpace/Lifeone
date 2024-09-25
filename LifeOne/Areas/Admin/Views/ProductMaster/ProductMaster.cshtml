@@ -189,6 +189,11 @@
                                     @Html.TextBoxFor(m => m.HSNCode, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Offered Qty<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.OfferedQty, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+
+                                </div>
 
 
                                 @*<div class="col-md-3 form-group">

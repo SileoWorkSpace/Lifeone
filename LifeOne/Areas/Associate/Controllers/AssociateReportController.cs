@@ -1233,6 +1233,7 @@ namespace LifeOne.Areas.Associate.Controllers
                 databonus.NetAmount = decimal.Parse(dr["NetAmount"].ToString());
                 //databonus.PerformanceBonus = Convert.ToDecimal(dr["performancebonus"].ToString());
                 databonus.ClosingDate = dr["closingdate"].ToString();
+                databonus.PayoutStatus = dr["PayoutStatus"].ToString();
                 databonus.PrevLeft = Convert.ToDecimal(dr["PreviousLeft"].ToString());
                 databonus.PrevRight = Convert.ToDecimal(dr["PreviousRight"].ToString());
                 databonus.CurrLeft = Convert.ToDecimal(dr["CurrentLeft"].ToString());

@@ -23,6 +23,7 @@ using System.Net;
 using System.Web.UI.WebControls;
 using System.Net.NetworkInformation;
 using LifeOne.Models;
+using System.Net.Sockets;
 
 namespace LifeOne.Controllers
 {
@@ -37,26 +38,32 @@ namespace LifeOne.Controllers
         string baseurl = ConfigurationManager.AppSettings["baseurl"].ToString();
         string baseurlNoImg = ConfigurationManager.AppSettings["baseurlNoImg"].ToString();
         private readonly object _objService;
-        static string GetMacAddress()
+        public ActionResult SetCookie()
         {
-            // Get all network interfaces
-            NetworkInterface[] nics = NetworkInterface.GetAllNetworkInterfaces();
+            string ipAddressString = string.Empty; // Variable to store IP address
+            ipAddressString = DateTime.Now.ToString("ddMMyyyyHHmmss");
+            HttpCookie cookie = new HttpCookie("TokenDetails");
+            cookie["Token"] = ipAddressString;
+            cookie.Expires = DateTime.Now.AddDays(30);
+            Response.Cookies.Add(cookie);
+            SessionManager.TokenNo = cookie["Token"];
+            return Content("Cookie has been set!");
 
-            // Iterate through network interfaces and return the first valid MAC address
-            foreach (NetworkInterface nic in nics)
-            {
-                // Make sure the network interface has a MAC address
-                if (nic.NetworkInterfaceType != NetworkInterfaceType.Loopback && !nic.GetPhysicalAddress().Equals(PhysicalAddress.None))
-                {
-                    return nic.GetPhysicalAddress().ToString();
-                }
-            }
-
-            return string.Empty; // Return empty if no valid MAC address is found
         }
         public ActionResult Index(Products products, string Add, string Fk_CategoryId, string ProductName)
         {
-            SessionManager.TokenNo = GetMacAddress();
+            HttpCookie cookie = Request.Cookies["TokenDetails"];
+            if (cookie != null)
+            {
+               
+                SessionManager.TokenNo = cookie["Token"];
+
+            }
+            else
+            {
+                SetCookie();
+              
+            }
             string time = DateTime.Now.ToString("ddMMyyyyhhMMss") + "_" + 4050;
             WebSitePopup model = DALProductServices.WebSitePopup();
             ViewBag.PopupStatus = model.Status;
