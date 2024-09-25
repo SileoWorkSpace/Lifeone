@@ -1,7 +1,39 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "D:\\Repositories\\Lifeone\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\associate\\controllers\\associateplanincomecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\controllers\\associateplanincomecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\associate\\views\\associateplanincome\\ewalletrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\views\\associateplanincome\\ewalletrequest.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\views\\home\\razorpaypaymentpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\razorpaypaymentpage.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\associate\\views\\associateplanincome\\paymentsuccess.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\views\\associateplanincome\\paymentsuccess.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\associate\\associatearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\associatearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\controllers\\razorpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\controllers\\razorpaycontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\models\\api\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\api\\common.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Piyush\\AppData\\Local\\Temp\\.vsdbgsrc\\07c4ec1cba87e4656ea3ff248a744c9ad14372e0efa94ac6f688b9e3e27ad0b3\\ControllerActionInvoker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,7 +41,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 48,
           "Children": [
             {
               "$type": "Bookmark",
@@ -182,6 +214,108 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ControllerActionInvoker.cs",
+              "DocumentMoniker": "C:\\Users\\Piyush\\AppData\\Local\\Temp\\.vsdbgsrc\\07c4ec1cba87e4656ea3ff248a744c9ad14372e0efa94ac6f688b9e3e27ad0b3\\ControllerActionInvoker.cs",
+              "ToolTip": "C:\\Users\\Piyush\\AppData\\Local\\Temp\\.vsdbgsrc\\07c4ec1cba87e4656ea3ff248a744c9ad14372e0efa94ac6f688b9e3e27ad0b3\\ControllerActionInvoker.cs [Read Only]",
+              "ViewState": "AQIAAEUBAAAAAAAAAAAiwFcBAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T13:23:19.657Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "PaymentSuccess.cshtml",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociatePlanIncome\\PaymentSuccess.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Views\\AssociatePlanIncome\\PaymentSuccess.cshtml",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociatePlanIncome\\PaymentSuccess.cshtml",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Views\\AssociatePlanIncome\\PaymentSuccess.cshtml",
+              "ViewState": "AQIAABgAAAAAAAAAAAAwwCkAAAANAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-24T13:14:33.817Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RazorpayController.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Controllers\\RazorpayController.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Controllers\\RazorpayController.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Controllers\\RazorpayController.cs",
+              "RelativeToolTip": "LifeOne\\Controllers\\RazorpayController.cs",
+              "ViewState": "AQIAABkAAAAAAAAAAAAzwBQAAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T12:20:14.434Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RazorPayPaymentPage.cshtml",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Views\\Home\\RazorPayPaymentPage.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\RazorPayPaymentPage.cshtml",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Views\\Home\\RazorPayPaymentPage.cshtml",
+              "RelativeToolTip": "LifeOne\\Views\\Home\\RazorPayPaymentPage.cshtml",
+              "ViewState": "AQIAAAMAAAAAAAAAAAAAAAkAAAAyAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-24T12:06:36.764Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AssociateAreaRegistration.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
+              "ViewState": "AQIAAFwCAAAAAAAAAAAwwGgCAAAdAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T12:02:59.872Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AssociatePlanIncomeController.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociatePlanIncomeController.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Controllers\\AssociatePlanIncomeController.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociatePlanIncomeController.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Controllers\\AssociatePlanIncomeController.cs",
+              "ViewState": "AQIAAHUAAAAAAAAAAAAAAH0AAAAjAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T11:45:23.331Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Common.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\API\\Common.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Models\\API\\Common.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\API\\Common.cs",
+              "RelativeToolTip": "LifeOne\\Models\\API\\Common.cs",
+              "ViewState": "AQIAACIAAAAAAAAAAAAwwD4AAAAJAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-24T11:04:35.011Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "EWalletRequest.cshtml",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociatePlanIncome\\EWalletRequest.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Views\\AssociatePlanIncome\\EWalletRequest.cshtml",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociatePlanIncome\\EWalletRequest.cshtml",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Views\\AssociatePlanIncome\\EWalletRequest.cshtml",
+              "ViewState": "AQIAAMMAAAAAAAAAAAAAAN4AAAAqAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-24T11:01:14.414Z",
+              "EditorCaption": ""
             }
           ]
         },
