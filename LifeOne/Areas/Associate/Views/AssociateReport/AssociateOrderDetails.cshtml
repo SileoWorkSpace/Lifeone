@@ -57,6 +57,7 @@
 
                                             @*<th style="text-align:right">Gateway Amount</th>*@
                                             <th style="text-align:right">Amount</th>
+                                            <th >Action</th>
 
 
                                         </tr>
@@ -87,7 +88,9 @@
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderStatus"].ToString()</td>
                                                     @*<td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["GatewayAmount"].ToString()</td>*@
                                                     <td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["WalletAmount"].ToString()</td>
-
+                                                    <td>
+                                                        <a href="/AssociateReport/ShoppingOrderTaxInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                    </td>
 
                                                 </tr>
                                                 j++;
