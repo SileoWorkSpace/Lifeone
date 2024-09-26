@@ -237,6 +237,7 @@ namespace LifeOne.Models
         public DataTable dtPaymentDetails { get; set; }
         public DataTable dtGetInvoiceGSTReport { get; set; }
         public string RazorPayAmount { get; set; }
+        public string Key { get; set; }
         public DataTable dtGetConsolidatedGstReport { get;  set; }
 
         public DataTable dtGetStatewiseGstReport { get; set; }
@@ -610,6 +611,7 @@ namespace LifeOne.Models
             SqlParameter[] para = {
                                         new SqlParameter("@Pk_AddressId",Pk_AddressId),
                                         new SqlParameter("@Fk_MemId", FK_MemId),
+                                        new SqlParameter("@Token", Token),
 
             };
             DataSet ds = DBHelper.ExecuteQuery("GetAddressDetails", para);
@@ -652,6 +654,7 @@ namespace LifeOne.Models
                                         new SqlParameter("@PinCode", PinCode),
                                         new SqlParameter("@AddressType", AddressType),
                                         new SqlParameter("@IsDefault",IsDefault),
+                                        new SqlParameter("@Token",Token),
 
             };
             DataSet ds = DBHelper.ExecuteQuery("InsertAddress", para);
@@ -671,7 +674,7 @@ namespace LifeOne.Models
                                         new SqlParameter("@PinCode", PinCode),
                                         new SqlParameter("@AddressType", AddressType),
                                         new SqlParameter("@IsDefault",IsDefault ),
-
+                                         new SqlParameter("@Token",Token)
             };
             DataSet ds = DBHelper.ExecuteQuery("UpdateAddress", para);
             return ds;
@@ -682,6 +685,8 @@ namespace LifeOne.Models
                                         new SqlParameter("@OpCode",4 ),
                                         new SqlParameter("@LoginId",LoginId),
                                         new SqlParameter("@OrderNo",OrderNo),
+                                        new SqlParameter("@Page",Page),
+                                        new SqlParameter("@Size",Size),
 
 
             };
@@ -798,8 +803,6 @@ namespace LifeOne.Models
             return ds;
 
         }
-
-
 
           public DataSet CancelInvoicRequest(Reports reports)
 
@@ -1365,6 +1368,22 @@ namespace LifeOne.Models
                 new SqlParameter("@Createdby",AddedBy)
                 };
             DataSet ds = DBHelper.ExecuteQuery("GetPackageProducts", para);
+            return ds;
+
+        }
+
+        public DataSet GetGeustShoppingOrderDetails()
+        {
+            SqlParameter[] para = {
+                                        new SqlParameter("@OpCode",8),
+                                        new SqlParameter("@LoginId",LoginId),
+                                        new SqlParameter("@OrderNo",OrderNo),
+                                        new SqlParameter("@Page",Page),
+                                        new SqlParameter("@Size",Size),
+
+
+            };
+            DataSet ds = DBHelper.ExecuteQuery("PlaceShoppingOrder", para);
             return ds;
 
         }

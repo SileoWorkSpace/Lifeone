@@ -28,6 +28,36 @@ namespace LifeOne.Models.FranchiseManagement.FService
             }
 
         }
+        public static MSimpleString AddAssociateProduct(MFranchiseorderRequest _data)
+        {
+            try
+            {
+                _data.Fk_Memid = SessionManager.AssociateFk_MemId;
+                MSimpleString obj = DALFranchise.AddAllProduct(_data);
+                return obj;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+        public static MSimpleString AddProductbyAssociate(MFranchiseorderRequest _data)
+        {
+            try
+            {
+                _data.Fk_Memid = SessionManager.AssociateFk_MemId;
+                MSimpleString obj = DALFranchise.AddProduct(_data);
+                return obj;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         /*Add to temp*/
         public static MSimpleString AddAssociateProductService(MFranchiseorderRequest _data)
         {
@@ -60,7 +90,20 @@ namespace LifeOne.Models.FranchiseManagement.FService
             }
         }
 
+        public static MSimpleString SaveAssociateProduct(MFranchiseorderRequest _data)
+        {
+            try
+            {
+                
+                MSimpleString obj = DALFranchise.SaveProductbyAssociate(_data);
+                return obj;
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public static MSimpleString SaveAssociateProductService(MFranchiseorderRequest _data)
         {
             try

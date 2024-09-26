@@ -5,11 +5,10 @@
 }
 
 <style>
-    .card-1 {
-        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.05);
-        border-radius: 10px;
+    .card-1{
+        border-radius:10px;
+        border:none !important;
     }
-
     .form-group {
         position: relative;
         margin-bottom: 1rem;
@@ -49,54 +48,58 @@
             </ul>
         </nav>
     </div>
-    <div class="page-content mt-10">
+    <div class="page-content login-page-bg">
         <section class="contact-section my-5">
             <div class="container">
                 <div class="row no-gutters">
                     <div class="col-lg-10 mx-auto">
                         <div class="card card-1">
-                            <div class="card-body p-5">
+                            <div class="card-body p-0">
                                 <div class="row no-gutters">
-                                    <div class="col-lg-6 mb-15 mb-lg-0 pe-xl-2">
-                                        <h3 class="fs-4 mb-5">Log In</h3>
-                                        <span class="text-danger">@TempData["Msg"]</span>
-                                        @*<form class>*@
-                                        @using (Html.BeginForm("Login", "Home", FormMethod.Post))
-                                        {
+                                    <div class="col-lg-6 col-md-6 mb-15 mb-lg-0 pe-xl-2 p-0">
+                                        <div class="logisec">
+                                            <h3 class="fs-4 mb-5" style="font-size:22px !important">Log In</h3>
+                                            <span class="text-danger">@TempData["Msg"]</span>
+                                            @*<form class>*@
+                                            @using (Html.BeginForm("Login", "Home", FormMethod.Post))
+                                            {
 
-                                            <div class="form-group mb-6">
-                                                <label for="Loginid" class="visually-hidden">Email address</label>
-                                                <i class="fas fa-user input-icon"></i>
-                                                <input type="text" class="form-control" id="Loginid" name="Login" placeholder="Login Id">
-                                            </div>
-                                            <div class="form-group mb-6">
-                                                <label for="Password" class="visually-hidden">Password</label>
-                                                <i class="fas fa-lock input-icon"></i>
-                                                <input type="password" class="form-control" id="Password" placeholder="Password" name="Password">
-                                                <i class="fas fa-eye password-icon" onclick="togglePassword()"></i>
-                                            </div>
+                                                <div class="form-group mb-6">
+                                                    <label for="Loginid" class="visually-hidden">Email address</label>
+                                                    <i class="fas fa-user input-icon"></i>
+                                                    <input type="text" class="form-control" id="Loginid" name="Login" placeholder="Login Id">
+                                                </div>
+                                                <div class="form-group mb-6">
+                                                    <label for="Password" class="visually-hidden">Password</label>
+                                                    <i class="fas fa-lock input-icon"></i>
+                                                    <input type="password" class="form-control" id="Password" placeholder="Password" name="Password">
+                                                    <i class="fas fa-eye password-icon" onclick="togglePassword()"></i>
+                                                </div>
 
-                                            @*<a href="/Home/ForgotPassword?_=@Request.QueryString["_"]" class="d-inline-block fs-15 lh-12 mb-7">Forgot your password?</a>*@
-                                            <button class="btn btn-primary btn-sm w-100 mb-7" type="submit">SIGN IN</button>
-                                            @*<button type="submit" class="btn btn-primary w-100 mb-7">Submit</button>*@
-                                            @*<div class="form-check mb-7 d-flex">
-                                                    <input type="checkbox" class="form-check-input rounded-0" id="customCheck1" name="remember">
-                                                    <label class="form-check-label fs-15 ps-4 text-body-emphasis" for="customCheck1">Keep me signed in.</label>
-                                                </div>*@
+                                                @*<a href="/Home/ForgotPassword?_=@Request.QueryString["_"]" class="d-inline-block fs-15 lh-12 mb-7">Forgot your password?</a>*@
+                                                <button class="btn btn-primary btn-sm w-100 mb-7" type="submit">SIGN IN</button>
+                                                @*<button type="submit" class="btn btn-primary w-100 mb-7">Submit</button>*@
+                                                @*<div class="form-check mb-7 d-flex">
+                                                        <input type="checkbox" class="form-check-input rounded-0" id="customCheck1" name="remember">
+                                                        <label class="form-check-label fs-15 ps-4 text-body-emphasis" for="customCheck1">Keep me signed in.</label>
+                                                    </div>*@
 
-                                        }
-                                        @*</form>*@
+                                            }
+                                            @*</form>*@
+                                        </div>
                                     </div>
-                                    <div class="col-lg-6 ps-lg-6 ps-xl-12">
-                                        <h3 class="fs-4 mb-5">New Customer</h3>
-                                        <p class="mb-8">
-                                            By creating an account with our store, you will be able to move through the
-                                            checkout process
-                                            faster, store multiple shipping addresses, view and track your orders in your account and
-                                            more.
-                                        </p>
-                                        <a href="/Home/CustomerRegistration" class="btn btn-sm btn-primary">Register</a>
-                                        @*<a href="user-registration.html" class="btn btn-primary">Register</a>*@
+                                    <div class="col-lg-6 col-md-6 ps-lg-6 ps-xl-12 p-0">
+                                        <div class="regisec">
+                                            <h2 class="fs-4 mb-5 text-white"  style="font-size:22px !important">New Customer</h2>
+                                            <p class="mb-8">
+                                                By creating an account with our store, you will be able to move through the
+                                                checkout process
+                                                faster, store multiple shipping addresses, view and track your orders in your account and
+                                                more.
+                                            </p>
+                                            <a href="/Home/CustomerRegistration" class="btn btn-sm btn-primary">Register</a>
+                                            @*<a href="user-registration.html" class="btn btn-primary">Register</a>*@
+                                        </div>
                                     </div>
                                 </div>
                             </div>

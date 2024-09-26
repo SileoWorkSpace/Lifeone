@@ -12,6 +12,7 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
     public class MFranchiseorderRequest: MCommonProperties
     {
         public int PK_KeyId { get; set; }
+        public int PK_Id { get; set; }
         public int OpCode { get; set; }
         public int CategoryId { get; set; }
         public decimal To { get; set; }
@@ -62,6 +63,12 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
         public string CustomerLoginId { get; set; }
         public string CustomerGstNo { get; set; }
         public string UpiNumber { get; set; }
+        public string OfferQuantity { get; set; }
+        public string DistrictId { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public string StateId { get; set; }
+        public string PinCode { get; set; }
     }
 
 

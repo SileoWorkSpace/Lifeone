@@ -2813,6 +2813,28 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
               id = UrlParameter.Optional
           },
           new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+          "EWalletLedger",
+          "EWalletLedger/{action}/{id}",
+          new
+          {
+              area = "Admin",
+              controller = "Wallet",
+              action = "EWalletLedger",
+              id = UrlParameter.Optional
+          },
+          new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "Geust-Shopping",
+           "GeustShoppingOrderDetail/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "AdminReport",
+               action = "GeustShoppingOrderDetail",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

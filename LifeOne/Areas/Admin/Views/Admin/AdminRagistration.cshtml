@@ -20,12 +20,13 @@
     }*/
 </style>
 
-<section class="content">
-    @using (Html.BeginForm("AdminRagistration", "Admin", FormMethod.Post, new { @id = "form1" }))
-    {
+@using (Html.BeginForm("AdminRagistration", "Admin", FormMethod.Post, new { @id = "form1" }))
+{
+    <div class="container-fluid">
+
         <div class="row page-titles">
             <div class="ptitle">
-                <h3 class="text-themecolor">Direct Seller Ragistration</h3>
+                <h4 class="mb-1 mt-0">Direct Seller Ragistration</h4>
                 @*<ol class="breadcrumb">
                     <li class="breadcrumb-item"> <a href="/Admin-Dashboard">Dashboard</a></li>
                     <li class="breadcrumb-item"> <a href="">Transactions</a></li>
@@ -55,158 +56,159 @@
                 </div>
             }
 
-        </div>
-        <div class="box box-info">
-            <div class="box-body">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-body">
 
-                <div class="row">
-                    <div class="col-md-2">
-                    </div>
-                    <div class="col-md-8">
-                        <div class="card card-outline-info">
-                            <div class="card-body">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Sponsor Code<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.InviteCode, new { @class = "form-control", @autocomplete = "Off", @onchange = "GetReferDetails(this.id)", @placeholder = "Sponsor Code" })
-                                            @Html.HiddenFor(Model => Model.Fk_SponserId)
-                                            @Html.HiddenFor(Model => Model.Fk_MemId)
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Sponsor Name<span style="color:red;">*</span></label>
-                                            <input id="sponsorName" name="sponsorName" class="form-control" type="text" disabled value="@Html.DisplayFor(Model => Model.SponserName)">
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Place Id <span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.PlaceUnderId, new { @id = "PlaceUnderId", @class = "form-control", @autocomplete = "Off", @onchange = "GetPaceUnderIdReferDetails(this.id)", @placeholder = "Place Id" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Place Name<span style="color:red;">*</span></label>
-                                            <input id="placeIdName" name="sponsorName" class="form-control" type="text" disabled value="@Html.DisplayFor(Model => Model.SponserName)">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 ">
-                                        <label class="control-label">Placement <span class="text-danger">*</span></label>
-
-                                        <div class="custom_radio">
-                                            <input type="radio" id="Male" name="Leg" value="L">
-                                            <label for="Left">Left</label>
-                                            <input type="radio" id="Female" name="Leg" value="R">
-                                            <label for="Right">Right</label>
-                                        </div>
-
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Date Of Birth<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.DOB, new { @id = "DOB", @autocomplete = "off", @class = "form-control fdatepicker", @style = "height: 52px; border: 2px solid #e4ecf2;border-radius: inherit;",@placeholder="DD/MM/YYYY" })
-                                        </div>
-                                    </div>
-
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Full Name<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.Name, new { @id = "Name", @class = "form-control" })
-                                            <span class="small">(Full Name as on your PAN CARD)</span>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Mobile No.<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.MobileNo, new { @id = "MobileNo", @class = "form-control only-numeric", @onchange = "checkMobile(this.id)", @maxlength = "10" })
-                                            <span class="small">This mobile no. will be used for all official communications.</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                                <div class="row">
-
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Password<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control", @id = "Password", @type = "password", @autocomplete = "off", onchange = "checkPassword()" })
-                                            <span class="small">Password must be minimum 6 characters long, you can use number or letters of your choice.</span>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Confirm Password<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.ConPassword, new { @id = "ConPassword", @class = "form-control", @type = "password" })
-                                            <span class="small">Confirm password should match password entered above.</span>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">Pin Code.<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.Pincode, new { @id = "Pincode", @class = "form-control only-numeric", @maxlength = "6", @minlength = "6", @onchange = " return GetDistrictCityStateDetailsByPincode(this.id)" })
-
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">State<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.StateName, new { @id = "StateName", @class = "form-control", @readonly = "readonly" })
-                                            @Html.HiddenFor(Model => Model.StateId, new { @id = "StateId" })
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="control-label" for="name">City<span style="color:red;">*</span></label>
-                                            @Html.TextBoxFor(Model => Model.DistrictName, new { @id = "DistrictName", @class = "form-control", @readonly = "readonly" })
-                                            @*<input class="form-control" type="text" id="DistrictName" name="DistrictName">*@
-                                            @Html.HiddenFor(Model => Model.DistrictId, new { @id = "DistrictId" })
-                                        </div>
-                                    </div>
-                                </div>
-
-
-
-                                <div class="row">
-                                    <div class="col-md-6">
-
-                                        <input type="button" name="Save" class="btn btn-fill btn-success" id="register" style="display:@ViewBag.add;" onclick="Savedata(1)" value="Register" />
-                                        @*<input type="submit" id="Save" name="Save" class="btn btn-fill btn-success" style="display:none;" value="Submit" />*@
-                                        <input type="submit" id="Save" name="Save" class="btn btn-fill btn-success" style="display:none;" value="Submit" />
-                                    </div>
-                                </div>
-
+                        <div class="row">
+                            <div class="col-md-2">
                             </div>
-                        </div>
-                    </div>
+                            <div class="col-md-8">
+                                <div class="card card-outline-info">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Sponsor Code<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.InviteCode, new { @class = "form-control", @autocomplete = "Off", @onchange = "GetReferDetails(this.id)", @placeholder = "Sponsor Code" })
+                                                    @Html.HiddenFor(Model => Model.Fk_SponserId)
+                                                    @Html.HiddenFor(Model => Model.Fk_MemId)
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Sponsor Name<span style="color:red;">*</span></label>
+                                                    <input id="sponsorName" name="sponsorName" class="form-control" type="text" disabled value="@Html.DisplayFor(Model => Model.SponserName)">
+                                                </div>
+                                            </div>
 
-                    <div class="col-md-2">
-                        <span id="dbResponse" style="color:red"></span>
+                                        </div>
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Place Id <span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.PlaceUnderId, new { @id = "PlaceUnderId", @class = "form-control", @autocomplete = "Off", @onchange = "GetPaceUnderIdReferDetails(this.id)", @placeholder = "Place Id" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Place Name<span style="color:red;">*</span></label>
+                                                    <input id="placeIdName" name="sponsorName" class="form-control" type="text" disabled value="@Html.DisplayFor(Model => Model.SponserName)">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 ">
+                                                <label class="control-label">Placement <span class="text-danger">*</span></label>
+
+                                                <div class="custom_radio">
+                                                    <input type="radio" id="Male" name="Leg" value="L">
+                                                    <label for="Left">Left</label>
+                                                    <input type="radio" id="Female" name="Leg" value="R">
+                                                    <label for="Right">Right</label>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Date Of Birth<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.DOB, new { @id = "DOB", @autocomplete = "off", @class = "form-control fdatepicker", @style = "height: 52px; border: 2px solid #e4ecf2;border-radius: inherit;", @placeholder = "DD/MM/YYYY" })
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Full Name<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.Name, new { @id = "Name", @class = "form-control" })
+                                                    <span class="small">(Full Name as on your PAN CARD)</span>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Mobile No.<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.MobileNo, new { @id = "MobileNo", @class = "form-control only-numeric", @onchange = "checkMobile(this.id)", @maxlength = "10" })
+                                                    <span class="small">This mobile no. will be used for all official communications.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Password<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.Password, new { @class = "form-control", @id = "Password", @type = "password", @autocomplete = "off", onchange = "checkPassword()" })
+                                                    <span class="small">Password must be minimum 6 characters long, you can use number or letters of your choice.</span>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Confirm Password<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.ConPassword, new { @id = "ConPassword", @class = "form-control", @type = "password" })
+                                                    <span class="small">Confirm password should match password entered above.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">Pin Code.<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.Pincode, new { @id = "Pincode", @class = "form-control only-numeric", @maxlength = "6", @minlength = "6", @onchange = " return GetDistrictCityStateDetailsByPincode(this.id)" })
+
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">State<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.StateName, new { @id = "StateName", @class = "form-control", @readonly = "readonly" })
+                                                    @Html.HiddenFor(Model => Model.StateId, new { @id = "StateId" })
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="name">City<span style="color:red;">*</span></label>
+                                                    @Html.TextBoxFor(Model => Model.DistrictName, new { @id = "DistrictName", @class = "form-control", @readonly = "readonly" })
+                                                    @*<input class="form-control" type="text" id="DistrictName" name="DistrictName">*@
+                                                    @Html.HiddenFor(Model => Model.DistrictId, new { @id = "DistrictId" })
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+
+                                        <div class="row">
+                                            <div class="col-md-6">
+
+                                                <input type="button" name="Save" class="btn btn-fill btn-success" id="register" style="display:@ViewBag.add;" onclick="Savedata(1)" value="Register" />
+                                                @*<input type="submit" id="Save" name="Save" class="btn btn-fill btn-success" style="display:none;" value="Submit" />*@
+                                                <input type="submit" id="Save" name="Save" class="btn btn-fill btn-success" style="display:none;" value="Submit" />
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-2">
+                                <span id="dbResponse" style="color:red"></span>
+                            </div>
+
+                        </div>
                     </div>
 
                 </div>
             </div>
-
         </div>
-
-    }
-</section>
+    </div>
+}
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" integrity="sha512-ELV+xyi8IhEApPS/pSj66+Jiw+sOT1Mqkzlh8ExXihe4zfqbWkxPRi8wptXIO9g73FSlhmquFlUOuMSoXz5IRw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js" integrity="sha512-57oZ/vW8ANMjR/KQ6Be9v/+/h6bq9/l3f0Oc7vn6qMqyhvPd1cvKBRWWpzu0QoneImqr2SkmO4MSqU+RpHom3Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

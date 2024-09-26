@@ -9898,6 +9898,7 @@ figure:hover .overlay-visible {
     background-size: cover;
     text-align: center;
     color: #222;
+    background-attachment: fixed;
 }
 
     .page-header .breadcrumb {

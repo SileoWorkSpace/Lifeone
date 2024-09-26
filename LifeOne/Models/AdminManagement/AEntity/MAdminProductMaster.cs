@@ -11,6 +11,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
     {
         public string Pk_ProductId { get; set; }
         public string Fk_SupplierId { get; set; }
+        public string OfferedQty { get; set; }
         public string ProductName { get; set; }
         public string SupplierName { get; set; }
         public string ProductSKU { get; set; }
@@ -20,6 +21,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string Doses { get; set; }
         public string Avalibility { get; set; }
         public string SalesPrice { get; set; }
+        public string DP { get; set; }
         public string MRP { get; set; }
         public string Size { get; set; }
         public string ProductImage { get; set; }
@@ -49,6 +51,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string ImageUrl { get; set; }
         public string CreatedDate { get; set; }
         public string Videolink { get; set; }
+        public string OfferQuantity { get; set; }
         public int OpCode { get; set; }
         public List<MAdminProductMaster> ProductMasterList { get; set; }
         public List<MAdminProductMaster> ObjList{ get; set; }

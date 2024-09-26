@@ -155,6 +155,7 @@ namespace LifeOne.Areas.Associate.Controllers
                     Session["orderId"] = orderId;
                     Session["amount"] = Amount;
                     Session["status"] = Entity.ChequeDD_No;
+                    Session["key"] = CommonRazorPay.Key;
                     
                 }
 
