@@ -1274,6 +1274,14 @@ namespace LifeOne.Areas.Associate.Controllers
 
             // return View();
         }
+        public ActionResult ShoppingOrderTaxInvoice(string id)
+        {
+            ShoppingOrderInvoiceModel orderInvoice = new ShoppingOrderInvoiceModel();
+            OrderDAL orderDAL = new OrderDAL();
+            DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
+            orderInvoice.dtDetails = dsOrder.Tables[0];
+            return View(orderInvoice);
+        }
 
 
 
