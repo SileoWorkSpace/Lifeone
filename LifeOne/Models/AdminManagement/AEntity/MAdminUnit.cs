@@ -26,13 +26,16 @@ namespace LifeOne.Models.AdminManagement.AEntity
 
     public class WebSitePopup
     {
-        public string ImageUrl { get; set; }
+        public string Id { get; set; }
+        public HttpPostedFileBase ImageUrl_Doc { get; set; }
+        public String ImageUrl { get; set; }
         public string Status { get; set; }
         public bool IsActive { get; set; }
         public string ActiveType { get; set; }
         public string CreationDate { get; set; }
         public string UpdateDate { get; set; }
         public int Code { get; set; }
+        public List<WebSitePopup> websiteList { get; set; }
 
     }
 }
