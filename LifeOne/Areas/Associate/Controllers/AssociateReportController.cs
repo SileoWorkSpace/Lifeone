@@ -1013,6 +1013,11 @@ namespace LifeOne.Areas.Associate.Controllers
         }
         public ActionResult AssociateOrderDetails(Reports reports)
         {
+            if(reports.Page==0 || reports.Page==null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             DataSet dataSet = reports.GetShoppingOrderDetails();
             reports.dtGetShoppingOrderDetails = dataSet.Tables[0];

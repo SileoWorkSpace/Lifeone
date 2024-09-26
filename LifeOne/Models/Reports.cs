@@ -684,6 +684,7 @@ namespace LifeOne.Models
             SqlParameter[] para = {
                                         new SqlParameter("@OpCode",4 ),
                                         new SqlParameter("@LoginId",LoginId),
+                                        new SqlParameter("@Fk_MemId",FK_MemId),
                                         new SqlParameter("@OrderNo",OrderNo),
                                         new SqlParameter("@Page",Page),
                                         new SqlParameter("@Size",Size),
