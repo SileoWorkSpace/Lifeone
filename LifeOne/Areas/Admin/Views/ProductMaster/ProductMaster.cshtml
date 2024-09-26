@@ -160,7 +160,11 @@
                                     @Html.TextBoxFor(m => m.SalesPrice, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
+                                <div class="col-md-3">
+                                    <label>DP<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.DP, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
+                                </div>
 
                                 <div class="col-md-3 form-group" id="dv_PV">
                                     <label>BV<span style="color:red;">*</span></label>
@@ -190,17 +194,17 @@
 
                                 </div>
                                 <div class="col-md-3 form-group">
-<<<<<<< HEAD
+                                    <<<<<<< HEAD
                                     <label>Offered Qty<span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.OfferedQty, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
-=======
-                                    <label>Offer Quantity<span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.OfferQuantity, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
->>>>>>> origin/RinkuChauhan
+                                =======
+                                <label>Offer Quantity<span style="color:red;">*</span></label>
+                                @Html.TextBoxFor(m => m.OfferQuantity, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                >>>>>>> origin/RinkuChauhan
 
-                                </div>
+                            </div>
 
                                 @*<div class="col-md-3 form-group">
             <label>Image<span style="color:red;">*</span></label>
@@ -309,7 +313,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 }
 <script type="text/javascript">
     @{

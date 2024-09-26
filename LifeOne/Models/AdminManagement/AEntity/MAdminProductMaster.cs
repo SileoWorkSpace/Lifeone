@@ -21,6 +21,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string Doses { get; set; }
         public string Avalibility { get; set; }
         public string SalesPrice { get; set; }
+        public string DP { get; set; }
         public string MRP { get; set; }
         public string Size { get; set; }
         public string ProductImage { get; set; }
