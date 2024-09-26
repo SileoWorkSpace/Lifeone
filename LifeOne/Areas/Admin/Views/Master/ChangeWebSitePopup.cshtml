@@ -64,9 +64,7 @@
                                     <tr>
                                         <th>#Sn.</th>
                                         <th>Pop-up Image</th>
-                                        <th>Status</th>
                                         <th>Created Date</th>
-                                        <th>Updated Date</th>
                                         <th class="text-right">Actions</th>
                                     </tr>
                                 </thead>
@@ -79,21 +77,7 @@
                                             <tr>
                                                 <td>@(Sno = Sno + 1)</td>
                                                 <td><img src="@item.ImageUrl" height="100px" width="100px" /></td>
-                                                <td>
-                                                    @if (@item.Status == "Active")
-                                                    {
-
-                                                        <span class="badge badge-success">@item.Status</span>
-
-                                                    }
-                                                    else
-                                                    {
-                                                        <span class="badge badge-danger">@item.Status</span>
-                                                    }
-
-                                                </td>
                                                 <td>@item.CreationDate</td>
-                                                <td>@item.UpdateDate</td>
                                                 <td>
                                                     <a href="/Admin/Master/DeleteWebSidePopup?abc=@item.Id"><i class="fa fa-trash"></i></a>
                                                 </td>
@@ -232,12 +216,7 @@
                                 <input type="file" onchange="ShowImagePreview(this)" hidden />
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-md-3 form-group">
-                                @Html.CheckBoxFor(m => m.IsActive, new { @checked = "checked" })
-                                <label class="form-control-placeholder" for="name">Is Active</label>
-                            </div>
-                        </div>
+                        
                     </form>
                 </div>
                 <div class="modal-footer">
