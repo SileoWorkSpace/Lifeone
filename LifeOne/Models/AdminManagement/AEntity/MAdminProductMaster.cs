@@ -12,6 +12,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string Pk_ProductId { get; set; }
         public string Fk_SupplierId { get; set; }
         public string OfferedQty { get; set; }
+        public string CourierCharges { get; set; }
         public string ProductName { get; set; }
         public string SupplierName { get; set; }
         public string ProductSKU { get; set; }
