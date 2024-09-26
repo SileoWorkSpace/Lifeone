@@ -15,6 +15,10 @@
 <link rel="stylesheet" type="text/css" href="~/Content/NewAssests/vendor/owl-carousel/owl.carousel.min.css">
 
 <style>
+    .intro-banners img {
+        min-height: 5rem;
+    }
+
     @@media (max-width: 767px) {
         .ps-wel-cat-bg2-side {
             display: flex !important;
@@ -24,6 +28,7 @@
         .product-s {
             padding: 20px 0px 0 0;
         }
+
         .pro {
             display: block !important; /* or inline-block, depending on your needs */
         }
@@ -97,7 +102,7 @@
         background: url(/Content/NewAssests/images/hair.jpg) no-repeat right 10%;
     }
 
-   /* .product-s {
+    /* .product-s {
         padding: 10px 0px 0 0 !important;
     }*/
 
@@ -106,27 +111,30 @@
         font-size: 20px;
         line-height: 28px;
     }
-  
-        @@media only screen and (max-width: 479px) {
-            h2.product-system {
-                font-size: 20px !important;
-                line-height: 26px !important;
-            }
+
+    @@media only screen and (max-width: 479px) {
+        h2.product-system {
+            font-size: 20px !important;
+            line-height: 26px !important;
+        }
+    }
+
+    @@media only screen and (max-width: 479px) {
+        .panel-lifeone h1 {
+            font-size: 30px;
         }
 
         @@media only screen and (max-width: 479px) {
-            .panel-lifeone h1 {
-                font-size: 30px;
-            }
-
-            @@media only screen and (max-width: 479px) {
-                .panel-lifeone p {
-                    line-height: 24px !important;
-                    font-size: 17px !important;
-                    padding: 5px 8% !important;
-                }
+            .panel-lifeone p {
+                line-height: 24px !important;
+                font-size: 17px !important;
+                padding: 5px 8% !important;
             }
         }
+    }
+
+    @@media (max-width: 767px) {
+    }
 </style>
 <main class="main">
     <div class="page-content">
@@ -173,7 +181,7 @@
                     </div>
                     <div class="carousel-item">
                         <img width="100%" src="~/Content/NewAssests/images/hero-slider-10a.jpg" alt="intro-banner" />
-                    </div>                   
+                    </div>
                     <div class="carousel-item">
                         <img width="100%" src="~/Content/NewAssests/images/hero-slider-11a.jpg" alt="intro-banner" />
                     </div>
@@ -204,172 +212,496 @@
                 }">
 
             </div>
-            <!--<div class="intro-banners gutter-sm row">
-            <div class="col-lg-4 col-sm-6 mb-2">
-                <div class="banner banner-1 banner-fixed content-middle overlay-dark appear-animate"
-                     data-animation-options="{
+            <div class="intro-banners gutter-sm row">
+                <div class="col-lg-3 col-sm-6 mb-2">
+                    <div class="banner banner-1 banner-fixed content-middle overlay-dark appear-animate"
+                         data-animation-options="{
                             'name': 'fadeInLeftShorter',
                             'delay': '.5s'
                         }">
-                    <figure>
-                        <img src="~/Content/NewAssests/images/demos/demo19/banner/1.jpg" alt="banner" width="380" height="207"
-                             style="background-color: rgb(233, 233, 233);" />
-                    </figure>
-                    <div class="banner-content">-->
-            @*<h3 class="banner-title font-weight-bold">For Men’s</h3>
-                <h4 class="banner-subtitle text-uppercase text-body mb-0">
-                    Starting at ₹29
-                </h4>*@
-            @*<hr class="bg-grey">*@
-            <!--<a href="/Home/Products" class="btn btn-link btn-underline">
-                            Shop Now<i class="d-icon-arrow-right"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 mb-2 order-lg-auto order-sm-last">
-                <div class="banner banner-2 banner-fixed content-middle content-center overlay-effect4 appear-animate"
-                     data-animation-options="{
-                            'name': 'fadeIn',
-                            'delay': '.3s'
-                        }">
-                    <figure>
-                        <img src="~/Content/NewAssests/images/demos/demo19/banner/3.jpg" alt="banner" width="350" height="177"
-                             style="background-color: rgb(29, 29, 29);" />
-                    </figure>
-                    <div class="banner-content">-->
-            @*<h4 class="mb-2 text-uppercase text-primary font-weight-normal">
-                    GEt 40% Off Your
-                    Entire Order!
-                </h4>
-                <h3 class="banner-title font-weight-bold text-white">
-                    Black
-                    Friday Sale
-                </h3>
-                <p class="mt-1">
-                    Use code <strong class="text-white">BLKFRI40</strong> at checkout.
-                </p>*@
-            <!--<a href="/Home/Products" class="btn btn-primary btn-outline text-white">
-                            Shop Now
-                            <i class="d-icon-arrow-right ml-1"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-4 col-sm-6 mb-2">
-                <div class="banner banner-3 banner-fixed content-middle overlay-dark appear-animate"
-                     data-animation-options="{
-                            'name': 'fadeInRightShorter',
-                            'delay': '.5s'
-                        }">
-                    <figure>
-                        <img src="~/Content/NewAssests/images/demos/demo19/banner/2.jpg" alt="banner" width="380" height="207"
-                             style="background-color: rgb(233, 233, 233);" />
-                    </figure>
-                    <div class="banner-content">-->
-            @*<h3 class="banner-title font-weight-bold">For Women’s</h3>
-                <h4 class="banner-subtitle text-uppercase text-body mb-0">
-                    Starting at ₹29
-                </h4>*@
-            @*<hr class="bg-grey">*@
-            <!--<a href="/Home/Products" class="btn btn-link btn-underline">
-                                Shop Now<i class="d-icon-arrow-right"></i>
-                            </a>
+                        <figure>
+                            <img src="~/Content/NewAssests/images/demos/demo19/banner/1.jpg" alt="banner" width="380" height="207"
+                                 style="background-color: rgb(233, 233, 233);" />
+                        </figure>
+                        <div class="banner-content">
+                            <h3 class="banner-title font-weight-bold">
+                                Upcoming Events
+                            </h3>
+                            <h4 class="banner-subtitle text-uppercase  mb-0">
+                                
+                            </h4>
+                            <hr class="bg-white">
+                            @*<a href="/Home/Products" class="btn btn-link btn-underline text-white">
+                                    Shop Now<i class="d-icon-arrow-right"></i>
+                                </a>*@
                         </div>
                     </div>
                 </div>
-            </div>-->
+                <div class="col-lg-3 col-sm-6 mb-2">
+                    <div class="banner banner-1 banner-fixed content-middle overlay-dark appear-animate"
+                         data-animation-options="{
+                 'name': 'fadeInLeftShorter',
+                 'delay': '.5s'
+             }">
+                        <figure>
+                            <img src="~/Content/NewAssests/images/demos/demo19/banner/2.jpg" alt="banner" width="380" height="207"
+                                 style="background-color: rgb(233, 233, 233);" />
+                        </figure>
+                        <div class="banner-content">
+                            <h3 class="banner-title font-weight-bold">Lifeone Education </h3>
+                            <h4 class="banner-subtitle text-uppercase  mb-0">
+                               
+                            </h4>
+                            <hr class="bg-white">
+                            @*<a href="/Home/Products" class="btn btn-link btn-underline text-white">
+                                    Shop Now<i class="d-icon-arrow-right"></i>
+                                </a>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-2">
+                    <div class="banner banner-1 banner-fixed content-middle overlay-dark appear-animate"
+                         data-animation-options="{
+    'name': 'fadeInLeftShorter',
+    'delay': '.5s'
+}">
+                        <figure>
+                            <img src="~/Content/NewAssests/images/demos/demo19/banner/4.jpg" alt="banner" width="380" height="207"
+                                 style="background-color: rgb(233, 233, 233);" />
+                        </figure>
+                        <div class="banner-content">
+                            <h3 class="banner-title font-weight-bold">Achievement </h3>
+                            <h4 class="banner-subtitle text-uppercase  mb-0">
+                                
+                            </h4>
+                            <hr class="bg-white">
+                            @*<a href="/Home/Products" class="btn btn-link btn-underline text-white">
+                                    Shop Now<i class="d-icon-arrow-right"></i>
+                                </a>*@
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-2">
+                    <div class="banner banner-1 banner-fixed content-middle overlay-dark appear-animate"
+                         data-animation-options="{
+    'name': 'fadeInLeftShorter',
+    'delay': '.5s'
+}">
+                        <figure>
+                            <img src="~/Content/NewAssests/images/demos/demo19/banner/3.jpg" alt="banner" width="380" height="207"
+                                 style="background-color: rgb(233, 233, 233);" />
+                        </figure>
+                        <div class="banner-content">
+                            <h3 class="banner-title font-weight-bold">Current Offer</h3>
+                            <h4 class="banner-subtitle text-uppercase  mb-0">
+                                
+                            </h4>
+                            <hr class="bg-white">
+                            @*<a href="/Home/Products" class="btn btn-link btn-underline text-white">
+                                    Shop Now<i class="d-icon-arrow-right"></i>
+                                </a>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        @*product-section*@
-
-        @using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+        @if (Model.dtCategory != null && Model.dtCategory.Rows.Count > 0)
         {
-            <section class="panel-lifeone" style="border-bottom:1px solid #eee; padding-bottom:0px;">
-                @*<h1 class="mb-1">Our Revolutionary Products Range</h1>
-                    <p>
-                        Asclepius Wellness is above all a family company. We lead a diverse global management team that supports Independent Business Owners and their goals. Hone in on your goals with the best
-                        product combinations for targeted results.
-                    </p>*@
-                <div class="dividers-solid-light-gray-copy"></div>
-                <div class="container-fluid px-0">
-                    @if (Model != null && Model.dtCategory != null && Model.dtCategory.Rows.Count > 0)
-                    {
-                        for (int i = 0; i <= Model.dtCategory.Rows.Count - 1; i++)
-                        {
-                            if (i % 2 == 0)
+            <section class="product-wrapper grey-section pt-10 pb-6 appear-animate">
+                <div class="container mb-10">
+                    <h2 class="title title-simple text-center pt-8">Shop by categories</h2>
+                    <div class="owl-carousel owl-theme row owl-dot-grey cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
+                         data-owl-options="{
+                     'items':@Model.dtCategory.Rows[0]["TotalRecords"].ToString(),
+                     'margin': 20,
+                     'loop': false,
+                     'autoplay': true,
+                     'autoplayTimeout': 3000,
+                     'autoplayHoverPause': true,
+                     'responsive': {
+                         '0': { 'items': 2 },
+                         '576': { 'items': 3 },
+                         '768': { 'items': 4 },
+                         '992': { 'items': 4, 'dots': false },
+                         '1200': { 'items': 5, 'dots': false }
+                     }
+                   }">
+                        @{
+                            if (Model.DtDetails != null)
                             {
-                               <div class="row ps-wel-cat-bg3-side align-items-center">
-                                   <div class="col-xs-12 col-md-6 col-xs-12 wellness vh-100 " style="background-image:url(@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString())"></div>
-                                   <div class="col-xs-12 col-md-6 col-xs-12">
-                                       <div class="text-center product-s">
-                                           <h2 class="product-system">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h2>
-                                           @*<h2 class="product-system">Hair Care Range</h2>*@
-                                           @*<p class="product-system" style="text-align:center;">Our Hair Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>*@
-                                           <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View @Model.dtCategory.Rows[i]["ProductType"].ToString() <i class="d-icon-arrow-right"></i></a>
-                                       </div>
-                                   </div>
-                               </div>                               
-                            }
-                            else
-                            {
-                                <div class="row ps-wel-cat-bg2-side align-items-center">
-                                    <div class="col-xs-12 col-md-6 col-xs-12">
-                                        <div class="text-center product-s">
-                                            <h2 class="product-system">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h2>
-                                            @*<h2 class="product-system">Beauty Care Range</h2>*@
-                                            @*<p class="product-system" style="text-align:center;">Our Beauty Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>*@
-                                            <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View @Model.dtCategory.Rows[i]["ProductType"].ToString() <i class="d-icon-arrow-right"></i></a>
+                                for (int i = 0; i < Model.dtCategory.Rows.Count; i++)
+                                {
+                                    <div class="category category-absolute category-classic overlay-zoom mr-1" data-animation-options="{
+                                'name': 'fadeIn',
+                                'delay': '.3s'
+                            }">
+                                        <a href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.dtCategory.Rows[i]["PK_ProductTypeId"].ToString())">
+                                            <figure class="category-media">
+                                                <img src="@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString()" alt="category" width="348" height="348" />
+                                            </figure>
+                                        </a>
+                                        <div class="category-content">
+                                            <a class="pro-c" href="/Home/Products?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.dtCategory.Rows[i]["PK_ProductTypeId"].ToString())">
+                                                <h4 class="category-name">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h4>
+                                            </a>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-md-6 col-xs-12 beauty-care pro vh-100" style="background-image:url(@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString())"></div>
-                                </div>
+                                }
                             }
                         }
-                    }
-                    @*<div class="row ps-wel-cat-bg2-side">
-            <div class="col-xs-12 col-md-6 col-xs-12">
-                <div class="text-center product-s">
-                    <h2 class="product-system">Beauty Care Range</h2>
-                    <p class="product-system" style="text-align:center;">Our Beauty Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>
-                    <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Beauty Care Range <i class="d-icon-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-6 col-xs-12 beauty-care vh-100 hidden-mb"></div>
-        </div>
-        <div class="row ps-wel-cat-bg3-side">
-            <div class="col-xs-12 col-md-6 col-xs-12 wellness vh-100 hidden-mb"></div>
-            <div class="col-xs-12 col-md-6 col-xs-12">
-                <div class="text-center product-s">
-                    <h2 class="product-system">Wellness Care Range</h2>
-                    <p class="product-system" style="text-align:center;">Our Wellness Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>
-                    <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Wellness Care Range <i class="d-icon-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="row ps-wel-cat-bg5-side">
-            <div class="col-xs-12 col-md-6 col-xs-12">
-                <div class="text-center product-s">
-                    <h2 class="product-system">Food Product Range</h2>
-                    <p class="product-system" style="text-align:center;">Our Food Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>
-                    <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Food Products Range <i class="d-icon-arrow-right"></i></a>
-                </div>
-            </div>
-            <div class="col-xs-12 col-md-6 col-xs-12 food vh-100 hidden-mb"></div>
-        </div>
-        <div class="row ps-wel-cat-bg4-side">
-            <div class="col-xs-12 col-md-6 col-xs-12 Oral-care vh-100 hidden-mb"></div>
-            <div class="col-xs-12 col-md-6 col-xs-12">
-                <div class="text-center product-s">
-                    <h2 class="product-system">Oral Care Range</h2>
-                    <p class="product-system" style="text-align:center;">Our Oral Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>
-                    <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Oral Care Range <i class="d-icon-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>*@
+                    </div>
                 </div>
             </section>
         }
-        <section class="brand-section grey-section pt-10 pb-10 appear-animate" style="background: #eff1d9;">
+        <div class="intro-banners gutter-sm row">
+            <div class="col-md-12">
+                <img width="100%" src="~/Content/NewAssests/images/hero-slider-06a.jpg" />
+            </div>
+        </div>
+        @*product-section*@
+
+        @*@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+            {
+                <section class="panel-lifeone" style="border-bottom:1px solid #eee; padding-bottom:0px;">*@
+        @*<h1 class="mb-1">Our Revolutionary Products Range</h1>
+            <p>
+                Asclepius Wellness is above all a family company. We lead a diverse global management team that supports Independent Business Owners and their goals. Hone in on your goals with the best
+                product combinations for targeted results.
+            </p>*@
+        @*<div class="dividers-solid-light-gray-copy"></div>
+            <div class="container-fluid px-0">
+                @if (Model != null && Model.dtCategory != null && Model.dtCategory.Rows.Count > 0)
+                {
+                    for (int i = 0; i <= Model.dtCategory.Rows.Count - 1; i++)
+                    {
+                        if (i % 2 == 0)
+                        {
+                           <div class="row ps-wel-cat-bg3-side align-items-center">
+                               <div class="col-xs-12 col-md-6 col-xs-12 wellness vh-100 " style="background-image:url(@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString())"></div>
+                               <div class="col-xs-12 col-md-6 col-xs-12">
+                                   <div class="text-center product-s">
+                                       <h2 class="product-system">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h2>*@
+        @*<h2 class="product-system">Hair Care Range</h2>*@
+        @*<p class="product-system" style="text-align:center;">Our Hair Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>*@
+        @*<a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View @Model.dtCategory.Rows[i]["ProductType"].ToString() <i class="d-icon-arrow-right"></i></a>
+            </div>
+                                           </div>
+                                       </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="row ps-wel-cat-bg2-side align-items-center">
+                                            <div class="col-xs-12 col-md-6 col-xs-12">
+                                                <div class="text-center product-s">
+                                                    <h2 class="product-system">@Model.dtCategory.Rows[i]["ProductType"].ToString()</h2>*@
+        @*<h2 class="product-system">Beauty Care Range</h2>*@
+        @*<p class="product-system" style="text-align:center;">Our Beauty Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>*@
+        @*<a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View @Model.dtCategory.Rows[i]["ProductType"].ToString() <i class="d-icon-arrow-right"></i></a>
+                                </div>
+                            </div>
+                            <div class="col-xs-12 col-md-6 col-xs-12 beauty-care pro vh-100" style="background-image:url(@Model.dtCategory.Rows[i]["ProductTypeImage"].ToString())"></div>
+                        </div>
+                    }
+                }
+            }*@
+        @*<div class="row ps-wel-cat-bg2-side">
+                <div class="col-xs-12 col-md-6 col-xs-12">
+                    <div class="text-center product-s">
+                        <h2 class="product-system">Beauty Care Range</h2>
+                        <p class="product-system" style="text-align:center;">Our Beauty Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>
+                        <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Beauty Care Range <i class="d-icon-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-xs-12 beauty-care vh-100 hidden-mb"></div>
+            </div>
+            <div class="row ps-wel-cat-bg3-side">
+                <div class="col-xs-12 col-md-6 col-xs-12 wellness vh-100 hidden-mb"></div>
+                <div class="col-xs-12 col-md-6 col-xs-12">
+                    <div class="text-center product-s">
+                        <h2 class="product-system">Wellness Care Range</h2>
+                        <p class="product-system" style="text-align:center;">Our Wellness Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>
+                        <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Wellness Care Range <i class="d-icon-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="row ps-wel-cat-bg5-side">
+                <div class="col-xs-12 col-md-6 col-xs-12">
+                    <div class="text-center product-s">
+                        <h2 class="product-system">Food Product Range</h2>
+                        <p class="product-system" style="text-align:center;">Our Food Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>
+                        <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Food Products Range <i class="d-icon-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-6 col-xs-12 food vh-100 hidden-mb"></div>
+            </div>
+            <div class="row ps-wel-cat-bg4-side">
+                <div class="col-xs-12 col-md-6 col-xs-12 Oral-care vh-100 hidden-mb"></div>
+                <div class="col-xs-12 col-md-6 col-xs-12">
+                    <div class="text-center product-s">
+                        <h2 class="product-system">Oral Care Range</h2>
+                        <p class="product-system" style="text-align:center;">Our Oral Care Products are produced using scientific formulations, green ingredients and modern manufacturing processes.</p>
+                        <a href="#" class="btn btn-primary wel-button mt-4 mb-5" role="button">View Oral Care Range <i class="d-icon-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>*@
+        @*</div>
+                </section>
+            }*@
+
+        @if (Model.DtDetails != null && Model.DtDetails.Rows.Count > 0)
+        {
+            <section class="product-wrapper grey-section pt-10 pb-6 appear-animate">
+                <div class="container mb-10">
+                    <h2 class="title title-simple text-center pt-8">Shop Products</h2>
+                    <div class="owl-carousel owl-theme row owl-dot-grey cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
+                         data-owl-options="{
+                            'items':@Model.DtDetails.Rows[0]["TotalRecords"].ToString(),
+                            'margin': 20,
+                            'autoplay': true,
+                 'autoplayTimeout': 3000,
+                            'loop': false,
+                            'responsive': {
+                                '0': {
+                                    'items': 2
+                                },
+                                '576': {
+                                    'items': 3
+                                },
+                                '768': {
+                                    'items': 3
+                                },
+                                '992': {
+                                    'items': 4
+                                },
+                                '1200': {
+                                    'items': 5,
+                                    'dots': false
+                                }
+                            }
+                        }">
+                        @{
+                            if (Model.DtDetails != null)
+                            {
+
+                                for (int i = 0; i < Model.DtDetails.Rows.Count; i++)
+                                {
+                                    <div class="product text-center">
+                                        <figure class="product-media">
+                                            <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">
+                                                <img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="280"
+                                                     height="315">
+                                                @*<img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()"  alt="product" width="300"
+                                                    height="338">*@
+                                            </a>
+                                            @*<div class="product-label-group">
+                                                    <label class="product-label label-sale">27% off</label>
+                                                </div>*@
+                                            <div class="product-action-vertical">
+                                                @*<a href="#" class="btn-product-icon btn-cart" data-toggle="modal"
+
+                                                      data-target="#addCartModal" title="Add to cart">
+                                                    <i class="d-icon-bag"></i>
+                                                </a>*@
+                                                @*<a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart"
+                                                   title="Add to cart" value="Add" name="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">
+                                                    <i class="d-icon-bag"></i>
+                                                </a>*@
+                                              
+                                                <a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart"
+                                                   title="Add to cart" value="Add" name="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">
+                                                    <i class="d-icon-bag"></i>
+                                                </a>
+                                                @*<input type="submit" class="btn-product-icon btn-cart" name="Add" value="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())" />*@
+                                                @*<a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
+                                                        <i class="d-icon-heart"></i>
+                                                    </a>*@
+
+                                            </div>
+                                            <div class="product-action">
+                                                <a class="btn-product" title="View Details" href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">View Details</a>
+                                            </div>
+                                        </figure>
+                                        <div class="product-details">
+                                            <h3 class="product-name">
+                                                <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
+                                            </h3>
+                                            <div class="product-price">
+                                                <ins class="new-price">MRP ₹@Model.DtDetails.Rows[i]["MRP"].ToString()</ins><del class="new-price">PV @Model.DtDetails.Rows[i]["PV"].ToString()</del>
+                                            </div>
+                                            <div class="ratings-container">
+                                                <div class="ratings-full">
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "1")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "2")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "3")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "4")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "5")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                </div>
+                                                @if (@Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "0")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" class="rating-reviews">@Model.DtDetails.Rows[i]["ReviewCount"].ToString()</a>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </section>
+        }
+        <div class="intro-banners gutter-sm row">
+            <div class="col-md-12">
+                <img width="100%" src="~/Content/NewAssests/images/hero-slider-03a.jpg" />
+            </div>
+        </div>
+        @if (Model.DtDetails != null && Model.DtDetails.Rows.Count > 0)
+        {
+            <section class="product-wrapper container-fluid pt-10 appear-animate mb-5">
+                <div class="container">
+                    <h2 class="title title-simple text-center pt-7 pb-4">Featured Products</h2>
+                    <div class="owl-carousel owl-theme row owl-dot-grey cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
+                         data-owl-options="{
+                        'items':@Model.DtDetails.Rows[0]["TotalRecords"].ToString(),
+                        'margin': 20,
+                 'autoplay': true,
+                 'autoplayTimeout': 3000,
+                        'loop': false,
+                        'responsive': {
+                            '0': {
+                                'items': 2
+                            },
+                            '576': {
+                                'items': 3
+                            },
+                            '768': {
+                                'items': 3
+                            },
+                            '992': {
+                                'items': 4
+                            },
+                            '1200': {
+                                'items': 5,
+                                'dots': false
+                            }
+                        }
+                    }">
+                        @{
+                            if (Model.DtDetails != null)
+                            {
+                                for (int i = 0; i < Model.DtDetails.Rows.Count; i++)
+                                {
+                                    <div class="product text-center">
+                                        <figure class="product-media">
+                                            <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">
+                                                <img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="300"
+                                                     height="338">
+                                                <img src="@Model.DtDetails.Rows[i]["ProductImage"].ToString()" alt="product" width="300"
+                                                     height="338">
+                                            </a>
+                                            <div class="product-action-vertical">
+                                                @*<a href="/Home/ShoppingCartList?id=@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString()" class="btn-product-icon btn-cart" data-toggle="modal" title="Add to cart" value="Add" name="Add" onclick="return fAddToCart(@Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())"
+                                                       data-target="#addCartModal">
+                                                        <i class="d-icon-bag"></i>
+                                                    </a>*@
+                                                @*<a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist">
+                                                        <i class="d-icon-heart"></i>
+                                                    </a>*@
+                                            </div>
+                                            <div class="product-action">
+                                                <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())" class="btn-product" title="View Details">View Details</a>
+                                            </div>
+                                        </figure>
+                                        <div class="product-details">
+                                            <h3 class="product-name">
+                                                <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
+                                            </h3>
+                                            <div class="product-price">
+                                                <ins class="new-price">MRP ₹@Model.DtDetails.Rows[i]["MRP"].ToString()</ins><ins class="new-price">PV @Model.DtDetails.Rows[i]["PV"].ToString()</ins>
+                                            </div>
+                                            <div class="ratings-container">
+                                                <div class="ratings-full">
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "1")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "2")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "3")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "4")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                    @if (Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "5")
+                                                    {
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+                                                        <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                    }
+                                                </div>
+                                                @if (@Model.DtDetails.Rows[i]["ReviewCount"].ToString() == "0")
+                                                {
+
+                                                }
+                                                else
+                                                {
+                                                    <a href="#" class="rating-reviews">@Model.DtDetails.Rows[i]["ReviewCount"].ToString()</a>
+                                                }
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </section>
+        }
+        <!--<section class="brand-section grey-section pt-10 pb-10 appear-animate" style="background: #eff1d9;">
             <div class="container mt-8 mb-10">
                 <div class="row">
                     <div class="col-md-12 d-flex justify-content-center mb-4">
@@ -382,99 +714,48 @@
                 </div>
                 <div class="owl-carousel owl-theme row cols-xl-6 cols-lg-5 cols-md-4 cols-sm-3 cols-2"
                      data-owl-options="{
-                      'nav': false,
-                      'dots': false,
-                      'autoplay': true,
-                      'margin': 20,
-                      'responsive': {
-                          '0': {
-                              'items': 2
-                          },
-                          '576': {
-                              'items': 3
-                          },
-                          '768': {
-                              'items': 4
-                          },
-                          '992': {
-                              'items': 4
-                          },
-                          '1200': {
-                              'items': 4
-                          }
-                      }
-                  }">
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/fD4xBhaBhAE?si=Nj5dNDuAGX2K7hp0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-                    </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <!-- Second Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/oXnpcrXkqXI?si=4HZFmrr-ajptx1n4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <!-- Third Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/TYqcZj487bI?si=qrDISJuzR6F6s-fj" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <!-- Fourth Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/CAkdPfxVFYs?si=xyU1iOIHBquDVZhv" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </figure>
-                    <figure class="brand-wrap bg-white banner-radius">
-                        <!-- Fourth Video -->
-                        <iframe width="100%" height="150" src="https://www.youtube.com/embed/DpA8HKG0Z5w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                    </figure>                   
+                'nav': false,
+                'dots': false,
+                'autoplay': true,
+                'margin': 20,
+                'responsive': {
+                    '0': {
+                        'items': 2
+                    },
+                    '576': {
+                        'items': 3
+                    },
+                    '768': {
+                        'items': 4
+                    },
+                    '992': {
+                        'items': 4
+                    },
+                    '1200': {
+                        'items': 4
+                    }
+                }
+            }">
+
+                    @{
+                        if (Model != null)
+                        {
+                            if (Model.dtVedioLink != null && Model.dtVedioLink.Rows.Count>0)
+                            {
+                                for (int i = 0; i < Model.dtVedioLink.Rows.Count; i++)
+                                {
+                                    
+                                    <figure class="brand-wrap bg-white banner-radius">
+                                        <iframe width="100%" height="150" src="@Model.dtVedioLink.Rows[i]["Videolink"].ToString()" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+                                    </figure>
+                                }
+                            }
+                        }
+                    }
+                    
                 </div>
             </div>
-        </section>
-        <section class="banner-group container-fluid mt-10 pt-6 pb-8 mb-10 appear-animate">
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="banner1 banner banner-fixed overlay-effect1">
-                        <figure style=" background-color:#27262b">
-                            <img src="~/Content/NewAssests/images/demos/demo19/banner/4.jpg" alt="banner" width="881" height="150" />
-                        </figure>
-                        <div class="banner-content y-50">
-                            <h4 class="banner-subtitle text-uppercase text-body mb-0" style="color:#fff !important;">
-                                New Arrivals
-                            </h4>
-                            @*<h3 style="color:#fff" class="banner-title font-weight-bolder ls-m mb-0" data-animation-options="{
-                                            'name': 'blurIn',
-                                            'delay': '.4s'
-                                        }">
-                                    Season Training Shoes
-                                </h3>
-                                <hr class="bg-grey border-no">
-                                <h4 class="font-weight-normal mb-0 ls-normal" style="color:#fff;">
-                                    Only from <span class="text-primary font-weight-semi-bold">₹78.99</span>
-                                </h4>*@
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="banner2 banner banner-fixed overlay-effect1">
-                        <figure style="background-color: #231f1c">
-                            <img src="~/Content/NewAssests/images/demos/demo19/banner/5.jpg" alt="banner" width="881" height="150" />
-                        </figure>
-                        <div class="banner-content y-50">
-                            <h4 class="banner-subtitle text-uppercase mb-0">
-                                Top Products
-                            </h4>
-                            @*<h3 class="banner-title font-weight-bolder ls-m mb-0 appear-animate text-white"
-                                    data-animation-options="{
-                                            'name': 'blurIn',
-                                            'delay': '.4s'
-                                        }">
-                                    Suitable Women Wear
-                                </h3>
-                                <hr class="bg-grey border-no">
-                                <h4 class="font-weight-normal mb-0 ls-normal">
-                                    Only from <span class="text-primary font-weight-semi-bold">₹121.99</span>
-                                </h4>*@
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        </section>-->
         @{
             if (ViewBag.PopupStatus == "Active")
             {
@@ -482,14 +763,36 @@
                     <div class="modal-dialog">
                         <div class="modal-content" style="position:relative;">
                             <a type="button" class="popupbtn" data-bs-dismiss="modal" aria-label="Close">x</a>
-                            <div class="modal-body">
-                                <img src="@ViewBag.ImageUrl" />
-                            </div>
+                                <div class="modal-body">
+                                    <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <div class="carousel-item active">
+                                                <img src="@ViewBag.ImageUrl" class="d-block w-100" alt="">
+                                            </div>
+                                            @*<div class="carousel-item">
+                                                <img src="@ViewBag.ImageUrl" class="d-block w-100" alt="">
+                                            </div>
+                                            <div class="carousel-item">
+                                                <img src="@ViewBag.ImageUrl" class="d-block w-100" alt="">
+                                            </div>*@
+                                        </div>
+                                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Previous</span>
+                                        </button>
+                                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="visually-hidden">Next</span>
+                                        </button>
+                                    </div>
+                                    @*<img src="@ViewBag.ImageUrl" />*@
+                                </div>
                         </div>
                     </div>
                 </div>
             }
         }
+    </div>
 </main>
 <script src="~/Content/NewAssests/vendor/jquery/jquery.min.js"></script>
 <script src="~/Content/NewAssests/vendor/owl-carousel/owl.carousel.min.js"></script>

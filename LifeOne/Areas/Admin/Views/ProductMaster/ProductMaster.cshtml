@@ -160,7 +160,11 @@
                                     @Html.TextBoxFor(m => m.SalesPrice, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
+                                <div class="col-md-3">
+                                    <label>DP<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.DP, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
+                                </div>
 
                                 <div class="col-md-3 form-group" id="dv_PV">
                                     <label>BV<span style="color:red;">*</span></label>
@@ -190,10 +194,17 @@
 
                                 </div>
                                 <div class="col-md-3 form-group">
-                                    <label>Offer Quantity<span style="color:red;">*</span></label>
-                                    @Html.TextBoxFor(m => m.OfferQuantity, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                    <<<<<<< HEAD
+                                    <label>Offered Qty<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.OfferedQty, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
+                                =======
+                                <label>Offer Quantity<span style="color:red;">*</span></label>
+                                @Html.TextBoxFor(m => m.OfferQuantity, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                >>>>>>> origin/RinkuChauhan
+
+                            </div>
 
                                 @*<div class="col-md-3 form-group">
             <label>Image<span style="color:red;">*</span></label>
@@ -302,7 +313,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 }
 <script type="text/javascript">
     @{
@@ -425,11 +436,11 @@
             return false;
 
         }
-        else if (SalesPrice> MRP) {
-        alert("Sales Price Should be less than MRP");
-        return false;
-        }
-        else if ((PV == null || PV == 0) && ProductType != "Box") {
+        //else if (SalesPrice> MRP) {
+        //alert("Sales Price Should be less than MRP");
+        //return false;
+        //}
+        else if ((PV == null || PV == '') && ProductType != "Box") {
             alert("Please Add Point Value");
             return false;
 

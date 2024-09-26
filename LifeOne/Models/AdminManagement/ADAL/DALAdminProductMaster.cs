@@ -40,6 +40,8 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 queryParameters.Add("@Avalibility", obj.Avalibility);
                 queryParameters.Add("@Packing", obj.Packing);
                 queryParameters.Add("@Fk_SupplierId", obj.Fk_SupplierId);
+                queryParameters.Add("@OfferedQty", obj.OfferedQty);
+                queryParameters.Add("@DP", obj.DP);
 
                 ResponseMaster _iresult = DBHelperDapper.DAAddAndReturnModel<ResponseMaster>("ProductMasterInsert", queryParameters);
                 return _iresult;
@@ -80,6 +82,8 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 queryParameters.Add("@Avalibility", obj.Avalibility);
                 queryParameters.Add("@Packing", obj.Packing);
                 queryParameters.Add("@Fk_SupplierId", obj.Fk_SupplierId);
+                queryParameters.Add("@OfferedQty", obj.OfferedQty);
+                queryParameters.Add("@DP", obj.DP);
                 ResponseMaster _iresult = DBHelperDapper.DAAddAndReturnModel<ResponseMaster>("ProductMasterUpdate", queryParameters);
                 return _iresult;
             }

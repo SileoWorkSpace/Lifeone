@@ -27,7 +27,7 @@
 }
 
 <div>
-    @using (Html.BeginForm("EWalletRequest", "AssociatePlanIncome",FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("EWalletRequest", "AssociatePlanIncome", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="content">
             <div class="content-wrapper-before"></div>
@@ -35,12 +35,12 @@
                 <div class="ptitle">
                     <h4 class="mb-1 mt-0 text-white">EWallet Request</h4>
                     @*<nav aria-label="breadcrumb" class="float-left mt-1">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Associate-Dashboard">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="#">My Account</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Change Password</li>
-                    </ol>
-                </nav>*@
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/Associate-Dashboard">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="#">My Account</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Change Password</li>
+                            </ol>
+                        </nav>*@
                 </div>
 
             </div>
@@ -94,7 +94,7 @@
              new SelectListItem { Text = "DD", Value = "DD" },
              new SelectListItem { Text = "NEFT", Value = "NEFT" },
              new SelectListItem { Text = "RTGS", Value = "RTGS" },
-             new SelectListItem { Text = "Free", Value = "Free" }
+             new SelectListItem { Text = "Gateway", Value = "Gateway" }
          }, "Value", "Text"),
          new { @class = "form-control", @id = "PaymentMode", @onchange = "ChangePaymentMode();", @required = "required" })
                                         </div>
@@ -134,7 +134,7 @@
                                     <div class="col-md-4">
                                         <div class="text-right">
                                             <br />
-                                            <button type="submit" value="Save" class="btn btn-success" onclick="return validate();" name="Save" id="Save">Request Amount</button>
+                                            <button type="button" value="Save" class="btn btn-success" onclick="return validate();" name="Save" id="Save">Request Amount</button>
                                             @*<input type="submit" value="Save Request" name="Request" id="Request" class="btn btn-success" onclick="return validate();"/>*@
 
                                         </div>
@@ -142,7 +142,7 @@
                                 </div>
 
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -157,14 +157,14 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".datepicker-all").datepicker({   
+        $(".datepicker-all").datepicker({
             maxDate: '0',
             yearRange: "-100:",
             showAnim: "slide",
             dateFormat: "mm-dd-yy",
             changeMonth: true,
             changeYear: true,
-        }); 
+        });
         $('#Amount').val('');
     });
     function validate() {
@@ -172,19 +172,18 @@
         $(".errortext").removeClass("errortext");
         if ($('#Amount').val() == 0 && $('#Amount').val() <= 0) {
             //$("#Amount").addClass('errortext');
-            alert('Please Enter Amount');  
+            alert('Please Enter Amount');
             $("#Amount").focus()
             return false;
         }
         if ($('#PaymentMode').val() == '0') {
             //$("#PaymentMode").addClass('errortext');
-            alert('Please select Payment mode');         
+            alert('Please select Payment mode');
             $("#PaymentMode").focus()
             return false;
         }
-        if ($('#PaymentMode').val() != "Cash" && $('#PaymentMode').val() != "Free" && $('#PaymentMode').val() != "UPI") {
-            debugger
-
+        if ($('#PaymentMode').val() != "Cash" && $('#PaymentMode').val() != "Free" && $('#PaymentMode').val() != "UPI" && $('#PaymentMode').val() != "Gateway") {
+           
             if ($('#ChequeDD_No').val().trim() == "") {
                 alert('Please enter Cheque/DD/RTGS/NEFT No.');
                 $('#ChequeDD_No').focus();
@@ -211,9 +210,24 @@
                 return false;
             }
         }
-        else {
-            return true;
-        }
+
+        $.ajax({
+            url: '/Associate/AssociatePlanIncome/RequestEwallet',
+            type: 'Post',
+            data: { LoginId: $('#LoginId').val(), Amount: $('#Amount').val(), PaymentMode: $('#PaymentMode').val(), ChequeDD_No: $('#ChequeDD_No').val(), BankId: $('#BankId').val() },
+            success: function (response) {
+                if (response.Flag == 1) {
+                    window.location = "/Home/RazorPayPaymentPage";
+                }
+                else {
+                    alert(response.Message)
+                }
+               
+            }, error: function () {
+               
+
+            }
+        });
        
     }
 
@@ -221,7 +235,7 @@
     function ChangePaymentMode() {
         debugger;
         var PMode = $("#PaymentMode").val();
-        if (PMode == "Cash" || PMode == "0" || PMode == "Free") {
+        if (PMode == "Cash" || PMode == "0" || PMode == "Free" || PMode == "Gateway") {
             $("#ChequeDDNo_id").hide();
             $("#Bank_id").hide();
             $("#Date_id").hide();
@@ -238,7 +252,7 @@
             $("#Date_id").show();
             $("#ChequeDDNo_id").show();
         }
- 
+
     }
 
     $("#amount").keypress(function (e) {
@@ -252,8 +266,8 @@
             e.preventDefault();
         }
     });
-    
-   
+
+
 
 </script>
 

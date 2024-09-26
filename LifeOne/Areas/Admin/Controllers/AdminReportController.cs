@@ -4169,8 +4169,20 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 return Redirect("/Home/adminlogin");
             }
+            if(reports.Page==0 || reports.Page==null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
             DataSet dataSet = reports.GetShoppingOrderDetails();
             reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
+            int totalRecords = 0;
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(reports.dtGetShoppingOrderDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, reports.Page, SessionManager.Size);
+                reports.Pager = pager;
+            }
             return View(reports);
 
         }
@@ -5817,14 +5829,40 @@ namespace LifeOne.Areas.Admin.Controllers
         }
         public ActionResult PrintPayoutReportForBank(int? Page)
         {
-            MPayoutReport obj = new MPayoutReport();          
-            ViewBag.LoginId = obj.MemberLoginId;                      
-            obj = AdminReportsService.GetPayoutReportForBankService(Page, obj);           
-            Session["PReportBank"] = obj.Objlist;
+            MPayoutReport obj = new MPayoutReport();
+            List<MPayoutReport> reportBankList = Session["PReportBank"] as List<MPayoutReport>;
+            //ViewBag.LoginId = obj.MemberLoginId;
+            //MPayoutReport reportFromSession = Session["PReportBank"] as MPayoutReport;
+            //  obj = Session["PReportBank"];
+
             //return RedirectToAction("PayoutReportForBank", "AdminReport");
+            obj.Objlist = reportBankList;
             return View(obj);
 
         }
 
+        public ActionResult GeustShoppingOrderDetail(Reports reports)
+        {
+            if (!PermissionManager.IsActionPermit("Shopping Order Details", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
+            if (reports.Page == 0 || reports.Page == null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
+            DataSet dataSet = reports.GetGeustShoppingOrderDetails();
+            reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
+            int totalRecords = 0;
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(reports.dtGetShoppingOrderDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, reports.Page, SessionManager.Size);
+                reports.Pager = pager;
+            }
+            return View(reports);
+
+        }
     }
 }

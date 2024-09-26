@@ -116,20 +116,21 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- stats + charts -->
         <div class="row">
             <div class="col-md-3 col-lg-3">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title header-title mb-0">Team Details</h5>
+                        <h5 class="card-title header-title mb-0 text-white">Team Details</h5>
                     </div>
                     <div class="card-body p-0 min-auto">
                         <div class="media p-3" style="padding-top: 0px !important;">
                             <div class="media-body">
                                 <h2 class="mb-0"> @Model.TotalActive</h2>
-                                <a href="/My-Downline?Status=P"><span class="text-uppercase font-size-12 font-weight-bold text-success">Active Direct Seller</span>
-                                </a>                                
+                                <a href="/My-Downline?Status=P">
+                                    <span class="text-uppercase font-size-12 font-weight-bold text-success">Active Direct Seller</span>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -160,10 +161,10 @@
                     <div class="col-md-6">
                         <div class="card">
 
-                            <div class="card-header" style="background: #f3f3f3;border-radius: 0;">
+                            <div class="card-header" style="background: #fff; border-radius: 0;">
                                 <h5 class="card-title header-title mb-0 text-center">All Business</h5>
                             </div>
-                            <div class="card-body p-0 min-auto" style=" background: #f3f3f3;">
+                            <div class="card-body p-0 min-auto" style=" background: #fff;">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="text-center">
@@ -180,8 +181,8 @@
                                 </div>
                             </div>
                             <hr />
-                            <div class="card-header" style="padding: 20px 0 0;">
-                                <h5 class="card-title header-title mb-0 text-center">Current Closing Business</h5>
+                            <div class="card-header">
+                                <h5 class="card-title header-title mb-0 text-center text-white">Current Closing Business</h5>
                             </div>
                             <div class="card-body p-0 min-auto">
                                 <div class="row">
@@ -192,7 +193,7 @@
                                     }
 
 
-                                    
+
 
                                     <div class="col-md-6">
                                         <div class="p-3 text-center pt--0">
@@ -213,7 +214,7 @@
 
 
                                     }
-                                    
+
 
                                     <div class="col-md-6">
                                         <div class="p-3 text-center pt--0">
@@ -236,10 +237,10 @@
                     </div>
                     <div class="col-md-6">
                         <div class="card">
-                            <div class="card-header" style="background: #f3f3f3;border-radius: 0;">
+                            <div class="card-header" style="background: #fff; border-radius: 0;">
                                 <h5 class="card-title header-title mb-0 text-center">Current Business Repurchase</h5>
                             </div>
-                            <div class="card-body p-0 min-auto" style="background: #f3f3f3;">
+                            <div class="card-body p-0 min-auto" style="background: #fff;">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="text-center">
@@ -259,8 +260,8 @@
                                 </div>
                             </div>
                             <hr />
-                            <div class="card-header" style="padding: 20px 0 0;">
-                                <h5 class="card-title header-title mb-0 text-center">Team Business Repurchase</h5>
+                            <div class="card-header">
+                                <h5 class="card-title header-title mb-0 text-center text-white">Team Business Repurchase</h5>
                             </div>
                             <div class="card-body p-0 min-auto">
                                 <div class="row">
@@ -461,7 +462,7 @@
             <div class="col-md-3 col-lg-3">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="card-title header-title mb-0">Payout Income</h5>
+                        <h5 class="card-title header-title mb-0 text-white">Payout Income</h5>
                     </div>
                     <div class="card-body p-0">
                         @if (Model.payoutSummaries.Count() > 0)
@@ -491,7 +492,7 @@
                     <div class="col-md-6">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title header-title mb-0" style="display:inline;">Direct Team</h5> <a href="/My-Direct" class="pull-right">View All</a>
+                                <h5 class="card-title header-title mb-0 text-white" style="display:inline;">Direct Team</h5> <a href="/My-Direct" class="pull-right">View All</a>
                             </div>
                             <div class="card-body" style="max-height: 300px; overflow-y: scroll;">
                                 @if (Model.lstAssociates.Count() > 0)
@@ -533,7 +534,7 @@
                     <div class="col-md-6 col-lg-6">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-title header-title mb-0">News &amp; Informaton</h5>
+                                <h5 class="card-title header-title mb-0 text-white">News &amp; Informaton</h5>
                             </div>
                             <div class="card-body">
                                 <div class="newslist">
@@ -564,6 +565,126 @@
 
 
 
+        </div>
+        <div class="row">
+
+            <div class="col-lg-12 stretch-card">
+                <div class="card">
+                    <div class="card-body">
+
+                        <div class="table-responsive" id="testTable">
+                            <table class="table color-table inverse-table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S. No.</th>
+                                        <th>Reward Name</th>
+                                        <th>Tours</th>
+                                        <th>Left Point</th>
+                                        <th>Right Point</th>
+                                        @*<th>Matching Target Point</th>*@
+                                        <th>Status</th>
+                                        <th>Acheived On</th>
+                                      
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null)
+                                    {
+                                        if (Model.Rewardslst != null)
+                                        {
+                                            int SNO = 0;
+                                            foreach (var item in Model.Rewardslst)
+                                            {
+                                                <tr>
+                                                    <td>@(SNO = SNO + 1)</td>
+                                                    @if (item.RewardImg == "" || item.RewardImg == "NULL")
+                                                    {
+                                                        <td></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <img src="@item.RewardImg" style="height:50px;width:50px;" />
+                                                            <br />
+                                                            @item.RewardName
+                                                        </td>
+
+                                                    }
+                                                    @if (item.ToursImage == "" || item.ToursImage == "NULL")
+                                                    {
+                                                        <td></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td><img src="@item.ToursImage" style="height:50px;width:50px;" /><br />@item.ToursName</td>
+
+                                                    }
+                                                    <td>
+                                                        @item.LeftBusiness
+                                                        @if (!string.IsNullOrEmpty(item.BalanceLeft))
+                                                        {
+                                                            <br />
+                                                            <span>Balance Left: <label class="badge badge-success">@item.BalanceLeft</label></span><br />
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @item.RightBusiness
+                                                        @if (!string.IsNullOrEmpty(item.BalanceRight))
+                                                        {
+                                                            <br />
+                                                            <span>Balance Right: <label class="badge badge-success">@item.BalanceRight</label></span>
+                                                        }
+                                                    </td>
+                                                    @*<td>
+                                                            @item.TargetPoint
+                                                        </td>*@
+                                                    @*<td>@item.Rank</td>
+                                                        <td>@item.Designation</td>*@
+
+                                                    <td>
+                                                        @if (item.Status == "Achieved")
+                                                        {
+                                                            <span class="badge badge-success">@item.Status</span>
+                                                        }
+                                                        else if (item.Status == "Pending")
+                                                        {
+                                                            <span class="badge badge-warning">@item.Status</span>
+                                                        }
+                                                        else if (item.Status == "Skipped")
+                                                        {
+                                                            <span class="badge badge-danger">@item.Status</span>
+                                                        }
+                                                        else if (item.Status == "Claimed")
+                                                        {
+                                                            <span class="badge badge-info">@item.Status</span>
+                                                        }
+                                                        else if (item.Status == "Claim Denied")
+                                                        {
+                                                            <span class="badge badge-red">@item.Status</span>
+                                                        }
+
+                                                        else if (item.Status == "Approved By Admin")
+                                                        {
+                                                            <a class="text-primary" style="cursor:pointer;text-decoration:underline" onclick="ShowBankDetails(@item.PK_RId)"><span class="badge badge-primary">@item.Status</span></a>
+                                                        }
+                                                    </td>
+                                                    <td>@item.AchievedOn</td>
+                                                   
+                                                </tr>
+                                            }
+                                        }
+                                    }
+
+                                </tbody>
+
+                            </table>
+                            @*<div>
+                                    <h4>1 Point = Rs. 50000 business.</h4>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
         @*<div class="row">
                 <div class="col-md-12">
@@ -655,11 +776,11 @@
             type: "GET",
 
             success: function (data) {
-               setDate(data.ClosingDate);
+                setDate(data.ClosingDate);
             }
         });
-       
-       
+
+
     }
 
     function setDate(entryDate) {
@@ -692,7 +813,7 @@
             if (minutes < "10") { minutes = "0" + minutes; }
             if (seconds < "10") { seconds = "0" + seconds; }
 
-          
+
             $(".hours").html(hours + "<span>Hrs</span>");
             $(".minutes").html(minutes + "<span>Min</span>");
             $(".seconds").html(seconds + "<span>Sec</span>");

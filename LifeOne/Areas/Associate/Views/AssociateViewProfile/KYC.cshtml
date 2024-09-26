@@ -176,7 +176,7 @@
                         <div class="col-xl-3">
                             <div class="card">
                                 <div class="card-body pt-2">
-                                    <h6 class="header-title mb-0">ID Proof</h6>
+                                    <h6 class="header-title mb-0">Adhar Front</h6>
                                     <div class="">
                                         <div>
                                             <div>
@@ -592,6 +592,11 @@
     }
     function validate2() {
         debugger;
+        if ($('#PanNo').val() == '') {
+            swal('', "Please enter pan no", 'warning');
+            $('#PanNo').focus();
+            return false;
+        }
         if ($('#pancardimagepath').val() == '') {
             swal('', "Please Upload Pan Front Image", 'warning');
             $('#pancardimagepath').focus();
@@ -601,6 +606,12 @@
 
     }
     function validate3() {
+
+        if ($('#IdProofNo').val() == '') {
+            swal('', "Please eneter adhar no!!", 'warning');
+            $('#IdProofNo').focus();
+            return false;
+        }
         if ($('#aadharfrontimagepath').val() == '') {
             swal('', "Please Upload Adhar Image!!", 'warning');
             $('#aadharfrontimagepath').focus();

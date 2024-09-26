@@ -423,17 +423,17 @@ namespace LifeOne.Models.Manager
                 HttpContext.Current.Session["TotalItems"] = value;
             }
         }
-        public static long TokenNo
+        public static string TokenNo
         {
             get
             {
                 if (HttpContext.Current.Session["TokenNo"] == null)
                 {
-                    return 0;
+                    return "";
                 }
                 else
                 {
-                    return int.Parse(HttpContext.Current.Session["TokenNo"].ToString());
+                    return (HttpContext.Current.Session["TokenNo"].ToString());
                 }
             }
             set

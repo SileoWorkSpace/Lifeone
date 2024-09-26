@@ -1,4 +1,7 @@
-﻿using LifeOne.Models.AdminManagement.AEntity;
+﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Bibliography;
+using LifeOne.Models;
+using LifeOne.Models.AdminManagement.AEntity;
 using LifeOne.Models.AdminManagement.AService;
 using LifeOne.Models.AssociateManagement.AssociateDAL;
 using LifeOne.Models.AssociateManagement.AssociateEntity;
@@ -6,13 +9,17 @@ using LifeOne.Models.Common;
 using LifeOne.Models.Manager;
 using LifeOne.Models.QUtility.DAL;
 using PagedList;
+using Razorpay.Api;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
+
 namespace LifeOne.Areas.Associate.Controllers
 {
 
@@ -212,6 +219,79 @@ namespace LifeOne.Areas.Associate.Controllers
                 TempData["EWallerLedger"] = lst;
             }
 
+            return View(objewallet);
+        }
+
+        public ActionResult GetEwalletLedger(EwalletLedger obj, int? page)
+        {
+            EwalletLedger objewallet = new EwalletLedger();
+            List<EwalletLedger> lst = new List<EwalletLedger>();
+            DALAssosiateEwalletLedger DALAssosiateEwalletLedger = new DALAssosiateEwalletLedger();
+            obj.LoginId = Convert.ToString(Session["LoginId"] ?? "0");
+            obj.FromDate = (!string.IsNullOrEmpty(obj.FromDate)) ? DsResultModel.ConvertToSystemDate(obj.FromDate, "MM/dd/yyyy") : null;
+            obj.ToDate = (!string.IsNullOrEmpty(obj.ToDate)) ? DsResultModel.ConvertToSystemDate(obj.ToDate, "MM/dd/yyyy") : null;
+
+                DataSet ds = DALAssosiateEwalletLedger.GetEWalletLedger(obj);
+                obj.DtDetails = ds.Tables[0];
+                if (ds.Tables != null && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow dr in ds.Tables[0].Rows)
+                    {
+                        EwalletLedger Objload = new EwalletLedger();
+                        Objload.TransactionDate = dr["TransactionDate"].ToString();
+                        Objload.Narration = dr["Narration"].ToString();
+                        Objload.CrAmount = dr["Credit"].ToString();
+                        Objload.DrAmount = dr["Debit"].ToString();
+                        Objload.Balance = dr["Balance"].ToString();
+
+                        lst.Add(Objload);
+                    }
+                    objewallet.CashbackWallets = lst;
+
+                    if (obj.IsExport == 1)
+                    {
+
+                        DataTable dt = new DataTable("EWallet Ledger");
+                        dt.Columns.AddRange(new DataColumn[5] {
+
+                                             new DataColumn("Transaction Date"),
+                                             new DataColumn("Narration"),
+                                            new DataColumn("Credit Amount"),
+                                            new DataColumn("Debit Amount"),
+                                            new DataColumn("Balance"),
+
+
+            });
+                        if (ds.Tables[0].Rows != null && ds.Tables[0].Rows.Count > 0)
+                        {
+                            foreach (DataRow row in ds.Tables[0].Rows)
+                            {
+                                dt.Rows.Add(row["TransactionDate"].ToString(), row["Narration"].ToString(), row["Credit"].ToString(), row["Debit"].ToString(), row["Balance"].ToString());
+                            }
+                        }
+
+                        using (XLWorkbook wb = new XLWorkbook())
+                        {
+                            wb.Worksheets.Add(dt);
+                            using (MemoryStream stream = new MemoryStream())
+                            {
+                                wb.SaveAs(stream);
+                                return File(stream.ToArray(), "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", "EWallet Ledger Reward.xlsx");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        int totalRecords = 0;
+                        if (ds.Tables[0].Rows.Count > 0)
+                        {
+
+                            totalRecords = Convert.ToInt32(obj.DtDetails.Rows[0]["TotalRecord"].ToString());
+                            var pager = new Pager(totalRecords, obj.Page, SessionManager.Size);
+                            obj.Pager = pager;
+                        }
+                    }
+                }
             return View(objewallet);
         }
     }

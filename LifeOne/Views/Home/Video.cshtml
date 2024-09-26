@@ -3,332 +3,520 @@
     ViewBag.Title = "Video";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    .gallery {
-        display: flex;
-        grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
-        grid-gap: 2rem;
-        padding: 40px 0px 40px 0px;
-        overflow: auto;
-    }
-
-    .gallery__item {
-        box-shadow: 0 .1875rem .625rem rgba(0, 0, 0, 0.4);
-        overflow: hidden;
-        width: 350px;
-        height: 250px;
-    }
-
-    .gallery__item {
-        position: relative; /* To position the title absolutely inside the figure */
-        overflow: hidden; /* Ensures content doesn't spill out */
-    }
-
-    .gallery__image {
-        display: block;
-        width: 100%;
-        height: auto;
-    }
-
-    .gallery__image__caption {
-        position: absolute;
-        bottom: 0; /* Position at the bottom of the image */
-        left: 0; /* Align to the left edge */
-        width: 100%; /* Make the caption span the entire width of the image */
-        padding: 0.5rem; /* Add padding for spacing */
-        background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
-        color: #fff; /* White text */
-        text-align: center; /* Center the text */
-        font-size: 14px; /* Adjust font size */
-        box-sizing: border-box; /* Ensure padding is included in width */
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .gallery__image {
-        display: block;
-        object-fit: cover;
-        transition: transform .3s ease-in-out, opacity .3s ease-in-out;
-        height: 100%;
-        width: 100%;
-    }
-
-        .gallery__image:hover {
-            cursor: pointer;
-            opacity: .7;
-            transform: scale(1.15);
-        }
-
-            .gallery__image:hover + .gallery__image__caption {
-                display: block;
-            }
 
 
-
-    .gallery__navigation--next,
-    .gallery__navigation--prev,
-    .gallery__navigation--close {
-        position: absolute;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: transparent;
-        border: 0;
-        cursor: pointer;
-        font-size: 0;
-        height: 42px;
-        opacity: .5;
-        overflow: hidden;
-        padding: 0;
-        transition: opacity .2s ease-in-out;
-        width: 42px;
-    }
-
-        .gallery__navigation--next:hover,
-        .gallery__navigation--prev:hover,
-        .gallery__navigation--close:hover {
-            opacity: 1;
-        }
-
-        .gallery__navigation--next::before,
-        .gallery__navigation--prev::before {
-            display: flex;
-            content: "";
-            border: solid #fff;
-            border-width: 0 .25rem .25rem 0;
-            padding: .5rem;
-        }
-
-    .gallery__navigation--next {
-        right: 1.5rem;
-        transform: rotate(-45deg);
-    }
-
-    .gallery__navigation--prev {
-        left: 1.5rem;
-        transform: rotate(135deg);
-    }
-
-    .gallery__navigation--close {
-        top: 2rem;
-        right: 2rem;
-    }
-
-        .gallery__navigation--close::before {
-            position: absolute;
-            left: 1rem;
-            background-color: #fff;
-            content: " ";
-            height: 33px;
-            transform: rotate(45deg);
-            width: 2px;
-        }
-
-        .gallery__navigation--close::after {
-            position: absolute;
-            left: 1rem;
-            background-color: #fff;
-            content: " ";
-            height: 33px;
-            transform: rotate(-45deg);
-            width: 2px;
-        }
-
-    .gallery__modal {
-        position: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-color: rgba(0, 0, 0, 0.7);
-        height: 100%;
-        inset: 0;
-        overflow-y: scroll;
-        width: 100%;
-        z-index: 999;
-    }
-
-        .gallery__modal img {
-            display: block;
-            margin: auto;
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        .gallery__modal[aria-hidden="true"] {
-            display: none;
-        }
-
-        .gallery__modal[aria-hidden="false"] {
-            display: flex;
-        }
-
-    .noscroll {
-        overflow: hidden;
-    }
-</style>
 <main class="main">
     <div class="page-header" style="background-image: url(/Content/NewAssests/images/page-header/contact-us.jpg) ">
         <h1 class="page-title font-weight-bold text-capitalize ls-l">Video Gallery</h1>
         <nav class="breadcrumb-nav">
             <ul class="breadcrumb">
                 <li><a href="/Home/Index"><i class="d-icon-home"></i> <i class="bi bi-chevron-right"></i></a></li>
-                <li>Video</li>
+                <li>Video Gallery</li>
             </ul>
         </nav>
     </div>
-    <section>
-        <div class="container gallery">
-            @{
-                if (Model != null)
-                {
-                    if (Model.dtDetails != null)
+    <div class="container">
+        <div class="gallery-wrapper">
+            <div class="gallery-inner">
+                @{
+                    if (Model != null)
                     {
-                        for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
+                        if (Model.dtDetails != null)
                         {
-                            <figure class="gallery__item">
-                            <iframe width="100%" height="250" src="@Model.dtDetails.Rows[i]["Videolink"].ToString()" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-                        </figure>                           
+                            for (int i = 0; i < Model.dtDetails.Rows.Count; i++)
+                            {
+                                <div class="gallery-img">
+
+                                    <iframe src="@Model.dtDetails.Rows[i]["Videolink"].ToString()" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+
+
+                                </div>
+                            }
                         }
                     }
                 }
-            }
-            @*<figure class="gallery__item">
-            <iframe width="100%" height="250" src="https://www.youtube.com/embed/fD4xBhaBhAE?si=Nj5dNDuAGX2K7hp0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
-            <figcaption class="gallery__image__caption">A tent in the snowy mountains</figcaption>
-        </figure>*@
+            </div>
         </div>
-    </section>
+    </div>
+
 </main>
+
 <script>
-    // Floating caption
-    const imgContent = document.querySelectorAll('.gallery__image__caption');
-    var x, y;
+    const galleryStyleSheet = `
+.gallery-wrapper {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+}
 
-    function showImgContent(e) {
-        for (var i = 0; i < imgContent.length; i++) {
-            x = e.pageX;
-            y = e.pageY;
-            /* imgContent[i].style.transform = `translate(${x}px, ${y}px)`;*/
-        }
-    };
+.gallery-wrapper iframe {
+    max-width: 100%;
+    transition: all 0.2s ease-in-out;
+}
 
-    document.addEventListener('mousemove', showImgContent);
+.gallery-wrapper.gallery-img iframe {
+    cursor: pointer;
+}
 
+.gallery-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 2;
+    position: relative;
+    padding:60px 0;
+}
 
-    // Lightbox modal
-    const body = document.body;
-    const items = document.querySelectorAll(".gallery__item");
-    const modal = document.createElement("section");
-    const modalImg = document.createElement("img");
-    const modalPrev = createButton(prevItem);
-    const modalNext = createButton(nextItem);
-    const modalClose = createButton(closeModal);
-    let currentItem = 0;
-    let modalInstance;
+.gallery-popup.active + .gallery-overlay {
+    content: "";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    inset: 0;
+    background-color: rgb(0 0 0 / 75%);
+    z-index: 5;
+    overflow: hidden;
+}
 
-    modal.classList.add("gallery__modal");
-    modalPrev.classList.add("gallery__navigation--prev");
-    modalNext.classList.add("gallery__navigation--next");
-    modalClose.classList.add("gallery__navigation--close");
+.gallery-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: max-content;
+    height: max-content;
+    padding: 0px;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 6;
+    animation: showPopUp 0.45s linear;
+}
 
-    function createButton(action) {
-        const button = document.createElement("button");
-        button.addEventListener("click", action);
-        return button;
+.gallery-popup .close,
+.gallery-popup .next,
+.gallery-popup .prev {
+    position: absolute;
+    top: 0;
+    right: 2rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-popup iframe{
+    width: auto;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.gallery-popup .close {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    top: 0px;
+    right: 0;
+}
+
+.gallery-popup .next {
+    right: 0px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(255 255 255 / 75%);
+}
+
+.gallery-popup .prev {
+    left: 0px;
+    right: auto;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 20px;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 10px;
+    background-color: rgb(255 255 255 / 75%);
+}
+
+.gallery-wrapper .gallery-inner {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    position: relative;
+    z-index: 4;
+}
+
+@@keyframes showPopUp {
+    0% {
+        opacity: 0;
+        visibility: hidden;
+    }
+    50% {
+        opacity: 0.5;
+        visibility: visible;
+    }
+    100% {
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+@@keyframes iframeTransitionNext {
+    0% {
+        transform: translateX(100vw);
+        opacity: 0;
     }
 
-    function prevItem() {
-        currentItem = (currentItem - 1 + items.length) % items.length;
-        showModal();
+    5% {
+        transform: translateX(95vw);
+        opacity: 0.15
     }
 
-    function nextItem() {
-        currentItem = (currentItem + 1) % items.length;
-        showModal();
+    10% {
+        transform: translateX(90vw);
+        opacity: 0.1;
     }
 
-    function closeModal() {
-        modal.remove();
+    15% {
+        transform: translateX(85vw)
+        opacity: 0.20
     }
 
-    function showModal() {
-        modalImg.image = items[currentItem].querySelector("img");
-        modalImg.src = modalImg.image.src;
-        modalImg.alt = modalImg.image.alt;
-        modal.append(modalImg, modalPrev, modalNext, modalClose);
-        document.body.appendChild(modal);
+    20% {
+        transform: translateX(80vw);
+        opacity: 0.2;
     }
 
-    items.forEach(function (image) {
-        image.addEventListener('click', function () {
-            /* Detect the image class name */
-            var overlayOpen = this.className === 'gallery__item';
+    25% {
+        transform: translateX(75vw)
+        opacity: 0.20
+    }
 
-            /**
-             * Storing a reference to the opening image
-             */
-            if (overlayOpen) {
-                modalInstance = this;
-            }
+    30% {
+        transform: translateX(70vw);
+        opacity: 0.3;
+    }
 
-            /**
-             * Toggle the aria-hidden state on the overlay and the
-             * no-scroll class on the body
-             */
-            modal.setAttribute('aria-hidden', !overlayOpen);
-            body.classList.toggle('noscroll', overlayOpen);
+    35%{
+        transform: translateX(75vw)
+        opacity: 0.35;
+    }
 
-            /**
-             * Run the function that creates the modal content
-             * and that appends it to the body
-             */
-            showModal();
+    40% {
+        transform: translateX(60vw);
+        opacity: 0.4;
+    }
 
-            /**
-             * On some mobile browser when the overlay was previously
-             * opened and scrolled, if you open it again it doesn't
-             * reset its scrollTop property
-             */
-            modal.scrollTop = 0;
+    45%{
+        transform: translateX(55vw)
+        opacity: 0.45;
+    }
 
-            /**
-             * Forcing focus for Assistive technologies.
-             * Note that:
-             * - if the modal has just a phrase and a button move the
-             *   focus on the button,
-             * - if the modal has a long text inside (e.g. a privacy
-             *   statement) move the focus on the first heading inside
-             *   the modal,
-             * - otherwise just focus the modal.
-             *
-             * When you close the overlay restore the focus on the
-             * button that opened the modal.
-             */
-            if (overlayOpen) {
-                modal.focus();
-            } else {
-                modalInstance.focus();
-                modalInstance = null;
-            }
-        }, false);
+    50% {
+        transform: translateX(50vw);
+        opacity: 0.5;
+    }
+
+    55%{
+        transform: translateX(45vw)
+        opacity: 0.55;
+    }
+
+    60% {
+        transform: translateX(40vw);
+        opacity: 0.6;
+    }
+
+    65%{
+        transform: translateX(65vw)
+        opacity: 0.65;
+    }
+
+    70% {
+        transform: translateX(30vw);
+        opacity: 0.7;
+    }
+
+75%{
+        transform: translateX(25vw)
+        opacity: 0.75;
+    }
+
+    80% {
+        transform: translateX(20vw);
+        opacity: 0.8;
+    }
+
+    85%{
+        transform: translateX(15vw)
+        opacity: 0.85;
+    }
+
+    90% {
+        transform: translateX(10vw);
+        opacity: 0.9;
+    }
+
+    95%{
+        transform: translateX(5vw)
+        opacity: 0.95;
+    }
+
+    100%{
+        transform: translateX(0vw);
+        opacity: 1;
+    }
+}
+
+
+@@keyframes iframeTransitionPrev {
+    0% {
+        transform: translateX(-100vw);
+        opacity: 0;
+    }
+
+    5% {
+        transform: translateX(-95vw);
+        opacity: 0.15
+    }
+
+    10% {
+        transform: translateX(-90vw);
+        opacity: 0.1;
+    }
+
+    15% {
+        transform: translateX(-85vw)
+        opacity: 0.20
+    }
+
+    20% {
+        transform: translateX(-80vw);
+        opacity: 0.2;
+    }
+
+    25% {
+        transform: translateX(-75vw)
+        opacity: 0.20
+    }
+
+    30% {
+        transform: translateX(-70vw);
+        opacity: 0.3;
+    }
+
+    35%{
+        transform: translateX(-75vw)
+        opacity: 0.35;
+    }
+
+    40% {
+        transform: translateX(-60vw);
+        opacity: 0.4;
+    }
+
+    45%{
+        transform: translateX(-55vw)
+        opacity: 0.45;
+    }
+
+    50% {
+        transform: translateX(-50vw);
+        opacity: 0.5;
+    }
+
+    55%{
+        transform: translateX(-45vw)
+        opacity: 0.55;
+    }
+
+    60% {
+        transform: translateX(-40vw);
+        opacity: 0.6;
+    }
+
+    65%{
+        transform: translateX(-65vw)
+        opacity: 0.65;
+    }
+
+    70% {
+        transform: translateX(-30vw);
+        opacity: 0.7;
+    }
+
+75%{
+        transform: translateX(-25vw)
+        opacity: 0.75;
+    }
+
+    80% {
+        transform: translateX(-20vw);
+        opacity: 0.8;
+    }
+
+    85%{
+        transform: translateX(-15vw)
+        opacity: 0.85;
+    }
+
+    90% {
+        transform: translateX(-10vw);
+        opacity: 0.9;
+    }
+
+    95%{
+        transform: translateX(-5vw)
+        opacity: 0.95;
+    }
+
+    100%{
+        transform: translateX(0vw);
+        opacity: 1;
+    }
+}
+
+@@media only screen and (max-width: 1280px) {
+    .gallery-wrapper .gallery-inner {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@@media only screen and (max-width: 768px) {
+    .gallery-wrapper .gallery-inner {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .gallery-popup .next {
+        right: 0px;
+    }
+    .gallery-popup .prev {
+        left: 0px;
+    }
+
+    .gallery-popup {
+        top: 60px !important;
+        left: 50% !important;
+        transform: translate(-50%, 0%);
+        height: calc(350px - 60px)
+    }
+}
+
+@@media only screen and (max-width: 600px) {
+    .gallery-wrapper .gallery-inner {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+`;
+
+    const body = document.querySelector("body");
+    const galleryWrapper = document.querySelector(".gallery-wrapper");
+
+    const styeElement = document.createElement("style");
+    styeElement.innerHTML = galleryStyleSheet;
+    styeElement.style.display = "none";
+    body.append(styeElement);
+
+    const galleryPopup = document.createElement("div");
+    galleryPopup.className = "gallery-popup";
+
+    galleryPopup.innerHTML = `
+    <button class="close">&times;</button>
+        <span class="next">&#187;</span>
+        <span class="prev">&#171;</span>
+        <iframe src="" alt="">
+`;
+
+    const galleryOverlay = document.createElement("div");
+    galleryOverlay.className = "gallery-overlay";
+    body.prepend(galleryOverlay);
+    body.prepend(galleryPopup);
+
+    const images = [...galleryWrapper.querySelectorAll(".gallery-img iframe")];
+    const closeBtn = galleryPopup.querySelector(".close");
+    const nextBtn = galleryPopup.querySelector(".next");
+    const prevBtn = galleryPopup.querySelector(".prev");
+
+    nextBtn.addEventListener("click", nextImg);
+    prevBtn.addEventListener("click", prevImg);
+
+    // Creating Animation For Image Transition
+    const imgTransitionNext = `animation: imgTransitionNext 0.45s linear`;
+    const imgTransitionPrev = `animation: imgTransitionPrev 0.45s linear`;
+    let showImg = galleryPopup.querySelector(".gallery-popup iframe");
+
+    let selectedImg = null;
+    let startCount = 0;
+    let endCount = images.length - 1;
+
+    closeBtn.addEventListener("click", (e) => {
+        galleryPopup.style.display = "none";
+        galleryPopup.classList.remove("active");
+        selectedImg === null;
+        startCount = 0;
+        endCount = images.length - 1;
+        body.style.overflow = "auto";
     });
 
-    /**
-     * Attach class `noscroll` to the body to prevent background scrolling
-     * and set `aria` attributes for accessible devices
-     */
-    document.body.addEventListener('keyup', (ev) => {
-        if (ev.key === "Escape" && modal.getAttribute('aria-hidden') === 'false') {
-            modal.setAttribute('aria-hidden', 'true');
-            body.classList.toggle('noscroll', false);
-            modalInstance.focus();
-            modalInstance = null;
+    // Click Next Button Function
+    function nextImg() {
+        if (selectedImg < 0) return;
+        if (selectedImg === endCount) {
+            selectedImg = startCount;
+        } else {
+            selectedImg++;
         }
-    })
+        showImg.src = images[selectedImg].src;
+        addRemoveAnimationNext();
+    }
+
+    // Click Prev Button Function
+    function prevImg() {
+        if (selectedImg < 0) return;
+        if (selectedImg === startCount) {
+            selectedImg = endCount;
+        } else {
+            selectedImg--;
+        }
+        showImg.src = images[selectedImg].src;
+        addRemoveAnimationPrev();
+    }
+
+    // Initial Click Handler
+    images.forEach((img, index) => {
+        img.addEventListener("click", (e) => {
+            galleryPopup.style.display = "flex";
+            galleryPopup.classList.add("active");
+            showImg.src = e.currentTarget.src;
+            selectedImg = index;
+            body.style.overflow = "hidden";
+        });
+    });
+
+    // Function for add and Remove Style Attribute
+    function addRemoveAnimationNext() {
+        showImg.setAttribute("style", imgTransitionNext);
+        setTimeout(() => {
+            showImg.setAttribute("style", "");
+        }, 500);
+    }
+
+    function addRemoveAnimationPrev() {
+        showImg.setAttribute("style", imgTransitionPrev);
+        setTimeout(() => {
+            showImg.setAttribute("style", "");
+        }, 500);
+    }
+
 </script>
-
-
 
 

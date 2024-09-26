@@ -66,7 +66,7 @@
                                                             </div>
                                                         </td>
                                                         <td class="product-subtotal">
-                                                            <span class="amount">@Model.DtDetails.Rows[i]["SalesPrice"].ToString()</span>
+                                                            <span class="amount">@Model.DtDetails.Rows[i]["MRP"].ToString()</span>
                                                         </td>
                                                         <td class="product-quantity">
                                                             <div class="input-group">
@@ -215,7 +215,7 @@
         $('#Pk_ProductId').val(Fk_ProductId);
         $('#Qty').val(newValue);
         $('#Update').val('Update');
-        $('#BtnSearch').trigger('click');
+       
     }
     function quantityChangeMinus(count, Fk_ProductId) {
         debugger;
@@ -228,7 +228,7 @@
         $('#Pk_ProductId').val(Fk_ProductId);
         $('#Qty').val(newValue);
         $('#Update').val('Update');
-        $('#BtnSearch').trigger('click');
+        
     }
 
     function GetAddQTY(count, Fk_ProductId) {

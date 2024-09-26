@@ -409,6 +409,7 @@ namespace LifeOne.Models.Common
                 new PaymentModeListViewModel{Value="NEFT",Text="NEFT"},
                 new PaymentModeListViewModel{Value="RTGS",Text="RTGS"},
                 new PaymentModeListViewModel{Value="IMPS",Text="IMPS"},
+                new PaymentModeListViewModel{Value="UPI",Text="UPI"},
             };
             return _objlist;
         }
