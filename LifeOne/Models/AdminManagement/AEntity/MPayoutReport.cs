@@ -95,6 +95,8 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public decimal PerformanceBonus { get; set; }
         public decimal Amount { get; set; }
         public string Date { get; set; }
+        public string PayoutStatus { get; set; }
+
         public DataSet GetPayoutReport()
         {
             SqlParameter[] para = new SqlParameter[] {

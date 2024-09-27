@@ -68,11 +68,17 @@
     <Reference Include="itextsharp">
       <HintPath>..\..\SGDocument\SGDocument\itextsharp.dll</HintPath>
     </Reference>
+    <Reference Include="LifeOne">
+      <HintPath>..\..\..\bin\LifeOne.dll</HintPath>
+    </Reference>
     <Reference Include="MCPG.CCA.Util">
       <HintPath>..\..\SGDocument\SGDocument\MCPG.CCA.Util.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNetCore.Http.Features, Version=5.0.17.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNetCore.Http.Features.5.0.17\lib\net461\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>..\..\SGDocument\SGDocument\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Extensions.Primitives, Version=5.0.0.1, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
@@ -164,7 +170,7 @@
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.10.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\..\SGDocument\SGDocument\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
-    <Reference Include="System.IO.Packaging, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+    <Reference Include="System.IO.Packaging">
       <HintPath>..\..\SGDocument\SGDocument\System.IO.Packaging.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Pipelines, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -259,9 +265,28 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
-      <HintPath>..\..\SGDocument\SGDocument\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
+    <Folder Include="App_Data\" />
+    <Folder Include="Areas\Associate\Data\" />
+    <Folder Include="Areas\Associate\Views\Shared\" />
+    <Folder Include="Content\assests\images\slides\" />
+    <Folder Include="Content\images\products\" />
+    <Folder Include="EwalletRequestFiles\" />
+    <Folder Include="Images\FranchiseeKYCDocuments\Aadhar\" />
+    <Folder Include="Images\FranchiseeKYCDocuments\Bank\" />
+    <Folder Include="Images\FranchiseeKYCDocuments\Pan\" />
+    <Folder Include="Images\ProductImages\" />
+    <Folder Include="Images\Users\Popup\" />
+    <Folder Include="Images\Users\Reward\" />
+    <Folder Include="Images\Users\VoterId\" />
+    <Folder Include="landing-page-files\" />
+    <Folder Include="Models\TBOHotelAPI\DBLayer\" />
+    <Folder Include="Properties\" />
+    <Folder Include="ReadWriteData\AadharImages\" />
+    <Folder Include="ReadWriteData\PaymentSlip\" />
+    <Folder Include="ReadWriteData\TestimonialsVideo\" />
+    <Folder Include="Views\Franchise\" />
+    <Folder Include="Views\PadAddaTransaction\" />
+    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -316,6 +341,7 @@
     <Compile Include="Areas\Associate\AssociateAreaRegistration.cs" />
     <Compile Include="Areas\Associate\Controllers\AssociateAdvancePaymentController.cs" />
     <Compile Include="Areas\Associate\Controllers\AssociateDashboardController.cs" />
+    <Compile Include="Areas\Associate\Controllers\AssociateOrderController.cs" />
     <Compile Include="Areas\Associate\Controllers\AssociatePlanIncomeController.cs" />
     <Compile Include="Areas\Associate\Controllers\AssociateRegistrationController.cs" />
     <Compile Include="Areas\Associate\Controllers\AssociateReportController.cs" />
@@ -354,13 +380,13 @@
     <Compile Include="Controllers\MigrationController.cs" />
     <Compile Include="Controllers\PayAddaTransactionController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\RazorpayController.cs" />
     <Compile Include="Controllers\ShiprocketController.cs" />
     <Compile Include="Controllers\SweetController.cs" />
     <Compile Include="Controllers\TBOHotelBookingController.cs" />
     <Compile Include="Controllers\TravelAPIV2Controller.cs" />
     <Compile Include="Controllers\UtilitiesController.cs" />
     <Compile Include="Controllers\WebController.cs" />
-    <Compile Include="Controllers\WebHookApiTestingController.cs" />
     <Compile Include="Filters\AuthorizeAdmin.cs" />
     <Compile Include="Filters\AuthorizeFilter.cs" />
     <Compile Include="Filters\SimpleAttribute.cs" />
@@ -617,6 +643,7 @@
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALAssociateManageOrder.cs" />
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALAssociateProfile.cs" />
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALAssociateTeam.cs" />
+    <Compile Include="Models\AssociateManagement\AssociateDAL\DALAssosiateEwalletLedger.cs" />
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALEmail.cs" />
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALEwalletRequests.cs" />
     <Compile Include="Models\AssociateManagement\AssociateDAL\DALKYC.cs" />
@@ -631,6 +658,7 @@
     <Compile Include="Models\AssociateManagement\AssociateEntity\AssociatePurchaseDetails.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\AssociateTeam.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\AssosiateRequest.cs" />
+    <Compile Include="Models\AssociateManagement\AssociateEntity\EwalletLedger.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\EwalletRequest.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\FranchiseList.cs" />
     <Compile Include="Models\AssociateManagement\AssociateEntity\FranchiseReqList.cs" />
@@ -764,16 +792,16 @@
     <Compile Include="Models\HomeManagement\HDAL\DALCustomerRegistration.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALForgotPassword.cs" />
     <Compile Include="Models\HomeManagement\HDAL\DALLogin.cs" />
-    <Compile Include="Models\HomeManagement\HEntity\FAQModel.cs" />
-    <Compile Include="Models\HomeManagement\HEntity\NewsandAnnouncement.cs" />
-    <Compile Include="Models\HomeManagement\HEntity\PrivacyandPolicy.cs" />
-    <Compile Include="Models\HomeManagement\HEntity\UploadImageVideo.cs" />
-    <Compile Include="Models\HomeManagement\HEntity\TermsCondition.cs" />
     <Compile Include="Models\HomeManagement\HEntity\Contact.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\FAQModel.cs" />
     <Compile Include="Models\HomeManagement\HEntity\FranchiseApplicationFormModel.cs" />
     <Compile Include="Models\HomeManagement\HEntity\MCustomerRegistration.cs" />
     <Compile Include="Models\HomeManagement\HEntity\MForgotPassword.cs" />
     <Compile Include="Models\HomeManagement\HEntity\MLogin.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\NewsandAnnouncement.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\PrivacyandPolicy.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\TermsCondition.cs" />
+    <Compile Include="Models\HomeManagement\HEntity\UploadImageVideo.cs" />
     <Compile Include="Models\HomeManagement\HEntity\_CommonModel.cs" />
     <Compile Include="Models\HomeManagement\HService\ContactService.cs" />
     <Compile Include="Models\HomeManagement\HService\CustomerRegService.cs" />
@@ -1585,6 +1613,11 @@
     <Content Include="Areas\Associate\Views\AssociatePlanIncome\EWalletRequest.cshtml" />
     <Content Include="Areas\Associate\Views\AssociatePlanIncome\EWalletList.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\EWalletRequestList.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociatePlanIncome\PaymentSuccess.cshtml" />
+    <Content Include="Areas\Associate\Views\EWalletRequest\GetEwalletLedger.cshtml" />
+    <Content Include="Areas\Admin\Views\Wallet\EWalletLedger.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminReport\GeustShoppingOrderDetail.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociateOrder\OrderByAssociate.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />
@@ -4736,33 +4769,12 @@
     <Content Include="Views\Home\NewsandAnnouncement.cshtml" />
     <Content Include="Views\Home\Certificate.cshtml" />
     <Content Include="Views\Home\FAQ.cshtml" />
+    <Content Include="Views\Home\RazorPayPaymentPage.cshtml" />
+    <Content Include="Views\Home\PlaceOrder.cshtml" />
     <Content Include="Views\Home\GalleryPhoto.cshtml" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-    <Folder Include="Areas\Associate\Data\" />
-    <Folder Include="Areas\Associate\Views\Shared\" />
-    <Folder Include="Content\assests\images\slides\" />
-    <Folder Include="Content\images\products\" />
-    <Folder Include="EwalletRequestFiles\" />
-    <Folder Include="Images\FranchiseeKYCDocuments\Aadhar\" />
-    <Folder Include="Images\FranchiseeKYCDocuments\Bank\" />
-    <Folder Include="Images\FranchiseeKYCDocuments\Pan\" />
-    <Folder Include="Images\ProductImages\" />
-    <Folder Include="Images\Users\Popup\" />
-    <Folder Include="Images\Users\Reward\" />
-    <Folder Include="Images\Users\VoterId\" />
-    <Folder Include="landing-page-files\" />
-    <Folder Include="Models\TBOHotelAPI\DBLayer\" />
-    <Folder Include="obj\" />
-    <Folder Include="Properties\" />
-    <Folder Include="ReadWriteData\AadharImages\" />
-    <Folder Include="ReadWriteData\PaymentSlip\" />
-    <Folder Include="ReadWriteData\TestimonialsVideo\" />
-    <Folder Include="Views\Franchise\" />
-    <Folder Include="Views\PadAddaTransaction\" />
-    <Folder Include="Views\Product\" />
-  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup />
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

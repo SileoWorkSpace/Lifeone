@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -249,6 +251,73 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string IGSTAmt { get; set; }
         public string TotalTaxAmt { get; set; }
         public string TotAmount { get; set; }
+    }
+    public class ShoppingOrderInvoiceModel
+    {
+        public string Id { get; set; }
+        public string Fk_MemId { get; set; }
+        public string LoginId { get; set; }
+        public string BillingPincode { get; set; }
+
+        public string OrderNo { get; set; }
+        public string OrderDate { get; set; }
+        public string OrderType { get; set; }
+        public string VendorName { get; set; }      
+        public string OrderAmount { get; set; }
+        public decimal BaseAmount { get; set; }
+        public string ShippingCharges { get; set; }
+        public string UserName { get; set; }
+        public string DeliveryAddress { get; set; }
+        public string Mobile { get; set; }
+        public string Email { get; set; }
+        public string PinCode { get; set; }
+        public string OrderStatus { get; set; }
+        public string InvoiceNo { get; set; }
+        public string GSTIN { get; set; }
+        public string PAN { get; set; }
+        public string CIN { get; set; }
+        public string TotalProductQty { get; set; }
+        public string TotalProductAmt { get; set; }
+        public string TotalDiscount { get; set; }
+        public string TotalTax { get; set; }
+        public string TotalCGST { get; set; }
+        public string TotalSGST { get; set; }
+        public string Total { get; set; }
+        public string Name { get; set; }                                       
+        public string ProductName { get; set; }
+        public string AmountInWords { get; set; }
+        public string TransportMode { get; set; }
+        public string State { get; set; }
+        public string InvoiceDate { get; set; }
+        public string Address { get; set; }
+        public string GSTNo { get; set; }
+        public string City { get; set; }
+        public string CourierName { get; set; }
+        public string FinalAmount { get; set; }
+        public string CompanyName { get; set; }
+        public string CompanyEmail { get; set; }              
+        public string CompanyAddress { get; set; }
+        public string ContactNo { get; set; }
+        public string CompanyLogo { get; set; }         
+        public string HSNNo { get; set; }
+        public string StateCode { get; set; }
+        public string BGSTNo { get; set; }
+        public string FreeAmount { get; set; }             
+        public string MRP { get; set; }             
+        public string Qty { get; set; }
+        public string BV { get; set; }    
+        public string SGST { get; set; }
+        public string CGST { get; set; }
+        public string IGST { get; set; }
+        public string Tax { get; set; }
+        public string TaxableAmt { get; set; }
+        public string SGSTAmt { get; set; }
+        public string CGSTAmt { get; set; }
+        public string IGSTAmt { get; set; }
+        public string TotalTaxAmt { get; set; }
+        public string TotAmount { get; set; }
+        public string SubTotal { get; set; }
+        public DataTable dtDetails { get; set; }
     }
 
 }

@@ -226,5 +226,22 @@ namespace LifeOne.Models.AdminManagement.AService
             }
         }
 
+        public List<MAdminWallet> GetEWalletLedgerService(MAdminWallet _obj)
+        {
+            List<MAdminWallet> _objResponseModel = new List<MAdminWallet>();
+            try
+            {
+                //decrypt app team reponse
+
+                _objResponseModel = AdminDALWallet.GetEWalletData(_obj);
+
+
+                return _objResponseModel;
+            }
+            catch (Exception ex)
+            {
+                return _objResponseModel;
+            }
+        }
     }
 }

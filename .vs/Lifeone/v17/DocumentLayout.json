@@ -1,8 +1,9 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\",
+  "WorkspaceRootPath": "D:\\Repositories\\Lifeone\\",
   "Documents": [
     {
+<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\home\\galleryphoto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\galleryphoto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
@@ -65,6 +66,26 @@
     {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\home\\imagegallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\imagegallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+=======
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\admin\\views\\productmaster\\productmaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\views\\productmaster\\productmaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\models\\adminmanagement\\adal\\daladminproductmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\adminmanagement\\adal\\daladminproductmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\admin\\controllers\\productmastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\controllers\\productmastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\associate\\associatearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\associatearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\views\\shared\\_associatelayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\shared\\_associatelayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+>>>>>>> origin/UAT
     }
   ],
   "DocumentGroupContainers": [
@@ -74,6 +95,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
+<<<<<<< HEAD
           "SelectedChildIndex": 8,
           "Children": [
             {
@@ -270,6 +292,323 @@
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
               "WhenOpened": "2024-09-25T10:56:06.639Z"
+=======
+          "SelectedChildIndex": 45,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DALAdminProductMaster.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminProductMaster.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminProductMaster.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminProductMaster.cs",
+              "RelativeToolTip": "LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminProductMaster.cs",
+              "ViewState": "AQIAAFcAAAAAAAAAAAAYwF4AAABXAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T04:23:00.699Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:13:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:11:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:14:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:12:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{65ddf8c3-8f89-4077-a6c6-dbb8853aab13}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:15:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:135:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:141:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:142:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:143:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:144:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:145:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:146:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:147:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:148:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:138:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:149:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:150:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{809f6ff3-8092-454a-8003-6d4091f9b5bb}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:130:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{6324226f-61b6-4f28-92ee-18d4b5fe1e48}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ProductMasterController.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\ProductMasterController.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Controllers\\ProductMasterController.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\ProductMasterController.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Controllers\\ProductMasterController.cs",
+              "ViewState": "AQIAAGQAAAAAAAAAAAAkwG4AAAAwAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-26T04:22:43.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ProductMaster.cshtml",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\ProductMaster\\ProductMaster.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Views\\ProductMaster\\ProductMaster.cshtml",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\ProductMaster\\ProductMaster.cshtml",
+              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Views\\ProductMaster\\ProductMaster.cshtml",
+              "ViewState": "AQIAACcBAAAAAAAAAAAowDsBAAAEAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-26T04:21:49.219Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "_AssociateLayout.cshtml",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Views\\Shared\\_AssociateLayout.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_AssociateLayout.cshtml",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Views\\Shared\\_AssociateLayout.cshtml",
+              "RelativeToolTip": "LifeOne\\Views\\Shared\\_AssociateLayout.cshtml",
+              "ViewState": "AQIAAE8BAAAAAAAAAAAowFkBAAAWAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-09-25T13:31:47.978Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AssociateAreaRegistration.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
+              "ViewState": "AQIAAG4CAAAAAAAAAAArwIMCAAAIAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-09-25T13:30:53.343Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{004be353-6879-467c-9d1e-9ac23cdf6d49}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:121:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:122:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:124:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:126:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:127:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{28836128-fc2c-11d2-a433-00c04f72d18a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:114:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:119:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:27:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:28:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:32:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+>>>>>>> origin/UAT
             }
           ]
         }

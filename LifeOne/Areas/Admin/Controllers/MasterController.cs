@@ -740,7 +740,7 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(model);
         }
         [HttpPost]
-        public ActionResult ChangeWebSitePopup(WebSitePopup model, HttpPostedFileBase file)
+        public ActionResult ChangeWebSitePopup(WebSitePopup model, HttpPostedFileBase ImageUrl_Doc)
         {
             if (!PermissionManager.IsActionPermit("Change WebSite Popup", ViewOptions.FormUpdate))
             {
@@ -748,30 +748,71 @@ namespace LifeOne.Areas.Admin.Controllers
             }
             Random rnd = new Random();
             string path = "";
-            if (file != null)
+            if (ImageUrl_Doc != null)
             {
-                string pic = rnd.Next(1000000).ToString() + System.IO.Path.GetFileName(file.FileName);
+                string pic = rnd.Next(1000000).ToString() + System.IO.Path.GetFileName(ImageUrl_Doc.FileName);
 
                 path = System.IO.Path.Combine(
                  Server.MapPath("~/Images/Users/Popup"), pic);
 
-                file.SaveAs(path);
+                ImageUrl_Doc.SaveAs(path);
 
                 model.ImageUrl = "~/Images/Users/Popup/" + pic;
                 using (MemoryStream ms = new MemoryStream())
                 {
-                    file.InputStream.CopyTo(ms);
+                    ImageUrl_Doc.InputStream.CopyTo(ms)
+;
                     byte[] array = ms.GetBuffer();
                 }
 
             }
 
-            model.ActiveType = "Update";
+            model.ActiveType = "Save";
             WebSitePopup status = ProductService.UpdateWebSitePopup(model);
+            if (status != null)
+            {
+                TempData["msg"] = status.Status;
+                TempData["code"] = Convert.ToString(status.Code);
+                return RedirectToAction("ChangeWebSitePopup");
+            }
+            else
+            {
+                TempData["msg"] = status.Status;
+                TempData["code"] = Convert.ToString(status.Code);
+            }
+            return View(model);
 
-            return RedirectToAction("ChangeWebSitePopup");
+
         }
 
+        public ActionResult DeleteWebSidePopup(string abc)
+        {
+            try
+            {
+                WebSitePopup model = new WebSitePopup();
+                model.Id = abc;
+                model.ActiveType = "Delete";
+                WebSitePopup status = ProductService.UpdateWebSitePopup(model);
+                if (status != null)
+                {
+                    TempData["msg"] = status.Status;
+                    TempData["code"] = Convert.ToString(status.Code);
+                    return RedirectToAction("ChangeWebSitePopup");
+                }
+                else
+                {
+                    TempData["msg"] = status.Status;
+                    TempData["code"] = Convert.ToString(status.Code);
+                }
+                return RedirectToAction("ChangeWebSitePopup");
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
 
         [HttpGet]
         public ActionResult BonanzaMasterList()

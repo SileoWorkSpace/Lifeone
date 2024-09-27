@@ -142,16 +142,16 @@
                         </ol>
                     </nav>*@
             </div>
-            @*<div class="pbutton">
-                    <div class="right text-right">
-                        <span>
-                            <a href="@Url.Action("ExportToExcelMyDownline","AssociateTeam",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
-                        </span> <span>
-                            <button class="btn btn-danger btn-custom btn-rounded btn-sm" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>
-                        </span>
-
-                    </div>
-                </div>*@
+            <div class="pbutton">
+                <div class="right text-right">
+                    @*<span>
+            <a href="@Url.Action("ExportToExcelMyDownline","AssociateTeam",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+        </span>*@
+                    <span>
+                        <button class="btn btn-danger btn-custom btn-rounded btn-sm" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>
+                </div>
+                </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -160,7 +160,7 @@
                     <div class="card-body pt-10  pb-10" style="padding-top:15px !important;">
 
                         @using (Html.BeginForm("MyDownline", "AssociateTeam", FormMethod.Post))
-                         {
+                        {
                             <div class="row mb-3">
 
                                 <div class="col-lg-3">
@@ -208,16 +208,17 @@
 
                                 </div>
                             </div>
+                           
                         }
                         @*<button class="btn btn-info btn-sm" onclick="SMS()">
-                                <i class="fa fa-mobile"></i> SMS
-                            </button>
-                            <button class="btn btn-primary btn-sm" onclick="Notification()">
-                                <i class="fa fa-envelope"></i> Notification
-                            </button>
-                            <button class="btn btn-danger openEmail btn-sm" onclick="sendEmail()">
-                                <i class="fa fa-envelope"></i> Email
-                            </button>*@
+            <i class="fa fa-mobile"></i> SMS
+        </button>
+        <button class="btn btn-primary btn-sm" onclick="Notification()">
+            <i class="fa fa-envelope"></i> Notification
+        </button>
+        <button class="btn btn-danger openEmail btn-sm" onclick="sendEmail()">
+            <i class="fa fa-envelope"></i> Email
+        </button>*@
                         <div class="table-responsive">
                             <table class="table table-striped mb-0" id="MyDownlineList">
                                 <thead>
@@ -292,8 +293,8 @@
                                     else
                                     {
                                         @*<tr>
-                                                <td colspan="10">No Record Found..</td>
-                                            </tr>*@
+                            <td colspan="10">No Record Found..</td>
+                        </tr>*@
                                     }
                                 </tbody>
                             </table>

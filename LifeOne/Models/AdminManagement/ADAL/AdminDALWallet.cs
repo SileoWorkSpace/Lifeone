@@ -311,5 +311,29 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 throw ex;
             }
         }
+
+        public static List<MAdminWallet> GetEWalletData(MAdminWallet obj)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();
+
+                queryParameters.Add("@LoginId", obj.LoginId);
+                queryParameters.Add("@FromDate", obj.FromDate);
+                queryParameters.Add("@ToDate", obj.ToDate);
+                queryParameters.Add("@Page", obj.Page);
+                queryParameters.Add("@Size", obj.Size > 0 ? obj.Size : SessionManager.Size);
+                queryParameters.Add("@ExportToExcel",obj.IsExport);
+
+                List<MAdminWallet> _iresult = DBHelperDapper.DAAddAndReturnModelList<MAdminWallet>("GetEwalletLedger", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+
     }
 }

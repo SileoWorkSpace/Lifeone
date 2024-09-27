@@ -6,14 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System;
 using System.Web.Http;
-using static LifeOne.Models.ShoppingResponse;
 using LifeOne.Models;
 using System.Web;
 using LifeOne.Models.API;
 
 namespace LifeOne.Controllers
 {
-    public class WebHookController : ApiController
+    public class WebHookApiTestingController : ApiController
     {
       
 

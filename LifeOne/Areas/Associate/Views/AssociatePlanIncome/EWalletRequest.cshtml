@@ -94,7 +94,7 @@
              new SelectListItem { Text = "DD", Value = "DD" },
              new SelectListItem { Text = "NEFT", Value = "NEFT" },
              new SelectListItem { Text = "RTGS", Value = "RTGS" },
-             new SelectListItem { Text = "Gateway", Value = "Gateway" }
+             //new SelectListItem { Text = "Gateway", Value = "Gateway" }
          }, "Value", "Text"),
          new { @class = "form-control", @id = "PaymentMode", @onchange = "ChangePaymentMode();", @required = "required" })
                                         </div>
@@ -217,7 +217,8 @@
             data: { LoginId: $('#LoginId').val(), Amount: $('#Amount').val(), PaymentMode: $('#PaymentMode').val(), ChequeDD_No: $('#ChequeDD_No').val(), BankId: $('#BankId').val() },
             success: function (response) {
                 if (response.Flag == 1) {
-                    window.location = "/Home/RazorPayPaymentPage";
+                    //window.location = "/Home/RazorPayPaymentPage";
+                    window.location = "/Associate/AssociatePlanIncome/EWalletList";
                 }
                 else {
                     alert(response.Message)
