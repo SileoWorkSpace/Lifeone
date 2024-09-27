@@ -23,7 +23,7 @@
                 <tbody>
                     <tr>
                         <td style="width: 40%;">
-                            <img src="@Model.dtDetails.Rows[0]["CompanyLogo"].ToString();" style="width: 120px;height:120px;margin-right: 23px;padding-bottom: 5px;">
+                            <img src="@Model.dtDetails.Rows[0]["CompanyLogo"].ToString()" style="width: 120px;height:120px;margin-right: 23px;padding-bottom: 5px;">
 
                         </td>
                         <td style="padding-bottom: 5px;font-size:25px;font-weight:500;">Tax Invoice</td>
@@ -281,7 +281,6 @@
                                                 
                                             </td>
                                         </tr>
-
                                         <tr>
                                             <td style="border: 1px solid black" colspan="2">
                                                 <b>Add : IGST : </b>
@@ -290,8 +289,6 @@
                                                 @Model.dtDetails.Rows[0]["totalGST"].ToString()
                                             </td>
                                         </tr>
-
-
                                         <tr>
                                             <td style="border: 1px solid black" colspan="2">
                                                 <b>ShippingCharges:</b>

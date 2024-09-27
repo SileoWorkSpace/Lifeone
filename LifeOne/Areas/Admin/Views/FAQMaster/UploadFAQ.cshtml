@@ -42,16 +42,16 @@
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="ptitle">
-            <h4 class="mb-1 mt-0">Upload FAQ</h4>
+            <h4 class="mb-1 mt-0">FAQ's</h4>
         </div>
         <div class="pbutton">
             <div class="right text-right">
                 @if (PermissionManager.IsActionPermit("FAQ Master", ViewOptions.FormSave))
-                {
+                 {
                     <a href="" id="btnAdd" class="btn btn-success btn-sm" onclick="return ResetPopup();" data-toggle="modal" title="Add New" Target="_blank" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4">
                         <i class="fa fa-plus" aria-hidden="true"></i> Add New
                     </a>
-                }
+                 }
             </div>
         </div>
     </div>
@@ -86,7 +86,7 @@
                                             <a href="/FAQMaster/UnitDelete?Id=@item.Pk_FAQId" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>
                                         </td>
                                     </tr>
-                                }
+                                 }
                                 <tbody>
                                 </tbody>
                             </table>
@@ -137,7 +137,7 @@
                 </div>
             </div>
         </div>
-    }
+     }
 </div>
 <script>
     function ResetPopup() {
