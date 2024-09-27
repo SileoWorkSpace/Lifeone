@@ -288,6 +288,7 @@
             font-size: 12px;
             font-weight: 400;
         }
+
         .sbutton {
             display: none; /* Initially hide all social buttons */
             margin: 5px;
@@ -300,47 +301,76 @@
         .sbutton.mainsbutton {
             display: inline-block; /* Always show the main share button */
         }
+
+        .sign-in, .regiter-1 {
+            text-decoration: underline;
+            color: green;
+        }
+
+        .regiter-1 {
+            margin-left: 5px;
+        }
+
+        .top-head {
+            background: #f1f1f1;
+            padding: 5px;
+        }
     </style>
 
     <!-- Schema Markup for SEO -->
     <script type="application/ld+json">
-    {
-      "@@context": "https://schema.org",
-      "@@type": "HealthAndBeautyBusiness",
-      "name": "Lifeone Wellness",
-      "description": "A wellness center offering holistic treatments, fitness programs, and nutritional guidance for personalized health solutions.",
-      "url": "https://www.lifeonewellness.com",
-      "address": {
-        "@@type": "PostalAddress",
-        "streetAddress": "78 Raj nagar K.N. Kanpur",
-        "addressLocality": "Kanpur",
-        "postalCode": "227105",
-        "addressCountry": "India"
-      },
-      "contactPoint": {
-        "@@type": "ContactPoint",
-        "telephone": "+918090839393",
-        "contactType": "Customer Service"
-      },
-      "openingHours": "Mo-Fri 09:00-18:00",
-      "priceRange": "200-150000"
-    }
+        {
+          "@@context": "https://schema.org",
+          "@@type": "HealthAndBeautyBusiness",
+          "name": "Lifeone Wellness",
+          "description": "A wellness center offering holistic treatments, fitness programs, and nutritional guidance for personalized health solutions.",
+          "url": "https://www.lifeonewellness.com",
+          "address": {
+            "@@type": "PostalAddress",
+            "streetAddress": "78 Raj nagar K.N. Kanpur",
+            "addressLocality": "Kanpur",
+            "postalCode": "227105",
+            "addressCountry": "India"
+          },
+          "contactPoint": {
+            "@@type": "ContactPoint",
+            "telephone": "+918090839393",
+            "contactType": "Customer Service"
+          },
+          "openingHours": "Mo-Fri 09:00-18:00",
+          "priceRange": "200-150000"
+        }
     </script>
 </head>
 <body>
     <div id="overlayer" style="display:none;"></div>
     <div id="loader" class="loader" style="display:none;"></div>
     <header class="header">
-        <marquee width="100%" direction="Left" onmouseover="this.stop();" onmouseout="this.start();" style="background: #177740;height: 35px; padding: 5px 0 0 0;margin-bottom: -9px;">
-            <span class="Scrollnews" style="color: #fff;">
+        @*<marquee width="100%" direction="Left" onmouseover="this.stop();" onmouseout="this.start();" style="background: #177740;height: 35px; padding: 5px 0 0 0;margin-bottom: -9px;">*@
+        <div class="top-head">
+            <div class="container d-flex justify-content-end align-items-center ">
+                <span class="Scrollnews" style="color: #fff;">
 
-                <ul class="list-inline m-0">
-                    <li>
-                        Creating New Innovative Products In Healthcare Industry. We Make Our Products Sustainably, By Which You Can Build A Idealistic Diverse Global Team. You Make A Positive Impact In Communities Where You Live Work.
-                    </li>
-                </ul>
-            </span>
-        </marquee>
+                    @*<ul class="list-inline m-0">
+                            <li>
+                                Creating New Innovative Products In Healthcare Industry. We Make Our Products Sustainably, By Which You Can Build A Idealistic Diverse Global Team. You Make A Positive Impact In Communities Where You Live Work.
+                            </li>
+                        </ul>*@
+                    @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
+                    {
+                        <a href="/Home/Login" class="sign-in">Sign In</a>
+                        <a href="/Home/CustomerRegistration" class="regiter-1">Registration</a>
+                    }
+                    else
+                    {
+
+
+                        <a href="/Home/Logout" class="sign-in" ><i class="fa fa-unlock-alt" aria-hidden="true" title="logout"></i></a>
+                    }
+                </span>
+            </div>
+        </div>
+        @*</marquee>*@
         <input type="hidden" id="GLB_CookiesId" />
         <div class="header-middle sticky-header fix-top sticky-content">
             <div class="container">
@@ -487,27 +517,27 @@
                             </div>
                         }
                     }
-                    <div>
-                        <ul class="menu menu-sign lireg">
-                            <li>
-                                <a href="#"><i style="font-size: 28px;" class="bi bi-person"></i></a>
-                                @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
-                                {
-                                    <ul style="right: 0; left: -9.9rem !important;">
-                                        <li><a href="/Home/Login">Sign in</a></li>
-                                        <li><a href="/Home/CustomerRegistration">Register</a></li>
-                                    </ul>
-                                }
-                                else
-                                {
+                    @*<div>
+                            <ul class="menu menu-sign lireg">
+                                <li>
+                                    <a href="#"><i style="font-size: 28px;" class="bi bi-person"></i></a>
+                                    @if (LifeOne.Models.Manager.SessionManager.AssociateFk_MemId == 0)
+                                    {
+                                        <ul style="right: 0; left: -9.9rem !important;">
+                                            <li><a href="/Home/Login">Sign in</a></li>
+                                            <li><a href="/Home/CustomerRegistration">Register</a></li>
+                                        </ul>
+                                    }
+                                    else
+                                    {
 
-                                    <ul style="right: 0; left: -9.9rem !important;">
-                                        <li><a href="/Home/Logout">Logout</a></li>
-                                    </ul>
-                                }
-                            </li>
-                        </ul>
-                    </div>
+                                        <ul style="right: 0; left: -9.9rem !important;">
+                                            <li><a href="/Home/Logout">Logout</a></li>
+                                        </ul>
+                                    }
+                                </li>
+                            </ul>
+                        </div>*@
                     <!-- End Dropdown Box -->
                 </div>
             </div>
@@ -564,19 +594,19 @@
                     <a href="/Home/BusinessPlan">Business Plan</a>
                 </li>
                 @*<li>
-            <a href="#">Products</a>
+                        <a href="#">Products</a>
 
-            <ul>
-                <li><a href="#">Home Care</a></li>
-                <li><a href="#">Health Care</a></li>
-                <li><a href="#">Veda & Nutraceuticals</a></li>
-                <li><a href="#">Fashion</a></li>
-                <li><a href="#">Personal Care</a></li>
+                        <ul>
+                            <li><a href="#">Home Care</a></li>
+                            <li><a href="#">Health Care</a></li>
+                            <li><a href="#">Veda & Nutraceuticals</a></li>
+                            <li><a href="#">Fashion</a></li>
+                            <li><a href="#">Personal Care</a></li>
 
-            </ul>
+                        </ul>
 
-        </li>*@
-               
+                    </li>*@
+
                 <li>
                     <a href="#">Compliance</a>
                     <ul>
@@ -839,7 +869,7 @@
             document.querySelector('.sbuttons').classList.toggle('open');
         });
     </script>
-   
+
 
 </body>
 </html>
