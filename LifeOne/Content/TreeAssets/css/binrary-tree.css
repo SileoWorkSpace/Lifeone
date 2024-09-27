@@ -35,7 +35,7 @@
         }
 
         .tf-tree li li:before {
-            border-top: .0625em solid #000;
+            border-top: .0625em solid #d8d8d8;
             content: "";
             display: block;
             height: .0625em;
@@ -78,7 +78,7 @@
         }
 
         .tf-tree .tf-nc:before, .tf-tree .tf-nc:after, .tf-tree .tf-node-content:after, .tf-tree .tf-node-content:before {
-            border-left: .0625em solid #000;
+            border-left: .0625em solid #d8d8d8;
             content: "";
             display: block;
             height: 1em;
@@ -95,7 +95,7 @@
             width: .0625em;
         }
     .tf-tree ul li ul:before {
-        border-left: .0625em solid #000;
+        border-left: .0625em solid #d8d8d8;
         content: "";
         display: block;
         height: 1em;
@@ -234,16 +234,16 @@ span.id-name {
 
 .hover-data {
     max-width: 350px;
-    /* border: 1px solid #ddd; */
-    padding: 8px;
+    border: 1px solid #ededed;
+    padding: 10px;
     display: block;
     position: absolute;
     width: 350px;
     left: -100px;
     background: #fffaf4;
     z-index: 4;
-    box-shadow: 1px 1px 1px rgb(0 0 0 / 46%);
-    display:none;
+    box-shadow: 1px 1px 6px rgb(210 210 210 / 67%);
+    display: none;
 }
 /*.hover-data:before
 {
@@ -318,7 +318,7 @@ span.id-name {
     padding: 0px;
     box-sizing: border-box;
     width: 100%;
-    border: 1px solid #f00;
+    border: 1px solid #4CAF50;
     background: #fffaf4;
     border-radius: 4px;
 }
@@ -332,7 +332,7 @@ span.id-name {
     }
 
         .hover-data-content table tr:first-child {
-            background: #000;
+            background: #4CAF50;
             color: #fff;
         }
 
@@ -355,7 +355,7 @@ span.id-name {
         font-size: 15px;
         margin-top: 5px;
         text-align: left;
-        color: #fd0000;
+        color: #4CAF50;
         font-weight: bold;
         margin-bottom: 10px;
         padding-left: 10px;
