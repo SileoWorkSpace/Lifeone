@@ -1277,9 +1277,6 @@ namespace LifeOne.Areas.Associate.Controllers
             orderInvoice.dtDetails = dsOrder.Tables[0];
             return View(orderInvoice);
         }
-
-
-
     }
 }
 
