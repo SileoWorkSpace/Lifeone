@@ -1176,8 +1176,7 @@ namespace LifeOne.Areas.Associate.Controllers
             obj.FK_MemID = SessionManager.AssociateFk_MemId.ToString();
             try
             {
-                
-                
+                                
                 List<ModelMatchingBonus> listmaching = new List<ModelMatchingBonus>();
                 DataSet ds = obj.GetPerformanceBonus();
                 foreach (DataRow dr in ds.Tables[0].Rows)
