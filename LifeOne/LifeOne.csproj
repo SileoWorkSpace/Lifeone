@@ -1618,6 +1618,8 @@
     <Content Include="Areas\Admin\Views\Wallet\EWalletLedger.cshtml" />
     <Content Include="Areas\Admin\Views\AdminReport\GeustShoppingOrderDetail.cshtml" />
     <Content Include="Areas\Associate\Views\AssociateOrder\OrderByAssociate.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminReport\ShoppingOrderInvoice.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociateReport\ShoppingOrderTaxInvoice.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />
