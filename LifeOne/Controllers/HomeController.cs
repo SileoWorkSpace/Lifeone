@@ -52,6 +52,7 @@ namespace LifeOne.Controllers
         }
         public ActionResult Index(Products products, string Add, string Fk_CategoryId, string ProductName)
         {
+            WebSitePopup WebSitePopup = new WebSitePopup();
             HttpCookie cookie = Request.Cookies["TokenDetails"];
             if (cookie != null)
             {
@@ -65,11 +66,9 @@ namespace LifeOne.Controllers
               
             }
             string time = DateTime.Now.ToString("ddMMyyyyhhMMss") + "_" + 4050;
-            //WebSitePopup model = DALProductServices.WebSitePopup();
-            //ViewBag.PopupStatus = model.Status;
-            //ViewBag.ImageUrl = model.ImageUrl;
-
-
+            WebSitePopup.ActiveType = "Select";
+            products.websiteList = DALProductServices.ChangeWebSitePopup(WebSitePopup);
+            
             products.TokenNo = SessionManager.TokenNo;
             products.OpCode = 2;
 

@@ -1084,7 +1084,7 @@
 
         $.ajax({
             url: "/Admin/AdminReport/ApprovePanOrVoterId",
-            type: "Get",
+            type: "Post",
             data: { Fk_MemId: Fk_MemId, Type: Type, Status: Status },
             dataType: 'json',
             containtType: 'application/json;charset=utf-8',
@@ -1108,6 +1108,7 @@
     }
 
     function Decline(Fk_MemId, Type, Status) {
+        debugger
         if (confirm('Are you sure to decline this Request?') == false) {
             return false;
         }
@@ -1118,6 +1119,7 @@
     }
 
     function DeclineKYC(Fk_MemId, Type, Status, Remark) {
+        debugger
         if (Remark == null || Remark == undefined || Remark == '') {
             $('#Status').focus();
             return false;
@@ -1125,7 +1127,7 @@
         if ((Type != null && Type != undefined) && (Remark != null && Remark != undefined)) {
             $.ajax({
                 url: "/Admin/AdminReport/ApprovePanOrVoterId",
-                type: "Get",
+                type: "Post",
                 data: { Fk_MemId: Fk_MemId, Type: Type, Status: Status, Remark: Remark },
                 dataType: 'json',
                 containtType: 'application/json;charset=utf-8',

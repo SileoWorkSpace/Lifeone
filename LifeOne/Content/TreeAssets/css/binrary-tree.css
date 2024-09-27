@@ -35,7 +35,7 @@
         }
 
         .tf-tree li li:before {
-            border-top: .0625em solid #000;
+            border-top: .0625em solid #d8d8d8;
             content: "";
             display: block;
             height: .0625em;
@@ -78,7 +78,7 @@
         }
 
         .tf-tree .tf-nc:before, .tf-tree .tf-nc:after, .tf-tree .tf-node-content:after, .tf-tree .tf-node-content:before {
-            border-left: .0625em solid #000;
+            border-left: .0625em solid #d8d8d8;
             content: "";
             display: block;
             height: 1em;
@@ -95,7 +95,7 @@
             width: .0625em;
         }
     .tf-tree ul li ul:before {
-        border-left: .0625em solid #000;
+        border-left: .0625em solid #d8d8d8;
         content: "";
         display: block;
         height: 1em;

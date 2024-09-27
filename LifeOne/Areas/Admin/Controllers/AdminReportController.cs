@@ -2493,7 +2493,7 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(_model);
         }
 
-        [HttpGet]
+        [HttpPost]
         public JsonResult ApprovePanOrVoterId(string Fk_MemId, string Type, string Status, string Remark)
         {
             VerifyPanOrVoterid _result = new VerifyPanOrVoterid();

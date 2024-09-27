@@ -23,7 +23,7 @@ function SearchLogin() {
 
 
 }
-var ImageUrl = 'https://lifeonewellness.com/Content/TreeAssets/icons/open-member.png';
+var ImageUrl = 'https://lifeonewellness.com/Content/TreeAssets/icons/open-member.svg';
 function BindRoot(LoginId) {
 
 
