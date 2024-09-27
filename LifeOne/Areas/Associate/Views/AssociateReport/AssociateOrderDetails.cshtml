@@ -30,7 +30,7 @@
 
     <div id="no-more-tables">
         <form id="form1" method="post">
-
+            @Html.HiddenFor(m=>m.Page)
             <div class="row">
                 <div class="col-lg-12">
                     <div class="card">
@@ -38,7 +38,7 @@
 
 
                             <div class="table-responsive" id="customers">
-                                <table class="table mb-0" id="tblCustomers" >
+                                <table class="table mb-0" id="tblCustomers">
                                     <thead>
                                         <tr>
                                             <th>#Sn.</th>
@@ -55,9 +55,10 @@
                                             <th> Order Date</th>
                                             <th>Order Status</th>
 
-                                            <th style="text-align:right">Gateway Amount</th>
-                                            <th style="text-align:right">Wallet Amount</th>
-                                   
+                                            @*<th style="text-align:right">Gateway Amount</th>*@
+                                            <th style="text-align:right">Amount</th>
+                                            <th >Action</th>
+
 
                                         </tr>
                                     </thead>
@@ -68,7 +69,7 @@
                                             for (var i = 0; i <= Model.dtGetShoppingOrderDetails.Rows.Count - 1; i++)
                                             {
 
-                                                <tr >
+                                                <tr>
                                                     <td>@j</td>
 
 
@@ -78,16 +79,18 @@
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Name"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["MobileNo"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Landmark"].ToString()</td>
-                                                    <td >@Model.dtGetShoppingOrderDetails.Rows[i]["Address"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Address"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["State"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["City"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["PinCode"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["AddressType"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderDate"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderStatus"].ToString()</td>
-                                                    <td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["GatewayAmount"].ToString()</td>
+                                                    @*<td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["GatewayAmount"].ToString()</td>*@
                                                     <td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["WalletAmount"].ToString()</td>
-                                                  
+                                                    <td>
+                                                        <a href="/AssociateReport/ShoppingOrderTaxInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                    </td>
 
                                                 </tr>
                                                 j++;
@@ -101,7 +104,58 @@
                                 </table>
 
                             </div>
-                           
+                            <footer class="card-footer bg-white p-2">
+                                <div class="d-md-flex align-items-center justify-content-between">
+
+                                    @if (Model != null)
+                                    {
+                                        if (Model.Pager != null)
+                                        {
+                                            if (Model.Pager.EndPage > 1)
+                                            {
+                                                <div> <small class="text-muted inline">showing @Model.dtGetShoppingOrderDetails.Rows.Count  of @Model.dtGetShoppingOrderDetails.Rows[0]["TotalRecord"].ToString() items</small> </div>
+                                                <div>
+                                                    <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                        @if (Model.Pager.CurrentPage > 1)
+                                                        {
+                                                            <li class="page-item">
+                                                                <a class="page-link" onclick="fCallPaging(1)" href="#">First</a>
+                                                                @*<a class="page-link" href="/Admin/ViewFranchiseSupplyOrderStatus">First</a>*@
+                                                            </li>
+                                                            <li class="page-item">
+                                                                @*<a class="page-link" onclick="fPaging(@(Model.Pager.CurrentPage - 1))" href="/Admin/Admin/ViewFranchiseSupplyOrderStatus?Page=@(Model.Pager.CurrentPage - 1)">Previous</a>*@
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1))" href="#">Previous</a>
+                                                            </li>
+                                                        }
+                                                        @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                        {
+                                                            <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+                                                                @*<a class="page-link" onclick="fPaging(@page)" href="/Admin/Admin/ViewFranchiseSupplyOrderStatus?Page=@page">@page</a>*@
+
+                                                                <span><a class="page-link" onclick="fCallPaging(@page)" href="#">@page</a></span>
+                                                            </li>
+                                                        }
+                                                        @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                        {
+                                                            <li class="page-item">
+                                                                @*<a class="page-link" onclick="fPaging(@(Model.Pager.CurrentPage + 1))" href="/Admin/Admin/ViewFranchiseSupplyOrderStatus?Page=@(Model.Pager.CurrentPage + 1)">Next</a>*@
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1))" href="#">Next</a>
+
+                                                            </li>
+                                                            <li class="page-item">
+                                                                @*<a class="page-link"  href="/Admin/Admin/ViewFranchiseSupplyOrderStatus?Page=@(Model.Pager.TotalPages)">Last</a>*@
+                                                                <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages))" href="#">Last</a>
+                                                            </li>
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            }
+                                        }
+
+                                    }
+
+                                </div>
+                            </footer>
                         </div>
 
                         <!-- /.box-body -->

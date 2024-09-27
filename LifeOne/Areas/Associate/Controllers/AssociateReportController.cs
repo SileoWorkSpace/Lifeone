@@ -1013,6 +1013,11 @@ namespace LifeOne.Areas.Associate.Controllers
         }
         public ActionResult AssociateOrderDetails(Reports reports)
         {
+            if(reports.Page==0 || reports.Page==null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             reports.Page = 1;
             DataSet dataSet = reports.GetShoppingOrderDetails();
@@ -1269,6 +1274,14 @@ namespace LifeOne.Areas.Associate.Controllers
             return View(obj);
 
             // return View();
+        }
+        public ActionResult ShoppingOrderTaxInvoice(string id)
+        {
+            ShoppingOrderInvoiceModel orderInvoice = new ShoppingOrderInvoiceModel();
+            OrderDAL orderDAL = new OrderDAL();
+            DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
+            orderInvoice.dtDetails = dsOrder.Tables[0];
+            return View(orderInvoice);
         }
 
 

@@ -11,6 +11,7 @@ using DALCommon = LifeOne.Models.Common.DALCommon;
 using Dapper;
 using LifeOne.Models.Manager;
 using Newtonsoft.Json;
+using LifeOne.Models.AdminManagement.AEntity;
 
 namespace LifeOne.Models
 {
@@ -60,6 +61,7 @@ namespace LifeOne.Models
         public List<Products> objList { get; set; }
         public List<Products> LstMenu { get; set; }
         public List<Products> lstDetails { get; set; }
+        public List<WebSitePopup> websiteList { get; set; }
         public DataTable dtVedioLink { get; set; }
         public DataSet GetAllProducts()
         {
