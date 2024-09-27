@@ -69,5 +69,14 @@ namespace LifeOne.Models.AdminManagement.ADAL
             DataSet dsresult = ExecuteQuery("OpenOrderTaxInvoice", para);
             return dsresult;
         }
+        public DataSet GetShoppingOrderInvoice(string id)
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@fk_OrderId",id)
+            };
+            DataSet dsresult = ExecuteQuery("ShoppingOrderInvoice", para);
+            return dsresult;
+        }
     }
 }

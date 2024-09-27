@@ -230,21 +230,22 @@ namespace LifeOne.Models.AdminManagement.ADAL
         {
             var queryParameters = new DynamicParameters();
 
+            queryParameters.Add("@Id", obj.Id);
             queryParameters.Add("@ImageUrl", obj.ImageUrl);
             queryParameters.Add("@IsActive", obj.IsActive);
             queryParameters.Add("@ActionType", obj.ActiveType);
             WebSitePopup ObjList = DBHelperDapper.DAAddAndReturnModel<WebSitePopup>("GetUpdateWebSitePopup", queryParameters);
             return ObjList;
         }
-        public static WebSitePopup WebSitePopup()
-        {
-            var queryParameters = new DynamicParameters();
+        //public static List<WebSitePopup> WebSitePopup()
+        //{
+        //    var queryParameters = new DynamicParameters();
 
          
-            queryParameters.Add("@ActionType","Select");
-            WebSitePopup ObjList = DBHelperDapper.DAAddAndReturnModel<WebSitePopup>("GetUpdateWebSitePopup", queryParameters);
-            return ObjList;
-        }
+        //    queryParameters.Add("@ActionType","Select");
+        //    WebSitePopup ObjList = DBHelperDapper.DAAddAndReturnModel<WebSitePopup>("GetUpdateWebSitePopup", queryParameters);
+        //    return ObjList;
+        //}
         public static ResponseUnitModel SaveCropSubCategorySave(SubCategoryViewModel obj)
         {
             try

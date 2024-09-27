@@ -135,6 +135,8 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public List<PayoutStatement> payoutStatements { get; set; }
         public List<PayoutSummary> payoutSummaries { get; set; }
         public List<NewsDetails> lstNews { get; set; }
+        public long FkMemId { get;  set; }
+        public List<RewardsModel> Rewardslst { get;  set; }
     }
 
     public class PayoutStatement

@@ -45,7 +45,8 @@
                                                     <div class="form-group">
                                                         <label>Order No.</label>
                                                         @Html.TextBoxFor(m => m.OrderNo, new { @class = "form-control", @placeholder = "Order No." })
-
+                                                        @Html.HiddenFor(m=>m.Page)
+                                                        
                                                     </div>
                                                 </div>
 
@@ -89,8 +90,8 @@
                                             <th>Address Type</th>
                                             <th>Order Date</th>
                                             <th>Order Status</th>
-                                            <th style="text-align:right">Gateway Amount</th>
-                                            <th style="text-align:right">Wallet Amount</th>
+                                            @*<th style="text-align:right">Gateway Amount</th>*@
+                                            <th style="text-align:right">Amount</th>
                                             <th>Action</th>
 
                                         </tr>
@@ -98,12 +99,17 @@
                                     <tbody>
                                         @if (Model != null && Model.dtGetShoppingOrderDetails.Rows.Count > 0)
                                         {
-                                            int j = 1;
+                                            int j = 0;
+                                            int page = Model.Page ?? 0;
+                                            page = (page - 1);
+
+
+                                            j = ((page) * (Model.Size));
                                             for (var i = 0; i <= Model.dtGetShoppingOrderDetails.Rows.Count - 1; i++)
                                             {
 
                                                 <tr>
-                                                    <td>@j</td>
+                                                    <td>@(j+1)</td>
 
 
 
@@ -125,22 +131,21 @@
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["AddressType"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderDate"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderStatus"].ToString()</td>
-                                                    <td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["GatewayAmount"].ToString()</td>
+                                                    @*<td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["GatewayAmount"].ToString()</td>*@
                                                     <td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["WalletAmount"].ToString()</td>
                                                     <td>
                                                         @if (bool.Parse(Model.dtGetShoppingOrderDetails.Rows[i]["IsShipped"].ToString()) == false)
                                                         {
 
-                                                            <a data-toggle="modal" data-target="#myModaldelivery" class="btn-xs btn btn-default" onclick="AddDeliveryInformation('@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()')"><i class="fa fa-truck text-success" aria-hidden="true"></i></a>
+                                                            @*<a data-toggle="modal" data-target="#myModaldelivery" class="btn-xs btn btn-default" onclick="AddDeliveryInformation('@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()')"><i class="fa fa-truck text-success" aria-hidden="true"></i></a>*@
                                                         }
                                                         else
                                                         {
 
                                                         }
                                                         <a href="/Admin/AdminReport/CancelShoppingOrder?id=@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()" onclick="return confirm('Are you sure to cancel this?') " class="btn btn-danger btn-sm"><i>Cancel</i></a>
+                                                        <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank"  class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
                                                     </td>
-
-
                                                 </tr>
                                                 j++;
                                             }
@@ -163,7 +168,7 @@
                                     {
                                         if (Model.Pager.EndPage > 1)
                                         {
-                                            <div> <small class="text-muted inline">showing @Model.LstOrder.Count  of @Model.LstOrder[0].TotalRecords items</small> </div>
+                                            <div> <small class="text-muted inline">showing @Model.dtGetShoppingOrderDetails.Rows.Count  of @Model.dtGetShoppingOrderDetails.Rows[0]["TotalRecord"].ToString() items</small> </div>
                                             <div>
                                                 <ul class="pagination pagination-sm m-t-none m-b-none">
                                                     @if (Model.Pager.CurrentPage > 1)

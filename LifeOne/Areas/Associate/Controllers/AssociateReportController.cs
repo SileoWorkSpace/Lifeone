@@ -988,8 +988,8 @@ namespace LifeOne.Areas.Associate.Controllers
             reports.Token = SessionManager.TokenNo.ToString();
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             reports.Pk_AddressId = Session["Pk_AddressId"].ToString();
-           // dtPaymentDetails.Rows.Add("Gateway", Session["RazorPayTotalAmt"].ToString());
-            dtPaymentDetails.Rows.Add("Wallet", Session["WalletAmount"].ToString());
+            dtPaymentDetails.Rows.Add("Gateway", Session["RazorPayTotalAmt"].ToString());
+           
             reports.dtPaymentDetails = dtPaymentDetails;
             DataSet dataSet = reports.PlaceOrderForWeb();
             if (dataSet != null)
@@ -1013,6 +1013,11 @@ namespace LifeOne.Areas.Associate.Controllers
         }
         public ActionResult AssociateOrderDetails(Reports reports)
         {
+            if(reports.Page==0 || reports.Page==null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             DataSet dataSet = reports.GetShoppingOrderDetails();
             reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
@@ -1233,6 +1238,7 @@ namespace LifeOne.Areas.Associate.Controllers
                 databonus.NetAmount = decimal.Parse(dr["NetAmount"].ToString());
                 //databonus.PerformanceBonus = Convert.ToDecimal(dr["performancebonus"].ToString());
                 databonus.ClosingDate = dr["closingdate"].ToString();
+                databonus.PayoutStatus = dr["PayoutStatus"].ToString();
                 databonus.PrevLeft = Convert.ToDecimal(dr["PreviousLeft"].ToString());
                 databonus.PrevRight = Convert.ToDecimal(dr["PreviousRight"].ToString());
                 databonus.CurrLeft = Convert.ToDecimal(dr["CurrentLeft"].ToString());
@@ -1267,6 +1273,14 @@ namespace LifeOne.Areas.Associate.Controllers
             return View(obj);
 
             // return View();
+        }
+        public ActionResult ShoppingOrderTaxInvoice(string id)
+        {
+            ShoppingOrderInvoiceModel orderInvoice = new ShoppingOrderInvoiceModel();
+            OrderDAL orderDAL = new OrderDAL();
+            DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
+            orderInvoice.dtDetails = dsOrder.Tables[0];
+            return View(orderInvoice);
         }
 
 

@@ -25,11 +25,12 @@ namespace LifeOne.Models.FranchiseManagement.FDAL
                 if (SessionManager.Usertype == "3")//For Admin
                 {
                     _qury = "Proc_GetProductDetail @ProductId=" + _param.PrdId + ",@Fk_MemId=" + SessionManager.Fk_MemId + ",@Type=1";
-                }
-                else///For Franchisee
+                }                
+                else ///For Franchisee
                 {
                     _qury = "Proc_GetProductDetail @ProductId=" + _param.PrdId + ",@Fk_MemId=" + SessionManager.FranchiseFk_MemId + ",@Type=2";
                 }
+                
                 MFranchiseorderRequest _iresult = DBHelperDapper.DAGetDetailsInList<MFranchiseorderRequest>(_qury).FirstOrDefault();
                 return _iresult;
             }
@@ -40,8 +41,20 @@ namespace LifeOne.Models.FranchiseManagement.FDAL
 
 
         }
-
-
+        public MFranchiseorderRequest GetAllProductDetails(MFranchiseorderRequest _param)
+        {
+            try
+            {
+                string _qury;
+                _qury = "GetProductDetail @ProductId=" + _param.PrdId + ",@Fk_MemId=" + SessionManager.AssociateFk_MemId + ",@Type=1";
+                MFranchiseorderRequest _iresult = DBHelperDapper.DAGetDetailsInList<MFranchiseorderRequest>(_qury).FirstOrDefault();
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public MFranchiseorderRequest GetProductDetailsForAPI(MFranchiseorderRequest _param)
         {
             try
@@ -123,11 +136,6 @@ namespace LifeOne.Models.FranchiseManagement.FDAL
                 throw ex;
             }
         }
-
-
-
-
-
         public static MSimpleString AddProduct(MFranchiseorderRequest _param)
         {
             try
@@ -149,7 +157,27 @@ namespace LifeOne.Models.FranchiseManagement.FDAL
                 throw ex;
             }
         }
-
+        public static MSimpleString AddAllProduct(MFranchiseorderRequest _param)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();
+                //queryParameters.Add("@RequestId", _param.ReqId);
+                queryParameters.Add("@ProductId", _param.PrdId);
+                //queryParameters.Add("@PrdTypeId", _param.CategoryId);
+                queryParameters.Add("@Amount", _param.Amount);
+                queryParameters.Add("@PointValue", _param.PointValue);
+                queryParameters.Add("@Quantity", _param.Quantity);
+                queryParameters.Add("@TotalAmount", _param.TotalAmt);
+                queryParameters.Add("@Fk_MemId", _param.Fk_Memid);
+                MSimpleString _iresult = DBHelperDapper.DAAddAndReturnModel<MSimpleString>("InsertAssociateOrderTemp", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static List<MOrder> BindStockHistory(long PrdId)
         {
             try
@@ -339,7 +367,33 @@ namespace LifeOne.Models.FranchiseManagement.FDAL
                 throw ex;
             }
         }
-
+        public static List<MFranchiseorderRequest> AssociateOrderTemp(MSimpleString _param)
+        {
+            try
+            {
+                string _qry = "GetAssociateOrderTemp " + _param.Fk_MemId + "";
+                List<MFranchiseorderRequest> _iresult = DBHelperDapper.DAGetDetailsInList<MFranchiseorderRequest>(_qry);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static MSimpleString DeleteAssociateProductTemp(MFranchiseorderRequest _param)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();
+                queryParameters.Add("@PK_Id", _param.PK_KeyId);
+                MSimpleString _iresult = DBHelperDapper.DAAddAndReturnModel<MSimpleString>("DeleteAssociateOrderTemp", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static MSimpleString DeleteProductTemp(MFranchiseorderRequest _param)
         {
             try
@@ -388,6 +442,25 @@ namespace LifeOne.Models.FranchiseManagement.FDAL
                 queryParameters.Add("@paymentMode", _param.PaymentMode);
 
                 MSimpleString _iresult = DBHelperDapper.DAAddAndReturnModel<MSimpleString>("Proc_InsertOrderRequestFinal", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public static MSimpleString SaveProductbyAssociate(MFranchiseorderRequest _param)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();                
+                queryParameters.Add("@Fk_MemId", _param.Fk_Memid);
+                queryParameters.Add("@Address", _param.CustomerAddress);                
+                queryParameters.Add("@State", _param.State);   
+                queryParameters.Add("@City", _param.City);   
+                queryParameters.Add("@Pincode", _param.PinCode);   
+                
+                MSimpleString _iresult = DBHelperDapper.DAAddAndReturnModel<MSimpleString>("OrderByAssociateInsert", queryParameters);
                 return _iresult;
             }
             catch (Exception ex)

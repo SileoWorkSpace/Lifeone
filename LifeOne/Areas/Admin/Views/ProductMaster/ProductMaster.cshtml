@@ -155,12 +155,16 @@
                                     @Html.TextBoxFor(m => m.MRP, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3" style="display:none;">
                                     <label>Sale Price<span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.SalesPrice, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
+                                <div class="col-md-3">
+                                    <label>DP<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.DP, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
+                                </div>
 
                                 <div class="col-md-3 form-group" id="dv_PV">
                                     <label>BV<span style="color:red;">*</span></label>
@@ -189,7 +193,18 @@
                                     @Html.TextBoxFor(m => m.HSNCode, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
+                                <div class="col-md-3 form-group">
+                                   
+                                    <label>Offered Qty<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.OfferedQty, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
+                                </div>
+                                <div class="col-md-3 form-group">
+                                    <label>Courier Charges<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.CourierCharges, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+
+                                </div>
+                            </div>
 
                                 @*<div class="col-md-3 form-group">
             <label>Image<span style="color:red;">*</span></label>
@@ -298,7 +313,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    
 }
 <script type="text/javascript">
     @{
@@ -383,9 +398,12 @@
         var BoxQty = $('#BoxQty').val();
         var BoxPV = $('#BoxPV').val();
         var HSNCode = $('#HSNCode').val();
+        var OfferQuantity = $('#OfferedQty').val();
         var Packing = $('#Packing').val();
         var file = $('#file').val();
         var ProductID = $('#Pk_ProductId').val()
+        var DP = $('#DP').val()
+        var CourierCharges = $('#CourierCharges').val()
         //UploadFile();
         if (ProductType == "Box")
         {
@@ -414,16 +432,21 @@
         else if (MRP == null || MRP == 0) {
             alert("Please Add MRP");
             return false;
-
-        } else if (SalesPrice == null || SalesPrice == 0) {
-            alert("Please Add Sales Price");
-            return false;
-
         }
+        //} else if (SalesPrice == null || SalesPrice == 0) {
+        //    alert("Please Add Sales Price");
+        //    return false;
+
+        //}
         //else if (SalesPrice> MRP) {
         //alert("Sales Price Should be less than MRP");
         //return false;
         //}
+        else if ((DP == null || DP == '') && ProductType != "Box") {
+            alert("Please Add Point Value");
+            return false;
+
+        }
         else if ((PV == null || PV == '') && ProductType != "Box") {
             alert("Please Add Point Value");
             return false;
@@ -436,6 +459,16 @@
         }
         else if ((HSNCode == null || HSNCode == 0)) {
             alert("Please Add HSN Code");
+            return false;
+
+        }
+        else if ((OfferedQty == null || OfferedQty == 0)) {
+            alert("Please Add Offer Quantity");
+            return false;
+
+        }
+        else if ((CourierCharges == null || CourierCharges == 0)) {
+            alert("Please Add Courier Charges");
             return false;
 
         }

@@ -3443,7 +3443,7 @@ window.Riode = {};
                     //dark theme
                     Riode.popup({
                         items: {
-                            src: "Content/NewAssests/ajax/quickview.html"
+                            src: "/Content/NewAssests/ajax/quickview.html"
                         },
                         callbacks: {
                             ajaxContentAdded: function () {
@@ -3457,7 +3457,7 @@ window.Riode = {};
                     //light theme
                     Riode.popup({
                         items: {
-                            src: "Content/NewAssests/ajax/quickview.html"
+                            src: "/Content/NewAssests/ajax/quickview.html"
                         },
                         callbacks: {
                             ajaxContentAdded: function () {

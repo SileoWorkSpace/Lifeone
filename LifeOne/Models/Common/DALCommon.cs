@@ -340,6 +340,20 @@ namespace LifeOne.Models.Common
             }
             return _objlist;
         }
+        public static List<SelectListItem> BindProductDropdown(int _procId, long _dataValue)
+        {
+            List<SelectListItem> _objlist = new List<SelectListItem>();
+            try
+            {
+                string _qury = "BindAllProduct @ProcId=" + _procId + ",@Value='" + _dataValue + "'";
+                _objlist = DBHelperDapper.DAGetDetailsInList<SelectListItem>(_qury);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return _objlist;
+        }
 
         public static List<SelectListItem> PackageBindDropdown(int _procId, long _dataValue)
         {

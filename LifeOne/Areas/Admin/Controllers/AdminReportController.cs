@@ -33,6 +33,7 @@ using Support = LifeOne.Models.AdminManagement.AEntity.Support;
 using SupportRequest = LifeOne.Models.AdminManagement.AEntity.SupportRequest;
 using SupportResponse = LifeOne.Models.AdminManagement.AEntity.SupportResponse;
 using DocumentFormat.OpenXml.EMMA;
+using DocumentFormat.OpenXml.Drawing.Diagrams;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -1585,7 +1586,7 @@ namespace LifeOne.Areas.Admin.Controllers
             }
 
             ViewBag.LoginId = obj.MemberLoginId;
-            ViewBag.PayoutNo = obj.PayoutNo;            
+            ViewBag.PayoutNo = obj.PayoutNo;
             ViewBag.Iskyc = obj.IsKyc;
             ViewBag.tdate = obj.tdate;
             ViewBag.fdate = obj.fdate;
@@ -1602,7 +1603,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 return Redirect("/Home/adminlogin");
             }
             ViewBag.LoginId = model.MemberLoginId;
-            ViewBag.PayoutNo = model.PayoutNo;          
+            ViewBag.PayoutNo = model.PayoutNo;
             ViewBag.Iskyc = model.IsKyc;
             ViewBag.tdate = model.tdate;
             ViewBag.fdate = model.fdate;
@@ -1631,7 +1632,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 {
                     foreach (var customer in model.Objlist)
                     {
-                        dt.Rows.Add(customer.LoginId, customer.Name,customer.KycStatus, customer.MobileNo, customer.PayountNo, customer.ClosingDate, customer.BankName, customer.IFSCCode, customer.MemberBranch, customer.MemberAccNo, customer.NetIncome);
+                        dt.Rows.Add(customer.LoginId, customer.Name, customer.KycStatus, customer.MobileNo, customer.PayountNo, customer.ClosingDate, customer.BankName, customer.IFSCCode, customer.MemberBranch, customer.MemberAccNo, customer.NetIncome);
 
                     }
                     using (XLWorkbook wb = new XLWorkbook())
@@ -2492,7 +2493,7 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(_model);
         }
 
-        [HttpGet]
+        [HttpPost]
         public JsonResult ApprovePanOrVoterId(string Fk_MemId, string Type, string Status, string Remark)
         {
             VerifyPanOrVoterid _result = new VerifyPanOrVoterid();
@@ -2664,7 +2665,7 @@ namespace LifeOne.Areas.Admin.Controllers
 
             return Json(model, JsonRequestBehavior.AllowGet);
         }
-        public JsonResult StatementDetails(string FK_MemId,string PayoutNo)
+        public JsonResult StatementDetails(string FK_MemId, string PayoutNo)
         {
 
             StatementDetails modelRequest = new StatementDetails();
@@ -4169,8 +4170,20 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 return Redirect("/Home/adminlogin");
             }
+            if (reports.Page == 0 || reports.Page == null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
             DataSet dataSet = reports.GetShoppingOrderDetails();
             reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
+            int totalRecords = 0;
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(reports.dtGetShoppingOrderDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, reports.Page, SessionManager.Size);
+                reports.Pager = pager;
+            }
             return View(reports);
 
         }
@@ -5829,5 +5842,36 @@ namespace LifeOne.Areas.Admin.Controllers
 
         }
 
+        public ActionResult GeustShoppingOrderDetail(Reports reports)
+        {
+            if (!PermissionManager.IsActionPermit("Shopping Order Details", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
+            if (reports.Page == 0 || reports.Page == null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
+            DataSet dataSet = reports.GetGeustShoppingOrderDetails();
+            reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
+            int totalRecords = 0;
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(reports.dtGetShoppingOrderDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, reports.Page, SessionManager.Size);
+                reports.Pager = pager;
+            }
+            return View(reports);
+
+        }
+        public ActionResult ShoppingOrderInvoice(string id)
+        {
+            ShoppingOrderInvoiceModel orderInvoice = new ShoppingOrderInvoiceModel();
+            OrderDAL orderDAL = new OrderDAL();
+            DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
+            orderInvoice.dtDetails = dsOrder.Tables[0];            
+            return View(orderInvoice);
+        }
     }
 }
