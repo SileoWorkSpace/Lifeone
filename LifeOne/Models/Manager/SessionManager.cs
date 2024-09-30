@@ -142,8 +142,7 @@ namespace LifeOne.Models.Manager
                 HttpContext.Current.Session["ProfilePic"] = value;
             }
         }
-  
-      
+        
         public static string RecognitionPic
         {
             get
@@ -255,7 +254,26 @@ namespace LifeOne.Models.Manager
                 HttpContext.Current.Session["Quantity"] = value;
             }
         }
-     
+
+        //public static long AssociateFk_MemId
+        //{
+        //    get
+        //    {
+        //        if (HttpContext.Current.Session["AssociateFk_MemId"] == null)
+        //        {
+        //            return 0;
+        //        }
+        //        else
+        //        {
+        //            return long.Parse(HttpContext.Current.Session["AssociateFk_MemId"].ToString());
+        //        }
+        //    }
+        //    set
+        //    {
+        //        HttpContext.Current.Session["AssociateFk_MemId"] = value;
+        //    }
+        //}
+
         public static long AssociateFk_MemId
         {
             get
@@ -264,9 +282,14 @@ namespace LifeOne.Models.Manager
                 {
                     return 0;
                 }
+                long result;
+                if (long.TryParse(HttpContext.Current.Session["AssociateFk_MemId"].ToString(), out result))
+                {
+                    return result;
+                }
                 else
                 {
-                    return long.Parse(HttpContext.Current.Session["AssociateFk_MemId"].ToString());
+                    return 0;
                 }
             }
             set
