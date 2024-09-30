@@ -2760,7 +2760,6 @@ namespace LifeOne.Areas.Admin.Controllers
                                              new DataColumn("Direct Seller"),
                                              new DataColumn("Payout No"),
                                              new DataColumn("Direct Income"),
-
                                              new DataColumn("Gross Amount"),
                                              new DataColumn("Processing Fee"),
                                              new DataColumn("TDS Amount"),

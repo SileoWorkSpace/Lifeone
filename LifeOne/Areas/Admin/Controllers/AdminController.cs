@@ -2405,8 +2405,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 throw ex;
             }
         }
-
-
-
+        
     }
 }
