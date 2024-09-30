@@ -268,7 +268,7 @@
                                  style="background-color: rgb(233, 233, 233);" />
                         </figure>
                         <div class="banner-content">
-                            <h3 class="banner-title font-weight-bold">Achievement </h3>
+                            <h3 class="banner-title font-weight-bold"><a href="/Home/Achievement">Achievement</a> </h3>
                             <h4 class="banner-subtitle text-uppercase  mb-0">
                             </h4>
                             <hr class="bg-white">
@@ -753,7 +753,7 @@
         </div>
     </section>-->
         @{
-            if (Model.websiteList != null)
+            if (Model!=null && Model.websiteList != null && Model.websiteList.Count>0)
             {
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg "style="border-radius:20px;">

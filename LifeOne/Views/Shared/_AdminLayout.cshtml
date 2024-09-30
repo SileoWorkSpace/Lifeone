@@ -258,16 +258,20 @@
                                         {
                                             <li><a href="/Admin-UploadVideo">Add Video</a></li>
                                         }
+                                        @if (PermissionManager.IsViewPermit("Add Achievement"))
+                                        {
+                                            <li><a href="/Upload_Achievement">Add Achievement</a></li>
+                                        }
 
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
-                    {
-                        <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
-                    }
+        {
+            <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
+        }
 
-                    @if (PermissionManager.IsViewPermit("Bonanza Detail"))
-                    {
-                        <li><a href="/Admin-BonanzaDetail">Bonanza Details Master</a></li>
-                    }*@
+        @if (PermissionManager.IsViewPermit("Bonanza Detail"))
+        {
+            <li><a href="/Admin-BonanzaDetail">Bonanza Details Master</a></li>
+        }*@
 
 
 
@@ -278,9 +282,9 @@
 
 
                                         @*@if (PermissionManager.IsViewPermit("Offer Date Master"))
-                    {
-                        <li><a href="/GetOfferDateMaster">Offer Date Master</a></li>
-                    }*@
+        {
+            <li><a href="/GetOfferDateMaster">Offer Date Master</a></li>
+        }*@
                                         @if (PermissionManager.IsViewPermit("Role Master"))
                                         {
                                             <li><a href="/Role-Master-List">Role Master</a></li>
@@ -308,8 +312,8 @@
                                             </ul>
                                         </li>
                                         @* <li>
-                                                <a href="javascript: void(0);" aria-expanded="false">Users<span class="menu-arrow"></span> </a>
-                                                <ul class="nav-second-level" aria-expanded="false">
+                                    <a href="javascript: void(0);" aria-expanded="false">Users<span class="menu-arrow"></span> </a>
+                                    <ul class="nav-second-level" aria-expanded="false">
 
 
 
@@ -320,24 +324,24 @@
 
 
 
-                                                   @if (PermissionManager.IsViewPermit("Employee Registration"))
-                    {
-                        <li><a href="/Employee-Registration">Add Employees</a></li>
-                    }*@
+                                       @if (PermissionManager.IsViewPermit("Employee Registration"))
+        {
+            <li><a href="/Employee-Registration">Add Employees</a></li>
+        }*@
                                         @*@if (PermissionManager.IsViewPermit("Role Master"))
-                    {
-                        <li><a href="/Role-Master-List">Role Master</a></li>
-                    }*@
+        {
+            <li><a href="/Role-Master-List">Role Master</a></li>
+        }*@
                                         @*@if (PermissionManager.IsViewPermit("Form Type"))
-                    {
-                        <li><a href="/Form-Type-List">Form Type</a></li>
-                    }
-                    @if (PermissionManager.IsViewPermit("Form Master"))
-                    {
-                        <li><a href="/Form-Master-List">Form Master</a></li>
-                    }
-                                                </ul>
-                                                    </li>*@
+        {
+            <li><a href="/Form-Type-List">Form Type</a></li>
+        }
+        @if (PermissionManager.IsViewPermit("Form Master"))
+        {
+            <li><a href="/Form-Master-List">Form Master</a></li>
+        }
+                                    </ul>
+                                        </li>*@
 
                                     </ul>
                                 </li>
