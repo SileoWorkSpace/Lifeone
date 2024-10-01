@@ -262,7 +262,10 @@
                                         {
                                             <li><a href="/Upload_Achievement">Add Achievement</a></li>
                                         }
-
+                                        @if (PermissionManager.IsViewPermit("Add Upcoming Event"))
+                                        {
+                                            <li><a href="/Upload_UpcomingEvent">Add Upcoming Event</a></li>
+                                        }
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
         {
             <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>

@@ -2444,5 +2444,33 @@ namespace LifeOne.Controllers
                 throw ex;
             }
         }
+        public ActionResult UpcomingEvent()
+        {
+            DALUpcomingEvent dALUpcomingEvent = new DALUpcomingEvent();
+            MUpcomingEvent obj = new MUpcomingEvent();
+            List<MUpcomingEvent> lst = new List<MUpcomingEvent>();
+            try
+            {
+                obj.OpCode = "Get";
+                DataSet ds = dALUpcomingEvent.UploadUpcomingEvent(obj);
+                if (ds != null)
+                {
+                    obj.dtDetails = ds.Tables[0];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        MUpcomingEvent lstobj = new MUpcomingEvent();
+                        lstobj.Id = ds.Tables[0].Rows[i]["Id"].ToString();
+                        lstobj.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        lst.Add(lstobj);
+                    }
+                    obj.lstData = lst;
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }         
+        }
     }
 }
