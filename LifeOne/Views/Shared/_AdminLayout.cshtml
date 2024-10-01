@@ -262,6 +262,14 @@
                                         {
                                             <li><a href="/Upload_Achievement">Add Achievement</a></li>
                                         }
+                                        @if (PermissionManager.IsViewPermit("Lifeone Education"))
+                                        {
+                                            <li><a href="/Life_Education">Lifeone Education</a></li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("Current Offer"))
+                                        {
+                                            <li><a href="/Current_Offer">Current Offer</a></li>
+                                        }
 
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
         {

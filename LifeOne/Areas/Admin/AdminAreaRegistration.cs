@@ -2846,6 +2846,28 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                id = UrlParameter.Optional
            },
            new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "Life_Education",
+           "Life_Education/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Master",
+               action = "LifeEducation",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "Current_Offer",
+           "Current_Offer/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Master",
+               action = "CurrentOffer",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

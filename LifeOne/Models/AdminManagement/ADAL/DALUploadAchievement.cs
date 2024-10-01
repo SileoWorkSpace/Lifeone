@@ -31,5 +31,43 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 throw ex;
             }
         }
+        public DataSet LifeOneEducation(MUploadAchievement obj)
+        {
+            try
+            {
+                SqlParameter[] para = {
+                new SqlParameter("@Id",obj.Id),
+                new SqlParameter("@ImageUrl",obj.ImageUrl),
+                new SqlParameter("@AddedBy",obj.AddedBy),
+                new SqlParameter("@Action",obj.OpCode)
+                };
+                DataSet ds = Connection.ExecuteQuery("ManageLifeOneEducation", para);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public DataSet CurrentOffer(MUploadAchievement obj)
+        {
+            try
+            {
+                SqlParameter[] para = {
+                new SqlParameter("@Id",obj.Id),
+                new SqlParameter("@ImageUrl",obj.ImageUrl),
+                new SqlParameter("@AddedBy",obj.AddedBy),
+                new SqlParameter("@Action",obj.OpCode)
+                };
+                DataSet ds = Connection.ExecuteQuery("ManageCurrentOffer", para);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }
