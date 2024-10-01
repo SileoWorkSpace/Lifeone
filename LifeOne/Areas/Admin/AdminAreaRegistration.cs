@@ -2846,6 +2846,18 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                id = UrlParameter.Optional
            },
            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+          "Upload_UpcomingEvent",
+          "Upload_UpcomingEvent/{action}/{id}",
+          new
+          {
+              area = "Admin",
+              controller = "Master",
+              action = "UploadUpcomingEvent",
+              id = UrlParameter.Optional
+          },
+          new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

@@ -276,7 +276,7 @@ namespace LifeOne.Models.Manager
 
         public static long AssociateFk_MemId
         {
-            get
+            get            
             {
                 if (HttpContext.Current.Session["AssociateFk_MemId"] == null)
                 {
