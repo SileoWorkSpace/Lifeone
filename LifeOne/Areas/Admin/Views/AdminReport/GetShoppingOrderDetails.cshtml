@@ -144,7 +144,7 @@
 
                                                         }
                                                         <a href="/Admin/AdminReport/CancelShoppingOrder?id=@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()" onclick="return confirm('Are you sure to cancel this?') " class="btn btn-danger btn-sm"><i>Cancel</i></a>
-                                                        <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank"  class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        @*<a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank"  class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>*@
                                                     </td>
                                                 </tr>
                                                 j++;
