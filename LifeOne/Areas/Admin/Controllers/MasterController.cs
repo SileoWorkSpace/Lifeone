@@ -2050,6 +2050,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 obj.OpCode = "Delete";
                 obj.Id = abc;
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
                 DataSet ds = dALUploadAchievement.UploadAchievement(obj);
                 if (ds != null)
                 {
@@ -2288,6 +2289,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 obj.OpCode = "Delete";
                 obj.Id = abc;
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
                 DataSet ds = dALUploadAchievement.LifeOneEducation(obj);
                 if (ds != null)
                 {
@@ -2411,6 +2413,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 obj.OpCode = "Delete";
                 obj.Id = abc;
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
                 DataSet ds = dALUploadAchievement.CurrentOffer(obj);
                 if (ds != null)
                 {
