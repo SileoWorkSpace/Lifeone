@@ -2132,9 +2132,7 @@ namespace LifeOne.Areas.Admin.Controllers
                         obj.ImageUrl = "/Images/Users/UpcomingImage/" + pic;
                         using (MemoryStream ms = new MemoryStream())
                         {
-                            ImageUrl_Doc.InputStream.CopyTo(ms)
-
-        ;
+                            ImageUrl_Doc.InputStream.CopyTo(ms);
                             byte[] array = ms.GetBuffer();
                         }
 
@@ -2157,8 +2155,6 @@ namespace LifeOne.Areas.Admin.Controllers
                         return View(obj);
                     }
                 }
-
-
                 return View(obj);
             }
             catch (Exception ex)
@@ -2187,13 +2183,11 @@ namespace LifeOne.Areas.Admin.Controllers
                     TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
                     return RedirectToAction("UploadUpcomingEvent");
                 }
-
             }
             catch (Exception ex)
             {
                 throw ex;
-            }
-           // return RedirectToAction("UploadAchievement");
+            }           
         }
     }
 }
