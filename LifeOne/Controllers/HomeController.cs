@@ -2003,7 +2003,7 @@ namespace LifeOne.Controllers
             products.TokenNo = SessionManager.TokenNo;
             DataSet dataSetP = products.ManageShoppingCart();
             reports.TotalAmount = decimal.Parse(dataSetP.Tables[0].Compute("sum(SubTotal)", "").ToString());
-
+            
             reports.OpCode = 1;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             Session["Pk_AddressId"] = reports.Pk_AddressId;
@@ -2016,7 +2016,9 @@ namespace LifeOne.Controllers
             RazorpayClient client = null;
             client = new RazorpayClient(LifeOne.Models.CommonRazorPay.Key, LifeOne.Models.CommonRazorPay.SecretKey);
             Dictionary<string, object> options = new Dictionary<string, object>();
-            options.Add("amount", (reports.TotalAmount) * 100);
+            decimal gatewayamt = ((reports.TotalAmount * (decimal)2.5) / 100);
+            gatewayamt = reports.TotalAmount + gatewayamt;
+            options.Add("amount", (gatewayamt) * 100);
             options.Add("receipt", "Shopping Order");
             options.Add("currency", "INR");
             options.Add("payment_capture", 1);
