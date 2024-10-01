@@ -2003,7 +2003,7 @@ namespace LifeOne.Controllers
             products.TokenNo = SessionManager.TokenNo;
             DataSet dataSetP = products.ManageShoppingCart();
             reports.TotalAmount = decimal.Parse(dataSetP.Tables[0].Compute("sum(SubTotal)", "").ToString());
-
+            
             reports.OpCode = 1;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             Session["Pk_AddressId"] = reports.Pk_AddressId;
@@ -2016,7 +2016,9 @@ namespace LifeOne.Controllers
             RazorpayClient client = null;
             client = new RazorpayClient(LifeOne.Models.CommonRazorPay.Key, LifeOne.Models.CommonRazorPay.SecretKey);
             Dictionary<string, object> options = new Dictionary<string, object>();
-            options.Add("amount", (reports.TotalAmount) * 100);
+            decimal gatewayamt = ((reports.TotalAmount * (decimal)2.5) / 100);
+            gatewayamt = reports.TotalAmount + gatewayamt;
+            options.Add("amount", (gatewayamt) * 100);
             options.Add("receipt", "Shopping Order");
             options.Add("currency", "INR");
             options.Add("payment_capture", 1);
@@ -2413,6 +2415,34 @@ namespace LifeOne.Controllers
         public ActionResult GalleryPhoto()
         {
             return View();
+        }
+        public ActionResult Achievement()
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            List<MUploadAchievement> lst = new List<MUploadAchievement>();
+            try
+            {
+                obj.OpCode = "Get";
+                DataSet ds = dALUploadAchievement.UploadAchievement(obj);
+                if (ds != null)
+                {
+                    obj.dtDetails = ds.Tables[0];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        MUploadAchievement lstobj = new MUploadAchievement();
+                        lstobj.Id = ds.Tables[0].Rows[i]["Id"].ToString();
+                        lstobj.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        lst.Add(lstobj);
+                    }
+                    obj.lstData = lst;
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

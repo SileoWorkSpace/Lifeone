@@ -2835,7 +2835,19 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                id = UrlParameter.Optional
            },
            new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "Upload_Achievement",
+           "Upload_Achievement/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Master",
+               action = "UploadAchievement",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
         }
+
 
 
     }
