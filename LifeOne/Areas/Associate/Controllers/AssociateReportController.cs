@@ -1013,6 +1013,11 @@ namespace LifeOne.Areas.Associate.Controllers
         }
         public ActionResult AssociateOrderDetails(Reports reports)
         {
+            if(reports.Page==0 || reports.Page==null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
             DataSet dataSet = reports.GetShoppingOrderDetails();
             reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
@@ -1171,8 +1176,7 @@ namespace LifeOne.Areas.Associate.Controllers
             obj.FK_MemID = SessionManager.AssociateFk_MemId.ToString();
             try
             {
-                
-                
+                                
                 List<ModelMatchingBonus> listmaching = new List<ModelMatchingBonus>();
                 DataSet ds = obj.GetPerformanceBonus();
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -1269,9 +1273,14 @@ namespace LifeOne.Areas.Associate.Controllers
 
             // return View();
         }
-
-
-
+        public ActionResult ShoppingOrderTaxInvoice(string id)
+        {
+            ShoppingOrderInvoiceModel orderInvoice = new ShoppingOrderInvoiceModel();
+            OrderDAL orderDAL = new OrderDAL();
+            DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
+            orderInvoice.dtDetails = dsOrder.Tables[0];
+            return View(orderInvoice);
+        }
     }
 }
 

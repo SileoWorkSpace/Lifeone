@@ -155,7 +155,7 @@
                                     @Html.TextBoxFor(m => m.MRP, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-3" style="display:none;">
                                     <label>Sale Price<span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.SalesPrice, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
@@ -194,6 +194,7 @@
 
                                 </div>
                                 <div class="col-md-3 form-group">
+                                   
                                     <label>Offered Qty<span style="color:red;">*</span></label>
                                     @Html.TextBoxFor(m => m.OfferedQty, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
 
@@ -397,7 +398,7 @@
         var BoxQty = $('#BoxQty').val();
         var BoxPV = $('#BoxPV').val();
         var HSNCode = $('#HSNCode').val();
-        var OfferQuantity = $('#OfferQuantity').val();
+        var OfferQuantity = $('#OfferedQty').val();
         var Packing = $('#Packing').val();
         var file = $('#file').val();
         var ProductID = $('#Pk_ProductId').val()
@@ -431,12 +432,12 @@
         else if (MRP == null || MRP == 0) {
             alert("Please Add MRP");
             return false;
-
-        } else if (SalesPrice == null || SalesPrice == 0) {
-            alert("Please Add Sales Price");
-            return false;
-
         }
+        //} else if (SalesPrice == null || SalesPrice == 0) {
+        //    alert("Please Add Sales Price");
+        //    return false;
+
+        //}
         //else if (SalesPrice> MRP) {
         //alert("Sales Price Should be less than MRP");
         //return false;
@@ -466,7 +467,7 @@
             return false;
 
         }
-        else if ((CourierCharges == null || CourierCharges == 0)) {
+        else if ((CourierCharges == null)) {
             alert("Please Add Courier Charges");
             return false;
 
