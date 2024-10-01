@@ -5,8 +5,8 @@ using System.Linq;
 using System.Web;
 
 namespace LifeOne.Models.AdminManagement.AEntity
-{
-    public class MUploadAchievement
+{  
+    public class MUpcomingEvent
     {
         public string Id { get; set; }
         public HttpPostedFileBase ImageUrl_Doc { get; set; }
@@ -14,6 +14,6 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string AddedBy { get; set; }
         public string OpCode { get; set; }
         public DataTable dtDetails { get; set; }
-        public List<MUploadAchievement> lstData { get; set; }
-    }   
+        public List<MUpcomingEvent> lstData { get; set; }
+    }
 }

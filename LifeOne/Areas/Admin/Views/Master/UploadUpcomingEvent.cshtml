@@ -1,6 +1,6 @@
-﻿@model LifeOne.Models.AdminManagement.AEntity.MUploadAchievement
+﻿@model LifeOne.Models.AdminManagement.AEntity.MUpcomingEvent
 @{ 
-    ViewBag.Title = "UploadAchievement";
+    ViewBag.Title = "UploadUpcomingEvent";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
@@ -30,7 +30,7 @@
 <div class="container-fluid">
     <div class="row page-titles">
         <div class="ptitle">
-            <h4 class="mb-1 mt-0">Upload Achievement</h4>
+            <h4 class="mb-1 mt-0">Upcoming Events</h4>
            
         </div>
         <div class="pbutton">
@@ -56,12 +56,12 @@
                                 <thead>
                                     <tr>
                                         <th>#Sn.</th>
-                                        <th>Upload Achievement</th>
+                                        <th>Upcoming Event</th>
                                         <th class="text-right">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (Model.lstData != null && Model.lstData.Count != 0)
+                                    @if (Model.lstData != null)
                                     {
                                         int Sno = 0;
                                         foreach (var item in Model.lstData)
@@ -71,13 +71,9 @@
                                                 <td><img src="@item.ImageUrl" height="100px" width="100px" /></td>
 
                                                 <td>
-                                                    <a href="/Admin/Master/DeleteUploadAchievement?abc=@item.Id" onclick="confirm('Are you sure you want to delete this record?')"><i class="fa fa-trash" style="color: red;"></i></a>
-                                                    @*&nbsp;
-                                                    &nbsp;
-                                                    <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-rel="tooltips" ToolTip="Edit" data-target="#myModal4"><i class="fa fa-pencil"></i></button>*@
+                                                    <a href="/Admin/Master/DeleteUpcomingEvent?Id=@item.Id" onclick="return confirm ('Are you sure want to delete?');"  class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></a>                                                 
                                                 </td>
                                             </tr>
-
 
                                         }
 
@@ -98,13 +94,13 @@
 </div>
 
 
-@using (Html.BeginForm("UploadAchievement", "Master", new { area = "Admin" }, FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+@using (Html.BeginForm("UploadUpcomingEvent", "Master", new { area = "Admin" }, FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
     <div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Upload Achievement</h4>
+                    <h4 class="modal-title">Upcoming Events</h4>
                 </div>
                 <div class="modal-body">
                     <form class="form-horizontal">
@@ -125,7 +121,7 @@
                 <div class="modal-footer">
                     <input type="submit" id="Save" name="Save" class="btn btn-primary" value="Save" onclick="return validate();" />
 
-                    <a href="/Upload_Achievement" class="btn btn-danger"> Cancel</a>
+                    <a href="/Upload_UpcomingEvent" class="btn btn-danger"> Cancel</a>
                 </div>
             </div>
         </div>
@@ -169,11 +165,7 @@
         ShowImagePreview($("#file")[0]);
         return true;
     }
-
-  
-    
-
-    
+        
     function ShowImagePreview(input) {
         debugger;
         if (input.files && input.files[0]) {
