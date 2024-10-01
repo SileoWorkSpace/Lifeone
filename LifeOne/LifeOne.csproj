@@ -2200,10 +2200,7 @@
     <Content Include="Content\NewAssests\images\icon-boxes\shopbag.svg" />
     <Content Include="Content\NewAssests\images\icon-boxes\shopbag_solid.svg" />
     <Content Include="Content\NewAssests\images\Lifeone-logo-Favicon.png" />
-    <Content Include="Content\NewAssests\images\lifeonelogo.jpg" />
     <Content Include="Content\NewAssests\images\lifeonelogo.png" />
-    <Content Include="Content\NewAssests\images\logo-footer.png" />
-    <Content Include="Content\NewAssests\images\logo.png" />
     <Content Include="Content\NewAssests\images\menu\1.jpg" />
     <Content Include="Content\NewAssests\images\menu\2.jpg" />
     <Content Include="Content\NewAssests\images\menu\3.jpg" />
@@ -3666,16 +3663,12 @@
     <Content Include="home-assets\images\di-income.png" />
     <Content Include="home-assets\images\directincome.png" />
     <Content Include="home-assets\images\f-h-package.png" />
-    <Content Include="home-assets\images\favicon.png" />
     <Content Include="home-assets\images\hdaybeach.jpg" />
     <Content Include="home-assets\images\i20-car.png" />
     <Content Include="home-assets\images\jaguar.png" />
     <Content Include="home-assets\images\laptop.png" />
     <Content Include="home-assets\images\Lifeone-logo.png" />
     <Content Include="home-assets\images\loginbg.jpg" />
-    <Content Include="home-assets\images\logo-white.png" />
-    <Content Include="home-assets\images\logo-wide.png" />
-    <Content Include="home-assets\images\logo.png" />
     <Content Include="home-assets\images\mercedese.png" />
     <Content Include="home-assets\images\mission.jpg" />
     <Content Include="home-assets\images\prettyPhoto\dark_rounded\btnNext.png" />
@@ -3716,8 +3709,6 @@
     <Content Include="home-assets\images\projects\4.jpg" />
     <Content Include="home-assets\images\projects\5.jpg" />
     <Content Include="home-assets\images\projects\6.jpg" />
-    <Content Include="home-assets\images\sg-icon.png" />
-    <Content Include="home-assets\images\SgcarePopup.jpeg" />
     <Content Include="home-assets\images\shadow-overlay.png" />
     <Content Include="home-assets\images\shadow-overlay2.png" />
     <Content Include="home-assets\images\shop\education.jpg" />
@@ -4659,10 +4650,6 @@
     <Content Include="Content\summernote\summernote\font\summernote.ttf" />
     <Content Include="Content\summernote\summernote\font\summernote.woff" />
     <Content Include="Content\summernote\summernote\font\summernote.woff2" />
-    <Content Include="Content\NewAssests\images\certificate-pdf\1-13419502504 FORM NO INC-34 LIFEONE WELLNESS FINAL.pdf" />
-    <Content Include="Content\NewAssests\images\certificate-pdf\1-13419502511 FORM NO INC-33 LIFEONE WELLNESS FINAL.pdf" />
-    <Content Include="Content\NewAssests\images\certificate-pdf\INC-24_Certificate of Incorporation Pursuant To Change of Name_AA7722374.pdf" />
-    <Content Include="Content\NewAssests\images\certificate-pdf\INC-24_Certificate of Incorporation Pursuant To Change of Name_AA7722374_1.pdf" />
     <Content Include="Content\NewAssests\images\certificate-pdf\%28e-Memorandum-of-Association.pdf" />
     <Content Include="Content\NewAssests\images\certificate-pdf\%28e-Articles-of-Association%29.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
