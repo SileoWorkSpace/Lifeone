@@ -2472,5 +2472,61 @@ namespace LifeOne.Controllers
                 throw ex;
             }         
         }
+        public ActionResult LifeoneEducation()
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            List<MUploadAchievement> lst = new List<MUploadAchievement>();
+            try
+            {
+                obj.OpCode = "Get";
+                DataSet ds = dALUploadAchievement.LifeOneEducation(obj);
+                if (ds != null)
+                {
+                    obj.dtDetails = ds.Tables[0];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        MUploadAchievement lstobj = new MUploadAchievement();
+                        lstobj.Id = ds.Tables[0].Rows[i]["Id"].ToString();
+                        lstobj.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        lst.Add(lstobj);
+                    }
+                    obj.lstData = lst;
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public ActionResult CurrentOffer()
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            List<MUploadAchievement> lst = new List<MUploadAchievement>();
+            try
+            {
+                obj.OpCode = "Get";
+                DataSet ds = dALUploadAchievement.CurrentOffer(obj);
+                if (ds != null)
+                {
+                    obj.dtDetails = ds.Tables[0];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        MUploadAchievement lstobj = new MUploadAchievement();
+                        lstobj.Id = ds.Tables[0].Rows[i]["Id"].ToString();
+                        lstobj.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        lst.Add(lstobj);
+                    }
+                    obj.lstData = lst;
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

@@ -266,6 +266,15 @@
                                         {
                                             <li><a href="/Upload_UpcomingEvent">Add Upcoming Event</a></li>
                                         }
+                                        @if (PermissionManager.IsViewPermit("Lifeone Education"))
+                                        {
+                                            <li><a href="/Life_Education">Lifeone Education</a></li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("Current Offer"))
+                                        {
+                                            <li><a href="/Current_Offer">Current Offer</a></li>
+                                        }
+
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
         {
             <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
