@@ -3,24 +3,16 @@
   "WorkspaceRootPath": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\prakhar file\\my project\\selio_proect\\lifeone\\lifeone\\views\\home\\businessplan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\businessplan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\prakhar file\\my project\\selio_proect\\lifeone\\lifeone\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\prakhar file\\my project\\selio_proect\\lifeone\\lifeone\\views\\home\\certificate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\certificate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\prakhar file\\my project\\selio_proect\\lifeone\\lifeone\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\prakhar file\\my project\\selio_proect\\lifeone\\lifeone\\views\\home\\galleryphoto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\galleryphoto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\home\\businessplan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\businessplan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\home\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -77,6 +69,14 @@
     {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\home\\imagegallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\imagegallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\home\\certificate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\certificate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\lifeone\\views\\home\\galleryphoto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\galleryphoto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     }
   ],
   "DocumentGroupContainers": [
@@ -86,24 +86,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "BusinessPlan.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\BusinessPlan.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\BusinessPlan.cshtml",
               "ToolTip": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\BusinessPlan.cshtml",
               "RelativeToolTip": "LifeOne\\Views\\Home\\BusinessPlan.cshtml",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAAAAcAAAAgAAAA",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAAAYAAAAQAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T10:32:20.798Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-27T10:32:20.798Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "About.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\About.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\About.cshtml",
@@ -111,12 +110,11 @@
               "RelativeToolTip": "LifeOne\\Views\\Home\\About.cshtml",
               "ViewState": "AQIAAIMAAAAAAAAAAAAAANkAAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T09:57:32.063Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-27T09:57:32.063Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 17,
               "Title": "Certificate.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\Certificate.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Certificate.cshtml",
@@ -124,12 +122,11 @@
               "RelativeToolTip": "LifeOne\\Views\\Home\\Certificate.cshtml",
               "ViewState": "AQIAAC0AAAAAAAAAAAAAADsAAAA+AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T09:57:06.505Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-27T09:57:06.505Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "HomeController.cs",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "LifeOne\\Controllers\\HomeController.cs",
@@ -141,7 +138,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 7,
               "Title": "AdminLogin.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\AdminLogin.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\AdminLogin.cshtml",
@@ -153,20 +150,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_Layout.cshtml",
               "ToolTip": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Shared\\_Layout.cshtml",
               "RelativeToolTip": "LifeOne\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAAHgBAAAAAAAAAAAAAIYBAABNAAAA",
+              "ViewState": "AQIAADoDAAAAAAAAAAAAAIYBAAA3AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2024-09-25T11:18:37.275Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 11,
               "Title": "_FooterPartialLayout.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
@@ -178,7 +175,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 14,
               "Title": "CustomerRegistration.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
@@ -190,7 +187,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "Login.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\Login.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Login.cshtml",
@@ -202,7 +199,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 15,
               "Title": "Video.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\Video.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Video.cshtml",
@@ -214,7 +211,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 3,
               "Title": "ProductDetails.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\ProductDetails.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\ProductDetails.cshtml",
@@ -226,7 +223,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 18,
               "Title": "GalleryPhoto.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
@@ -234,12 +231,11 @@
               "RelativeToolTip": "LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T09:52:52.181Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-09-25T09:52:52.181Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 5,
               "Title": "quickview.html",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
@@ -251,7 +247,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 6,
               "Title": "Web.config",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Web.config",
               "RelativeDocumentMoniker": "LifeOne\\Web.config",
@@ -264,7 +260,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 16,
               "Title": "ImageGallery.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\ImageGallery.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\ImageGallery.cshtml",
@@ -276,7 +272,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 9,
               "Title": "demo19.min.css",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
@@ -288,7 +284,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 12,
               "Title": "main.js",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.js",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\js\\main.js",
@@ -300,7 +296,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 10,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Index.cshtml",
@@ -312,7 +308,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 13,
               "Title": "main.min.js",
               "DocumentMoniker": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.min.js",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\js\\main.min.js",
