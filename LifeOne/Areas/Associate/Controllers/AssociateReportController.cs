@@ -1019,6 +1019,7 @@ namespace LifeOne.Areas.Associate.Controllers
             }
             reports.Size = SessionManager.Size;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            reports.Page = 1;
             DataSet dataSet = reports.GetShoppingOrderDetails();
             reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
             return View(reports);
