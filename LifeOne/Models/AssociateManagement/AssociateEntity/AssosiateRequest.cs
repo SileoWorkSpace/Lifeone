@@ -20,8 +20,10 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
             public decimal Amount { get; set; }               
             public string PaymentMode { get; set; }           
             public string ChequeDD_No { get; set; }           
-            public int? BankId { get; set; }                   
-            public string TransactionNo { get; set; }          
+            public int? BankId { get; set; }   
+            public HttpPostedFileBase File { get; set; }
+            public string Image_url { get; set; }
+        public string TransactionNo { get; set; }          
             public string ChequeDDNo { get; set; }          
             public string Date { get; set; }     
             public string Convert_date { get; set; }     

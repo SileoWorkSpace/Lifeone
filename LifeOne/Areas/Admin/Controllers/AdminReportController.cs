@@ -4163,6 +4163,7 @@ namespace LifeOne.Areas.Admin.Controllers
 
 
         }
+      
         public ActionResult GetShoppingOrderDetails(Reports reports)
         {
             if (!PermissionManager.IsActionPermit("Shopping Order Details", ViewOptions.FormView))
@@ -4186,14 +4187,32 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(reports);
 
         }
-
-        public ActionResult CancelShoppingOrder(string id)
+        [HttpPost]
+        public JsonResult CancelShoppingOrder(string id,string remark)
         {
-            Reports reports = new Reports();
-            reports.OrderNo = id;
-            reports.FK_MemId = int.Parse(SessionManager.Fk_MemId.ToString());
-            DataSet dataSet = reports.CancelShoppingOrder();
-            return RedirectToAction("ShoppingOrderDetails");
+            string message = "";
+            try
+            {
+                Reports reports = new Reports();
+                reports.OrderNo = id;
+                reports.RemarkCancel = remark;
+                reports.FK_MemId = int.Parse(SessionManager.Fk_MemId.ToString());
+                DataSet dataSet = reports.CancelShoppingOrder();
+                if (dataSet != null)
+                {
+                    if (dataSet.Tables[0].Rows[0]["Code"].ToString() == "1") {
+                        message = dataSet.Tables[0].Rows[0]["Msg"].ToString();
+                    }
+                }
+                else
+                {
+                    message = dataSet.Tables[0].Rows[0]["Msg"].ToString();
+                }
+            }
+            catch (Exception ex) {
+                throw ex;
+            }
+            return Json(new { message = message });
         }
 
 
