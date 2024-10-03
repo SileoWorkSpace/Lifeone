@@ -4,6 +4,14 @@
     Layout = null;
 }
 
+@{
+    decimal TotalGross=0;
+    decimal TotalCGST = 0;
+    decimal TotalSGST = 0;
+    decimal TotalIGST = 0;
+    decimal AmountAfterTax = 0;
+    decimal TotalBox = 0;
+ }
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -227,12 +235,12 @@
 
                                 for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
                                 {
-                                    //TotalGross = TotalGross + decimal.Parse(Model.dtDetails.Rows[j]["Gross"].ToString());
-                                    //TotalCGST = TotalCGST + decimal.Parse(Model.dtDetails.Rows[j]["CGSTAmt"].ToString());
-                                    //TotalSGST = TotalSGST + decimal.Parse(Model.dtDetails.Rows[j]["SGSTAmt"].ToString());
-                                    //TotalIGST = TotalIGST + decimal.Parse(Model.dtDetails.Rows[j]["IGSTAmt"].ToString());
-                                    //AmountAfterTax = TotalGross + TotalCGST + TotalSGST;
-                                    //TotalBox = TotalBox + int.Parse(Model.dtDetails.Rows[j]["Box"].ToString());
+                                    TotalGross = TotalGross + decimal.Parse(Model.dtDetails.Rows[j]["Gross"].ToString());
+                                    TotalCGST = TotalCGST + decimal.Parse(Model.dtDetails.Rows[j]["CGSTAmt"].ToString());
+                                    TotalSGST = TotalSGST + decimal.Parse(Model.dtDetails.Rows[j]["SGSTAmt"].ToString());
+                                    TotalIGST = TotalIGST + decimal.Parse(Model.dtDetails.Rows[j]["IGSTAmt"].ToString());
+                                    AmountAfterTax = TotalGross + TotalCGST + TotalSGST;
+                                    TotalBox = TotalBox + int.Parse(Model.dtDetails.Rows[j]["Box"].ToString());
                                     <tr>
                                         <td style="border: 1px solid black;padding-left: 2px;"> @(j + 1) </td>
                                         <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["ProductName"]</td>
@@ -240,8 +248,8 @@
 
                                         <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["Quantity"]</td>
                                         <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["MRP"]</td>
-                                        <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["GSTPerc"]</td>
-                                        <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["GSTAmt"]</td>
+                                        <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["CGSTPerc"]</td>
+                                        <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["CGSTAmt"]</td>
 
                                         <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["SubTotal"]</td>
                                     </tr>
