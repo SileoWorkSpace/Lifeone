@@ -1903,7 +1903,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 _result = _objServices.SaveVideo(obj);
                 if (_result != null)
                 {
-
                     TempData["code"] = _result.Code.ToString();
                     TempData["msg"] = _result.Msg.ToString();
                     return Redirect("UploadVideo");
