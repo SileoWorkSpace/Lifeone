@@ -610,7 +610,10 @@
                                         {
                                             <li> <a href="/ShoppingOrderDetails">Member Shopping</a> </li>
                                         }
-
+                                        @if (PermissionManager.IsViewPermit("Cancel Order Details"))
+                                        {
+                                            <li> <a href="/CancelOrderDetails">Cancel Order Details</a> </li>
+                                        }
 
                                     </ul>
                                 </li>

@@ -5868,5 +5868,28 @@ namespace LifeOne.Areas.Admin.Controllers
             orderInvoice.dtDetails = dsOrder.Tables[0];            
             return View(orderInvoice);
         }
+        public ActionResult CancelOrderDetails(Reports reports)
+        {
+            if (!PermissionManager.IsActionPermit("Cancel Order Details", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
+            if (reports.Page == 0 || reports.Page == null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
+            DataSet dataSet = reports.GetCancelOrderDetails();
+            reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
+            int totalRecords = 0;
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(reports.dtGetShoppingOrderDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, reports.Page, SessionManager.Size);
+                reports.Pager = pager;
+            }
+            return View(reports);
+
+        }
     }
 }

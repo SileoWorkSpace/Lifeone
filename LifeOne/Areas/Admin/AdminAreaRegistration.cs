@@ -2880,6 +2880,18 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
        },
        new[] { "LifeOne.Areas.Admin.Controllers" });
 
+            context.MapRoute(
+            "Cancel-Order-Details",
+            "CancelOrderDetails/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "AdminReport",
+                action = "CancelOrderDetails",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
 
         }
 
