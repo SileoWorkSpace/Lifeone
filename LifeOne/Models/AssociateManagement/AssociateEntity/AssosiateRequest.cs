@@ -38,6 +38,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
             public List<AssosiateRequest> lstAssosiateRequest { get; set; }
         public string orderId { get;  set; }
         public int Flag { get;  set; }
+       
 
         public DataSet UpdateWalletByGateway()
         {

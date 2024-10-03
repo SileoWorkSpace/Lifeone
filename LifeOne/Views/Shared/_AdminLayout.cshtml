@@ -451,6 +451,10 @@
                                         {
                                             <li> <a href="/Admin-Topup">Topup</a> </li>
                                         }
+                                        @if (PermissionManager.IsViewPermit("TopupHistory"))
+                                        {
+                                            <li> <a href="/TopupHistory">TopupHistory</a> </li>
+                                        }
 
                                         @*@if (PermissionManager.IsViewPermit("Recharge/Bill Payment"))
                     {

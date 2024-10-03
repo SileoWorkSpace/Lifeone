@@ -1,4 +1,5 @@
 ﻿
+using LifeOne.Models.AssociateManagement.AssociateEntity;
 using LifeOne.Models.Common;
 using System;
 using System.Collections.Generic;
@@ -77,6 +78,21 @@ namespace LifeOne.Models.AdminManagement.ADAL
             };
             DataSet dsresult = ExecuteQuery("ShoppingOrderInvoice", para);
             return dsresult;
+        }
+        public DataSet TopupHistory(string Fk_MemId)
+        {
+            try
+            {
+                SqlParameter[] para = {
+               new SqlParameter("@Fk_memid",Fk_MemId)
+                };
+                DataSet ds = DBHelper.ExecuteQuery("Topuphistory", para);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

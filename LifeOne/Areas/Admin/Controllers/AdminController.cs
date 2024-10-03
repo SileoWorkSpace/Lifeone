@@ -32,6 +32,8 @@ using iTextSharp.text.pdf;
 using static LifeOne.Models.ShoppingRequest;
 using AesEncryption;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using Razorpay.Api;
+using LifeOne.Models.AssociateManagement.AssociateDAL;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -2404,6 +2406,15 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 throw ex;
             }
+        }
+
+        public ActionResult TopupHistory(string Fk_MemId)
+        {
+            ShoppingOrderInvoiceModel model = new ShoppingOrderInvoiceModel();
+            OrderDAL orderDAL = new OrderDAL();
+            DataSet dsOrder = orderDAL.TopupHistory(Fk_MemId);
+            model.dtDetails = dsOrder.Tables[0];
+            return View(model);
         }
         
     }
