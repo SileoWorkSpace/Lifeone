@@ -247,7 +247,7 @@
                                  style="background-color: rgb(233, 233, 233);" />
                         </figure>
                         <div class="banner-content">
-                            <h3 class="banner-title font-weight-bold">Lifeone Education </h3>
+                            <h3 class="banner-title font-weight-bold"><a href="/Home/LifeoneEducation">Lifeone Education</a> </h3>
                             <h4 class="banner-subtitle text-uppercase  mb-0">
                             </h4>
                             <hr class="bg-white">
@@ -289,7 +289,7 @@
                                  style="background-color: rgb(233, 233, 233);" />
                         </figure>
                         <div class="banner-content">
-                            <h3 class="banner-title font-weight-bold">Current Offer</h3>
+                            <h3 class="banner-title font-weight-bold"> <a href="/Home/CurrentOffer">Current Offer</a></h3>
                             <h4 class="banner-subtitle text-uppercase  mb-0">
                             </h4>
                             <hr class="bg-white">
@@ -522,7 +522,7 @@
                                                 <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
                                             </h3>
                                             <div class="product-price">
-                                                <ins class="new-price">MRP ₹@Model.DtDetails.Rows[i]["MRP"].ToString()</ins><del class="new-price">PV @Model.DtDetails.Rows[i]["PV"].ToString()</del>
+                                                <ins class="new-price">MRP ₹@Model.DtDetails.Rows[i]["MRP"].ToString()</ins><br/><del class="new-price">PV @Model.DtDetails.Rows[i]["PV"].ToString()</del>
                                             </div>
                                             <div class="ratings-container">
                                                 <div class="ratings-full">
@@ -638,7 +638,7 @@
                                                 <a href="/Home/ProductDetails?id=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z", @Model.DtDetails.Rows[i]["Pk_ProductId"].ToString())">@Model.DtDetails.Rows[i]["ProductName"].ToString()</a>
                                             </h3>
                                             <div class="product-price">
-                                                <ins class="new-price">MRP ₹@Model.DtDetails.Rows[i]["MRP"].ToString()</ins><ins class="new-price">PV @Model.DtDetails.Rows[i]["PV"].ToString()</ins>
+                                                <ins class="new-price">MRP ₹@Model.DtDetails.Rows[i]["MRP"].ToString()</ins><br /><ins class="new-price">PV @Model.DtDetails.Rows[i]["PV"].ToString()</ins>
                                             </div>
                                             <div class="ratings-container">
                                                 <div class="ratings-full">
@@ -755,7 +755,7 @@
         @{
             if (Model!=null && Model.websiteList != null && Model.websiteList.Count>0)
             {
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" style="z-index: 20999;">
                         <div class="modal-dialog modal-lg "style="border-radius:20px;">
                             <div class="modal-content" style="position: relative; border-radius: 20px;">
                                 <a class="popupbtn" data-bs-dismiss="modal" aria-label="Close">x</a>
