@@ -22,8 +22,6 @@
                         <table class="table mb-0" id="tblCustomers">
                             <thead>
                                 <tr>
-
-
                                     <th>Sn.</th>
                                     <th>Login Id</th>
                                     <th>Amount</th>
@@ -33,8 +31,6 @@
                                     <th>Requested Date</th>
                                     <th>Status</th>
                                     <th class="text-center">Action</th>
-
-
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,7 +99,7 @@
 
                                                 <span class="badge bg-red">
                                                     <a class="text-white"
-                                                       href="/Declined_EWallet?fk_MemId=@AesEncryption.Crypto.Encryption("LifeWellAP1234@Z",@Model.lstAssosiateRequest[i].RequestId.ToString())"
+                                                       href="/Declined_EWallet?fk_MemId=@Model.lstAssosiateRequest[i].RequestId.ToString()"
                                                        onclick="return confirm('Are you sure you want to approve this request?');">
                                                         Declined
                                                     </a>
