@@ -129,6 +129,16 @@
                                         </div>
                                     </div>
                                 </div>
+                                <div class="row" id="file_id" style="display:none">
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class="control-label">Attachment</label>
+
+                                            @Html.TextBoxFor(m => m.File, new { @class = "form-control", @id = "fileInput", @type = "file" })
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-4"></div>
                                     <div class="col-md-4">
@@ -139,6 +149,7 @@
 
                                         </div>
                                     </div>
+
                                 </div>
 
                             </div>
@@ -170,6 +181,9 @@
     function validate() {
         debugger;
         $(".errortext").removeClass("errortext");
+        
+        var fileInput = $('#fileInput')[0];
+        var file = fileInput.files[0];
         if ($('#Amount').val() == 0 && $('#Amount').val() <= 0) {
             //$("#Amount").addClass('errortext');
             alert('Please Enter Amount');
@@ -201,6 +215,11 @@
                 $('#Date').focus();
                 return false;
             }
+            if (file.length === 0) {
+                alert("Please select a file to upload.");
+                $('#fileInput').focus();
+                return false;
+            }
 
         }
         else if ($('#PaymentMode').val() == "UPI") {
@@ -210,11 +229,26 @@
                 return false;
             }
         }
+        LoginId = $('#LoginId').val();
+        Amount = $('#Amount').val();
+        PaymentMode = $('#PaymentMode').val();
+        ChequeDD_No = $('#ChequeDD_No').val();
+        BankId = $('#BankId').val()
+        var form_Data = new FormData();
+        form_Data.append('LoginId', LoginId);
+        form_Data.append('Amount', Amount);
+        form_Data.append('PaymentMode', PaymentMode);
+        form_Data.append('ChequeDD_No', ChequeDD_No);
+        form_Data.append('BankId', BankId);
+        form_Data.append('File', file);
+       
 
         $.ajax({
             url: '/Associate/AssociatePlanIncome/RequestEwallet',
             type: 'Post',
-            data: { LoginId: $('#LoginId').val(), Amount: $('#Amount').val(), PaymentMode: $('#PaymentMode').val(), ChequeDD_No: $('#ChequeDD_No').val(), BankId: $('#BankId').val() },
+            data: form_Data,
+            contentType: false, 
+            processData: false,
             success: function (response) {
                 if (response.Flag == 1) {
                     //window.location = "/Home/RazorPayPaymentPage";
@@ -240,10 +274,12 @@
             $("#ChequeDDNo_id").hide();
             $("#Bank_id").hide();
             $("#Date_id").hide();
+            $("#file_id").hide();
         }
         else if (PMode == "UPI") {
             $('#changeLabelName').text('UPI Number');
             $("#ChequeDDNo_id").show();
+            $("#file_id").show();
             $("#Bank_id").hide();
             $("#Date_id").hide();
         }
@@ -252,6 +288,7 @@
             $("#Bank_id").show();
             $("#Date_id").show();
             $("#ChequeDDNo_id").show();
+            $("#file_id").show();
         }
 
     }

@@ -30,6 +30,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
     new SqlParameter("@TransactionDate", obj.Convert_date ?? (object)DBNull.Value),
     new SqlParameter("@Fk_BankId", obj.BankId ?? (object)DBNull.Value), 
     new SqlParameter("@OpCode", obj.OpCode),
+    new SqlParameter("@File_Url", obj.Image_url),
     new SqlParameter("@AddedBy", obj.AddedBy)
 };
                 DataSet ds = DBHelper.ExecuteQuery("SaveEwalletRequest", para);
