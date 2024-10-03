@@ -15,7 +15,6 @@
 <body>
     <div class="container" id="shoppingInvoice">
         <div style="
-
           padding-left: 10px;
           padding-right: 10px;
         ">
@@ -23,7 +22,7 @@
                 <tbody>
                     <tr>
                         <td style="width: 40%;">
-                            <img src="@Model.dtDetails.Rows[0]["CompanyLogo"].ToString();" style="width: 120px;height:120px;margin-right: 23px;padding-bottom: 5px;">
+                            <img src="@Model.dtDetails.Rows[0]["CompanyLogo"].ToString()" style="width: 120px;height:120px;margin-right: 23px;padding-bottom: 5px;">
 
                         </td>
                         <td style="padding-bottom: 5px;font-size:25px;font-weight:500;">Tax Invoice</td>
@@ -172,7 +171,6 @@
                         <td style="vertical-align: top;width:50%;border-collapse: collapse; border: 1px solid black;">
                             <table style="width: 100%;" class="table table-striped">
                                 <tbody>
-
                                     <tr>
                                         <td colspan="2"></td>
                                     </tr>
@@ -213,8 +211,8 @@
                         <td style="border: 1px solid black;padding-left: 5px;"> Qty</td>
                         <td style="border: 1px solid black;padding-left: 5px;"> MRP<br>(₹)</td>
                             @*<td style="border: 1px solid black;padding-left: 5px;"> Gross Amt<br>(₹)</td>*@
-                        <td style="border: 1px solid black;padding-left: 5px;"> IGST<br>(%)</td>
-                        <td style="border: 1px solid black;padding-left: 5px;"> CGST<br>(₹)</td>
+                        <td style="border: 1px solid black;padding-left: 5px;"> GST<br>(%)</td>
+                        <td style="border: 1px solid black;padding-left: 5px;"> GST<br>(₹)</td>
                         <td style="border: 1px solid black;padding-left: 5px;"> Net Amt<br>(₹)</td>
                     </tr>
                 </thead>
@@ -242,8 +240,8 @@
 
                                         <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["Quantity"]</td>
                                         <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["MRP"]</td>
-                                        <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["IGST"]</td>
-                                        <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["CGST"]</td>
+                                        <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["GSTPerc"]</td>
+                                        <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["GSTAmt"]</td>
 
                                         <td style="border: 1px solid black;padding-left: 5px;"> @Model.dtDetails.Rows[j]["SubTotal"]</td>
                                     </tr>
@@ -281,17 +279,14 @@
                                                 
                                             </td>
                                         </tr>
-
                                         <tr>
                                             <td style="border: 1px solid black" colspan="2">
-                                                <b>Add : IGST : </b>
+                                                <b> GST : </b>
                                             </td>
                                             <td style="border: 1px solid black" colspan="2">
                                                 @Model.dtDetails.Rows[0]["totalGST"].ToString()
                                             </td>
                                         </tr>
-
-
                                         <tr>
                                             <td style="border: 1px solid black" colspan="2">
                                                 <b>ShippingCharges:</b>

@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using DocumentFormat.OpenXml.EMMA;
+using System.Configuration;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -31,6 +32,7 @@ namespace LifeOne.Areas.Admin.Controllers
         //AdminProductMasterService _objService = new AdminProductMasterService();
         AdminImageUploadService _objServices = new AdminImageUploadService();
         // GET: Admin/Master
+        string baseurl = ConfigurationManager.AppSettings["baseurl"].ToString();
         public ActionResult Index()
         {
             return View();
@@ -752,8 +754,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 string pic = rnd.Next(1000000).ToString() + System.IO.Path.GetFileName(ImageUrl_Doc.FileName);
 
-                path = System.IO.Path.Combine(
-                 Server.MapPath("~/Images/Users/Popup"), pic);
+                path = System.IO.Path.Combine(Server.MapPath("~/Images/Users/Popup"), pic);
 
                 ImageUrl_Doc.SaveAs(path);
 
@@ -1947,6 +1948,493 @@ namespace LifeOne.Areas.Admin.Controllers
                 throw;
             }
             return Redirect("UploadVideo");
+        }
+
+        [HttpGet]
+        public ActionResult UploadAchievement()
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            List<MUploadAchievement> lst = new List<MUploadAchievement>();
+            try
+            {
+                obj.OpCode = "Get";
+                DataSet ds = dALUploadAchievement.UploadAchievement(obj);
+                if (ds != null)
+                {
+                    obj.dtDetails =  ds.Tables[0];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        MUploadAchievement lstobj = new MUploadAchievement();
+                        lstobj.Id = ds.Tables[0].Rows[i]["Id"].ToString();
+                        lstobj.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        lst.Add(lstobj);
+                    }
+                    obj.lstData = lst;
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult UploadAchievement(MUploadAchievement obj, HttpPostedFileBase ImageUrl_Doc,string Save)
+        {
+            Random random = new Random();
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement(); 
+            string path = "";
+            try
+            {
+                if (!string.IsNullOrEmpty(Save))
+                {
+                    if (Save == "Save")
+                    {
+                        
+                        obj.OpCode = "Insert";
+                    }
+                    else
+                    {
+                        obj.OpCode = "Update";
+                    }
+                    if (ImageUrl_Doc != null)
+                    {
+                        string pic = random.Next(1000000).ToString() + System.IO.Path.GetFileName(ImageUrl_Doc.FileName);
+
+                        path = System.IO.Path.Combine(Server.MapPath("/Images/Users/AchievementImage"), pic);
+
+                        ImageUrl_Doc.SaveAs(path);
+
+                        obj.ImageUrl = "/Images/Users/AchievementImage/" + pic;
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            ImageUrl_Doc.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+                        }
+
+                    }
+                }
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
+                DataSet ds = dALUploadAchievement.UploadAchievement(obj);
+                if (ds != null) {
+                    if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                        return RedirectToAction("UploadAchievement");
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                        return View(obj);
+                    }
+                }
+
+
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult DeleteUploadAchievement(string abc)
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            try
+            {
+                obj.OpCode = "Delete";
+                obj.Id = abc;
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
+                DataSet ds = dALUploadAchievement.UploadAchievement(obj);
+                if (ds != null)
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("UploadAchievement");
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("UploadAchievement");
+                }              
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return RedirectToAction("UploadAchievement");
+        }
+
+        [HttpGet]
+        public ActionResult UploadUpcomingEvent()
+        {
+            DALUpcomingEvent dALUpcomingEvent = new DALUpcomingEvent();
+            MUpcomingEvent obj = new MUpcomingEvent();
+            List<MUpcomingEvent> lst = new List<MUpcomingEvent>();
+            try
+            {
+                obj.OpCode = "Get";
+                DataSet ds = dALUpcomingEvent.UploadUpcomingEvent(obj);
+                if (ds != null)
+                {
+                    obj.dtDetails = ds.Tables[0];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        MUpcomingEvent lstobj = new MUpcomingEvent();
+                        lstobj.Id = ds.Tables[0].Rows[i]["Id"].ToString();
+                        lstobj.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        lst.Add(lstobj);
+                    }
+                    obj.lstData = lst;
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public ActionResult UploadUpcomingEvent(MUpcomingEvent obj, HttpPostedFileBase ImageUrl_Doc, string Save)
+        {
+            Random random = new Random();
+            DALUpcomingEvent dALUpcomingEvent = new DALUpcomingEvent();
+            string path = "";
+            try
+            {
+                if (!string.IsNullOrEmpty(Save))
+                {
+                    if (Save == "Save")
+                    {
+
+                        obj.OpCode = "Insert";
+                    }
+                    else
+                    {
+                        obj.OpCode = "Update";
+                    }
+                    if (ImageUrl_Doc != null)
+                    {
+                        string pic = random.Next(1000000).ToString() + System.IO.Path.GetFileName(ImageUrl_Doc.FileName);
+
+                        path = System.IO.Path.Combine(Server.MapPath("/Images/Users/UpcomingImage"), pic);
+
+                        ImageUrl_Doc.SaveAs(path);
+
+                        obj.ImageUrl = "/Images/Users/UpcomingImage/" + pic;
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            ImageUrl_Doc.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+                        }
+
+                    }
+                }
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
+                DataSet ds = dALUpcomingEvent.UploadUpcomingEvent(obj);
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                        return RedirectToAction("UploadUpcomingEvent");
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                        return View(obj);
+                    }
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public ActionResult DeleteUpcomingEvent(string Id)
+        {
+            DALUpcomingEvent dALUpcomingEvent = new DALUpcomingEvent();
+            MUpcomingEvent obj = new MUpcomingEvent();
+            try
+            {
+                obj.OpCode = "Delete";
+                obj.Id = Id;
+                DataSet ds = dALUpcomingEvent.UploadUpcomingEvent(obj);
+                if (ds != null)
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("UploadUpcomingEvent");
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("UploadUpcomingEvent");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }           
+        }
+
+        [HttpGet]
+        public ActionResult LifeEducation()
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            List<MUploadAchievement> lst = new List<MUploadAchievement>();
+            try
+            {
+                obj.OpCode = "Get";
+                DataSet ds = dALUploadAchievement.LifeOneEducation(obj);
+                if (ds != null)
+                {
+                    obj.dtDetails = ds.Tables[0];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        MUploadAchievement lstobj = new MUploadAchievement();
+                        lstobj.Id = ds.Tables[0].Rows[i]["Id"].ToString();
+                        lstobj.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        lst.Add(lstobj);
+                    }
+                    obj.lstData = lst;
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public ActionResult LifeEducation(MUploadAchievement obj, HttpPostedFileBase ImageUrl_Doc, string Save)
+        {
+            Random random = new Random();
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            string path = "";
+            try
+            {
+                if (!string.IsNullOrEmpty(Save))
+                {
+                    if (Save == "Save")
+                    {
+
+                        obj.OpCode = "Insert";
+                    }
+                    else
+                    {
+                        obj.OpCode = "Update";
+                    }
+                    if (ImageUrl_Doc != null)
+                    {
+                        string pic = random.Next(1000000).ToString() + System.IO.Path.GetFileName(ImageUrl_Doc.FileName);
+
+                        path = System.IO.Path.Combine(Server.MapPath("/Images/Users/LifeEducationImage"), pic);
+
+                        ImageUrl_Doc.SaveAs(path);
+
+                        obj.ImageUrl = "/Images/Users/LifeEducationImage/" + pic;
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            ImageUrl_Doc.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+                        }
+
+                    }
+                }
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
+                DataSet ds = dALUploadAchievement.LifeOneEducation(obj);
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                        return RedirectToAction("LifeEducation");
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                        return View(obj);
+                    }
+                }
+
+
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult DeleteLifeEducation(string abc)
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            try
+            {
+                obj.OpCode = "Delete";
+                obj.Id = abc;
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
+                DataSet ds = dALUploadAchievement.LifeOneEducation(obj);
+                if (ds != null)
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("LifeEducation");
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("LifeEducation");
+                }
+                return RedirectToAction("LifeEducation");
+
+            }
+
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+        [HttpGet]
+        public ActionResult CurrentOffer()
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            List<MUploadAchievement> lst = new List<MUploadAchievement>();
+            try
+            {
+                obj.OpCode = "Get";
+                DataSet ds = dALUploadAchievement.CurrentOffer(obj);
+                if (ds != null)
+                {
+                    obj.dtDetails = ds.Tables[0];
+                    for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                    {
+                        MUploadAchievement lstobj = new MUploadAchievement();
+                        lstobj.Id = ds.Tables[0].Rows[i]["Id"].ToString();
+                        lstobj.ImageUrl = baseurl + ds.Tables[0].Rows[i]["ImageUrl"].ToString();
+                        lst.Add(lstobj);
+                    }
+                    obj.lstData = lst;
+                }
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        [HttpPost]
+        public ActionResult CurrentOffer(MUploadAchievement obj, HttpPostedFileBase ImageUrl_Doc, string Save)
+        {
+            Random random = new Random();
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            string path = "";
+            try
+            {
+                if (!string.IsNullOrEmpty(Save))
+                {
+                    if (Save == "Save")
+                    {
+
+                        obj.OpCode = "Insert";
+                    }
+                    else
+                    {
+                        obj.OpCode = "Update";
+                    }
+                    if (ImageUrl_Doc != null)
+                    {
+                        string pic = random.Next(1000000).ToString() + System.IO.Path.GetFileName(ImageUrl_Doc.FileName);
+
+                        path = System.IO.Path.Combine(Server.MapPath("/Images/Users/CurrentOfferImage"), pic);
+
+                        ImageUrl_Doc.SaveAs(path);
+
+                        obj.ImageUrl = "/Images/Users/CurrentOfferImage/" + pic;
+                        using (MemoryStream ms = new MemoryStream())
+                        {
+                            ImageUrl_Doc.InputStream.CopyTo(ms);
+                            byte[] array = ms.GetBuffer();
+                        }
+
+                    }
+                }
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
+                DataSet ds = dALUploadAchievement.CurrentOffer(obj);
+                if (ds != null)
+                {
+                    if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                        return RedirectToAction("CurrentOffer");
+                    }
+                    else
+                    {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                        return View(obj);
+                    }
+                }
+
+
+                return View(obj);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult DeleteCurrentOffer(string abc)
+        {
+            DALUploadAchievement dALUploadAchievement = new DALUploadAchievement();
+            MUploadAchievement obj = new MUploadAchievement();
+            try
+            {
+                obj.OpCode = "Delete";
+                obj.Id = abc;
+                obj.AddedBy = SessionManager.Fk_MemId.ToString();
+                DataSet ds = dALUploadAchievement.CurrentOffer(obj);
+                if (ds != null)
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("CurrentOffer");
+                }
+                else
+                {
+                    TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("CurrentOffer");
+                }
+
+                return RedirectToAction("CurrentOffer");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+           
         }
     }
 }

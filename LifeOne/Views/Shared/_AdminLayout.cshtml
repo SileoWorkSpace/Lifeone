@@ -240,34 +240,50 @@
                                         }
                                         @if (PermissionManager.IsViewPermit("Upload Terms and Condition"))
                                         {
-                                            <li><a href="/UploadTermsandConditionList">Upload Terms & Condition</a></li>
+                                            <li><a href="/UploadTermsandConditionList">Terms & Condition Master</a></li>
                                         }
                                         @if (PermissionManager.IsViewPermit("Upload Privacy Policy"))
                                         {
-                                            <li><a href="/UploadPrivacyPolicyList">Upload Privacy Policy</a></li>
+                                            <li><a href="/UploadPrivacyPolicyList">Privacy Policy Master</a></li>
                                         }
                                         @if (PermissionManager.IsViewPermit("Upload FAQ"))
                                         {
-                                            <li><a href="/UploadFAQ">Upload FAQ</a></li>
+                                            <li><a href="/UploadFAQ">FAQ Master</a></li>
                                         }
                                         @if (PermissionManager.IsViewPermit("Upload Image"))
                                         {
-                                            <li><a href="/Admin-UploadImage">Upload Image</a></li>
+                                            <li><a href="/Admin-UploadImage">Add Image</a></li>
                                         }
                                         @if (PermissionManager.IsViewPermit("Upload Video"))
                                         {
-                                            <li><a href="/Admin-UploadVideo">Upload Video</a></li>
+                                            <li><a href="/Admin-UploadVideo">Add Video</a></li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("Add Achievement"))
+                                        {
+                                            <li><a href="/Upload_Achievement">Add Achievement</a></li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("Add Upcoming Event"))
+                                        {
+                                            <li><a href="/Upload_UpcomingEvent">Add Upcoming Event</a></li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("Lifeone Education"))
+                                        {
+                                            <li><a href="/Life_Education">Lifeone Education</a></li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("Current Offer"))
+                                        {
+                                            <li><a href="/Current_Offer">Current Offer</a></li>
                                         }
 
                                         @*@if (PermissionManager.IsViewPermit("Reward Detail"))
-                    {
-                        <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
-                    }
+        {
+            <li><a href="/Admin-RewardDetail">Reward Details Master</a></li>
+        }
 
-                    @if (PermissionManager.IsViewPermit("Bonanza Detail"))
-                    {
-                        <li><a href="/Admin-BonanzaDetail">Bonanza Details Master</a></li>
-                    }*@
+        @if (PermissionManager.IsViewPermit("Bonanza Detail"))
+        {
+            <li><a href="/Admin-BonanzaDetail">Bonanza Details Master</a></li>
+        }*@
 
 
 
@@ -278,9 +294,9 @@
 
 
                                         @*@if (PermissionManager.IsViewPermit("Offer Date Master"))
-                    {
-                        <li><a href="/GetOfferDateMaster">Offer Date Master</a></li>
-                    }*@
+        {
+            <li><a href="/GetOfferDateMaster">Offer Date Master</a></li>
+        }*@
                                         @if (PermissionManager.IsViewPermit("Role Master"))
                                         {
                                             <li><a href="/Role-Master-List">Role Master</a></li>
@@ -308,8 +324,8 @@
                                             </ul>
                                         </li>
                                         @* <li>
-                                                <a href="javascript: void(0);" aria-expanded="false">Users<span class="menu-arrow"></span> </a>
-                                                <ul class="nav-second-level" aria-expanded="false">
+                                    <a href="javascript: void(0);" aria-expanded="false">Users<span class="menu-arrow"></span> </a>
+                                    <ul class="nav-second-level" aria-expanded="false">
 
 
 
@@ -320,24 +336,24 @@
 
 
 
-                                                   @if (PermissionManager.IsViewPermit("Employee Registration"))
-                    {
-                        <li><a href="/Employee-Registration">Add Employees</a></li>
-                    }*@
+                                       @if (PermissionManager.IsViewPermit("Employee Registration"))
+        {
+            <li><a href="/Employee-Registration">Add Employees</a></li>
+        }*@
                                         @*@if (PermissionManager.IsViewPermit("Role Master"))
-                    {
-                        <li><a href="/Role-Master-List">Role Master</a></li>
-                    }*@
+        {
+            <li><a href="/Role-Master-List">Role Master</a></li>
+        }*@
                                         @*@if (PermissionManager.IsViewPermit("Form Type"))
-                    {
-                        <li><a href="/Form-Type-List">Form Type</a></li>
-                    }
-                    @if (PermissionManager.IsViewPermit("Form Master"))
-                    {
-                        <li><a href="/Form-Master-List">Form Master</a></li>
-                    }
-                                                </ul>
-                                                    </li>*@
+        {
+            <li><a href="/Form-Type-List">Form Type</a></li>
+        }
+        @if (PermissionManager.IsViewPermit("Form Master"))
+        {
+            <li><a href="/Form-Master-List">Form Master</a></li>
+        }
+                                    </ul>
+                                        </li>*@
 
                                     </ul>
                                 </li>

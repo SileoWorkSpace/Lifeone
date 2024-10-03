@@ -68,9 +68,6 @@
     <Reference Include="itextsharp">
       <HintPath>C:\Users\SILEO\Downloads\SGDocument\itextsharp.dll</HintPath>
     </Reference>
-    <Reference Include="LifeOne">
-      <HintPath>..\..\..\bin\LifeOne.dll</HintPath>
-    </Reference>
     <Reference Include="MCPG.CCA.Util">
       <HintPath>C:\Users\SILEO\Downloads\SGDocument\MCPG.CCA.Util.dll</HintPath>
     </Reference>
@@ -124,9 +121,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>C:\Users\SILEO\Downloads\SGDocument\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.IdentityModel.Tokens">
-      <HintPath>..\..\..\Users\Sileo 1\Downloads\SGCAREbin\Microsoft.IdentityModel.Tokens.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.1.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>C:\Users\SILEO\Downloads\SGDocument\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
@@ -156,10 +150,6 @@
       <HintPath>C:\Users\SILEO\Downloads\SGDocument\Select.HtmlToPdf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\Users\ABCD\Downloads\SGDocument (2)\SGDocument\SGDocument\System.Buffers.dll</HintPath>
-    </Reference>
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Data" />
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -275,8 +265,10 @@
     <Folder Include="Images\FranchiseeKYCDocuments\Bank\" />
     <Folder Include="Images\FranchiseeKYCDocuments\Pan\" />
     <Folder Include="Images\ProductImages\" />
+    <Folder Include="Images\Users\AchievementImage\" />
     <Folder Include="Images\Users\Popup\" />
     <Folder Include="Images\Users\Reward\" />
+    <Folder Include="Images\Users\UpcomingImage\" />
     <Folder Include="Images\Users\VoterId\" />
     <Folder Include="landing-page-files\" />
     <Folder Include="Models\TBOHotelAPI\DBLayer\" />
@@ -440,6 +432,8 @@
     <Compile Include="Models\AdminManagement\ADAL\DALTourDetail.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALTransaction.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DALUpline.cs" />
+    <Compile Include="Models\AdminManagement\ADAL\DALUpcomingEvent.cs" />
+    <Compile Include="Models\AdminManagement\ADAL\DALUploadAchievement.cs" />
     <Compile Include="Models\AdminManagement\ADAL\DBHelperDapper.cs" />
     <Compile Include="Models\AdminManagement\ADAL\FormMasterRepository.cs" />
     <Compile Include="Models\AdminManagement\ADAL\FormPermissionRepository.cs" />
@@ -508,6 +502,8 @@
     <Compile Include="Models\AdminManagement\AEntity\MTDSReport.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MTransactionLog.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MUpline.cs" />
+    <Compile Include="Models\AdminManagement\AEntity\MUpcomingEvent.cs" />
+    <Compile Include="Models\AdminManagement\AEntity\MUploadAchievement.cs" />
     <Compile Include="Models\AdminManagement\AEntity\PayoutCalculationStatusModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\ProductServiceModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\QCRMStringConstants.cs" />
@@ -1618,6 +1614,10 @@
     <Content Include="Areas\Admin\Views\Wallet\EWalletLedger.cshtml" />
     <Content Include="Areas\Admin\Views\AdminReport\GeustShoppingOrderDetail.cshtml" />
     <Content Include="Areas\Associate\Views\AssociateOrder\OrderByAssociate.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminReport\ShoppingOrderInvoice.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociateReport\ShoppingOrderTaxInvoice.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\UploadAchievement.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\UploadUpcomingEvent.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />
@@ -2044,6 +2044,22 @@
     <Content Include="Content\NewAssests\images\brands\4.png" />
     <Content Include="Content\NewAssests\images\brands\5.png" />
     <Content Include="Content\NewAssests\images\brands\6.png" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0001.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0002.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0003.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0004.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0005.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0006.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0007.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0008.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0009.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0010.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0011.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0012.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0013.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0014.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0015.jpg" />
+    <Content Include="Content\NewAssests\images\business-plan\Business_page-0016.jpg" />
     <Content Include="Content\NewAssests\images\cart\product-1.jpg" />
     <Content Include="Content\NewAssests\images\cart\product-2.jpg" />
     <Content Include="Content\NewAssests\images\categories\babycare.svg" />
@@ -2184,10 +2200,7 @@
     <Content Include="Content\NewAssests\images\icon-boxes\shopbag.svg" />
     <Content Include="Content\NewAssests\images\icon-boxes\shopbag_solid.svg" />
     <Content Include="Content\NewAssests\images\Lifeone-logo-Favicon.png" />
-    <Content Include="Content\NewAssests\images\lifeonelogo.jpg" />
     <Content Include="Content\NewAssests\images\lifeonelogo.png" />
-    <Content Include="Content\NewAssests\images\logo-footer.png" />
-    <Content Include="Content\NewAssests\images\logo.png" />
     <Content Include="Content\NewAssests\images\menu\1.jpg" />
     <Content Include="Content\NewAssests\images\menu\2.jpg" />
     <Content Include="Content\NewAssests\images\menu\3.jpg" />
@@ -3650,16 +3663,12 @@
     <Content Include="home-assets\images\di-income.png" />
     <Content Include="home-assets\images\directincome.png" />
     <Content Include="home-assets\images\f-h-package.png" />
-    <Content Include="home-assets\images\favicon.png" />
     <Content Include="home-assets\images\hdaybeach.jpg" />
     <Content Include="home-assets\images\i20-car.png" />
     <Content Include="home-assets\images\jaguar.png" />
     <Content Include="home-assets\images\laptop.png" />
     <Content Include="home-assets\images\Lifeone-logo.png" />
     <Content Include="home-assets\images\loginbg.jpg" />
-    <Content Include="home-assets\images\logo-white.png" />
-    <Content Include="home-assets\images\logo-wide.png" />
-    <Content Include="home-assets\images\logo.png" />
     <Content Include="home-assets\images\mercedese.png" />
     <Content Include="home-assets\images\mission.jpg" />
     <Content Include="home-assets\images\prettyPhoto\dark_rounded\btnNext.png" />
@@ -3700,8 +3709,6 @@
     <Content Include="home-assets\images\projects\4.jpg" />
     <Content Include="home-assets\images\projects\5.jpg" />
     <Content Include="home-assets\images\projects\6.jpg" />
-    <Content Include="home-assets\images\sg-icon.png" />
-    <Content Include="home-assets\images\SgcarePopup.jpeg" />
     <Content Include="home-assets\images\shadow-overlay.png" />
     <Content Include="home-assets\images\shadow-overlay2.png" />
     <Content Include="home-assets\images\shop\education.jpg" />
@@ -4638,12 +4645,13 @@
     <Content Include="Content\NewAssests\sass\pages\_video.scss" />
     <Content Include="Content\NewAssests\sass\pages\_wishlist.scss" />
     <Content Include="Content\NewAssests\sass\style.scss" />
-    <Content Include="Content\NewAssests\images\Business.pdf" />
     <Content Include="LifeOne\Views\Home\ProductDetails.cshtml" />
     <Content Include="Content\summernote\summernote\font\summernote.eot" />
     <Content Include="Content\summernote\summernote\font\summernote.ttf" />
     <Content Include="Content\summernote\summernote\font\summernote.woff" />
     <Content Include="Content\summernote\summernote\font\summernote.woff2" />
+    <Content Include="Content\NewAssests\images\certificate-pdf\%28e-Memorandum-of-Association.pdf" />
+    <Content Include="Content\NewAssests\images\certificate-pdf\%28e-Articles-of-Association%29.pdf" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\choices.css" />
     <Content Include="Scripts\choices.js" />
@@ -4772,6 +4780,8 @@
     <Content Include="Views\Home\RazorPayPaymentPage.cshtml" />
     <Content Include="Views\Home\PlaceOrder.cshtml" />
     <Content Include="Views\Home\GalleryPhoto.cshtml" />
+    <Content Include="Views\Home\Achievement.cshtml" />
+    <Content Include="Views\Home\UpcomingEvent.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup />

@@ -2385,7 +2385,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 Models.AssociateManagement.AssociateEntity.AssosiateRequest Entity = new Models.AssociateManagement.AssociateEntity.AssosiateRequest();
                 Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
 
-                Entity.RequestId = Convert.ToString(Crypto.Decryption("LifeWellAP1234@Z", fk_MemId));
+                Entity.RequestId = fk_MemId;
                 Entity.LoginId = Convert.ToString(Session["LoginId"] ?? "0");
                 
                 
@@ -2405,8 +2405,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 throw ex;
             }
         }
-
-
-
+        
     }
 }

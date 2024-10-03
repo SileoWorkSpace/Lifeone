@@ -1019,6 +1019,7 @@ namespace LifeOne.Areas.Associate.Controllers
             }
             reports.Size = SessionManager.Size;
             reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            reports.Page = 1;
             DataSet dataSet = reports.GetShoppingOrderDetails();
             reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
             return View(reports);
@@ -1176,8 +1177,7 @@ namespace LifeOne.Areas.Associate.Controllers
             obj.FK_MemID = SessionManager.AssociateFk_MemId.ToString();
             try
             {
-                
-                
+                                
                 List<ModelMatchingBonus> listmaching = new List<ModelMatchingBonus>();
                 DataSet ds = obj.GetPerformanceBonus();
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -1282,9 +1282,6 @@ namespace LifeOne.Areas.Associate.Controllers
             orderInvoice.dtDetails = dsOrder.Tables[0];
             return View(orderInvoice);
         }
-
-
-
     }
 }
 

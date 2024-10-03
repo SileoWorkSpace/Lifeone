@@ -2761,7 +2761,6 @@ namespace LifeOne.Areas.Admin.Controllers
                                              new DataColumn("Direct Seller"),
                                              new DataColumn("Payout No"),
                                              new DataColumn("Direct Income"),
-
                                              new DataColumn("Gross Amount"),
                                              new DataColumn("Processing Fee"),
                                              new DataColumn("TDS Amount"),
@@ -5597,8 +5596,6 @@ namespace LifeOne.Areas.Admin.Controllers
                                             new DataColumn("State"),
 
 
-
-
             });
                 //List<OrderList> customers = Session["ProductStockReport"] as List<OrderList>;
                 if (dataSet.Tables[0].Rows != null && dataSet.Tables[0].Rows.Count > 0)
@@ -5630,8 +5627,6 @@ namespace LifeOne.Areas.Admin.Controllers
                     reports.Pager = pager;
                 }
             }
-
-
 
             return View(reports);
         }
