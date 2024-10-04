@@ -1302,7 +1302,7 @@ namespace LifeOne.Areas.Associate.Controllers
                 model.Pager = pager;
             }
             return View(model);
-           
+            
            
         }
     }
