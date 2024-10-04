@@ -143,7 +143,7 @@ namespace LifeOne.Areas.Associate.Controllers
             Entity.OpCode = 1;
             Entity.LoginId = LoginId;
 
-            Entity.Amount =decimal.Parse(Amount.ToString());
+            Entity.Amount = decimal.Parse(Amount.ToString());
             Entity.PaymentMode = PaymentMode;
             Entity.ChequeDD_No = PaymentMode=="Gateway"?DateTime.Now.ToString("ddMMyyyyhhmmss"):ChequeDD_No;
             Entity.BankId = BankId;

@@ -39,6 +39,7 @@ namespace LifeOne.Models.HomeManagement.HEntity
         public string FK_ProductID { get; set; }
         public string Recognition { get; set; }
         public int TotalItems { get; set; }
+        public string EWalletBalance { get; set; }
     }
     public class MultiUserIdList
     {

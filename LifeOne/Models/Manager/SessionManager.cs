@@ -465,7 +465,24 @@ namespace LifeOne.Models.Manager
             }
         }
 
-
+        public static string EwalletBalance
+        {
+            get
+            {
+                if (HttpContext.Current.Session["EWalletBalance"] == null)
+                {
+                    return "";
+                }
+                else
+                {
+                    return (HttpContext.Current.Session["EWalletBalance"].ToString());
+                }
+            }
+            set
+            {
+                HttpContext.Current.Session["EWalletBalance"] = value;
+            }
+        }
         public static int Size => 30;
 
         public void Dispose()

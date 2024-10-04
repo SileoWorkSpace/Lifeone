@@ -1093,7 +1093,6 @@ namespace LifeOne.Areas.Associate.Controllers
             DataSet dataSet = reports.GetRecognition();
             reports.dtGetRecognition = dataSet.Tables[0];
             return View(reports);
-
         }
 
         public ActionResult Rewardspage(Modelreward obj)
@@ -1261,7 +1260,6 @@ namespace LifeOne.Areas.Associate.Controllers
             try
             {
 
-
                 obj.FkMemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
                 listdata = obj.RewardsandRecognitionDetails();
                 obj.RewardsDetail = listdata;
@@ -1281,6 +1279,20 @@ namespace LifeOne.Areas.Associate.Controllers
             DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
             orderInvoice.dtDetails = dsOrder.Tables[0];
             return View(orderInvoice);
+        }
+        public ActionResult AssociateCancelOrderDetails(Reports reports)
+        {
+            if (reports.Page == 0 || reports.Page == null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
+            reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            reports.Page = 1;
+            DataSet dataSet = reports.GetCancelOrderDetails();
+            reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
+            return View(reports);
+
         }
     }
 }

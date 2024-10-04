@@ -649,9 +649,21 @@ namespace LifeOne.Areas.Associate
            id = UrlParameter.Optional
        },
        new[] { "LifeOne.Areas.Associate.Controllers" });
-           
+
+
+            context.MapRoute(
+  "AssociateCancel-Order-Details",
+  "AssociateCancel-Order-Details/{action}/{id}",
+  new
+  {
+      area = "Associate",
+      controller = "AssociateReport",
+      action = "AssociateCancelOrderDetails",
+      id = UrlParameter.Optional
+  },
+  new[] { "LifeOne.Areas.Associate.Controllers" });
 
 
         }
     }
-    }
+}
