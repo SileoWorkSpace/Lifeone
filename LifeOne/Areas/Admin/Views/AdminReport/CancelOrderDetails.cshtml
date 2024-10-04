@@ -79,7 +79,10 @@
                                             <th>Pin Code</th>
                                             <th>Address Type</th>
                                             <th>Order Date</th>
+                                            <th>Cancel Date</th>
                                             <th style="text-align:right">Amount</th>
+
+                                            <th>Cancel Remark</th>
                                             <th>Order Status</th>
                                             @*<th>Action</th>*@
 
@@ -117,12 +120,16 @@
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["PinCode"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["AddressType"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderDate"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["CancelledDate"].ToString()</td>
                                                     <td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["WalletAmount"].ToString()</td>
+                                                    
+                                                    <td>
+                                                        <label>@Model.dtGetShoppingOrderDetails.Rows[i]["CancelRemark"].ToString()</label>
+                                                        @*<a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank"  class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>*@
+                                                    </td>
                                                     <td>
                                                         <label class="badge badge-danger">@Model.dtGetShoppingOrderDetails.Rows[i]["OrderStatus"].ToString()</label>
                                                     <td>
-                                                        @*<a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank"  class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>*@
-                                                    </td>
                                                 </tr>
                                                 j++;
                                             }
