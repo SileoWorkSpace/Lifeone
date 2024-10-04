@@ -1277,7 +1277,7 @@ namespace LifeOne.Areas.Associate.Controllers
             ShoppingOrderInvoiceModel orderInvoice = new ShoppingOrderInvoiceModel();
             OrderDAL orderDAL = new OrderDAL();
             DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
-            orderInvoice.dtDetails = dsOrder.Tables[0];
+            orderInvoice.dtDetails = dsOrder.Tables[0];            
             return View(orderInvoice);
         }
         public ActionResult AssociateCancelOrderDetails(Reports reports)
