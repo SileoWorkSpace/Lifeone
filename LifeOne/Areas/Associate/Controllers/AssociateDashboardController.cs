@@ -29,7 +29,7 @@ namespace LifeOne.Areas.Associate.Controllers
         //[RouteArea("Admin”)]
         //[RoutePrefix(“menu”)]
         //[Route(“{action}”)]
-        public ActionResult Dashboard()
+        public ActionResult Dashboard()        
         {
             try
             {
@@ -67,10 +67,9 @@ namespace LifeOne.Areas.Associate.Controllers
                 }
                 AssociateRewardsDAL obj = new AssociateRewardsDAL();
                 RewardsModel obj2 = new RewardsModel();
-                Value.FkMemId = SessionManager.AssociateFk_MemId;
-                Value.Rewardslst = obj.Rewards(obj2);
-                return View(Value);
-
+                obj2.FkMemId = SessionManager.AssociateFk_MemId;
+                Value.Rewardslst = obj.Rewards(obj2);                
+                return View(Value);                
             }
             catch (Exception ex)
             {
