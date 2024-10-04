@@ -161,5 +161,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                 throw ex;
             }
         }
+
+        
     }
 }

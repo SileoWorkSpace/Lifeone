@@ -32,6 +32,10 @@ using iTextSharp.text.pdf;
 using static LifeOne.Models.ShoppingRequest;
 using AesEncryption;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using Razorpay.Api;
+using LifeOne.Models.AssociateManagement.AssociateDAL;
+using DocumentFormat.OpenXml.Bibliography;
+using System.Web.UI.WebControls;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -2404,6 +2408,28 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 throw ex;
             }
+        }
+
+        public ActionResult TopupHistory(TopupHistory model)
+        {
+            DataSet dataSet = new DataSet();
+             
+            OrderDAL orderDAL = new OrderDAL();
+            if(model.Page==0 || model.Page==null)
+            {
+                model.Page = 1;
+            }
+            model.Size = SessionManager.Size;
+            DataSet dsOrder = orderDAL.GetTopupHistory(model);
+            model.dtDetails = dsOrder.Tables[0];
+            int totalRecords = 0;
+            if (dsOrder!=null && dsOrder.Tables.Count>0 && dsOrder.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(model.dtDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, model.Page, SessionManager.Size);
+                model.Pager = pager;
+            }
+            return View(model);
         }
         
     }

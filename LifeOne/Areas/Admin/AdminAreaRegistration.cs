@@ -2892,7 +2892,18 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
             },
             new[] { "LifeOne.Areas.Admin.Controllers" });
 
+            context.MapRoute(
+                "TopupHistory",
+                "TopupHistory/{action}/{id}",
+                new
+                {
+                    area="Admin",
+                    Controller="Admin",
+                    action= "TopupHistory",
+                    id=UrlParameter.Optional
+                },
 
+            new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 
