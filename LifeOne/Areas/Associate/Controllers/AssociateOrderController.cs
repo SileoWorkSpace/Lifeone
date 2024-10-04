@@ -22,11 +22,15 @@ namespace LifeOne.Areas.Associate.Controllers
         {
             return View();
         }
-        public ActionResult OrderByAssociate()
+        public ActionResult OrderByAssociate(MFranchiseorderRequest model)
         {
             try
-            {               
+            {
+                model.Fk_Memid= Convert.ToInt32(SessionManager.AssociateFk_MemId);
+                List<SelectListItem> Lst = DALBindCommonDropdown.BindDropdown(20, model.Fk_Memid);
+                ViewBag.WalletBalance = Lst[0].Value;
                 ViewBag.Product = DALBindCommonDropdown.BindProductDropdown(0, 0);
+                
             }
             catch (Exception)
             {
@@ -92,7 +96,15 @@ namespace LifeOne.Areas.Associate.Controllers
         {
             try
             {
-                List<SelectListItem> Lst = DALBindCommonDropdown.BindDropdown(1, _data.CategoryId);
+                if(_data.ShoppingType== "ByeGetOne")
+                {
+                    _data.OpCode = 18;
+                }
+                if (_data.ShoppingType == "Normal")
+                {
+                    _data.OpCode = 19;
+                }
+                List<SelectListItem> Lst = DALBindCommonDropdown.BindDropdown(_data.OpCode, 0);
                 return Json(Lst, JsonRequestBehavior.AllowGet);
             }
             catch (Exception)

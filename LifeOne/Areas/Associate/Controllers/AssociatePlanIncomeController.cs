@@ -109,9 +109,29 @@ namespace LifeOne.Areas.Associate.Controllers
 
             return View(Entity);
         }
-        public ActionResult RequestEwallet(string LoginId, int Amount, string PaymentMode, string ChequeDD_No, int BankId)
+        public ActionResult RequestEwallet(string LoginId, int Amount, string PaymentMode, string ChequeDD_No, int BankId,HttpPostedFileBase File)
         {
+            Random random = new Random();
             AssosiateRequest Entity = new AssosiateRequest();
+            string path = "";
+
+            if (File != null)
+            {
+                string pic = random.Next(1000000).ToString() + System.IO.Path.GetFileName(File.FileName);
+
+                path = System.IO.Path.Combine(Server.MapPath("/Images/Users/RequestEwalletImage"), pic);
+
+                File.SaveAs(path);
+
+                Entity.Image_url = "/Images/Users/RequestEwalletImage/" + pic;
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    File.InputStream.CopyTo(ms);
+                    byte[] array = ms.GetBuffer();
+                }
+
+            }
+           
 
             Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
 
@@ -123,7 +143,7 @@ namespace LifeOne.Areas.Associate.Controllers
             Entity.OpCode = 1;
             Entity.LoginId = LoginId;
 
-            Entity.Amount = Amount;
+            Entity.Amount = decimal.Parse(Amount.ToString());
             Entity.PaymentMode = PaymentMode;
             Entity.ChequeDD_No = PaymentMode=="Gateway"?DateTime.Now.ToString("ddMMyyyyhhmmss"):ChequeDD_No;
             Entity.BankId = BankId;

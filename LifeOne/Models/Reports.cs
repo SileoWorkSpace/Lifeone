@@ -82,6 +82,7 @@ namespace LifeOne.Models
         public string PersonName { get; set; }
         public string PackageName { get; set; }
         public string OrderNo { get; set; }
+        public string RemarkCancel { get; set; }
         public string ShippingId { get; set; }
         public string InvoiceNo { get; set; }
         public string TransactionDate { get; set; }
@@ -727,6 +728,7 @@ namespace LifeOne.Models
 
                                         new SqlParameter("@CancelledBy",FK_MemId),
                                         new SqlParameter("@OrderNo",OrderNo),
+                                        new SqlParameter("@RemarkCancel",RemarkCancel),
 
 
             };

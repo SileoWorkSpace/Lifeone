@@ -1311,6 +1311,7 @@ namespace LifeOne.Controllers
                     SessionManager.AssociateFk_MemId = Convert.ToInt64(_objres.Fk_MemId);
                     SessionManager.Recognition = _objres.Recognition;
                     SessionManager.TotalItems = int.Parse(_objres.TotalItems.ToString());
+                    SessionManager.EwalletBalance = _objres.EWalletBalance.ToString();
 
                     if (Session["Pk_ProductId"] != null)
                     {
