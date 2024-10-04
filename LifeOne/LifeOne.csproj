@@ -1629,6 +1629,7 @@
     <Content Include="Areas\Admin\Views\Master\UploadAchievement.cshtml" />
     <Content Include="Areas\Admin\Views\Master\UploadUpcomingEvent.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\TopupHistory.cshtml" />
+    <Content Include="Areas\Associate\Views\AssociateReport\AssociateToPupHistory.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />

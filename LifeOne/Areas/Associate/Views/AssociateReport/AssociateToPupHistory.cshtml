@@ -1,12 +1,13 @@
 ﻿@model LifeOne.Models.AdminManagement.AEntity.TopupHistory
 @{
-    ViewBag.Title = "TopupHistory";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = "AssociateToPupHistory";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
 }
 
 
+
 <div class="container-fluid">
-    @using (Html.BeginForm("TopupHistory", "Admin"))
+    @using (Html.BeginForm("AssociateToPupHistory", "AssociateReport"))
     {
         <div class="row page-titles">
             <div class="ptitle">
@@ -14,7 +15,7 @@
             </div>
             <div class="pbutton">
                 <div class="right text-right">
-                    
+                   
                     @*<span>
                         <a href="#" onclick="fCallPaging(1,1)" data-toggle="tooltip" data-placement="top" title="Download Excel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
                        
@@ -34,19 +35,17 @@
                                     <div class="alert alert-warning" style="color:#727272 !important">
                                         <div class="row">
                                             @Html.HiddenFor(m => m.Page)
-                                                @*@Html.HiddenFor(m => m.IsExport)*@
+                                            @*@Html.HiddenFor(m => m.IsExport)*@
                                             <div class="col-sm-12 col-md-2">
                                                 <div class="form-group">
                                                     <label>Form Date</label>
-                                                    @Html.TextBoxFor(m => m.FormDate, new { @class = "form-control", @Type = "date" })
-                                                    @*<input type="date" name="FormDate" id="FormDate" class="form-control">*@
+                                                    <input type="date" name="FormDate" id="FormDate" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-2">
                                                 <div class="form-group">
                                                     <label>To Date</label>
-                                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Type = "date" })
-                                                    @*<input type="date" name="ToDate" id="ToDate" placeholder="" class="form-control">*@
+                                                    <input type="date" name="ToDate" id="ToDate" placeholder="" class="form-control">
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-2">
@@ -130,5 +129,3 @@
     }
 
 </script>
-
-
