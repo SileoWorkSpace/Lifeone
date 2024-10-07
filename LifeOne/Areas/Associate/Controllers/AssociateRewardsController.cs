@@ -96,8 +96,5 @@ namespace LifeOne.Areas.Associate.Controllers
         #endregion
 
 
-
-      
-
     }
 }
