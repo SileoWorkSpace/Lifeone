@@ -46,11 +46,9 @@
                                             <th>Order Date</th>
                                             <th>Cancel Date</th>
                                             <th style="text-align:right">Amount</th>
-
                                             <th>Cancel Remark</th>
                                             <th>Order Status</th>
                                             @*<th>Action</th>*@
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,14 +65,7 @@
 
                                                 <tr>
                                                     <td>@(j+1)</td>
-
-                                                    <td align="left">
-
-                                                        <a href="#" style="text-decoration:underline" data-toggle="modal" data-target="#myModal" onclick="return OrderItems('@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()')">
-                                                            @Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()
-                                                        </a>
-
-                                                    </td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["LoginId"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Name"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["MobileNo"].ToString()</td>

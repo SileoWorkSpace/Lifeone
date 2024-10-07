@@ -4193,7 +4193,7 @@ namespace LifeOne.Areas.Admin.Controllers
             try
             {
                 Reports reports = new Reports();
-                reports.OrderNo = id;
+                reports.OrderNo = id;               
                 reports.RemarkCancel = remark;
                 reports.FK_MemId = int.Parse(SessionManager.Fk_MemId.ToString());
                 DataSet dataSet = reports.CancelShoppingOrder();

@@ -1051,9 +1051,6 @@ namespace LifeOne.Areas.Associate.Controllers
         [HttpPost]
         public ActionResult AssociateAddress(Reports report, string Save)
         {
-
-
-
             try
             {
                 DataSet _result = new DataSet();
