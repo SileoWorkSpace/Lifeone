@@ -72,7 +72,7 @@
                                     </div>
                                 </div>
 
-                            }
+                             }
                             <div class="table-responsive" id="customers">
                                 <table class="table mb-0" id="tblCustomers">
                                     <thead>
@@ -112,7 +112,6 @@
                                                     <td>@(j+1)</td>
 
 
-
                                                     <td align="left">
 
                                                         <a href="#" style="text-decoration:underline" data-toggle="modal" data-target="#myModal" onclick="return OrderItems('@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()')">
@@ -143,7 +142,8 @@
                                                         {
 
                                                         }
-                                                        <a href="/Admin/AdminReport/CancelShoppingOrder?id=@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()" onclick="return confirm('Are you sure to cancel this?') " class="btn btn-danger btn-sm"><i>Cancel</i></a>
+                                                        <a href="#" onclick="return openCancelOrderModal()" class="btn btn-danger btn-sm"><i>Cancel</i></a>                                                        
+                                                        @*<a href="/Admin/AdminReport/CancelShoppingOrder?id=@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()" onclick="return confirm('Are you sure to cancel this?') " class="btn btn-danger btn-sm"><i>Cancel</i></a>*@
                                                         @if (int.Parse(Model.dtGetShoppingOrderDetails.Rows[i]["downloadCount"].ToString()) > 0)
                                                         {
                                                             <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" onclick="return confirm('This Invoice Already download !')" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
@@ -151,14 +151,14 @@
                                                         }
                                                         else
                                                         {
-                                                            @*<a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>*@
-                                                            <a id="viewInvoiceBtn_@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>
+                                                            <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                            @*<a id="viewInvoiceBtn_@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>*@
                                                         }
                                                     </td>
                                                 </tr>
                                                 j++;
                                             }
-                                        }
+                                         }
                                     </tbody>
                                 </table>
                             </div>
@@ -211,7 +211,7 @@
                                         }
                                     }
 
-                                }
+                                 }
 
                             </div>
                         </footer>
@@ -296,7 +296,7 @@
     function openCancelOrderModal(order_No) {
         $('#order_Number').val(order_No);
         $('#cancelOrderModal').modal('show');
-        var remark = $('#remarks').val('');
+      //  var remark = $('#remarks').val('');
 
     }
     function cancelOrder() {
@@ -402,13 +402,13 @@
     }
 </script>
 <script>
-    $(document).ready(function () {
+    //$(document).ready(function () {
 
-        $('a[id^="viewInvoiceBtn_"]').on('click', function () {
-            setTimeout(function () {
-                location.reload();
-            }, 1000);
-        });
-    });
+    //    $('a[id^="viewInvoiceBtn_"]').on('click', function () {
+    //        setTimeout(function () {
+    //            location.reload();
+    //        }, 1000);
+    //    });
+    //});
 </script>
 
