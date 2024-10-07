@@ -2371,6 +2371,8 @@ namespace LifeOne.Areas.Admin.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
                     {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
                         return RedirectToAction("EWalletRequestList", "Admin");
                     }
                 }
@@ -2399,6 +2401,8 @@ namespace LifeOne.Areas.Admin.Controllers
                 {
                     if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
                     {
+                        TempData["msg"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = ds.Tables[0].Rows[0]["Flag"].ToString();
                         return RedirectToAction("EWalletRequestList","Admin");
                     }
                 }
