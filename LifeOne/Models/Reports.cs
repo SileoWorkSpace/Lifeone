@@ -730,7 +730,6 @@ namespace LifeOne.Models
                                         new SqlParameter("@OrderNo",OrderNo),
                                         new SqlParameter("@RemarkCancel",RemarkCancel),
 
-
             };
             DataSet ds = DBHelper.ExecuteQuery("CancelShoppingOrder", para);
             return ds;
