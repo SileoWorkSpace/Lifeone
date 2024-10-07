@@ -33,36 +33,48 @@
                                     <thead>
                                         <tr>
                                             <th>#Sn.</th>
-                                            <th>OrderNo</th>
-                                            <th>Login ID</th>
-                                            <th>Name</th>
+                                            <th>Order No</th>
+                                            <th>Login Id</th>
+                                            <th>Direct Seller Name</th>
                                             <th>Mobile No</th>
-                                            <th> Landmark</th>
+                                            <th>Landmark</th>
                                             <th>Address</th>
                                             <th>State</th>
                                             <th>City</th>
                                             <th>Pin Code</th>
                                             <th>Address Type</th>
-                                            <th> Order Date</th>
-                                            @*<th style="text-align:right">Gateway Amount</th>*@
+                                            <th>Order Date</th>
+                                            <th>Cancel Date</th>
                                             <th style="text-align:right">Amount</th>
+
+                                            <th>Cancel Remark</th>
                                             <th>Order Status</th>
-                                            @*<th >Action</th>*@
+                                            @*<th>Action</th>*@
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @if (Model != null && Model.dtGetShoppingOrderDetails.Rows.Count > 0)
                                         {
-                                            int j = 1;
+                                            int j = 0;
+                                            int page = Model.Page ?? 0;
+                                            page = (page - 1);
+
+
+                                            j = ((page) * (Model.Size));
                                             for (var i = 0; i <= Model.dtGetShoppingOrderDetails.Rows.Count - 1; i++)
                                             {
 
                                                 <tr>
-                                                    <td>@j</td>
+                                                    <td>@(j+1)</td>
 
+                                                    <td align="left">
 
+                                                        <a href="#" style="text-decoration:underline" data-toggle="modal" data-target="#myModal" onclick="return OrderItems('@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()')">
+                                                            @Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()
+                                                        </a>
 
-                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()</td>
+                                                    </td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["LoginId"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Name"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["MobileNo"].ToString()</td>
@@ -73,22 +85,22 @@
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["PinCode"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["AddressType"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderDate"].ToString()</td>
-                                                    @*<td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["GatewayAmount"].ToString()</td>*@
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["CancelledDate"].ToString()</td>
                                                     <td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["WalletAmount"].ToString()</td>
+
                                                     <td>
-                                                        <label class="badge badge-danger">@Model.dtGetShoppingOrderDetails.Rows[i]["OrderStatus"].ToString()</label>
+                                                        <label>@Model.dtGetShoppingOrderDetails.Rows[i]["CancelRemark"].ToString()</label>
+                                                        @*<a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank"  class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>*@
                                                     </td>
                                                     <td>
-                                                        @*<a href="/Associate/AssociateReport/ShoppingOrderTaxInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
-            </td>*@
-
+                                                        <label class="badge badge-danger">@Model.dtGetShoppingOrderDetails.Rows[i]["OrderStatus"].ToString()</label>
+                                                    <td>
                                                 </tr>
                                                 j++;
                                             }
                                         }
                                     </tbody>
                                 </table>
-
                             </div>
                             <footer class="card-footer bg-white p-2">
                                 <div class="d-md-flex align-items-center justify-content-between">

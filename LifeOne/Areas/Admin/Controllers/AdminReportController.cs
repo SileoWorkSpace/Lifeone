@@ -4161,7 +4161,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 throw e;
             }
 
-
         }
       
         public ActionResult GetShoppingOrderDetails(Reports reports)

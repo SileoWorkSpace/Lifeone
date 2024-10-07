@@ -144,7 +144,16 @@
 
                                                         }
                                                         <a href="/Admin/AdminReport/CancelShoppingOrder?id=@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()" onclick="return confirm('Are you sure to cancel this?') " class="btn btn-danger btn-sm"><i>Cancel</i></a>
-                                                        <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank"  class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        @if (int.Parse(Model.dtGetShoppingOrderDetails.Rows[i]["downloadCount"].ToString()) > 0)
+                                                        {
+                                                            <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" onclick="return confirm('This Invoice Already download !')" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                            @*<a id="viewInvoiceBtn_@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()"href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" onclick="return confirm('This Invoice Already download !')" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>*@
+                                                        }
+                                                        else
+                                                        {
+                                                            @*<a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>*@
+                                                            <a id="viewInvoiceBtn_@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        }
                                                     </td>
                                                 </tr>
                                                 j++;
@@ -271,7 +280,7 @@
                     <div class="form-group">
                         <label for="remarks">Remarks:</label>
                         <textarea class="form-control" id="remarks" rows="3"></textarea>
-                        <input type="hidden" id="order_Number"/>
+                        <input type="hidden" id="order_Number" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -288,7 +297,7 @@
         $('#order_Number').val(order_No);
         $('#cancelOrderModal').modal('show');
         var remark = $('#remarks').val('');
-        
+
     }
     function cancelOrder() {
         debugger
@@ -318,7 +327,7 @@
         else {
             $('#remarks').focus();
         }
-       
+
     }
 
     function isNumberKey(evt) {
@@ -376,7 +385,7 @@
                         Quantity = parseInt(Quantity) + parseFloat(result[i].Quantity);
                         FinalAmt = parseInt(FinalAmt) + parseInt(result[i].FinalAmount);
                         TotalProdAmt = parseInt(TotalProdAmt) + parseInt(result[i].Amount);
-                       
+
                         str += "<tr><td nowrap>" + result[i].CategoryName + "</td><td >" + result[i].ProductName + "</td><td >" + result[i].Quantity + "</td><td >" + result[i].Amount + "</td><td >" + result[i].FinalAmount + "</td></tr>";
                     }
 
@@ -392,3 +401,14 @@
         });
     }
 </script>
+<script>
+    $(document).ready(function () {
+
+        $('a[id^="viewInvoiceBtn_"]').on('click', function () {
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        });
+    });
+</script>
+

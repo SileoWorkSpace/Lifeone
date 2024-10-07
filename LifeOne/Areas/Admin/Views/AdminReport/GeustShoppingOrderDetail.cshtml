@@ -144,7 +144,16 @@
 
                                                         }
                                                         <a href="/Admin/AdminReport/CancelShoppingOrder?id=@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()" onclick="return confirm('Are you sure to cancel this?') " class="btn btn-danger btn-sm"><i>Cancel</i></a>
-                                                        <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        @*<a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>*@
+
+                                                        @if (int.Parse(Model.dtGetShoppingOrderDetails.Rows[i]["downloadCount"].ToString()) > 0)
+                                                        {
+                                                            <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" onclick="return confirm('This Invoice Already download !')" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>                     
+                                                        }
+                                                        else
+                                                        {         
+                                                            <a id="viewInvoiceBtn_@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        }
                                                     </td>
                                                 </tr>
                                                 j++;
@@ -335,3 +344,14 @@
         });
     }
 </script>
+<script>
+    $(document).ready(function () {
+
+        $('a[id^="viewInvoiceBtn_"]').on('click', function () {
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        });
+    });
+</script>
+
