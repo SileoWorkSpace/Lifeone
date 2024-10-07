@@ -1,0 +1,131 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.TopupHistory
+@{
+    ViewBag.Title = "AssociateToPupHistory";
+    Layout = "~/Views/Shared/_AssociateLayout.cshtml";
+}
+
+
+
+<div class="container-fluid">
+    @using (Html.BeginForm("AssociateToPupHistory", "AssociateReport"))
+    {
+        <div class="row page-titles">
+            <div class="ptitle">
+                <h4 class="mb-1 mt-0">Topup History</h4>
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                   
+                    @*<span>
+                        <a href="#" onclick="fCallPaging(1,1)" data-toggle="tooltip" data-placement="top" title="Download Excel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                       
+                        <button class="btn btn-success btn-rounded btngreen" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
+                    </span>*@
+                </div>
+            </div>
+        </div>
+
+        <div id="no-more-tables">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="box">
+                        <div class="box-body">
+                            <div class="row" id="advance-search" style="display:none;">
+                                <div class="col-md-12">
+                                    <div class="alert alert-warning" style="color:#727272 !important">
+                                        <div class="row">
+                                            @Html.HiddenFor(m => m.Page)
+                                            @*@Html.HiddenFor(m => m.IsExport)*@
+                                            <div class="col-sm-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>Form Date</label>
+                                                    <input type="date" name="FormDate" id="FormDate" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label>To Date</label>
+                                                    <input type="date" name="ToDate" id="ToDate" placeholder="" class="form-control">
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-2">
+                                                <div class="form-group">
+                                                    <label style="display:block;"></label>
+                                                    <input type="submit" class="btn btn-success" style="margin-top:1.5em;display:none;" value="Search" id="BtnSearch">
+                                                    <input type="submit" class="btn btn-success" style="margin-top:1.5em;" value="Search" onclick="fCallPaging(1,0)">
+                                                    <input type="button" class="btn btn-secondary" onClick="fclaer()" style="margin-top:1.5em;" value="Reset">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="table-responsive" id="customers">
+                            <table class="table table-striped mb-0" id="tblCustomers">
+                                <thead>
+                                    <tr>
+                                        <th>S.no</th>
+                                        <th>ToLoginId</th>
+                                        <th>FromLoginId</th>
+                                        <th>FullName</th>
+                                        <th>Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model != null && Model.dtDetails.Rows.Count > 0)
+                                    {
+                                        int i = 0;
+                                        int page = Model.Page ?? 0;
+                                        page = (page - 1);
+                                        i = ((page) * (Model.Size));
+                                        for (var j = 0; j < Model.dtDetails.Rows.Count; j++)
+                                        {
+                                            <tr>
+                                                <td>@(i = i + 1)</td>
+                                                <td>@Model.dtDetails.Rows[j]["ToLoginId"].ToString()</td>
+                                                <td>@Model.dtDetails.Rows[j]["FromLoginId"].ToString()</td>
+                                                <td>@Model.dtDetails.Rows[j]["FullName"].ToString()</td>
+                                                <td>@Model.dtDetails.Rows[j]["Amount"].ToString()</td>
+                                            </tr>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        // Handle empty or null Model scenario
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<div id="tblpdff" style="font-size:50px;">
+
+</div>
+<script>
+    function fCallPaging(val, IsExport) {
+        debugger
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#IsExport").val(IsExport);
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+    function fclaer() {
+        $(".fclear").val('');
+        $("#Page").val(1);
+        $("#IsExport").val(0);
+        window.location.reload();
+    }
+
+</script>

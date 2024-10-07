@@ -109,7 +109,7 @@ namespace LifeOne.Areas.Associate.Controllers
 
             return View(Entity);
         }
-        public ActionResult RequestEwallet(string LoginId, int Amount, string PaymentMode, string ChequeDD_No, int BankId,HttpPostedFileBase File)
+        public ActionResult RequestEwallet(string LoginId, string Amount, string PaymentMode, string ChequeDD_No, string BankId,HttpPostedFileBase File)
         {
             Random random = new Random();
             AssosiateRequest Entity = new AssosiateRequest();
@@ -135,18 +135,15 @@ namespace LifeOne.Areas.Associate.Controllers
 
             Models.AssociateManagement.AssociateDAL.RequestDAL para = new Models.AssociateManagement.AssociateDAL.RequestDAL();
 
-            if (string.IsNullOrEmpty(Entity.Date) == false)
-            {
-                Entity.Convert_date = DsResultModel.ConvertToSystemDate(Entity.Date, "dd/MM/yyyy");
-            }
+            
             Entity.AddedBy = Convert.ToInt32(Session["AssociateFk_MemId"] ?? "0");
             Entity.OpCode = 1;
             Entity.LoginId = LoginId;
 
-            Entity.Amount = decimal.Parse(Amount.ToString());
+            Entity.Amount = decimal.Parse(Amount);
             Entity.PaymentMode = PaymentMode;
             Entity.ChequeDD_No = PaymentMode=="Gateway"?DateTime.Now.ToString("ddMMyyyyhhmmss"):ChequeDD_No;
-            Entity.BankId = BankId;
+            Entity.BankId = int.Parse(BankId);
             Entity.OpCode = 1;
 
             AssosiateRequest Responce = para.RequestwalletPoints(Entity);
@@ -163,7 +160,7 @@ namespace LifeOne.Areas.Associate.Controllers
 
 
                     Dictionary<string, object> options = new Dictionary<string, object>();
-                    options.Add("amount", Amount * 100);
+                    options.Add("amount", int.Parse(Amount) * 100);
                     options.Add("receipt", "");
                     options.Add("currency", "INR");
                     options.Add("payment_capture", 1);
