@@ -17,8 +17,6 @@
         </div>
 
     </div>
-
-
     <div id="no-more-tables">
         <form id="form1" method="post">
             @Html.HiddenFor(m=>m.Page)
@@ -26,8 +24,6 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-
-
                             <div class="table-responsive" id="customers">
                                 <table class="table mb-0" id="tblCustomers">
                                     <thead>
@@ -89,7 +85,7 @@
                                                 </tr>
                                                 j++;
                                             }
-                                        }
+                                         }
                                     </tbody>
                                 </table>
                             </div>
@@ -133,14 +129,13 @@
                                                                 
                                                                 <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages))" href="#">Last</a>
                                                             </li>
-                                                        }
+                                                         }
                                                     </ul>
                                                 </div>
                                             }
                                         }
 
-                                    }
-
+                                     }
                                 </div>
                             </footer>
                         </div>
