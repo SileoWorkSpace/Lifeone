@@ -2464,12 +2464,6 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                 },
                 new[] { "LifeOne.Areas.Admin.Controllers" });
 
-
-
-
-
-
-
             context.MapRoute(
           "SupplierMasterList",
           "SupplierMasterList/{action}/{id}",
