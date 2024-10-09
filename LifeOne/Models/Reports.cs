@@ -30,8 +30,7 @@ namespace LifeOne.Models
         public string DOA { get; set; }
         public string TransNo { get; set; }
         public string DDChequedate { get; set; }
-        public string CreateDate { get; set; }
-        
+        public string CreateDate { get; set; }              
        
         public string CategoryName { get; set; }
         public string OfferedPrice { get; set; }
@@ -493,6 +492,9 @@ namespace LifeOne.Models
             SqlParameter[] para = {
                                         new SqlParameter("@FK_ProductID",Pk_PackageID),
                                         new SqlParameter("@LoginId",LoginId),
+                                        new SqlParameter("@PayMentMode",PaymentMode=="0"?null:PaymentMode),                      
+                                        new SqlParameter("@fromDate",FromDate),
+                                        new SqlParameter("@toDate",ToDate),
                                         new SqlParameter("@Page",Page ),
                                         new SqlParameter("@Size",Size ),
                                         new SqlParameter("@IsExport",IsExport ),

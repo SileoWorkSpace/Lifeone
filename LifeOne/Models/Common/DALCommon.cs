@@ -524,10 +524,7 @@ namespace LifeOne.Models.Common
                 }
             }
             return ListRecognition;
-        }
-
-
-
+        }        
     }
 
     public class MCommonProperties

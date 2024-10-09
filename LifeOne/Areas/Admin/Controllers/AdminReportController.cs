@@ -5437,6 +5437,7 @@ namespace LifeOne.Areas.Admin.Controllers
 
                 DataSet dataSet = reports.GetPackagewayActvationReport();
                 ViewBag.PackageList = DALBindCommonDropdown.PackageBindDropdown(16, 0);
+                ViewBag.PaymentModeList = DALBindCommonDropdown.BindPaymentMode();
                 reports.dtDetails = dataSet.Tables[0];
                 if (reports.IsExport == 1)
                 {
@@ -5478,6 +5479,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 }
                 else
                 {
+                    
                     int totalRecords = 0;
                     if (dataSet.Tables[0].Rows.Count > 0)
                     {
