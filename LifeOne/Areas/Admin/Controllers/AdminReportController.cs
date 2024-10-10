@@ -5932,8 +5932,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 rewards.Pager = pager;
             }
             return View(rewards);
-
         }
-
     }
 }

@@ -34,26 +34,27 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-2">
+                                                    <label>Status</label>
                                                     <div class="input-group">
-                                                        <select class="form-control" name="RewardStatus" id="ddlStatus" style="margin-top:2em;">
+                                                        <select class="form-control" name="RewardStatus" id="ddlStatus">
                                                             <option value="0">--Select--</option>
                                                             <option value="N">Achieved</option>
                                                             <option value="C">Claimed</option>
                                                             <option value="NC">Skipped</option>
                                                         </select>
-                                                        <input type="hidden" id="txtStatus" value="@ViewBag.RewardStatus"/>
-                                                    </div>                                                   
+                                                        <input type="hidden" id="txtStatus" value="@ViewBag.RewardStatus" />
+                                                    </div>
                                                 </div>
 
-                                                    <div class="col-12 col-md-2">
-                                                        <div class="form-group">
-                                                            <label style="display:block;"></label>
-                                                            <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label style="display:block;"></label>
+                                                        <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
 
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
+                                        </div>
                                     </div>
                                 </div>
 
@@ -106,13 +107,13 @@
                                                         }
                                                         else
                                                         {
-                                                          
+
                                                         }
-                                                        </td>
-                                                    </tr>
-                                                    j++;
-                                                }
+                                                    </td>
+                                                </tr>
+                                                j++;
                                             }
+                                        }
                                     </tbody>
                                 </table>
                             </div>
