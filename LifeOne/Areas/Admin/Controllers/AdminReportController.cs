@@ -5754,9 +5754,6 @@ namespace LifeOne.Areas.Admin.Controllers
                                             new DataColumn("Purchase Price"),
                                             new DataColumn("Quantity"),
                                             new DataColumn("Total Amount"),
-
-
-
             });
                 //List<OrderList> customers = Session["ProductStockReport"] as List<OrderList>;
                 if (dataset.Tables[0].Rows != null && dataset.Tables[0].Rows.Count > 0)

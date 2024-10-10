@@ -69,8 +69,8 @@
                                             <th>Right Business</th>
                                             <th>Reward Name</th>
                                             <th>Reward Image</th>
-                                            <th>Tour Name</th>
-                                            <th>Tour Image</th>
+                                            <th>Tours Name</th>
+                                            <th>Tours Image</th>
                                             <th>Status</th>
                                         </tr>
                                     </thead>
@@ -90,12 +90,42 @@
                                                     <td>@Model.getRewardDetails.Rows[i]["LoginId"].ToString()</td>
                                                     <td>@Model.getRewardDetails.Rows[i]["LeftBusiness"].ToString()</td>
                                                     <td>@Model.getRewardDetails.Rows[i]["RightBusiness"].ToString()</td>
-                                                    <td>@Model.getRewardDetails.Rows[i]["RewardName"].ToString()</td>
-                                                    <td>
-                                                        <img src="@Model.getRewardDetails.Rows[i]["RewardImage"].ToString()" style="width: 50px; height: 50px;" />
-                                                    </td>
-                                                    <td>@Model.getRewardDetails.Rows[i]["ToursName"].ToString()</td>
-                                                    <td> <img src="@Model.getRewardDetails.Rows[i]["ToursImage"].ToString()" style="width: 50px; height: 50px;" /></td>
+                                                    @if (Model.getRewardDetails.Rows[i]["RewardName"].ToString() == "" || Model.getRewardDetails.Rows[i]["RewardName"].ToString() == "NULL")
+                                                    {
+                                                        <td><span></span></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>@Model.getRewardDetails.Rows[i]["RewardName"].ToString()</td>
+                                                    }
+                                                    @if (Model.getRewardDetails.Rows[i]["RewardImage"].ToString() == "" || Model.getRewardDetails.Rows[i]["RewardImage"].ToString() == "NULL")
+                                                    {
+                                                        <td><span></span></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>
+                                                            <img src="@Model.getRewardDetails.Rows[i]["RewardImage"].ToString()" style="width: 50px; height: 50px;" />
+                                                        </td>
+                                                    }
+
+                                                    @if (Model.getRewardDetails.Rows[i]["ToursName"].ToString() == "" || Model.getRewardDetails.Rows[i]["ToursName"].ToString() == "NULL")
+                                                    {
+                                                        <td><span></span></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>@Model.getRewardDetails.Rows[i]["ToursName"].ToString()</td>
+                                                    }
+                                                    @if (Model.getRewardDetails.Rows[i]["ToursImage"].ToString() == "" || Model.getRewardDetails.Rows[i]["ToursImage"].ToString() == "NULL")
+                                                    {
+                                                        <td><span></span></td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td> <img src="@Model.getRewardDetails.Rows[i]["ToursImage"].ToString()" style="width: 50px; height: 50px;" /></td>
+                                                    }
+
                                                     <td>
                                                         @if (Model.getRewardDetails.Rows[i]["RewardStatus"].ToString() == "Achieved")
                                                         {
@@ -113,7 +143,7 @@
                                                 </tr>
                                                 j++;
                                             }
-                                        }
+                                         }
                                     </tbody>
                                 </table>
                             </div>
