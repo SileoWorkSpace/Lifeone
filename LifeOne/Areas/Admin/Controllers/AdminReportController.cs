@@ -5433,11 +5433,10 @@ namespace LifeOne.Areas.Admin.Controllers
                 {
                     reports.Page = 1;
                 }
-                reports.Size = SessionManager.Size;
-
+                reports.Size = SessionManager.Size;                
                 DataSet dataSet = reports.GetPackagewayActvationReport();
                 ViewBag.PackageList = DALBindCommonDropdown.PackageBindDropdown(16, 0);
-                ViewBag.PaymentModeList = DALBindCommonDropdown.BindPaymentMode();
+                ViewBag.PaymentModeList = DALBindCommonDropdown.DropdownPaymentMode();
                 reports.dtDetails = dataSet.Tables[0];
                 if (reports.IsExport == 1)
                 {

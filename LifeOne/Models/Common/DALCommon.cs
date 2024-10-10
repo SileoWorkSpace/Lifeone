@@ -524,7 +524,21 @@ namespace LifeOne.Models.Common
                 }
             }
             return ListRecognition;
-        }        
+        }
+        public static List<PaymentModeListViewModel> DropdownPaymentMode()
+        {
+            List<PaymentModeListViewModel> _objlist = new List<PaymentModeListViewModel> {
+               new PaymentModeListViewModel{Value="0",Text="--Select--"},
+                new PaymentModeListViewModel{Value="Cash",Text="Cash"},
+                new PaymentModeListViewModel{Value="Cheque",Text="Cheque"},
+                new PaymentModeListViewModel{Value="NEFT",Text="NEFT"},
+                new PaymentModeListViewModel{Value="RTGS",Text="RTGS"},
+                new PaymentModeListViewModel{Value="IMPS",Text="IMPS"},
+                new PaymentModeListViewModel{Value="UPI",Text="UPI"},
+                new PaymentModeListViewModel{Value="Wallet",Text="Wallet"},
+            };
+            return _objlist;
+        }
     }
 
     public class MCommonProperties
