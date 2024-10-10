@@ -1,5 +1,6 @@
 ﻿using ClosedXML.Excel;
 using DocumentFormat.OpenXml.Bibliography;
+using DocumentFormat.OpenXml.EMMA;
 using LifeOne.Models;
 using LifeOne.Models.AdminManagement.AEntity;
 using LifeOne.Models.AdminManagement.AService;
@@ -296,39 +297,56 @@ namespace LifeOne.Areas.Associate.Controllers
             return View(objewallet);
         }
 
-        public ActionResult WalletToWalletTransfer(EwalletRequest obj)
+        public ActionResult WalletToWalletTransfer()
         {
+            EwalletRequest obj = new EwalletRequest();
             obj.LoginId = Convert.ToString(Session["LoginId"] ?? "0");
             obj.Name = Convert.ToString(Session["Name"] ?? null);
             obj.Fk_MemId = SessionManager.AssociateFk_MemId.ToString();
             obj.Amount = SessionManager.EwalletBalance.ToString();
-            //obj.Mobile = Session["Mobile"].ToString();
-
-            #region ddlpaymentmode
-            List<PaymentModeListViewModel> ddlpaymentmode = DALBindCommonDropdown.BindPaymentMode();
-            ViewBag.ddlpaymentmode = ddlpaymentmode;
-            ViewBag.BankList = DALBindCommonDropdown.BindDropdown(9, 0);
-            #endregion
 
             return View(obj);
         }
 
-
-        public ActionResult GetUserDetail(EwalletRequest obj ,string LoginId)
+        [HttpGet]
+        public JsonResult GetUserDetail(EwalletRequest obj, string loginid)
         {
-            List<EwalletRequest> list = new List<EwalletRequest>();
-            obj.LoginId = LoginId;
+            string Name = "";
+            string Flag = "";
+            obj.LoginId = loginid;
             DataSet ds = obj.GetAssociateDetail();
-            if(ds!=null && ds.Tables.Count>0 && ds.Tables[0].Rows.Count>0)
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                EwalletRequest listData = new EwalletRequest();
-                listData.Name = ds.Tables[0].Rows[0]["Name"].ToString();
-                listData.Flag = ds.Tables[0].Rows[0]["Flag"].ToString();
-                list.Add(listData);
-            }
-            obj.list1 = list;
-            return Json(obj);
 
+                Name = ds.Tables[0].Rows[0]["Name"].ToString();
+                Flag = ds.Tables[0].Rows[0]["flag"].ToString();
+
+            }
+
+            return Json(new { Name, Flag }, JsonRequestBehavior.AllowGet);
+
+        }
+        [HttpPost]
+        public ActionResult WalletToWalletTransfer(EwalletRequest obj)
+        {
+            try
+            {
+                DataSet ds = new DataSet();
+                ds = obj.WalletTransfer();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    TempData["Message"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    TempData["Flag"] = ds.Tables[0].Rows[0]["Flag"].ToString();
+                    return RedirectToAction("WalletToWalletTransfer");
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return View(obj);
         }
 
     }

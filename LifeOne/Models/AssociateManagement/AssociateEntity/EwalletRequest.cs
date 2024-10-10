@@ -87,6 +87,25 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
                 throw;
             }
         }
+
+        public DataSet WalletTransfer()
+        {
+            try
+            {
+                SqlParameter[] para =
+                {
+                    new SqlParameter("@ToLoginId",ToLoginId),
+                    new SqlParameter("@FromLoginId",LoginId),
+                    new SqlParameter("@Amount",ToAmount),
+                };
+                DataSet ds = Connection.ExecuteQuery("wallet_transfer", para);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
 

@@ -30,7 +30,7 @@
 }
 
 <div>
-    @using (Html.BeginForm("EWalletRequest", "WalletToWalletTransfer", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("WalletToWalletTransfer", "EWalletRequest", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         <div class="content">
             <div class="content-wrapper-before"></div>
@@ -84,7 +84,7 @@
                                         <div class="form-group">
                                             <label class="control-label">To Name</label>
                                            
-                                            @Html.TextBoxFor(m => m.ToName, new { @class = "form-control", @id = "Amount", @onkeypress = "return isNumberKey(event)" })
+                                            @Html.TextBoxFor(m => m.ToName, new { @class = "form-control", @readonly = "readonly" })
 
                                         </div>
                                     </div>
@@ -92,14 +92,14 @@
                                         <div class="form-group">
                                             <label class="control-label">Amount</label>
                                            
-                                            @Html.TextBoxFor(m => m.ToAmount, new { @class = "form-control", @id = "Amount", @onkeypress = "return isNumberKey(event)" })
+                                            @Html.TextBoxFor(m => m.ToAmount, new {@type="number", @class = "form-control", @onchange= "return checkBalance()" })
 
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="text-right">
                                             <br />
-                                            <button type="button" value="Save" class="btn btn-success" onclick="return validate();" name="Save" id="Save">Submit</button>
+                                            <input type="submit" value="Submit" class="btn btn-success" onclick="return validate()" name="Save" id="Save" />
                                             @*<input type="submit" value="Save Request" name="Request" id="Request" class="btn btn-success" onclick="return validate();"/>*@
 
                                         </div>
@@ -131,28 +131,60 @@
         return true;
     }
     function GetUserData() {
+        debugger;
         var loginid = $('#ToLoginId').val();
-        $.ajax({
-            url: "/EWalletRequest/GetUserDetail",
-            data: { loginid: loginid },
-            processData: false,
-            type: 'GET',
-            contentType: false,
-            success: function (data) {
-                if (data[0].flag == "1") {
-                    
-                    $("#ToName").val(data[0].Name);
-                   
-                }
-                else {
-                    alert(data.msg);
-                }
-            }
-        });
-    }
-    validate()
-    {
+        if (loginid != null || loginid != "" || loginid != undefined) {
+            $.ajax({
+                url: "/EWalletRequest/GetUserDetail",
+                type: 'GET',
+                data: { loginid: loginid },
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
 
+                success: function (data) {
+                    //console.log(data)
+                    if (data.Flag == "1") {
+
+                        $("#ToName").val(data.Name);
+
+                    }
+                    else {
+                        alert("Invalid Login Id");
+                        $('#ToLoginId').val('');
+                        $('#ToName').val('');
+                    }
+                }
+            });
+        }
+        else {
+            alert("Please Enter the Login Id");
+            $('#ToLoginId').val('');
+            $('#ToName').val('');
+        }
+       
+    }
+
+    function checkBalance() {
+        var fromamount = $('#Amount').val();
+        var toamount = $('#ToAmount').val();
+        if (toamount > fromamount) {
+            alert('The transfer amount exceeds your wallet balance. Please check your wallet balance and try again.');
+            $('#ToAmount').focus();
+            return false;
+        }
+
+    }
+    function validate() {
+        if ($('#ToLoginId').val() == "" || $('#ToLoginId').val() == null) {
+            alert('Enter the to Login Id');
+            $('#ToLoginId').focus();
+            return false;
+        }
+        if ($('#ToAmount').val() == "" || $('#ToAmount').val() == null) {
+            alert('Enter the transfer amount');
+            $('#ToAmount').focus();
+            return false;
+        }
     }
 </script>
 
