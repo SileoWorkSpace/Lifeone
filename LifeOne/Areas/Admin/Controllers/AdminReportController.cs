@@ -5910,5 +5910,30 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(reports);
 
         }
+        public ActionResult RewardDetails(Rewards rewards)
+        {
+            if (!PermissionManager.IsActionPermit("Reward Details", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
+            if (rewards.Page == 0 || rewards.Page == null)
+            {
+                rewards.Page = 1;
+            }
+            ViewBag.RewardStatus = rewards.RewardStatus;
+            rewards.Size = SessionManager.Size;
+            DataSet dataSet = rewards.GetRewardDetails();
+            rewards.getRewardDetails = dataSet.Tables[0];
+            int totalRecords = 0;
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(rewards.getRewardDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, rewards.Page, SessionManager.Size);
+                rewards.Pager = pager;
+            }
+            return View(rewards);
+
+        }
+
     }
 }

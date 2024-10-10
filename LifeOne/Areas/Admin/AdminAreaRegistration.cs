@@ -2898,6 +2898,18 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                 },
 
             new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+            "RewardDetails",
+            "RewardDetails/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "AdminReport",
+                action = "RewardDetails",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

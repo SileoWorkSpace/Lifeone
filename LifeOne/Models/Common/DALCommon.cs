@@ -587,9 +587,6 @@ namespace LifeOne.Models.Common
         public Pager Pager { get; set; }
         public int EndPage { get; private set; }
 
-
-       
-
     }
 
     [Serializable]

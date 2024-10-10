@@ -826,6 +826,7 @@
     <Compile Include="Models\DALReports.cs" />
     <Compile Include="Models\Razorpay\Razorpay.cs" />
     <Compile Include="Models\Razorpay\RazorpayCommon.cs" />
+    <Compile Include="Models\Rewards.cs" />
     <Compile Include="Models\Reports.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\QUtility\API\GenericAPI.cs" />
@@ -1633,6 +1634,7 @@
     <Content Include="Areas\Associate\Views\AssociateReport\AssociateCancelOrderDetails.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\TopupHistory.cshtml" />
     <Content Include="Areas\Associate\Views\AssociateReport\AssociateToPupHistory.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminReport\RewardDetails.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />

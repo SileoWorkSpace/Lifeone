@@ -780,21 +780,21 @@
                                             </a>
                                             <ul class="nav-third-level" aria-expanded="false">
                                                 @*@if (PermissionManager.IsViewPermit("Monthly Bonanza Reward"))
-                                                {
-                                                    <li><a href="/Monthly-Bonanza-Reward">Monthly Bonanza Reward</a></li>
-                                                }*@
+                {
+                    <li><a href="/Monthly-Bonanza-Reward">Monthly Bonanza Reward</a></li>
+                }*@
                                                 @if (PermissionManager.IsViewPermit("Life Time Reward"))
                                                 {
                                                     <li><a href="/LifeTimeReward">Lifetime Reward</a></li>
                                                 }
                                                 @*@if (PermissionManager.IsViewPermit("Premium Club Direct Seller"))
-                            {
-                                <li><a href="/PremiumClubMember">Premium Club Direct Seller</a></li>
-                            }*@
+                {
+                    <li><a href="/PremiumClubMember">Premium Club Direct Seller</a></li>
+                }*@
                                                 @*@if (PermissionManager.IsViewPermit("Premium Club Qualifier"))
-                                                {
-                                                    <li><a href="/PremiumClubQualifier">Premium Club Qualifier</a></li>
-                                                }*@
+                {
+                    <li><a href="/PremiumClubQualifier">Premium Club Qualifier</a></li>
+                }*@
                                                 @if (PermissionManager.IsViewPermit("Direct Seller Recognition"))
                                                 {
                                                     <li><a href="/Admin/AdminReport/GetMembersRecognition">Direct Seller's Recognition</a></li>
@@ -821,6 +821,10 @@
                                         @if (PermissionManager.IsViewPermit("Activation Tally GST Report"))
                                         {
                                             <li><a href="/Admin-ActivationTallyGSTReport">Activation Tally GST Report</a></li>
+                                        }
+                                        @if (PermissionManager.IsViewPermit("Reward Details"))
+                                        {
+                                            <li><a href="/RewardDetails">Reward Details</a></li>
                                         }
                                     </ul>
 
