@@ -888,6 +888,7 @@
     <Compile Include="Models\QUtility\Service\VerifyTransactionPasswordService.cs" />
     <Compile Include="Models\QUtility\Service\WalletService.cs" />
     <Compile Include="Models\QUtility\Service\WaterBillPaymentService.cs" />
+    <Compile Include="Models\Rewards.cs" />
     <Compile Include="Models\ShoppingRequest.cs" />
     <Compile Include="Models\ShoppingResponse.cs" />
     <Compile Include="Models\TBOHotelAPI\API\TBOHotelGenericAPI.cs" />
