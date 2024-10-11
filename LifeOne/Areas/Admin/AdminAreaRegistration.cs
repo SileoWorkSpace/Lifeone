@@ -2910,10 +2910,19 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                 id = UrlParameter.Optional
             },
             new[] { "LifeOne.Areas.Admin.Controllers" });
-        }
 
-
-
+            context.MapRoute(
+           "WalletTransferDetails",
+           "WalletTransferDetails/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "AdminReport",
+               action = "WalletTransferDetails",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+        }       
     }
     
 }

@@ -1314,6 +1314,20 @@ namespace LifeOne.Areas.Associate.Controllers
            
            
         }
+        public ActionResult GetWalletTransferDetails(WalletTransfer wallet)
+        {
+            if (wallet.Page == 0 || wallet.Page == null)
+            {
+                wallet.Page = 1;
+            }
+            wallet.Size = SessionManager.Size;
+            wallet.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            wallet.Page = 1;
+            DataSet dataSet = wallet.GetWalletTransfer();
+            wallet.getwalletdetails = dataSet.Tables[0];
+            return View(wallet);
+
+        }
     }
 }
 

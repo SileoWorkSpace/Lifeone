@@ -5928,5 +5928,27 @@ namespace LifeOne.Areas.Admin.Controllers
             }
             return View(rewards);
         }
+        public ActionResult WalletTransferDetails(WalletTransfer wallet)
+        {
+            if (!PermissionManager.IsActionPermit("Reward Details", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
+            if (wallet.Page == 0 || wallet.Page == null)
+            {
+                wallet.Page = 1;
+            }           
+            wallet.Size = SessionManager.Size;
+            DataSet dataSet = wallet.GetWalletTransfer();
+            wallet.getwalletdetails = dataSet.Tables[0];
+            int totalRecords = 0;
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(wallet.getwalletdetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, wallet.Page, SessionManager.Size);
+                wallet.Pager = pager;
+            }
+            return View(wallet);
+        }
     }
 }

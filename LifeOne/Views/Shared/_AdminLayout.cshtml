@@ -826,6 +826,10 @@
                                         {
                                             <li><a href="/RewardDetails">Reward Details</a></li>
                                         }
+                                        @if (PermissionManager.IsViewPermit("Wallet Transfer Details"))
+                                        {
+                                            <li><a href="/WalletTransferDetails">Wallet Transfer Details</a></li>
+                                        }
                                     </ul>
 
                                 </li>
