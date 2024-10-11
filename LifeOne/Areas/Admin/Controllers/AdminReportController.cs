@@ -1656,7 +1656,6 @@ namespace LifeOne.Areas.Admin.Controllers
         }
         public ActionResult UpdatePayoutPayment(int? Page, MPayoutReport obj)
         {
-
             if (!PermissionManager.IsActionPermit("Update Payout Payment", ViewOptions.FormView))
             {
                 return Redirect("/Home/adminlogin");
@@ -5905,7 +5904,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 reports.Pager = pager;
             }
             return View(reports);
-
         }
         public ActionResult RewardDetails(Rewards rewards)
         {

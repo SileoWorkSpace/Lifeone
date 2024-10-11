@@ -29,6 +29,7 @@ namespace LifeOne.Models
         public string ToursImage{ get; set; }
         public string RewardStatus { get; set; }
         public decimal LeftBusiness { get; set; }
+
         public decimal RightBusiness { get; set; }
 
         public DataTable getRewardDetails { get; set; }
