@@ -239,7 +239,7 @@
     }
 
     function Skip(pId) {
-
+        debugger
         if (confirm('Do you want to Skip this Reward ?')) {
             if (pId == "") {
                 return false;
@@ -256,7 +256,7 @@
                     success: function (data) {
                         if (data.Msg == "1") {
                             alert('Skipped Successfully!!');
-                            location.href = "/Accounts/Rewards";
+                            location.href = "/Associate/AssociateRewards/Rewards";
                             return false;
                         }
                         else if (data.Msg == "2") {
