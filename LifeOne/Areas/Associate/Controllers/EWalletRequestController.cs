@@ -298,13 +298,17 @@ namespace LifeOne.Areas.Associate.Controllers
         }
 
         public ActionResult WalletToWalletTransfer()
-        {
+        { 
             EwalletRequest obj = new EwalletRequest();
             obj.LoginId = Convert.ToString(Session["LoginId"] ?? "0");
             obj.Name = Convert.ToString(Session["Name"] ?? null);
             obj.Fk_MemId = SessionManager.AssociateFk_MemId.ToString();
-            obj.Amount = SessionManager.EwalletBalance.ToString();
-
+            //obj.Amount = SessionManager.EwalletBalance.ToString();
+            DataSet ds = obj.GetWalletDetail();
+            if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+            {
+                obj.Amount = ds.Tables[0].Rows[0]["WalletAmount"].ToString();                
+            }
             return View(obj);
         }
 
@@ -325,7 +329,7 @@ namespace LifeOne.Areas.Associate.Controllers
 
             return Json(new { Name, Flag }, JsonRequestBehavior.AllowGet);
 
-        }
+        }        
         [HttpPost]
         public ActionResult WalletToWalletTransfer(EwalletRequest obj)
         {

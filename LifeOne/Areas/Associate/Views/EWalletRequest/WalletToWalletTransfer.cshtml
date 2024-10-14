@@ -115,7 +115,7 @@
             </div>
         </div>
 
-    }
+     }
 </div>
 
 
@@ -162,11 +162,12 @@
             $('#ToName').val('');
         }
        
-    }
-
+    }       
     function checkBalance() {
-        var fromamount = $('#Amount').val();
-        var toamount = $('#ToAmount').val();
+        debugger
+        var fromamount =parseInt($('#Amount').val());
+        var toamount = parseInt($('#ToAmount').val());
+
         if (toamount > fromamount) {
             alert('The transfer amount exceeds your wallet balance. Please check your wallet balance and try again.');
             $('#ToAmount').focus();

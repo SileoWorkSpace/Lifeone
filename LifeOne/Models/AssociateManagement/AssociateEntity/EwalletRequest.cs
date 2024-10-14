@@ -65,6 +65,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public string ToLoginId { get; set; }
         public string ToAmount { get; set; }
         public string ToName { get; set; }
+        public decimal WalletAmount { get; set; }
         public string Flag { get; set; }
         public List<EwalletRequest> list1 { get; set; }
 
@@ -80,6 +81,22 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
                     new SqlParameter("@LoginId",LoginId)
                 };
             DataSet ds = Connection.ExecuteQuery("getAssociateDetails", para);
+            return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        public DataSet GetWalletDetail()
+        {
+            try
+            {
+                SqlParameter[] para =
+                {
+                    new SqlParameter("@LoginId",LoginId)
+                };
+            DataSet ds = Connection.ExecuteQuery("getWalletDetails", para);
             return ds;
             }
             catch (Exception)

@@ -33,7 +33,8 @@ namespace LifeOne.Models
         public DataSet GetWalletTransfer()
         {
             SqlParameter[] para = { 
-                                        new SqlParameter("@FK_MemId",FK_MemId),                                    new SqlParameter("@LoginId",LoginId),
+                                        new SqlParameter("@FK_MemId",FK_MemId),                                    new SqlParameter("@FromLoginId",FromLoginId),
+                                        new SqlParameter("@ToLoginId",ToLoginId),
                                         new SqlParameter("@Page",Page),
                                         new SqlParameter("@Size",Size),
 

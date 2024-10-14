@@ -26,12 +26,20 @@
                                             <div class="row">
                                                 <div class="col-12 col-md-2">
                                                     <div class="form-group">
-                                                        <label>Login Id</label>
-                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Login Id" })
+                                                        <label>From Login Id</label>
+                                                        @Html.TextBoxFor(m => m.FromLoginId, new { @class = "form-control", @placeholder = "Enter From Login Id" })
                                                         @Html.HiddenFor(m => m.Page)
 
                                                     </div>
-                                                </div>                                              
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>To Login Id</label>
+                                                        @Html.TextBoxFor(m => m.ToLoginId, new { @class = "form-control", @placeholder = "Enter To Login Id" })
+                                                        @Html.HiddenFor(m => m.Page)
+
+                                                    </div>
+                                                </div>
 
                                                 <div class="col-12 col-md-2">
                                                     <div class="form-group">
