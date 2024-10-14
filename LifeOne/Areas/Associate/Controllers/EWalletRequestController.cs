@@ -342,9 +342,7 @@ namespace LifeOne.Areas.Associate.Controllers
                     TempData["Message"] = ds.Tables[0].Rows[0]["Message"].ToString();
                     TempData["Flag"] = ds.Tables[0].Rows[0]["Flag"].ToString();
                     return RedirectToAction("WalletToWalletTransfer");
-
                 }
-
             }
             catch (Exception)
             {

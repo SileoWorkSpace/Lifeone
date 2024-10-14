@@ -1311,8 +1311,7 @@ namespace LifeOne.Areas.Associate.Controllers
                 model.Pager = pager;
             }
             return View(model);
-           
-           
+                      
         }
         public ActionResult GetWalletTransferDetails(WalletTransfer wallet)
         {
@@ -1326,7 +1325,6 @@ namespace LifeOne.Areas.Associate.Controllers
             DataSet dataSet = wallet.GetWalletTransfer();
             wallet.getwalletdetails = dataSet.Tables[0];
             return View(wallet);
-
         }
     }
 }
