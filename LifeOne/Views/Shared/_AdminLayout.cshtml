@@ -785,7 +785,8 @@
                 }*@
                                                 @if (PermissionManager.IsViewPermit("Life Time Reward"))
                                                 {
-                                                    <li><a href="/LifeTimeReward">Lifetime Reward</a></li>
+                                                    @*<li><a href="/LifeTimeReward">Lifetime Reward</a></li>*@
+                                                    <li><a href="/RewardDetails">Lifetime Reward</a></li>
                                                 }
                                                 @*@if (PermissionManager.IsViewPermit("Premium Club Direct Seller"))
                 {
@@ -822,10 +823,10 @@
                                         {
                                             <li><a href="/Admin-ActivationTallyGSTReport">Activation Tally GST Report</a></li>
                                         }
-                                        @if (PermissionManager.IsViewPermit("Reward Details"))
+                                        @*@if (PermissionManager.IsViewPermit("Reward Details"))
                                         {
                                             <li><a href="/RewardDetails">Reward Details</a></li>
-                                        }
+                                        }*@
                                     </ul>
 
                                 </li>
