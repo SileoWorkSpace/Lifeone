@@ -213,10 +213,9 @@ namespace LifeOne.Areas.Admin.Controllers
             }
             catch (Exception)
             {
-                throw;
             }
 
-            return View();
+            return View(obj);
         }
 
         [HttpGet]

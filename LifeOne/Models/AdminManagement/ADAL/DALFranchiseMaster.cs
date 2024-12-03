@@ -46,7 +46,7 @@ namespace LifeOne.Models.AdminManagement.ADAL
 
                 queryParameters.Add("@CreatedBy", obj.CreatedBy);
                 queryParameters.Add("@Issame", obj.Issame);
-                queryParameters.Add("@ProfilePic", obj.ProfilePic);
+                queryParameters.Add("@ProfilePic", obj.ProfilePic == "" ? null : obj.ProfilePic);
                 queryParameters.Add("@BLoginID", obj.LoginID);
 
                 FranchiseResponseMaster _iresult = DBHelperDapper.DAAddAndReturnModel<FranchiseResponseMaster>("FranchiseRegistration", queryParameters);
