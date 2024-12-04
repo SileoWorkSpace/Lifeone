@@ -205,8 +205,8 @@ namespace LifeOne.Areas.Admin.Controllers
 
                 else
                 {
-                    TempData["code"] = "0";
-                    TempData["msg"] = "Can not process the request";
+                    TempData["code"] = "";
+                    TempData["msg"] = _result.Msg.ToString();
 
                 }
 

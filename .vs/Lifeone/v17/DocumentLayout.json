@@ -3,16 +3,12 @@
   "WorkspaceRootPath": "E:\\github\\Lifeone\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\models\\adminmanagement\\adal\\dalfranchisemaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\adminmanagement\\adal\\dalfranchisemaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\areas\\admin\\controllers\\franchisemastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\controllers\\franchisemastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\areas\\admin\\views\\franchisemaster\\franchisemaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
@@ -110,7 +106,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 46,
+          "SelectedChildIndex": 48,
           "Children": [
             {
               "$type": "Bookmark",
@@ -298,58 +294,46 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "CustomerController.cs",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Controllers\\CustomerController.cs",
               "RelativeDocumentMoniker": "LifeOne\\Controllers\\CustomerController.cs",
               "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Controllers\\CustomerController.cs",
               "RelativeToolTip": "LifeOne\\Controllers\\CustomerController.cs",
-              "ViewState": "AgIAABoAAAAAAAAAAAAAwIQBAABGAAAAAAAAAA==",
+              "ViewState": "AgIAAH0BAAAAAAAAAAAgwHIBAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-04T05:37:34.479Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DALFranchiseMaster.cs",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALFranchiseMaster.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Models\\AdminManagement\\ADAL\\DALFranchiseMaster.cs",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALFranchiseMaster.cs",
-              "RelativeToolTip": "LifeOne\\Models\\AdminManagement\\ADAL\\DALFranchiseMaster.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAYwCAAAAA/AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T13:22:58.04Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 2,
               "Title": "FranchiseMaster.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
               "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
               "RelativeToolTip": "LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAhwNMAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAEwAAAAAAAAAAAAhwFcAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-03T12:42:03.22Z"
+              "WhenOpened": "2024-12-03T12:42:03.22Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "FranchiseMasterController.cs",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\FranchiseMasterController.cs",
               "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Controllers\\FranchiseMasterController.cs",
               "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\FranchiseMasterController.cs",
               "RelativeToolTip": "LifeOne\\Areas\\Admin\\Controllers\\FranchiseMasterController.cs",
-              "ViewState": "AgIAAKIAAAAAAAAAAADgv8AAAAAUAAAAAAAAAA==",
+              "ViewState": "AgIAAL0AAAAAAAAAAAAYwM8AAAAoAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-12-03T12:15:16.512Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
               "Title": "AdminAreaRegistration.cs",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
               "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
@@ -357,24 +341,25 @@
               "RelativeToolTip": "LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
               "ViewState": "AgIAAAAEAAAAAAAAAAAEwA0EAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T12:14:49.982Z"
+              "WhenOpened": "2024-12-03T12:14:49.982Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 4,
               "Title": "Web.config",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Web.config",
               "RelativeDocumentMoniker": "LifeOne\\Web.config",
               "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Web.config",
               "RelativeToolTip": "LifeOne\\Web.config",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAACtAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABIAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2024-10-01T13:11:46.788Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 9,
               "Title": "Products.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Products.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Products.cshtml",
@@ -386,7 +371,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 8,
               "Title": "HomeController.cs",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "LifeOne\\Controllers\\HomeController.cs",
@@ -398,7 +383,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 7,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_Layout.cshtml",
@@ -410,7 +395,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 13,
               "Title": "_FooterPartialLayout.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
@@ -422,7 +407,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 5,
               "Title": "CustomerRegistration.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
@@ -434,7 +419,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 17,
               "Title": "Login.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Login.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Login.cshtml",
@@ -446,7 +431,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 10,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Index.cshtml",
@@ -458,7 +443,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 6,
               "Title": "BusinessPlan.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\BusinessPlan.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\BusinessPlan.cshtml",
@@ -470,7 +455,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 11,
               "Title": "ProductDetails.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\ProductDetails.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\ProductDetails.cshtml",
@@ -482,7 +467,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 12,
               "Title": "main.js",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.js",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\js\\main.js",
@@ -494,7 +479,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 22,
               "Title": "Certificate.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Certificate.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Certificate.cshtml",
@@ -506,7 +491,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 14,
               "Title": "About.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\About.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\About.cshtml",
@@ -518,7 +503,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 15,
               "Title": "Gallery.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Gallery.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Gallery.cshtml",
@@ -530,7 +515,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 20,
               "Title": "Video.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Video.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Video.cshtml",
@@ -542,7 +527,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 23,
               "Title": "GalleryPhoto.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
@@ -554,7 +539,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 16,
               "Title": "quickview.html",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
@@ -566,7 +551,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 21,
               "Title": "ImageGallery.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\ImageGallery.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\ImageGallery.cshtml",
@@ -578,7 +563,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 18,
               "Title": "demo19.min.css",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
@@ -590,7 +575,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 19,
               "Title": "main.min.js",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.min.js",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\js\\main.min.js",
