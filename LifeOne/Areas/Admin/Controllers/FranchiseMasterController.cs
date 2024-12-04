@@ -216,7 +216,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 throw;
             }
 
-            return View();
+            return View(obj);
         }
 
         [HttpGet]
