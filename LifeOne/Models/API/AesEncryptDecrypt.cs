@@ -1,19 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Configuration;
 using System.IO;
-using System.Linq;
-using System.Runtime.Serialization.Json;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
-using Newtonsoft.Json;
-using Quartz.Util;
 
 namespace LifeOne.Models.API
 {
-    public class AesEncryptDecrypt
+	public class AesEncryptDecrypt
     {
         public static string EncryptString(string key, string plainText)
         {

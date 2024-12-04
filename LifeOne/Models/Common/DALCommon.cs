@@ -1,18 +1,10 @@
-﻿using Dapper;
-using LifeOne.Models.AdminManagement.AEntity;
-
-using Microsoft.Owin.Security.Notifications;
+﻿using LifeOne.Models.AdminManagement.AEntity;
 using Newtonsoft.Json;
-using Quartz.Impl.Triggers;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity.Infrastructure;
 using System.IO;
-using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using LifeOne.Models.BillAvenueUtility.DAL;
 using LifeOne.Models.QUtility.Entity;
 using LifeOne.Models.QUtility.Service;
 using System.Data;
@@ -25,7 +17,7 @@ using System.Text;
 namespace LifeOne.Models.Common
 {
 
-    public class DALCommon
+	public class DALCommon
     {
 
         public WalletTransactionResponse DALSaveTransactionDetails(RequestModel _obj, string _Action, string _ActionType, string _RechargeType)

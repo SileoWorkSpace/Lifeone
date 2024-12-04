@@ -1,20 +1,18 @@
 ﻿using LifeOne.Models.AdminManagement.AEntity;
-using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using LifeOne.Models.Manager;
 using LifeOne.Models.Common;
 using LifeOne.Models.AdminManagement.AService;
+using PagedList;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
-    public class MakeMemberLeaderController : Controller
+	public class MakeMemberLeaderController : Controller
     {
         logic obj = new logic();
         public ActionResult ViewAndMakePayment(MFranchiseLeaders leaders)

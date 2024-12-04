@@ -1,18 +1,15 @@
 ﻿using LifeOne.Filters;
 using LifeOne.Models.AdminManagement.ADAL;
 using LifeOne.Models.AdminManagement.AEntity;
-using LifeOne.Models.Common;
 using LifeOne.Models.Manager;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
 using LifeOne.Models.AdminManagement.AModels;
+using System.Web.Mvc;
 namespace LifeOne.Areas.Admin.Controllers
 {
-    [AuthorizeAdmin]
+	[AuthorizeAdmin]
     // [MenuPermissionFilter]
     public class UserPermissionController : Controller
     {

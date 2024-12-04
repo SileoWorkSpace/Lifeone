@@ -1,24 +1,12 @@
-﻿using AesEncryption;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using System;
 using System.Web.Http;
 using System.Configuration;
-using Newtonsoft.Json;
 using LifeOne.Models.QUtility.Entity;
 using LifeOne.Models.QUtility.Service;
-using LifeOne.Models.API;
-using System.Data.SqlClient;
-using LifeOne.Models.AdminManagement.ADAL;
-using Dapper;
-using LifeOne.Models.API.DAL;
-using LifeOne.Models.BillAvenueUtility.DAL;
 
 namespace LifeOne.Controllers
 {
-    public class UtilitiesController : ApiController
+	public class UtilitiesController : ApiController
     {
         string Aeskey = ConfigurationManager.AppSettings["Aeskey"].ToString();
         [HttpPost] //Hit the Quaere company wallet api
@@ -69,64 +57,7 @@ namespace LifeOne.Controllers
         //Begin
         //All Recharge Informaiton
         //payada and LifeOnee intigration
-        [HttpPost]
-        public ResponseModel PrePaidRechargeV2(RequestModel _model)
-        {
-            try
-            {
-                RechargeModel req = new RechargeModel();
-                var QuaryPara = new DynamicParameters();
-                RechargeApiModeModel ApiModeRes = DBHelperDapper.DAAddAndReturnModel<RechargeApiModeModel>("ProGetRechargeAPIMode", QuaryPara);
-                ResponseModel _result = new ResponseModel();
-                if (ApiModeRes.IsPayAdda)
-                {
-                    ApiCommonRechargeModel _Req = DALCommon.CustomDeserializeObjectWithDecryptString<ApiCommonRechargeModel>(_model.body);
-                    var QuaryParameter = new DynamicParameters();
-                    QuaryParameter.Add("@BillerId", string.Empty);
-                    QuaryParameter.Add("@Provider", _Req.Provider);
-                    QuaryParameter.Add("@TypeId", 1);
-                    RechargeModel _obj = DBHelperDapper.DAAddAndReturnModel<RechargeModel>("ProGetOperatorByBillerId", QuaryParameter);
-                    if (_obj != null)
-                    {
-                        //if (_obj.OperatorId == 10)//--10 Used for Jio temprary added this code will remove it ahead
-                        //    _result = new UtilitiesController().JioMobilePrepaidRecharge(_model);
-                        //else
-                        //{
-                            req.CustomerNumber = _Req.Number;
-                            req.RechargeType = _obj.RechargeType;
-                            req.OperatorId = _obj.OperatorId;
-                            req.TransactionAmount = decimal.ToInt32(Convert.ToDecimal(_Req.Amount));
-                            _result = new RechargerApiBusiness().RechargeV2(req, _model, "Prepaid Recharge", "PrepaidRecharge");
-                       //}
-                    }
-                    else
-                    {
-                        return new ResponseModel { body = DALCommon.CustomSerializeObjectWithEncryptString(new List<PrepaidResponse> { new PrepaidResponse { Message = "Invalid Provider", Status = "failed", ERROR = "1", RESULT = "1", ERRMSG = "Invalid Provider" } }) };
-                    }
-                }
-                else if (ApiModeRes.IsLifeOnee)
-                {
-                    ApiCommonRechargeModel _Req = DALCommon.CustomDeserializeObjectWithDecryptString<ApiCommonRechargeModel>(_model.body);
-                    if (_Req.Provider.ToLower() != "jio")
-                    {
-                        _result = new PrepaidService().CallPrepaidAndOtherRechargeService(_model, "PrepaidRecharge", "Prepaid Recharge", "PrepaidRecharge");
-                    }
-                    else
-                    {
-                        _result = new UtilitiesController().JioMobilePrepaidRecharge(_model);
-                    }
-                }
-                else
-                {
-                    return new ResponseModel { body = DALCommon.CustomSerializeObjectWithEncryptString(new List<PrepaidResponse> { new PrepaidResponse { Message = "Recharge mode not enabled", Status = "failed", ERROR = "1", RESULT = "1", ERRMSG = "Recharge mode not enabled" } }) };
-                }
-                return _result;
-            }
-            catch (Exception ex)
-            {
-                return new ResponseModel { body = DALCommon.CustomSerializeObjectWithEncryptString(new List<PrepaidResponse> { new PrepaidResponse { Message = "We are facing some technical issues as of now please try again later", Status = "failed", ERROR = "1", RESULT = "1", ERRMSG = "We are facing some technical issues as of now please try again later" } }) };
-            }
-        }
+      
         [HttpPost]
         public ResponseModel PrePaidRecharge(RequestModel _model)
         {
@@ -172,55 +103,7 @@ namespace LifeOne.Controllers
             }
         }
 
-        [HttpPost]
-        public ResponseModel DTHV2(RequestModel _model)
-        {
-            try
-            {
-                RechargeModel req = new RechargeModel();
-                var QuaryPara = new DynamicParameters();
-                RechargeApiModeModel ApiModeRes = DBHelperDapper.DAAddAndReturnModel<RechargeApiModeModel>("ProGetRechargeAPIMode", QuaryPara);
-                ResponseModel _result = new ResponseModel();
-                if (ApiModeRes.IsPayAdda)
-                {
-                    ApiCommonRechargeModel _Req = DALCommon.CustomDeserializeObjectWithDecryptString<ApiCommonRechargeModel>(_model.body);
-                    var QuaryParameter = new DynamicParameters();
-                    QuaryParameter.Add("@BillerId", string.Empty);
-                    QuaryParameter.Add("@Provider", _Req.Provider);
-                    QuaryParameter.Add("@TypeId", 2);
-                    RechargeModel _obj = DBHelperDapper.DAAddAndReturnModel<RechargeModel>("ProGetOperatorByBillerId", QuaryParameter);
-                    if (_obj != null)
-                    {
-                        req.CustomerNumber = _Req.Number;
-                        req.RechargeType = _obj.RechargeType;
-                        req.OperatorId = _obj.OperatorId;
-                        req.TransactionAmount = decimal.ToInt32(Convert.ToDecimal(_Req.Amount));
-                        _result = new RechargerApiBusiness().RechargeV2(req, _model, "DTH Recharge", "DTH");
-                    }
-                    else
-                    {
-                        return new ResponseModel { body = DALCommon.CustomSerializeObjectWithEncryptString(new List<PrepaidResponse> { new PrepaidResponse { Message = "Invalid Provider", Status = "failed", ERROR = "1", RESULT = "1", ERRMSG = "Invalid Provider" } }) };
-                    }
-                }
-                else if (ApiModeRes.IsLifeOnee)
-                {
-
-                    //CallPrepaidAndOtherRechargeService - Enable us to recharge Prepaid, PostPaid(BBPS),DTH,TataskyRecharge,ThemeParkGiftCard            
-                    DTHService _objprepaidService = new DTHService();
-                    _result = _objprepaidService.CallDTHRechargeService(_model, "DTH", "DTH Recharge", "DTH");
-                }
-                else
-                {
-                    return new ResponseModel { body = DALCommon.CustomSerializeObjectWithEncryptString(new List<PrepaidResponse> { new PrepaidResponse { Message = "Recharge mode not enabled", Status = "failed", ERROR = "1", RESULT = "1", ERRMSG = "Recharge mode not enabled" } }) };
-                }
-                return _result;
-            }
-            catch (Exception)
-            {
-                return new ResponseModel { body = DALCommon.CustomSerializeObjectWithEncryptString(new List<PrepaidResponse> { new PrepaidResponse { Message = "We are facing some technical issues as of now please try again later", Status = "failed", ERROR = "-1", RESULT = "-1", ERRMSG = "We are facing some technical issues as of now please try again later" } }) };
-            }
-        }
-
+       
         [HttpPost]
         public ResponseModel DataCard(RequestModel _model)
         {

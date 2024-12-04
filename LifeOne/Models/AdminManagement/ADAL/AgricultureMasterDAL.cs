@@ -6,11 +6,10 @@ using LifeOne.Models.Manager;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace LifeOne.Models.AdminManagement.ADAL
 {
-    public class AgricultureMasterDAL
+	public class AgricultureMasterDAL
     {
         private static string connectionString = string.Empty;
         public static string connection()

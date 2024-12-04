@@ -1,31 +1,20 @@
 ﻿using ClosedXML.Excel;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.EMMA;
-using LifeOne.Models;
 using LifeOne.Models.AdminManagement.AEntity;
 using LifeOne.Models.AdminManagement.AService;
 using LifeOne.Models.AssociateManagement.AssociateDAL;
 using LifeOne.Models.AssociateManagement.AssociateEntity;
 using LifeOne.Models.Common;
 using LifeOne.Models.Manager;
-using LifeOne.Models.QUtility.DAL;
-using PagedList;
-using Razorpay.Api;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.IO;
-using System.Linq;
-using System.Net;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 
 namespace LifeOne.Areas.Associate.Controllers
 {
 
-    [SessionTimeoutAttribute]
+	[SessionTimeoutAttribute]
     public class EWalletRequestController : Controller
     {
         // GET: Associate/EWalletRequest

@@ -1,144 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "E:\\github\\Lifeone\\",
+  "WorkspaceRootPath": "D:\\Repositories\\Lifeone\\",
   "Documents": [
     {
-<<<<<<< HEAD
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\admin\\views\\franchisemaster\\franchisemaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\views\\franchisemaster\\franchisemaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\models\\adminmanagement\\adal\\admindalkyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\adminmanagement\\adal\\admindalkyc.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\admin\\adminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\adminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\models\\adminmanagement\\adal\\agriculturemasterdal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\adminmanagement\\adal\\agriculturemasterdal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\areas\\franchise\\franchisearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\franchise\\franchisearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\controllers\\utilitiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\controllers\\utilitiescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|d:\\repositories\\lifeone\\lifeone\\models\\reports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\reports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\packages.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\areas\\associate\\controllers\\associatereportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\controllers\\associatereportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-=======
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\models\\adminmanagement\\adal\\dalfranchisemaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\adminmanagement\\adal\\dalfranchisemaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\controllers\\franchisemastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\controllers\\franchisemastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
->>>>>>> origin/Asif3Disember
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\views\\franchisemaster\\franchisemaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\views\\franchisemaster\\franchisemaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-<<<<<<< HEAD
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\areas\\associate\\associatearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\associatearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\areas\\admin\\views\\productmaster\\productmaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\views\\productmaster\\productmaster.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\models\\adminmanagement\\adal\\daladminproductmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\adminmanagement\\adal\\daladminproductmaster.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\areas\\admin\\controllers\\productmastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\controllers\\productmastercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-=======
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\adminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\adminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\customerregistration.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\customerregistration.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\views\\home\\businessplan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\businessplan.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\shared\\_layout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
->>>>>>> origin/Asif3Disember
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\products.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\productdetails.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\content\\newassests\\js\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\content\\newassests\\js\\main.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\shared\\_footerpartiallayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\shared\\_footerpartiallayout.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\about.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\gallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\gallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\content\\newassests\\ajax\\quickview.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\content\\newassests\\ajax\\quickview.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\login.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\content\\newassests\\css\\demo19.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\content\\newassests\\css\\demo19.min.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\content\\newassests\\js\\main.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\content\\newassests\\js\\main.min.js||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\video.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\video.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\imagegallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\imagegallery.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\certificate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\certificate.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|E:\\github\\Lifeone\\lifeone\\views\\home\\galleryphoto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\home\\galleryphoto.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|D:\\Repositories\\Lifeone\\lifeone\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\views\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     }
   ],
   "DocumentGroupContainers": [
@@ -148,7 +34,6 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-<<<<<<< HEAD
           "SelectedChildIndex": 2,
           "Children": [
             {
@@ -158,703 +43,80 @@
             {
               "$type": "Bookmark",
               "Name": "ST:129:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-=======
-          "SelectedChildIndex": 46,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:130:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{13b12e3e-c1b4-4539-9371-4fe9a0d523fc}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:133:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:132:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:134:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:135:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:135:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:136:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:13:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:11:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:14:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:12:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:131:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{65ddf8c3-8f89-4077-a6c6-dbb8853aab13}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:15:0:{2456bd12-ecf7-4988-a4a6-67d49173f565}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:137:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:138:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:139:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:136:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:140:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:137:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:140:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:141:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:142:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:143:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:144:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:145:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:146:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:147:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:148:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:138:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:149:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:150:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{809f6ff3-8092-454a-8003-6d4091f9b5bb}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:2:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
->>>>>>> origin/Asif3Disember
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-<<<<<<< HEAD
-              "Title": "FranchiseMaster.cshtml",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "ViewState": "AgIAAKcAAAAAAAAAAAAWwLsAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-11-29T09:23:07.468Z",
+              "Title": "AdminDALKYC.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\AdminDALKYC.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Models\\AdminManagement\\ADAL\\AdminDALKYC.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\AdminDALKYC.cs",
+              "RelativeToolTip": "LifeOne\\Models\\AdminManagement\\ADAL\\AdminDALKYC.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-04T07:11:32.41Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "AdminAreaRegistration.cs",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
-              "RelativeToolTip": "LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
-              "ViewState": "AgIAAPkDAAAAAAAAAIAwwBQEAAAtAAAAAAAAAA==",
+              "Title": "AgricultureMasterDAL.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\AgricultureMasterDAL.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Models\\AdminManagement\\ADAL\\AgricultureMasterDAL.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\AgricultureMasterDAL.cs",
+              "RelativeToolTip": "LifeOne\\Models\\AdminManagement\\ADAL\\AgricultureMasterDAL.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T09:22:49.229Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T07:10:48.598Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "FranchiseAreaRegistration.cs",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Franchise\\FranchiseAreaRegistration.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Franchise\\FranchiseAreaRegistration.cs",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Franchise\\FranchiseAreaRegistration.cs",
-              "RelativeToolTip": "LifeOne\\Areas\\Franchise\\FranchiseAreaRegistration.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAANAAAAAAAAAA==",
+              "Title": "UtilitiesController.cs",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Controllers\\UtilitiesController.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Controllers\\UtilitiesController.cs",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Controllers\\UtilitiesController.cs",
+              "RelativeToolTip": "LifeOne\\Controllers\\UtilitiesController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T09:22:37.184Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-12-04T07:10:38.935Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Reports.cs",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\Reports.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Models\\Reports.cs",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\Reports.cs",
-              "RelativeToolTip": "LifeOne\\Models\\Reports.cs",
-              "ViewState": "AgIAAJcCAAAAAAAAAAAqwKgCAAAJAAAAAAAAAA==",
-=======
-              "Title": "DALFranchiseMaster.cs",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALFranchiseMaster.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Models\\AdminManagement\\ADAL\\DALFranchiseMaster.cs",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALFranchiseMaster.cs",
-              "RelativeToolTip": "LifeOne\\Models\\AdminManagement\\ADAL\\DALFranchiseMaster.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwCUAAABDAAAAAAAAAA==",
->>>>>>> origin/Asif3Disember
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T13:22:58.04Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 5,
-              "Title": "ModelMetadata.cs",
-              "DocumentMoniker": "C:\\Users\\Piyush\\AppData\\Local\\Temp\\.vsdbgsrc\\4c774b4b794a5f5b2421e30e61440fc1e2757b14e36ba0321ebad2feffdf31aa\\ModelMetadata.cs",
-              "ToolTip": "C:\\Users\\Piyush\\AppData\\Local\\Temp\\.vsdbgsrc\\4c774b4b794a5f5b2421e30e61440fc1e2757b14e36ba0321ebad2feffdf31aa\\ModelMetadata.cs [Read Only]",
-              "ViewState": "AQIAACoBAAAAAAAAAAAiwDwBAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T04:37:17.354Z",
-              "EditorCaption": " [Read Only]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 4,
               "Title": "Web.config",
               "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Web.config",
               "RelativeDocumentMoniker": "LifeOne\\Web.config",
               "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Web.config",
               "RelativeToolTip": "LifeOne\\Web.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAADwAAAAAAAAAAAAAAE8AAAALAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-09-26T04:32:33.028Z",
-=======
-              "DocumentIndex": 2,
-              "Title": "FranchiseMaster.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Views\\FranchiseMaster\\FranchiseMaster.cshtml",
-              "ViewState": "AgIAAMAAAAAAAAAAAAAhwNMAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-12-03T12:42:03.22Z",
->>>>>>> origin/Asif3Disember
+              "WhenOpened": "2024-12-04T05:47:06.868Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-<<<<<<< HEAD
-              "DocumentIndex": 4,
-              "Title": "AssociateReportController.cs",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociateReportController.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Controllers\\AssociateReportController.cs",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociateReportController.cs",
-              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Controllers\\AssociateReportController.cs",
-              "ViewState": "AQIAAOsDAAAAAAAAAAAUwPkDAAAxAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T04:30:52.657Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "DALAdminProductMaster.cs",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminProductMaster.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminProductMaster.cs",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminProductMaster.cs",
-              "RelativeToolTip": "LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminProductMaster.cs",
-              "ViewState": "AQIAAFcAAAAAAAAAAAAYwF4AAABXAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T04:23:00.699Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "ProductMasterController.cs",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\ProductMasterController.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Controllers\\ProductMasterController.cs",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\ProductMasterController.cs",
-              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Controllers\\ProductMasterController.cs",
-              "ViewState": "AQIAAGQAAAAAAAAAAAAkwG4AAAAwAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-26T04:22:43.326Z"
-=======
-              "DocumentIndex": 1,
-              "Title": "FranchiseMasterController.cs",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\FranchiseMasterController.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Controllers\\FranchiseMasterController.cs",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\FranchiseMasterController.cs",
-              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Controllers\\FranchiseMasterController.cs",
-              "ViewState": "AgIAAKsAAAAAAAAAAADgv8AAAABEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T12:15:16.512Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AdminAreaRegistration.cs",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
-              "RelativeToolTip": "LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
-              "ViewState": "AgIAAAAEAAAAAAAAAAAEwA0EAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-03T12:14:49.982Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Web.config",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Web.config",
-              "RelativeDocumentMoniker": "LifeOne\\Web.config",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Web.config",
-              "RelativeToolTip": "LifeOne\\Web.config",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA8AAACtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2024-10-01T13:11:46.788Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Products.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Products.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Products.cshtml",
-              "ToolTip": "E:\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\Products.cshtml*",
-              "RelativeToolTip": "..\\..\\prakhar file\\My Project\\Selio_Proect\\Lifeone\\LifeOne\\Views\\Home\\Products.cshtml*",
-              "ViewState": "AQIAAIoAAAAAAAAAAAAkwJsAAABoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-01T12:43:03.311Z"
->>>>>>> origin/Asif3Disember
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-<<<<<<< HEAD
-              "Title": "ProductMaster.cshtml",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\ProductMaster\\ProductMaster.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Views\\ProductMaster\\ProductMaster.cshtml",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\ProductMaster\\ProductMaster.cshtml",
-              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Views\\ProductMaster\\ProductMaster.cshtml",
-              "ViewState": "AQIAACcBAAAAAAAAAAAowDcBAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-26T04:21:49.219Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "_AssociateLayout.cshtml",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Views\\Shared\\_AssociateLayout.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_AssociateLayout.cshtml",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Views\\Shared\\_AssociateLayout.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Shared\\_AssociateLayout.cshtml",
-              "ViewState": "AQIAAE8BAAAAAAAAAAAowFkBAAAWAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T13:31:47.978Z"
-=======
-              "Title": "HomeController.cs",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Controllers\\HomeController.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Controllers\\HomeController.cs",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Controllers\\HomeController.cs",
-              "RelativeToolTip": "LifeOne\\Controllers\\HomeController.cs",
-              "ViewState": "AQIAACgAAAAAAAAAAIA0wDQAAAAuAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T12:37:59.519Z"
->>>>>>> origin/Asif3Disember
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-<<<<<<< HEAD
-              "Title": "AssociateAreaRegistration.cs",
-              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
-              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
-              "RelativeToolTip": "LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
-              "ViewState": "AQIAAMYBAAAAAAAAAAAUwN8BAAAoAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-09-25T13:30:53.343Z"
-=======
-              "Title": "_Layout.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Shared\\_Layout.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_Layout.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Shared\\_Layout.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Shared\\_Layout.cshtml",
-              "ViewState": "AQIAABoCAAAAAAAAAAAAAB8CAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T11:18:37.275Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "_FooterPartialLayout.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
-              "ViewState": "AQIAAIIAAAAAAAAAAIBZwHIAAABSAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T11:06:58.907Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "CustomerRegistration.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
-              "ViewState": "AgIAACEAAAAAAAAAAAAAACQAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T10:52:06.696Z",
-              "EditorCaption": ""
+              "Title": "Web.config",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\Views\\Web.config",
+              "RelativeDocumentMoniker": "LifeOne\\Views\\Web.config",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\Views\\Web.config",
+              "RelativeToolTip": "LifeOne\\Views\\Web.config",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAABQAAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-12-04T05:45:12.835Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "Login.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Login.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Login.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Login.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\Login.cshtml",
-              "ViewState": "AQIAAFYAAAAAAAAAAAAqwFwAAABvAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T10:46:52.831Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Index.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Index.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Index.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Index.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\Index.cshtml",
-              "ViewState": "AQIAANQBAAAAAAAAAAAAAMcBAAAtAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T05:50:20.525Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BusinessPlan.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\BusinessPlan.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\BusinessPlan.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\BusinessPlan.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\BusinessPlan.cshtml",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABwAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T10:32:20.798Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ProductDetails.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\ProductDetails.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\ProductDetails.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\ProductDetails.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\ProductDetails.cshtml",
-              "ViewState": "AQIAABoAAAAAAAAAAAAkwBwAAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T05:51:00.259Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "main.js",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.js",
-              "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\js\\main.js",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.js",
-              "RelativeToolTip": "LifeOne\\Content\\NewAssests\\js\\main.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAANUBAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-09-25T06:41:49.845Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 22,
-              "Title": "Certificate.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Certificate.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Certificate.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Certificate.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\Certificate.cshtml",
-              "ViewState": "AQIAAC0AAAAAAAAAAAAAADsAAAA+AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T09:57:06.505Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "About.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\About.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\About.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\About.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\About.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-27T09:57:32.063Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Gallery.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Gallery.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Gallery.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Gallery.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\Gallery.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-10-01T07:00:14.904Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 20,
-              "Title": "Video.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Video.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Video.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Video.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\Video.cshtml",
-              "ViewState": "AQIAADMAAAAAAAAAAAAuwEQAAAANAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T09:58:47.954Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 23,
-              "Title": "GalleryPhoto.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAAEAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T09:52:52.181Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "quickview.html",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
-              "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
-              "RelativeToolTip": "LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
-              "WhenOpened": "2024-09-25T12:41:14.375Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 21,
-              "Title": "ImageGallery.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\ImageGallery.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\ImageGallery.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\ImageGallery.cshtml",
-              "RelativeToolTip": "LifeOne\\Views\\Home\\ImageGallery.cshtml",
-              "ViewState": "AQIAAOQAAAAAAAAAAAAAAPkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2024-09-25T09:29:34.587Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "demo19.min.css",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
-              "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
-              "RelativeToolTip": "LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
-              "ViewState": "AQIAACVIAAAAAAAAAAAqwCxIAAAiAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
-              "WhenOpened": "2024-09-25T07:20:08.37Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "main.min.js",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.min.js",
-              "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\js\\main.min.js",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.min.js",
-              "RelativeToolTip": "LifeOne\\Content\\NewAssests\\js\\main.min.js",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001646|",
-              "WhenOpened": "2024-09-25T10:56:06.639Z"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:1:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{28836128-fc2c-11d2-a433-00c04f72d18a}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:121:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:122:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:124:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:126:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:127:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:114:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:119:0:{e8034f19-ab72-4f06-83fd-f6832b41aa63}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
-            }
-          ]
-        },
-        {
-          "DockedWidth": 200,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:27:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:28:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:32:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
->>>>>>> origin/Asif3Disember
+              "DocumentIndex": 3,
+              "Title": "packages.config",
+              "DocumentMoniker": "D:\\Repositories\\Lifeone\\LifeOne\\packages.config",
+              "RelativeDocumentMoniker": "LifeOne\\packages.config",
+              "ToolTip": "D:\\Repositories\\Lifeone\\LifeOne\\packages.config",
+              "RelativeToolTip": "LifeOne\\packages.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2024-12-04T05:43:15.271Z"
             }
           ]
         }

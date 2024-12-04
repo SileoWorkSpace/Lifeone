@@ -386,7 +386,7 @@ namespace LifeOne.Controllers
                         if (res.flag == 1)
                         {
                             objresponse.response = "success";
-                            objresponse.result.token = JWTToken.GenerateToken(Crypto.Encryption(Aeskey, objresponse.result.androidId));
+                            //objresponse.result.token = JWTToken.GenerateToken(Crypto.Encryption(Aeskey, objresponse.result.androidId));
                             objresponse.message = res.message;
                         }
                         else

@@ -5183,68 +5183,7 @@ namespace LifeOne.Controllers
             return _response;
         }
 
-        [HttpPost]
-        public ResponseModel Recharge(RequestModel model)
-        {
-            RechargeModel req = new RechargeModel();
-            ApiResponeModel objresponse = new ApiResponeModel();
-            ResponseModel _response = new ResponseModel();
-            string EncryptedText = "";
-            try
-            {
-                if (model != null)
-                {
-                    string dcdata = Crypto.Decryption(Aeskey, model.body);
-                    req = JsonConvert.DeserializeObject<RechargeModel>(dcdata);
-                    var res = new RechargerApiBusiness().Recharge(req, model);
-                    if (res != null)
-                    {
-                        if (res.Status)
-                        {
-                            objresponse.Flag = 1;
-                            objresponse.response = "success";
-                            objresponse.message = res.message;
-                        }
-                        else
-                        {
-                            objresponse.Flag = 0;
-                            objresponse.response = "failed";
-                            objresponse.message = res.message;
-                        }
-                    }
-                    else
-                    {
-                        objresponse.Flag = 0;
-                        objresponse.response = "failed";
-                        objresponse.message = res.message;
-                    }
-                }
-                else
-                {
-                    objresponse.Flag = 0;
-                    objresponse.response = "failed";
-                    objresponse.message = "error";
-                }
-            }
-            catch (Exception ex)
-            {
-                objresponse.response = "error ";
-            }
-            string CustData = "";
-            DataContractJsonSerializer js;
-            MemoryStream ms;
-            js = new DataContractJsonSerializer(typeof(ApiResponeModel));
-            ms = new MemoryStream();
-            js.WriteObject(ms, objresponse);
-            ms.Position = 0;
-            StreamReader sr = new StreamReader(ms);
-            CustData = sr.ReadToEnd();
-            sr.Close();
-            ms.Close();
-            EncryptedText = Crypto.Encryption(Aeskey, CustData);
-            _response.body = EncryptedText;
-            return _response;
-        }
+    
         #endregion
 
         #region Testimonials  Maqsood

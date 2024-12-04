@@ -1,17 +1,14 @@
 ﻿using LifeOne.Models.QUtility.Entity;
-using Quartz.Impl.Triggers;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Web;
 using LifeOne.Models.Common;
 
 
 namespace LifeOne.Models.QUtility.DAL
 {
-    public class DALWaterBillPayment : DBHelper
+	public class DALWaterBillPayment : DBHelper
     {
         public DataSet BBPSIntegration(RequestModel _objRequestModel, List<MWaterBillPaymentResponse> _objResponseModel, WalletTransactionResponse objResTrans)
         {

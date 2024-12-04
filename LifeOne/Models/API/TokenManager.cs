@@ -37,7 +37,7 @@ namespace LifeOne.Models.API
                 JwtSecurityToken jwtToken = (JwtSecurityToken)tokenHandler.ReadToken(token);
                 if (jwtToken == null) return null;
 
-                
+
                 byte[] key = Convert.FromBase64String(Secret);
                 TokenValidationParameters parameters = new TokenValidationParameters()
                 {
@@ -50,7 +50,7 @@ namespace LifeOne.Models.API
                 ClaimsPrincipal principal = tokenHandler.ValidateToken(token, parameters, out securityToken);
                 return principal;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return null;
             }

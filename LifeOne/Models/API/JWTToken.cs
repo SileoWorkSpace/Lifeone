@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using LifeOne.Models.API.DAL;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace LifeOne.Models.API
-{  
-    public class JWTToken
+{
+	public class JWTToken
     {
 
         private static string Secret = "XCAP05H6LoKvbRRa/QkqLNMI7cOHguaRyHzyg7n5qEkGjQmtBhz4SzYh4Fqwjyi3KJHlSXKPwVu2+bXr6CtpgQ==";

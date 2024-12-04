@@ -1,6 +1,4 @@
-﻿using iTextSharp.text.pdf.qrcode;
-using ClosedXML.Excel;
-using LifeOne.Filters;
+﻿using ClosedXML.Excel;
 using LifeOne.Models.AdminManagement.AEntity;
 using LifeOne.Models.AdminManagement.AService;
 using LifeOne.Models.Manager;
@@ -9,36 +7,25 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using System.IO;
-using System.Globalization;
-using System.Web.ModelBinding;
 using LifeOne.Models.FranchiseManagement.FEntity;
 using LifeOne.Models.AssociateManagement.AssociateEntity;
 using LifeOne.Models.AssociateManagement.AssociateDAL;
-using PagedList;
 using LifeOne.Models;
-using DocumentFormat.OpenXml.Bibliography;
 using LifeOne.Models.AdminManagement.ADAL;
 using static LifeOne.Models.API.Common;
 using Newtonsoft.Json;
-using LifeOne.Models.FranchiseManagement.FService;
-using Org.BouncyCastle.Asn1.Ocsp;
-using System.Runtime.Remoting;
-using LifeOne.Models.API;
 using System.Web.UI.WebControls;
 using MemberKYC = LifeOne.Models.AdminManagement.AEntity.MemberKYC;
 using Support = LifeOne.Models.AdminManagement.AEntity.Support;
 using SupportRequest = LifeOne.Models.AdminManagement.AEntity.SupportRequest;
 using SupportResponse = LifeOne.Models.AdminManagement.AEntity.SupportResponse;
-using DocumentFormat.OpenXml.EMMA;
-using DocumentFormat.OpenXml.Drawing.Diagrams;
 
 namespace LifeOne.Areas.Admin.Controllers
 {
 
-    [SessionTimeoutAttributeAdmin]
+	[SessionTimeoutAttributeAdmin]
     public class AdminReportController : Controller
     {
         // GET: Admin/AdminReport
