@@ -30,8 +30,7 @@ namespace LifeOne.Models
         public string DOA { get; set; }
         public string TransNo { get; set; }
         public string DDChequedate { get; set; }
-        public string CreateDate { get; set; }
-        
+        public string CreateDate { get; set; }              
        
         public string CategoryName { get; set; }
         public string OfferedPrice { get; set; }
@@ -82,6 +81,7 @@ namespace LifeOne.Models
         public string PersonName { get; set; }
         public string PackageName { get; set; }
         public string OrderNo { get; set; }
+        public string RemarkCancel { get; set; }
         public string ShippingId { get; set; }
         public string InvoiceNo { get; set; }
         public string TransactionDate { get; set; }
@@ -492,6 +492,9 @@ namespace LifeOne.Models
             SqlParameter[] para = {
                                         new SqlParameter("@FK_ProductID",Pk_PackageID),
                                         new SqlParameter("@LoginId",LoginId),
+                                        new SqlParameter("@PayMentMode",PaymentMode=="0"?null:PaymentMode),                      
+                                        new SqlParameter("@fromDate",FromDate),
+                                        new SqlParameter("@toDate",ToDate),
                                         new SqlParameter("@Page",Page ),
                                         new SqlParameter("@Size",Size ),
                                         new SqlParameter("@IsExport",IsExport ),
@@ -695,6 +698,19 @@ namespace LifeOne.Models
             return ds;
 
         }
+        public DataSet GetCancelOrderDetails()
+        {
+            SqlParameter[] para = {                                      
+                                        new SqlParameter("@LoginId",LoginId),
+                                        new SqlParameter("@FK_MemId",FK_MemId),
+                                        new SqlParameter("@OrderNo",OrderNo),
+                                        new SqlParameter("@Page",Page),
+                                        new SqlParameter("@Size",Size),
+            };
+            DataSet ds = DBHelper.ExecuteQuery("CancelOrderDetails", para);
+            return ds;
+
+        }
         public DataSet GetShoppingOrderDetailsForOrderNo()
         {
             SqlParameter[] para = {
@@ -714,7 +730,7 @@ namespace LifeOne.Models
 
                                         new SqlParameter("@CancelledBy",FK_MemId),
                                         new SqlParameter("@OrderNo",OrderNo),
-
+                                        new SqlParameter("@RemarkCancel",RemarkCancel),
 
             };
             DataSet ds = DBHelper.ExecuteQuery("CancelShoppingOrder", para);
@@ -1381,8 +1397,6 @@ namespace LifeOne.Models
                                         new SqlParameter("@OrderNo",OrderNo),
                                         new SqlParameter("@Page",Page),
                                         new SqlParameter("@Size",Size),
-
-
             };
             DataSet ds = DBHelper.ExecuteQuery("PlaceShoppingOrder", para);
             return ds;

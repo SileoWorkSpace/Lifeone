@@ -19,7 +19,7 @@
 
     .heading {
         color: #FFF;
-        font-size: 14px;
+        font-size: 16px;
         border-bottom: 1px solid #e7e7e7;
         letter-spacing: 0.8px;
         padding: 15px;
@@ -53,11 +53,11 @@
         background: #FFFAFA;
         padding: 15px;
         color: #7f8fa4;
-        font-size: 13px;
+        font-size: 18px;
         line-height: 1.5;
     }
 
-        .contents.active {
+        .contents active {
             display: block;
         }
 </style>
@@ -103,6 +103,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
+        debugger
         $(".accordion").on("click", ".heading", function () {
             // Toggle the current heading and content
             $(this).toggleClass("active").next(".contents").slideToggle(300);

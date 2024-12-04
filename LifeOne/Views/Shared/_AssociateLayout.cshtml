@@ -112,7 +112,7 @@
 
         .table-responsive {
             overflow-y: auto;
-            height: 502px;
+            max-height: 502px;
         }
 
         }
@@ -181,10 +181,11 @@
                             <div class="d-flex align-items-center user-profile ">
                                 <div class="media-body text-left">
                                     <h6 class="pro-user-name d-block ml-2 my-0">
-                                        <span>@SessionManager.Name</span> <span class="pro-user-desc  d-block mt-0">
+                                        <span class="badge badge-warning" title="wallet balance">@SessionManager.EwalletBalance</span> 
+                                            <span>@SessionManager.Name</span> <span class="pro-user-desc  d-block mt-0">
 
-                                           
-                                        </span>
+
+                                            </span>
                                     </h6>
                                 </div>
                                 
@@ -225,6 +226,8 @@
                                 <li><a href="/Change-Password">Change Password</a></li>
                                 <li><a href="/View-IdCard" target="_blank">Print Id Card</a></li>
                                 <li><a href="/TopupbyAssociate">Topup </a></li>
+                                <li><a href="/AssociateToPupHistory">ToPup History</a></li>
+
 
                                 @*<li><a href="/User/ChangeTransactionPassword">Change Trans. Password</a></li>*@
                                 @*<li><a href="/RequestDetail-Associate">Request Details</a></li>*@
@@ -265,6 +268,7 @@
                                 @*<li><a href="/Associate-Utility">Utility Shopping</a></li>*@
                                 <li><a href="/OrderByAssociate">Place Order </a></li>
                                 <li><a href="/Associate-Order-Details">Shopping Orders</a></li>
+                                <li><a href="/AssociateCancel-Order-Details">Cancel Order Details</a></li>
                             </ul>
                         </li>
 

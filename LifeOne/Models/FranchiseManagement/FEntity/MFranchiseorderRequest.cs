@@ -69,6 +69,7 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
         public string State { get; set; }
         public string StateId { get; set; }
         public string PinCode { get; set; }
+        public string ShoppingType { get; set; }
     }
 
 

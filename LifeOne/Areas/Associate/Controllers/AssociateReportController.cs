@@ -1051,9 +1051,6 @@ namespace LifeOne.Areas.Associate.Controllers
         [HttpPost]
         public ActionResult AssociateAddress(Reports report, string Save)
         {
-
-
-
             try
             {
                 DataSet _result = new DataSet();
@@ -1093,7 +1090,6 @@ namespace LifeOne.Areas.Associate.Controllers
             DataSet dataSet = reports.GetRecognition();
             reports.dtGetRecognition = dataSet.Tables[0];
             return View(reports);
-
         }
 
         public ActionResult Rewardspage(Modelreward obj)
@@ -1177,8 +1173,7 @@ namespace LifeOne.Areas.Associate.Controllers
             obj.FK_MemID = SessionManager.AssociateFk_MemId.ToString();
             try
             {
-                
-                
+                                
                 List<ModelMatchingBonus> listmaching = new List<ModelMatchingBonus>();
                 DataSet ds = obj.GetPerformanceBonus();
                 foreach (DataRow dr in ds.Tables[0].Rows)
@@ -1262,7 +1257,6 @@ namespace LifeOne.Areas.Associate.Controllers
             try
             {
 
-
                 obj.FkMemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
                 listdata = obj.RewardsandRecognitionDetails();
                 obj.RewardsDetail = listdata;
@@ -1280,12 +1274,46 @@ namespace LifeOne.Areas.Associate.Controllers
             ShoppingOrderInvoiceModel orderInvoice = new ShoppingOrderInvoiceModel();
             OrderDAL orderDAL = new OrderDAL();
             DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
-            orderInvoice.dtDetails = dsOrder.Tables[0];
+            orderInvoice.dtDetails = dsOrder.Tables[0];            
             return View(orderInvoice);
         }
+        public ActionResult AssociateCancelOrderDetails(Reports reports)
+        {
+            if (reports.Page == 0 || reports.Page == null)
+            {
+                reports.Page = 1;
+            }
+            reports.Size = SessionManager.Size;
+            reports.FK_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            reports.Page = 1;
+            DataSet dataSet = reports.GetCancelOrderDetails();
+            reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
+            return View(reports);
 
+        }
 
-
+        public ActionResult AssociateToPupHistory(TopupHistory model)
+        {
+            DataSet dataSet = new DataSet();
+            OrderDAL orderDAL = new OrderDAL();
+            if (model.Page == 0 || model.Page == null)
+            {
+                model.Page = 1;
+            }
+            model.Fk_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            DataSet dsOrder = orderDAL.GetTopupHistory(model);
+            model.dtDetails = dsOrder.Tables[0];
+            int totalRecords = 0;
+            if (dsOrder != null && dsOrder.Tables.Count > 0 && dsOrder.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(model.dtDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, model.Page, SessionManager.Size);
+                model.Pager = pager;
+            }
+            return View(model);
+           
+           
+        }
     }
 }
 

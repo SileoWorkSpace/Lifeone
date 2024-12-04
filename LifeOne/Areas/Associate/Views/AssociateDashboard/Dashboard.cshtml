@@ -77,8 +77,8 @@
                     <div class="card-body p-0 min-auto">
                         <div class="media p-3">
                             <div class="media-body">
-                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Matching </span>
-                                <a href="/Payout-Report"><h2 class="mb-0 text-white">@Model.MatchingPoints</h2></a>
+                                <span class="text-uppercase font-size-12 font-weight-bold text-white">Wallet Balance </span>
+                                <a href="/Payout-Report"><h2 class="mb-0 text-white">@Model.EWallet</h2></a>
                             </div>
 
                         </div>
@@ -559,21 +559,15 @@
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
         </div>
         <div class="row">
 
             <div class="col-lg-12 stretch-card">
                 <div class="card">
-                    <div class="card-body">
+                    <div class="card-body p-0">
 
                         <div class="table-responsive" id="testTable">
-                            <table class="table color-table inverse-table table-bordered">
+                            <table class="table color-table inverse-table table-striped">
                                 <thead>
                                     <tr>
                                         <th>S. No.</th>
@@ -584,7 +578,7 @@
                                         @*<th>Matching Target Point</th>*@
                                         <th>Status</th>
                                         <th>Acheived On</th>
-                                      
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -604,7 +598,7 @@
                                                     else
                                                     {
                                                         <td>
-                                                            <img src="@item.RewardImg" style="height:50px;width:50px;" />
+                                                            <img src="@item.RewardImg" class="reimg" />
                                                             <br />
                                                             @item.RewardName
                                                         </td>
@@ -616,7 +610,7 @@
                                                     }
                                                     else
                                                     {
-                                                        <td><img src="@item.ToursImage" style="height:50px;width:50px;" /><br />@item.ToursName</td>
+                                                        <td><img src="@item.ToursImage" class="reimg" /><br />@item.ToursName</td>
 
                                                     }
                                                     <td>
@@ -636,10 +630,10 @@
                                                         }
                                                     </td>
                                                     @*<td>
-                                                            @item.TargetPoint
-                                                        </td>*@
+                                @item.TargetPoint
+                            </td>*@
                                                     @*<td>@item.Rank</td>
-                                                        <td>@item.Designation</td>*@
+                            <td>@item.Designation</td>*@
 
                                                     <td>
                                                         @if (item.Status == "Achieved")
@@ -669,7 +663,7 @@
                                                         }
                                                     </td>
                                                     <td>@item.AchievedOn</td>
-                                                   
+
                                                 </tr>
                                             }
                                         }

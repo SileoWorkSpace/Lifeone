@@ -2464,12 +2464,6 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                 },
                 new[] { "LifeOne.Areas.Admin.Controllers" });
 
-
-
-
-
-
-
             context.MapRoute(
           "SupplierMasterList",
           "SupplierMasterList/{action}/{id}",
@@ -2835,7 +2829,89 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                id = UrlParameter.Optional
            },
            new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "Upload_Achievement",
+           "Upload_Achievement/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Master",
+               action = "UploadAchievement",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "Life_Education",
+           "Life_Education/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Master",
+               action = "LifeEducation",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "Current_Offer",
+           "Current_Offer/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Master",
+               action = "CurrentOffer",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+       "Upload_UpcomingEvent",
+       "Upload_UpcomingEvent/{action}/{id}",
+       new
+       {
+           area = "Admin",
+           controller = "Master",
+           action = "UploadUpcomingEvent",
+           id = UrlParameter.Optional
+       },
+       new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+            "Cancel-Order-Details",
+            "CancelOrderDetails/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "AdminReport",
+                action = "CancelOrderDetails",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+                "TopupHistory",
+                "TopupHistory/{action}/{id}",
+                new
+                {
+                    area="Admin",
+                    Controller="Admin",
+                    action= "TopupHistory",
+                    id=UrlParameter.Optional
+                },
+
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+            "RewardDetails",
+            "RewardDetails/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "AdminReport",
+                action = "RewardDetails",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
         }
+
 
 
     }

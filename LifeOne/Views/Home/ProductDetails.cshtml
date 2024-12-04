@@ -15,213 +15,216 @@
 
 <main class="main border-top single-product">
     <div class="container">
-        <div class="page-content mb-10 pb-6 d-flex justify-content-center">
-            <div class="col-md-10 mt-10">
+        <div class="page-content" style="margin-top:50px;">
+           
                 @{
                     if (Model != null)
                     {
 
-                        <div class="product product-single row">
-                            <div class="col-md-6">
-                                <div class="product-gallery">
-                                    <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
-                                        <figure class="product-image">
-                                            <img src="@Model.ProductImage" data-zoom-image="@Model.ProductImage" alt="@Model.ProductName" width="580" height="580">
-                                        </figure>
-                                        <figure class="product-image">
-                                            <img src="@Model.ProductImage" data-zoom-image="@Model.ProductImage" alt="@Model.ProductName" width="580" height="580">
-                                        </figure>
-                                        <figure class="product-image">
-                                            <img src="@Model.ProductImage" data-zoom-image="@Model.ProductImage" alt="@Model.ProductName" width="580" height="580">
-                                        </figure>
-                                        <figure class="product-image">
-                                            <img src="@Model.ProductImage" data-zoom-image="@Model.ProductImage" alt="@Model.ProductName" width="580" height="580">
-                                        </figure>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="product-details">
-                                    <h1 class="product-name pt-2">@Model.ProductName</h1>
-                                    <div class="product-price">₹@Model.OfferedPrice</div>
-                                    <div class="ratings-container">
-                                        <div class="ratings-full">
-                                            @if (Model.ReviewCount == "1")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.ReviewCount == "2")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.ReviewCount == "3")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.ReviewCount == "4")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                            @if (Model.ReviewCount == "5")
-                                            {
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-                                                <i class="fa fa-star" aria-hidden="true"></i>
-
-                                            }
-                                        </div>
-                                        @if (@Model.ReviewCount == "0")
-                                        {
-
-
-                                        }
-                                        else
-                                        {
-                                            <a href="#product-tab-reviews" class="link-to-tab rating-reviews">
-                                                @Model.ReviewCount
-                                            </a>
-                                        }
-
-                                    </div>
-                                    <p class="product-short-desc mb-5">
-                                        @Model.ProductDescription
-                                    </p>
-                                    <hr class="product-divider">
-
-                                    <div class="product-form product-qty">
-                                        <div class="d-flex justify-content-start">
-                                            <span id="Pk_ProductId" style="display:none;"></span>
-                                            <div class="input-group mr-3">
-                                                <button class=" d-icon-minus" onclick="return quantityChangeMinus();"></button>
-                                                <input class="quantity form-control" type="number" min="1" value="1" id="Quantity123" onchange="return GetAddQTY();">
-                                                <button class=" d-icon-plus" onclick="return quantityChangePluse();"></button>
-                                            </div>
-                                            <a href="#" class="btn btn-sm btn-primary" onclick="return addcartdata(@Model.Pk_ProductId)" id="btnAddCard">
-                                                <i class="d-icon-bag"></i>&nbsp; Add
-                                                To Cart
-                                            </a>
-                                            @*<button type="submit" class="btn-hover-bg-primary btn-hover-border-primary btn btn-lg btn-dark w-100" name="Add" value="Add to Cart" id="AddQuty" style="display:none">
-                                                Add To Bag
-                                            </button>*@
-                                        </div>
-                                    </div>
-                                    <hr class="product-divider mb-3">
-
-                                    @*<div class="product-footer">
-                                        <div class="social-links mr-4">
-                                            <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
-                                            <a href="#" class="social-link social-twitter fab fa-twitter"></a>
-                                            <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
-                                        </div>
-                                        <span class="divider d-lg-show"></span>
-                                        <div class="product-action">
-                                                <a href="#" class="btn-product btn-wishlist mr-6">
-                                                    <i class="d-icon-heart"></i>Add to
-                                                    wishlist
-                                                </a>
-                                                <span class="divider d-lg-show"></span>
-                                                <a href="#" class="btn-product btn-compare">
-                                                    <i class="d-icon-compare"></i>Compare
-                                                </a>
-                                            </div>
-                                    </div>*@
-
-                                    <!-- End Comments -->
-                                    <div class="review-form-section">
-                                        <div class="review-overlay"></div>
-                                        <div class="review-form-wrapper">
-                                            <div class="title-wrapper text-left">
-                                                <h3 class="title title-simple text-left text-normal">
-                                                    Add
-                                                    a Review
-                                                </h3>
-                                                <p>
-                                                    Your email address will not be published. Required
-                                                    fields are marked *
-                                                </p>
-                                            </div>
-                                            <div class="rating-form">
-                                                <label for="rating" class="text-dark">
-                                                    Your rating *
-                                                </label>
-                                                <span class="rating-stars selected">
-                                                    <a class="star-1" href="#">1</a>
-                                                    <a class="star-2" href="#">2</a>
-                                                    <a class="star-3" href="#">3</a>
-                                                    <a class="star-4 active" href="#">4</a>
-                                                    <a class="star-5" href="#">5</a>
-                                                </span>
-
-                                                <select name="rating" id="rating" required="" style="display: none;">
-                                                    <option value="">Rate…</option>
-                                                    <option value="5">Perfect</option>
-                                                    <option value="4">Good</option>
-                                                    <option value="3">Average</option>
-                                                    <option value="2">Not that bad</option>
-                                                    <option value="1">Very poor</option>
-                                                </select>
-                                            </div>
-                                            <form action="#">
-                                                <textarea id="reply-message" cols="30" rows="6" class="form-control mb-4" placeholder="Comment *" required></textarea>
-
-                                                <div class="review-medias">
-                                                    <div class="file-input form-control image-input" style="background-image: url(images/product/placeholder.png);">
-                                                        <div class="file-input-wrapper">
+                        <div class="product product-single">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <div class="product-gallery">
+                                                        <div class="product-single-carousel owl-carousel owl-theme owl-nav-inner row cols-1">
+                                                            <figure class="product-image">
+                                                                <img src="@Model.ProductImage" alt="@Model.ProductName" width="580" height="580">
+                                                            </figure>
+                                                            <figure class="product-image">
+                                                                <img src="@Model.ProductImage" alt="@Model.ProductName" width="580" height="580">
+                                                            </figure>
+                                                            <figure class="product-image">
+                                                                <img src="@Model.ProductImage" alt="@Model.ProductName" width="580" height="580">
+                                                            </figure>
+                                                            <figure class="product-image">
+                                                                <img src="@Model.ProductImage" alt="@Model.ProductName" width="580" height="580">
+                                                            </figure>
                                                         </div>
-                                                        <label class="btn-action btn-upload" title="Upload Media">
-                                                            <input type="file" accept=".png, .jpg, .jpeg" name="riode_comment_medias_image_1">
-                                                        </label>
-                                                        <label class="btn-action btn-remove" title="Remove Media">
-                                                        </label>
-                                                    </div>
-                                                    <div class="file-input form-control image-input" style="background-image: url(images/product/placeholder.png);">
-                                                        <div class="file-input-wrapper">
-                                                        </div>
-                                                        <label class=" btn-action btn-upload" title="Upload Media">
-                                                            <input type="file" accept=".png, .jpg, .jpeg" name="riode_comment_medias_image_2">
-                                                        </label>
-                                                        <label class="btn-action btn-remove" title="Remove Media">
-                                                        </label>
-                                                    </div>
-                                                    <div class="file-input form-control video-input" style="background-image: url(images/product/placeholder.png);">
-                                                        <video class="file-input-wrapper" controls=""></video>
-                                                        <label class="btn-action btn-upload" title="Upload Media">
-                                                            <input type="file" accept=".avi, .mp4" name="riode_comment_medias_video_1">
-                                                        </label>
-                                                        <label class="btn-action btn-remove" title="Remove Media">
-                                                        </label>
                                                     </div>
                                                 </div>
-                                                <p>
-                                                    Upload images and videos. Maximum count: 3, size: 2MB
-                                                </p>
-                                                <button type="submit" class="btn btn-primary btn-rounded">
-                                                    Submit<i class="d-icon-arrow-right"></i>
-                                                </button>
-                                            </form>
-                                        </div>
-                                    </div>
-                                    <!-- End Reply -->
-                                </div>
-                            </div>
+                                                <div class="col-md-6">
+                                                    <div class="product-details">
+                                                        <h1 class="product-name pt-2">@Model.ProductName</h1>
+                                                        <div class="product-price">₹ @Model.MRP</div>
+                                                        <div class="product-price">PV : @Model.PV</div>
+                                                        <div class="ratings-container">
+                                                            <div class="ratings-full">
+                                                                @if (Model.ReviewCount == "1")
+                                                                {
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                                }
+                                                                @if (Model.ReviewCount == "2")
+                                                                {
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                                }
+                                                                @if (Model.ReviewCount == "3")
+                                                                {
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                                }
+                                                                @if (Model.ReviewCount == "4")
+                                                                {
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                                }
+                                                                @if (Model.ReviewCount == "5")
+                                                                {
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+                                                                    <i class="fa fa-star" aria-hidden="true"></i>
+
+                                                                }
+                                                            </div>
+                                                            @if (@Model.ReviewCount == "0")
+                                                            {
+
+
+                                                            }
+                                                            else
+                                                            {
+                                                                <a href="#product-tab-reviews" class="link-to-tab rating-reviews">
+                                                                    @Model.ReviewCount
+                                                                </a>
+                                                            }
+
+                                                        </div>
+                                                        <p class="product-short-desc mb-5">
+                                                            @Model.ProductDescription
+                                                        </p>
+                                                        <hr class="product-divider">
+
+                                                        <div class="product-form product-qty">
+                                                            <div class="d-flex justify-content-start">
+                                                                <span id="Pk_ProductId" style="display:none;"></span>
+                                                                <div class="input-group mr-3">
+                                                                    <button class=" d-icon-minus" onclick="return quantityChangeMinus();"></button>
+                                                                    <input class="quantity form-control" type="number" min="1" value="1" id="Quantity123" onchange="return GetAddQTY();">
+                                                                    <button class=" d-icon-plus" onclick="return quantityChangePluse();"></button>
+                                                                </div>
+                                                                <a href="#" class="btn btn-sm btn-primary" onclick="return addcartdata(@Model.Pk_ProductId)" id="btnAddCard">
+                                                                    <i class="d-icon-bag"></i>&nbsp; Add
+                                                                    To Cart
+                                                                </a>
+                                                                @*<button type="submit" class="btn-hover-bg-primary btn-hover-border-primary btn btn-lg btn-dark w-100" name="Add" value="Add to Cart" id="AddQuty" style="display:none">
+                            Add To Bag
+                        </button>*@
+                                                            </div>
+                                                        </div>
+                                                        <hr class="product-divider mb-3">
+
+                                                        @*<div class="product-footer">
+                    <div class="social-links mr-4">
+                        <a href="#" class="social-link social-facebook fab fa-facebook-f"></a>
+                        <a href="#" class="social-link social-twitter fab fa-twitter"></a>
+                        <a href="#" class="social-link social-pinterest fab fa-pinterest-p"></a>
+                    </div>
+                    <span class="divider d-lg-show"></span>
+                    <div class="product-action">
+                            <a href="#" class="btn-product btn-wishlist mr-6">
+                                <i class="d-icon-heart"></i>Add to
+                                wishlist
+                            </a>
+                            <span class="divider d-lg-show"></span>
+                            <a href="#" class="btn-product btn-compare">
+                                <i class="d-icon-compare"></i>Compare
+                            </a>
+                        </div>
+                </div>*@
+
+                                                        <!-- End Comments -->
+                                                        <div class="review-form-section">
+                                                            <div class="review-overlay"></div>
+                                                            <div class="review-form-wrapper">
+                                                                <div class="title-wrapper text-left">
+                                                                    <h3 class="title title-simple text-left text-normal">
+                                                                        Add
+                                                                        a Review
+                                                                    </h3>
+                                                                    <p>
+                                                                        Your email address will not be published. Required
+                                                                        fields are marked *
+                                                                    </p>
+                                                                </div>
+                                                                <div class="rating-form">
+                                                                    <label for="rating" class="text-dark">
+                                                                        Your rating *
+                                                                    </label>
+                                                                    <span class="rating-stars selected">
+                                                                        <a class="star-1" href="#">1</a>
+                                                                        <a class="star-2" href="#">2</a>
+                                                                        <a class="star-3" href="#">3</a>
+                                                                        <a class="star-4 active" href="#">4</a>
+                                                                        <a class="star-5" href="#">5</a>
+                                                                    </span>
+
+                                                                    <select name="rating" id="rating" required="" style="display: none;">
+                                                                        <option value="">Rate…</option>
+                                                                        <option value="5">Perfect</option>
+                                                                        <option value="4">Good</option>
+                                                                        <option value="3">Average</option>
+                                                                        <option value="2">Not that bad</option>
+                                                                        <option value="1">Very poor</option>
+                                                                    </select>
+                                                                </div>
+                                                                <form action="#">
+                                                                    <textarea id="reply-message" cols="30" rows="6" class="form-control mb-4" placeholder="Comment *" required></textarea>
+
+                                                                    <div class="review-medias">
+                                                                        <div class="file-input form-control image-input" style="background-image: url(images/product/placeholder.png);">
+                                                                            <div class="file-input-wrapper">
+                                                                            </div>
+                                                                            <label class="btn-action btn-upload" title="Upload Media">
+                                                                                <input type="file" accept=".png, .jpg, .jpeg" name="riode_comment_medias_image_1">
+                                                                            </label>
+                                                                            <label class="btn-action btn-remove" title="Remove Media">
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="file-input form-control image-input" style="background-image: url(images/product/placeholder.png);">
+                                                                            <div class="file-input-wrapper">
+                                                                            </div>
+                                                                            <label class=" btn-action btn-upload" title="Upload Media">
+                                                                                <input type="file" accept=".png, .jpg, .jpeg" name="riode_comment_medias_image_2">
+                                                                            </label>
+                                                                            <label class="btn-action btn-remove" title="Remove Media">
+                                                                            </label>
+                                                                        </div>
+                                                                        <div class="file-input form-control video-input" style="background-image: url(images/product/placeholder.png);">
+                                                                            <video class="file-input-wrapper" controls=""></video>
+                                                                            <label class="btn-action btn-upload" title="Upload Media">
+                                                                                <input type="file" accept=".avi, .mp4" name="riode_comment_medias_video_1">
+                                                                            </label>
+                                                                            <label class="btn-action btn-remove" title="Remove Media">
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                    <p>
+                                                                        Upload images and videos. Maximum count: 3, size: 2MB
+                                                                    </p>
+                                                                    <button type="submit" class="btn btn-primary btn-rounded">
+                                                                        Submit<i class="d-icon-arrow-right"></i>
+                                                                    </button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        <!-- End Reply -->
+                                                    </div>
+                                                </div>
+                                            </div>
                         </div>
 
                     }
                 }
 
-            </div>
+           
 
         </div>
     </div>

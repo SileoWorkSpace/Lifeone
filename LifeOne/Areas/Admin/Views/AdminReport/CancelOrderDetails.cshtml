@@ -1,0 +1,300 @@
+﻿@model LifeOne.Models.Reports
+
+@{
+    ViewBag.Title = "Cancel Order Details";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="~/Content/dist/js/CommonJS.js?1.0"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+<div class="container-fluid">
+
+    <div class="row page-titles">
+        <div class="ptitle">
+            <h4 class="mb-1 mt-0">Cancel Order Details</h4>
+        </div>
+    </div>
+
+    <div id="no-more-tables">
+        <form id="form1" method="post">
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-body">
+
+                            @using (Html.BeginForm("CancelOrderDetails", "AdminReport", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+                            {
+                                <div class="row" id="advance-search" style="display:none;">
+                                    <div class="col-md-12">
+                                        <div class="alert alert-warning" style="color:#727272 !important">
+                                            <div class="row">
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Order No.</label>
+                                                        @Html.TextBoxFor(m => m.OrderNo, new { @class = "form-control", @placeholder = "Order No." })
+                                                        @Html.HiddenFor(m => m.Page)
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Login Id</label>
+                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Login Id" })
+                                                        @Html.HiddenFor(m => m.Page)
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label style="display:block;"></label>
+                                                        <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            }
+                            <div class="table-responsive" id="customers">
+                                <table class="table mb-0" id="tblCustomers">
+                                    <thead>
+                                        <tr>
+                                            <th>#Sn.</th>
+                                            <th>Order No</th>
+                                            <th>Login Id</th>
+                                            <th>Direct Seller Name</th>
+                                            <th>Mobile No</th>
+                                            <th>Landmark</th>
+                                            <th>Address</th>
+                                            <th>State</th>
+                                            <th>City</th>
+                                            <th>Pin Code</th>
+                                            <th>Address Type</th>
+                                            <th>Order Date</th>
+                                            <th>Cancel Date</th>
+                                            <th style="text-align:right">Amount</th>
+
+                                            <th>Cancel Remark</th>
+                                            <th>Order Status</th>
+                                            @*<th>Action</th>*@
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model != null && Model.dtGetShoppingOrderDetails.Rows.Count > 0)
+                                        {
+                                            int j = 0;
+                                            int page = Model.Page ?? 0;
+                                            page = (page - 1);
+
+
+                                            j = ((page) * (Model.Size));
+                                            for (var i = 0; i <= Model.dtGetShoppingOrderDetails.Rows.Count - 1; i++)
+                                            {
+
+                                                <tr>
+                                                    <td>@(j+1)</td>
+
+                                                    <td align="left">
+
+                                                        <a href="#" style="text-decoration:underline" data-toggle="modal" data-target="#myModal" onclick="return OrderItems('@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()')">
+                                                            @Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()
+                                                        </a>
+
+                                                    </td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["LoginId"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Name"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["MobileNo"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Landmark"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Address"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["State"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["City"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["PinCode"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["AddressType"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderDate"].ToString()</td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["CancelledDate"].ToString()</td>
+                                                    <td style="text-align:right">@Model.dtGetShoppingOrderDetails.Rows[i]["WalletAmount"].ToString()</td>
+                                                    
+                                                    <td>
+                                                        <label>@Model.dtGetShoppingOrderDetails.Rows[i]["CancelRemark"].ToString()</label>
+                                                        @*<a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank"  class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>*@
+                                                    </td>
+                                                    <td>
+                                                        <label class="badge badge-danger">@Model.dtGetShoppingOrderDetails.Rows[i]["OrderStatus"].ToString()</label>
+                                                    <td>
+                                                </tr>
+                                                j++;
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between">
+
+                                @if (Model != null)
+                                {
+                                    if (Model.Pager != null)
+                                    {
+                                        if (Model.Pager.EndPage > 1)
+                                        {
+                                            <div> <small class="text-muted inline">showing @Model.dtGetShoppingOrderDetails.Rows.Count  of @Model.dtGetShoppingOrderDetails.Rows[0]["TotalRecord"].ToString() items</small> </div>
+                                            <div>
+                                                <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                    @if (Model.Pager.CurrentPage > 1)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" onclick="fCallPaging(1)" href="#">First</a>
+                                                        </li>
+                                                        <li class="page-item">
+
+                                                            <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1))" href="#">Previous</a>
+                                                        </li>
+                                                    }
+                                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                    {
+                                                        <li class="page-item @(page == Model.Pager.CurrentPage ? "active" : "")">
+
+
+                                                            <span><a class="page-link" onclick="fCallPaging(@page)" href="#">@page</a></span>
+                                                        </li>
+                                                    }
+                                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                    {
+                                                        <li class="page-item">
+
+                                                            <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1))" href="#">Next</a>
+
+                                                        </li>
+                                                        <li class="page-item">
+
+                                                            <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages))" href="#">Last</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+
+                                }
+
+                            </div>
+                        </footer>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+
+                </div>
+                <!-- /.col -->
+            </div>
+
+        </form>
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Ordered Details</h4>
+                </div>
+                <div class="modal-body">
+                    @*<div id="CustomMessages1"></div>*@
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table id="Productdetails" class="table table-striped mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>Product&nbsp;Type</th>
+                                            <th>Product&nbsp;Name</th>
+                                            <th>Total&nbsp;Qty</th>
+
+                                            <th>Product&nbsp;Amt</th>
+
+
+                                            <th>Final&nbsp;Amt</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+    function fCallPaging(val) {
+        if (val == undefined || val == NaN || val == null || val == "" || val == 0) {
+            val = 1;
+        }
+        $("#Page").val(val);
+        $('#BtnSearch').trigger('click');
+
+    }
+    function AddDeliveryInformation(OrderNo) {
+        $('#txtOrderNo').val(OrderNo);
+
+    }
+    function OrderItems(OrderId) {
+        var ReqId = OrderId;
+        $.ajax({
+            url: "/Admin/AdminReport/ViewOrderItemDetail",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ OrderId: ReqId }),
+            contentType: "application/json",
+            success: function (result) {
+
+                if (result != undefined && result != '') {
+
+                    $("#Productdetails tbody").html('');
+
+                    var str = "";
+                    var TotalProdAmt = 0;
+                    var Quantity = 0;
+                    var FinalAmt = 0;
+                    for (var i = 0; i < result.length; i++) {
+                        Quantity = parseInt(Quantity) + parseFloat(result[i].Quantity);
+                        FinalAmt = parseInt(FinalAmt) + parseInt(result[i].FinalAmount);
+                        TotalProdAmt = parseInt(TotalProdAmt) + parseInt(result[i].Amount);
+
+                        str += "<tr><td nowrap>" + result[i].CategoryName + "</td><td >" + result[i].ProductName + "</td><td >" + result[i].Quantity + "</td><td >" + result[i].Amount + "</td><td >" + result[i].FinalAmount + "</td></tr>";
+                    }
+
+                    str += "<tr><th colspan='2'>Total</th><th>" + Quantity + "</th><th>" + TotalProdAmt + "</th><th>" + FinalAmt + "</th></tr>";
+
+                    $("#Productdetails tbody").html(str);
+                }
+            },
+            error: function (err) {
+                showSnazzyErrorMessage1(err.statusText);
+                return false;
+            }
+        });
+    }
+</script>

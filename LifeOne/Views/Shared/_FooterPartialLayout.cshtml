@@ -16,6 +16,16 @@
                                 <img src="~/Content/NewAssests/images/indiasmosttrust.png" alt="logo" width="130" />
                             </div>
                         </div>
+                        <p class="mb-0">Follow Us</p>
+                        <div class="social-links mt-3">
+                            <a target="_blank" href="https://www.facebook.com/profile.php?id=61558483911520&mibextid=LQQJ4d" title="social-link"
+                               class="social-link social-facebook fab fa-facebook-f"></a>
+                            <a target="_blank" href="https://www.instagram.com/lifeonewellness?igsh=MTNrMWxyZ3dxOGN0ZA%3D%3D&utm_source=qr" title="social-link"
+                               class="social-link social-twitter fab fa-instagram"></a>
+                            <a target="_blank" href="#" title="social-link"
+                               class="social-link social-linkedin fab fa-youtube"></a>
+                        </div>
+
                     </div>
                     <!-- End of Widget -->
                 </div>
@@ -33,13 +43,14 @@
                 </div>
                 <div class="col-xl-2 col-lg-4 col-sm-6">
                     <div class="widget">
-                        <h4 class="widget-title">Useful links</h4>
+                        <h4 class="widget-title">Quick links</h4>
                         <ul class="widget-body">
+                            <li><a href="/">Home</a></li>
                             <li><a href="/Home/About">About</a></li>
                             <li><a href="/Home/Products">Product</a></li>
-                            <li><a href="/Home/VisionMission">Vision & Mission</a></li>
+                            <li><a href="/Home/BusinessPlan">Business Plan</a></li>
+                            <li><a href="/Home/NewsandAnnouncement">News & Information</a></li>
                             <li><a href="/Home/Contact">Contact</a></li>
-                            <li><a href="/Home/CmdDesk">Cmd Desk</a></li>
                         </ul>
                     </div>
                     <!-- End of Widget -->
@@ -61,29 +72,37 @@
                 <div class="col-xl-3 col-lg-8">
                     <div class="widget mb-4">
                         <h4 class="widget-title">Contact Us</h4>
-                        <ul class="widget-body">
-                            @{
-                                if (Model != null)
-                                {
-                                    <li><i class="fa fa-envelope"></i>&nbsp; @Model.Email</li>
-                                    <li><i class="fa fa-map-marker"></i>&nbsp; @Model.Address1</li>
-                                }
-                            }
+                        <p class="mb-0"><b>Lifeone Wellness Pvt. Ltd.</b></p>
+                        <p class="mb-1">
+                            78 Raj Nagar K.N. <br />
+                            Lucknow-227105, UP
+                        </p>
+                        <p class="mb-1">
+                            <a href="tel:@Model.Mobile"><i class="bi bi-telephone"></i> @Model.Mobile</a><br />
+                            <a href="tel:@Model.Mobile2"><i class="bi bi-telephone"></i> @Model.Mobile2</a>
+                        </p>
+                        <p class="mb-2">
+                            <a href="mailto:@Model.Email"><i class="bi bi-envelope-at"></i> @Model.Email</a><br>
+                        </p>
+                        @*<ul class="widget-body">
+                                @{
+                                    if (Model != null)
+                                    {
 
-                        </ul>
+                                        <li><i class="fa fa-map-marker"></i>&nbsp; <b>Lifeone Wellness Pvt. Ltd.</b></li>
+                                        <li><i class="fa fa-envelope"></i>&nbsp; @Model.Email</li>
+                                        <a href="tel:@Model.Mobile"><i class="bi bi-telephone"></i> @Model.Mobile</a>
+
+                                    }
+                                }
+
+                            </ul>*@
                     </div>
                     <div class="footer-info">
                         <figure class="payment">
                             <img src="~/Content/NewAssests/images/demos/demo19/payment.png" alt="payment" width="135" height="24" />
                         </figure>
-                        <div class="social-links mt-3">
-                            <a target="_blank" href="https://www.facebook.com/profile.php?id=61558483911520&mibextid=LQQJ4d" title="social-link"
-                               class="social-link social-facebook fab fa-facebook-f"></a>
-                            <a target="_blank" href="https://www.instagram.com/lifeonewellness?igsh=MTNrMWxyZ3dxOGN0ZA%3D%3D&utm_source=qr" title="social-link"
-                               class="social-link social-twitter fab fa-instagram"></a>
-                            <a target="_blank" href="#" title="social-link"
-                               class="social-link social-linkedin fab fa-youtube"></a>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -94,18 +113,18 @@
         <div class="container">
             <div class="px-4" style="width:100%;">
                 <div class="row d-flex align-items-center justify-content-between life-bottom">
-                    <div class="col-md-4">
-                        <p class="copyright">Lifeone Wellness &copy; 2024. All Rights Reserved</p>
+                    <div class="col-md-6">
+                        <p class="copyright"> &copy; 2024 Lifeone Wellness Pvt. Ltd., All Rights Reserved</p>
                     </div>
-                    <div class="col-md-4 text-center">
+                    <div class="col-md-6 text-right">
                         <strong style="font-size:13px;">Visitor No. :</strong>&nbsp;
-                        <a href="https://www.thesileo.com" target="_blank" title="hit counter"><img style="height:23px;" src="https://counter2.optistats.ovh/private/freecounterstat.php?c=p8zw7ch222g1ed8a9uub5dmz6d27sf6p" border="0" title="hit counter" alt="hit counter"></a>
+                        <a href="https://www.freecounterstat.com" target="_blank" title="hit counter"><img style="height:23px;" src="https://counter2.optistats.ovh/private/freecounterstat.php?c=p8zw7ch222g1ed8a9uub5dmz6d27sf6p" border="0" title="hit counter" alt="hit counter"></a>
                     </div>
 
-                    <div class="col-md-4 sileo text-center">
-                        Powered By :
-                        <a href="https://thesileo.com/"><img width="50" src="~/Content/NewAssests/images/Sileo-Logo.svg" alt=""></a>
-                    </div>
+                    @*<div class="col-md-4 sileo text-center">
+                            Designed & Developed By :
+                            <a href="https://thesileo.com/"><img width="28" src="~/Content/NewAssests/images/Sileo-Logo.svg" alt=""></a>
+                        </div>*@
 
                 </div>
             </div>
@@ -113,3 +132,36 @@
     </div>
     <!-- End of FooterBottom -->
 </footer>
+<style>
+    a {
+        cursor: pointer;
+    }
+
+    .footer p {
+        color: #fff;
+    }
+
+    .footer a {
+        color: #fff;
+    }
+
+        .footer a:hover {
+            color: #c0de21;
+        }
+
+    .footer-middle .widget-body li a {
+        color: #fff;
+    }
+
+        .footer-middle .widget-body li a:hover {
+            color: #c0de21;
+        }
+
+    .footer .copyright, .footer-bottom {
+        font-size: 12px;
+        font-weight: normal;
+        color: #b1b1b1;
+    }
+</style>
+
+<script src="~/Content/NewAssests/js/visitorCount.js"></script>

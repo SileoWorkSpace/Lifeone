@@ -28,8 +28,9 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
     new SqlParameter("@PaymentMode", string.IsNullOrEmpty(obj.PaymentMode) ? (object)DBNull.Value : obj.PaymentMode),
     new SqlParameter("@UPI_Number", string.IsNullOrEmpty(obj.ChequeDD_No) ? (object)DBNull.Value : obj.ChequeDD_No),
     new SqlParameter("@TransactionDate", obj.Convert_date ?? (object)DBNull.Value),
-    new SqlParameter("@Fk_BankId", obj.BankId ?? (object)DBNull.Value), 
+    new SqlParameter("@Fk_BankId", obj.BankId), 
     new SqlParameter("@OpCode", obj.OpCode),
+    new SqlParameter("@File_Url", obj.Image_url),
     new SqlParameter("@AddedBy", obj.AddedBy)
 };
                 DataSet ds = DBHelper.ExecuteQuery("SaveEwalletRequest", para);
@@ -37,8 +38,8 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                 {
                     if (ds.Tables[0].Rows.Count > 0)
                     {
-                        obj.Code = ds.Tables[0].Rows[0]["Flag"].ToString();
-                        obj.Message = ds.Tables[0].Rows[0]["Message"].ToString();
+                        obj.Code = ds.Tables[0].Rows[0]["Code"].ToString();
+                        obj.Message = ds.Tables[0].Rows[0]["Remark"].ToString();
                     }
                 }
                 return obj;
@@ -160,5 +161,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                 throw ex;
             }
         }
+
+        
     }
 }
