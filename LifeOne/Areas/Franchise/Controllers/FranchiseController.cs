@@ -413,7 +413,7 @@ namespace LifeOne.Areas.Franchise.Controllers
                 ProductsDetail product = new ProductsDetail();
                 List<SelectListItem> ddlProduct = new List<SelectListItem>();
 
-                DataSet dataSet = product.GetAllProducts();
+                DataSet dataSet = product.GetAllProductsForFranchisee();
 
                 if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
 

@@ -332,9 +332,15 @@ namespace LifeOne.Models
             DataSet ds = DBHelper.ExecuteQuery("GetProductDetails", para);
             return ds;
         }
-    
+		public DataSet GetAllProductsForFranchisee()
+		{
+			
+			DataSet ds = DBHelper.ExecuteQuery("GetProductDetailsForFranchsie");
+			return ds;
+		}
 
-        public DataSet AddTempStock()
+
+		public DataSet AddTempStock()
         {
             try
             {
