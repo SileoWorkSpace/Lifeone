@@ -530,20 +530,26 @@ debugger
 
         }
         else {
-            if ($('#txtChequeDDNo').val() == '') {
-                $("#txtChequeDDNo").addClass('errortext');
-                $('#txtChequeDDNo').focus();
-                return false;
+            var PMode = $("#ddlPaymentMode").val();
+            if (PMode == "Cash" || PMode == "0" || PMode == "Free") {
+
             }
-            if ($('#txtBankName').val() == '') {
-                $("#txtBankName").addClass('errortext');
-                $('#txtBankName').focus();
-                return false;
-            }
-            if ($('#mdate1').val() == '') {
-                $("#mdate1").addClass('errortext');
-                $('#mdate1').focus();
-                return false;
+            else {
+                if ($('#txtChequeDDNo').val() == '') {
+                    $("#txtChequeDDNo").addClass('errortext');
+                    $('#txtChequeDDNo').focus();
+                    return false;
+                }
+                if ($('#txtBankName').val() == '') {
+                    $("#txtBankName").addClass('errortext');
+                    $('#txtBankName').focus();
+                    return false;
+                }
+                if ($('#mdate1').val() == '') {
+                    $("#mdate1").addClass('errortext');
+                    $('#mdate1').focus();
+                    return false;
+                }
             }
             //if ($('#TopupRemark').val() == '') {
             //    $("#TopupRemark").addClass('errortext');
