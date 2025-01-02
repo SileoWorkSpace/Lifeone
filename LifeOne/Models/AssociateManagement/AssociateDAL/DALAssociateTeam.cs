@@ -29,7 +29,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
             }
         }
 
-        public static List<DirectAPI> GetDirectList(int? Fk_MemId, string SearchLoginId,string Status,string JoiningDate)
+        public static List<DirectAPI> GetDirectList(int? Fk_MemId, string SearchLoginId,string Status,string FromDate,string ToDate)
         {
             List<DirectAPI> objlist = new List<DirectAPI>();
             try
@@ -39,7 +39,8 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                     new SqlParameter("@Fk_memId",Fk_MemId),
                     new SqlParameter("@SearchLoginId",string.IsNullOrEmpty(SearchLoginId)?null:SearchLoginId),
                     new SqlParameter("@Status",string.IsNullOrEmpty(Status)?null:Status),
-                    //new SqlParameter("@JoiningDate",string.IsNullOrEmpty(JoiningDate)?null:JoiningDate)
+                    new SqlParameter("@FromDate",string.IsNullOrEmpty(FromDate)?null:FromDate),
+                    new SqlParameter("@ToDate",string.IsNullOrEmpty(ToDate)?null:ToDate)
 
                 };
                 DataSet ds = DBHelper.ExecuteQuery("AssociateDirectTeam", param);

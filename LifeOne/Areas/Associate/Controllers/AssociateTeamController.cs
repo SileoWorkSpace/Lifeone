@@ -51,8 +51,9 @@ namespace LifeOne.Areas.Associate.Controllers
             {
                 Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
             }
-            team.JoiningDate = String.IsNullOrEmpty(team.JoiningDate) ? null : Common.ConvertToSystemDate(team.JoiningDate, "dd/MM/yyyy");
-            team.Directs = AssociateTeamService.GetDirectList(Fk_MemId, team.SearchLoginId, team.Status, team.JoiningDate);
+            team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
+            team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");
+            team.Directs = AssociateTeamService.GetDirectList(Fk_MemId, team.SearchLoginId, team.Status, team.FromDate,team.ToDate);
            
             return View(team);
         }
