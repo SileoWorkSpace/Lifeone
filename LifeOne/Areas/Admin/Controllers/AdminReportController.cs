@@ -1656,7 +1656,6 @@ namespace LifeOne.Areas.Admin.Controllers
         }
         public ActionResult UpdatePayoutPayment(int? Page, MPayoutReport obj)
         {
-
             if (!PermissionManager.IsActionPermit("Update Payout Payment", ViewOptions.FormView))
             {
                 return Redirect("/Home/adminlogin");
@@ -4161,7 +4160,6 @@ namespace LifeOne.Areas.Admin.Controllers
                 throw e;
             }
 
-
         }
       
         public ActionResult GetShoppingOrderDetails(Reports reports)
@@ -4195,7 +4193,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
 
                 Reports reports = new Reports();
-                reports.OrderNo = id;
+                reports.OrderNo = id;               
                 reports.RemarkCancel = remark;
                 reports.FK_MemId = int.Parse(SessionManager.Fk_MemId.ToString());
                 DataSet dataSet = reports.CancelShoppingOrder();
@@ -5435,10 +5433,10 @@ namespace LifeOne.Areas.Admin.Controllers
                 {
                     reports.Page = 1;
                 }
-                reports.Size = SessionManager.Size;
-
+                reports.Size = SessionManager.Size;                
                 DataSet dataSet = reports.GetPackagewayActvationReport();
                 ViewBag.PackageList = DALBindCommonDropdown.PackageBindDropdown(16, 0);
+                ViewBag.PaymentModeList = DALBindCommonDropdown.DropdownPaymentMode();
                 reports.dtDetails = dataSet.Tables[0];
                 if (reports.IsExport == 1)
                 {
@@ -5480,6 +5478,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 }
                 else
                 {
+                    
                     int totalRecords = 0;
                     if (dataSet.Tables[0].Rows.Count > 0)
                     {
@@ -5755,9 +5754,6 @@ namespace LifeOne.Areas.Admin.Controllers
                                             new DataColumn("Purchase Price"),
                                             new DataColumn("Quantity"),
                                             new DataColumn("Total Amount"),
-
-
-
             });
                 //List<OrderList> customers = Session["ProductStockReport"] as List<OrderList>;
                 if (dataset.Tables[0].Rows != null && dataset.Tables[0].Rows.Count > 0)
@@ -5909,7 +5905,29 @@ namespace LifeOne.Areas.Admin.Controllers
                 reports.Pager = pager;
             }
             return View(reports);
-
+        }
+        public ActionResult RewardDetails(Rewards rewards)
+        {
+            if (!PermissionManager.IsActionPermit("Reward Details", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
+            if (rewards.Page == 0 || rewards.Page == null)
+            {
+                rewards.Page = 1;
+            }
+            ViewBag.RewardStatus = rewards.RewardStatus;
+            rewards.Size = SessionManager.Size;
+            DataSet dataSet = rewards.GetRewardDetails();
+            rewards.getRewardDetails = dataSet.Tables[0];
+            int totalRecords = 0;
+            if (dataSet.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(rewards.getRewardDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, rewards.Page, SessionManager.Size);
+                rewards.Pager = pager;
+            }
+            return View(rewards);
         }
     }
 }

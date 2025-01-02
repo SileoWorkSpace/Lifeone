@@ -318,6 +318,21 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string TotAmount { get; set; }
         public string SubTotal { get; set; }
         public DataTable dtDetails { get; set; }
+
+
+    }
+
+    public class TopupHistory: MPaging
+    {
+        public string Id { get; set; }
+        public int Fk_MemId { get; set; }
+        public string LoginId { get; set; }
+        public string FirstName { get; set; }
+        public string Amount { get; set; }
+        public string FormDate { get; set; }
+        public string ToDate { get; set; }
+       public DataTable dtDetails { get; set; }
+       
     }
 
 }

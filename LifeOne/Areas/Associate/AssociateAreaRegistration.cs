@@ -663,6 +663,29 @@ namespace LifeOne.Areas.Associate
   },
   new[] { "LifeOne.Areas.Associate.Controllers" });
 
+           
+            context.MapRoute(
+                "AssociateToPupHistory",
+                "AssociateToPupHistory/{action}/{id}",
+                new
+                {
+                    area = "Associate",
+                    controller = "AssociateReport",
+                    action = "AssociateToPupHistory",
+                    id = UrlParameter.Optional
+                },
+              new[] { "LifeOne.Areas.Associate.Controllers" });
+            context.MapRoute(
+                "WalletToWalletTransfer",
+                "WalletToWalletTransfer/{action}/{id}",
+                new
+                {
+                    area = "Associate",
+                    controller = "EWalletRequest",
+                    action = "WalletToWalletTransfer",
+                    id = UrlParameter.Optional
+                },
+              new[] { "LifeOne.Areas.Associate.Controllers" });
 
         }
     }

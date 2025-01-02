@@ -17,8 +17,6 @@
         </div>
 
     </div>
-
-
     <div id="no-more-tables">
         <form id="form1" method="post">
             @Html.HiddenFor(m=>m.Page)
@@ -26,8 +24,6 @@
                 <div class="col-lg-12">
                     <div class="card">
                         <div class="card-body">
-
-
                             <div class="table-responsive" id="customers">
                                 <table class="table mb-0" id="tblCustomers">
                                     <thead>
@@ -46,11 +42,9 @@
                                             <th>Order Date</th>
                                             <th>Cancel Date</th>
                                             <th style="text-align:right">Amount</th>
-
                                             <th>Cancel Remark</th>
                                             <th>Order Status</th>
                                             @*<th>Action</th>*@
-
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -67,14 +61,7 @@
 
                                                 <tr>
                                                     <td>@(j+1)</td>
-
-                                                    <td align="left">
-
-                                                        <a href="#" style="text-decoration:underline" data-toggle="modal" data-target="#myModal" onclick="return OrderItems('@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()')">
-                                                            @Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()
-                                                        </a>
-
-                                                    </td>
+                                                    <td>@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["LoginId"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["Name"].ToString()</td>
                                                     <td>@Model.dtGetShoppingOrderDetails.Rows[i]["MobileNo"].ToString()</td>
@@ -98,7 +85,7 @@
                                                 </tr>
                                                 j++;
                                             }
-                                        }
+                                         }
                                     </tbody>
                                 </table>
                             </div>
@@ -142,14 +129,13 @@
                                                                 
                                                                 <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages))" href="#">Last</a>
                                                             </li>
-                                                        }
+                                                         }
                                                     </ul>
                                                 </div>
                                             }
                                         }
 
-                                    }
-
+                                     }
                                 </div>
                             </footer>
                         </div>

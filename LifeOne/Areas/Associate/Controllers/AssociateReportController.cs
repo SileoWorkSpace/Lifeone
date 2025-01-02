@@ -1051,9 +1051,6 @@ namespace LifeOne.Areas.Associate.Controllers
         [HttpPost]
         public ActionResult AssociateAddress(Reports report, string Save)
         {
-
-
-
             try
             {
                 DataSet _result = new DataSet();
@@ -1277,7 +1274,7 @@ namespace LifeOne.Areas.Associate.Controllers
             ShoppingOrderInvoiceModel orderInvoice = new ShoppingOrderInvoiceModel();
             OrderDAL orderDAL = new OrderDAL();
             DataSet dsOrder = orderDAL.GetShoppingOrderInvoice(id);
-            orderInvoice.dtDetails = dsOrder.Tables[0];
+            orderInvoice.dtDetails = dsOrder.Tables[0];            
             return View(orderInvoice);
         }
         public ActionResult AssociateCancelOrderDetails(Reports reports)
@@ -1293,6 +1290,29 @@ namespace LifeOne.Areas.Associate.Controllers
             reports.dtGetShoppingOrderDetails = dataSet.Tables[0];
             return View(reports);
 
+        }
+
+        public ActionResult AssociateToPupHistory(TopupHistory model)
+        {
+            DataSet dataSet = new DataSet();
+            OrderDAL orderDAL = new OrderDAL();
+            if (model.Page == 0 || model.Page == null)
+            {
+                model.Page = 1;
+            }
+            model.Fk_MemId = int.Parse(SessionManager.AssociateFk_MemId.ToString());
+            DataSet dsOrder = orderDAL.GetTopupHistory(model);
+            model.dtDetails = dsOrder.Tables[0];
+            int totalRecords = 0;
+            if (dsOrder != null && dsOrder.Tables.Count > 0 && dsOrder.Tables[0].Rows.Count > 0)
+            {
+                totalRecords = Convert.ToInt32(model.dtDetails.Rows[0]["TotalRecord"].ToString());
+                var pager = new Pager(totalRecords, model.Page, SessionManager.Size);
+                model.Pager = pager;
+            }
+            return View(model);
+           
+           
         }
     }
 }

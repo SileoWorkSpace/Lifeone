@@ -4,12 +4,12 @@
     ViewBag.Title = "UpdatePayoutPayment";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-@*<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
+<script src="~/Content/plugins/jQuery/jQuery-2.1.4.min.js"></script>
 <script src="~/Content/dist/js/CommonJS.js?1.0"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+@*<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.22/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>*@
 <link href="~/Content/dist/css/sweetalert.css" rel="stylesheet" />
-<script src="~/Content/dist/js/sweetalert.min.js"></script>*@
+<script src="~/Content/dist/js/sweetalert.min.js"></script>
 <div class="container-fluid">
 
     <div class="row page-titles">
@@ -302,7 +302,8 @@
                 if (data != null && data != "") {
                     swal('Success', data.Remark, 'info');
                     if (data.Code == "1") {
-                        GetPayoutDetails();
+                        //GetPayoutDetails();
+                        $('#BtnSearch').click();
                     }
                     //$("#div-PayoutDetails").html(data);
 

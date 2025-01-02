@@ -51,13 +51,13 @@
                                                 </div>
                                                 @Html.HiddenFor(m => m.Page)
                                                 @*<div class="col-12 col-md-2">
-                                                    <div class="form-group">
-                                                        <label>Login Id</label>
-                                                        @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Login Id" })
+                                                        <div class="form-group">
+                                                            <label>Login Id</label>
+                                                            @Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Login Id" })
 
 
-                                                    </div>
-                                                </div>*@
+                                                        </div>
+                                                    </div>*@
 
                                                 <div class="col-12 col-md-2">
                                                     <div class="form-group">
@@ -143,17 +143,24 @@
                                                         {
 
                                                         }
-                                                        <a href="/Admin/AdminReport/CancelShoppingOrder?id=@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()" onclick="return confirm('Are you sure to cancel this?') " class="btn btn-danger btn-sm"><i>Cancel</i></a>
-                                                        <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        @*<a href="/Admin/AdminReport/CancelShoppingOrder?id=@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()" onclick="return confirm('Are you sure to cancel this?') " class="btn btn-danger btn-sm"><i>Cancel</i></a>*@
+                                                        <a href="#" onclick="return openCancelOrderModal('@Model.dtGetShoppingOrderDetails.Rows[i]["OrderNo"].ToString()')" class="btn-sm btn  btn-danger">
+                                                            <i>Cancel</i>
+                                                        </a>
+
+                                                        @if (int.Parse(Model.dtGetShoppingOrderDetails.Rows[i]["downloadCount"].ToString()) > 0)
+                                                        {
+                                                            <a href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" onclick="return confirm('This Invoice Already download !')" class="btn-sm btn  btn-info " title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a id="viewInvoiceBtn_@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" href="/Admin/AdminReport/ShoppingOrderInvoice?id=@Model.dtGetShoppingOrderDetails.Rows[i]["Pk_OrderId"].ToString()" target="_blank" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>
+                                                        }
                                                     </td>
                                                 </tr>
                                                 j++;
                                             }
                                         }
-
-
-
-
                                     </tbody>
                                 </table>
 
@@ -207,7 +214,7 @@
                                         }
                                     }
 
-                                }
+                                 }
 
                             </div>
                         </footer>
@@ -218,7 +225,6 @@
                 </div>
                 <!-- /.col -->
             </div>
-
         </form>
     </div>
     <div id="myModal" class="modal fade" role="dialog">
@@ -232,17 +238,14 @@
                     @*<div id="CustomMessages1"></div>*@
                     <div class="row">
                         <div class="col-lg-12">
-                            <div class="table-responsive" >
+                            <div class="table-responsive">
                                 <table id="Productdetails" class="table table-striped mb-0">
                                     <thead>
                                         <tr>
                                             <th>Product&nbsp;Type</th>
                                             <th>Product&nbsp;Name</th>
                                             <th>Total&nbsp;Qty</th>
-                                          
                                             <th>Product&nbsp;Amt</th>
-
-
                                             <th>Final&nbsp;Amt</th>
                                         </tr>
                                     </thead>
@@ -258,12 +261,68 @@
                     <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                 </div>
             </div>
-
+        </div>
+    </div>
+    <div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cancelOrderModalLabel">Cancel Order</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p style="font-size: 16px;">Are you sure want to cancel the order?</p>
+                    <div class="form-group">
+                        <label for="remarks">Remarks:</label>
+                        <textarea class="form-control" id="remarks" rows="3"></textarea>
+                        <input type="hidden" id="order_Number" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="cancelOrder()">Cancel Order</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
 <script>
-
+    function openCancelOrderModal(order_Number) {
+        $('#order_Number').val(order_Number);
+        $('#cancelOrderModal').modal('show');
+        $('#remarks').val('');
+        //var remark = $('#remarks').val('');
+    }
+    function cancelOrder() {
+        var id = $('#order_Number').val();
+        var remark = $('#remarks').val();
+        if (remark != "" || remark != 0) {
+            $.ajax({
+                url: '/Admin/AdminReport/CancelShoppingOrder',
+                type: 'Post',
+                data: JSON.stringify({ id: id, remark: remark }),
+                contentType: 'application/json',
+                success: function (responce) {
+                    debugger;
+                    if (responce.message) {
+                        alert('Order cancel Successfully.!');
+                        $('#cancelOrderModal').modal('hide');
+                    }
+                    else {
+                        alert('An error occurred.!');
+                    }
+                },
+                error: function (xhr, status, error) {
+                    alert('An error occurred: ' + error);
+                }
+            });
+        }
+        else {
+            $('#remarks').focus();
+        }
+    }
     function isNumberKey(evt) {
         var charCode = (evt.which) ? evt.which : event.keyCode;
         if (charCode != 46 && charCode > 31
@@ -292,7 +351,6 @@
             success: function (data) {
                 alert('Shipping Details Updated');
                 window.location.href = "/Admin/AdminReport/GetShoppingOrderDetails";
-
             },
 
         });
@@ -335,3 +393,14 @@
         });
     }
 </script>
+<script>
+    $(document).ready(function () {
+
+        $('a[id^="viewInvoiceBtn_"]').on('click', function () {
+            setTimeout(function () {
+                location.reload();
+            }, 1000);
+        });
+    });
+</script>
+

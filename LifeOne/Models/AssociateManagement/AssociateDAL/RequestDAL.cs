@@ -38,8 +38,8 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                 {
                     if (ds.Tables[0].Rows.Count > 0)
                     {
-                        obj.Code = ds.Tables[0].Rows[0]["Flag"].ToString();
-                        obj.Message = ds.Tables[0].Rows[0]["Message"].ToString();
+                        obj.Code = ds.Tables[0].Rows[0]["Code"].ToString();
+                        obj.Message = ds.Tables[0].Rows[0]["Remark"].ToString();
                     }
                 }
                 return obj;
@@ -161,5 +161,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                 throw ex;
             }
         }
+
+        
     }
 }

@@ -27,10 +27,6 @@
             </div>
         </div>
     </div>
-
-
-
-
     <div id="no-more-tables">
         <form id="form1" method="post" style="height:0;">
 
@@ -47,20 +43,38 @@
                                         <div class="alert alert-warning" style="color:#727272 !important">
                                             <div class="row">
                                                 @*<div class="col-12 col-md-2">
-                                                    <div class="form-group">
-                                                        
-                                                        <label>Login Id</label>
-                                                         <input type="text" name="LoginID" id="LoginID" placeholder="Enter Login Id" class="form-control">
+            <div class="form-group">
+
+                <label>Login Id</label>
+                 <input type="text" name="LoginID" id="LoginID" placeholder="Enter Login Id" class="form-control">
 
 
-                                                    </div>
-                                                </div>*@
+            </div>
+        </div>*@
                                                 <div class="col-12 col-md-2">
                                                     <div class="form-group">
                                                         <label>Package Name</label>
                                                         @Html.DropDownListFor(m => m.Pk_PackageID, new SelectList(ViewBag.PackageList, "Value", "Text"), new { @class = "form-control", @id = "Pk_PackageID" })
                                                         @Html.HiddenFor(m => m.Page)
                                                         @Html.HiddenFor(m => m.IsExport)
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Payment Mode</label>
+                                                        @Html.DropDownListFor(m=>m.PaymentMode, new SelectList(ViewBag.PaymentModeList, "Value", "Text"), new { @class = "form-control",@id= "PaymentMode" })
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>From Date</label>
+                                                        <input type="date" name="FromDate" id="fdate" class="form-control"/>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-2">
+                                                    <div class="form-group">
+                                                        <label>To Date</label>
+                                                        <input type="date" name="ToDate" id="tdate" class="form-control"/>
                                                     </div>
                                                 </div>
 
@@ -75,7 +89,7 @@
                                                 </div>
 
                                             </div>
-                                        </div>
+                                            </div>
                                     </div>
                                 </div>
 
@@ -191,7 +205,7 @@
                         <!-- /.box -->
 
                     </div>
-                }
+                 }
                     <!-- /.col -->
                 </div>
 
@@ -249,7 +263,6 @@
         $("#IsExport").val(IsExport);
         $("#Page").val(val);
         $('#BtnSearch').trigger('click');
-
     }
     function fclaer() {
         $(".fclear").val('');

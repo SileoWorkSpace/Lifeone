@@ -2464,12 +2464,6 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                 },
                 new[] { "LifeOne.Areas.Admin.Controllers" });
 
-
-
-
-
-
-
             context.MapRoute(
           "SupplierMasterList",
           "SupplierMasterList/{action}/{id}",
@@ -2892,7 +2886,30 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
             },
             new[] { "LifeOne.Areas.Admin.Controllers" });
 
+            context.MapRoute(
+                "TopupHistory",
+                "TopupHistory/{action}/{id}",
+                new
+                {
+                    area="Admin",
+                    Controller="Admin",
+                    action= "TopupHistory",
+                    id=UrlParameter.Optional
+                },
 
+            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+            "RewardDetails",
+            "RewardDetails/{action}/{id}",
+            new
+            {
+                area = "Admin",
+                controller = "AdminReport",
+                action = "RewardDetails",
+                id = UrlParameter.Optional
+            },
+            new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

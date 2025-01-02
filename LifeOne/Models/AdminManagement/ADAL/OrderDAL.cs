@@ -1,8 +1,12 @@
 ﻿
+using DocumentFormat.OpenXml.Spreadsheet;
+using LifeOne.Models.AdminManagement.AEntity;
+using LifeOne.Models.AssociateManagement.AssociateEntity;
 using LifeOne.Models.Common;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
@@ -77,6 +81,25 @@ namespace LifeOne.Models.AdminManagement.ADAL
             };
             DataSet dsresult = ExecuteQuery("ShoppingOrderInvoice", para);
             return dsresult;
+        }
+        public DataSet GetTopupHistory(TopupHistory model)
+        {
+            try
+            {
+                SqlParameter[] para = {
+               new SqlParameter("@Fk_MemId",model.Fk_MemId),
+               new SqlParameter("@Page",model.Page),
+               new SqlParameter("@Size",model.Size),
+               new SqlParameter("@FormDate",model.FormDate),
+               new SqlParameter("@ToDate",model.ToDate),
+                };
+                DataSet ds = DBHelper.ExecuteQuery("Topuphistory", para);
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 }

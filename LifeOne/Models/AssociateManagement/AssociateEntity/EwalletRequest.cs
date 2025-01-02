@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -61,9 +62,50 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public string Name { get; set; }
         public string SearchBy { get; set; }
         public string Parameter { get; set; }
+        public string ToLoginId { get; set; }
+        public string ToAmount { get; set; }
+        public string ToName { get; set; }
+        public string Flag { get; set; }
+        public List<EwalletRequest> list1 { get; set; }
 
         [NotMapped]
         public List<EwalletRequest> WalletRequestList { get; set; }
+
+        public DataSet GetAssociateDetail()
+        {
+            try
+            {
+                SqlParameter[] para =
+                {
+                    new SqlParameter("@LoginId",LoginId)
+                };
+            DataSet ds = Connection.ExecuteQuery("getAssociateDetails", para);
+            return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public DataSet WalletTransfer()
+        {
+            try
+            {
+                SqlParameter[] para =
+                {
+                    new SqlParameter("@ToLoginId",ToLoginId),
+                    new SqlParameter("@FromLoginId",LoginId),
+                    new SqlParameter("@Amount",ToAmount),
+                };
+                DataSet ds = Connection.ExecuteQuery("wallet_transfer", para);
+                return ds;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 
 
