@@ -3,6 +3,30 @@
   "WorkspaceRootPath": "E:\\github\\Lifeone\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\views\\adminreport\\lifetimereward.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\views\\adminreport\\lifetimereward.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\controllers\\adminreportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\controllers\\adminreportcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\associate\\controllers\\associatedashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\controllers\\associatedashboardcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\associate\\views\\associateteam\\mydirect.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\views\\associateteam\\mydirect.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\adminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\adminarearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\models\\adminmanagement\\adal\\daladminreports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\adminmanagement\\adal\\daladminreports.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\web.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
     },
@@ -11,20 +35,32 @@
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\associatemanagement\\associatedal\\dalassociateteam.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\models\\associatemanagement\\associateservice\\associateteamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\associatemanagement\\associateservice\\associateteamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\associate\\controllers\\associateteamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\controllers\\associateteamcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\associate\\views\\associateteam\\mydirect.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
-      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\views\\associateteam\\mydirect.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\controllers\\admincontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\views\\adminreport\\tdsreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\views\\adminreport\\tdsreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\admin\\views\\adminreport\\payoutreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\admin\\views\\adminreport\\payoutreport.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\associate\\views\\associatedashboard\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\views\\associatedashboard\\dashboard.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\areas\\associate\\associatearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\areas\\associate\\associatearearegistration.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\models\\associatemanagement\\associateservice\\associateteamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|solutionrelative:lifeone\\models\\associatemanagement\\associateservice\\associateteamservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{EFA6FA29-DABE-44F9-91F6-74631EAF7E11}|LifeOne\\LifeOne.csproj|e:\\github\\lifeone\\lifeone\\app_start\\bundleconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -303,19 +339,175 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "LifeTimeReward.cshtml",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\AdminReport\\LifeTimeReward.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Views\\AdminReport\\LifeTimeReward.cshtml",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\AdminReport\\LifeTimeReward.cshtml",
+              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Views\\AdminReport\\LifeTimeReward.cshtml",
+              "ViewState": "AgIAAIYAAAAAAAAAAAAkwIsAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T13:02:35.101Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AssociateDashboardController.cs",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociateDashboardController.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Controllers\\AssociateDashboardController.cs",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociateDashboardController.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Controllers\\AssociateDashboardController.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAAAzwCIAAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T11:03:20.8Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
               "Title": "Web.config",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Web.config",
               "RelativeDocumentMoniker": "LifeOne\\Web.config",
               "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Web.config",
               "RelativeToolTip": "LifeOne\\Web.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
               "WhenOpened": "2025-01-02T10:58:35.745Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
+              "Title": "MyDirect.cshtml",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociateTeam\\MyDirect.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Views\\AssociateTeam\\MyDirect.cshtml",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociateTeam\\MyDirect.cshtml",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Views\\AssociateTeam\\MyDirect.cshtml",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADcAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T09:37:36.757Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "DALAdminReports.cs",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminReports.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminReports.cs",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminReports.cs",
+              "RelativeToolTip": "LifeOne\\Models\\AdminManagement\\ADAL\\DALAdminReports.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAawC0AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T12:04:36.533Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "AssociateTeamController.cs",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociateTeamController.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Controllers\\AssociateTeamController.cs",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociateTeamController.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Controllers\\AssociateTeamController.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAcwBkAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T09:37:04.652Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DALAssociateTeam.cs",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Models\\AssociateManagement\\AssociateDAL\\DALAssociateTeam.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Models\\AssociateManagement\\AssociateDAL\\DALAssociateTeam.cs",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Models\\AssociateManagement\\AssociateDAL\\DALAssociateTeam.cs",
+              "RelativeToolTip": "LifeOne\\Models\\AssociateManagement\\AssociateDAL\\DALAssociateTeam.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAEwBgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T09:39:30.228Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "AdminReportController.cs",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\AdminReportController.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Controllers\\AdminReportController.cs",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\AdminReportController.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Controllers\\AdminReportController.cs",
+              "ViewState": "AgIAAOQRAAAAAAAAAAAawP4RAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T09:30:42.146Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "AdminAreaRegistration.cs",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Admin\\AdminAreaRegistration.cs",
+              "ViewState": "AgIAAGwJAAAAAAAAAAAawG8JAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T11:13:27.708Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Dashboard.cshtml",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociateDashboard\\Dashboard.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Views\\AssociateDashboard\\Dashboard.cshtml",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociateDashboard\\Dashboard.cshtml",
+              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Views\\AssociateDashboard\\Dashboard.cshtml",
+              "ViewState": "AgIAAEICAAAAAAAAAADwv1MCAABBAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T11:03:54.119Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "TDSReport.cshtml",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\AdminReport\\TDSReport.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Views\\AdminReport\\TDSReport.cshtml",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\AdminReport\\TDSReport.cshtml",
+              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Views\\AdminReport\\TDSReport.cshtml",
+              "ViewState": "AgIAAP0AAAAAAAAAAAAnwAsBAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T11:13:49.889Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "AdminController.cs",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\AdminController.cs",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Controllers\\AdminController.cs",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Controllers\\AdminController.cs",
+              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Controllers\\AdminController.cs",
+              "ViewState": "AgIAAFsJAAAAAAAAAAAUwHoJAAA2AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-02T11:25:48.215Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "PayoutReport.cshtml",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\AdminReport\\PayoutReport.cshtml",
+              "RelativeDocumentMoniker": "LifeOne\\Areas\\Admin\\Views\\AdminReport\\PayoutReport.cshtml",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Admin\\Views\\AdminReport\\PayoutReport.cshtml",
+              "RelativeToolTip": "LifeOne\\Areas\\Admin\\Views\\AdminReport\\PayoutReport.cshtml",
+              "ViewState": "AgIAADQBAAAAAAAAAAAnwD4BAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-01-02T11:52:49.351Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "AssociateTeamService.cs",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Models\\AssociateManagement\\AssociateService\\AssociateTeamService.cs",
               "RelativeDocumentMoniker": "LifeOne\\Models\\AssociateManagement\\AssociateService\\AssociateTeamService.cs",
@@ -328,59 +520,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "DALAssociateTeam.cs",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Models\\AssociateManagement\\AssociateDAL\\DALAssociateTeam.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Models\\AssociateManagement\\AssociateDAL\\DALAssociateTeam.cs",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Models\\AssociateManagement\\AssociateDAL\\DALAssociateTeam.cs",
-              "RelativeToolTip": "LifeOne\\Models\\AssociateManagement\\AssociateDAL\\DALAssociateTeam.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAiwC0AAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T09:39:30.228Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "MyDirect.cshtml",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociateTeam\\MyDirect.cshtml",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Views\\AssociateTeam\\MyDirect.cshtml",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Views\\AssociateTeam\\MyDirect.cshtml",
-              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Views\\AssociateTeam\\MyDirect.cshtml",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAwBoAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
-              "WhenOpened": "2025-01-02T09:37:36.757Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "AssociateTeamController.cs",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociateTeamController.cs",
-              "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\Controllers\\AssociateTeamController.cs",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\Controllers\\AssociateTeamController.cs",
-              "RelativeToolTip": "LifeOne\\Areas\\Associate\\Controllers\\AssociateTeamController.cs",
-              "ViewState": "AgIAAB0AAAAAAAAAAAAmwDcAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-02T09:37:04.652Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 13,
               "Title": "AssociateAreaRegistration.cs",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
               "RelativeDocumentMoniker": "LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
               "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
               "RelativeToolTip": "LifeOne\\Areas\\Associate\\AssociateAreaRegistration.cs",
-              "ViewState": "AgIAAGEAAAAAAAAAAAAmwHYAAAAlAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAiwCAAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-02T09:36:45.364Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 15,
               "Title": "BundleConfig.cs",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\App_Start\\BundleConfig.cs",
               "RelativeDocumentMoniker": "LifeOne\\App_Start\\BundleConfig.cs",
@@ -393,7 +546,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 19,
               "Title": "Products.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Products.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Products.cshtml",
@@ -405,7 +558,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 18,
               "Title": "HomeController.cs",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Controllers\\HomeController.cs",
               "RelativeDocumentMoniker": "LifeOne\\Controllers\\HomeController.cs",
@@ -417,7 +570,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 17,
               "Title": "_Layout.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Shared\\_Layout.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_Layout.cshtml",
@@ -429,7 +582,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 23,
               "Title": "_FooterPartialLayout.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Shared\\_FooterPartialLayout.cshtml",
@@ -441,7 +594,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 30,
               "Title": "CustomerRegistration.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\CustomerRegistration.cshtml",
@@ -453,7 +606,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 27,
               "Title": "Login.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Login.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Login.cshtml",
@@ -465,7 +618,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 20,
               "Title": "Index.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Index.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Index.cshtml",
@@ -477,7 +630,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 16,
               "Title": "BusinessPlan.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\BusinessPlan.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\BusinessPlan.cshtml",
@@ -490,7 +643,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 21,
               "Title": "ProductDetails.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\ProductDetails.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\ProductDetails.cshtml",
@@ -502,7 +655,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 22,
               "Title": "main.js",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.js",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\js\\main.js",
@@ -514,7 +667,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 33,
               "Title": "Certificate.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Certificate.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Certificate.cshtml",
@@ -526,7 +679,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 24,
               "Title": "About.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\About.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\About.cshtml",
@@ -538,7 +691,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 25,
               "Title": "Gallery.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Gallery.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Gallery.cshtml",
@@ -550,7 +703,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 31,
               "Title": "Video.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\Video.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\Video.cshtml",
@@ -562,7 +715,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 34,
               "Title": "GalleryPhoto.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\GalleryPhoto.cshtml",
@@ -574,7 +727,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 26,
               "Title": "quickview.html",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\ajax\\quickview.html",
@@ -586,7 +739,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 32,
               "Title": "ImageGallery.cshtml",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Views\\Home\\ImageGallery.cshtml",
               "RelativeDocumentMoniker": "LifeOne\\Views\\Home\\ImageGallery.cshtml",
@@ -598,7 +751,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 28,
               "Title": "demo19.min.css",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\css\\demo19.min.css",
@@ -610,7 +763,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 29,
               "Title": "main.min.js",
               "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Content\\NewAssests\\js\\main.min.js",
               "RelativeDocumentMoniker": "LifeOne\\Content\\NewAssests\\js\\main.min.js",

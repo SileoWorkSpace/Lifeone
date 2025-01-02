@@ -19,9 +19,9 @@
             <div class="ptitle">
                 <h4 class="mb-1 mt-0 text-white">My Direct</h4>
 
-              
+
             </div>
-          
+
         </div>
         <div class="row">
             <div class="col-lg-12">
@@ -31,60 +31,60 @@
                         {
                             <div class="row p-3">
                                 <div class="col-lg-3">
-                                    <div class="d-flex align-items-center justify-content-center mb-3">
-                                        @*<a href="/Associate/AssociateTeam/MyDirect" class="btn btn-secondary mr-2">Root</a>*@
-                                        <div class="input-group">
-                                            <select class="form-control" name="Status" id="ddlStatus">
-                                                <option value="">--All--</option>
-                                                <option value="P">Active</option>
-                                                <option value="T">InActive</option>
+                                    <label>Status</label>
+                                    @*<a href="/Associate/AssociateTeam/MyDirect" class="btn btn-secondary mr-2">Root</a>*@
+                                    <div class="input-group">
 
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="d-flex align-items-center justify-content-center mb-3">
-                                        <label>From&nbsp;Date&nbsp;</label>
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" placeholder="Joining Date" name="FromDate" value="@ViewBag.JoiningDate" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="d-flex align-items-center justify-content-center mb-3">
-                                        <label>To&nbsp;Date&nbsp;</label> 
-                                        <div class="input-group">
-                                            <input type="date" class="form-control" placeholder="Joining Date" name="ToDate" value="@ViewBag.JoiningDate" />
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-lg-3">
-                                    <div class="d-flex align-items-center justify-content-center mb-3">
-                                        <div class="input-group" style="float:left">
-                                            @Html.TextBoxFor(m => m.SearchLoginId, new { @class = "form-control", @placeholder = "Enter Login ID" })
+                                        <select class="form-control" name="Status" id="ddlStatus">
+                                            <option value="">--All--</option>
+                                            <option value="P">Active</option>
+                                            <option value="T">InActive</option>
 
-                                            @*<button type="submit" class="btn btn-success mr-2" style="border-radius: 0 5px 5px 0px;">
-                        <i class="fa fa-search"></i>
-                    </button>*@
-                                            
-                                            @*@if (Model.Directs.Count > 0)
-                    {
-                        <a href="/Associate/AssociateTeam/MyDirect?Fk_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Directs[0].FK_sponsorId.ToString())" class="btn btn-secondary">Go Up</a>
-                    }*@
-                                        </div>
+                                        </select>
                                     </div>
+
                                 </div>
                                 <div class="col-lg-3">
-                                    <div class="d-flex align-items-center justify-content-center mb-3">
-                                        <div class="input-group">
-                                           <input type="submit" class="btn btn-success" value="Search" />
-                                        </div>
+                                    <label>From Date</label>
+                                    <div class="input- group">
+
+                                        @Html.TextBoxFor(model => model.FromDate, new { @class = "form-control", @placeholder = "Joining Date", type = "date", value = ViewBag.FromDate })
                                     </div>
+                                </div>
+
+                                <div class="col-lg-3">
+                                    <label>To Date</label>
+                                    <div class="input-group">
+
+                                        @Html.TextBoxFor(model => model.ToDate, new { @class = "form-control", @placeholder = "Joining Date", type = "date", value = ViewBag.ToDate })
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <label>From Date</label>
+                                    <div class="input-group" style="float:left">
+                                        @Html.TextBoxFor(m => m.SearchLoginId, new { @class = "form-control", @placeholder = "Enter Login ID" })
+
+                                        @*<button type="submit" class="btn btn-success mr-2" style="border-radius: 0 5px 5px 0px;">
+                                                <i class="fa fa-search"></i>
+                                            </button>*@
+
+                                        @*@if (Model.Directs.Count > 0)
+                                            {
+                                                <a href="/Associate/AssociateTeam/MyDirect?Fk_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Directs[0].FK_sponsorId.ToString())" class="btn btn-secondary">Go Up</a>
+                                            }*@
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 mt-2">
+                                    <div class="input-group">
+                                        <input type="submit" class="btn btn-success" value="Search" />
+                                    </div>
+
                                 </div>
                             </div>
                         }
-                        <div class="table-responsive" >
+                        <div class="table-responsive">
                             <table class="table table-striped mb-0" id="MyDirectList">
                                 <thead>
                                     <tr>
@@ -104,44 +104,44 @@
                                         int SNo = 0;
                                         foreach (var item in Model.Directs)
                                         {
-                                    <tr>
-                                        <td>@(SNo = SNo + 1)</td>
-                                        <td>
-                                            <span>@item.MemberLoginId</span>
-                                        </td>
-                                        <td>
-                                            @item.MemberName
+                                            <tr>
+                                                <td>@(SNo = SNo + 1)</td>
+                                                <td>
+                                                    <span>@item.MemberLoginId</span>
+                                                </td>
+                                                <td>
+                                                    @item.MemberName
 
-                                            @if (@item.Place == "Left")
-                                            {
-                                                <span class="badge badge-danger float-lg-right">@item.Place</span>
+                                                    @if (@item.Place == "Left")
+                                                    {
+                                                        <span class="badge badge-danger float-lg-right">@item.Place</span>
 
-                                            }
-                                            @if (@item.Place == "Right")
-                                            {
-                                                <span class="badge badge-success float-lg-right">@item.Place</span>
+                                                    }
+                                                    @if (@item.Place == "Right")
+                                                    {
+                                                        <span class="badge badge-success float-lg-right">@item.Place</span>
 
-                                            }
-                                        </td>
-                                        <td>@item.ParentLoginId </td>
-                                        <td>@item.ParentName </td>
+                                                    }
+                                                </td>
+                                                <td>@item.ParentLoginId </td>
+                                                <td>@item.ParentName </td>
 
-                                        <td>
-                                            @if (@item.ActiveInactiveStatus == "Active")
-                                            {
-                                                <span class="badge badge-success">@item.ActiveInactiveStatus</span>
-                                            }
-                                            @if (@item.ActiveInactiveStatus == "InActive")
-                                            {
-                                                <span class="badge badge-danger">@item.ActiveInactiveStatus</span>
-                                            }
+                                                <td>
+                                                    @if (@item.ActiveInactiveStatus == "Active")
+                                                    {
+                                                        <span class="badge badge-success">@item.ActiveInactiveStatus</span>
+                                                    }
+                                                    @if (@item.ActiveInactiveStatus == "InActive")
+                                                    {
+                                                        <span class="badge badge-danger">@item.ActiveInactiveStatus</span>
+                                                    }
 
-                                        </td>
+                                                </td>
 
-                                        <td>@item.ActivationDate </td>
-                                        <td>@item.DateOfjoining </td>
+                                                <td>@item.ActivationDate </td>
+                                                <td>@item.DateOfjoining </td>
 
-                                    </tr>
+                                            </tr>
                                         }
                                     }
                                     else
