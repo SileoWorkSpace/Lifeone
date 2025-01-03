@@ -956,6 +956,10 @@
                                         {
                                             <li><a href="/FranchiseeStockReturn">Franchisee Stock Return</a></li>
                                         }
+                                        @if (PermissionManager.IsViewPermit("Franchise Translations"))
+                                        {
+                                            <li><a href="/franchisetranslations">Franchise Translations</a></li>
+                                        }
 
                                     </ul>
                                 </li>

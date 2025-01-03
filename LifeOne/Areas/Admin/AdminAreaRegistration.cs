@@ -2910,6 +2910,17 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                 id = UrlParameter.Optional
             },
             new[] { "LifeOne.Areas.Admin.Controllers" });
+            context.MapRoute(
+           "franchisetranslations",
+           "franchisetranslations/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Admin",
+               action = "franchisetranslations",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

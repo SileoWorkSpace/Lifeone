@@ -1,0 +1,183 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.Franchisetranslations
+@{
+    ViewBag.Title = "franchisetranslations";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .company-txt {
+        font-size: 17pt;
+        font-weight: bold;
+    }
+</style>
+@using (Html.BeginForm("franchisetranslations", "Admin", FormMethod.Post))
+{
+    @Html.HiddenFor(model => model.Type)
+    @Html.HiddenFor(model => model.IsDebitCredit, new { @id = "IsDebitCredit" })
+
+   <section class="invoice" id="printArea">
+       <div class="container">
+           <div class="row">
+               <div class="col-md-12">
+                   <div class="row align-items-center">
+                       <div class="col-md-6">
+                           <h2 class="page-header">
+                               Wallet Transactions
+                           </h2>
+                       </div>
+                       <div class="col-md-6 d-flex justify-content-between">
+                           @if (@TempData["Message"] != null)
+                           {
+                               <small class="pull-right" style="color: red; display: inline-block; font-size: 14px;">
+                                   @TempData["Message"]
+                               </small>
+                           }
+                       </div>
+
+                   </div>
+               </div>
+           </div>
+
+           <div class="card">
+               <div class="card-body p-5">
+                   <!-- Single Row for all form elements -->
+                   <div class="row">
+                           <!-- Login ID -->
+                           <div class="col-md-6">
+                               <label for="LoginId">Login Id</label>
+                               @Html.TextBoxFor(model => model.LoginId, new { @id = "LoginId", @class = "web form-control", placeholder = "Login Id", onchange = "fgetMemberDetails()" })
+                           </div>
+
+                           <!-- Name -->
+                           <div class="col-md-6">
+                               <label for="Name">Name</label>
+                               @Html.TextBoxFor(model => model.Name, new { @class = "web form-control", placeholder = "Name", @readonly = "readonly" })
+                           </div>
+
+                           <!-- Amount -->
+                           <div class="col-md-6">
+                               <label for="Amount">Amount</label>
+                               @Html.TextBoxFor(model => model.Amount, new { @class = "web form-control", placeholder = "Amount", maxlength = "50" })
+                           </div>
+
+                           <!-- Balance Amount -->
+                           <div class="col-md-6">
+                               <label for="BalanceAmount">Balance Amount</label>
+                               @Html.TextBoxFor(model => model.BalanceAmount, new { @class = "web form-control", @readonly = "readonly" })
+                           </div>
+
+                           <!-- Transaction Type -->
+                           <div class="col-md-6">
+                               <br />
+                               <label for="BalanceAmount">Transaction Type</label>
+                               <input type="radio" name="rdbIsDebitCredit" value="Credit" id="IsDebitCreditCredit" /> Credit
+                               <input type="radio" name="rdbIsDebitCredit" value="Debit" id="IsDebitCreditDebit" /> Debit
+                           </div>
+
+                           <!-- Transaction No -->
+                           <div class="col-md-6">
+                               <label for="TransactionNo">Transaction No.</label>
+                               @Html.TextBoxFor(model => model.TransactionNo, new { @class = "web form-control", placeholder = "Transaction No.", maxlength = "50" })
+                           </div>
+
+                           <!-- Transaction Date -->
+                           <div class="col-md-6">
+                               <label for="TransactionDate">Transaction Date</label>
+                               @Html.TextBoxFor(model => model.TransactionDate, new { @class = "web form-control", placeholder = "dd/mm/yyyy", type = "date" })
+                           </div>
+
+                           <!-- Narration -->
+                           <div class="col-md-12">
+                               <label for="Narration">Narration</label>
+                               @Html.TextAreaFor(model => model.Narration, new { @class = "form-control", placeholder = "Narration", rows = "4", style = "width: 100%;" })
+                           </div>
+
+                           <!-- Submit Button -->
+                           <div class="col-md-12">
+                               <br />
+                               <input type="submit" class="btn btn-success" value="Submit" name="Submit" onclick="return fvalidate()" />
+                           </div>
+                       </div>
+                   
+               </div>
+           </div>
+
+       </div>
+    </section>
+}
+<script>
+
+    function fgetMemberDetails() {
+        debugger;
+        if ($("#LoginId").val() != "") {
+            $.ajax({
+                type: "post",
+                url: "/Admin/Admin/GetMemberdetails",
+                data: { Value: $("#LoginId").val() },
+                dataType: "json",
+                success: function (response) {
+                    console.log(response);
+                    if (response != null) {
+                        if (response.Name != null) {
+                            $('#Name').val(response.Name);
+                            $('#BalanceAmount').val(response.Amount);
+                        }
+                        else {
+                            $('#Name').val("");
+                            $('#BalanceAmount').val("");
+                            $('#LoginId').val("");
+                            alert("Invalid Id!");
+                        }
+                    }
+                    else {
+                        alert('Something went wrong!');
+                    }
+                },
+                error: function () {
+                    alert('Something went wrong!');
+                }
+            });
+        } else {
+            alert('Please fill login id.!');
+        }
+    }
+
+    function fvalidate() {
+        debugger;
+        var IsDebitCredit = $('input[name="rdbIsDebitCredit"]:checked').val();
+        $('#IsDebitCredit').val(IsDebitCredit);
+
+        if ($('#LoginId').val() == "" || $('#LoginId').val() == "0") {
+            alert("Please Enter LoginId");
+            $('#LoginId').focus();
+            return false;
+        }
+        else if ($('#Amount').val() == "" || $('#Amount').val() == "0") {
+            alert("Please Enter Amount");
+            $('#Amount').focus();
+            return false;
+        }
+        else if ($('#IsDebitCredit').val() == "") {
+            alert("Please Select Transaction Type");
+
+            return false;
+        }
+        else if ($('#TransactionNo').val() == "" || $('#TransactionNo').val() == "0") {
+            alert("Please Enter Transaction No");
+            $('#TransactionNo').focus();
+            return false;
+        }
+        else if ($('#TransactionDate').val() == "") {
+            alert("Please Enter Transaction Date");
+            $('#TransactionDate').focus();
+            return false;
+        }
+        else if ($('#Narration').val() == "") {
+            alert("Please Add Narration");
+            $('#Narration').focus();
+            return false;
+        }
+        return true;
+
+    }
+</script>
+
