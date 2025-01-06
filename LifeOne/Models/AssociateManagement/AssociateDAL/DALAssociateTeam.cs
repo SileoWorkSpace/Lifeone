@@ -64,11 +64,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                             ParentName = dr["ParentName"].ToString(),
                             ActiveInactiveStatus = dr["ActiveInactiveStatus"].ToString(),
                             ActivationDate = dr["ActivationDate"].ToString()
-
-
                         });
-
-
                     }
 
                 }

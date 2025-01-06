@@ -2438,12 +2438,12 @@ namespace LifeOne.Areas.Admin.Controllers
             return View(model);
         }
         [HttpGet]
-        public ActionResult franchisetranslations()
+        public ActionResult franchisewallettransaction()
         { 
              return View();
         }
         [HttpPost]
-        public ActionResult franchisetranslations(Franchisetranslations obj , string Submit)
+        public ActionResult franchisewallettransaction(Franchisetranslations obj , string Submit)
         {
            
             DataSet ds = new DataSet();
@@ -2473,7 +2473,7 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 throw ex;
             }
-            return RedirectToAction("franchisetranslations");
+            return RedirectToAction("franchisewallettransaction");
         }
 
         [HttpPost]

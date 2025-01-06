@@ -9,7 +9,7 @@
         font-weight: bold;
     }
 </style>
-@using (Html.BeginForm("franchisetranslations", "Admin", FormMethod.Post))
+@using (Html.BeginForm("franchisewallettransaction", "Admin", FormMethod.Post))
 {
     @Html.HiddenFor(model => model.Type)
     @Html.HiddenFor(model => model.IsDebitCredit, new { @id = "IsDebitCredit" })

@@ -2911,13 +2911,13 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
             },
             new[] { "LifeOne.Areas.Admin.Controllers" });
             context.MapRoute(
-           "franchisetranslations",
-           "franchisetranslations/{action}/{id}",
+           "franchisewallettransaction",
+           "franchisewallettransaction/{action}/{id}",
            new
            {
                area = "Admin",
                controller = "Admin",
-               action = "franchisetranslations",
+               action = "franchisewallettransaction",
                id = UrlParameter.Optional
            },
            new[] { "LifeOne.Areas.Admin.Controllers" });

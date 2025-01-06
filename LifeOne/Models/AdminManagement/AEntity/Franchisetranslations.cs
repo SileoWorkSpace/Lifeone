@@ -37,7 +37,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
                     new SqlParameter("@AddedBy",AddedBy),
                     new SqlParameter("@OpCode",OpCode),
                 };
-                DataSet ds = Connection.ExecuteQuery("sp_GetFranchiseDetails", para);
+                DataSet ds = Connection.ExecuteQuery("franchisewallettransaction", para);
                 return ds;
             }
             catch (Exception)
@@ -55,7 +55,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
                     new SqlParameter("@OpCode",OpCode)
                     
                 };
-                DataSet ds = Connection.ExecuteQuery("sp_GetFranchiseDetails", para);
+                DataSet ds = Connection.ExecuteQuery("franchisewallettransaction", para);
                 return ds;
             }
             catch (Exception)
