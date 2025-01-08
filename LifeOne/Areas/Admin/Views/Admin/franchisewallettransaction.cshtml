@@ -73,17 +73,6 @@
                                <input type="radio" name="rdbIsDebitCredit" value="Debit" id="IsDebitCreditDebit" /> Debit
                            </div>
 
-                           <!-- Transaction No -->
-                           <div class="col-md-6">
-                               <label for="TransactionNo">Transaction No.</label>
-                               @Html.TextBoxFor(model => model.TransactionNo, new { @class = "web form-control", placeholder = "Transaction No.", maxlength = "50" })
-                           </div>
-
-                           <!-- Transaction Date -->
-                           <div class="col-md-6">
-                               <label for="TransactionDate">Transaction Date</label>
-                               @Html.TextBoxFor(model => model.TransactionDate, new { @class = "web form-control", placeholder = "dd/mm/yyyy", type = "date" })
-                           </div>
 
                            <!-- Narration -->
                            <div class="col-md-12">
@@ -105,6 +94,13 @@
     </section>
 }
 <script>
+    $('#Amount').on('blur', function () {
+        var amount = $(this).val();
+        if (amount == "0" || amount == "-1") {
+            alert("Amount cannot be 0 or -1."); 
+            $(this).val('');
+        }
+    });
 
     function fgetMemberDetails() {
         debugger;
@@ -115,9 +111,8 @@
                 data: { Value: $("#LoginId").val() },
                 dataType: "json",
                 success: function (response) {
-                    console.log(response);
-                    if (response != null) {
-                        if (response.Name != null) {
+                   
+                        if (response.Name != "") {
                             $('#Name').val(response.Name);
                             $('#BalanceAmount').val(response.Amount);
                         }
@@ -125,12 +120,9 @@
                             $('#Name').val("");
                             $('#BalanceAmount').val("");
                             $('#LoginId').val("");
-                            alert("Invalid Id!");
+                            alert("Invalid Login Id!");
                         }
-                    }
-                    else {
-                        alert('Something went wrong!');
-                    }
+                   
                 },
                 error: function () {
                     alert('Something went wrong!');
@@ -161,16 +153,7 @@
 
             return false;
         }
-        else if ($('#TransactionNo').val() == "" || $('#TransactionNo').val() == "0") {
-            alert("Please Enter Transaction No");
-            $('#TransactionNo').focus();
-            return false;
-        }
-        else if ($('#TransactionDate').val() == "") {
-            alert("Please Enter Transaction Date");
-            $('#TransactionDate').focus();
-            return false;
-        }
+        
         else if ($('#Narration').val() == "") {
             alert("Please Add Narration");
             $('#Narration').focus();

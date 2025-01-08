@@ -37,6 +37,7 @@ using LifeOne.Models.AssociateManagement.AssociateDAL;
 using DocumentFormat.OpenXml.Bibliography;
 using System.Web.UI.WebControls;
 using static LifeOne.Models.TravelModel.RechargeAPI;
+using System.Web.Services.Description;
 
 
 namespace LifeOne.Areas.Admin.Controllers
@@ -2480,7 +2481,7 @@ namespace LifeOne.Areas.Admin.Controllers
         public JsonResult GetMemberdetails(string Value)
         {
             Franchisetranslations obj = new Franchisetranslations();
-            var response = new { Name = string.Empty, Amount = string.Empty };
+            var response = new { Name = string.Empty, Amount = string.Empty};
 
             try
             {
@@ -2499,6 +2500,7 @@ namespace LifeOne.Areas.Admin.Controllers
                                 Amount = ds.Tables[0].Rows[0]["Amount"].ToString()
                             };
                         }
+                        
                     }
                 }
             }
