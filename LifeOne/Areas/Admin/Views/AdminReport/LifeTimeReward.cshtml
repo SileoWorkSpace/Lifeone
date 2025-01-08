@@ -125,7 +125,7 @@
                                                         <td>@(j=j+1)</td>
                                                         <td>@Model.dtLifeTimeReward.Rows[i]["LoginId"].ToString()</td>
                                                         <td>@Model.dtLifeTimeReward.Rows[i]["Name"].ToString()</td>
-                                                        <td><img src="@Model.dtLifeTimeReward.Rows[i]["ImageUrl"].ToString()" style="height:50px;width:50px;" /> <br />@Model.dtLifeTimeReward.Rows[i]["Recognition"].ToString() </td>
+                                                        <td><img src="@Model.dtLifeTimeReward.Rows[i]["ImageUrl"].ToString()" style="height:50px;width:50px;" /> @*<br />@Model.dtLifeTimeReward.Rows[i]["Recognition"].ToString()*@ </td>
                                                         <td>@Model.dtLifeTimeReward.Rows[i]["Rewards"].ToString()</td>
                                                         <td style="text-align:right;">@Model.dtLifeTimeReward.Rows[i]["RewardAmount"].ToString()</td>
                                                         <td style="text-align:right;">@Model.dtLifeTimeReward.Rows[i]["LeftPoint"].ToString()</td>
@@ -133,32 +133,29 @@
                                                         <td style="text-align:right;">@Model.dtLifeTimeReward.Rows[i]["MatchingTargetPoint"].ToString()</td>
 
                                                         <td>
-
                                                             @if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Achieved")
                                                             {
                                                                 <span class="badge badge-success">@Model.dtLifeTimeReward.Rows[i]["Status"].ToString()</span>
                                                             }
-                                                            else if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Pending")
+                                                            @if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Pending")
                                                             {
                                                                 <span class="badge badge-warning">@Model.dtLifeTimeReward.Rows[i]["Status"].ToString()</span>
                                                             }
-                                                            else if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Skipped")
+                                                            @if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Skipped")
                                                             {
                                                                 <span class="badge badge-danger">@Model.dtLifeTimeReward.Rows[i]["Status"].ToString()</span>
                                                             }
-                                                            else if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Claimed")
+                                                            @if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Claimed")
                                                             {
                                                                 <span class="badge badge-info">@Model.dtLifeTimeReward.Rows[i]["Status"].ToString()</span>
                                                             }
-                                                            else if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Claim Denied")
+                                                            @if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Claim Denied")
                                                             {
-                                                                <span class="badge badge-red">@Model.dtLifeTimeReward.Rows[i]["Status"].ToString()</span>
+                                                                <span class="badge badge-danger">@Model.dtLifeTimeReward.Rows[i]["Status"].ToString()</span>
                                                             }
-
-                                                            else if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Approved By Admin")
+                                                            @if (@Model.dtLifeTimeReward.Rows[i]["Status"].ToString() == "Approved By Admin")
                                                             {
                                                                 <span class="badge badge-primary">@Model.dtLifeTimeReward.Rows[i]["Status"].ToString()</span>
-
                                                             }
                                                         </td>
                                                         <td>@Model.dtLifeTimeReward.Rows[i]["AchievedDate"].ToString()</td>

@@ -472,6 +472,7 @@
     <Compile Include="Models\AdminManagement\AEntity\FormMasterModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\FormPermissionModel.cs" />
     <Compile Include="Models\AdminManagement\AEntity\FormTypeModel.cs" />
+    <Compile Include="Models\AdminManagement\AEntity\Franchisetranslations.cs" />
     <Compile Include="Models\AdminManagement\AEntity\KYC.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAchieverClubBonusMaster.cs" />
     <Compile Include="Models\AdminManagement\AEntity\MAddShippingInformation.cs" />
@@ -1640,6 +1641,7 @@
     <Content Include="Areas\Admin\Views\Admin\TopupHistory.cshtml" />
     <Content Include="Areas\Associate\Views\AssociateReport\AssociateToPupHistory.cshtml" />
     <Content Include="Areas\Associate\Views\EWalletRequest\WalletToWalletTransfer.cshtml" />
+    <Content Include="Areas\Admin\Views\Admin\franchisewallettransaction.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />
