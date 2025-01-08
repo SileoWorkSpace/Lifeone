@@ -1406,7 +1406,12 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 return Redirect("/Home/adminlogin");
             }
-            MTDSReport list = AdminReportsService.GetTDSReportService(model);
+			if (model.Page == 0 || model.Page == null)
+			{
+				model.Page = 1;
+			}
+			model.Size = SessionManager.Size;
+			MTDSReport list = AdminReportsService.GetTDSReportService(model);
             ViewBag.FinancealYear = DALBindCommonDropdown.BindFinancealYear();
             ViewBag.FinancealYear = DALBindCommonDropdown.BindFinancealYear();
             ViewBag.FinancealMonth = DALBindCommonDropdown.BindFinancealMonth();

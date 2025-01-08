@@ -657,15 +657,18 @@ body {
     .navbar-custom .logo span.logo-lg {
         display: none
     }
+
     .navbar-custom .logo span.logo-sm {
         display: block
     }
 
 .navbar-custom {
 }
+
 .form-control {
     box-sizing: border-box;
 }
+
 .text-logo {
     text-transform: uppercase;
     font-weight: 900;
@@ -1039,7 +1042,7 @@ body[data-layout=topnav] .profile-dropdown {
 
         .topbar-nav .metismenu li .nav-second-level {
             color: #333;
-           background-color: #00973b;
+            background-color: #00973b;
             background-clip: padding-box;
             border-radius: 0 0 .2rem .2rem;
             min-width: calc(10rem + 1.5rem);
@@ -1048,7 +1051,6 @@ body[data-layout=topnav] .profile-dropdown {
             box-shadow: 0 .5rem 1rem rgba(0,0,0,.175);
             padding: .5rem 0;
             z-index: 9999;
-            display:none;
         }
 
             .topbar-nav .metismenu li .nav-second-level li:active, .topbar-nav .metismenu li .nav-second-level li:focus, .topbar-nav .metismenu li .nav-second-level li:hover {
@@ -4361,7 +4363,7 @@ p.text-bold-600.m-0 {
 }
 
 .logo-lg img {
-    height:60px;
+    height: 60px;
 }
 
 .nav-tabs li a.active {
