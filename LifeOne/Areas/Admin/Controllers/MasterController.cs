@@ -2433,7 +2433,146 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 throw ex;
             }
-           
+
         }
+
+        [HttpGet]
+        public ActionResult PackageMasterComboList(string pk_pakageId)
+        {
+            if (!PermissionManager.IsActionPermit("Package Master", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
+            Reports product = new Reports();
+            try
+            {
+                product.OpCode = 4;
+                DataSet dataset = product.PackageMaster_Combo();
+                product.dtDetails = dataset.Tables[0];
+                return View(product);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        [HttpGet]
+        public ActionResult PackageMasterCombo(Reports product)
+        {
+            
+            return View(product);
+        }
+        [HttpPost]
+        public ActionResult PackageMasterCombo(Reports reports, string Save)
+        {
+            try
+            {
+
+                if (!PermissionManager.IsActionPermit("Package Master", ViewOptions.FormSave))
+                {
+                    return Redirect("/Home/adminlogin");
+                }
+                if (Save == "Save")
+                {
+                    reports.OpCode = 1;
+                }
+                else
+                {
+                    reports.OpCode = 2;
+                }
+                reports.AddedBy = int.Parse(SessionManager.Fk_MemId.ToString());
+                DataSet dataset = reports.PackageMaster_Combo();
+                if (dataset != null && dataset.Tables[0].Rows.Count > 0)
+                {
+                    if (dataset.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        TempData["msg"] = dataset.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["Flag"] = dataset.Tables[0].Rows[0]["Flag"].ToString();
+                        return RedirectToAction("PackageMasterComboList");
+                    }
+
+                }
+                return View("PackageMasterCombo");
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public ActionResult PackageMasterComboDelete(string id)
+        {
+            if (!PermissionManager.IsActionPermit("Package Master", ViewOptions.FormView))
+            {
+                return Redirect("/Home/adminlogin");
+            }
+            Reports product = new Reports();
+            try
+            {
+                if (id != null)
+                {
+                    product.OpCode = 3;
+                }
+                DataSet dataset = product.PackageMaster_Combo();
+                product.dtDetails = dataset.Tables[0];
+                if (dataset != null)
+                {
+                    if (dataset.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        TempData["msg"] = dataset.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = dataset.Tables[0].Rows[0]["Flag"].ToString();
+                        return RedirectToAction("PackageMasterComboList");
+                    }
+                    else
+                    {
+                        TempData["msg"] = dataset.Tables[0].Rows[0]["Message"].ToString();
+                        TempData["code"] = dataset.Tables[0].Rows[0]["Flag"].ToString();
+                        return RedirectToAction("PackageMasterComboList");
+                    }
+                }
+                return RedirectToAction("PackageMasterComboList");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public ActionResult PackageMasterComboGetBy_Id(string id)
+        {
+            Reports product = new Reports();
+            try
+            {
+
+                if (id != null)
+                {
+                    product.Pk_PackageID = int.Parse(id);
+
+                    product.OpCode = 5;
+                    DataSet dataset = product.PackageMaster_Combo();
+                    product.PackageName = dataset.Tables[0].Rows[0]["PackageName"].ToString();
+                    product.PackageAmount = dataset.Tables[0].Rows[0]["PackageAmount"].ToString();
+                    product.Price = dataset.Tables[0].Rows[0]["Price"].ToString();
+                    product.CGST = decimal.Parse(dataset.Tables[0].Rows[0]["CGST"].ToString());
+                    product.SGST = decimal.Parse(dataset.Tables[0].Rows[0]["SGST"].ToString());
+                    product.IGST = decimal.Parse(dataset.Tables[0].Rows[0]["IGST"].ToString());
+                    product.BP = dataset.Tables[0].Rows[0]["BP"].ToString();
+                    product.DP = dataset.Tables[0].Rows[0]["DP"].ToString();
+                    product.Rate = dataset.Tables[0].Rows[0]["Rate"].ToString();
+                    product.MinBv = dataset.Tables[0].Rows[0]["MinBV"].ToString();
+                    product.CappingPoints = dataset.Tables[0].Rows[0]["CappingPoints"].ToString();
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            return RedirectToAction("PackageMasterCombo", product);
+        }
+
+
     }
 }

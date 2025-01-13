@@ -56,20 +56,33 @@
                     <div class="col-md-8">
                         <div class="card card-outline-info">
                             <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+
+                                            @Html.RadioButtonFor(m => m.PaymentOption, "Wallet", new { id = "walletOption", @checked = Model.PaymentOption == "Wallet" ? "checked" : null, onclick = "PayementModeWallet();" })
+                                            Wallet
+
+                                            @Html.RadioButtonFor(m => m.PaymentOption, "Product", new { id = "productOption", onclick = "PayementModeProduct();" })
+                                            Product
+
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group label-floating is-empty">
                                             <label class="form-control-placeholder" for="name">Login Id</label>
-                                            @Html.TextBoxFor(m => m.txtLoginId, new { @class = "form-control", @placeholder = "LoginId" })
+                                            @Html.TextBoxFor(m => m.txtLoginId, new { @class = "form-control", @placeholder = "LoginId", @readonly = "readonly", @id = "txtLoginId" })
                                             @*@if (!string.IsNullOrEmpty(@ViewBag.Name))
-                                                {
-                                                    <span style="color:blue">
-                                                        @ViewBag.Name
-                                                    </span>
-                                                }*@
+                    {
+                        <span style="color:blue">
+                            @ViewBag.Name
+                        </span>
+                    }*@
                                             @*else
-                                                {*@
+                    {*@
                                             <span id="SpnLogInId" style="color:blue"> @ViewBag.Name</span>
                                             @*}*@
 
@@ -81,7 +94,15 @@
                                     </div>
 
                                 </div>
-                                <div class="row">
+                                <div class="row" id="wallet_id">
+                                    <div class="col-md-12">
+                                        <div class="form-group label-floating is-empty">
+                                            <label class="form-control-placeholder" for="name">Wallet Amount</label>
+                                            @Html.TextBoxFor(m => m.Wallet, new { @class = "form-control", @maxlength = "500", id = "Wallet" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" id="pakage_id">
                                     <div class="col-md-12">
                                         <div class="form-group label-floating is-empty">
                                             <label class="form-control-placeholder" for="name">Package</label>
@@ -128,11 +149,11 @@
 
 
                                     @*<div class="col-md-6">
-                                            <div class="form-group label-floating is-empty">
-                                                <label class="form-control-placeholder" for="name">Topup Date</label>
-                                                <input type="text" class="form-control" name="TopupDate" id="mdate" required autocomplete="off" />
-                                            </div>
-                                        </div>*@
+                <div class="form-group label-floating is-empty">
+                    <label class="form-control-placeholder" for="name">Topup Date</label>
+                    <input type="text" class="form-control" name="TopupDate" id="mdate" required autocomplete="off" />
+                </div>
+            </div>*@
                                 </div>
                                 <div class="row" id="producttable" style="display:none">
                                     <div class="col-md-12">
@@ -196,11 +217,11 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <div class="row" id="paymentmod_id" style="display:none;">
                                     <div class="col-md-12">
                                         <div class="form-group label-floating is-empty">
                                             <label class="form-control-placeholder" for="name">Payment Mode</label>
-                                            <select id="ddlPaymentMode" name="PaymentMode" class="form-control" >
+                                            <select id="ddlPaymentMode" name="PaymentMode" class="form-control">
                                                 <option value="0">Select</option>
                                                 @*<option value="Cash">Cash</option>*@
                                                 <option value="Cheque">Cheque</option>
@@ -285,7 +306,17 @@
 
 
 <script type="text/javascript">
-debugger
+    debugger
+    $(document).ready(function () {
+        debugger;
+        var franchiseloginid = $('#txtLoginId').val();
+        fgetMemberDetails(franchiseloginid);
+        var product_id = '@Model.ProductId';
+        if (product_id != null && product_id != "") {
+            $('#producttable').show();
+            $('#paymentmod_id').show();
+        }
+    });
     $('#mdate1').datepicker({
         autoclose: true,
         orientation: "top",
@@ -457,6 +488,7 @@ debugger
 
 
         var Pk_PackageID = $('#FK_PackageId').val();
+        var pakage_name = $('#FK_PackageId').text();
         var PackageAmt = 0
         if ($('#FK_PackageId').val() != "") {
             $.ajax({
@@ -518,11 +550,6 @@ debugger
             $('#txtPaidAmount').focus();
             return false;
         }
-        if ($('#txtPaidAmount').val() == '') {
-            $("#txtPaidAmount").addClass('errortext');
-            $('#txtPaidAmount').focus();
-            return false;
-        }
         if ($('#ddlPaymentMode').val() == '0') {
             $("#ddlPaymentMode").addClass('errortext');
             $('#ddlPaymentMode').focus();
@@ -563,4 +590,56 @@ debugger
 
         $('#Save').trigger('click');
     }
+    //add ask
+
+    function PayementModeWallet() {
+        debugger
+        var payement_mode = $('input[name="PaymentOption"]:checked').val();
+        if (payement_mode == "Wallet") {
+            $('#wallet_id').css("display", "block");
+            $('#packageamt').hide();
+            //$('#productdiv').hide();
+            $('#producttable').hide();
+            $('#paymentmod_id').hide();
+        }
+    }
+    function PayementModeProduct() {
+        debugger
+        var payement_mode = $('input[name="PaymentOption"]:checked').val();
+        if (payement_mode == "Product") {
+            $('#packageamt').show();
+            //$('#productdiv').show();
+            //$('#producttable').show();
+            $('#paymentmod_id').show();
+            $('#wallet_id').hide();
+            $('#wallet_id').val('');
+
+        }
+    }
+    function fgetMemberDetails(franchiseloginid) {
+        debugger;
+
+        $.ajax({
+            type: "post",
+            url: "/Franchise/Franchise/GetMemberdetails_franchise",
+            data: { Value: franchiseloginid },
+            dataType: "json",
+            success: function (response) {
+
+                if (response.Name != "") {
+
+                    $('#Wallet').val(response.Amount);
+                }
+                else {
+                    $('#Wallet').val("");
+
+                }
+
+            },
+            error: function () {
+                alert('Something went wrong!');
+            }
+        });
+    }
+
 </script>

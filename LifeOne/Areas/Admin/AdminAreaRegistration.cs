@@ -2921,6 +2921,30 @@ new[] { "LifeOne.Areas.Admin.Controllers" });
                id = UrlParameter.Optional
            },
            new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+           "PackageMasterComboList",
+           "PackageMasterComboList/{action}/{id}",
+           new
+           {
+               area = "Admin",
+               controller = "Master",
+               action = "PackageMasterComboList",
+               id = UrlParameter.Optional
+           },
+           new[] { "LifeOne.Areas.Admin.Controllers" });
+
+            context.MapRoute(
+          "PackageMasterCombo",
+          "PackageMasterCombo/{action}/{id}",
+          new
+          {
+              area = "Admin",
+              controller = "Master",
+              action = "PackageMasterCombo",
+              id = UrlParameter.Optional
+          },
+          new[] { "LifeOne.Areas.Admin.Controllers" });
         }
 
 

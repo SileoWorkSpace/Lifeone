@@ -1403,8 +1403,33 @@ namespace LifeOne.Models
 
         }
 
+        public DataSet PackageMaster_Combo()
+        {
+            SqlParameter[] para = {
+            new SqlParameter("@Pk_PackageID", Pk_PackageID),
+            new SqlParameter("@PackageName", PackageName),
+            new SqlParameter("@PackageAmount", PackageAmount),
+            new SqlParameter("@Price", Price),
+            new SqlParameter("@CGST", CGST),
+            new SqlParameter("@SGST", SGST),
+            new SqlParameter("@IGST", IGST),
+            new SqlParameter("@BP", BP),
+            new SqlParameter("@DP", DP),
+            new SqlParameter("@Rate", Rate),
+            new SqlParameter("@CappingPoints", CappingPoints),
+            new SqlParameter("@MinBv", MinBv),
+            new SqlParameter("@AddedBy", AddedBy),
+            new SqlParameter("@Opcode", OpCode)
+            };
+            DataSet ds = DBHelper.ExecuteQuery("ManagePackageMaster_Combo", para);
+            return ds;
+        }
+
+
+
+
     }
-    
+
     public class AdminStock: MPaging
     {
         public string LoginId { get; set; }

@@ -29,8 +29,6 @@ namespace LifeOne.Models.AdminManagement.AEntity
                 SqlParameter[] para =
                 {
                     new SqlParameter("@LoginId",LoginId),
-                    new SqlParameter("@TransDate",TransactionDate),
-                    new SqlParameter("@TransactionNo",TransactionNo),
                     new SqlParameter("@Narration",Narration),
                     new SqlParameter("@IsDebitCredit",IsDebitCredit),
                     new SqlParameter("@Amount",Amount),

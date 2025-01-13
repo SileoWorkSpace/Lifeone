@@ -43,6 +43,8 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
         public string TotalBV { get; set; }
         public string txtLoginId { get; set; }
         public int txtFK_PackageId { get; set; }
+        public int Wallet { get; set; }
+        public string PaymentOption { get; set; }
         public DataTable dtDetails { get;  set; }
 
         public DataSet ActivateMembersTemp()
@@ -73,6 +75,8 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
 
             SqlParameter[] para =
             {
+            new SqlParameter("@PaymentOption",obj.PaymentOption),
+            new SqlParameter("@Wallet",obj.Wallet),
             new SqlParameter("@FK_MemId",obj.FK_MemId),
             new SqlParameter("@FK_PackageId",obj.FK_PackageId),
             new SqlParameter("@Fk_FranchiseId",obj.Fk_FranchiseId),

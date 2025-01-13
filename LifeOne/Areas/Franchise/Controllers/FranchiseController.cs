@@ -406,28 +406,34 @@ namespace LifeOne.Areas.Franchise.Controllers
         public ActionResult TopupByFranchise(TopupByFranchise topupByFranchise)
         {
             ViewBag.Colortxt = "alert-success";
+            topupByFranchise.txtLoginId = Convert.ToString(SessionManager.LoginId);
             try
             {
+                
                 Models.AssociateManagement.AssociateEntity.PackageMaster para = new Models.AssociateManagement.AssociateEntity.PackageMaster();
                 ViewBag.ddlPackageList = Models.AssociateManagement.AssociateEntity.BindPckageMaster.BindPackageMasterFranchise();
-                ProductsDetail product = new ProductsDetail();
-                List<SelectListItem> ddlProduct = new List<SelectListItem>();
+                #region
+                //ProductsDetail product = new ProductsDetail();
+                //List<SelectListItem> ddlProduct = new List<SelectListItem>();
 
-                DataSet dataSet = product.GetAllProductsForFranchisee();
+                //DataSet dataSet = product.GetAllProductsForFranchisee();
 
-                if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+                //if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
 
-                {
-                    ddlProduct.Add(new SelectListItem { Text = "Select Product", Value = "0" });
-                    foreach (DataRow r in dataSet.Tables[0].Rows)
-                    {
+                //{
+                //    ddlProduct.Add(new SelectListItem { Text = "Select Product", Value = "0" });
+                //    foreach (DataRow r in dataSet.Tables[0].Rows)
+                //    {
 
-                        ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                //        ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
 
-                    }
+                //    }
 
-                }
-                ViewBag.ddlProduct = ddlProduct;
+                //}
+                //ViewBag.ddlProduct = ddlProduct;
+                #endregion
+
+                ViewBag.ddlProduct = DALBindCommonDropdown.BindFranchiseProductDropdown(1, 0, SessionManager.FranchiseFk_MemId);
                 topupByFranchise.Fk_FranchiseId = SessionManager.FranchiseFk_MemId;
                 if (topupByFranchise.FK_MemId > 0)
                 {
@@ -489,25 +495,27 @@ namespace LifeOne.Areas.Franchise.Controllers
             try
             {
                 ViewBag.ddlPackageList = Models.AssociateManagement.AssociateEntity.BindPckageMaster.BindPackageMasterAdmin();
-                ProductsDetail product = new ProductsDetail();
-                List<SelectListItem> ddlProduct = new List<SelectListItem>();
+                #region
+                //ProductsDetail product = new ProductsDetail();
+                //List<SelectListItem> ddlProduct = new List<SelectListItem>();
 
-                DataSet dataSet = product.GetAllProducts();
+                //DataSet dataSet = product.GetAllProductsForFranchisee();
 
-                if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+                //if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
 
-                {
-                    ddlProduct.Add(new SelectListItem { Text = "Select Product", Value = "0" });
-                    foreach (DataRow r in dataSet.Tables[0].Rows)
-                    {
+                //{
+                //    ddlProduct.Add(new SelectListItem { Text = "Select Product", Value = "0" });
+                //    foreach (DataRow r in dataSet.Tables[0].Rows)
+                //    {
 
-                        ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+                //        ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
 
-                    }
+                //    }
 
-                }
-                ViewBag.ddlProduct = ddlProduct;
-
+                //}
+                //ViewBag.ddlProduct = ddlProduct;
+                #endregion
+                ViewBag.ddlProduct = DALBindCommonDropdown.BindFranchiseProductDropdown(1, 0, SessionManager.FranchiseFk_MemId);
                 Models.FranchiseManagement.FEntity.TopupByFranchise para = new Models.FranchiseManagement.FEntity.TopupByFranchise();
 
                 para.FK_MemId = obj.FK_MemId;
@@ -662,6 +670,42 @@ namespace LifeOne.Areas.Franchise.Controllers
 
             return RedirectToAction("TopupByFranchise", topupByFranchise);
 
+        }
+        [HttpPost]
+        public JsonResult GetMemberdetails_franchise(string Value)
+        {
+            Franchisetranslations obj = new Franchisetranslations();
+            var response = new { Name = string.Empty, Amount = string.Empty };
+
+            try
+            {
+                if (!string.IsNullOrEmpty(Value))
+                {
+                    obj.OpCode = 1;
+                    obj.LoginId = Value;
+                    DataSet ds = obj.FranchiseDetails();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                        {
+                            response = new
+                            {
+                                Name = ds.Tables[0].Rows[0]["PersonName"].ToString(),
+                                Amount = ds.Tables[0].Rows[0]["Amount"].ToString()
+                            };
+                        }
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+                return Json(null);
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
     }
 }

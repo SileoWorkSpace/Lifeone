@@ -232,7 +232,12 @@
 
                                         @if (PermissionManager.IsViewPermit("Package Master"))
                                         {
-                                            <li><a href="/PackageMasterList">Package Master</a></li>
+                                            <li><a href="/PackageMasterList">Package Master Combo</a></li>
+                                        }
+
+                                        @if (PermissionManager.IsViewPermit("Package Master"))
+                                        {
+                                            <li><a href="/PackageMasterComboList">Package Master</a></li>
                                         }
                                         @if (PermissionManager.IsViewPermit("Change WebSite Popup"))
                                         {

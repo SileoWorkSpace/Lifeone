@@ -1642,6 +1642,8 @@
     <Content Include="Areas\Associate\Views\AssociateReport\AssociateToPupHistory.cshtml" />
     <Content Include="Areas\Associate\Views\EWalletRequest\WalletToWalletTransfer.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\franchisewallettransaction.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\PackageMasterCombo.cshtml" />
+    <Content Include="Areas\Admin\Views\Master\PackageMasterComboList.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />

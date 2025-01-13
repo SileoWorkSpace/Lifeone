@@ -1,29 +1,34 @@
 ﻿@model LifeOne.Models.Reports
 @using LifeOne.Models.Manager;
 @{
-    ViewBag.Title = "PackageMasterList";
+    ViewBag.Title = "PackageMasterComboList";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
-
-
 <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6 d-flex justify-content-between">
+                    @if (@TempData["msg"] != null)
+                    {
+                        <small class="pull-right" style="color: red; display: inline-block; font-size: 14px;">
+                            @TempData["msg"]
+                        </small>
+                    }
+                </div>
 
+            </div>
+        </div>
+    </div>
     <div class="row page-titles">
         <div class="ptitle">
-            <h4 class="mb-1 mt-0">Package Master Combo</h4>
-            @*<nav aria-label="breadcrumb" class="float-left">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="#-">Masters</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Package Master</li>
-                    </ol>
-                </nav>*@
+            <h4 class="mb-1 mt-0">Package Master</h4>
         </div>
         <div class="pbutton">
             <div class="right text-right">
-                <span>
-                    @*<a class="advance-search" title="Click here for search" data-toggle="tooltip" data-placement="bottom" href="#-">Search</a>*@
-                </span>
+
                 <span>
 
                     <!--<a href="@Url.Action("ExportToExcelPackageMasterList","AdminReport",new {page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
@@ -42,13 +47,10 @@
 
                     @if (PermissionManager.IsActionPermit("Package Master", ViewOptions.FormSave))
                     {
-                        <a href="/PackageMaster" id="btnAdd" class="btn btn-success btn-sm">
+                        <a href="/PackageMasterCombo" id="btnAdd" class="btn btn-success btn-sm">
                             <i class="fa fa-plus" aria-hidden="true"></i> Add New
                         </a>
                     }
-
-                    @*<button class="btn btn-success btn-rounded btnprint" onclick="printDiv('customers')" title="Print"><i class="fa fa-print"></i></button>*@
-                    @*<button class="btn btn-success btn-rounded btnPdf" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>*@
 
                 </span>
 
@@ -59,15 +61,11 @@
 
     <div id="no-more-tables">
         <form id="form1" method="post">
-
-
-
             <div class="table-responsive fixTableHead" id="customers">
                 <table class="table mb-0" id="tblCustomers">
                     <thead>
                         <tr>
                             <th>#Sn.</th>
-                            @*<th>Pk_PackageID</th>*@
                             <th>Package Name</th>
                             <th>Package Amount</th>
                             <th>Price</th>
@@ -78,11 +76,7 @@
                             <th>DP</th>
                             <th>Rate</th>
                             <th>Percentage</th>
-                            <th @*style="text-align:left"*@>Capping Points</th>
                             <th>Minimum BV</th>
-                            <th>IsFixed</th>
-                            <th>IsDiscount</th>
-                            <th>View</th>
                             <th style="text-align:right">Action</th>
 
 
@@ -99,7 +93,6 @@
                                 <tr>
 
                                     <td>@j</td>
-                                    @*<td>@Model.dtPackageMaster.Rows[i]["Pk_PackageID"].ToString()</td>*@
                                     <td>@Model.dtDetails.Rows[i]["PackageName"].ToString()</td>
                                     <td>@Model.dtDetails.Rows[i]["PackageAmount"].ToString()</td>
                                     <td>@Model.dtDetails.Rows[i]["Price"].ToString()</td>
@@ -109,50 +102,21 @@
                                     <td>@Model.dtDetails.Rows[i]["BP"].ToString()</td>
                                     <td>@Model.dtDetails.Rows[i]["DP"].ToString()</td>
                                     <td>@Model.dtDetails.Rows[i]["Rate"].ToString()</td>
-                                    <td>@Model.dtDetails.Rows[i]["Percentage"].ToString()</td>
                                     <td style="text-align:left">@Model.dtDetails.Rows[i]["CappingPoints"].ToString()</td>
                                     <td style="text-align:left">@Model.dtDetails.Rows[i]["MinBV"].ToString()</td>
-                                    <td>
-                                        @if (@Model.dtDetails.Rows[i]["IsFixed"].ToString() == "True")
-                                        {
-                                            <span class="badge badge-success py-1">Yes</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="badge badge-danger py-1">No</span>
-                                        }
 
-                                    </td>
-                                    <td>
-                                        @if (@Model.dtDetails.Rows[i]["IsDiscount"].ToString() == "True")
-                                        { 
-                                        <span class="badge badge-success">Yes</span>
-                                        }
-                                        else { 
-                                        
-                                        <span class="badge badge-danger">No</span>
-                                        }
-                                    </td>
-                                    <td>
-                                        @if (@Model.dtDetails.Rows[i]["IsFixed"].ToString() == "True")
-                                        {
-                                            <a href="#" class=""  data-toggle="modal" data-target="#myModal" onclick="return ShowItems('@Model.dtDetails.Rows[i]["Pk_PackageId"].ToString()')">
-                                              <i class="fa fa-eye"></i>
-                                            </a>
-                                        }
-                                    </td>
                                     <td>
 
 
                                         @if (PermissionManager.IsActionPermit("Package Master", ViewOptions.FormUpdate))
                                         {
-                                            <a href="/PackageMaster?id=@Model.dtDetails.Rows[i]["Pk_PackageId"].ToString()" class="btn btn-primary btn-sm" onclick="return confirm('are you sure to Edit this record?')" style="display:@ViewBag.edit;">
+                                            <a href="/Admin/Master/PackageMasterComboGetBy_Id?id=@Model.dtDetails.Rows[i]["Pk_PackageId"].ToString()" class="btn btn-primary btn-sm" onclick="return confirm('are you sure to Edit this record?')" style="display:@ViewBag.edit;">
                                                 <i class="fa fa-edit"></i>
                                             </a>
                                         }
                                         @if (PermissionManager.IsActionPermit("Package Master", ViewOptions.FormDelete))
                                         {
-                                            <a href="/Admin/Master/PackageMasterDelete?id=@Model.dtDetails.Rows[i]["Pk_PackageId"].ToString()" id="btnDelete" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to delete this record?')" ToolTip="Delete" style="display:@ViewBag.delete;">
+                                            <a href="/Admin/Master/PackageMasterComboDelete?id=@Model.dtDetails.Rows[i]["Pk_PackageId"].ToString()" id="btnDelete" class="btn btn-danger btn-sm" onclick="return confirm('are you sure to delete this record?')" ToolTip="Delete" style="display:@ViewBag.delete;">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         }
@@ -168,6 +132,7 @@
                 </table>
 
             </div>
+        </form>
     </div>
     <footer class="card-footer bg-white p-2">
         <div class="d-md-flex align-items-center justify-content-between">
@@ -223,51 +188,7 @@
     </footer>
     <!-- /.box-body -->
 </div>
-<!-- /.box -->
-                </div>
-<!-- /.col -->
-            </div>
 
-        </form>
-    </div>
-
-
-@*<div class="modal fade in" id="myModal4" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-
-                    <h4 class="modal-title">Order Details</h4>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-striped mb-0" id="tableOrderDetail">
-                        <thead>
-                            <tr>
-
-                                <th>LoginId</th>
-                                <th>Name</th>
-                                <th>Bonanza Name</th>
-                                <th>Total BV</th>
-
-
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                        </tbody>
-                        <tfoot id="tablefoot">
-
-                        </tfoot>
-                    </table>
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-
-            </div>
-        </div>
-
-    </div>*@
 <div id="tblpdff" style="font-size:50px;">
 
 
@@ -381,11 +302,11 @@
 
                     $("#TmpProd tbody").html('');
                     for (var i = 0; i < response.length; i++) {
-                 
+
 
                         str += "<tr><td>" + srno + "</td><td>" + response[i].ProductName + "</td><td>" + response[i].ProductMRP + "</td><td>" + response[i].ProductBV + "</td><td>" + response[i].ProductDP + "</td><td>" + response[i].ProductQTY + "</td></tr>";
                         srno++
-                     }
+                    }
 
                     $("#TmpProd tbody").html(str);
                 }

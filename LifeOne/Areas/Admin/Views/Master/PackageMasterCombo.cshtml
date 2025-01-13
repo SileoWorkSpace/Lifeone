@@ -1,0 +1,290 @@
+﻿@model LifeOne.Models.Reports
+@using LifeOne.Models.Manager;
+@{
+    ViewBag.Title = "PackageMasterCombo";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<style>
+    .card-body.em .row .col-md-6 {
+        margin-bottom: 10px;
+    }
+
+    .container2 {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        cursor: pointer;
+        font-size: 15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+
+        .container2 input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+    .checkmark {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
+    }
+
+    .container2:hover input ~ .checkmark {
+        background-color: #ccc;
+    }
+
+    .container2 input:checked ~ .checkmark {
+        background-color: #2196F3;
+    }
+
+    .checkmark:after {
+        content: "";
+        position: absolute;
+        display: none;
+    }
+
+    .container2 input:checked ~ .checkmark:after {
+        display: block;
+    }
+
+    .container2 .checkmark:after {
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
+    }
+
+    .dv_Orbit {
+        display: none;
+    }
+</style>
+
+
+
+@using (Html.BeginForm("PackageMasterCombo", "Master", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Pk_PackageID)
+    <div class="registration-form  ml-auto mr-auto no-float">
+        <div class="container" style="background-color:#fff; padding:20px;border-radius:10px;">
+            <div class="row">
+                <div class="card">
+                    <div class="card-body em">
+                        <div class="col-md-12">
+                            <div class="mb-30">
+                                <h2 class="nonecase-font txt-grey">Package Master</h2>
+                            </div>
+                            <hr />
+                        </div>
+
+                        <div class="col-md-12">
+
+                            <div class="row">
+
+
+
+                                <div class="col-md-3">
+                                    <label>Package Name<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.PackageName, new { @class = "form-control" })
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label>Package Amount<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.PackageAmount, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+
+
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Price<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Price, new { @class = "form-control" })
+
+                                </div>
+
+
+                                <div class="col-md-3 form-group" id="dv_PV">
+                                    <label>CGST<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.CGST, new { @class = "form-control" })
+
+                                </div>
+
+                                <div class="col-md-3 form-group" id="dv_PV">
+                                    <label>SGST<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.SGST, new { @class = "form-control" })
+
+                                </div>
+
+                                <div class="col-md-3 form-group" id="dv_PV">
+                                    <label>IGST<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.IGST, new { @class = "form-control" })
+
+                                </div>
+
+                                <div class="col-md-3 form-group">
+                                    <label>BV<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.BP, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                </div>
+
+                                <div class="col-md-3 form-group">
+                                    <label>DP<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.DP, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                </div>
+
+                                <div class="col-md-4 form-group">
+                                    <label>Rate<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.Rate, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                </div>
+
+
+                                <div class="col-md-4 form-group">
+                                    <label>CappingPoints<span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.CappingPoints, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                </div>
+
+                                <div class="col-md-4 form-group">
+                                    <label>Minimum BV <span style="color:red;">*</span></label>
+                                    @Html.TextBoxFor(m => m.MinBv, new { @class = "form-control", @onkeypress = "return isNumberKey(event)" })
+                                </div>
+
+
+
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-12" style="margin-top:10px">
+                                    <div class="text-center" style="margin-left:50px">
+                                        @{
+                                            var Button = "";
+                                            if (Model == null)
+                                            {
+                                                Button = "Save";
+                                            }
+
+                                            else if (Model != null)
+                                            {
+
+                                                if (Model.Pk_PackageID == 0)
+                                                {
+                                                    Button = "Save";
+                                                }
+                                                else
+                                                {
+                                                    Button = "Update";
+                                                }
+                                            }
+                                            <button type="submit" value="@Button" class="btn btn-success" onclick="return validate();" name="@Button">@Button</button>
+
+                                        }
+
+
+                                        <a href="/PackageMasterList" class="btn btn-danger"> Cancel</a>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <br />
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script type="text/javascript">
+    function validate() {
+        var PackageName = $('#PackageName').val();
+        var PackageAmount = $('#PackageAmount').val();
+        var Price = $('#Price').val();
+        var CGST = $('#CGST').val();
+        var SGST = $('#SGST').val();
+        var IGST = $('#IGST').val();
+        var BP = $('#BP').val();
+        var DP = $('#DP').val();
+        var Rate = $('#Rate').val();
+        var CappingPoints = $('#CappingPoints').val();
+        var MinBv = $('#MinBv').val();
+
+
+        if (PackageName == null || PackageName == "") {
+            alert("Please Add Package Name");
+            return false;
+        }
+        else if (PackageAmount == null || PackageAmount == "") {
+            alert("Please Add Package Amount");
+            return false;
+
+        }
+
+        else if (Price == null || Price == "") {
+            alert("Please Add Price ");
+            return false;
+        }
+        else if (CGST == null || CGST == "") {
+            alert("Please Add CGST");
+            return false;
+        }
+        else if (IGST == null || IGST == "") {
+            alert("Please Add IGST");
+            return false;
+        }
+        else if (SGST == null || SGST == "") {
+            alert("Please Add SGST");
+            return false;
+        }
+        else if (BP == null || BP == "") {
+            alert("Please Add BP");
+            return false;
+        }
+        else if (DP == null || DP == "") {
+            alert("Please Add Sale Price");
+            return false;
+        }
+        else if (Rate == null || Rate == "") {
+            alert("Please Add Rate");
+            return false;
+        }
+        else if (CappingPoints == null || CappingPoints == "") {
+            alert("Please Add Capping Points");
+            return false;
+        } else if (MinBv == null || MinBv == "") {
+            alert("Please Add Minimum BV");
+            return false;
+        }
+        else {
+            $('#idfinalsubmit').click();
+        }
+
+    }
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : event.keyCode;
+        if (charCode != 46 && charCode > 31
+            && (charCode < 48 || charCode > 57))
+            return false;
+    }
+    $("#Percentage").blur(function (e) {
+        let txtInput = parseInt(this.value);
+        if (txtInput < 1 || txtInput > 100) {
+            alert('CLP Percentage should be grater than 0 and less than 100');
+            return false;
+        }
+
+
+    });
+</script>
