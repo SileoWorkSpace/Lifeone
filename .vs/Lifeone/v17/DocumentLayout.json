@@ -50,7 +50,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 48,
           "Children": [
             {
               "$type": "Document",
@@ -78,19 +78,6 @@
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
               "WhenOpened": "2025-01-14T12:03:05.961Z",
               "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Web.config",
-              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Web.config",
-              "RelativeDocumentMoniker": "LifeOne\\Web.config",
-              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Web.config",
-              "RelativeToolTip": "LifeOne\\Web.config",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-01-14T13:23:18.71Z",
               "EditorCaption": ""
             },
             {
@@ -276,6 +263,19 @@
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c64b9c2-e352-428e-a56d-0ace190b99a6}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Web.config",
+              "DocumentMoniker": "E:\\github\\Lifeone\\LifeOne\\Web.config",
+              "RelativeDocumentMoniker": "LifeOne\\Web.config",
+              "ToolTip": "E:\\github\\Lifeone\\LifeOne\\Web.config",
+              "RelativeToolTip": "LifeOne\\Web.config",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-01-14T13:23:18.71Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
