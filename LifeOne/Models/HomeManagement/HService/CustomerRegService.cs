@@ -77,6 +77,13 @@ namespace LifeOne.Models.HomeManagement.HService
             return obj;
         }
 
+        public static MSimpleString ProfileUpate(MCustomerRegistration _model)
+        {
+            MSimpleString obj = DALCustomerRegistration.UpdateProfile(_model);
+            return obj;
+        }
+
+
         public static MSimpleString InvokeCustomerAddressDetails(MCustomerRegistration _model)
         {
             MSimpleString obj = DALCustomerRegistration.CustomerAddressDetails(_model);

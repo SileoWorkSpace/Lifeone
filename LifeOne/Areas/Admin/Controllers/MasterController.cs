@@ -2437,7 +2437,7 @@ namespace LifeOne.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public ActionResult PackageMasterComboList(string pk_pakageId)
+        public ActionResult PackageMasterComboList()
         {
             if (!PermissionManager.IsActionPermit("Package Master", ViewOptions.FormView))
             {
@@ -2512,6 +2512,7 @@ namespace LifeOne.Areas.Admin.Controllers
                 if (id != null)
                 {
                     product.OpCode = 3;
+                    product.Pk_PackageID = Convert.ToInt32(id);
                 }
                 DataSet dataset = product.PackageMaster_Combo();
                 product.dtDetails = dataset.Tables[0];

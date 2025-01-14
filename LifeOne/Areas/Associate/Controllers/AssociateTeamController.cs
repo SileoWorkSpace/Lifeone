@@ -1,5 +1,8 @@
 ﻿using ClosedXML.Excel;
+using DocumentFormat.OpenXml.Bibliography;
 using DocumentFormat.OpenXml.EMMA;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 using LifeOne.Models.API;
 using LifeOne.Models.AssociateManagement.AssociateEntity;
 using LifeOne.Models.AssociateManagement.AssociateService;
@@ -13,6 +16,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using System.Web.UI.WebControls;
 
 namespace LifeOne.Areas.Associate.Controllers
 {
@@ -22,18 +26,57 @@ namespace LifeOne.Areas.Associate.Controllers
     {
         AssociateTeam team = new AssociateTeam();
         // GET: Associate/AssociateTeam
-        public ActionResult MyDirect(int? Page, string FK_MemId, AssociateTeam team)
-        {
 
+        #region MyDirect
+        //public ActionResult MyDirect(int? Page, string FK_MemId, AssociateTeam team)
+        //{
+
+        //    int TotalRecords = 0;
+        //    int PageSize = SessionManager.Size;
+        //    int Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+        //    if (Page == null)
+        //    {
+        //        Session["MemId"] = null;
+        //        Page = 1;
+        //    }
+        //    if (string.IsNullOrEmpty(FK_MemId) == false && FK_MemId != "0")
+        //    {
+        //        Fk_MemId = Convert.ToInt32(UrlEncodingDecoding.Decode(FK_MemId));
+        //        Session["MemId"] = Fk_MemId;
+        //    }
+        //    else if (Session["MemId"] != null)
+        //    {
+        //        Fk_MemId = Convert.ToInt32(Session["MemId"]);
+        //    }
+        //    else
+        //    {
+        //        Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+        //        Session["MemId"] = Fk_MemId;
+        //    }
+        //    if (SessionManager.SponsorFk_MemId == Fk_MemId)
+        //    {
+        //        Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+        //    }
+        //    team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
+        //    team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");
+        //    team.Directs = AssociateTeamService.GetDirectList(Fk_MemId, team.SearchLoginId, team.Status, team.FromDate, team.ToDate);
+
+        //    return View(team);
+        //}
+        #endregion
+        public ActionResult MyDirect(int? Page, string FK_MemId, AssociateTeam team, string Export)
+        {
             int TotalRecords = 0;
             int PageSize = SessionManager.Size;
             int Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+
             if (Page == null)
             {
                 Session["MemId"] = null;
                 Page = 1;
             }
-            if (string.IsNullOrEmpty(FK_MemId) == false && FK_MemId != "0")
+
+            if (!string.IsNullOrEmpty(FK_MemId) && FK_MemId != "0")
             {
                 Fk_MemId = Convert.ToInt32(UrlEncodingDecoding.Decode(FK_MemId));
                 Session["MemId"] = Fk_MemId;
@@ -47,16 +90,82 @@ namespace LifeOne.Areas.Associate.Controllers
                 Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
                 Session["MemId"] = Fk_MemId;
             }
+
             if (SessionManager.SponsorFk_MemId == Fk_MemId)
             {
                 Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
             }
-            team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
-            team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");
-            team.Directs = AssociateTeamService.GetDirectList(Fk_MemId, team.SearchLoginId, team.Status, team.FromDate,team.ToDate);
-           
+
+          
+            team.FromDate = string.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
+            team.ToDate = string.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");
+
+         
+            team.Directs = AssociateTeamService.GetDirectList(Fk_MemId, team.SearchLoginId, team.Status, team.FromDate, team.ToDate);
+
+            if (!string.IsNullOrEmpty(Export) && Export.Equals("PDF", StringComparison.OrdinalIgnoreCase))
+            {
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    Rectangle customSize = new Rectangle(1200, 850);
+                    Document pdfDoc = new Document(customSize, 25, 25, 25, 25);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+                    PdfPTable headerTable = new PdfPTable(2);
+                    headerTable.WidthPercentage = 100;
+                    headerTable.SetWidths(new float[] { 75, 25 });
+                    Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
+                    PdfPCell titleCell = new PdfPCell(new Phrase("Direct Report", titleFont))
+                    {
+                        Border = PdfPCell.NO_BORDER,
+                        HorizontalAlignment = Element.ALIGN_LEFT,
+                        VerticalAlignment = Element.ALIGN_MIDDLE
+                    };
+                    headerTable.AddCell(titleCell);
+                    pdfDoc.Add(headerTable);
+                    pdfDoc.Add(new Paragraph("\n"));
+                    PdfPTable table = new PdfPTable(8); 
+                    table.WidthPercentage = 100;
+                    float[] columnWidths = new float[] { 4f, 6f, 8f, 6f, 8f, 6f, 6f, 6f };
+                    table.SetWidths(columnWidths);
+                    string[] headers = new string[]
+                    {
+                "#Sn.", "Distributor Id", "Distributor Name", "Placement Id", "Placement Name",
+                "Active Status", "Activation Date", "Joining Date"
+                    };
+
+                    foreach (string header in headers)
+                    {
+                        PdfPCell headerCell = new PdfPCell(new Phrase(header, FontFactory.GetFont("Arial", 10, Font.BOLD)))
+                        {
+                            BackgroundColor = new BaseColor(200, 200, 200), 
+                            HorizontalAlignment = Element.ALIGN_CENTER,
+                            Padding = 5
+                        };
+                        table.AddCell(headerCell);
+                    }
+                    int serialNo = 1;
+                    foreach (var item in team.Directs)
+                    {
+                        table.AddCell(serialNo.ToString()); 
+                        table.AddCell(item.MemberLoginId); 
+                        table.AddCell(item.MemberName);
+                        table.AddCell(item.ParentLoginId); 
+                        table.AddCell(item.ParentName);
+                        table.AddCell(item.ActiveInactiveStatus == "Active" ? "Active" : "Inactive");
+                        table.AddCell(item.ActivationDate.ToString());
+                        table.AddCell(item.DateOfjoining.ToString());
+                        serialNo++;
+                    }
+
+                    pdfDoc.Add(table);
+                    pdfDoc.Close();
+                    return File(stream.ToArray(), "application/pdf", "DirectReport.pdf");
+                }
+            }
             return View(team);
         }
+
 
         public ActionResult ExportToExcelMyDirect(int? Page, string FK_MemId, AssociateTeam team)
         {
@@ -114,16 +223,72 @@ namespace LifeOne.Areas.Associate.Controllers
                 return Redirect("MyDirect");
             }
         }
-        public ActionResult MyDownline(int? Page, string FK_MemId, AssociateTeam team,string Leg, string FromDate, string ToDate)
+        #region MyDownline
+        //public ActionResult MyDownline(int? Page, string FK_MemId, AssociateTeam team, string Leg, string FromDate, string ToDate)
+        //{
+        //    int TotalRecords = 0;
+        //    int PageSize = SessionManager.Size;
+        //    int Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+        //    if (Page == null)
+        //    {
+        //        Session["MemId"] = null;
+        //        Page = 1;
+        //    }
+        //    if (string.IsNullOrEmpty(FK_MemId) == false && FK_MemId != "0")
+        //    {
+        //        Fk_MemId = Convert.ToInt32(UrlEncodingDecoding.Decode(FK_MemId));
+        //        Session["MemId"] = Fk_MemId;
+        //    }
+        //    else if (Session["MemId"] != null)
+        //    {
+        //        Fk_MemId = Convert.ToInt32(Session["MemId"]);
+        //    }
+        //    else
+        //    {
+        //        Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+        //        Session["MemId"] = Fk_MemId;
+        //    }
+        //    ViewBag.PackageList = DALBindCommonDropdown.PackageBindDropdown(16, 0);
+        //    team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : team.FromDate;
+        //    team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : team.ToDate;
+        //    team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
+        //    team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");
+        //    team.Downlines = AssociateTeamService.GetDownlineList(Fk_MemId, team.SearchLoginId, team.Status, team.FromDate, team.ToDate, Page, PageSize, Leg, team.Pk_PackageID);
+        //    ViewBag.Email = team.Downlines.Select(x => x.Email).ToList();
+        //    ViewBag.Email = DALBindCommonDropdown.BindDropdown(13, Fk_MemId);
+        //    if (team.Downlines.Count > 0)
+        //    {
+        //        TotalRecords = team.Downlines[0].TotalRecords;
+        //        var pager = new Pager(TotalRecords, Page, SessionManager.Size);
+        //        team.Pager = pager;
+        //        Session["TotalRecords"] = TotalRecords;
+        //    }
+        //    if (Leg == "L")
+        //    {
+        //        ViewBag.Leg = "Leg";
+        //    }
+        //    if (Leg == "R")
+        //    {
+        //        ViewBag.Leg = "Right";
+        //    }
+
+        //    return View(team);
+        //}
+        #endregion
+
+
+        public ActionResult MyDownline(int? Page, string FK_MemId, AssociateTeam team, string Leg, string FromDate, string ToDate, string Export)
         {
             int TotalRecords = 0;
             int PageSize = SessionManager.Size;
             int Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+
             if (Page == null)
             {
                 Session["MemId"] = null;
                 Page = 1;
             }
+
             if (string.IsNullOrEmpty(FK_MemId) == false && FK_MemId != "0")
             {
                 Fk_MemId = Convert.ToInt32(UrlEncodingDecoding.Decode(FK_MemId));
@@ -138,14 +303,78 @@ namespace LifeOne.Areas.Associate.Controllers
                 Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
                 Session["MemId"] = Fk_MemId;
             }
+
             ViewBag.PackageList = DALBindCommonDropdown.PackageBindDropdown(16, 0);
             team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : team.FromDate;
             team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : team.ToDate;
-            //team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
-            //team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");            
-            team.Downlines = AssociateTeamService.GetDownlineList(Fk_MemId, team.SearchLoginId,team.Status, team.FromDate, team.ToDate, Page, PageSize,Leg,team.Pk_PackageID);
-            //ViewBag.Email = team.Downlines.Select(x => x.Email).ToList();
+
+          
+            team.Downlines = AssociateTeamService.GetDownlineList(Fk_MemId, team.SearchLoginId, team.Status, team.FromDate, team.ToDate, Page, PageSize, Leg, team.Pk_PackageID);
+
+            if (!string.IsNullOrEmpty(Export) && Export.Equals("PDF", StringComparison.OrdinalIgnoreCase))
+            {
+                using (MemoryStream stream = new MemoryStream())
+                {
+                    Rectangle customSize = new Rectangle(1200, 850);
+                    Document pdfDoc = new Document(customSize, 25, 25, 25, 25);
+                    PdfWriter writer = PdfWriter.GetInstance(pdfDoc, stream);
+                    pdfDoc.Open();
+                    PdfPTable headerTable = new PdfPTable(2);
+                    headerTable.WidthPercentage = 100;
+                    headerTable.SetWidths(new float[] { 75, 25 });
+                    Font titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 16);
+                    PdfPCell titleCell = new PdfPCell(new Phrase("Downline Report", titleFont))
+                    {
+                        Border = PdfPCell.NO_BORDER,
+                        HorizontalAlignment = Element.ALIGN_LEFT,
+                        VerticalAlignment = Element.ALIGN_MIDDLE
+                    };
+                    headerTable.AddCell(titleCell);
+                    pdfDoc.Add(headerTable);
+                    pdfDoc.Add(new Paragraph("\n"));
+                    PdfPTable table = new PdfPTable(11); 
+                    table.WidthPercentage = 100;
+                    float[] columnWidths = new float[] { 4f, 6f, 8f, 6f, 8f, 6f, 8f, 4f, 4f, 6f, 6f };
+                    table.SetWidths(columnWidths);
+                    string[] headers = new string[]
+                    {
+                "#Sn.", "Distributor Id", "Direct Seller Name", "Place Under Id", "Place Under Name",
+                "Sponsor Id", "Sponsor Name", "Active Status", "PV", "Activation Date", "Joining Date"
+                    };
+
+                    foreach (string header in headers)
+                    {
+                        PdfPCell headerCell = new PdfPCell(new Phrase(header, FontFactory.GetFont("Arial", 10, Font.BOLD)))
+                        {
+                            BackgroundColor = new BaseColor(200, 200, 200), 
+                            HorizontalAlignment = Element.ALIGN_CENTER,
+                            Padding = 5
+                        };
+                        table.AddCell(headerCell);
+                    }
+                    int serialNo = 1;
+                    foreach (var item in team.Downlines)
+                    {
+                        table.AddCell(serialNo.ToString());
+                        table.AddCell(item.MemberLoginId);
+                        table.AddCell(item.MemberName); 
+                        table.AddCell(item.ParentLoginId);
+                        table.AddCell(item.ParentName);
+                        table.AddCell(item.SponsorLoginId);
+                        table.AddCell(item.SponsorName);
+                        table.AddCell(item.Status == "Performence" ? "Active" : (item.Status == "Bronze" ? "Bronze" : "Inactive"));
+                        table.AddCell(item.PV.ToString()); 
+                        table.AddCell(item.DateOfActivation.ToString()); 
+                        table.AddCell(item.DateOfjoining.ToString()); 
+                        serialNo++;
+                    }
+                    pdfDoc.Add(table);
+                    pdfDoc.Close();
+                    return File(stream.ToArray(), "application/pdf", "DownlineReport.pdf");
+                }
+            }
             ViewBag.Email = DALBindCommonDropdown.BindDropdown(13, Fk_MemId);
+
             if (team.Downlines.Count > 0)
             {
                 TotalRecords = team.Downlines[0].TotalRecords;
@@ -153,7 +382,8 @@ namespace LifeOne.Areas.Associate.Controllers
                 team.Pager = pager;
                 Session["TotalRecords"] = TotalRecords;
             }
-            if(Leg=="L")
+
+            if (Leg == "L")
             {
                 ViewBag.Leg = "Leg";
             }
@@ -161,10 +391,9 @@ namespace LifeOne.Areas.Associate.Controllers
             {
                 ViewBag.Leg = "Right";
             }
-           
+
             return View(team);
         }
-
         public ActionResult ExportToExcelMyDownline(int? Page, string FK_MemId, AssociateTeam team,string Leg)
         {
             int PageSize = Convert.ToInt32(Session["TotalRecords"]);

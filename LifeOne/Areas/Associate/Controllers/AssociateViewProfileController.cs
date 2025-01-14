@@ -729,7 +729,7 @@ namespace LifeOne.Areas.Associate.Controllers
                     reports.ProfilePic = dr["profilepic"].ToString();
                 }
             }
-          return View(reports);  
+          return View(reports);
         }
         public JsonResult GetLocationByPinCode(int? pin)
         {
@@ -751,5 +751,59 @@ namespace LifeOne.Areas.Associate.Controllers
             }).Distinct().ToList();
             return Json(data1, JsonRequestBehavior.AllowGet);
         }
+
+        [HttpPost]
+        public JsonResult UploadfileUpdate(HttpPostedFileBase file, string subdir)
+        {
+            MCustomerRegistration Obj = new MCustomerRegistration();
+           
+           
+            
+            var objres = (object)null;
+            string filePath = "";  // Declare a variable to store the file path
+
+            if (file != null && file.ContentLength > 0)
+            {
+                var ImagePath = "~/ReadWriteData/" + subdir + "/";
+                var fileName = Path.GetFileName(file.FileName);
+                var extension = Path.GetExtension(file.FileName);
+
+                if (extension.ToUpper() == ".PNG" || extension.ToUpper() == ".JPG" || extension.ToUpper() == ".JPEG")
+                {
+                    if (!Directory.Exists(Server.MapPath(ImagePath)))
+                    {
+                        Directory.CreateDirectory(Server.MapPath(ImagePath));
+                    }
+                    fileName = DateTime.Now.ToString("yyyyMMddHHmmss") + "_" + fileName;
+                    var fileSavePath = Path.Combine(Server.MapPath(ImagePath), fileName);
+                    file.SaveAs(fileSavePath);
+                    Obj.profilepic = ImagePath + fileName;
+                    Obj.LoginId = SessionManager.LoginId;
+                    var res = CustomerRegService.ProfileUpate(Obj);
+                    if (res.flag == 1)
+                    {
+
+                        objres = new { Msg = res.Message };
+                    }
+                    else {
+
+                        objres = new { Msg = res.Message };
+                    }
+
+                    
+                }
+                else
+                {
+                    objres = new { Msg = "Only jpg, jpeg, png, bmp files are allowed!" };
+                }
+            }
+            else
+            {
+                objres = new { Msg = "Please select a file to upload!" };
+            }
+
+            return Json(objres, JsonRequestBehavior.AllowGet);
+        }
+
     }
 }

@@ -123,6 +123,26 @@
         cursor: inherit;
         display: block;
     }
+    .alert {
+        padding: 8px 10px;
+        background-color: #f44336;
+        color: white;
+    }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .closebtn:hover {
+            color: black;
+        }
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/css/select2.min.css" integrity="sha256-FdatTf20PQr/rWg+cAKfl6j4/IY3oohFAJ7gVC3M34E=" crossorigin="anonymous" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.12/js/select2.min.js" integrity="sha256-wfVTTtJ2oeqlexBsfa3MmUoB77wDNRPqT1Q1WA2MMn4=" crossorigin="anonymous"></script>
@@ -133,6 +153,7 @@
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="ptitle">
+
                 <h4 class="mb-1 mt-0 text-white">My Downline</h4>
                 @*<nav aria-label="breadcrumb" class="float-left mt-1">
                         <ol class="breadcrumb">
@@ -143,24 +164,28 @@
                     </nav>*@
             </div>
             <div class="pbutton">
+                
                 <div class="right text-right">
-                    @*<span>
-            <a href="@Url.Action("ExportToExcelMyDownline","AssociateTeam",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
-        </span>*@
                     <span>
-                        <button class="btn btn-danger btn-custom btn-rounded btn-sm" id="btnpdf" title="PDF"><i class="fa fa-file-pdf-o"></i></button>
+                        <a href="@Url.Action("ExportToExcelMyDownline","AssociateTeam",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
                     </span>
+                    <span>
+                        <button type="button" name="Export" value="PDF" id="PDF" onclick="PdfCall()" class="btn btn-danger fa fa-file-pdf-o float-right mr-2"></button>
+                    </span>
+
                 </div>
-                </div>
+            </div>
         </div>
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
-
+                   
                     <div class="card-body pt-10  pb-10" style="padding-top:15px !important;">
 
                         @using (Html.BeginForm("MyDownline", "AssociateTeam", FormMethod.Post))
                         {
+                            <button type="submit" name="Export" value="PDF" id="PDFbtn" hidden></button>
+                            <button type="submit" name="Export" value="Excel" id="Excelbtn" hidden></button>
                             <div class="row mb-3">
 
                                 <div class="col-lg-3">
@@ -208,7 +233,7 @@
 
                                 </div>
                             </div>
-                           
+
                         }
                         @*<button class="btn btn-info btn-sm" onclick="SMS()">
             <i class="fa fa-mobile"></i> SMS
@@ -219,6 +244,16 @@
         <button class="btn btn-danger openEmail btn-sm" onclick="sendEmail()">
             <i class="fa fa-envelope"></i> Email
         </button>*@
+
+                        @if (@TempData["alert"] != null)
+                        {
+                            <div class="p-2">
+                                <div class="alert mb-0">
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                    <strong>@TempData["alert"] .!</strong>
+                                </div>
+                            </div>
+                        }
                         <div class="table-responsive">
                             <table class="table table-striped mb-0" id="MyDownlineList">
                                 <thead>
@@ -924,5 +959,13 @@
         });
     }
 
+
+
+    function PdfCall() {
+        document.getElementById("PDFbtn").click();
+    }
+    function ExcelCall() {
+        document.getElementById("Excelbtn").click();
+    }
 </script>
 

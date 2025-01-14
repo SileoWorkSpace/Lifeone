@@ -6,29 +6,60 @@
 
 
 <style>
-    .alert-warning {
-        background-color: #fcf8e3 !important;
-        border-color: #faebcc !important;
+    .alert {
+        padding: 8px 10px;
+        background-color: #f44336;
+        color: white;
     }
+
+    .closebtn {
+        margin-left: 15px;
+        color: white;
+        font-weight: bold;
+        float: right;
+        font-size: 22px;
+        line-height: 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+        .closebtn:hover {
+            color: black;
+        }
 </style>
 <div class="content">
     <div class="content-wrapper-before"></div>
     <!-- Start Content-->
     <div class="container-fluid">
+        <div>
+
+        </div>
         <div class="row page-titles">
             <div class="ptitle">
                 <h4 class="mb-1 mt-0 text-white">My Direct</h4>
 
-
+            </div>
+            <div class="pbutton">
+                <div class="right text-right">
+                    <span>
+                        <a href="@Url.Action("ExportToExcelMyDirect","AssociateTeam",new {Page=Model!=null && Model.Pager!=null&&Model.Pager.EndPage>0?Model.Pager.CurrentPage:1 })" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+                    </span>
+                    <span>
+                        <button type="button" name="Export" value="PDF" id="PDF" onclick="PdfCall()" class="btn btn-danger fa fa-file-pdf-o float-right mr-2"></button>
+                    </span>
+                </div>
             </div>
 
         </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body p-0 pt-10" style="padding-top:15px !important;">
                         @using (Html.BeginForm("MyDirect", "AssociateTeam", FormMethod.Post))
                         {
+                            <button type="submit" name="Export" value="PDF" id="PDFbtn" hidden></button>
+                            <button type="submit" name="Export" value="Excel" id="Excelbtn" hidden></button>
                             <div class="row p-3">
                                 <div class="col-lg-3">
                                     <label>Status</label>
@@ -61,18 +92,18 @@
 
                                 </div>
                                 <div class="col-lg-3">
-                                    <label>From Date</label>
+                                    <label>Login Id</label>
                                     <div class="input-group" style="float:left">
                                         @Html.TextBoxFor(m => m.SearchLoginId, new { @class = "form-control", @placeholder = "Enter Login ID" })
 
                                         @*<button type="submit" class="btn btn-success mr-2" style="border-radius: 0 5px 5px 0px;">
-                                                <i class="fa fa-search"></i>
-                                            </button>*@
+                            <i class="fa fa-search"></i>
+                        </button>*@
 
                                         @*@if (Model.Directs.Count > 0)
-                                            {
-                                                <a href="/Associate/AssociateTeam/MyDirect?Fk_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Directs[0].FK_sponsorId.ToString())" class="btn btn-secondary">Go Up</a>
-                                            }*@
+                        {
+                            <a href="/Associate/AssociateTeam/MyDirect?Fk_MemId=@LifeOne.Models.Common.UrlEncodingDecoding.Encode(Model.Directs[0].FK_sponsorId.ToString())" class="btn btn-secondary">Go Up</a>
+                        }*@
 
                                     </div>
                                 </div>
@@ -80,6 +111,18 @@
                                     <div class="input-group">
                                         <input type="submit" class="btn btn-success" value="Search" />
                                     </div>
+
+                                </div>
+                            </div>
+                        }
+                        @if (@TempData["alert"] != null)
+                        {
+                            <div class="p-2">
+                                <div class="alert mb-0">
+
+                                    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                                    <strong>@TempData["alert"] .!</strong>
+
 
                                 </div>
                             </div>
@@ -147,8 +190,8 @@
                                     else
                                     {
                                         @*<tr>
-                                                <td colspan="10">No Record Found..</td>
-                                            </tr>*@
+                            <td colspan="10">No Record Found..</td>
+                        </tr>*@
                                     }
                                 </tbody>
                             </table>
@@ -368,5 +411,11 @@
         win.document.close(); // CLOSE THE CURRENT WINDOW.
 
         win.print();    // PRINT THE CONTENTS.
+    }
+    function PdfCall() {
+        document.getElementById("PDFbtn").click();
+    }
+    function ExcelCall() {
+        document.getElementById("Excelbtn").click();
     }
 </script>

@@ -186,6 +186,24 @@ namespace LifeOne.Models.HomeManagement.HDAL
                 throw ex;
             }
         }
+
+        public static MSimpleString UpdateProfile(MCustomerRegistration _param)
+        {
+            try
+            {
+                var queryParameters = new DynamicParameters();
+                queryParameters.Add("@profilepic", _param.profilepic);
+                queryParameters.Add("@LoginId", _param.LoginId);
+                
+
+                MSimpleString _iresult = DBHelperDapper.DAAddAndReturnModel<MSimpleString>("update_profile", queryParameters);
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static MSimpleString CustomerAddressDetails(MCustomerRegistration _param)
         {
             try
