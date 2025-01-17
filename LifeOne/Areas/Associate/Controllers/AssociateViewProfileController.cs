@@ -245,7 +245,6 @@ namespace LifeOne.Areas.Associate.Controllers
             if (Request.Files[0].ContentLength > 0)
             {
                 Obj.ProfilePic = Obj.profileimagepath;
-             
             }
             KYCService _objService = new KYCService();
             KYCResponse objres = new KYCResponse();
@@ -756,9 +755,9 @@ namespace LifeOne.Areas.Associate.Controllers
         public JsonResult UploadfileUpdate(HttpPostedFileBase file, string subdir)
         {
             MCustomerRegistration Obj = new MCustomerRegistration();
-           
-           
-            
+
+
+
             var objres = (object)null;
             string filePath = "";  // Declare a variable to store the file path
 
@@ -785,12 +784,13 @@ namespace LifeOne.Areas.Associate.Controllers
 
                         objres = new { Msg = res.Message };
                     }
-                    else {
+                    else
+                    {
 
                         objres = new { Msg = res.Message };
                     }
 
-                    
+
                 }
                 else
                 {
@@ -803,6 +803,37 @@ namespace LifeOne.Areas.Associate.Controllers
             }
 
             return Json(objres, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ActionName("DocumentVerifyAction6")]
+        public ActionResult DocumentVerifyAction6(KYCDetails Obj)
+        {
+            Obj.CreatedBy = SessionManager.AssociateFk_MemId;
+            Obj.Fk_MemId = SessionManager.AssociateFk_MemId;
+            Obj.Action = "NOMINEE";
+            KYCService _objService = new KYCService();
+            KYCResponse objres = new KYCResponse();
+            objres = _objService.SaveKYC(Obj);
+            if (objres != null)
+            {
+                if (objres.Flag == 1)
+                {
+                    TempData["Code"] = objres.Flag;
+                    TempData["Document"] = objres.Msg;
+                }
+                else
+                {
+                    TempData["Code"] = objres.Flag;
+                    TempData["Document"] = objres.Msg;
+                }
+            }
+            else
+            {
+                TempData["Code"] = objres.Flag;
+                TempData["Document"] = "Something went wrong";
+            }
+            return RedirectToAction("KYC", "/AssociateViewProfile");
         }
 
     }

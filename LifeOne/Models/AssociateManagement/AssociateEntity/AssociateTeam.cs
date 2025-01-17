@@ -12,6 +12,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public int Fk_UpId { get; set; }
         public string SearchLoginId { get; set; }
         public string JoiningDate { get; set; }
+        public string Leg { get; set; }
         public string FromDate { get; set; }
         public string ToDate { get; set; }
         public string Pk_PackageID { get; set; }

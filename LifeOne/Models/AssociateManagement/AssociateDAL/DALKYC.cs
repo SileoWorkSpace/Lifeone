@@ -28,6 +28,10 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                 queryParameters.Add("@AddressProofNo", obj.AddressProofNo?? string.Empty);
                 queryParameters.Add("@Ifsc", obj.Ifsc ?? string.Empty);
                 queryParameters.Add("@BankName", obj.BankName ?? string.Empty);
+                queryParameters.Add("@Nominee_Name", obj.Nominee_Name ?? string.Empty);
+                queryParameters.Add("@Nominee_Address", obj.Nominee_Address ?? string.Empty);
+                queryParameters.Add("@Nominee_Relation", obj.Nominee_Relation ?? string.Empty);
+                queryParameters.Add("@nomineeimagepath", obj.nomineeimagepath ?? string.Empty);
                 KYCResponse _iresult = DBHelperDapper.DAAddAndReturnModel<KYCResponse>("UploadKYC", queryParameters);
                 return _iresult;
             }

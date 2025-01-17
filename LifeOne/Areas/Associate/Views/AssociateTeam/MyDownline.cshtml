@@ -184,6 +184,8 @@
 
                         @using (Html.BeginForm("MyDownline", "AssociateTeam", FormMethod.Post))
                         {
+
+                            @Html.HiddenFor(m=>m.Leg,new {@id="Leg_Id"})
                             <button type="submit" name="Export" value="PDF" id="PDFbtn" hidden></button>
                             <button type="submit" name="Export" value="Excel" id="Excelbtn" hidden></button>
                             <div class="row mb-3">
@@ -503,6 +505,16 @@
 </div>
 
 <script>
+    $(document).ready(function () {
+        if ('@Model.Leg' == "R")
+        {
+            $('#Leg_Id').val("R");
+        }
+        if ('@Model.Leg' == "L")
+        {
+             $('#Leg_Id').val("L")
+        }
+    });
     $('.selectdate').datepicker({
         autohide: true,
         format: 'dd/mm/yyyy',

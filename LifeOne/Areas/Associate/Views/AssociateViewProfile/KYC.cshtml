@@ -228,7 +228,7 @@
                                                                 {
                                                                     <input type="text" onchange="ValidateAAdhar(this.id)" name="AddressProofNo" class="form-control only-numeric" id="IdProofNo" placeholder="Enter Id Proof Number" readonly="readonly" value="@item.AddressProofNo" />
                                                                 }
-                                                                
+
                                                                 else
                                                                 {
                                                                     <input type="text" onchange="ValidateAAdhar(this.id)" name="AddressProofNo" class="form-control only-numeric" id="IdProofNo" placeholder="Enter Id Proof Number" value="@item.AddressProofNo" />
@@ -393,7 +393,7 @@
                                                         <div class="col-sm-12">
                                                             <label>Bank A/C Number <span style="color:red;">*</span></label>
                                                         </div>
-                                                        
+
 
                                                     </div>
                                                     <div class="row">
@@ -497,6 +497,156 @@
                             </div>
                         </div>
 
+                        <div class="col-xl-3">
+                            <div class="card">
+                                <div class="card-body pt-2" style="min-height:auto;">
+                                    <h6 class="header-title mb-0">Nominee Details </h6>
+                                    <div class="">
+                                        <div>
+                                            <div>
+                                                <p class="sub-header">
+                                                <p>
+                                                    <strong>Verfication Staus:</strong>
+                                                    @if (item.NomineeStatus == "Pending")
+                                                    {
+                                                        <span class="label label-warning">Pending</span>
+                                                    }
+                                                    else if (item.NomineeStatus == "Approved")
+                                                    {
+                                                        <span class="label label-success">Approved</span>
+                                                    }
+                                                    else if (item.NomineeStatus == "Rejected")
+                                                    {
+                                                        <span class="label label-danger">Rejected</span>
+                                                    }
+                                                </p>
+                                                </p>
+                                                <form action="/Associate/AssociateViewProfile/DocumentVerifyAction6" method="post" enctype="multipart/form-data">
+                                                    @if (item.NomineeStatus == "Approved")
+                                                    {
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <div class="fallback">
+                                                            <input name="file" type="file" onchange="uploadFile('NOMINEE', this)" />
+                                                            @Html.HiddenFor(m => m.nomineeimagepath)
+                                                        </div>
+                                                    }
+                                                    <div class="dropzone" style="margin-top:15px;">
+                                                        <div> <img id="output_image2" style="height:170px;width:200px;" onclick="ShowAllImage('@item.BankDocumentURL','Bank Proof Image')" src="@item.BankDocumentURL" class="my-img" altsrc="~/Content/Associate/assets/images/no-image.png" onerror="this.src = $(this).attr('altsrc')" /> </div>
+                                                    </div>
+
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12">
+                                                            <label>Name<span style="color:red;">*</span></label>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12">
+                                                            <label>
+                                                                @if (item.NomineeStatus == "Approved")
+                                                                {
+                                                                    <input type="text" name="Nominee_Name" class="form-control" id="Nominee_Name" placeholder="Enter Nominee Name" readonly="readonly" value="@item.Nominee_Name" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input name="Nominee_Name" type="text" class="form-control" id="Nominee_Name" placeholder="Enter Nominee Name" value="@item.Nominee_Name" />
+                                                                }
+
+
+                                                            </label>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12">
+                                                            <label>Address <span style="color:red;">*</span></label>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12">
+                                                            <label>
+                                                                @if (item.NomineeStatus == "Approved")
+                                                                {
+                                                                    <input type="text" name="Nominee_Address" class="form-control" id="Nominee_Address" placeholder="Nominee Address" readonly="readonly" value="@item.Nominee_Address" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input name="Nominee_Address" type="text" class="form-control" id="Nominee_Address" placeholder="Nominee Address" value="@item.Nominee_Address" />
+                                                                }
+
+
+                                                            </label>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12">
+                                                            <label>Relation<span style="color:red;">*</span></label>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="row">
+
+                                                        <div class="col-sm-12">
+                                                            <label>
+                                                                @if (item.NomineeStatus == "Approved")
+                                                                {
+                                                                    <input type="text" name="Nominee_Relation" class="form-control" id="Nominee_Relation" placeholder="Enter Nominee Relation" readonly="readonly" value="@item.Nominee_Relation" />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input name="Nominee_Relation" type="text" class="form-control" id="Nominee_Relation" placeholder="Enter Nominee Relation" value="@item.Nominee_Relation" />
+                                                                }
+
+
+                                                            </label>
+                                                        </div>
+
+
+                                                    </div>
+                                                    <div class="clearfix text-right mt-3">
+                                                        @if (item.NomineeStatus == "Approved")
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="submit" class="btn btn-success" onclick="return validate6()"> <i class="uil uil-arrow-right mr-1"></i> Submit</button>
+                                                        }
+                                                    </div>
+                                                </form>
+
+                                            </div>
+                                            <!-- end card-body -->
+                                        </div> 
+                                        @*<div class="form-group">
+                                            <p>You can provide following documents</p>
+                                            <ol>
+                                                <li>Cancelled Cheque</li>
+                                                <li>Bank Passbook</li>
+                                                <li>Bank Certification</li>
+                                            </ol>
+                                        </div>*@
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
                     }
                 }
             }
@@ -574,6 +724,10 @@
                     //$scope.profileimage ="http://webapi.FastKart.in/"+ response.data.imageUrl.replace('~', '');
                    $('#profileimagepath').val(data.filepath);
                 }
+                  else if (documentType == "NOMINEE") {
+                      //$scope.profileimage ="http://webapi.FastKart.in/"+ response.data.imageUrl.replace('~', '');
+                      $('#nomineeimagepath').val(data.filepath);
+                  }
                  else {
                       alert(data.msg);
                  }
@@ -633,6 +787,32 @@
             $('#aadharbackimagepath').focus();
             return false;
         }
+
+    }
+
+    function validate6() {
+        if ($('#nomineeimagepath').val() == '') {
+            swal('', "Please Upload your Nominee Pic!!", 'warning');
+            $('#nomineeimagepath').focus();
+            return false;
+        }
+        
+        if ($('#Nominee_Name').val() == '') {
+            swal('', "Please eneter nominee name!!", 'warning');
+            $('#Nominee_Name').focus();
+            return false;
+        }
+        if ($('#Nominee_Address').val() == '') {
+            swal('', "Please eneter nominee address!!", 'warning');
+            $('#Nominee_Address').focus();
+            return false;
+        }
+        if ($('#Nominee_Relation').val() == '') {
+            swal('', "Please eneter nominee relation!!", 'warning');
+            $('#Nominee_Relation').focus();
+            return false;
+        }
+        
 
     }
     $(document).ready(function () {

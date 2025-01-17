@@ -282,6 +282,8 @@ namespace LifeOne.Areas.Associate.Controllers
             int TotalRecords = 0;
             int PageSize = SessionManager.Size;
             int Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
+            
+
 
             if (Page == null)
             {
@@ -386,10 +388,12 @@ namespace LifeOne.Areas.Associate.Controllers
             if (Leg == "L")
             {
                 ViewBag.Leg = "Leg";
+                team.Leg = "L";
             }
             if (Leg == "R")
             {
                 ViewBag.Leg = "Right";
+                team.Leg= "R";
             }
 
             return View(team);

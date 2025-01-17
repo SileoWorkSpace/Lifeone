@@ -54,6 +54,13 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public string AddressProofNo { get; set; }
         public string MemberAccNo { get; set; }
 
+        public string nomineeimagepath { get; set; }
+        public string Nominee_Name { get; set; }
+        public string Nominee_Address { get; set; }
+        public string Nominee_Relation { get; set; }
+        public string NomineeStatus { get; set; }
+
+
         public KYCDetails KycDetail { get; set; }
         public List<KYCDetails> lstKyc { get; set; }
         public List<MemberKYC> lstKycDown { get; set; }
