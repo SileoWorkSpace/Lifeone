@@ -1,4 +1,4 @@
-﻿using iTextSharp.text.pdf.qrcode;
+﻿//using iTextSharp.text.pdf.qrcode;
 using LifeOne.Filters;
 using LifeOne.Models.AdminManagement.AEntity;
 using LifeOne.Models.AdminManagement.AService;

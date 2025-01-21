@@ -28,13 +28,13 @@ using LifeOne.Models;
 using LifeOne.Models.FranchiseManagement.FDAL;
 using Newtonsoft.Json;
 using System.Configuration;
-using iTextSharp.text.pdf;
+//using iTextSharp.text.pdf;
 using static LifeOne.Models.ShoppingRequest;
 using AesEncryption;
-using DocumentFormat.OpenXml.Office2010.Excel;
+//using DocumentFormat.OpenXml.Office2010.Excel;
 using Razorpay.Api;
 using LifeOne.Models.AssociateManagement.AssociateDAL;
-using DocumentFormat.OpenXml.Bibliography;
+//using DocumentFormat.OpenXml.Bibliography;
 using System.Web.UI.WebControls;
 
 namespace LifeOne.Areas.Admin.Controllers

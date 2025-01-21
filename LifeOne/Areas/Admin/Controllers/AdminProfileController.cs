@@ -1,4 +1,4 @@
-﻿using iTextSharp.text.pdf.qrcode;
+﻿//using iTextSharp.text.pdf.qrcode;
 using LifeOne.Filters;
 using LifeOne.Models.AdminManagement.AEntity;
 using LifeOne.Models.AdminManagement.AService;
@@ -11,7 +11,7 @@ using System.Web.Mvc;
 using System.Web.Security;
 using LifeOne.Models.Common;
 using System.IO;
-using DocumentFormat.OpenXml.EMMA;
+//using DocumentFormat.OpenXml.EMMA;
 
 namespace LifeOne.Areas.Admin.Controllers
 {

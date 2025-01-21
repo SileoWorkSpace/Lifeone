@@ -1,4 +1,4 @@
-﻿using iTextSharp.text.pdf.qrcode;
+﻿//using iTextSharp.text.pdf.qrcode;
 using LifeOne.Filters;
 using LifeOne.Models.AdminManagement.AEntity;
 using LifeOne.Models.AdminManagement.AService;
@@ -18,9 +18,9 @@ using LifeOne.Models.AdminManagement.ADAL;
 using LifeOne.Models;
 using static LifeOne.Models.ShoppingRequest;
 using System.Threading.Tasks;
-using DocumentFormat.OpenXml.Bibliography;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.EMMA;
+//using DocumentFormat.OpenXml.Bibliography;
+//using DocumentFormat.OpenXml.Office2010.Excel;
+//using DocumentFormat.OpenXml.EMMA;
 using System.Configuration;
 
 namespace LifeOne.Areas.Admin.Controllers
