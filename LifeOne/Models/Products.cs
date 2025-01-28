@@ -324,7 +324,7 @@ namespace LifeOne.Models
         public DataSet GetAllProducts()
         {
             SqlParameter[] para = {
-                                         //new SqlParameter("@Pk_ProductId", Pk_ProductId),
+                                         new SqlParameter("@Pk_ProductId", Pk_ProductId),
                                          //new SqlParameter("@ProductName", ProductName),
                                         //new SqlParameter("@Fk_CategoryId", Fk_CategoryId),
             };
