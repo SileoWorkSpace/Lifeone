@@ -47,6 +47,7 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
             SqlParameter[] para =
             {
                     new SqlParameter("@LoginId",LoginId),
+                    new SqlParameter("@Status",Status),
                     new SqlParameter("@AddedBy",AddedBy)
 
             };

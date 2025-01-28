@@ -119,6 +119,28 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-6 col-xl-3">
+                    <div class="card bg-success">
+                        <div class="card-body p-0">
+                            <div class="media p-3">
+                                <div class="media-body">
+                                    <span class="text-white text-uppercase font-size-12 font-weight-bold">Pending Wallet Request</span>
+                                    <div class="h2 mb-0 text-white">
+                                        <span>@ViewBag.TotalPendingWallet</span>
+                                    </div>
+                                </div>
+                                <div class="align-self-end">
+                                    <div class="icon-box">
+                                        <i data-feather="users" class="align-self-center icon-dual icon-lg text-info"></i>
+                                    </div>
+                                    <a href="/GetFranchise-E-WalletReq?Status=Pending" class="text-white font-weight-bold font-size-13">View All</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <!-- stats + charts -->
             <div class="row">
@@ -353,7 +375,7 @@
                     dataArray2.push([item.TotalCount]);
                 });
 
-               
+
                 Highcharts.chart('container', {
                     chart: {
                         type: 'spline'
@@ -384,12 +406,12 @@
                     series: [{
                         name: "Month Wise joining",
                         data: dataArray1
-                        },
-                        {
-                            name: "Active Ids",
-                            color: 'green',
-                            data: dataArray2
-                        }
+                    },
+                    {
+                        name: "Active Ids",
+                        color: 'green',
+                        data: dataArray2
+                    }
 
                     ]
                 });

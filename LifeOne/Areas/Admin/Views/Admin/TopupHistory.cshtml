@@ -72,6 +72,10 @@
                                         <th>ToLoginId</th>
                                         <th>FromLoginId</th>
                                         <th>FullName</th>
+                                        <th>UTR No</th>
+                                        <th>Package Name</th>
+                                        <th>DOJ</th>
+                                        <th>Topup Date</th>
                                         <th>Amount</th>
                                     </tr>
                                 </thead>
@@ -89,6 +93,10 @@
                                                 <td>@Model.dtDetails.Rows[j]["ToLoginId"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["FromLoginId"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["FullName"].ToString()</td>
+                                                <td>@Model.dtDetails.Rows[j]["TransactionNo"].ToString()</td>
+                                                <td>@Model.dtDetails.Rows[j]["PackageName"].ToString()</td>
+                                                <td></td>
+                                                <td>@Model.dtDetails.Rows[j]["CreateDate"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["Amount"].ToString()</td>
                                             </tr>
                                         }
