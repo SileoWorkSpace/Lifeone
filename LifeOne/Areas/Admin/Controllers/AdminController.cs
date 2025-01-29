@@ -1272,11 +1272,11 @@ namespace LifeOne.Areas.Admin.Controllers
             if (!PermissionManager.IsActionPermit("E-Wallet Request", ViewOptions.FormView))
             {
                 return Redirect("/Home/adminlogin");
-            }
-            //model.Inquirytype = Type == null ? model.Inquirytype : Type;
+            }           
             franchiseEWalletRequest.Status = Status;
             DataSet dataSet = franchiseEWalletRequest.GetEwalletRequest();
             franchiseEWalletRequest.dtRequestDetails = dataSet.Tables[0];
+            ViewBag.Status = Status;
             return View(franchiseEWalletRequest);
         }
         public ActionResult ApproveFranchiseEwallet(string id, string Status)

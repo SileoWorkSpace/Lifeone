@@ -14,12 +14,12 @@
             </div>
             <div class="pbutton">
                 <div class="right text-right">
-                    
+
                     @*<span>
-                        <a href="#" onclick="fCallPaging(1,1)" data-toggle="tooltip" data-placement="top" title="Download Excel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
-                       
-                        <button class="btn btn-success btn-rounded btngreen" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
-                    </span>*@
+                            <a href="#" onclick="fCallPaging(1,1)" data-toggle="tooltip" data-placement="top" title="Download Excel" class="btn btn-success btn-rounded btngreen"><i class="fa fa-file-excel-o"></i></a>
+
+                            <button class="btn btn-success btn-rounded btngreen" id="btnpdf" data-toggle="tooltip" data-placement="top" title="Download PDF"><i class="fa fa-file-pdf-o"></i></button>
+                        </span>*@
                 </div>
             </div>
         </div>
@@ -34,19 +34,43 @@
                                     <div class="alert alert-warning" style="color:#727272 !important">
                                         <div class="row">
                                             @Html.HiddenFor(m => m.Page)
-                                                @*@Html.HiddenFor(m => m.IsExport)*@
-                                            <div class="col-sm-12 col-md-2">
+                                            @*@Html.HiddenFor(m => m.IsExport)*@
+                                            <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <label>Form Date</label>
-                                                    @Html.TextBoxFor(m => m.FormDate, new { @class = "form-control", @Type = "date" })
-                                                    @*<input type="date" name="FormDate" id="FormDate" class="form-control">*@
+                                                    <label>UTR No</label>
+                                                    @Html.TextBoxFor(m => m.UTRNo, new { @class = "form-control", @placeholder = "Enter UTR No" })
                                                 </div>
                                             </div>
-                                            <div class="col-12 col-md-2">
+                                            <div class="col-12 col-md-3">
                                                 <div class="form-group">
-                                                    <label>To Date</label>
-                                                    @Html.TextBoxFor(m => m.ToDate, new { @class = "form-control", @Type = "date" })
-                                                    @*<input type="date" name="ToDate" id="ToDate" placeholder="" class="form-control">*@
+                                                    <label>Package Name</label>
+                                                    @Html.TextBoxFor(m => m.PackageName, new { @class = "form-control", @placeholder = "Enter Package Name" })
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Joining Form Date</label>
+                                                    @Html.TextBoxFor(m => m.JoiningFormDate, new { @class = "form-control", @Type = "date" })
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Joining To Date</label>
+                                                    @Html.TextBoxFor(m => m.JoiningToDate, new { @class = "form-control", @Type = "date" })
+                                                </div>
+                                            </div>                                          
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Topup Form Date</label>
+                                                    @Html.TextBoxFor(m => m.TopupFormDate, new { @class = "form-control", @Type = "date" })
+                                                </div>
+                                            </div>
+                                            <div class="col-12 col-md-3">
+                                                <div class="form-group">
+                                                    <label>Topup To Date</label>
+                                                    @Html.TextBoxFor(m => m.TopupToDate, new { @class = "form-control", @Type = "date" })
                                                 </div>
                                             </div>
                                             <div class="col-12 col-md-2">
@@ -54,11 +78,10 @@
                                                     <label style="display:block;"></label>
                                                     <input type="submit" class="btn btn-success" style="margin-top:1.5em;display:none;" value="Search" id="BtnSearch">
                                                     <input type="submit" class="btn btn-success" style="margin-top:1.5em;" value="Search" onclick="fCallPaging(1,0)">
-                                                    <input type="button" class="btn btn-secondary" onClick="fclaer()" style="margin-top:1.5em;" value="Reset">
+                                                    <input type="submit" class="btn btn-secondary" onClick="fclaer()" style="margin-top:1.5em;" value="Reset">
                                                 </div>
                                             </div>
-                                        </div>
-
+                                        </div>                                       
                                     </div>
                                 </div>
                             </div>
@@ -95,7 +118,7 @@
                                                 <td>@Model.dtDetails.Rows[j]["FullName"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["TransactionNo"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["PackageName"].ToString()</td>
-                                                <td></td>
+                                                <td>@Model.dtDetails.Rows[j]["JoiningDate"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["CreateDate"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["Amount"].ToString()</td>
                                             </tr>
@@ -134,6 +157,12 @@
         $(".fclear").val('');
         $("#Page").val(1);
         $("#IsExport").val(0);
+        $("#UTRNo").val('');
+        $("#PackageName").val('');
+        $("#JoiningFormDate").val('');
+        $("#JoiningToDate").val('');
+        $("#TopupFormDate").val('');
+        $("#TopupToDate").val('');
         window.location.reload();
     }
 

@@ -21,8 +21,9 @@
                                 <select class="form-control" name="Status" id="ddlStatus">
                                     <option value="">--ALL--</option>
                                     <option value="Approved">Approved</option>
-                                    <option value="Pending">Pending</option>                                  
+                                    <option value="Pending">Pending</option>
                                 </select>
+                                <input type="hidden" id="txtStatus" value="@ViewBag.Status" />
                             </div>
                             @*@Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Direct Seller Id" })*@
                         </div>
@@ -153,4 +154,16 @@
         </div>
     </div>
 }
+<script>
+    $(document).ready(function () {
+
+
+        if ($('#txtStatus').val() != '' && $('#txtStatus').val() != undefined) {
+            $('#ddlStatus').val($('#txtStatus').val());
+        }
+        if ($('#txtplace').val() != '' && $('#txtplace').val() != undefined) {
+            $('#ddlPlace').val($('#txtplace').val());
+        }
+    })
+</script>
 

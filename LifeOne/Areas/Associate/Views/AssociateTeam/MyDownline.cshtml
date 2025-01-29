@@ -181,6 +181,7 @@
                                                 <option value="P">Active</option>
                                                 <option value="F">Bronze</option>
                                             </select>
+                                            <input type="hidden" id="txtStatus" value="@ViewBag.Status" />
                                         </div>
                                     </div>
                                 </div>
@@ -923,6 +924,13 @@
             }
         });
     }
-
+    $(document).ready(function () {
+        if ($('#txtStatus').val() != '' && $('#txtStatus').val() != undefined) {
+            $('#ddlStatus').val($('#txtStatus').val());
+        }
+        if ($('#txtplace').val() != '' && $('#txtplace').val() != undefined) {
+            $('#ddlPlace').val($('#txtplace').val());
+        }
+    })
 </script>
 
