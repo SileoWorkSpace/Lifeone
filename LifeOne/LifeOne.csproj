@@ -2243,6 +2243,8 @@
     <Content Include="Content\NewAssests\images\icon-boxes\layer_solid.svg" />
     <Content Include="Content\NewAssests\images\icon-boxes\shopbag.svg" />
     <Content Include="Content\NewAssests\images\icon-boxes\shopbag_solid.svg" />
+    <Content Include="Content\NewAssests\images\life-one-logo-white.svg" />
+    <Content Include="Content\NewAssests\images\life-one-logo.svg" />
     <Content Include="Content\NewAssests\images\life-one-qr.jpeg" />
     <Content Include="Content\NewAssests\images\Lifeone-logo-Favicon.png" />
     <Content Include="Content\NewAssests\images\lifeonelogo.png" />
