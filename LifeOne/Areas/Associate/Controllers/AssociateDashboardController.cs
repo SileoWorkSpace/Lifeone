@@ -65,6 +65,10 @@ namespace LifeOne.Areas.Associate.Controllers
                 {
                     Value.payoutSummaries = item._payoutSummaries;
                 }
+                if (item._rewarddetails != null)
+                {
+                    Value.rewarddetails = item._rewarddetails;
+                }
                 AssociateRewardsDAL obj = new AssociateRewardsDAL();
                 RewardsModel obj2 = new RewardsModel();
                 obj2.FkMemId = SessionManager.AssociateFk_MemId;

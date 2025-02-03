@@ -178,9 +178,10 @@
                                             <select class="form-control" name="Status" id="ddlStatus">
                                                 <option value="">--ALL--</option>
                                                 <option value="T">InActive</option>
-                                                <option value="P">Performence</option>
+                                                <option value="P">Active</option>
                                                 <option value="F">Bronze</option>
                                             </select>
+                                            <input type="hidden" id="txtStatus" value="@ViewBag.Status" />
                                         </div>
                                     </div>
                                 </div>
@@ -263,7 +264,7 @@
                                                 <td>@item.SponsorLoginId </td>
                                                 <td>@item.SponsorName </td>
                                                 <td>
-                                                    @if (@item.Status == "Performence")
+                                                    @if (@item.Status == "Active")
                                                     {
                                                         <span class="badge badge-success">@item.Status</span>
                                                     }
@@ -923,6 +924,13 @@
             }
         });
     }
-
+    $(document).ready(function () {
+        if ($('#txtStatus').val() != '' && $('#txtStatus').val() != undefined) {
+            $('#ddlStatus').val($('#txtStatus').val());
+        }
+        if ($('#txtplace').val() != '' && $('#txtplace').val() != undefined) {
+            $('#ddlPlace').val($('#txtplace').val());
+        }
+    })
 </script>
 

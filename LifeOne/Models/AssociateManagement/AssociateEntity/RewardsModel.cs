@@ -46,6 +46,12 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public string ChequeDDDate { get; set; }
         public string PaidAmount { get; set; }
         public string PaymentModeName { get; set; }
+        public string SalesMatchingBonus { get; set; }
+        public string CashReward { get; set; }
+        public string TotalBonus { get; set; }
+        public string CarFund { get; set; }
+        public string Funds { get; set; }
+        public string Royality_yearly { get; set; }
         public List<RewardsModel> Rewardslst { get; set; }
 
     }

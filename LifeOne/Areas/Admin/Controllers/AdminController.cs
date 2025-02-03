@@ -36,6 +36,9 @@ using Razorpay.Api;
 using LifeOne.Models.AssociateManagement.AssociateDAL;
 using DocumentFormat.OpenXml.Bibliography;
 using System.Web.UI.WebControls;
+using static LifeOne.Models.TravelModel.RechargeAPI;
+using DocumentFormat.OpenXml.EMMA;
+
 
 namespace LifeOne.Areas.Admin.Controllers
 {
@@ -71,6 +74,7 @@ namespace LifeOne.Areas.Admin.Controllers
             ViewBag.FreePackageSale = dataSet.Tables[0].Rows[0]["FreePackageSale"].ToString();
             ViewBag.PaidPackageSale = dataSet.Tables[0].Rows[0]["PaidPackageSale"].ToString();
             ViewBag.TotalPackageSale = dataSet.Tables[0].Rows[0]["TotalPackageSale"].ToString();
+            ViewBag.TotalPendingWallet = dataSet.Tables[0].Rows[0]["TotalPendingWallet"].ToString();
             mAdminDashbord.dtPaidPackage = dataSet.Tables[1];
             mAdminDashbord.dtFreePackage = dataSet.Tables[2];
 
@@ -1030,7 +1034,7 @@ namespace LifeOne.Areas.Admin.Controllers
         //    NotificationService _objService = new NotificationService();
         //    //modelRequest.Title = Title;
         //    //modelRequest.Notificationmessage = Notificationmessage;
-        //    modelRequest.CreatedBy = SessionManager.AssociateFk_MemId;
+           //modelRequest.CreatedBy = SessionManager.AssociateFk_MemId;
         //    //modelRequest.lstMemberId = MemberId;
         //    var xmldata = "<Notification>";
         //    for (var i = 0; i < modelRequest.LstMemberId.Count(); i++)
@@ -1263,14 +1267,16 @@ namespace LifeOne.Areas.Admin.Controllers
 
 
 
-        public ActionResult GetFranchiseEwalletRequest(FranchiseEWalletRequest franchiseEWalletRequest)
+        public ActionResult GetFranchiseEwalletRequest(FranchiseEWalletRequest franchiseEWalletRequest,string Status)
         {
             if (!PermissionManager.IsActionPermit("E-Wallet Request", ViewOptions.FormView))
             {
                 return Redirect("/Home/adminlogin");
-            }
+            }           
+            franchiseEWalletRequest.Status = Status;
             DataSet dataSet = franchiseEWalletRequest.GetEwalletRequest();
             franchiseEWalletRequest.dtRequestDetails = dataSet.Tables[0];
+            ViewBag.Status = Status;
             return View(franchiseEWalletRequest);
         }
         public ActionResult ApproveFranchiseEwallet(string id, string Status)
@@ -2417,9 +2423,9 @@ namespace LifeOne.Areas.Admin.Controllers
         public ActionResult TopupHistory(TopupHistory model)
         {
             DataSet dataSet = new DataSet();
-             
+
             OrderDAL orderDAL = new OrderDAL();
-            if(model.Page==0 || model.Page==null)
+            if (model.Page == 0 || model.Page == null)
             {
                 model.Page = 1;
             }
@@ -2427,7 +2433,7 @@ namespace LifeOne.Areas.Admin.Controllers
             DataSet dsOrder = orderDAL.GetTopupHistory(model);
             model.dtDetails = dsOrder.Tables[0];
             int totalRecords = 0;
-            if (dsOrder!=null && dsOrder.Tables.Count>0 && dsOrder.Tables[0].Rows.Count > 0)
+            if (dsOrder != null && dsOrder.Tables.Count > 0 && dsOrder.Tables[0].Rows.Count > 0)
             {
                 totalRecords = Convert.ToInt32(model.dtDetails.Rows[0]["TotalRecord"].ToString());
                 var pager = new Pager(totalRecords, model.Page, SessionManager.Size);
@@ -2435,6 +2441,81 @@ namespace LifeOne.Areas.Admin.Controllers
             }
             return View(model);
         }
-        
+        [HttpGet]
+        public ActionResult franchisewallettransaction()
+        { 
+             return View();
+        }
+        [HttpPost]
+        public ActionResult franchisewallettransaction(Franchisetranslations obj , string Submit)
+        {
+           
+            DataSet ds = new DataSet();
+            try
+            {
+                
+                obj.AddedBy = Convert.ToString(SessionManager.Fk_MemId);
+                if (!string.IsNullOrEmpty(Submit)) 
+                {
+                    obj.OpCode = 2;
+                }
+                ds = obj.FranchiseTransactionDetails();
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                    {
+                        TempData["Message"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    }
+                    else
+                    {
+                        TempData["Message"] = ds.Tables[0].Rows[0]["Message"].ToString();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return RedirectToAction("franchisewallettransaction");
+        }
+
+        [HttpPost]
+        public JsonResult GetMemberdetails(string Value)
+        {
+            Franchisetranslations obj = new Franchisetranslations();
+            var response = new { Name = string.Empty, Amount = string.Empty };
+
+            try
+            {
+                if (!string.IsNullOrEmpty(Value))
+                {
+                    obj.OpCode = 1;
+                    obj.LoginId = Value;
+                    DataSet ds = obj.FranchiseDetails();
+                    if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                    {
+                        if (ds.Tables[0].Rows[0]["Flag"].ToString() == "1")
+                        {
+                            response = new
+                            {
+                                Name = ds.Tables[0].Rows[0]["PersonName"].ToString(),
+                                Amount = ds.Tables[0].Rows[0]["Amount"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
+                Console.WriteLine(ex.Message);
+                return Json(null); 
+            }
+
+            return Json(response, JsonRequestBehavior.AllowGet);
+        }
+
+
     }
 }

@@ -329,8 +329,12 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public string LoginId { get; set; }
         public string FirstName { get; set; }
         public string Amount { get; set; }
-        public string FormDate { get; set; }
-        public string ToDate { get; set; }
+        public string JoiningFormDate { get; set; }
+        public string JoiningToDate { get; set; }
+        public string TopupFormDate { get; set; }
+        public string TopupToDate { get; set; }
+        public string UTRNo { get; set; }
+        public string PackageName { get; set; }
        public DataTable dtDetails { get; set; }
        
     }

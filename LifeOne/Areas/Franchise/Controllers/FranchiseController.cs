@@ -413,7 +413,7 @@ namespace LifeOne.Areas.Franchise.Controllers
                 ProductsDetail product = new ProductsDetail();
                 List<SelectListItem> ddlProduct = new List<SelectListItem>();
 
-                DataSet dataSet = product.GetAllProducts();
+                DataSet dataSet = product.GetAllProductsForFranchisee();
 
                 if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
 
@@ -447,13 +447,11 @@ namespace LifeOne.Areas.Franchise.Controllers
                             ViewBag.PaidAmount = ds.Tables[0].Compute("Sum(Price)", "").ToString();
                             ViewBag.BV = ds.Tables[0].Compute("Sum(TotalBV)", "").ToString();
                             ViewBag.Name = ds.Tables[1].Rows[0]["Name"].ToString();
-
                         }
                         else
                         {
                             topupByFranchise.txtLoginId = Session["MemLoginId"].ToString();
                             topupByFranchise.FK_PackageId = int.Parse(Session["FK_PackageId"].ToString());
-
                             ViewBag.PaidAmount = 0;
                             ViewBag.BV = 0;
                             ViewBag.Name = ds.Tables[1].Rows[0]["Name"].ToString();
@@ -464,7 +462,6 @@ namespace LifeOne.Areas.Franchise.Controllers
                             TempData["ChequeDDDate"] = Session["ChequeDDDate"];
                             TempData["BankName"] = Session["BankName"];
           
-
                         return View(topupByFranchise);
 
                     }
@@ -626,14 +623,11 @@ namespace LifeOne.Areas.Franchise.Controllers
                                 {
                                     ViewBag.PaidAmount = ds.Tables[0].Compute("Sum(Price)", "").ToString();
                                     ViewBag.BV = ds.Tables[0].Compute("Sum(TotalBV)", "").ToString();
-
                                 }
                                 else
                                 {
-
                                     ViewBag.PaidAmount = 0;
                                     ViewBag.BV = 0;
-
                                 }
                             }
                             return View(para);

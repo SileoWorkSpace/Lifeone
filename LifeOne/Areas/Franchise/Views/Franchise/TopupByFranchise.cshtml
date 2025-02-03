@@ -144,7 +144,7 @@
                                                         <th>Product</th>
 
                                                         <th>Price(₹)</th>
-                                                        <th>BV</th>
+                                                        <th>PV</th>
                                                         <th>Quantity</th>
                                                         <th>Total BV</th>
 
@@ -207,13 +207,15 @@
                                                 <option value="DD">DD</option>
                                                 <option value="NEFT">NEFT</option>
                                                 <option value="RTGS">RTGS</option>
+                                                <option value="UPI">UPI</option>
+                                                <option value="Cash">Cash</option>
 
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-12" id="dv" style="display:none;">
                                         <div class="form-group label-floating is-empty">
-                                            <label class="form-control-placeholder" for="name">NEFT/RTGS/Check/DD No</label>
+                                            <label class="form-control-placeholder" for="name">NEFT/RTGS/Check/DD No/UPI No</label>
                                             <input type="text" class="form-control" name="ChequeDDNo" id="txtChequeDDNo" onkeypress="return onlyNos(event,this);" />
                                         </div>
                                     </div>
@@ -528,20 +530,26 @@ debugger
 
         }
         else {
-            if ($('#txtChequeDDNo').val() == '') {
-                $("#txtChequeDDNo").addClass('errortext');
-                $('#txtChequeDDNo').focus();
-                return false;
+            var PMode = $("#ddlPaymentMode").val();
+            if (PMode == "Cash" || PMode == "0" || PMode == "Free") {
+
             }
-            if ($('#txtBankName').val() == '') {
-                $("#txtBankName").addClass('errortext');
-                $('#txtBankName').focus();
-                return false;
-            }
-            if ($('#mdate1').val() == '') {
-                $("#mdate1").addClass('errortext');
-                $('#mdate1').focus();
-                return false;
+            else {
+                if ($('#txtChequeDDNo').val() == '') {
+                    $("#txtChequeDDNo").addClass('errortext');
+                    $('#txtChequeDDNo').focus();
+                    return false;
+                }
+                if ($('#txtBankName').val() == '') {
+                    $("#txtBankName").addClass('errortext');
+                    $('#txtBankName').focus();
+                    return false;
+                }
+                if ($('#mdate1').val() == '') {
+                    $("#mdate1").addClass('errortext');
+                    $('#mdate1').focus();
+                    return false;
+                }
             }
             //if ($('#TopupRemark').val() == '') {
             //    $("#TopupRemark").addClass('errortext');

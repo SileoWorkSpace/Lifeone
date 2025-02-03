@@ -460,7 +460,7 @@
 
         <div class="row">
             <div class="col-md-3 col-lg-3">
-                <div class="card">
+                <div class="card"style="height:134px;">
                     <div class="card-header">
                         <h5 class="card-title header-title mb-0 text-white">Payout Income</h5>
                     </div>
@@ -478,12 +478,30 @@
                                 </div>
                                 <hr />
                             }
+                        }                       
+                    </div>
+                </div>
+                <div class="card" style="height:190px;">
+                    <div class="card-header">
+                        <h5 class="card-title header-title mb-0 text-white">Current Rank</h5>
+                    </div>
+                    <div class="card-body p-0">                       
+                        @if (Model.rewarddetails.Count() > 0)
+                        {
+                            int SNo = 1;
+                            foreach (var item in Model.rewarddetails)
+                            {
+                                <div class="media p-3" style="padding-top:10px !important;">
+                                    <div class="media-body">
+                                        <h2 class="mb-0 text-muted"><span class="text-success">@item.RewardName</span></h2>
+                                        <img src="@item.ImageUrl" class="avatar rounded mr-3" alt="shreyu">
+                                    </div>
+                                </div>
+                                <hr />
+                            }
                         }
 
-
                     </div>
-
-
 
                 </div>
             </div>
@@ -575,7 +593,12 @@
                                         <th>Tours</th>
                                         <th>Left Point</th>
                                         <th>Right Point</th>
-                                        @*<th>Matching Target Point</th>*@
+                                        <th>Sales Matching Bonus</th>
+                                        <th>Cash Reward</th>
+                                        <th>Total Bonus</th>
+                                        <th>Car Fund</th>
+                                        <th>Funds</th>
+                                        <th>Royality Yearly</th>
                                         <th>Status</th>
                                         <th>Acheived On</th>
 
@@ -591,28 +614,12 @@
                                             {
                                                 <tr>
                                                     <td>@(SNO = SNO + 1)</td>
-                                                    @if (item.RewardImg == "" || item.RewardImg == "NULL")
-                                                    {
-                                                        <td></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td>
-                                                            <img src="@item.RewardImg" class="reimg" />
-                                                            <br />
-                                                            @item.RewardName
-                                                        </td>
-
-                                                    }
-                                                    @if (item.ToursImage == "" || item.ToursImage == "NULL")
-                                                    {
-                                                        <td></td>
-                                                    }
-                                                    else
-                                                    {
-                                                        <td><img src="@item.ToursImage" class="reimg" /><br />@item.ToursName</td>
-
-                                                    }
+                                                    <td>
+                                                        <img src="@item.RewardImg" class="reimg" />
+                                                        <br />
+                                                        @item.RewardName
+                                                    </td>
+                                                    <td><img src="@item.ToursImage" class="reimg" /><br />@item.ToursName</td>
                                                     <td>
                                                         @item.LeftBusiness
                                                         @if (!string.IsNullOrEmpty(item.BalanceLeft))
@@ -629,11 +636,13 @@
                                                             <span>Balance Right: <label class="badge badge-success">@item.BalanceRight</label></span>
                                                         }
                                                     </td>
-                                                    @*<td>
-                                @item.TargetPoint
-                            </td>*@
-                                                    @*<td>@item.Rank</td>
-                            <td>@item.Designation</td>*@
+                                                    <td>@item.SalesMatchingBonus</td>
+                                                    <td>@item.CashReward</td>
+                                                    <td>@item.TotalBonus</td>
+                                                    <td>@item.CarFund</td>
+                                                    <td>@Html.Raw(item.Funds)</td>
+                                                    <td>@item.Royality_yearly</td>
+
 
                                                     <td>
                                                         @if (item.Status == "Achieved")
@@ -663,7 +672,6 @@
                                                         }
                                                     </td>
                                                     <td>@item.AchievedOn</td>
-
                                                 </tr>
                                             }
                                         }

@@ -51,8 +51,9 @@ namespace LifeOne.Areas.Associate.Controllers
             {
                 Fk_MemId = Convert.ToInt32(SessionManager.AssociateFk_MemId);
             }
-            team.JoiningDate = String.IsNullOrEmpty(team.JoiningDate) ? null : Common.ConvertToSystemDate(team.JoiningDate, "dd/MM/yyyy");
-            team.Directs = AssociateTeamService.GetDirectList(Fk_MemId, team.SearchLoginId, team.Status, team.JoiningDate);
+            team.FromDate = String.IsNullOrEmpty(team.FromDate) ? null : Common.ConvertToSystemDate(team.FromDate, "dd/MM/yyyy");
+            team.ToDate = String.IsNullOrEmpty(team.ToDate) ? null : Common.ConvertToSystemDate(team.ToDate, "dd/MM/yyyy");
+            team.Directs = AssociateTeamService.GetDirectList(Fk_MemId, team.SearchLoginId, team.Status, team.FromDate,team.ToDate);
            
             return View(team);
         }
@@ -145,6 +146,7 @@ namespace LifeOne.Areas.Associate.Controllers
             team.Downlines = AssociateTeamService.GetDownlineList(Fk_MemId, team.SearchLoginId,team.Status, team.FromDate, team.ToDate, Page, PageSize,Leg,team.Pk_PackageID);
             //ViewBag.Email = team.Downlines.Select(x => x.Email).ToList();
             ViewBag.Email = DALBindCommonDropdown.BindDropdown(13, Fk_MemId);
+            ViewBag.Status = team.Status;
             if (team.Downlines.Count > 0)
             {
                 TotalRecords = team.Downlines[0].TotalRecords;

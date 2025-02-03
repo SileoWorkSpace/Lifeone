@@ -49,7 +49,13 @@ namespace LifeOne.Models.AssociateManagement.AssociateDAL
                         Recognition = dr["Recognition"].ToString(),
                         TargetPoint = dr["RawardTarget"].ToString(),
                         ToursName = dr["ToursName"].ToString(),
-                        ToursImage = dr["ToursImage"].ToString(),                        
+                        ToursImage = dr["ToursImage"].ToString(),
+						SalesMatchingBonus = dr["SalesMatchingBonus"].ToString(),
+						CashReward = dr["CashReward"].ToString(),
+						TotalBonus = dr["TotalBonus"].ToString(),
+						CarFund = dr["CarFund"].ToString(),
+						Funds = dr["Funds"].ToString(),
+						Royality_yearly = dr["Royality_yearly"].ToString(),                        
                     });
                 }
             }

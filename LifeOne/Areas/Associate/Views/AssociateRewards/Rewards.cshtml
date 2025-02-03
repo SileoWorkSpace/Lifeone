@@ -37,13 +37,17 @@
                             <tr>
                                 <th>S. No.</th>
                                 <th>Reward Name</th>
-                                <th class="text-center">Tours</th>
+                                <th>Tours</th>
                                 <th>Left Point</th>
                                 <th>Right Point</th>
-                                @*<th>Matching Target Point</th>*@
-                                <th class="text-center">Status</th>
+                                <th>Sales Matching Bonus</th>
+                                <th>Cash Reward</th>
+                                <th>Total Bonus</th>
+                                <th>Car Fund</th>
+                                <th>Funds</th>
+                                <th>Royality Yearly</th>
+                                <th>Status</th>
                                 <th>Acheived On</th>
-                                <th>Action</th>
 
                             </tr>
                         </thead>
@@ -57,28 +61,12 @@
                                     {
                                         <tr>
                                             <td>@(SNO = SNO + 1)</td>
-                                            @if (item.RewardImg == "" || item.RewardImg == "NULL")
-                                            {
-                                                <td></td>
-                                            }
-                                            else
-                                            {
-                                                <td class="text-center">
-                                                    <img src="@item.RewardImg" class="reimg" />
-                                                    <br />
-                                                    @item.RewardName
-                                                </td>
-
-                                            }
-                                            @if (item.ToursImage == "" || item.ToursImage == "NULL")
-                                            {
-                                                <td></td>
-                                            }
-                                            else
-                                            {
-                                                <td class="text-center"><img src="@item.ToursImage" class="reimg" /><br />@item.ToursName</td>
-
-                                            }
+                                            <td>
+                                                <img src="@item.RewardImg" class="reimg" />
+                                                <br />
+                                                @item.RewardName
+                                            </td>
+                                            <td><img src="@item.ToursImage" class="reimg" /><br />@item.ToursName</td>
                                             <td>
                                                 @item.LeftBusiness
                                                 @if (!string.IsNullOrEmpty(item.BalanceLeft))
@@ -95,11 +83,13 @@
                                                     <span>Balance Right: <label class="badge badge-success">@item.BalanceRight</label></span>
                                                 }
                                             </td>
-                                            @*<td>
-            @item.TargetPoint
-        </td>*@
-                                            @*<td>@item.Rank</td>
-        <td>@item.Designation</td>*@
+                                            <td>@item.SalesMatchingBonus</td>
+                                            <td>@item.CashReward</td>
+                                            <td>@item.TotalBonus</td>
+                                            <td>@item.CarFund</td>
+                                            <td>@Html.Raw(item.Funds)</td>
+                                            <td>@item.Royality_yearly</td>
+
 
                                             <td>
                                                 @if (item.Status == "Achieved")
@@ -129,17 +119,6 @@
                                                 }
                                             </td>
                                             <td>@item.AchievedOn</td>
-                                            @if (item.Status == "Achieved")
-                                            {
-                                                <td>
-                                                    <a href="javascript:void(0);" class="btn btn-success btn-sm" onclick="Claim(@item.PK_RId)">Claim</a>&nbsp;
-                                                    <a href="javascript:void(0);" class="btn btn-danger btn-sm" onclick="Skip(@item.PK_RId)">Skip</a>
-                                                </td>
-                                            }
-                                            else
-                                            {
-                                                <td>-</td>
-                                            }
                                         </tr>
                                     }
                                 }

@@ -16,6 +16,10 @@ using LifeOne.Models;
 using LifeOne.Models.AdminManagement.ADAL;
 using static LifeOne.Models.API.Common;
 using Newtonsoft.Json;
+using LifeOne.Models.FranchiseManagement.FService;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Runtime.Remoting;
+using LifeOne.Models.API; 
 using System.Web.UI.WebControls;
 using MemberKYC = LifeOne.Models.AdminManagement.AEntity.MemberKYC;
 using Support = LifeOne.Models.AdminManagement.AEntity.Support;
@@ -1393,7 +1397,12 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 return Redirect("/Home/adminlogin");
             }
-            MTDSReport list = AdminReportsService.GetTDSReportService(model);
+			if (model.Page == 0 || model.Page == null)
+			{
+				model.Page = 1;
+			}
+			model.Size = SessionManager.Size;
+			MTDSReport list = AdminReportsService.GetTDSReportService(model);
             ViewBag.FinancealYear = DALBindCommonDropdown.BindFinancealYear();
             ViewBag.FinancealYear = DALBindCommonDropdown.BindFinancealYear();
             ViewBag.FinancealMonth = DALBindCommonDropdown.BindFinancealMonth();
@@ -4178,6 +4187,7 @@ namespace LifeOne.Areas.Admin.Controllers
             string message = "";
             try
             {
+
                 Reports reports = new Reports();
                 reports.OrderNo = id;               
                 reports.RemarkCancel = remark;

@@ -15,9 +15,9 @@ namespace LifeOne.Models.AssociateManagement.AssociateService
             List<DirectAPI> obj = DALAssociateTeam.GetDirect(Fk_MemId,SearchLoginId, Page, PageSize);
             return obj;
         }
-        public static List<DirectAPI> GetDirectList(int? Fk_MemId, string SearchLoginId,string Status,string JoiningDate)
+        public static List<DirectAPI> GetDirectList(int? Fk_MemId, string SearchLoginId,string Status,string FromDate,string ToDate)
         {
-            List<DirectAPI> obj = DALAssociateTeam.GetDirectList(Fk_MemId, SearchLoginId, Status, JoiningDate);
+            List<DirectAPI> obj = DALAssociateTeam.GetDirectList(Fk_MemId, SearchLoginId, Status, FromDate,ToDate);
             return obj;
         }
         

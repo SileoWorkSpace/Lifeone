@@ -90,8 +90,12 @@ namespace LifeOne.Models.AdminManagement.ADAL
                new SqlParameter("@Fk_MemId",model.Fk_MemId),
                new SqlParameter("@Page",model.Page),
                new SqlParameter("@Size",model.Size),
-               new SqlParameter("@FormDate",model.FormDate),
-               new SqlParameter("@ToDate",model.ToDate),
+               new SqlParameter("@JoiningFormDate",model.JoiningFormDate),
+               new SqlParameter("@JoiningToDate",model.JoiningToDate),
+               new SqlParameter("@TopupFormDate",model.TopupFormDate),
+               new SqlParameter("@TopupToDate",model.TopupToDate),
+               new SqlParameter("@UTRNo",model.UTRNo),
+               new SqlParameter("@PackageName",model.PackageName),
                 };
                 DataSet ds = DBHelper.ExecuteQuery("Topuphistory", para);
                 return ds;
