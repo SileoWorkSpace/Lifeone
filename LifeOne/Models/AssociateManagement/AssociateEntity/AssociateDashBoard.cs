@@ -134,6 +134,7 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public List<AssociateDetails> lstAssociates { get; set; } 
         public List<PayoutStatement> payoutStatements { get; set; }
         public List<PayoutSummary> payoutSummaries { get; set; }
+        public List<RewardDetails> rewarddetails { get; set; }
         public List<NewsDetails> lstNews { get; set; }
         public long FkMemId { get;  set; }
         public List<RewardsModel> Rewardslst { get;  set; }
@@ -159,5 +160,10 @@ namespace LifeOne.Models.AssociateManagement.AssociateEntity
         public string NewsHeading { get; set; }
         public string News { get; set; }
         public string Date { get; set; }
+    }
+    public class RewardDetails
+    {
+        public string RewardName { get; set; }
+        public string ImageUrl { get; set; }      
     }
 }

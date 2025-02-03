@@ -146,6 +146,7 @@ namespace LifeOne.Areas.Associate.Controllers
             team.Downlines = AssociateTeamService.GetDownlineList(Fk_MemId, team.SearchLoginId,team.Status, team.FromDate, team.ToDate, Page, PageSize,Leg,team.Pk_PackageID);
             //ViewBag.Email = team.Downlines.Select(x => x.Email).ToList();
             ViewBag.Email = DALBindCommonDropdown.BindDropdown(13, Fk_MemId);
+            ViewBag.Status = team.Status;
             if (team.Downlines.Count > 0)
             {
                 TotalRecords = team.Downlines[0].TotalRecords;

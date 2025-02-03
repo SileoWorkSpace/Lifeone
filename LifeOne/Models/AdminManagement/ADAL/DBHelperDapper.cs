@@ -239,13 +239,15 @@ namespace LifeOne.Models.AdminManagement.ADAL
                     var payoutStatements = reader.Read<PayoutStatement>().ToList();
                     var payoutSummaries = reader.Read<PayoutSummary>().ToList();
                     var NewsDetails = reader.Read<NewsDetails>().ToList();
+                    var rewarddetails = reader.Read<RewardDetails>().ToList();
                     var genericResult = new
                     {
                         _AssociateDashBoardData = AssociateDashBoardData,
                         _AssociateDetails = AssociateDetails,
                         _payoutStatements = payoutStatements,
                         _payoutSummaries=payoutSummaries,
-                        _NewsDetails = NewsDetails
+                        _NewsDetails = NewsDetails,
+                        _rewarddetails = rewarddetails
                     };
                     return genericResult;
                 }

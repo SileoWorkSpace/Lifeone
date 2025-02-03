@@ -37,6 +37,7 @@ using LifeOne.Models.AssociateManagement.AssociateDAL;
 using DocumentFormat.OpenXml.Bibliography;
 using System.Web.UI.WebControls;
 using static LifeOne.Models.TravelModel.RechargeAPI;
+using DocumentFormat.OpenXml.EMMA;
 
 
 namespace LifeOne.Areas.Admin.Controllers
@@ -73,6 +74,7 @@ namespace LifeOne.Areas.Admin.Controllers
             ViewBag.FreePackageSale = dataSet.Tables[0].Rows[0]["FreePackageSale"].ToString();
             ViewBag.PaidPackageSale = dataSet.Tables[0].Rows[0]["PaidPackageSale"].ToString();
             ViewBag.TotalPackageSale = dataSet.Tables[0].Rows[0]["TotalPackageSale"].ToString();
+            ViewBag.TotalPendingWallet = dataSet.Tables[0].Rows[0]["TotalPendingWallet"].ToString();
             mAdminDashbord.dtPaidPackage = dataSet.Tables[1];
             mAdminDashbord.dtFreePackage = dataSet.Tables[2];
 
@@ -1265,14 +1267,16 @@ namespace LifeOne.Areas.Admin.Controllers
 
 
 
-        public ActionResult GetFranchiseEwalletRequest(FranchiseEWalletRequest franchiseEWalletRequest)
+        public ActionResult GetFranchiseEwalletRequest(FranchiseEWalletRequest franchiseEWalletRequest,string Status)
         {
             if (!PermissionManager.IsActionPermit("E-Wallet Request", ViewOptions.FormView))
             {
                 return Redirect("/Home/adminlogin");
-            }
+            }           
+            franchiseEWalletRequest.Status = Status;
             DataSet dataSet = franchiseEWalletRequest.GetEwalletRequest();
             franchiseEWalletRequest.dtRequestDetails = dataSet.Tables[0];
+            ViewBag.Status = Status;
             return View(franchiseEWalletRequest);
         }
         public ActionResult ApproveFranchiseEwallet(string id, string Status)

@@ -10,21 +10,53 @@
 
 @using (Html.BeginForm("GetFranchiseEwalletRequest", "Admin", FormMethod.Post, new { @id = "form1", enctype = "multipart/form-data" }))
 {
+    <div class="row" id="advance-search" style="display:none;">
+        <div class="col-md-12">
+            <div class="alert alert-warning" style="color:#727272 !important">
+                <div class="row">
+                    <div class="col-12 col-md-2">
+                        <div class="form-group">
+                            <label>Status</label>
+                            <div class="input-group" style="float:left">
+                                <select class="form-control" name="Status" id="ddlStatus">
+                                    <option value="">--ALL--</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Pending">Pending</option>
+                                </select>
+                                <input type="hidden" id="txtStatus" value="@ViewBag.Status" />
+                            </div>
+                            @*@Html.TextBoxFor(m => m.LoginId, new { @class = "form-control", @placeholder = "Enter Direct Seller Id" })*@
+                        </div>
+                    </div>                   
+                    <div class="col-12 col-md-2">
+                        <div class="form-group">
+                            <label style="display:block;"></label>
+                            <input type="submit" class="btn btn-success " style="margin-top:1.5em;" value="Search" id="BtnSearch">
+                            <a href="/GetFranchise-E-WalletReq" class="btn btn-secondary" style="margin-top:1.5em;">Reset</a>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 
     <div class="container-fluid">
         <div class="row page-titles">
             <div class="ptitle">
                 <h4 class="mb-1 mt-0">E-Wallet Request</h4>
                 @*<nav aria-label="breadcrumb" class="float-left">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
-                        <li class="breadcrumb-item"><a href="#-">Franchisee</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Ewallet Request</li>
-                    </ol>
-                </nav>*@
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="/Admin-Dashboard">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="#-">Franchisee</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Ewallet Request</li>
+                        </ol>
+                    </nav>*@
             </div>
         </div>
-        <div class="table-responsive" >
+        <div class="table-responsive">
             <table class="table table-striped mb-0">
                 <thead>
                     <tr>
@@ -102,11 +134,11 @@
                                                 <a class="btn btn-success btn-sm" href="/Admin/Admin/ApproveFranchiseEwallet?id=@Model.dtRequestDetails.Rows[i]["Pk_RequestId"].ToString()&&Status=Approved"
                                                    onclick="return confirm('Are you sure you want to approve this request?');">
                                                     Approve Request
-                                                    
+
                                                 </a>
-                                            <a class="btn btn-danger btn-sm" href="/Admin/Admin/ApproveFranchiseEwallet?id=@Model.dtRequestDetails.Rows[i]["Pk_RequestId"].ToString()&&Status=Declined"
+                                                <a class="btn btn-danger btn-sm" href="/Admin/Admin/ApproveFranchiseEwallet?id=@Model.dtRequestDetails.Rows[i]["Pk_RequestId"].ToString()&&Status=Declined"
                                                    onclick="return confirm('Are you sure you want to decline this request?');">
-                                                Decline Request
+                                                    Decline Request
                                                 </a>
                                             }
                                         </td>
@@ -122,4 +154,16 @@
         </div>
     </div>
 }
+<script>
+    $(document).ready(function () {
+
+
+        if ($('#txtStatus').val() != '' && $('#txtStatus').val() != undefined) {
+            $('#ddlStatus').val($('#txtStatus').val());
+        }
+        if ($('#txtplace').val() != '' && $('#txtplace').val() != undefined) {
+            $('#ddlPlace').val($('#txtplace').val());
+        }
+    })
+</script>
 
