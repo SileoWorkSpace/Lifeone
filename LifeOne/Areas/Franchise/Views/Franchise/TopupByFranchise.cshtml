@@ -10,7 +10,7 @@
         z-index: 1051;
     }
 </style>
-<section class="content">
+<section class="container-fluid">
     @using (Html.BeginForm("TopupByFranchise", "Franchise", FormMethod.Post, new { @id = "form1" }))
     {
         <div class="row page-titles">
@@ -47,40 +47,46 @@
             }
 
         </div>
-        <div class="box box-info">
-            <div class="box-body">
 
-                <div class="row">
-                    <div class="col-md-2">
+
+        <div class="row">
+            <div class="col-md-3">
+                <div class="box box-info">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group label-floating is-empty">
+                                    <label class="form-control-placeholder" for="name">Login Id</label>
+                                    @Html.TextBoxFor(m => m.txtLoginId, new { @class = "form-control", @placeholder = "LoginId" })
+                                    @*@if (!string.IsNullOrEmpty(@ViewBag.Name))
+                                        {
+                                            <span style="color:blue">
+                                                @ViewBag.Name
+                                            </span>
+                                        }*@
+                                    @*else
+                                        {*@
+                                    <span id="SpnLogInId" style="color:blue"> @ViewBag.Name</span>
+                                    @*}*@
+
+
+
+                                    @Html.HiddenFor(m => m.FK_MemId)
+                                    <input type="hidden" id="hdnTemppermanent" name="TempPermanent" />
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
-                    <div class="col-md-8">
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="box box-info">
+                    <div class="box-body">
                         <div class="card card-outline-info">
                             <div class="card-body">
 
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="form-group label-floating is-empty">
-                                            <label class="form-control-placeholder" for="name">Login Id</label>
-                                            @Html.TextBoxFor(m => m.txtLoginId, new { @class = "form-control", @placeholder = "LoginId" })
-                                            @*@if (!string.IsNullOrEmpty(@ViewBag.Name))
-                                                {
-                                                    <span style="color:blue">
-                                                        @ViewBag.Name
-                                                    </span>
-                                                }*@
-                                            @*else
-                                                {*@
-                                            <span id="SpnLogInId" style="color:blue"> @ViewBag.Name</span>
-                                            @*}*@
 
-
-
-                                            @Html.HiddenFor(m => m.FK_MemId)
-                                            <input type="hidden" id="hdnTemppermanent" name="TempPermanent" />
-                                        </div>
-                                    </div>
-
-                                </div>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="form-group label-floating is-empty">
@@ -200,7 +206,7 @@
                                     <div class="col-md-12">
                                         <div class="form-group label-floating is-empty">
                                             <label class="form-control-placeholder" for="name">Payment Mode</label>
-                                            <select id="ddlPaymentMode" name="PaymentMode" class="form-control" >
+                                            <select id="ddlPaymentMode" name="PaymentMode" class="form-control">
                                                 <option value="0">Select</option>
                                                 @*<option value="Cash">Cash</option>*@
                                                 <option value="Cheque">Cheque</option>
@@ -254,24 +260,23 @@
                                 </div>
 
                             </div>
+                            <div class="col-md-2">
+                                <span id="dbResponse" style="color:red"></span>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-md-2">
-                        <span id="dbResponse" style="color:red"></span>
                     </div>
 
                 </div>
             </div>
         </div>
         // @Html.HiddenFor(m=>m.txtFK_PackageId)
-        @Html.HiddenFor(m=>m.Fk_FranchiseId)
+        @Html.HiddenFor(m => m.Fk_FranchiseId)
         <input type="hidden" id="txtFK_PackageId" value="@TempData["txtFK_PackageId"]" />
         <input type="hidden" id="txtPaymentMode1" value="@TempData["PaymentMode"]" />
         <input type="hidden" id="txtChequeDDNo1" value="@TempData["ChequeDDNo"]" />
         <input type="hidden" id="txtChequeDDDate1" value="@TempData["ChequeDDDate"]" />
         <input type="hidden" id="txtBankName1" value="@TempData["BankName"]" />
-        
+
     }
 </section>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
@@ -285,7 +290,7 @@
 
 
 <script type="text/javascript">
-debugger
+
     $('#mdate1').datepicker({
         autoclose: true,
         orientation: "top",
@@ -301,7 +306,7 @@ debugger
     var txtChequeDDDate = $('#txtChequeDDDate1').val()
     var txtBankName = $('#txtBankName1').val()
     $(document).ready(function () {
-        debugger
+
         //if ($('#txtLoginId').val() != '') {
         //    GetMemberName()
         //}
@@ -329,7 +334,7 @@ debugger
 
         if (txtPaymentMode !== "0") {
 
-            if (txtPaymentMode == "Cash" ||  txtPaymentMode == "Free") {
+            if (txtPaymentMode == "Cash" || txtPaymentMode == "Free") {
                 $("#dv").css("display", "none");
                 $("#dv1").css("display", "none");
                 // $("#txtPaidAmount").val("");
@@ -501,7 +506,7 @@ debugger
     }
 
     function onValidation() {
-        debugger
+
         $(".errortext").removeClass("errortext");
         if ($('#txtLoginId').val() == '') {
             $("#txtLoginId").addClass('errortext');
