@@ -105,5 +105,14 @@ namespace LifeOne.Models.AdminManagement.ADAL
                 throw ex;
             }
         }
+        public DataSet GettopupInvoice(string id)
+        {
+            SqlParameter[] para =
+            {
+                new SqlParameter("@Pk_TransId",id)
+            };
+            DataSet dsresult = ExecuteQuery("GetTopupInvoiceDetails", para);
+            return dsresult;
+        }
     }
 }

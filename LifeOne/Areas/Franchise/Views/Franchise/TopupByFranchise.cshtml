@@ -88,6 +88,15 @@
 
 
                                 <div class="row">
+                                    <div class="row" @*style="display:none"*@ id="PaymethodMethod" onclick="return PaymentMethod()">
+                                        <div class="col-md-12">
+
+                                            <label>Payment Method</label>
+                                            <input type="radio" name="WalletPayment" value="Wallet" id="WalletPaymentWallet" />Wallet
+                                            <input type="radio" name="WalletPayment" value="Product" id="WalletPaymentProduct" />Product
+
+                                        </div>
+                                    </div>
                                     <div class="col-md-12">
                                         <div class="form-group label-floating is-empty">
                                             <label class="form-control-placeholder" for="name">Package</label>
@@ -101,7 +110,10 @@
                                     <div class="col-md-8">
                                         <div class="form-group label-floating is-empty">
                                             <label class="form-control-placeholder" for="name">Product</label>
-                                            @Html.DropDownListFor(m => m.ProductId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control" })
+
+                                            @*@Html.DropDownListFor(m => m.ProductId, new SelectList(ViewBag.ddlProduct, "Value", "Text"), new { @class = "form-control", id = "ProductId" })*@
+
+                                            @Html.DropDownListFor(m => m.ProductId, new List<SelectListItem>(), new { @class = "form-control", id = "ProductId" })
 
                                         </div>
 
@@ -109,7 +121,7 @@
                                     <div class="col-md-2">
                                         <div class="form-group label-floating is-empty">
                                             <label class="form-control-placeholder" for="name">Quantity</label>
-                                            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @placeholder = "Quantity", @onkeypress = "return isNumberKey(event)" })
+                                            @Html.TextBoxFor(m => m.Quantity, new { @class = "form-control", @type = "number", @placeholder = "Quantity", @onkeypress = "return isNumberKe(event)", @onblur = "return ProductQuantityValidate()" })
                                         </div>
 
                                     </div>
@@ -143,7 +155,7 @@
                                 <div class="row" id="producttable" style="display:none">
                                     <div class="col-md-12">
                                         <div class="form-group label-floating is-empty">
-                                            <table class="table " id="TmpProdgrd">
+                                            <table class="table" id="TmpProdgrd">
                                                 <thead>
                                                     <tr>
                                                         <th>Sn</th>
@@ -186,11 +198,11 @@
                                                 <tfoot>
                                                     <tr>
                                                         <th></th>
-                                                        <th></th>
+                                                        <th style="text-align:right">Total Price</th>
 
-                                                        <th></th>
-                                                        <th></th>
 
+                                                        <th id="txttotalPrice">@ViewBag.PaidAmount</th>
+                                                        <th></th>
                                                         <th>Total BV</th>
                                                         <th id="txttotalBV">@ViewBag.BV</th>
                                                         <th></th>
@@ -202,14 +214,14 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
+                                <!--<div class="row"style="display:none" id="PaymentModeother">
                                     <div class="col-md-12">
                                         <div class="form-group label-floating is-empty">
                                             <label class="form-control-placeholder" for="name">Payment Mode</label>
                                             <select id="ddlPaymentMode" name="PaymentMode" class="form-control">
-                                                <option value="0">Select</option>
-                                                @*<option value="Cash">Cash</option>*@
-                                                <option value="Cheque">Cheque</option>
+                                                <option value="0">Select</option>-->
+                                @*<option value="Cash">Cash</option>*@
+                                <!--<option value="Cheque">Cheque</option>
                                                 <option value="DD">DD</option>
                                                 <option value="NEFT">NEFT</option>
                                                 <option value="RTGS">RTGS</option>
@@ -225,31 +237,30 @@
                                             <input type="text" class="form-control" name="ChequeDDNo" id="txtChequeDDNo" onkeypress="return onlyNos(event,this);" />
                                         </div>
                                     </div>
-                                </div>
+                                </div>-->
+                                @*<div class="row" id="dv1" style="display:none;">
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="form-control-placeholder" for="name">Bank Name</label>
+                                                <input type="text" class="form-control" name="BankName" id="txtBankName" />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="form-control-placeholder" for="name">Date</label>
+                                                <input type="text" class="form-control" name="ChequeDDDate" readonly placeholder="dd/mm/yyyy" id="mdate1" />
+                                            </div>
+                                        </div>
+                                    </div>
 
-                                <div class="row" id="dv1" style="display:none;">
-                                    <div class="col-md-12">
-                                        <div class="form-group label-floating is-empty">
-                                            <label class="form-control-placeholder" for="name">Bank Name</label>
-                                            <input type="text" class="form-control" name="BankName" id="txtBankName" />
+                                    <div class="row" style="display:none;">
+                                        <div class="col-md-12">
+                                            <div class="form-group label-floating is-empty">
+                                                <label class="form-control-placeholder" for="name">Remark</label>
+                                                @Html.TextAreaFor(m => m.TopupRemark, new { @class = "form-control", @maxlength = "500" })
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="form-group label-floating is-empty">
-                                            <label class="form-control-placeholder" for="name">Date</label>
-                                            <input type="text" class="form-control" name="ChequeDDDate" readonly placeholder="dd/mm/yyyy" id="mdate1" />
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="row" style="display:none;">
-                                    <div class="col-md-12">
-                                        <div class="form-group label-floating is-empty">
-                                            <label class="form-control-placeholder" for="name">Remark</label>
-                                            @Html.TextAreaFor(m => m.TopupRemark, new { @class = "form-control", @maxlength = "500" })
-                                        </div>
-                                    </div>
-                                </div>
+                                    </div>*@
 
                                 <div class="row">
 
@@ -276,6 +287,8 @@
         <input type="hidden" id="txtChequeDDNo1" value="@TempData["ChequeDDNo"]" />
         <input type="hidden" id="txtChequeDDDate1" value="@TempData["ChequeDDDate"]" />
         <input type="hidden" id="txtBankName1" value="@TempData["BankName"]" />
+        <input type="hidden" id="SelectedPaymentMethod" value="@TempData["WalletPayment"]" />
+
 
     }
 </section>
@@ -306,6 +319,11 @@
     var txtChequeDDDate = $('#txtChequeDDDate1').val()
     var txtBankName = $('#txtBankName1').val()
     $(document).ready(function () {
+        var selectedPaymentMethod = $("#SelectedPaymentMethod").val();
+
+        if (selectedPaymentMethod) {
+            $("input[name='WalletPayment'][value='" + selectedPaymentMethod + "']").prop("checked", true);
+        }
 
         //if ($('#txtLoginId').val() != '') {
         //    GetMemberName()
@@ -318,6 +336,7 @@
         if (id != "") {
             $('#FK_PackageId').val(id)
         }
+
         if (txtPaymentMode !== "0") {
             $('#ddlPaymentMode').val(txtPaymentMode)
             $('#txtChequeDDNo').val(txtChequeDDNo)
@@ -348,6 +367,7 @@
         }
 
         getPackageAmount()
+        getproduct()
     });
     function fvalidateAddProduct() {
         $(".errortext").removeClass("errortext");
@@ -356,12 +376,30 @@
             $('#txtLoginId').focus();
             return false;
         }
-        if ($('#ProductId').val() == '0') {
-            $("#ProductId").addClass('errortext');
-            $('#ProductId').focus();
+        var walletPaymentMethod = $('input[name="WalletPayment"]:checked').val();
+
+        if (!walletPaymentMethod) {
+
+            $("#WalletPayment").addClass('errortext');
+            $('#WalletPayment').focus();
             return false;
         }
-        if ($('#Quantity').val() == '0' || $('#Quantity').val() == '' || $('#Quantity').val() == null) {
+        if (walletPaymentMethod == "Product") {
+            if ($('#ProductIdshow').val() == '0') {
+                $("#ProductIdshow").addClass('errortext');
+                $('#ProductIdshow').focus();
+                return false;
+            }
+
+        } else {
+            if ($('#ProductId').val() == '0') {
+                $("#ProductId").addClass('errortext');
+                $('#ProductId').focus();
+                return false;
+            }
+        }
+
+        if ($('#Quantity').val() == '0' || $('#Quantity').val() == '' || $('#Quantity').val() == null || $('#Quantity').val() == 0) {
             $("#Quantity").addClass('errortext');
             $('#Quantity').focus();
             return false;
@@ -462,6 +500,8 @@
 
 
         var Pk_PackageID = $('#FK_PackageId').val();
+
+
         var PackageAmt = 0
         if ($('#FK_PackageId').val() != "") {
             $.ajax({
@@ -482,14 +522,14 @@
                     $("#txtPaidAmount").val(response[0].MRP);
                     $('#hdnPackageName').html(response[0].ProductName);
                     if (response[0].IsFixed == "No") {
-                        $('#packageamt').show();
+                        $('#packageamt').hide();
                         $('#productdiv').show();
                         $('#producttable').show();
                     }
                     else {
                         $('#packageamt').show();
-                        $('#productdiv').hide();
-                        $('#producttable').hide();
+                        $('#productdiv').show();
+                        $('#producttable').show();
 
                     }
 
@@ -507,6 +547,7 @@
 
     function onValidation() {
 
+        var rowCount = $('#TmpProdgrd tbody tr').length;
         $(".errortext").removeClass("errortext");
         if ($('#txtLoginId').val() == '') {
             $("#txtLoginId").addClass('errortext');
@@ -518,6 +559,16 @@
             $('#FK_PackageId').focus();
             return false;
         }
+        if ($('#FK_PackageId').val() == 6) {
+
+            if (rowCount == 0) {
+                alert("Please choose some own product!")
+                return false;
+            }
+
+
+        }
+
         if ($('#txtPaidAmount').val() == '0') {
             $("#txtPaidAmount").addClass('errortext');
             $('#txtPaidAmount').focus();
@@ -528,44 +579,171 @@
             $('#txtPaidAmount').focus();
             return false;
         }
-        if ($('#ddlPaymentMode').val() == '0') {
-            $("#ddlPaymentMode").addClass('errortext');
-            $('#ddlPaymentMode').focus();
-            return false;
+        var ProductId = $('#ProductId').val();
+        var TotalPrice = parseFloat(document.getElementById("txttotalPrice").innerText) || 0;
+        var WallletPaymentMethod = $('input[name="WalletPayment"]:checked').val();
 
+        if (WallletPaymentMethod == "Wallet") {
+            $.ajax({
+                url: "/Franchise/Franchise/ValFranchiseWalletAmount",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ ProductId: ProductId, OpCode: 1 }),
+                contentType: "application/json",
+                success: function (result) {
+                    debugger;
+                    var WalletAmt = result[0].WalletAmt;
+
+                    if (WalletAmt < TotalPrice) {
+                        alert("You Have Insufficient Balance!");
+                        return false;
+
+                    }
+
+                },
+                error: function (err) {
+                    alert("Something Went Wrong !");
+                    return false;
+                }
+            });
+
+        }
+        var WallletPaymentMethod = $('input[name="WalletPayment"]:checked').val();
+        if (!WallletPaymentMethod) {
+
+            $("#WalletPayment").addClass('errortext');
+            $('#WalletPayment').focus();
+            return false;
+        }
+        //if (walletPaymentMethod == "PaymentMode") {
+        //    if ($('#ddlPaymentMode').val() == '0') {
+        //        $("#ddlPaymentMode").addClass('errortext');
+        //        $('#ddlPaymentMode').focus();
+        //        return false;
+
+        //    }
+        //    else {
+        //        var PMode = $("#ddlPaymentMode").val();
+        //        if (PMode == "Cash" || PMode == "0" || PMode == "Free") {
+
+        //        }
+        //        else {
+        //            if ($('#txtChequeDDNo').val() == '') {
+        //                $("#txtChequeDDNo").addClass('errortext');
+        //                $('#txtChequeDDNo').focus();
+        //                return false;
+        //            }
+        //            if ($('#txtBankName').val() == '') {
+        //                $("#txtBankName").addClass('errortext');
+        //                $('#txtBankName').focus();
+        //                return false;
+        //            }
+        //            if ($('#mdate1').val() == '') {
+        //                $("#mdate1").addClass('errortext');
+        //                $('#mdate1').focus();
+        //                return false;
+        //            }
+        //        }
+        //        //if ($('#TopupRemark').val() == '') {
+        //        //    $("#TopupRemark").addClass('errortext');
+        //        //    $('#TopupRemark').focus();
+        //        //    return false;
+        //        //}
+
+        //    }
+        //}
+
+        var Pk_PackageID = $('#FK_PackageId').val();
+        $('#Save').trigger('click');
+
+
+
+    }
+    function PaymentMethod() {
+        $(".errortext").removeClass("errortext");
+        if ($('#txtLoginId').val() == '') {
+            $("#txtLoginId").addClass('errortext');
+            $('#txtLoginId').focus();
+            return false;
+        }
+        var WallletPaymentMethod = $('input[name="WalletPayment"]:checked').val();
+        if (WallletPaymentMethod == "Product") {
+            $("#PaymentModeother").css("display", "block");
         }
         else {
-            var PMode = $("#ddlPaymentMode").val();
-            if (PMode == "Cash" || PMode == "0" || PMode == "Free") {
+            $("#PaymentModeother").css("display", "none");
+            $("#dv1").css("display", "none");
+        }
+        getproduct();
 
-            }
-            else {
-                if ($('#txtChequeDDNo').val() == '') {
-                    $("#txtChequeDDNo").addClass('errortext');
-                    $('#txtChequeDDNo').focus();
+
+    }
+    function ProductQuantityValidate() {
+        var ProductId = $('#ProductId').val();
+        var Quantity = parseInt($('#Quantity').val());
+
+        var WallletPaymentMethod = $('input[name="WalletPayment"]:checked').val();
+        if (WallletPaymentMethod == "Product") {
+            $.ajax({
+                url: "/Franchise/Franchise/ValFranchiseWalletAmount",
+                type: "POST",
+                dataType: 'json',
+                data: JSON.stringify({ ProductId: ProductId, OpCode: 2 }),
+                contentType: "application/json",
+                success: function (result) {
+
+                    var Quat = result[0].Quantity;
+
+                    if (Quantity > Quat) {
+                        alert("This Product is Out Of Stock !");
+                        $('#Quantity').val(0);
+                    }
+                },
+                error: function (err) {
+                    alert("Something Went Wrong !");
                     return false;
                 }
-                if ($('#txtBankName').val() == '') {
-                    $("#txtBankName").addClass('errortext');
-                    $('#txtBankName').focus();
-                    return false;
-                }
-                if ($('#mdate1').val() == '') {
-                    $("#mdate1").addClass('errortext');
-                    $('#mdate1').focus();
-                    return false;
-                }
-            }
-            //if ($('#TopupRemark').val() == '') {
-            //    $("#TopupRemark").addClass('errortext');
-            //    $('#TopupRemark').focus();
-            //    return false;
-            //}
+            });
 
         }
-
-
-
-        $('#Save').trigger('click');
     }
+
+    function getproduct() {
+        var WallletPaymentMethod = $('input[name="WalletPayment"]:checked').val();
+        if (WallletPaymentMethod == "Product") {
+
+            ProductType = "MemProduct";
+        }
+        else {
+            ProductType = "AllProduct";
+        }
+        $.ajax({
+            url: "/Franchise/Franchise/GetProductMemeberWise",
+            type: "POST",
+            dataType: 'json',
+            data: JSON.stringify({ ProductType: ProductType }),
+            contentType: "application/json",
+            success: function (result) {
+
+
+                var ddl = $("#ProductId"); // Select the dropdown
+                ddl.empty(); // Clear existing options
+
+                // Loop through the returned JSON data and add options
+                $.each(result, function (index, item) {
+                    ddl.append($('<option></option>').val(item.Value).text(item.Text));
+                });
+
+            },
+            error: function (err) {
+                alert("Something Went Wrong !");
+                return false;
+            }
+        });
+        //else {
+        //    $("#ProductIdshow").hide();
+        //    $("#ProductId").show();
+        //}
+    }
+
 </script>

@@ -1,0 +1,1649 @@
+﻿@model LifeOne.Models.AdminManagement.AEntity.TopupInvoiceModel
+@{
+    ViewBag.Title = "Topup Invoice";
+    Layout = null;
+}
+@{
+    decimal TotalTaxAmount = 0;
+    decimal TotalAmount = 0;
+    decimal TotalCGST = 0;
+    decimal TotalSGST = 0;
+    decimal TotalIGST = 0;
+    decimal AmountAfterTax = 0;
+    decimal GSTAmount = 0;
+    decimal TotalGSTAmount = 0;
+    decimal TotalShippingCharges = 0;
+    decimal TotalBV = 0;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Lifeone Wellness Pvt. Ltd.</title>
+    <style type="text/css">
+    p {
+        padding: 0px;
+        margin: 0px;
+        margin-bottom: 10px !important;
+    }
+</style>
+</head>
+
+<body style="margin: 10px 0;
+      font-size: 12px;
+      font-family: Arial, Verdana, Tahoma;
+      line-height: 16px;
+    " id="shoppingInvoice">
+    <table cellspacing="0" cellpadding="0" style="
+        width: 800px;
+        margin: 0px auto;
+        border: 1px solid #000;
+        font-size: 12px;
+        font-family: Arial, Verdana, Tahoma;
+        line-height: 16px;
+      ">
+        <tbody>
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td style="
+                      padding: 5px 5px 0px 5px;
+                      border-bottom: 0px solid #000;
+                      padding: 2px 5px;
+                      padding: 2px 5px;
+                    ">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="
+                              width: 100%;
+                              vertical-align: top;
+                              text-align: center;
+                            ">
+                                                    <strong>TAX INVOICE</strong>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="
+                      padding: 5px;
+                      border-bottom: 1px solid #000;
+                      padding: 2px 5px;
+                      padding: 2px 5px;
+                    ">
+                                </td>
+                            </tr>
+                            
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="
+                              border-bottom: 0px solid #000;
+                              text-align: left;
+                              padding: 10px 0 0 10px;
+                            ">
+                                                    <img src="@Model.dtDetails.Rows[0]["CompanyLogo"].ToString()" alt="Logo"
+                                                         style="width: 190px; padding: 0 0px 0px 10px" />
+                                                </td>
+                                                <td style="
+                              text-align: right;
+                              border-bottom: 0px solid #000;
+                              padding:5px 10px 0;
+                            ">
+                                                    <h2 style="
+                                margin: 0px !important;
+                                padding:2px 0px;
+                                font-size: 24px;
+                              ">
+
+                                                        @Model.dtDetails.Rows[0]["CompanyName"].ToString()
+                                                        @*Lifeone Wellness Pvt. Ltd.*@
+                                                    </h2>
+                                                    <p style="margin:0px !important; padding: 2px 0px; font-size: 12px;">
+                                                        <strong>Corporate Address:- </strong>@Model.dtDetails.Rows[0]["OfficeAddress"].ToString()<br>
+                                                        <strong>Admin Office:-</strong> C-1/22, Vineet Khand, Gomti Nagar, Lucknow, Uttar-Pradesh-226010 <br>
+                                                        <strong> Contact:-</strong>@Model.dtDetails.Rows[0]["OfficeContactNo"].ToString()<br>
+                                                        <strong> Customer Care No.:-</strong> 08090839393<br>
+                                                        <strong> Email ID:-</strong> <a href="mailto:info@lifeonewellness.com">@Model.dtDetails.Rows[0]["OfficeEmailId"].ToString()</a> <br>
+                                                        <strong style="font-size: 14px"><strong>GSTIN :</strong> </strong>@Model.dtDetails.Rows[0]["CompanyGST"].ToString()<br>
+                                                        @*<strong> Franchisee Name</strong>: Lifeone Rockers  <br>
+                                                        <strong>  Franchisee Code :</strong> 364589*@
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            <tr>
+                                                <td style="
+                              border-right: 1px solid #000;
+                              border-top: 1px solid #000;
+                              width: 30%;
+                              vertical-align: top;
+                            ">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="
+                                      border-top: 0px solid #000;
+                                      background: #f1f1f1;
+                                      font-size: 14px;
+                                      font-weight: bold;
+                                      padding: 5px 10px;
+                                      border-bottom: 1px solid #000;
+                                      padding: 2px 5px;
+                                      padding: 2px 5px;
+                                    ">
+                                                                    Invoice Details
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 5px 5px">
+                                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong>Invoice No.</strong>:@Model.dtDetails.Rows[0]["InnvoiceNo"].ToString()
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong>Date</strong>: @Model.dtDetails.Rows[0]["InvoiceDate"].ToString()
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong>Place of supply </strong>:
+                                                                                Lucknow
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong>Courier Name </strong>: NA
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>
+                                                                                <strong>Courier Ref. No</strong> : NA
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td style="
+                              border-right: 1px solid #000;
+                              border-top: 1px solid #000;
+                              width: 35%;
+                              vertical-align: top;
+                            ">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="
+                                      border-top: 0px solid #000;
+                                      background: #f1f1f1;
+                                      font-size: 14px;
+                                      font-weight: bold;
+                                      padding: 5px 10px;
+                                      border-bottom: 1px solid #000;
+                                      padding: 2px 5px;
+                                      padding: 2px 5px;
+                                    ">
+                                                                    Bill To
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 5px 5px">
+                                                                    <strong>@Model.dtDetails.Rows[0]["DisplayName"].ToString()</strong><br />Distributor ID: @Model.dtDetails.Rows[0]["LoginId"].ToString()<br>
+                                                                    @Model.dtDetails.Rows[0]["CustAddress"].ToString()<br />
+                                                                    @Model.dtDetails.Rows[0]["custCity"].ToString()&nbsp;@Model.dtDetails.Rows[0]["CustPincode"].ToString()&nbsp;&nbsp;@Model.dtDetails.Rows[0]["CustState"].ToString() <br />
+                                                                    Phone:@Model.dtDetails.Rows[0]["mobile"].ToString()
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                                <td style="
+                              border-top: 1px solid #000;
+                              vertical-align: top;
+                            ">
+                                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="
+                                      border-top: 0px solid #000;
+                                      background: #f1f1f1;
+                                      font-size: 14px;
+                                      font-weight: bold;
+                                      padding: 5px 10px;
+                                      border-bottom: 1px solid #000;
+                                      padding: 2px 5px;
+                                      padding: 2px 5px;
+                                    ">
+                                                                    Ship To
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding: 5px 5px">
+                                                                    <strong>@Model.dtDetails.Rows[0]["DisplayName"].ToString()</strong><br />Distributor ID: @Model.dtDetails.Rows[0]["LoginId"].ToString()<br>
+                                                                    @Model.dtDetails.Rows[0]["CustAddress"].ToString()<br />
+                                                                    @Model.dtDetails.Rows[0]["custCity"].ToString() @Model.dtDetails.Rows[0]["custCity"].ToString()&nbsp;@Model.dtDetails.Rows[0]["CustPincode"].ToString()&nbsp;&nbsp;@Model.dtDetails.Rows[0]["CustState"].ToString()
+                                                                    <br />
+                                                                    Phone: @Model.dtDetails.Rows[0]["mobile"].ToString()
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td style="border-top: 1px solid #000; vertical-align: top">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                        <tbody>
+                                            @if (Model.dtDetails.Rows[0]["CustState"].ToString() == "UTTAR PRADESH")
+                                            {
+                                                <tr>
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>S.No</strong>
+                                                    </td>
+
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: left; text-align: center
+                            ">
+                                                        <strong>Description of Goods</strong>
+                                                    </td>
+
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>MRP</strong>
+                                                    </td>
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>Qty</strong>
+                                                    </td>
+
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>Rate</strong>
+                                                    </td>
+                                                    <td rowspan="2" style="text-align: center;
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>
+                                                            Total <br />
+                                                            Amount(₹)
+                                                        </strong>
+                                                    </td>
+                                                    <td colspan="2" style=" text-align: center; background: #f1f1f1; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 2px 5px; text-align: center; width: 120px; min-width: 120px; max-width: 120px; ">
+                                                        <strong>SGST</strong>
+                                                    </td>
+                                                    <td colspan="2" style=" text-align: center; background: #f1f1f1; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 2px 5px; text-align: center; width: 120px; min-width: 120px; max-width: 120px; ">
+                                                        <strong>CGST</strong>
+                                                    </td>
+                                                    <td colspan="4" rowspan="2" style="
+                              background: #f1f1f1;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>Sub&nbsp;Total(₹)</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                              font-size: 10px;
+                            ">
+                                                        <strong>R(%)</strong>
+                                                    </td>
+                                                    <td style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                              font-size: 10px;
+
+                            ">
+                                                        <strong>Amt(₹)</strong>
+                                                    </td>
+                                                    <td style="
+  background: #f1f1f1;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 2px 5px;
+  text-align: center;
+  font-size: 10px;
+">
+                                                        <strong>R(%)</strong>
+                                                    </td>
+                                                    <td style="
+  background: #f1f1f1;
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 2px 5px;
+  text-align: center;
+  font-size: 10px;
+">
+                                                        <strong>Amt(₹)</strong>
+                                                    </td>
+                                                </tr>
+
+                                                if (Model != null)
+                                                {
+
+                                                    if (Model.dtDetails1 != null)
+                                                    {
+                                                        if (Model.dtDetails1.Rows.Count > 0)
+                                                        {
+                                                            for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
+                                                            {
+                                                                TotalBV = TotalBV + decimal.Parse(Model.dtDetails.Rows[j]["BV"].ToString());
+                                                                TotalTaxAmount = TotalTaxAmount + decimal.Parse(Model.dtDetails.Rows[j]["TaxableAmt"].ToString());
+
+                                                                TotalCGST = TotalCGST + decimal.Parse(Model.dtDetails.Rows[j]["CGSTAmt"].ToString());
+                                                                TotalSGST = TotalSGST + decimal.Parse(Model.dtDetails.Rows[j]["SGSTAmt"].ToString());
+                                                                AmountAfterTax = TotalTaxAmount + TotalCGST + TotalSGST + TotalBV;
+
+                                                                <tr>
+                                                                    <td style="
+                              line-height: 25px;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                                        @(j + 1)
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px; text-align: center
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["PackageName"].ToString() <br />@*<span>Quantity: 400gm</span>*@
+                                                                    </td>
+
+
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["Rate"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["Qty"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["Rate"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["TaxableAmt"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["SGST"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["SGSTAmt"].ToString()
+                                                                    </td>
+                                                                    <td style="
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 2px 5px;text-align: center;
+">
+                                                                        @Model.dtDetails1.Rows[j]["CGST"].ToString()
+                                                                    </td>
+                                                                    <td style="
+  border-right: 1px solid #000;
+  border-bottom: 1px solid #000;
+  padding: 2px 5px;text-align: center;
+">
+                                                                        @Model.dtDetails1.Rows[j]["CGSTAmt"].ToString()
+                                                                    </td>
+                                                                    <td colspan="4" style="text-align: center;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px; text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["TotAmount"].ToString()
+                                                                    </td>
+                                                                </tr>
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
+
+                                                <tr>
+                                                    <td style="height: 100px">&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="9" rowspan="9" style="
+  line-height: 25px;
+  border-right: 1px solid #000;
+  background: #f1f1f1;
+  border-top: 1px solid #000;
+  vertical-align: top;
+">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tbody>
+                                                                <tr>
+
+                                                                    <td rowspan="2" style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+        ">
+                                                                        <strong>Taxable Amount</strong>
+                                                                    </td>
+
+                                                                    <td colspan="2" style="
+          text-align: center;
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+        ">
+                                                                        <strong>CGST</strong>
+                                                                    </td>
+                                                                    <td colspan="2" style="
+          text-align: center;
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+        ">
+                                                                        <strong>SGST</strong>
+                                                                    </td>
+
+                                                                    <td rowspan="2" style="
+          background: #f1f1f1;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+        ">
+                                                                        <strong>Total Tax Amount(₹)</strong>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+          font-size: 10px;
+        ">
+                                                                        <strong>R(%)</strong>
+                                                                    </td>
+                                                                    <td style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+          font-size: 10px;
+        ">
+                                                                        <strong>Amt(₹)</strong>
+                                                                    </td>
+                                                                    <td style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+          font-size: 10px;
+        ">
+                                                                        <strong>R(%)</strong>
+                                                                    </td>
+                                                                    <td style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+          font-size: 10px;
+        ">
+                                                                        <strong>Amt(₹)</strong>
+                                                                    </td>
+                                                                </tr>
+                                                                @if (Model != null)
+                                                                {
+
+                                                                    if (Model.dtDetails1 != null)
+                                                                    {
+                                                                        if (Model.dtDetails1.Rows.Count > 0)
+                                                                        {
+                                                                            for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
+                                                                            {
+                                                                                <tr>
+
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["TaxableAmt"].ToString()
+                                                                                    </td>
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["CGST"].ToString()
+                                                                                    </td>
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["CGSTAmt"].ToString()
+                                                                                    </td>
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["SGST"].ToString()
+                                                                                    </td>
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["SGSTAmt"].ToString()
+                                                                                    </td>
+                                                                                    <td style="text-align: center;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["TaxAmt"].ToString()
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                            </tbody>
+                                                        </table>
+                                                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="padding: 2px 5px">
+                                                                        <strong>Payment Mode:</strong> @Model.dtDetails.Rows[0]["PayMentMode"].ToString()
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 1px solid #000;
+" colspan="3">
+                                                        @*<strong>Total PV:</strong>*@
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 1px solid #000;text-align: center;
+" colspan="1">
+                                                        @*5*@
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 0px solid #000;
+" colspan="3">
+                                                        <strong>Total BV:</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;text-align: center;
+" colspan="1">
+                                                        @Model.dtDetails.Rows[0]["BV"].ToString()
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 0px solid #000;
+" colspan="3">
+                                                        @*<strong>Sub Total:</strong>*@
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;text-align: center;
+" colspan="1">
+                                                        @*@Model.dtDetails.Rows[0]["TotAmount"].ToString()*@
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 0px solid #000;
+" colspan="3">
+                                                        <strong>Discount Amount:</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Total Taxable Amount:</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        @Model.dtDetails.Rows[0]["TaxableAmt"].ToString()
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Total Tax Amount :</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        @Model.dtDetails.Rows[0]["TaxAmt"].ToString()
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Round Off:</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Shpping Charges</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Shpping Charges (GST)</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                            }
+                                            else
+                                            {
+                                                <tr>
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>S.No</strong>
+                                                    </td>
+
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: left; text-align: center
+                            ">
+                                                        <strong>Description of Goods</strong>
+                                                    </td>
+
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>MRP</strong>
+                                                    </td>
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>Qty</strong>
+                                                    </td>
+
+                                                    <td rowspan="2" style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>Rate</strong>
+                                                    </td>
+                                                    <td rowspan="2" style="text-align: center;
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>
+                                                            Total <br />
+                                                            Amount(₹)
+                                                        </strong>
+                                                    </td>
+                                                    <td colspan="2" style=" text-align: center; background: #f1f1f1; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 2px 5px; text-align: center; width: 120px; min-width: 120px; max-width: 120px; ">
+                                                        <strong>IGST</strong>
+                                                    </td>
+                                                    @*<td colspan="2" style=" text-align: center; background: #f1f1f1; border-right: 1px solid #000; border-bottom: 1px solid #000; padding: 2px 5px; text-align: center; width: 120px; min-width: 120px; max-width: 120px; ">
+                    <strong>CGST</strong>
+                </td>*@
+                                                    <td colspan="6" rowspan="2" style="
+                              background: #f1f1f1;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                        <strong>Sub&nbsp;Total(₹)</strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                              font-size: 10px;
+                            ">
+                                                        <strong>R(%)</strong>
+                                                    </td>
+                                                    <td style="
+                              background: #f1f1f1;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                              font-size: 10px;
+
+                            ">
+                                                        <strong>Amt(₹)</strong>
+                                                    </td>
+                                                    @*<td style="
+                  background: #f1f1f1;
+                  border-right: 1px solid #000;
+                  border-bottom: 1px solid #000;
+                  padding: 2px 5px;
+                  text-align: center;
+                  font-size: 10px;
+                ">
+                                                                        <strong>R(%)</strong>
+                                                                    </td>
+                                                                    <td style="
+                  background: #f1f1f1;
+                  border-right: 1px solid #000;
+                  border-bottom: 1px solid #000;
+                  padding: 2px 5px;
+                  text-align: center;
+                  font-size: 10px;
+                ">
+                                                                        <strong>Amt(₹)</strong>
+                                                                    </td>*@
+                                                </tr>
+
+                                                if (Model != null)
+                                                {
+
+                                                    if (Model.dtDetails1 != null)
+                                                    {
+                                                        if (Model.dtDetails1.Rows.Count > 0)
+                                                        {
+                                                            for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
+                                                            {
+                                                                TotalBV = TotalBV + decimal.Parse(Model.dtDetails.Rows[j]["BV"].ToString());
+                                                                TotalTaxAmount = TotalTaxAmount + decimal.Parse(Model.dtDetails1.Rows[j]["IGSTTaxableAmt"].ToString());
+                                                                TotalIGST = TotalIGST + decimal.Parse(Model.dtDetails1.Rows[j]["IGSTAmt"].ToString());
+
+                                                                AmountAfterTax = TotalTaxAmount + TotalIGST + TotalBV;
+
+                                                                <tr>
+                                                                    <td style="
+                              line-height: 25px;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                                        @(j + 1)
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px; text-align: center
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["PackageName"].ToString() <br />@*<span>Quantity: 400gm</span>*@
+                                                                    </td>
+
+
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["Rate"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["Qty"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["Rate"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["IGSTTaxableAmt"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["IGST"].ToString()
+                                                                    </td>
+                                                                    <td style="
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["IGSTAmt"].ToString()
+                                                                    </td>
+                                                                    @*<td style="
+                                  border-right: 1px solid #000;
+                                  border-bottom: 1px solid #000;
+                                  padding: 2px 5px;text-align: center;
+                                ">
+                                                                                                        @Model.dtDetails1.Rows[j]["CGST"].ToString()
+                                                                                                    </td>
+                                                                                                    <td style="
+                                  border-right: 1px solid #000;
+                                  border-bottom: 1px solid #000;
+                                  padding: 2px 5px;text-align: center;
+                                ">
+                                                                                                        @Model.dtDetails1.Rows[j]["CGSTAmt"].ToString()
+                                                                                                    </td>*@
+                                                                    <td colspan="6" style="text-align: center;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px; text-align: center;
+                            ">
+                                                                        @Model.dtDetails1.Rows[j]["TotalIGSTAmount"].ToString()
+                                                                    </td>
+                                                                </tr>
+                                                            }
+
+                                                        }
+                                                    }
+                                                }
+                                                <tr>
+                                                    <td style="height: 100px">&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                    <td>&nbsp;</td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="9" rowspan="9" style="
+  line-height: 25px;
+  border-right: 1px solid #000;
+  background: #f1f1f1;
+  border-top: 1px solid #000;
+  vertical-align: top;
+">
+                                                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                                                            <tbody>
+                                                                <tr>
+
+                                                                    <td rowspan="2" style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+        ">
+                                                                        <strong>Taxable Amount</strong>
+                                                                    </td>
+
+                                                                    <td colspan="2" style="
+          text-align: center;
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+        ">
+                                                                        <strong>ICGST</strong>
+                                                                    </td>
+                                                                    @*<td colspan="2" style="
+          text-align: center;
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+        ">
+                                                                        <strong>SGST</strong>
+                                                                    </td>*@
+
+                                                                    <td rowspan="2" style="
+          background: #f1f1f1;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+        ">
+                                                                        <strong>Total Tax Amount(₹)</strong>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+          font-size: 10px;
+        ">
+                                                                        <strong>R(%)</strong>
+                                                                    </td>
+                                                                    <td style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+          font-size: 10px;
+        ">
+                                                                        <strong>Amt(₹)</strong>
+                                                                    </td>
+                                                                    @*<td style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+          font-size: 10px;
+        ">
+                                                                        <strong>R(%)</strong>
+                                                                    </td>
+                                                                    <td style="
+          background: #f1f1f1;
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          text-align: center;
+          font-size: 10px;
+        ">
+                                                                        <strong>Amt(₹)</strong>
+                                                                    </td>*@
+                                                                </tr>
+                                                                @if (Model != null)
+                                                                {
+
+                                                                    if (Model.dtDetails1 != null)
+                                                                    {
+                                                                        if (Model.dtDetails1.Rows.Count > 0)
+                                                                        {
+                                                                            for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
+                                                                            {
+                                                                                <tr>
+
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["IGSTTaxableAmt"].ToString()
+                                                                                    </td>
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["IGST"].ToString()
+                                                                                    </td>
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["IGSTAmt"].ToString()
+                                                                                    </td>
+                                                                                    @*<td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["SGST"].ToString()
+                                                                                    </td>
+                                                                                    <td style="
+          border-right: 1px solid #000;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;text-align: center;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["SGSTAmt"].ToString()
+                                                                                    </td>*@
+                                                                                    <td style="text-align: center;
+          border-bottom: 1px solid #000;
+          padding: 2px 5px;
+          padding: 2px 5px;
+        ">
+                                                                                        @Model.dtDetails1.Rows[j]["IGSTTaxAmt"].ToString()
+                                                                                    </td>
+                                                                                </tr>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+
+                                                            </tbody>
+                                                        </table>
+                                                        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="padding: 2px 5px">
+                                                                        <strong>Payment Mode:</strong> @Model.dtDetails.Rows[0]["PayMentMode"].ToString()
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 1px solid #000;
+" colspan="3">
+                                                        @*<strong>Total PV:</strong>*@
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 1px solid #000;text-align: center;
+" colspan="1">
+                                                        @*5*@
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 0px solid #000;
+" colspan="3">
+                                                        <strong>Total BV:</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;text-align: center;
+" colspan="1">
+                                                        @Model.dtDetails.Rows[0]["BV"].ToString()
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 0px solid #000;
+" colspan="3">
+                                                        @*<strong>Sub Total:</strong>*@
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;text-align: center;
+" colspan="1">
+                                                        @*@Model.dtDetails.Rows[0]["TotAmount"].ToString()*@
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+  border-top: 0px solid #000;
+" colspan="3">
+                                                        <strong>Discount Amount:</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Total Taxable Amount:</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        @Model.dtDetails.Rows[0]["TaxableAmt"].ToString()
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Total Tax Amount :</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        @Model.dtDetails.Rows[0]["TaxAmt"].ToString()
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Round Off:</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Shpping Charges</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="3">
+                                                        <strong>Shpping Charges (GST)</strong>
+                                                    </td>
+                                                    <td style="
+  border-bottom: 0px solid #000;
+  border-right: 0px solid #000;text-align: center;
+  background: #f1f1f1;
+" colspan="1">
+                                                        0
+                                                    </td>
+                                                </tr>
+                                            }
+                                            <tr>
+                                            <tr style="display:none" id="AmountWord">
+                                                <td>
+                                                    <input type="text" id="Text1" hidden value="@(Math.Round(AmountAfterTax))" />
+                                                </td>
+                                            </tr>
+
+<td style="
+                              line-height: 25px;
+                              border-right: 1px solid #000;
+                              border-top: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              padding: 2px 5px;
+                              background: #f1f1f1;
+                            " colspan="9">
+                                            <strong>Total Invoice Amount in Words:</strong>
+                                            :<span id="Text2">
+                                            </span>
+                                        </td>
+
+                                        <td style="
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              padding: 2px 5px;
+                              border-right: 0px solid #000;text-align: center;
+                              background: #f1f1f1;
+                            " colspan="3">
+                                            <strong>Grand Total:</strong>
+                                        </td>
+                                        <td style="
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              padding: 2px 5px;
+                              border-right: 0px solid #000;text-align: center;
+                              background: #f1f1f1;
+                            " colspan="1">
+                                            <strong>@AmountAfterTax</strong>
+                                        </td>
+                            </tr>
+                            <tr>
+                                <td style="
+                              line-height: 25px;
+                              border-right: 1px solid #000;
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              padding: 2px 5px;text-align: left
+                            " colspan="7">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding-left: 10px">
+                                                    <strong>TERMS &amp; CONDITIONS</strong><br />
+                                                    1. Goods once dispatch will not be taken
+                                                    back.<br />
+                                                    2. Subject to lucknow jurisdiction only.
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <td style="
+                              border-bottom: 1px solid #000;
+                              padding: 2px 5px;
+                              padding: 2px 5px;
+                              border-right: 0px solid #000;text-align: center;
+                            " colspan="6">
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="2">
+                                        <tbody>
+                                            <tr>
+                                                <td style="
+                                      font-size: 14px;
+                                      font-weight: bold;
+                                      text-align: center;
+                                    ">
+                                                    &nbsp;<br />
+                                                    <br /><br />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="font-size: 14px; text-align: center;">
+                                                    Authorised Signatory
+                                                </td>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td style="
+                            border-bottom: 0px solid #000;
+                            border-right: 1px solid #000;
+                            width: 65%;
+                            font-size: 14px;
+                            font-weight: bold;
+                          "></td>
+                            <td style="border-bottom: 0px solid #000; font-size: 14px"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                        <tbody>
+                            <tr>
+                                <td style="vertical-align: top; padding-left: 10px; text-align: center">
+                                    <strong>Declaration</strong> <br />
+                                    We Declare that this Invoice shows the actual
+                                    price of the Goods described and that all
+                                    particulars are true and correct.
+                                    <br />
+                                    Registered Office- 78 Raj Nagar K.N.
+                                    Lucknow-227105, UP
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+</body>
+
+<script src="~/assets/libs/jquery/jquery.min.js"></script>
+<script>
+    function printDiv(shoppingInvoice) {
+        debugger
+        var printContents = document.getElementById(shoppingInvoice).innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+    $(document).ready(function () {
+
+        printDiv('shoppingInvoice');
+    });
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        NumToWord();
+    });
+    function NumToWord() {
+        var inputNumber = $("#Text1").val();
+        //alert("Raghu"+inputNumber);
+        var str = new String(inputNumber)
+        var splt = str.split("");
+        var rev = splt.reverse();
+        var once = ['Zero', ' One', ' Two', ' Three', ' Four', ' Five', ' Six', ' Seven', ' Eight', ' Nine'];
+        var twos = ['Ten', ' Eleven', ' Twelve', ' Thirteen', ' Fourteen', ' Fifteen', ' Sixteen', ' Seventeen', ' Eighteen', ' Nineteen'];
+        var tens = ['', 'Ten', ' Twenty', ' Thirty', ' Forty', ' Fifty', ' Sixty', ' Seventy', ' Eighty', ' Ninety'];
+
+        numLength = rev.length;
+        var word = new Array();
+        var j = 0;
+
+        for (i = 0; i < numLength; i++) {
+            switch (i) {
+
+                case 0:
+                    if ((rev[i] == 0) || (rev[i + 1] == 1)) {
+                        word[j] = '';
+                    }
+                    else {
+                        word[j] = '' + once[rev[i]];
+                    }
+                    word[j] = word[j];
+                    break;
+
+                case 1:
+                    aboveTens();
+                    break;
+
+                case 2:
+                    if (rev[i] == 0) {
+                        word[j] = '';
+                    }
+                    else if ((rev[i - 1] == 0) || (rev[i - 2] == 0)) {
+                        word[j] = once[rev[i]] + " Hundred ";
+                    }
+                    else {
+                        word[j] = once[rev[i]] + " Hundred and";
+                    }
+                    break;
+
+                case 3:
+                    if (rev[i] == 0 || rev[i + 1] == 1) {
+                        word[j] = '';
+                    }
+                    else {
+                        word[j] = once[rev[i]];
+                    }
+                    if ((rev[i + 1] != 0) || (rev[i] > 0)) {
+                        word[j] = word[j] + " Thousand";
+                    }
+                    break;
+
+                case 4:
+                    aboveTens();
+                    break;
+
+                case 5:
+                    if ((rev[i] == 0) || (rev[i + 1] == 1)) {
+                        word[j] = '';
+                    }
+                    else {
+                        word[j] = once[rev[i]];
+                    }
+                    if (rev[i + 1] !== '0' || rev[i] > '0') {
+                        word[j] = word[j] + " Lakh";
+                    }
+
+                    break;
+
+                case 6:
+                    aboveTens();
+                    break;
+
+                case 7:
+                    if ((rev[i] == 0) || (rev[i + 1] == 1)) {
+                        word[j] = '';
+                    }
+                    else {
+                        word[j] = once[rev[i]];
+                    }
+                    if (rev[i + 1] !== '0' || rev[i] > '0') {
+                        word[j] = word[j] + " Crore";
+                    }
+                    break;
+
+                case 8:
+                    aboveTens();
+                    break;
+
+                default: break;
+            }
+            j++;
+        }
+
+        function aboveTens() {
+            if (rev[i] == 0) { word[j] = ''; }
+            else if (rev[i] == 1) { word[j] = twos[rev[i - 1]]; }
+            else { word[j] = tens[rev[i]]; }
+        }
+
+        word.reverse();
+        var finalOutput = '';
+        for (i = 0; i < numLength; i++) {
+            finalOutput = finalOutput + word[i];
+        }
+        //$("#Text2").val(finalOutput);
+        $('#Text2').html(finalOutput);
+    }
+
+
+</script>
+</html>

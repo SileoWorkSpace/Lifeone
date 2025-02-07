@@ -4444,9 +4444,6 @@ namespace LifeOne.Areas.Admin.Controllers
             }
         }
 
-
-
-
         public ActionResult GetInvoiceGSTReport(int? Page, Reports reports)
         {
             try
@@ -5933,6 +5930,15 @@ namespace LifeOne.Areas.Admin.Controllers
                 rewards.Pager = pager;
             }
             return View(rewards);
+        }
+        public ActionResult TopupInvoice(string id)
+        {
+            TopupInvoiceModel topupInvoice = new TopupInvoiceModel();
+            OrderDAL orderDAL = new OrderDAL();
+            DataSet dsOrder = orderDAL.GettopupInvoice(id);
+            topupInvoice.dtDetails = dsOrder.Tables[0];
+            topupInvoice.dtDetails1 = dsOrder.Tables[1];
+            return View(topupInvoice);
         }
     }
 }

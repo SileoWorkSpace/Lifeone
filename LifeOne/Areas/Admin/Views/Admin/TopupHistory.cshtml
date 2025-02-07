@@ -99,7 +99,8 @@
                                         <th>Package Name</th>
                                         <th>DOJ</th>
                                         <th>Topup Date</th>
-                                        <th>Amount</th>
+                                        <th>Amount</th>                                       
+                                        <th>Action</th>                                       
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -121,6 +122,9 @@
                                                 <td>@Model.dtDetails.Rows[j]["JoiningDate"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["CreateDate"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["Amount"].ToString()</td>
+                                                <td>                                                    
+                                                    <a href="/Admin/AdminReport/TopupInvoice?id=@Model.dtDetails.Rows[j]["Pk_TransId"].ToString()" target="_blank" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>                   
+                                                </td>
                                             </tr>
                                         }
                                     }

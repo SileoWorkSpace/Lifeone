@@ -1262,11 +1262,7 @@ namespace LifeOne.Areas.Admin.Controllers
             }
             return Json(Objres, JsonRequestBehavior.AllowGet);
 
-
         }
-
-
-
         public ActionResult GetFranchiseEwalletRequest(FranchiseEWalletRequest franchiseEWalletRequest,string Status)
         {
             if (!PermissionManager.IsActionPermit("E-Wallet Request", ViewOptions.FormView))
@@ -1457,6 +1453,7 @@ namespace LifeOne.Areas.Admin.Controllers
             OrderDAL orderDAL = new OrderDAL();
             DataSet dsOrder = orderDAL.ActivatedCustomerInvoiceById(Pk_TransId);
             Int32 TotalAmount = 0;
+
             if (dsOrder.Tables[0].Rows.Count > 0)
             {
                 for (int i = 0; i < dsOrder.Tables[0].Rows.Count; i++)
