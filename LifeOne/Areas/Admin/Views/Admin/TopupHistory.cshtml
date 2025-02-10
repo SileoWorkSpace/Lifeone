@@ -58,7 +58,7 @@
                                                     <label>Joining To Date</label>
                                                     @Html.TextBoxFor(m => m.JoiningToDate, new { @class = "form-control", @Type = "date" })
                                                 </div>
-                                            </div>                                          
+                                            </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-sm-12 col-md-3">
@@ -81,7 +81,7 @@
                                                     <input type="submit" class="btn btn-secondary" onClick="fclaer()" style="margin-top:1.5em;" value="Reset">
                                                 </div>
                                             </div>
-                                        </div>                                       
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -99,8 +99,8 @@
                                         <th>Package Name</th>
                                         <th>DOJ</th>
                                         <th>Topup Date</th>
-                                        <th>Amount</th>                                       
-                                        <th>Action</th>                                       
+                                        <th>Amount</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -122,8 +122,8 @@
                                                 <td>@Model.dtDetails.Rows[j]["JoiningDate"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["CreateDate"].ToString()</td>
                                                 <td>@Model.dtDetails.Rows[j]["Amount"].ToString()</td>
-                                                <td>                                                    
-                                                    <a href="/Admin/AdminReport/TopupInvoice?id=@Model.dtDetails.Rows[j]["Pk_TransId"].ToString()" target="_blank" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>                   
+                                                <td>
+                                                    <a href="/Admin/AdminReport/TopupInvoice?id=@Model.dtDetails.Rows[j]["Pk_TransId"].ToString()" target="_blank" class="btn-sm btn btn-info" title="View Invoice"><i class="fa fa-file"></i></a>
                                                 </td>
                                             </tr>
                                         }
@@ -135,6 +135,58 @@
                                 </tbody>
                             </table>
                         </div>
+                        <footer class="card-footer bg-white p-2">
+                            <div class="d-md-flex align-items-center justify-content-between">
+
+                                @if (Model != null)
+                                {
+                                    if (Model.Pager != null)
+                                    {
+                                        if (Model.Pager.EndPage > 1)
+                                        {
+                                            <div> <small class="text-muted inline">showing Model.dtDetails.Rows.Count  of @Model.Pager.TotalItems items</small> </div>
+                                            <div>
+                                                <ul class="pagination pagination-sm m-t-none m-b-none">
+                                                    @if (Model.Pager.CurrentPage > 1)
+                                                    {
+                                                        <li class="page-item">
+                                                            <a class="page-link" onclick="fCallPaging(1,0)" href="#">First</a>
+
+                                                        </li>
+                                                        <li class="page-item">
+
+                                                            <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage - 1),0)" href="#">Previous</a>
+                                                        </li>
+                                                    }
+                                                    @for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                                                    {
+                                                        <li class="page-item @(page == Model.Pager.CurrentPage ? " active" : "" )">
+
+
+                                                            <span><a class="page-link" onclick="fCallPaging(@page,0)" href="#">@page</a></span>
+                                                        </li>
+                                                    }
+                                                    @if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                                                    {
+                                                        <li class="page-item">
+
+                                                            <a class="page-link" onclick="fCallPaging(@(Model.Pager.CurrentPage + 1),0)" href="#">Next</a>
+
+                                                        </li>
+                                                        <li class="page-item">
+
+                                                            <a class="page-link" onclick="fCallPaging(@(Model.Pager.TotalPages),0)" href="#">Last</a>
+                                                        </li>
+                                                    }
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+
+                                }
+
+                            </div>
+                        </footer>
                     </div>
                 </div>
             </div>
