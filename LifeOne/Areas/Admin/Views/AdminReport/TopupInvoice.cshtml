@@ -14,6 +14,7 @@
     decimal TotalGSTAmount = 0;
     decimal TotalShippingCharges = 0;
     decimal TotalBV = 0;
+    decimal TaxAmount = 0;
 }
 
 <!DOCTYPE html>
@@ -260,7 +261,7 @@
                                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                                         <tbody>
                                             @if (Model.dtDetails.Rows[0]["CustState"].ToString() == "UTTAR PRADESH")
-                                            {
+                                             {
                                                 <tr>
                                                     <td rowspan="2" style="
                               background: #f1f1f1;
@@ -388,13 +389,14 @@
                                                     {
                                                         if (Model.dtDetails1.Rows.Count > 0)
                                                         {
-                                                            for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
+                                                            for (int j = 0; j <= Model.dtDetails1.Rows.Count - 1; j++)
                                                             {
-                                                                TotalBV = TotalBV + decimal.Parse(Model.dtDetails.Rows[j]["BV"].ToString());
-                                                                TotalTaxAmount = TotalTaxAmount + decimal.Parse(Model.dtDetails.Rows[j]["TaxableAmt"].ToString());
+                                                                TotalBV = TotalBV + decimal.Parse(Model.dtDetails.Rows[0]["BV"].ToString());
+                                                                TotalTaxAmount = TotalTaxAmount + decimal.Parse(Model.dtDetails1.Rows[j]["TaxableAmt"].ToString());
+                                                                TaxAmount = TaxAmount + decimal.Parse(Model.dtDetails1.Rows[j]["TaxAmt"].ToString());
 
-                                                                TotalCGST = TotalCGST + decimal.Parse(Model.dtDetails.Rows[j]["CGSTAmt"].ToString());
-                                                                TotalSGST = TotalSGST + decimal.Parse(Model.dtDetails.Rows[j]["SGSTAmt"].ToString());
+                                                                TotalCGST = TotalCGST + decimal.Parse(Model.dtDetails1.Rows[j]["CGSTAmt"].ToString());
+                                                                TotalSGST = TotalSGST + decimal.Parse(Model.dtDetails1.Rows[j]["SGSTAmt"].ToString());
                                                                 AmountAfterTax = TotalTaxAmount + TotalCGST + TotalSGST + TotalBV;
 
                                                                 <tr>
@@ -412,7 +414,7 @@
                               border-bottom: 1px solid #000;
                               padding: 2px 5px; text-align: center
                             ">
-                                                                        @Model.dtDetails1.Rows[j]["PackageName"].ToString() <br />@*<span>Quantity: 400gm</span>*@
+                                                                        @Model.dtDetails1.Rows[j]["ProductName"].ToString() <br />@*<span>Quantity: 400gm</span>*@
                                                                     </td>
 
 
@@ -599,7 +601,7 @@
                                                                     {
                                                                         if (Model.dtDetails1.Rows.Count > 0)
                                                                         {
-                                                                            for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
+                                                                            for (int j = 0; j <= Model.dtDetails1.Rows.Count - 1; j++)
                                                                             {
                                                                                 <tr>
 
@@ -750,7 +752,8 @@
   border-right: 0px solid #000;text-align: center;
   background: #f1f1f1;
 " colspan="1">
-                                                        @Model.dtDetails.Rows[0]["TaxableAmt"].ToString()
+                                                        @TotalTaxAmount
+                                                       @*@Model.dtDetails1.Rows[0]["TaxableAmt"].ToString()*@
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -766,7 +769,8 @@
   border-right: 0px solid #000;text-align: center;
   background: #f1f1f1;
 " colspan="1">
-                                                        @Model.dtDetails.Rows[0]["TaxAmt"].ToString()
+                                                        @TaxAmount
+                                                        @*@Model.dtDetails1.Rows[0]["TaxAmt"].ToString()*@
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -947,10 +951,11 @@
                                                     {
                                                         if (Model.dtDetails1.Rows.Count > 0)
                                                         {
-                                                            for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
+                                                            for (int j = 0; j <= Model.dtDetails1.Rows.Count - 1; j++)
                                                             {
-                                                                TotalBV = TotalBV + decimal.Parse(Model.dtDetails.Rows[j]["BV"].ToString());
+                                                                TotalBV = TotalBV + decimal.Parse(Model.dtDetails.Rows[0]["BV"].ToString());
                                                                 TotalTaxAmount = TotalTaxAmount + decimal.Parse(Model.dtDetails1.Rows[j]["IGSTTaxableAmt"].ToString());
+                                                                TaxAmount = TaxAmount + decimal.Parse(Model.dtDetails1.Rows[j]["IGSTTaxAmt"].ToString());
                                                                 TotalIGST = TotalIGST + decimal.Parse(Model.dtDetails1.Rows[j]["IGSTAmt"].ToString());
 
                                                                 AmountAfterTax = TotalTaxAmount + TotalIGST + TotalBV;
@@ -970,7 +975,7 @@
                               border-bottom: 1px solid #000;
                               padding: 2px 5px; text-align: center
                             ">
-                                                                        @Model.dtDetails1.Rows[j]["PackageName"].ToString() <br />@*<span>Quantity: 400gm</span>*@
+                                                                        @Model.dtDetails1.Rows[j]["ProductName"].ToString() <br />@*<span>Quantity: 400gm</span>*@
                                                                     </td>
 
 
@@ -1156,7 +1161,7 @@
                                                                     {
                                                                         if (Model.dtDetails1.Rows.Count > 0)
                                                                         {
-                                                                            for (int j = 0; j <= Model.dtDetails.Rows.Count - 1; j++)
+                                                                            for (int j = 0; j <= Model.dtDetails1.Rows.Count - 1; j++)
                                                                             {
                                                                                 <tr>
 
@@ -1307,7 +1312,8 @@
   border-right: 0px solid #000;text-align: center;
   background: #f1f1f1;
 " colspan="1">
-                                                        @Model.dtDetails.Rows[0]["TaxableAmt"].ToString()
+                                                        @TotalTaxAmount
+                                                        @*@Model.dtDetails1.Rows[0]["TaxableAmt"].ToString()*@
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -1323,7 +1329,8 @@
   border-right: 0px solid #000;text-align: center;
   background: #f1f1f1;
 " colspan="1">
-                                                        @Model.dtDetails.Rows[0]["TaxAmt"].ToString()
+                                                        @TaxAmount
+                                                        @*@Model.dtDetails1.Rows[0]["TaxAmt"].ToString()*@
                                                     </td>
                                                 </tr>
                                                 <tr>

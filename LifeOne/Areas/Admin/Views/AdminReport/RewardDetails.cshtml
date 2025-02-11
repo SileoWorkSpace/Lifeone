@@ -33,6 +33,14 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-12 col-md-2">
+                                                    <div class="form-group">
+                                                        <label>Login Id</label>
+                                                        @Html.TextBoxFor(m => m.RewardName, new { @class = "form-control", @placeholder = "Enter Reward Name" })
+                                                        @Html.HiddenFor(m => m.Page)
+
+                                                    </div>
+                                                </div>
+                                                <div class="col-12 col-md-2">
                                                     <label>Status</label>
                                                     <div class="input-group">
                                                         <select class="form-control" name="RewardStatus" id="ddlStatus">
@@ -63,6 +71,7 @@
                                         <tr>
                                             <th>#Sn.</th>
                                             <th>Login Id</th>
+                                            <th>Name</th>
                                             <th>Left Business</th>
                                             <th>Right Business</th>
                                             <th>Reward Name</th>
@@ -86,6 +95,7 @@
                                                 <tr>
                                                     <td>@(j+1)</td>
                                                     <td>@Model.getRewardDetails.Rows[i]["LoginId"].ToString()</td>
+                                                    <td>@Model.getRewardDetails.Rows[i]["Name"].ToString()</td>
                                                     <td>@Model.getRewardDetails.Rows[i]["LeftBusiness"].ToString()</td>
                                                     <td>@Model.getRewardDetails.Rows[i]["RightBusiness"].ToString()</td>
                                                     @if (Model.getRewardDetails.Rows[i]["RewardName"].ToString() == "" || Model.getRewardDetails.Rows[i]["RewardName"].ToString() == "NULL")
@@ -203,9 +213,10 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
+    $(document).ready(function () {       
+        $('#ddlStatus').val('N');
         if ($('#txtStatus').val() != '' && $('#txtStatus').val() != undefined) {
-            $('#ddlStatus').val($('#txtStatus').val());
+            $('#ddlStatus').val('N');
         }
     });
     function isNumberKey(evt) {

@@ -1643,6 +1643,7 @@
     <Content Include="Areas\Associate\Views\EWalletRequest\WalletToWalletTransfer.cshtml" />
     <Content Include="Areas\Admin\Views\Admin\franchisewallettransaction.cshtml" />
     <Content Include="Areas\Admin\Views\AdminReport\TopupInvoice.cshtml" />
+    <Content Include="Areas\Admin\Views\AdminReport\RewardDetails.cshtml" />
     <None Include="Content\Associate\assets\css\app.min.css_old" />
     <Content Include="Content\Associate\assets\css\app.min.css" />
     <Content Include="Content\Associate\assets\css\bootstrap-dark.min.css" />

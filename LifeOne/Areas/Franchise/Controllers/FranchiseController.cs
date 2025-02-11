@@ -372,7 +372,6 @@ namespace LifeOne.Areas.Franchise.Controllers
         [HttpPost]
         public ActionResult FranchiseEWalletRequest(FranchiseEWalletRequest obj, HttpPostedFileBase postedFile)
         {
-
             if (postedFile != null)
             {
                 obj.FileUpload = "/EwalletRequestFiles/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
@@ -705,7 +704,6 @@ namespace LifeOne.Areas.Franchise.Controllers
         }
         public JsonResult ValFranchiseWalletAmount(ProductsDetail product, int ProductId, int Opcode)
         {
-
             try
             {
                 product.Fk_MemId = SessionManager.FranchiseFk_MemId;
@@ -718,7 +716,6 @@ namespace LifeOne.Areas.Franchise.Controllers
             {
                 throw;
             }
-
         }
     }
 }

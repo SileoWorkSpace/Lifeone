@@ -276,7 +276,6 @@
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
@@ -289,8 +288,7 @@
         <input type="hidden" id="txtBankName1" value="@TempData["BankName"]" />
         <input type="hidden" id="SelectedPaymentMethod" value="@TempData["WalletPayment"]" />
 
-
-    }
+     }
 </section>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/css/bootstrap-datepicker.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.7.1/js/bootstrap-datepicker.js"></script>
@@ -497,11 +495,7 @@
         }
     }
     function getPackageAmount() {
-
-
         var Pk_PackageID = $('#FK_PackageId').val();
-
-
         var PackageAmt = 0
         if ($('#FK_PackageId').val() != "") {
             $.ajax({
@@ -599,6 +593,7 @@
                         return false;
 
                     }
+                    else {                        $('#Save').trigger('click');                    }
 
                 },
                 error: function (err) {
@@ -615,6 +610,7 @@
             $('#WalletPayment').focus();
             return false;
         }
+        else {            $('#Save').trigger('click');        }
         //if (walletPaymentMethod == "PaymentMode") {
         //    if ($('#ddlPaymentMode').val() == '0') {
         //        $("#ddlPaymentMode").addClass('errortext');
