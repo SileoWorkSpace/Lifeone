@@ -2426,6 +2426,9 @@ namespace LifeOne.Areas.Admin.Controllers
             {
                 model.Page = 1;
             }
+            Models.AssociateManagement.AssociateEntity.PackageMaster para = new Models.AssociateManagement.AssociateEntity.PackageMaster();
+            ViewBag.ddlPackageList = Models.AssociateManagement.AssociateEntity.BindPckageMaster.BindPackageMasterAdmin();
+
             model.Size = SessionManager.Size;
             DataSet dsOrder = orderDAL.GetTopupHistory(model);
             model.dtDetails = dsOrder.Tables[0];

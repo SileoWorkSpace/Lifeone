@@ -41,12 +41,28 @@
                                                     @Html.TextBoxFor(m => m.UTRNo, new { @class = "form-control", @placeholder = "Enter UTR No" })
                                                 </div>
                                             </div>
+                                            @*<div class="col-12 col-md-3">
+                                                    <div class="form-group">
+                                                        <label>Package Name</label>
+                                                        @Html.TextBoxFor(m => m.PackageName, new { @class = "form-control", @placeholder = "Enter Package Name" })
+                                                    </div>
+                                                </div>*@
                                             <div class="col-12 col-md-3">
                                                 <div class="form-group">
                                                     <label>Package Name</label>
-                                                    @Html.TextBoxFor(m => m.PackageName, new { @class = "form-control", @placeholder = "Enter Package Name" })
+                                                    @Html.DropDownListFor(m => m.FK_PackageId, new SelectList(ViewBag.ddlPackageList, "Value", "Text"), new { @class = "form-control" })
+                                                    <input type="hidden" id="hdnPackageName" name="ProductName" />
                                                 </div>
                                             </div>
+                                            @*<div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group label-floating is-empty">
+                                                        <label class="form-control-placeholder" for="name">Package</label>
+                                                        @Html.DropDownListFor(m => m.FK_PackageId, new SelectList(ViewBag.ddlPackageList, "Value", "Text"), new { @class = "form-control clearIniFields", @onchange = "getPackageAmount()", @required = "required" })
+                                                        <input type="hidden" id="hdnPackageName" name="ProductName" />
+                                                    </div>
+                                                </div>
+                                            </div>*@
                                             <div class="col-sm-12 col-md-3">
                                                 <div class="form-group">
                                                     <label>Joining Form Date</label>
@@ -214,7 +230,7 @@
         $("#Page").val(1);
         $("#IsExport").val(0);
         $("#UTRNo").val('');
-        $("#PackageName").val('');
+        $("#FK_PackageId").val(0);
         $("#JoiningFormDate").val('');
         $("#JoiningToDate").val('');
         $("#TopupFormDate").val('');

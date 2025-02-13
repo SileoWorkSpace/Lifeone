@@ -95,7 +95,8 @@ namespace LifeOne.Models.AdminManagement.ADAL
                new SqlParameter("@TopupFormDate",model.TopupFormDate),
                new SqlParameter("@TopupToDate",model.TopupToDate),
                new SqlParameter("@UTRNo",model.UTRNo),
-               new SqlParameter("@PackageName",model.PackageName),
+               //new SqlParameter("@PackageName",model.PackageName),
+               new SqlParameter("@Fk_PackageId",model.FK_PackageId),
                 };
                 DataSet ds = DBHelper.ExecuteQuery("Topuphistory", para);
                 return ds;

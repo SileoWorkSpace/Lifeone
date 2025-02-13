@@ -328,6 +328,7 @@ namespace LifeOne.Models.AdminManagement.AEntity
         public int Fk_MemId { get; set; }
         public int Pk_TransId { get; set; }
         public string LoginId { get; set; }
+        public string FK_PackageId { get; set; }
         public string FirstName { get; set; }
         public string Amount { get; set; }
         public string JoiningFormDate { get; set; }
