@@ -42,6 +42,7 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
         public string txtPaidAmount { get; set; }
         public string TotalBV { get; set; }
         public string txtLoginId { get; set; }
+        public string WalletPayment { get; set; }
         public int txtFK_PackageId { get; set; }
         public DataTable dtDetails { get;  set; }
 
@@ -77,16 +78,17 @@ namespace LifeOne.Models.FranchiseManagement.FEntity
             new SqlParameter("@FK_PackageId",obj.FK_PackageId),
             new SqlParameter("@Fk_FranchiseId",obj.Fk_FranchiseId),
             new SqlParameter("@PaidAmount",obj.PaidAmount),
-            new SqlParameter("@BankName",obj.BankName),
-            new SqlParameter("@ChequeDDNo",obj.ChequeDDNo),
-            new SqlParameter("@ChequeDDDate",obj.ChequeDDDate),
-            new SqlParameter("@BankBranch",obj.BankBranch),
-            new SqlParameter("@TopupDate",obj.TopupDate),
-            new SqlParameter("@PaymentMode",obj.PaymentMode),
-            new SqlParameter("@TopupRemark",obj.TopupRemark)
+            new SqlParameter("@WalletPayment",obj.WalletPayment)
+            //new SqlParameter("@BankName",obj.BankName),
+            //new SqlParameter("@ChequeDDNo",obj.ChequeDDNo),
+            //new SqlParameter("@ChequeDDDate",obj.ChequeDDDate),
+            //new SqlParameter("@BankBranch",obj.BankBranch),
+            //new SqlParameter("@TopupDate",obj.TopupDate),
+            //new SqlParameter("@PaymentMode",obj.PaymentMode),
+            //new SqlParameter("@TopupRemark",obj.TopupRemark)
             };
 
-            DataTable dt = API.DAL.DBHelper.ExecuteQuery("TopUpMemberByFranchise", para).Tables[0];
+            DataTable dt = API.DAL.DBHelper.ExecuteQuery("Sp_TopUpMemberByFranchise", para).Tables[0];
             return dt;
         }
 

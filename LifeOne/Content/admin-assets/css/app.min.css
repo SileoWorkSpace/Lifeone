@@ -1185,7 +1185,7 @@ body[data-layout=topnav] .profile-dropdown {
 
             .topbar-nav .metismenu > li > ul {
                 position: absolute;
-                z-index: 1001
+                z-index: 1001;
             }
 
         .topbar-nav .metismenu .side-nav-item:first-of-type .side-nav-link {

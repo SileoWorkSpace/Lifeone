@@ -372,7 +372,6 @@ namespace LifeOne.Areas.Franchise.Controllers
         [HttpPost]
         public ActionResult FranchiseEWalletRequest(FranchiseEWalletRequest obj, HttpPostedFileBase postedFile)
         {
-
             if (postedFile != null)
             {
                 obj.FileUpload = "/EwalletRequestFiles/" + Guid.NewGuid() + Path.GetExtension(postedFile.FileName);
@@ -456,25 +455,25 @@ namespace LifeOne.Areas.Franchise.Controllers
                             ViewBag.BV = 0;
                             ViewBag.Name = ds.Tables[1].Rows[0]["Name"].ToString();
                         }
-                            TempData["txtFK_PackageId"] = int.Parse(Session["FK_PackageId"].ToString());
-                            TempData["PaymentMode"] = Session["PaymentMode"].ToString();
-                            TempData["ChequeDDNo"] = Session["ChequeDDNo"];
-                            TempData["ChequeDDDate"] = Session["ChequeDDDate"];
-                            TempData["BankName"] = Session["BankName"];
-          
+                        TempData["txtFK_PackageId"] = int.Parse(Session["FK_PackageId"].ToString());
+                        TempData["PaymentMode"] = Session["PaymentMode"].ToString();
+                        TempData["ChequeDDNo"] = Session["ChequeDDNo"];
+                        TempData["ChequeDDDate"] = Session["ChequeDDDate"];
+                        TempData["BankName"] = Session["BankName"];
+
                         return View(topupByFranchise);
 
                     }
 
                 }
-                    else
-                    {
+                else
+                {
                     TempData["PaymentMode"] = "0";
 
                     DataSet ds1 = topupByFranchise.DeleteActivateMembersTempbyId();
-                        return View(topupByFranchise);
+                    return View(topupByFranchise);
 
-                    }
+                }
 
                 return View();
             }
@@ -492,7 +491,8 @@ namespace LifeOne.Areas.Franchise.Controllers
                 ProductsDetail product = new ProductsDetail();
                 List<SelectListItem> ddlProduct = new List<SelectListItem>();
 
-                DataSet dataSet = product.GetAllProducts();
+                //DataSet dataSet = product.GetAllProducts();
+                DataSet dataSet = product.GetAllProductsForFranchisee();
 
                 if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
 
@@ -511,6 +511,7 @@ namespace LifeOne.Areas.Franchise.Controllers
                 Models.FranchiseManagement.FEntity.TopupByFranchise para = new Models.FranchiseManagement.FEntity.TopupByFranchise();
 
                 para.FK_MemId = obj.FK_MemId;
+                para.WalletPayment = obj.WalletPayment;
                 para.FK_PackageId = obj.FK_PackageId;
                 para.PaidAmount = Convert.ToDecimal(obj.txtPaidAmount);
                 para.Fk_FranchiseId = SessionManager.FranchiseFk_MemId;
@@ -522,7 +523,7 @@ namespace LifeOne.Areas.Franchise.Controllers
 
                 Session["FK_PackageId"] = obj.FK_PackageId;
                 Session["MemLoginId"] = obj.txtLoginId;
-                Session["PaymentMode"] = string.IsNullOrEmpty(obj.PaymentMode)?"0": obj.PaymentMode;
+                Session["PaymentMode"] = string.IsNullOrEmpty(obj.PaymentMode) ? "0" : obj.PaymentMode;
                 Session["ChequeDDNo"] = obj.ChequeDDNo;
                 Session["ChequeDDDate"] = obj.ChequeDDDate;
                 Session["BankName"] = obj.BankName;
@@ -530,6 +531,7 @@ namespace LifeOne.Areas.Franchise.Controllers
                 TempData["BankName"] = obj.BankName;
                 TempData["ChequeDDNo"] = obj.ChequeDDNo;
                 TempData["ChequeDDDate"] = obj.ChequeDDDate;
+                TempData["WalletPayment"] = obj.WalletPayment;
 
 
                 if (!string.IsNullOrEmpty(btnAdd))
@@ -539,7 +541,7 @@ namespace LifeOne.Areas.Franchise.Controllers
                     para.Quantity = obj.Quantity;
                     DataSet ds = para.ActivateMembersTemp();
                     para.dtDetails = ds.Tables[0];
-                  
+
                     if (ds != null)
                     {
                         if (ds.Tables[1] != null && ds.Tables[1].Rows.Count > 0)
@@ -559,7 +561,7 @@ namespace LifeOne.Areas.Franchise.Controllers
                         }
                         else
                         {
-                            ViewBag.PaidAmount ="";
+                            ViewBag.PaidAmount = "";
                             ViewBag.BV = "";
                         }
                     }
@@ -599,6 +601,7 @@ namespace LifeOne.Areas.Franchise.Controllers
                             TempData["BankName"] = "";
                             TempData["ChequeDDNo"] = "";
                             TempData["ChequeDDDate"] = "";
+                            TempData["WalletPayment"] = "";
                             return RedirectToAction("TopupByFranchise");
                         }
                         else if (dt.Rows[0]["Msg"].ToString() == "0")
@@ -662,6 +665,57 @@ namespace LifeOne.Areas.Franchise.Controllers
 
             return RedirectToAction("TopupByFranchise", topupByFranchise);
 
+        }
+        public JsonResult GetProductMemeberWise(ProductsDetail product, string ProductType)
+        {
+            List<SelectListItem> ddlProduct = new List<SelectListItem>();
+            try
+            {
+                product.Fk_MemId = SessionManager.FranchiseFk_MemId;
+                DataSet dataSet;
+                if (ProductType == "MemProduct")
+                {
+                    dataSet = product.GetProductMemeberWise();
+                }
+                else
+                {
+                    dataSet = product.GetAllProductsForFranchisee();
+                }
+
+                if (dataSet != null && dataSet.Tables.Count > 0 && dataSet.Tables[0].Rows.Count > 0)
+                {
+                    ddlProduct.Add(new SelectListItem { Text = "Select Product", Value = "0" });
+                    foreach (DataRow r in dataSet.Tables[0].Rows)
+                    {
+
+                        ddlProduct.Add(new SelectListItem { Text = r["ProductName"].ToString(), Value = r["Pk_ProductId"].ToString() });
+
+                    }
+
+                }
+                ViewBag.ddlProduct = ddlProduct;
+                return Json(ViewBag.ddlProduct, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public JsonResult ValFranchiseWalletAmount(ProductsDetail product, int ProductId, int Opcode)
+        {
+            try
+            {
+                product.Fk_MemId = SessionManager.FranchiseFk_MemId;
+                product.OpCode = Opcode;
+                product.Pk_ProductId = ProductId;
+                product.LstOrder = product.ValFranchiseWalletAmount();
+                return Json(product.LstOrder, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

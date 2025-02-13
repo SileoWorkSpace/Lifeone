@@ -259,6 +259,7 @@ namespace LifeOne.Models
         public string PurchasePrice { get; set; }
         public string MRP { get; set; }
         public string PV { get; set; }
+        public decimal WalletAmt { get; set; }
         public string TotalAmount { get; set; }
         public string CGST { get; set; }
         public string IGST { get; set; }
@@ -501,6 +502,43 @@ namespace LifeOne.Models
         //    DataSet ds = DBHelper.ExecuteQuery("GetProductTypeMaster", para);
         //    return ds;
         //}
+        public List<ProductsDetail> ValFranchiseWalletAmount()
+        {
+            try
+            {
+
+                string _qury = string.Empty;
+                List<ProductsDetail> _iresult = null;
+                var queryParameters = new DynamicParameters();
+
+                queryParameters.Add("@Fk_MemId", Fk_MemId);
+                queryParameters.Add("@OpCode", OpCode);
+                queryParameters.Add("@Pk_ProductId", Pk_ProductId);
+
+
+                _iresult = DBHelperDapper.DAAddAndReturnModelList<ProductsDetail>("Proc_ValFranchiseWalletAmount", queryParameters);
+
+
+
+                return _iresult;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
+        public DataSet GetProductMemeberWise()
+        {
+            SqlParameter[] para = {
+
+                                        new SqlParameter("@Fk_MemId", Fk_MemId),
+
+
+            };
+            DataSet dataSet = DBHelper.ExecuteQuery("GetProductMemeberWise", para);
+            return dataSet;
+        }
 
 
     }

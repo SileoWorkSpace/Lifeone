@@ -224,6 +224,7 @@ namespace LifeOne.Models
         public DataTable dtGetFranchsisePayoutDetails { get; set; }
         public DataTable dtGetRecognition { get; set; }
         public DataTable dtGetPayPayoutReport { get; set; }
+        public DataTable dtGettopupdetails { get; set; }
 
 
         public DataTable dtaddressdetails { get; set; }
@@ -239,22 +240,13 @@ namespace LifeOne.Models
         public string RazorPayAmount { get; set; }
         public string Key { get; set; }
         public DataTable dtGetConsolidatedGstReport { get;  set; }
-
         public DataTable dtGetStatewiseGstReport { get; set; }
-
         public DataTable dtCancelInvoicRequest { get; set; }
-        public DataTable AllGetShoppingOrderDetails { get; set; }
-        
-        
-        public DataTable dtAllGetShoppingOrder { get; set; }
-        
-
+        public DataTable AllGetShoppingOrderDetails { get; set; }       
+        public DataTable dtAllGetShoppingOrder { get; set; }        
         public DataTable dtLifeTimeReward { get;  set; }
-
-
-        public DataTable dtPackageMaster { get; set; }
-       
-          public DataTable dtGetMembersRecognition { get; set; }
+        public DataTable dtPackageMaster { get; set; }       
+        public DataTable dtGetMembersRecognition { get; set; }
         public DataTable dtGetTallyGSTReport { get; set; }
         public string FinalAmount { get;  set; }
         public int FK_RcogId { get;  set; }

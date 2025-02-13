@@ -39,7 +39,8 @@ namespace LifeOne.Models
             SqlParameter[] para = {                                        
                                         new SqlParameter("@LoginId",LoginId),
                                         new SqlParameter("@FK_MemId",FK_MemId),
-                                        new SqlParameter("@Status",RewardStatus=="0"?null:RewardStatus),                                          
+                                        new SqlParameter("@RewardDetailName",RewardName),
+                                        new SqlParameter("@Status",RewardStatus=="0"?null:RewardStatus),
                                         new SqlParameter("@Page",Page),
                                         new SqlParameter("@Size",Size),
 
